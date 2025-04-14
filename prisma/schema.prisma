@@ -1,0 +1,118 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                      String                   @id @default(uuid())
+  name                    String?
+  username                String?                  @unique
+  email                   String?                  @unique
+  avatarUrl               String?
+  role                    Role?                    @default(USER)
+  createdAt               DateTime                 @default(now())
+  telephone               String?
+  passwordHash            String?
+  googleId                String?                  @unique
+  bio                     String?
+  isWelcomed              Boolean                  @default(false)
+  isVerified              Boolean                  @default(false)
+  emailVerified           Boolean                  @default(false)
+  emailVerificationTokens EmailVerificationToken[]
+  sessions                Session[]
+  newsArticles            NewsArticle[]
+  newsComments            NewsComment[]
+  newsArticleLikes        NewsArticleLike[]
+  NewsLetter              NewsLetter[]
+
+  @@map("users")
+}
+
+model EmailVerificationToken {
+  id      String @id @default(uuid())
+  userId  String
+  expires BigInt
+  user    User   @relation(fields: [userId], references: [id])
+
+  @@map("email_verifications")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  expiresAt DateTime
+  role      Role     @default(USER)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model NewsLetterSubscription {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model NewsLetter {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+}
+
+model NewsArticle {
+  id              String            @id @default(uuid())
+  imageUrl        String?
+  title           String
+  publishedAt     DateTime          @default(now())
+  content         String
+  author          User              @relation(fields: [authorId], references: [id])
+  authorId        String
+  location        String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  newsComments    NewsComment[]
+  NewsArticleLike NewsArticleLike[]
+}
+
+model NewsComment {
+  id            String      @id @default(uuid())
+  content       String
+  commenter     User        @relation(fields: [commenterId], references: [id])
+  commenterId   String
+  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
+  newsArticleId String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model NewsArticleLike {
+  id            String      @id @default(uuid())
+  liker         User        @relation(fields: [likerId], references: [id])
+  likerId       String
+  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
+  newsArticleId String
+  createdAt     DateTime    @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+  MODERATOR
+}

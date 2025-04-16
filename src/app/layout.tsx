@@ -1,10 +1,10 @@
+import ReactQueryProvider from "@/components/react-query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import { webName } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { webName } from "@/lib/utils";
-import { Toaster } from "@/components/ui/sonner";
-import ReactQueryProvider from "@/components/react-query-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title:{
-    template:`%s| ${webName}`,
-    absolute:webName,
-    default:webName
+  title: {
+    template: `%s| ${webName}`,
+    absolute: webName,
+    default: webName,
   },
   description: "An all in one place to get services at Lira City.",
 };
@@ -41,11 +41,10 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          enableColorScheme
         >
-        <ReactQueryProvider >
-        {children}
-        </ReactQueryProvider>
-          <Toaster/>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

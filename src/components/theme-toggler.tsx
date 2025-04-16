@@ -11,11 +11,10 @@ const toggleThemes: { name: string; theme: string; icon: LucideIcon }[] = [
 ];
 
 export function ThemeToggler() {
-  const { setTheme, theme: currentTheme,   } = useTheme();
+  const { setTheme, theme: currentTheme } = useTheme();
 
   return (
     <div>
-
       {toggleThemes.map(({ name, theme, icon }) => {
         const Icon = icon;
         return (
@@ -26,6 +25,7 @@ export function ThemeToggler() {
             onClick={() => setTheme(theme)}
           >
             <Icon />
+            <span>{`${currentTheme === theme}`}</span>
             <span className="sr-only">{name}</span>
           </Button>
         );

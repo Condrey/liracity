@@ -20,7 +20,7 @@ export default function ListOfNewsArticles({
   });
 
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <>
       {query.status === "error" ? (
         <ErrorContainer
           query={query}
@@ -31,10 +31,12 @@ export default function ListOfNewsArticles({
           message={"There are no news articles in the database yet."}
         />
       ) : (
-        query.data.map((article) => (
-          <NewsArticleContainer key={article.id} newsArticle={article} />
-        ))
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-12">
+          {query.data.map((article) => (
+            <NewsArticleContainer key={article.id} newsArticle={article} />
+          ))}
+        </div>
       )}
-    </div>
+    </>
   );
 }

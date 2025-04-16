@@ -1,7 +1,8 @@
 import { NewsArticleData } from "@/lib/types";
 import { formatDateToLocal } from "@/lib/utils";
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { MapPinIcon } from "lucide-react";
 
 interface NewsContainerProps {
   className?: string;
@@ -22,16 +23,18 @@ export default function NewsArticleContainer({
           className="w-full h-48 object-cover rounded-md"
         />
       </CardContent>
-      <CardDescription>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>
-          <span>{location}</span>
-          <span>{formatDateToLocal(publishedAt)}</span>
+      <CardHeader>
+        <h1 className="text-lg leading-tight tracking-tighter  line-clamp-2 text-ellipsis">{title}</h1>
+        <h2 className="flex text-sm items-end gap-2  tracking-wider">
+<MapPinIcon strokeWidth={0.5} />            <span>{location}</span>
+       
+        </h2>
+        <CardDescription className="w-full gap-2 ice flex flex-wrap flex-row" >
+        <p >
+        <span className="text-xs">Published {formatDateToLocal(publishedAt)}</span>
+        {" "}<cite className="italic">By {author.name}</cite></p>
         </CardDescription>
-        <CardDescription className="italic">
-          Published by: {author.name}
-        </CardDescription>
-      </CardDescription>
+      </CardHeader>
     </Card>
   );
 }

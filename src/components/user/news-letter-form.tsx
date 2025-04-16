@@ -23,6 +23,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import LoadingButton from "../ui/loading-button";
+import { MailIcon } from "lucide-react";
 
 export default function NewsLetterForm() {
   const form = useForm<NewsLetterSubscriptionSchema>({
@@ -36,13 +37,16 @@ export default function NewsLetterForm() {
   const onSubmit = (input: NewsLetterSubscriptionSchema) => {};
   return (
     <Form {...form}>
-      <Card className="w-full max-w-2xl mx-auto">
-        <CardHeader>
-          <CardTitle>Request Newsletter</CardTitle>
-          <CardDescription>
-            Subscribe to our newsletter to stay ahead. Get notified about news
-            feeds and upcoming events before others.
-          </CardDescription>
+      <Card className="w-full max-w-2xl mx-auto group/newsLetter">
+        <CardHeader className="flex flex-row gap-3 items-center">
+          <MailIcon className="size-20 text-muted-foreground hidden sm:block animate-bounce group-hover/newsLetter:animate-none" strokeWidth={0.5} />
+          <div className=" gap-1.5 flex flex-col">
+            <CardTitle >Request Newsletter</CardTitle>
+            <CardDescription>
+              Subscribe to our newsletter to stay ahead. Get notified about news
+              feeds and upcoming events before others.
+            </CardDescription>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
@@ -80,7 +84,9 @@ export default function NewsLetterForm() {
                 </FormItem>
               )}
             />
-            <LoadingButton loading>Request</LoadingButton>
+            <div className="flex items-center justify-end gap-4">
+              <LoadingButton loading>Request</LoadingButton>
+            </div>
           </form>
         </CardContent>
       </Card>

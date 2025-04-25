@@ -23,9 +23,9 @@ export function ThemeToggler() {
             variant={currentTheme === theme ? "secondary" : "ghost"}
             size={"icon"}
             onClick={() => setTheme(theme)}
+            title={name+' mode'}
           >
             <Icon />
-            <span>{`${currentTheme === theme}`}</span>
             <span className="sr-only">{name}</span>
           </Button>
         );

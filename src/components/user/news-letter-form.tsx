@@ -39,7 +39,7 @@ export default function NewsLetterForm() {
     <Form {...form}>
       <Card className="w-full max-w-2xl mx-auto group/newsLetter">
         <CardHeader className="flex flex-row gap-3 items-center">
-          <MailIcon className="size-20 text-muted-foreground hidden sm:block animate-bounce group-hover/newsLetter:animate-none" strokeWidth={0.5} />
+          <MailIcon className="size-20 text-muted-foreground hidden sm:block  group-hover/newsLetter:animate-none" strokeWidth={0.5} />
           <div className=" gap-1.5 flex flex-col">
             <CardTitle >Request Newsletter</CardTitle>
             <CardDescription>
@@ -60,7 +60,7 @@ export default function NewsLetterForm() {
                     <Input
                       type="text"
                       {...field}
-                      placeholder="e.g., Okello Tom Richard"
+                      placeholder="e.g., John Doe"
                     />
                   </FormControl>
                   <FormMessage />
@@ -77,7 +77,7 @@ export default function NewsLetterForm() {
                     <Input
                       type="email"
                       {...field}
-                      placeholder="e.g., trokello5@gmail.com"
+                      placeholder="e.g., someone@gmail.com"
                     />
                   </FormControl>
                   <FormMessage />

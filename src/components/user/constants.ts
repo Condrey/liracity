@@ -137,8 +137,8 @@ export const navLinks: NavLinkGroup[] = [
     children: cityServicesLinks,
   },
   {
-    title: "What We Do",
-    href: "/what-we-do",
+    title: "The team",
+    href: "/the-team",
     description: "Explore the focus areas and functions of the city council.",
     icon: BlocksIcon,
     children: whatWeDoLinks,

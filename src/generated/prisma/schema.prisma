@@ -34,9 +34,49 @@ model User {
   newsArticles            NewsArticle[]
   newsComments            NewsComment[]
   newsArticleLikes        NewsArticleLike[]
-  NewsLetter              NewsLetter[]
+  newsLetters             NewsLetter[]
+  employees               Employee[]
 
   @@map("users")
+}
+
+model DepartMent {
+  id                  String               @id @default(uuid())
+  name                String
+  about               String?
+  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id])
+  departmentalSectors DepartMentalSector[]
+  headOfDepartmentId  String?
+
+  @@map("departments")
+}
+
+model DepartMentalSector {
+  id           String      @id @default(uuid())
+  name         String
+  description  String?
+  hierarchy    Int
+  employees    Employee[]
+  departMent   DepartMent? @relation(fields: [departMentId], references: [id])
+  departMentId String?
+
+  @@map("departmental_sectors")
+}
+
+model Employee {
+  id                   String              @id @default(uuid())
+  user                 User                @relation(fields: [userId], references: [id])
+  assumedOffice        Int
+  endedOffice          Int?
+  position             String
+  hierarchy            Int
+  shortMessageToPublic String?
+  departMents          DepartMent[]
+  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
+  departMentalSectorId String?
+  userId               String
+
+  @@map("employees")
 }
 
 model EmailVerificationToken {
@@ -63,6 +103,8 @@ model NewsLetterSubscription {
   email     String   @unique
   name      String
   createdAt DateTime @default(now())
+
+  @@map("news_letter_subscriptions")
 }
 
 model NewsLetter {
@@ -74,21 +116,25 @@ model NewsLetter {
   updatedAt   DateTime @updatedAt
   author      User     @relation(fields: [authorId], references: [id])
   authorId    String
+
+  @@map("news_letters")
 }
 
 model NewsArticle {
-  id              String            @id @default(uuid())
-  imageUrl        String?
-  title           String
-  publishedAt     DateTime          @default(now())
-  content         String
-  author          User              @relation(fields: [authorId], references: [id])
-  authorId        String
-  location        String?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  newsComments    NewsComment[]
-  NewsArticleLike NewsArticleLike[]
+  id               String            @id @default(uuid())
+  imageUrl         String?
+  title            String
+  publishedAt      DateTime          @default(now())
+  content          String
+  author           User              @relation(fields: [authorId], references: [id])
+  authorId         String
+  location         String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  newsComments     NewsComment[]
+  newsArticleLikes NewsArticleLike[]
+
+  @@map("news_articles")
 }
 
 model NewsComment {
@@ -100,6 +146,8 @@ model NewsComment {
   newsArticleId String
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+
+  @@map("news_article_comments")
 }
 
 model NewsArticleLike {
@@ -109,6 +157,8 @@ model NewsArticleLike {
   newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
   newsArticleId String
   createdAt     DateTime    @default(now())
+
+  @@map("news_article_likes")
 }
 
 enum Role {

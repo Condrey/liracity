@@ -6,6 +6,7 @@ import { cache } from "react"
 
  async function lastTenNewsArticles (){
     return await prisma.newsArticle.findMany({
+        orderBy:{createdAt:'desc'},
         take:10,
         include:newsArticleDataInclude
     })

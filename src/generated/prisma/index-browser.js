@@ -134,6 +134,32 @@ exports.Prisma.UserScalarFieldEnum = {
   emailVerified: 'emailVerified'
 };
 
+exports.Prisma.DepartMentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  about: 'about',
+  headOfDepartmentId: 'headOfDepartmentId'
+};
+
+exports.Prisma.DepartMentalSectorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  hierarchy: 'hierarchy',
+  departMentId: 'departMentId'
+};
+
+exports.Prisma.EmployeeScalarFieldEnum = {
+  id: 'id',
+  assumedOffice: 'assumedOffice',
+  endedOffice: 'endedOffice',
+  position: 'position',
+  hierarchy: 'hierarchy',
+  shortMessageToPublic: 'shortMessageToPublic',
+  departMentalSectorId: 'departMentalSectorId',
+  userId: 'userId'
+};
+
 exports.Prisma.EmailVerificationTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -214,6 +240,9 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  DepartMent: 'DepartMent',
+  DepartMentalSector: 'DepartMentalSector',
+  Employee: 'Employee',
   EmailVerificationToken: 'EmailVerificationToken',
   Session: 'Session',
   NewsLetterSubscription: 'NewsLetterSubscription',

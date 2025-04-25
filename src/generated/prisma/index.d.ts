@@ -19,6 +19,21 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model DepartMent
+ * 
+ */
+export type DepartMent = $Result.DefaultSelection<Prisma.$DepartMentPayload>
+/**
+ * Model DepartMentalSector
+ * 
+ */
+export type DepartMentalSector = $Result.DefaultSelection<Prisma.$DepartMentalSectorPayload>
+/**
+ * Model Employee
+ * 
+ */
+export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
+/**
  * Model EmailVerificationToken
  * 
  */
@@ -206,6 +221,36 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.departMent`: Exposes CRUD operations for the **DepartMent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DepartMents
+    * const departMents = await prisma.departMent.findMany()
+    * ```
+    */
+  get departMent(): Prisma.DepartMentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.departMentalSector`: Exposes CRUD operations for the **DepartMentalSector** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DepartMentalSectors
+    * const departMentalSectors = await prisma.departMentalSector.findMany()
+    * ```
+    */
+  get departMentalSector(): Prisma.DepartMentalSectorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.employee`: Exposes CRUD operations for the **Employee** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Employees
+    * const employees = await prisma.employee.findMany()
+    * ```
+    */
+  get employee(): Prisma.EmployeeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.emailVerificationToken`: Exposes CRUD operations for the **EmailVerificationToken** model.
@@ -717,6 +762,9 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    DepartMent: 'DepartMent',
+    DepartMentalSector: 'DepartMentalSector',
+    Employee: 'Employee',
     EmailVerificationToken: 'EmailVerificationToken',
     Session: 'Session',
     NewsLetterSubscription: 'NewsLetterSubscription',
@@ -742,7 +790,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "newsComment" | "newsArticleLike"
+      modelProps: "user" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "newsComment" | "newsArticleLike"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -817,6 +865,228 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      DepartMent: {
+        payload: Prisma.$DepartMentPayload<ExtArgs>
+        fields: Prisma.DepartMentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartMentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartMentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartMentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartMentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          findMany: {
+            args: Prisma.DepartMentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>[]
+          }
+          create: {
+            args: Prisma.DepartMentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          createMany: {
+            args: Prisma.DepartMentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DepartMentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>[]
+          }
+          delete: {
+            args: Prisma.DepartMentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          update: {
+            args: Prisma.DepartMentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartMentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartMentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DepartMentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>[]
+          }
+          upsert: {
+            args: Prisma.DepartMentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartMentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartMent>
+          }
+          groupBy: {
+            args: Prisma.DepartMentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartMentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartMentCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartMentCountAggregateOutputType> | number
+          }
+        }
+      }
+      DepartMentalSector: {
+        payload: Prisma.$DepartMentalSectorPayload<ExtArgs>
+        fields: Prisma.DepartMentalSectorFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartMentalSectorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartMentalSectorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartMentalSectorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartMentalSectorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          findMany: {
+            args: Prisma.DepartMentalSectorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>[]
+          }
+          create: {
+            args: Prisma.DepartMentalSectorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          createMany: {
+            args: Prisma.DepartMentalSectorCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DepartMentalSectorCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>[]
+          }
+          delete: {
+            args: Prisma.DepartMentalSectorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          update: {
+            args: Prisma.DepartMentalSectorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartMentalSectorDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartMentalSectorUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DepartMentalSectorUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>[]
+          }
+          upsert: {
+            args: Prisma.DepartMentalSectorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartMentalSectorPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartMentalSectorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartMentalSector>
+          }
+          groupBy: {
+            args: Prisma.DepartMentalSectorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartMentalSectorGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartMentalSectorCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartMentalSectorCountAggregateOutputType> | number
+          }
+        }
+      }
+      Employee: {
+        payload: Prisma.$EmployeePayload<ExtArgs>
+        fields: Prisma.EmployeeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmployeeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmployeeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          findFirst: {
+            args: Prisma.EmployeeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmployeeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          findMany: {
+            args: Prisma.EmployeeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          create: {
+            args: Prisma.EmployeeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          createMany: {
+            args: Prisma.EmployeeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmployeeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          delete: {
+            args: Prisma.EmployeeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          update: {
+            args: Prisma.EmployeeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          deleteMany: {
+            args: Prisma.EmployeeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmployeeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmployeeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>[]
+          }
+          upsert: {
+            args: Prisma.EmployeeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmployeePayload>
+          }
+          aggregate: {
+            args: Prisma.EmployeeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmployee>
+          }
+          groupBy: {
+            args: Prisma.EmployeeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmployeeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmployeeCountArgs<ExtArgs>
+            result: $Utils.Optional<EmployeeCountAggregateOutputType> | number
           }
         }
       }
@@ -1423,6 +1693,9 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    departMent?: DepartMentOmit
+    departMentalSector?: DepartMentalSectorOmit
+    employee?: EmployeeOmit
     emailVerificationToken?: EmailVerificationTokenOmit
     session?: SessionOmit
     newsLetterSubscription?: NewsLetterSubscriptionOmit
@@ -1529,7 +1802,8 @@ export namespace Prisma {
     newsArticles: number
     newsComments: number
     newsArticleLikes: number
-    NewsLetter: number
+    newsLetters: number
+    employees: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1538,7 +1812,8 @@ export namespace Prisma {
     newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
     newsComments?: boolean | UserCountOutputTypeCountNewsCommentsArgs
     newsArticleLikes?: boolean | UserCountOutputTypeCountNewsArticleLikesArgs
-    NewsLetter?: boolean | UserCountOutputTypeCountNewsLetterArgs
+    newsLetters?: boolean | UserCountOutputTypeCountNewsLettersArgs
+    employees?: boolean | UserCountOutputTypeCountEmployeesArgs
   }
 
   // Custom InputTypes
@@ -1590,8 +1865,108 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountNewsLetterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountNewsLettersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsLetterWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
+   * Count Type DepartMentCountOutputType
+   */
+
+  export type DepartMentCountOutputType = {
+    departmentalSectors: number
+  }
+
+  export type DepartMentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departmentalSectors?: boolean | DepartMentCountOutputTypeCountDepartmentalSectorsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartMentCountOutputType without action
+   */
+  export type DepartMentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentCountOutputType
+     */
+    select?: DepartMentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartMentCountOutputType without action
+   */
+  export type DepartMentCountOutputTypeCountDepartmentalSectorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartMentalSectorWhereInput
+  }
+
+
+  /**
+   * Count Type DepartMentalSectorCountOutputType
+   */
+
+  export type DepartMentalSectorCountOutputType = {
+    employees: number
+  }
+
+  export type DepartMentalSectorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | DepartMentalSectorCountOutputTypeCountEmployeesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartMentalSectorCountOutputType without action
+   */
+  export type DepartMentalSectorCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSectorCountOutputType
+     */
+    select?: DepartMentalSectorCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartMentalSectorCountOutputType without action
+   */
+  export type DepartMentalSectorCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
+   * Count Type EmployeeCountOutputType
+   */
+
+  export type EmployeeCountOutputType = {
+    departMents: number
+  }
+
+  export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departMents?: boolean | EmployeeCountOutputTypeCountDepartMentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmployeeCountOutputType
+     */
+    select?: EmployeeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeCountDepartMentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartMentWhereInput
   }
 
 
@@ -1601,12 +1976,12 @@ export namespace Prisma {
 
   export type NewsArticleCountOutputType = {
     newsComments: number
-    NewsArticleLike: number
+    newsArticleLikes: number
   }
 
   export type NewsArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     newsComments?: boolean | NewsArticleCountOutputTypeCountNewsCommentsArgs
-    NewsArticleLike?: boolean | NewsArticleCountOutputTypeCountNewsArticleLikeArgs
+    newsArticleLikes?: boolean | NewsArticleCountOutputTypeCountNewsArticleLikesArgs
   }
 
   // Custom InputTypes
@@ -1630,7 +2005,7 @@ export namespace Prisma {
   /**
    * NewsArticleCountOutputType without action
    */
-  export type NewsArticleCountOutputTypeCountNewsArticleLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type NewsArticleCountOutputTypeCountNewsArticleLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsArticleLikeWhereInput
   }
 
@@ -1880,7 +2255,8 @@ export namespace Prisma {
     newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsComments?: boolean | User$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | User$newsArticleLikesArgs<ExtArgs>
-    NewsLetter?: boolean | User$NewsLetterArgs<ExtArgs>
+    newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
+    employees?: boolean | User$employeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1942,7 +2318,8 @@ export namespace Prisma {
     newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsComments?: boolean | User$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | User$newsArticleLikesArgs<ExtArgs>
-    NewsLetter?: boolean | User$NewsLetterArgs<ExtArgs>
+    newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
+    employees?: boolean | User$employeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1956,7 +2333,8 @@ export namespace Prisma {
       newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
       newsArticleLikes: Prisma.$NewsArticleLikePayload<ExtArgs>[]
-      NewsLetter: Prisma.$NewsLetterPayload<ExtArgs>[]
+      newsLetters: Prisma.$NewsLetterPayload<ExtArgs>[]
+      employees: Prisma.$EmployeePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2372,7 +2750,8 @@ export namespace Prisma {
     newsArticles<T extends User$newsArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsComments<T extends User$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsArticleLikes<T extends User$newsArticleLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    NewsLetter<T extends User$NewsLetterArgs<ExtArgs> = {}>(args?: Subset<T, User$NewsLetterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    newsLetters<T extends User$newsLettersArgs<ExtArgs> = {}>(args?: Subset<T, User$newsLettersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    employees<T extends User$employeesArgs<ExtArgs> = {}>(args?: Subset<T, User$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2924,9 +3303,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.NewsLetter
+   * User.newsLetters
    */
-  export type User$NewsLetterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$newsLettersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NewsLetter
      */
@@ -2948,6 +3327,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.employees
+   */
+  export type User$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    cursor?: EmployeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2963,6 +3366,3437 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DepartMent
+   */
+
+  export type AggregateDepartMent = {
+    _count: DepartMentCountAggregateOutputType | null
+    _min: DepartMentMinAggregateOutputType | null
+    _max: DepartMentMaxAggregateOutputType | null
+  }
+
+  export type DepartMentMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    about: string | null
+    headOfDepartmentId: string | null
+  }
+
+  export type DepartMentMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    about: string | null
+    headOfDepartmentId: string | null
+  }
+
+  export type DepartMentCountAggregateOutputType = {
+    id: number
+    name: number
+    about: number
+    headOfDepartmentId: number
+    _all: number
+  }
+
+
+  export type DepartMentMinAggregateInputType = {
+    id?: true
+    name?: true
+    about?: true
+    headOfDepartmentId?: true
+  }
+
+  export type DepartMentMaxAggregateInputType = {
+    id?: true
+    name?: true
+    about?: true
+    headOfDepartmentId?: true
+  }
+
+  export type DepartMentCountAggregateInputType = {
+    id?: true
+    name?: true
+    about?: true
+    headOfDepartmentId?: true
+    _all?: true
+  }
+
+  export type DepartMentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DepartMent to aggregate.
+     */
+    where?: DepartMentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMents to fetch.
+     */
+    orderBy?: DepartMentOrderByWithRelationInput | DepartMentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartMentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DepartMents
+    **/
+    _count?: true | DepartMentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartMentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartMentMaxAggregateInputType
+  }
+
+  export type GetDepartMentAggregateType<T extends DepartMentAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartMent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartMent[P]>
+      : GetScalarType<T[P], AggregateDepartMent[P]>
+  }
+
+
+
+
+  export type DepartMentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartMentWhereInput
+    orderBy?: DepartMentOrderByWithAggregationInput | DepartMentOrderByWithAggregationInput[]
+    by: DepartMentScalarFieldEnum[] | DepartMentScalarFieldEnum
+    having?: DepartMentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartMentCountAggregateInputType | true
+    _min?: DepartMentMinAggregateInputType
+    _max?: DepartMentMaxAggregateInputType
+  }
+
+  export type DepartMentGroupByOutputType = {
+    id: string
+    name: string
+    about: string | null
+    headOfDepartmentId: string | null
+    _count: DepartMentCountAggregateOutputType | null
+    _min: DepartMentMinAggregateOutputType | null
+    _max: DepartMentMaxAggregateOutputType | null
+  }
+
+  type GetDepartMentGroupByPayload<T extends DepartMentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartMentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartMentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartMentGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartMentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartMentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    about?: boolean
+    headOfDepartmentId?: boolean
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+    departmentalSectors?: boolean | DepartMent$departmentalSectorsArgs<ExtArgs>
+    _count?: boolean | DepartMentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["departMent"]>
+
+  export type DepartMentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    about?: boolean
+    headOfDepartmentId?: boolean
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+  }, ExtArgs["result"]["departMent"]>
+
+  export type DepartMentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    about?: boolean
+    headOfDepartmentId?: boolean
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+  }, ExtArgs["result"]["departMent"]>
+
+  export type DepartMentSelectScalar = {
+    id?: boolean
+    name?: boolean
+    about?: boolean
+    headOfDepartmentId?: boolean
+  }
+
+  export type DepartMentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "headOfDepartmentId", ExtArgs["result"]["departMent"]>
+  export type DepartMentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+    departmentalSectors?: boolean | DepartMent$departmentalSectorsArgs<ExtArgs>
+    _count?: boolean | DepartMentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DepartMentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+  }
+  export type DepartMentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+  }
+
+  export type $DepartMentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DepartMent"
+    objects: {
+      headOfDepartment: Prisma.$EmployeePayload<ExtArgs> | null
+      departmentalSectors: Prisma.$DepartMentalSectorPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      about: string | null
+      headOfDepartmentId: string | null
+    }, ExtArgs["result"]["departMent"]>
+    composites: {}
+  }
+
+  type DepartMentGetPayload<S extends boolean | null | undefined | DepartMentDefaultArgs> = $Result.GetResult<Prisma.$DepartMentPayload, S>
+
+  type DepartMentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartMentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartMentCountAggregateInputType | true
+    }
+
+  export interface DepartMentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DepartMent'], meta: { name: 'DepartMent' } }
+    /**
+     * Find zero or one DepartMent that matches the filter.
+     * @param {DepartMentFindUniqueArgs} args - Arguments to find a DepartMent
+     * @example
+     * // Get one DepartMent
+     * const departMent = await prisma.departMent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartMentFindUniqueArgs>(args: SelectSubset<T, DepartMentFindUniqueArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DepartMent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartMentFindUniqueOrThrowArgs} args - Arguments to find a DepartMent
+     * @example
+     * // Get one DepartMent
+     * const departMent = await prisma.departMent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartMentFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartMentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DepartMent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentFindFirstArgs} args - Arguments to find a DepartMent
+     * @example
+     * // Get one DepartMent
+     * const departMent = await prisma.departMent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartMentFindFirstArgs>(args?: SelectSubset<T, DepartMentFindFirstArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DepartMent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentFindFirstOrThrowArgs} args - Arguments to find a DepartMent
+     * @example
+     * // Get one DepartMent
+     * const departMent = await prisma.departMent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartMentFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartMentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DepartMents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DepartMents
+     * const departMents = await prisma.departMent.findMany()
+     * 
+     * // Get first 10 DepartMents
+     * const departMents = await prisma.departMent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departMentWithIdOnly = await prisma.departMent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartMentFindManyArgs>(args?: SelectSubset<T, DepartMentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DepartMent.
+     * @param {DepartMentCreateArgs} args - Arguments to create a DepartMent.
+     * @example
+     * // Create one DepartMent
+     * const DepartMent = await prisma.departMent.create({
+     *   data: {
+     *     // ... data to create a DepartMent
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartMentCreateArgs>(args: SelectSubset<T, DepartMentCreateArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DepartMents.
+     * @param {DepartMentCreateManyArgs} args - Arguments to create many DepartMents.
+     * @example
+     * // Create many DepartMents
+     * const departMent = await prisma.departMent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartMentCreateManyArgs>(args?: SelectSubset<T, DepartMentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DepartMents and returns the data saved in the database.
+     * @param {DepartMentCreateManyAndReturnArgs} args - Arguments to create many DepartMents.
+     * @example
+     * // Create many DepartMents
+     * const departMent = await prisma.departMent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DepartMents and only return the `id`
+     * const departMentWithIdOnly = await prisma.departMent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DepartMentCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartMentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DepartMent.
+     * @param {DepartMentDeleteArgs} args - Arguments to delete one DepartMent.
+     * @example
+     * // Delete one DepartMent
+     * const DepartMent = await prisma.departMent.delete({
+     *   where: {
+     *     // ... filter to delete one DepartMent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartMentDeleteArgs>(args: SelectSubset<T, DepartMentDeleteArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DepartMent.
+     * @param {DepartMentUpdateArgs} args - Arguments to update one DepartMent.
+     * @example
+     * // Update one DepartMent
+     * const departMent = await prisma.departMent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartMentUpdateArgs>(args: SelectSubset<T, DepartMentUpdateArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DepartMents.
+     * @param {DepartMentDeleteManyArgs} args - Arguments to filter DepartMents to delete.
+     * @example
+     * // Delete a few DepartMents
+     * const { count } = await prisma.departMent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartMentDeleteManyArgs>(args?: SelectSubset<T, DepartMentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DepartMents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DepartMents
+     * const departMent = await prisma.departMent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartMentUpdateManyArgs>(args: SelectSubset<T, DepartMentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DepartMents and returns the data updated in the database.
+     * @param {DepartMentUpdateManyAndReturnArgs} args - Arguments to update many DepartMents.
+     * @example
+     * // Update many DepartMents
+     * const departMent = await prisma.departMent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DepartMents and only return the `id`
+     * const departMentWithIdOnly = await prisma.departMent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DepartMentUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartMentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DepartMent.
+     * @param {DepartMentUpsertArgs} args - Arguments to update or create a DepartMent.
+     * @example
+     * // Update or create a DepartMent
+     * const departMent = await prisma.departMent.upsert({
+     *   create: {
+     *     // ... data to create a DepartMent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DepartMent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartMentUpsertArgs>(args: SelectSubset<T, DepartMentUpsertArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DepartMents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentCountArgs} args - Arguments to filter DepartMents to count.
+     * @example
+     * // Count the number of DepartMents
+     * const count = await prisma.departMent.count({
+     *   where: {
+     *     // ... the filter for the DepartMents we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartMentCountArgs>(
+      args?: Subset<T, DepartMentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartMentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DepartMent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartMentAggregateArgs>(args: Subset<T, DepartMentAggregateArgs>): Prisma.PrismaPromise<GetDepartMentAggregateType<T>>
+
+    /**
+     * Group by DepartMent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartMentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartMentGroupByArgs['orderBy'] }
+        : { orderBy?: DepartMentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartMentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartMentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DepartMent model
+   */
+  readonly fields: DepartMentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DepartMent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartMentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    headOfDepartment<T extends DepartMent$headOfDepartmentArgs<ExtArgs> = {}>(args?: Subset<T, DepartMent$headOfDepartmentArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    departmentalSectors<T extends DepartMent$departmentalSectorsArgs<ExtArgs> = {}>(args?: Subset<T, DepartMent$departmentalSectorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DepartMent model
+   */
+  interface DepartMentFieldRefs {
+    readonly id: FieldRef<"DepartMent", 'String'>
+    readonly name: FieldRef<"DepartMent", 'String'>
+    readonly about: FieldRef<"DepartMent", 'String'>
+    readonly headOfDepartmentId: FieldRef<"DepartMent", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DepartMent findUnique
+   */
+  export type DepartMentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMent to fetch.
+     */
+    where: DepartMentWhereUniqueInput
+  }
+
+  /**
+   * DepartMent findUniqueOrThrow
+   */
+  export type DepartMentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMent to fetch.
+     */
+    where: DepartMentWhereUniqueInput
+  }
+
+  /**
+   * DepartMent findFirst
+   */
+  export type DepartMentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMent to fetch.
+     */
+    where?: DepartMentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMents to fetch.
+     */
+    orderBy?: DepartMentOrderByWithRelationInput | DepartMentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DepartMents.
+     */
+    cursor?: DepartMentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DepartMents.
+     */
+    distinct?: DepartMentScalarFieldEnum | DepartMentScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMent findFirstOrThrow
+   */
+  export type DepartMentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMent to fetch.
+     */
+    where?: DepartMentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMents to fetch.
+     */
+    orderBy?: DepartMentOrderByWithRelationInput | DepartMentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DepartMents.
+     */
+    cursor?: DepartMentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DepartMents.
+     */
+    distinct?: DepartMentScalarFieldEnum | DepartMentScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMent findMany
+   */
+  export type DepartMentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMents to fetch.
+     */
+    where?: DepartMentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMents to fetch.
+     */
+    orderBy?: DepartMentOrderByWithRelationInput | DepartMentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DepartMents.
+     */
+    cursor?: DepartMentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMents.
+     */
+    skip?: number
+    distinct?: DepartMentScalarFieldEnum | DepartMentScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMent create
+   */
+  export type DepartMentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DepartMent.
+     */
+    data: XOR<DepartMentCreateInput, DepartMentUncheckedCreateInput>
+  }
+
+  /**
+   * DepartMent createMany
+   */
+  export type DepartMentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DepartMents.
+     */
+    data: DepartMentCreateManyInput | DepartMentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DepartMent createManyAndReturn
+   */
+  export type DepartMentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * The data used to create many DepartMents.
+     */
+    data: DepartMentCreateManyInput | DepartMentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DepartMent update
+   */
+  export type DepartMentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DepartMent.
+     */
+    data: XOR<DepartMentUpdateInput, DepartMentUncheckedUpdateInput>
+    /**
+     * Choose, which DepartMent to update.
+     */
+    where: DepartMentWhereUniqueInput
+  }
+
+  /**
+   * DepartMent updateMany
+   */
+  export type DepartMentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DepartMents.
+     */
+    data: XOR<DepartMentUpdateManyMutationInput, DepartMentUncheckedUpdateManyInput>
+    /**
+     * Filter which DepartMents to update
+     */
+    where?: DepartMentWhereInput
+    /**
+     * Limit how many DepartMents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DepartMent updateManyAndReturn
+   */
+  export type DepartMentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * The data used to update DepartMents.
+     */
+    data: XOR<DepartMentUpdateManyMutationInput, DepartMentUncheckedUpdateManyInput>
+    /**
+     * Filter which DepartMents to update
+     */
+    where?: DepartMentWhereInput
+    /**
+     * Limit how many DepartMents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DepartMent upsert
+   */
+  export type DepartMentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DepartMent to update in case it exists.
+     */
+    where: DepartMentWhereUniqueInput
+    /**
+     * In case the DepartMent found by the `where` argument doesn't exist, create a new DepartMent with this data.
+     */
+    create: XOR<DepartMentCreateInput, DepartMentUncheckedCreateInput>
+    /**
+     * In case the DepartMent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartMentUpdateInput, DepartMentUncheckedUpdateInput>
+  }
+
+  /**
+   * DepartMent delete
+   */
+  export type DepartMentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    /**
+     * Filter which DepartMent to delete.
+     */
+    where: DepartMentWhereUniqueInput
+  }
+
+  /**
+   * DepartMent deleteMany
+   */
+  export type DepartMentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DepartMents to delete
+     */
+    where?: DepartMentWhereInput
+    /**
+     * Limit how many DepartMents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DepartMent.headOfDepartment
+   */
+  export type DepartMent$headOfDepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+  /**
+   * DepartMent.departmentalSectors
+   */
+  export type DepartMent$departmentalSectorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    where?: DepartMentalSectorWhereInput
+    orderBy?: DepartMentalSectorOrderByWithRelationInput | DepartMentalSectorOrderByWithRelationInput[]
+    cursor?: DepartMentalSectorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartMentalSectorScalarFieldEnum | DepartMentalSectorScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMent without action
+   */
+  export type DepartMentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DepartMentalSector
+   */
+
+  export type AggregateDepartMentalSector = {
+    _count: DepartMentalSectorCountAggregateOutputType | null
+    _avg: DepartMentalSectorAvgAggregateOutputType | null
+    _sum: DepartMentalSectorSumAggregateOutputType | null
+    _min: DepartMentalSectorMinAggregateOutputType | null
+    _max: DepartMentalSectorMaxAggregateOutputType | null
+  }
+
+  export type DepartMentalSectorAvgAggregateOutputType = {
+    hierarchy: number | null
+  }
+
+  export type DepartMentalSectorSumAggregateOutputType = {
+    hierarchy: number | null
+  }
+
+  export type DepartMentalSectorMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    hierarchy: number | null
+    departMentId: string | null
+  }
+
+  export type DepartMentalSectorMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    hierarchy: number | null
+    departMentId: string | null
+  }
+
+  export type DepartMentalSectorCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    hierarchy: number
+    departMentId: number
+    _all: number
+  }
+
+
+  export type DepartMentalSectorAvgAggregateInputType = {
+    hierarchy?: true
+  }
+
+  export type DepartMentalSectorSumAggregateInputType = {
+    hierarchy?: true
+  }
+
+  export type DepartMentalSectorMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    hierarchy?: true
+    departMentId?: true
+  }
+
+  export type DepartMentalSectorMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    hierarchy?: true
+    departMentId?: true
+  }
+
+  export type DepartMentalSectorCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    hierarchy?: true
+    departMentId?: true
+    _all?: true
+  }
+
+  export type DepartMentalSectorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DepartMentalSector to aggregate.
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMentalSectors to fetch.
+     */
+    orderBy?: DepartMentalSectorOrderByWithRelationInput | DepartMentalSectorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartMentalSectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMentalSectors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMentalSectors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DepartMentalSectors
+    **/
+    _count?: true | DepartMentalSectorCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DepartMentalSectorAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DepartMentalSectorSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartMentalSectorMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartMentalSectorMaxAggregateInputType
+  }
+
+  export type GetDepartMentalSectorAggregateType<T extends DepartMentalSectorAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartMentalSector]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartMentalSector[P]>
+      : GetScalarType<T[P], AggregateDepartMentalSector[P]>
+  }
+
+
+
+
+  export type DepartMentalSectorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartMentalSectorWhereInput
+    orderBy?: DepartMentalSectorOrderByWithAggregationInput | DepartMentalSectorOrderByWithAggregationInput[]
+    by: DepartMentalSectorScalarFieldEnum[] | DepartMentalSectorScalarFieldEnum
+    having?: DepartMentalSectorScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartMentalSectorCountAggregateInputType | true
+    _avg?: DepartMentalSectorAvgAggregateInputType
+    _sum?: DepartMentalSectorSumAggregateInputType
+    _min?: DepartMentalSectorMinAggregateInputType
+    _max?: DepartMentalSectorMaxAggregateInputType
+  }
+
+  export type DepartMentalSectorGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    hierarchy: number
+    departMentId: string | null
+    _count: DepartMentalSectorCountAggregateOutputType | null
+    _avg: DepartMentalSectorAvgAggregateOutputType | null
+    _sum: DepartMentalSectorSumAggregateOutputType | null
+    _min: DepartMentalSectorMinAggregateOutputType | null
+    _max: DepartMentalSectorMaxAggregateOutputType | null
+  }
+
+  type GetDepartMentalSectorGroupByPayload<T extends DepartMentalSectorGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartMentalSectorGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartMentalSectorGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartMentalSectorGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartMentalSectorGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartMentalSectorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    hierarchy?: boolean
+    departMentId?: boolean
+    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+    _count?: boolean | DepartMentalSectorCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["departMentalSector"]>
+
+  export type DepartMentalSectorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    hierarchy?: boolean
+    departMentId?: boolean
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+  }, ExtArgs["result"]["departMentalSector"]>
+
+  export type DepartMentalSectorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    hierarchy?: boolean
+    departMentId?: boolean
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+  }, ExtArgs["result"]["departMentalSector"]>
+
+  export type DepartMentalSectorSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    hierarchy?: boolean
+    departMentId?: boolean
+  }
+
+  export type DepartMentalSectorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "hierarchy" | "departMentId", ExtArgs["result"]["departMentalSector"]>
+  export type DepartMentalSectorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+    _count?: boolean | DepartMentalSectorCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DepartMentalSectorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+  }
+  export type DepartMentalSectorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+  }
+
+  export type $DepartMentalSectorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DepartMentalSector"
+    objects: {
+      employees: Prisma.$EmployeePayload<ExtArgs>[]
+      departMent: Prisma.$DepartMentPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      hierarchy: number
+      departMentId: string | null
+    }, ExtArgs["result"]["departMentalSector"]>
+    composites: {}
+  }
+
+  type DepartMentalSectorGetPayload<S extends boolean | null | undefined | DepartMentalSectorDefaultArgs> = $Result.GetResult<Prisma.$DepartMentalSectorPayload, S>
+
+  type DepartMentalSectorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartMentalSectorFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartMentalSectorCountAggregateInputType | true
+    }
+
+  export interface DepartMentalSectorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DepartMentalSector'], meta: { name: 'DepartMentalSector' } }
+    /**
+     * Find zero or one DepartMentalSector that matches the filter.
+     * @param {DepartMentalSectorFindUniqueArgs} args - Arguments to find a DepartMentalSector
+     * @example
+     * // Get one DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartMentalSectorFindUniqueArgs>(args: SelectSubset<T, DepartMentalSectorFindUniqueArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DepartMentalSector that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartMentalSectorFindUniqueOrThrowArgs} args - Arguments to find a DepartMentalSector
+     * @example
+     * // Get one DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartMentalSectorFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartMentalSectorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DepartMentalSector that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorFindFirstArgs} args - Arguments to find a DepartMentalSector
+     * @example
+     * // Get one DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartMentalSectorFindFirstArgs>(args?: SelectSubset<T, DepartMentalSectorFindFirstArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DepartMentalSector that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorFindFirstOrThrowArgs} args - Arguments to find a DepartMentalSector
+     * @example
+     * // Get one DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartMentalSectorFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartMentalSectorFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DepartMentalSectors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DepartMentalSectors
+     * const departMentalSectors = await prisma.departMentalSector.findMany()
+     * 
+     * // Get first 10 DepartMentalSectors
+     * const departMentalSectors = await prisma.departMentalSector.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departMentalSectorWithIdOnly = await prisma.departMentalSector.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartMentalSectorFindManyArgs>(args?: SelectSubset<T, DepartMentalSectorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DepartMentalSector.
+     * @param {DepartMentalSectorCreateArgs} args - Arguments to create a DepartMentalSector.
+     * @example
+     * // Create one DepartMentalSector
+     * const DepartMentalSector = await prisma.departMentalSector.create({
+     *   data: {
+     *     // ... data to create a DepartMentalSector
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartMentalSectorCreateArgs>(args: SelectSubset<T, DepartMentalSectorCreateArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DepartMentalSectors.
+     * @param {DepartMentalSectorCreateManyArgs} args - Arguments to create many DepartMentalSectors.
+     * @example
+     * // Create many DepartMentalSectors
+     * const departMentalSector = await prisma.departMentalSector.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartMentalSectorCreateManyArgs>(args?: SelectSubset<T, DepartMentalSectorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DepartMentalSectors and returns the data saved in the database.
+     * @param {DepartMentalSectorCreateManyAndReturnArgs} args - Arguments to create many DepartMentalSectors.
+     * @example
+     * // Create many DepartMentalSectors
+     * const departMentalSector = await prisma.departMentalSector.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DepartMentalSectors and only return the `id`
+     * const departMentalSectorWithIdOnly = await prisma.departMentalSector.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DepartMentalSectorCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartMentalSectorCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DepartMentalSector.
+     * @param {DepartMentalSectorDeleteArgs} args - Arguments to delete one DepartMentalSector.
+     * @example
+     * // Delete one DepartMentalSector
+     * const DepartMentalSector = await prisma.departMentalSector.delete({
+     *   where: {
+     *     // ... filter to delete one DepartMentalSector
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartMentalSectorDeleteArgs>(args: SelectSubset<T, DepartMentalSectorDeleteArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DepartMentalSector.
+     * @param {DepartMentalSectorUpdateArgs} args - Arguments to update one DepartMentalSector.
+     * @example
+     * // Update one DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartMentalSectorUpdateArgs>(args: SelectSubset<T, DepartMentalSectorUpdateArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DepartMentalSectors.
+     * @param {DepartMentalSectorDeleteManyArgs} args - Arguments to filter DepartMentalSectors to delete.
+     * @example
+     * // Delete a few DepartMentalSectors
+     * const { count } = await prisma.departMentalSector.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartMentalSectorDeleteManyArgs>(args?: SelectSubset<T, DepartMentalSectorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DepartMentalSectors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DepartMentalSectors
+     * const departMentalSector = await prisma.departMentalSector.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartMentalSectorUpdateManyArgs>(args: SelectSubset<T, DepartMentalSectorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DepartMentalSectors and returns the data updated in the database.
+     * @param {DepartMentalSectorUpdateManyAndReturnArgs} args - Arguments to update many DepartMentalSectors.
+     * @example
+     * // Update many DepartMentalSectors
+     * const departMentalSector = await prisma.departMentalSector.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DepartMentalSectors and only return the `id`
+     * const departMentalSectorWithIdOnly = await prisma.departMentalSector.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DepartMentalSectorUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartMentalSectorUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DepartMentalSector.
+     * @param {DepartMentalSectorUpsertArgs} args - Arguments to update or create a DepartMentalSector.
+     * @example
+     * // Update or create a DepartMentalSector
+     * const departMentalSector = await prisma.departMentalSector.upsert({
+     *   create: {
+     *     // ... data to create a DepartMentalSector
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DepartMentalSector we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartMentalSectorUpsertArgs>(args: SelectSubset<T, DepartMentalSectorUpsertArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DepartMentalSectors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorCountArgs} args - Arguments to filter DepartMentalSectors to count.
+     * @example
+     * // Count the number of DepartMentalSectors
+     * const count = await prisma.departMentalSector.count({
+     *   where: {
+     *     // ... the filter for the DepartMentalSectors we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartMentalSectorCountArgs>(
+      args?: Subset<T, DepartMentalSectorCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartMentalSectorCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DepartMentalSector.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartMentalSectorAggregateArgs>(args: Subset<T, DepartMentalSectorAggregateArgs>): Prisma.PrismaPromise<GetDepartMentalSectorAggregateType<T>>
+
+    /**
+     * Group by DepartMentalSector.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartMentalSectorGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartMentalSectorGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartMentalSectorGroupByArgs['orderBy'] }
+        : { orderBy?: DepartMentalSectorGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartMentalSectorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartMentalSectorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DepartMentalSector model
+   */
+  readonly fields: DepartMentalSectorFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DepartMentalSector.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartMentalSectorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    employees<T extends DepartMentalSector$employeesArgs<ExtArgs> = {}>(args?: Subset<T, DepartMentalSector$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    departMent<T extends DepartMentalSector$departMentArgs<ExtArgs> = {}>(args?: Subset<T, DepartMentalSector$departMentArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DepartMentalSector model
+   */
+  interface DepartMentalSectorFieldRefs {
+    readonly id: FieldRef<"DepartMentalSector", 'String'>
+    readonly name: FieldRef<"DepartMentalSector", 'String'>
+    readonly description: FieldRef<"DepartMentalSector", 'String'>
+    readonly hierarchy: FieldRef<"DepartMentalSector", 'Int'>
+    readonly departMentId: FieldRef<"DepartMentalSector", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DepartMentalSector findUnique
+   */
+  export type DepartMentalSectorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMentalSector to fetch.
+     */
+    where: DepartMentalSectorWhereUniqueInput
+  }
+
+  /**
+   * DepartMentalSector findUniqueOrThrow
+   */
+  export type DepartMentalSectorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMentalSector to fetch.
+     */
+    where: DepartMentalSectorWhereUniqueInput
+  }
+
+  /**
+   * DepartMentalSector findFirst
+   */
+  export type DepartMentalSectorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMentalSector to fetch.
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMentalSectors to fetch.
+     */
+    orderBy?: DepartMentalSectorOrderByWithRelationInput | DepartMentalSectorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DepartMentalSectors.
+     */
+    cursor?: DepartMentalSectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMentalSectors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMentalSectors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DepartMentalSectors.
+     */
+    distinct?: DepartMentalSectorScalarFieldEnum | DepartMentalSectorScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMentalSector findFirstOrThrow
+   */
+  export type DepartMentalSectorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMentalSector to fetch.
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMentalSectors to fetch.
+     */
+    orderBy?: DepartMentalSectorOrderByWithRelationInput | DepartMentalSectorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DepartMentalSectors.
+     */
+    cursor?: DepartMentalSectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMentalSectors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMentalSectors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DepartMentalSectors.
+     */
+    distinct?: DepartMentalSectorScalarFieldEnum | DepartMentalSectorScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMentalSector findMany
+   */
+  export type DepartMentalSectorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter, which DepartMentalSectors to fetch.
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DepartMentalSectors to fetch.
+     */
+    orderBy?: DepartMentalSectorOrderByWithRelationInput | DepartMentalSectorOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DepartMentalSectors.
+     */
+    cursor?: DepartMentalSectorWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DepartMentalSectors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DepartMentalSectors.
+     */
+    skip?: number
+    distinct?: DepartMentalSectorScalarFieldEnum | DepartMentalSectorScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMentalSector create
+   */
+  export type DepartMentalSectorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DepartMentalSector.
+     */
+    data: XOR<DepartMentalSectorCreateInput, DepartMentalSectorUncheckedCreateInput>
+  }
+
+  /**
+   * DepartMentalSector createMany
+   */
+  export type DepartMentalSectorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DepartMentalSectors.
+     */
+    data: DepartMentalSectorCreateManyInput | DepartMentalSectorCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DepartMentalSector createManyAndReturn
+   */
+  export type DepartMentalSectorCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * The data used to create many DepartMentalSectors.
+     */
+    data: DepartMentalSectorCreateManyInput | DepartMentalSectorCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DepartMentalSector update
+   */
+  export type DepartMentalSectorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DepartMentalSector.
+     */
+    data: XOR<DepartMentalSectorUpdateInput, DepartMentalSectorUncheckedUpdateInput>
+    /**
+     * Choose, which DepartMentalSector to update.
+     */
+    where: DepartMentalSectorWhereUniqueInput
+  }
+
+  /**
+   * DepartMentalSector updateMany
+   */
+  export type DepartMentalSectorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DepartMentalSectors.
+     */
+    data: XOR<DepartMentalSectorUpdateManyMutationInput, DepartMentalSectorUncheckedUpdateManyInput>
+    /**
+     * Filter which DepartMentalSectors to update
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * Limit how many DepartMentalSectors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DepartMentalSector updateManyAndReturn
+   */
+  export type DepartMentalSectorUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * The data used to update DepartMentalSectors.
+     */
+    data: XOR<DepartMentalSectorUpdateManyMutationInput, DepartMentalSectorUncheckedUpdateManyInput>
+    /**
+     * Filter which DepartMentalSectors to update
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * Limit how many DepartMentalSectors to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DepartMentalSector upsert
+   */
+  export type DepartMentalSectorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DepartMentalSector to update in case it exists.
+     */
+    where: DepartMentalSectorWhereUniqueInput
+    /**
+     * In case the DepartMentalSector found by the `where` argument doesn't exist, create a new DepartMentalSector with this data.
+     */
+    create: XOR<DepartMentalSectorCreateInput, DepartMentalSectorUncheckedCreateInput>
+    /**
+     * In case the DepartMentalSector was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartMentalSectorUpdateInput, DepartMentalSectorUncheckedUpdateInput>
+  }
+
+  /**
+   * DepartMentalSector delete
+   */
+  export type DepartMentalSectorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    /**
+     * Filter which DepartMentalSector to delete.
+     */
+    where: DepartMentalSectorWhereUniqueInput
+  }
+
+  /**
+   * DepartMentalSector deleteMany
+   */
+  export type DepartMentalSectorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DepartMentalSectors to delete
+     */
+    where?: DepartMentalSectorWhereInput
+    /**
+     * Limit how many DepartMentalSectors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DepartMentalSector.employees
+   */
+  export type DepartMentalSector$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    cursor?: EmployeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMentalSector.departMent
+   */
+  export type DepartMentalSector$departMentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    where?: DepartMentWhereInput
+  }
+
+  /**
+   * DepartMentalSector without action
+   */
+  export type DepartMentalSectorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Employee
+   */
+
+  export type AggregateEmployee = {
+    _count: EmployeeCountAggregateOutputType | null
+    _avg: EmployeeAvgAggregateOutputType | null
+    _sum: EmployeeSumAggregateOutputType | null
+    _min: EmployeeMinAggregateOutputType | null
+    _max: EmployeeMaxAggregateOutputType | null
+  }
+
+  export type EmployeeAvgAggregateOutputType = {
+    assumedOffice: number | null
+    endedOffice: number | null
+    hierarchy: number | null
+  }
+
+  export type EmployeeSumAggregateOutputType = {
+    assumedOffice: number | null
+    endedOffice: number | null
+    hierarchy: number | null
+  }
+
+  export type EmployeeMinAggregateOutputType = {
+    id: string | null
+    assumedOffice: number | null
+    endedOffice: number | null
+    position: string | null
+    hierarchy: number | null
+    shortMessageToPublic: string | null
+    departMentalSectorId: string | null
+    userId: string | null
+  }
+
+  export type EmployeeMaxAggregateOutputType = {
+    id: string | null
+    assumedOffice: number | null
+    endedOffice: number | null
+    position: string | null
+    hierarchy: number | null
+    shortMessageToPublic: string | null
+    departMentalSectorId: string | null
+    userId: string | null
+  }
+
+  export type EmployeeCountAggregateOutputType = {
+    id: number
+    assumedOffice: number
+    endedOffice: number
+    position: number
+    hierarchy: number
+    shortMessageToPublic: number
+    departMentalSectorId: number
+    userId: number
+    _all: number
+  }
+
+
+  export type EmployeeAvgAggregateInputType = {
+    assumedOffice?: true
+    endedOffice?: true
+    hierarchy?: true
+  }
+
+  export type EmployeeSumAggregateInputType = {
+    assumedOffice?: true
+    endedOffice?: true
+    hierarchy?: true
+  }
+
+  export type EmployeeMinAggregateInputType = {
+    id?: true
+    assumedOffice?: true
+    endedOffice?: true
+    position?: true
+    hierarchy?: true
+    shortMessageToPublic?: true
+    departMentalSectorId?: true
+    userId?: true
+  }
+
+  export type EmployeeMaxAggregateInputType = {
+    id?: true
+    assumedOffice?: true
+    endedOffice?: true
+    position?: true
+    hierarchy?: true
+    shortMessageToPublic?: true
+    departMentalSectorId?: true
+    userId?: true
+  }
+
+  export type EmployeeCountAggregateInputType = {
+    id?: true
+    assumedOffice?: true
+    endedOffice?: true
+    position?: true
+    hierarchy?: true
+    shortMessageToPublic?: true
+    departMentalSectorId?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type EmployeeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Employee to aggregate.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Employees
+    **/
+    _count?: true | EmployeeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmployeeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmployeeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmployeeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmployeeMaxAggregateInputType
+  }
+
+  export type GetEmployeeAggregateType<T extends EmployeeAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmployee]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmployee[P]>
+      : GetScalarType<T[P], AggregateEmployee[P]>
+  }
+
+
+
+
+  export type EmployeeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithAggregationInput | EmployeeOrderByWithAggregationInput[]
+    by: EmployeeScalarFieldEnum[] | EmployeeScalarFieldEnum
+    having?: EmployeeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmployeeCountAggregateInputType | true
+    _avg?: EmployeeAvgAggregateInputType
+    _sum?: EmployeeSumAggregateInputType
+    _min?: EmployeeMinAggregateInputType
+    _max?: EmployeeMaxAggregateInputType
+  }
+
+  export type EmployeeGroupByOutputType = {
+    id: string
+    assumedOffice: number
+    endedOffice: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic: string | null
+    departMentalSectorId: string | null
+    userId: string
+    _count: EmployeeCountAggregateOutputType | null
+    _avg: EmployeeAvgAggregateOutputType | null
+    _sum: EmployeeSumAggregateOutputType | null
+    _min: EmployeeMinAggregateOutputType | null
+    _max: EmployeeMaxAggregateOutputType | null
+  }
+
+  type GetEmployeeGroupByPayload<T extends EmployeeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmployeeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmployeeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
+            : GetScalarType<T[P], EmployeeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assumedOffice?: boolean
+    endedOffice?: boolean
+    position?: boolean
+    hierarchy?: boolean
+    shortMessageToPublic?: boolean
+    departMentalSectorId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMents?: boolean | Employee$departMentsArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assumedOffice?: boolean
+    endedOffice?: boolean
+    position?: boolean
+    hierarchy?: boolean
+    shortMessageToPublic?: boolean
+    departMentalSectorId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assumedOffice?: boolean
+    endedOffice?: boolean
+    position?: boolean
+    hierarchy?: boolean
+    shortMessageToPublic?: boolean
+    departMentalSectorId?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+  }, ExtArgs["result"]["employee"]>
+
+  export type EmployeeSelectScalar = {
+    id?: boolean
+    assumedOffice?: boolean
+    endedOffice?: boolean
+    position?: boolean
+    hierarchy?: boolean
+    shortMessageToPublic?: boolean
+    departMentalSectorId?: boolean
+    userId?: boolean
+  }
+
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assumedOffice" | "endedOffice" | "position" | "hierarchy" | "shortMessageToPublic" | "departMentalSectorId" | "userId", ExtArgs["result"]["employee"]>
+  export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMents?: boolean | Employee$departMentsArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+  }
+  export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+  }
+
+  export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Employee"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      departMents: Prisma.$DepartMentPayload<ExtArgs>[]
+      departMentalSector: Prisma.$DepartMentalSectorPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      assumedOffice: number
+      endedOffice: number | null
+      position: string
+      hierarchy: number
+      shortMessageToPublic: string | null
+      departMentalSectorId: string | null
+      userId: string
+    }, ExtArgs["result"]["employee"]>
+    composites: {}
+  }
+
+  type EmployeeGetPayload<S extends boolean | null | undefined | EmployeeDefaultArgs> = $Result.GetResult<Prisma.$EmployeePayload, S>
+
+  type EmployeeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmployeeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmployeeCountAggregateInputType | true
+    }
+
+  export interface EmployeeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Employee'], meta: { name: 'Employee' } }
+    /**
+     * Find zero or one Employee that matches the filter.
+     * @param {EmployeeFindUniqueArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmployeeFindUniqueArgs>(args: SelectSubset<T, EmployeeFindUniqueArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Employee that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmployeeFindUniqueOrThrowArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmployeeFindUniqueOrThrowArgs>(args: SelectSubset<T, EmployeeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Employee that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindFirstArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmployeeFindFirstArgs>(args?: SelectSubset<T, EmployeeFindFirstArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Employee that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindFirstOrThrowArgs} args - Arguments to find a Employee
+     * @example
+     * // Get one Employee
+     * const employee = await prisma.employee.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmployeeFindFirstOrThrowArgs>(args?: SelectSubset<T, EmployeeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Employees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Employees
+     * const employees = await prisma.employee.findMany()
+     * 
+     * // Get first 10 Employees
+     * const employees = await prisma.employee.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const employeeWithIdOnly = await prisma.employee.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmployeeFindManyArgs>(args?: SelectSubset<T, EmployeeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Employee.
+     * @param {EmployeeCreateArgs} args - Arguments to create a Employee.
+     * @example
+     * // Create one Employee
+     * const Employee = await prisma.employee.create({
+     *   data: {
+     *     // ... data to create a Employee
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmployeeCreateArgs>(args: SelectSubset<T, EmployeeCreateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Employees.
+     * @param {EmployeeCreateManyArgs} args - Arguments to create many Employees.
+     * @example
+     * // Create many Employees
+     * const employee = await prisma.employee.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmployeeCreateManyArgs>(args?: SelectSubset<T, EmployeeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Employees and returns the data saved in the database.
+     * @param {EmployeeCreateManyAndReturnArgs} args - Arguments to create many Employees.
+     * @example
+     * // Create many Employees
+     * const employee = await prisma.employee.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Employees and only return the `id`
+     * const employeeWithIdOnly = await prisma.employee.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmployeeCreateManyAndReturnArgs>(args?: SelectSubset<T, EmployeeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Employee.
+     * @param {EmployeeDeleteArgs} args - Arguments to delete one Employee.
+     * @example
+     * // Delete one Employee
+     * const Employee = await prisma.employee.delete({
+     *   where: {
+     *     // ... filter to delete one Employee
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmployeeDeleteArgs>(args: SelectSubset<T, EmployeeDeleteArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Employee.
+     * @param {EmployeeUpdateArgs} args - Arguments to update one Employee.
+     * @example
+     * // Update one Employee
+     * const employee = await prisma.employee.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmployeeUpdateArgs>(args: SelectSubset<T, EmployeeUpdateArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Employees.
+     * @param {EmployeeDeleteManyArgs} args - Arguments to filter Employees to delete.
+     * @example
+     * // Delete a few Employees
+     * const { count } = await prisma.employee.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmployeeDeleteManyArgs>(args?: SelectSubset<T, EmployeeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Employees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Employees
+     * const employee = await prisma.employee.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmployeeUpdateManyArgs>(args: SelectSubset<T, EmployeeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Employees and returns the data updated in the database.
+     * @param {EmployeeUpdateManyAndReturnArgs} args - Arguments to update many Employees.
+     * @example
+     * // Update many Employees
+     * const employee = await prisma.employee.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Employees and only return the `id`
+     * const employeeWithIdOnly = await prisma.employee.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmployeeUpdateManyAndReturnArgs>(args: SelectSubset<T, EmployeeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Employee.
+     * @param {EmployeeUpsertArgs} args - Arguments to update or create a Employee.
+     * @example
+     * // Update or create a Employee
+     * const employee = await prisma.employee.upsert({
+     *   create: {
+     *     // ... data to create a Employee
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Employee we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmployeeUpsertArgs>(args: SelectSubset<T, EmployeeUpsertArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Employees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeCountArgs} args - Arguments to filter Employees to count.
+     * @example
+     * // Count the number of Employees
+     * const count = await prisma.employee.count({
+     *   where: {
+     *     // ... the filter for the Employees we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmployeeCountArgs>(
+      args?: Subset<T, EmployeeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmployeeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Employee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmployeeAggregateArgs>(args: Subset<T, EmployeeAggregateArgs>): Prisma.PrismaPromise<GetEmployeeAggregateType<T>>
+
+    /**
+     * Group by Employee.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmployeeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmployeeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmployeeGroupByArgs['orderBy'] }
+        : { orderBy?: EmployeeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmployeeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmployeeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Employee model
+   */
+  readonly fields: EmployeeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Employee.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    departMents<T extends Employee$departMentsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$departMentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    departMentalSector<T extends Employee$departMentalSectorArgs<ExtArgs> = {}>(args?: Subset<T, Employee$departMentalSectorArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Employee model
+   */
+  interface EmployeeFieldRefs {
+    readonly id: FieldRef<"Employee", 'String'>
+    readonly assumedOffice: FieldRef<"Employee", 'Int'>
+    readonly endedOffice: FieldRef<"Employee", 'Int'>
+    readonly position: FieldRef<"Employee", 'String'>
+    readonly hierarchy: FieldRef<"Employee", 'Int'>
+    readonly shortMessageToPublic: FieldRef<"Employee", 'String'>
+    readonly departMentalSectorId: FieldRef<"Employee", 'String'>
+    readonly userId: FieldRef<"Employee", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Employee findUnique
+   */
+  export type EmployeeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee findUniqueOrThrow
+   */
+  export type EmployeeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee findFirst
+   */
+  export type EmployeeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Employees.
+     */
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee findFirstOrThrow
+   */
+  export type EmployeeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employee to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Employees.
+     */
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee findMany
+   */
+  export type EmployeeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter, which Employees to fetch.
+     */
+    where?: EmployeeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Employees to fetch.
+     */
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Employees.
+     */
+    cursor?: EmployeeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Employees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Employees.
+     */
+    skip?: number
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Employee create
+   */
+  export type EmployeeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Employee.
+     */
+    data: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
+  }
+
+  /**
+   * Employee createMany
+   */
+  export type EmployeeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Employees.
+     */
+    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Employee createManyAndReturn
+   */
+  export type EmployeeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Employees.
+     */
+    data: EmployeeCreateManyInput | EmployeeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Employee update
+   */
+  export type EmployeeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Employee.
+     */
+    data: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
+    /**
+     * Choose, which Employee to update.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee updateMany
+   */
+  export type EmployeeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Employees.
+     */
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Employees to update
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Employee updateManyAndReturn
+   */
+  export type EmployeeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * The data used to update Employees.
+     */
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyInput>
+    /**
+     * Filter which Employees to update
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Employee upsert
+   */
+  export type EmployeeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Employee to update in case it exists.
+     */
+    where: EmployeeWhereUniqueInput
+    /**
+     * In case the Employee found by the `where` argument doesn't exist, create a new Employee with this data.
+     */
+    create: XOR<EmployeeCreateInput, EmployeeUncheckedCreateInput>
+    /**
+     * In case the Employee was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmployeeUpdateInput, EmployeeUncheckedUpdateInput>
+  }
+
+  /**
+   * Employee delete
+   */
+  export type EmployeeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    /**
+     * Filter which Employee to delete.
+     */
+    where: EmployeeWhereUniqueInput
+  }
+
+  /**
+   * Employee deleteMany
+   */
+  export type EmployeeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Employees to delete
+     */
+    where?: EmployeeWhereInput
+    /**
+     * Limit how many Employees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Employee.departMents
+   */
+  export type Employee$departMentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    where?: DepartMentWhereInput
+    orderBy?: DepartMentOrderByWithRelationInput | DepartMentOrderByWithRelationInput[]
+    cursor?: DepartMentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartMentScalarFieldEnum | DepartMentScalarFieldEnum[]
+  }
+
+  /**
+   * Employee.departMentalSector
+   */
+  export type Employee$departMentalSectorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMentalSector
+     */
+    select?: DepartMentalSectorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMentalSector
+     */
+    omit?: DepartMentalSectorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentalSectorInclude<ExtArgs> | null
+    where?: DepartMentalSectorWhereInput
+  }
+
+  /**
+   * Employee without action
+   */
+  export type EmployeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
   }
 
 
@@ -7341,7 +11175,7 @@ export namespace Prisma {
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
-    NewsArticleLike?: boolean | NewsArticle$NewsArticleLikeArgs<ExtArgs>
+    newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
@@ -7387,7 +11221,7 @@ export namespace Prisma {
   export type NewsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
-    NewsArticleLike?: boolean | NewsArticle$NewsArticleLikeArgs<ExtArgs>
+    newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NewsArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7402,7 +11236,7 @@ export namespace Prisma {
     objects: {
       author: Prisma.$UserPayload<ExtArgs>
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
-      NewsArticleLike: Prisma.$NewsArticleLikePayload<ExtArgs>[]
+      newsArticleLikes: Prisma.$NewsArticleLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7810,7 +11644,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     newsComments<T extends NewsArticle$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    NewsArticleLike<T extends NewsArticle$NewsArticleLikeArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$NewsArticleLikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    newsArticleLikes<T extends NewsArticle$newsArticleLikesArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsArticleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8269,9 +12103,9 @@ export namespace Prisma {
   }
 
   /**
-   * NewsArticle.NewsArticleLike
+   * NewsArticle.newsArticleLikes
    */
-  export type NewsArticle$NewsArticleLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type NewsArticle$newsArticleLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the NewsArticleLike
      */
@@ -10477,6 +14311,41 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const DepartMentScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    about: 'about',
+    headOfDepartmentId: 'headOfDepartmentId'
+  };
+
+  export type DepartMentScalarFieldEnum = (typeof DepartMentScalarFieldEnum)[keyof typeof DepartMentScalarFieldEnum]
+
+
+  export const DepartMentalSectorScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    hierarchy: 'hierarchy',
+    departMentId: 'departMentId'
+  };
+
+  export type DepartMentalSectorScalarFieldEnum = (typeof DepartMentalSectorScalarFieldEnum)[keyof typeof DepartMentalSectorScalarFieldEnum]
+
+
+  export const EmployeeScalarFieldEnum: {
+    id: 'id',
+    assumedOffice: 'assumedOffice',
+    endedOffice: 'endedOffice',
+    position: 'position',
+    hierarchy: 'hierarchy',
+    shortMessageToPublic: 'shortMessageToPublic',
+    departMentalSectorId: 'departMentalSectorId',
+    userId: 'userId'
+  };
+
+  export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
   export const EmailVerificationTokenScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -10635,20 +14504,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BigInt'
-   */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-    
-
-
-  /**
-   * Reference to a field of type 'BigInt[]'
-   */
-  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10659,6 +14514,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
     
 
 
@@ -10702,7 +14571,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
-    NewsLetter?: NewsLetterListRelationFilter
+    newsLetters?: NewsLetterListRelationFilter
+    employees?: EmployeeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10725,7 +14595,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleOrderByRelationAggregateInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
     newsArticleLikes?: NewsArticleLikeOrderByRelationAggregateInput
-    NewsLetter?: NewsLetterOrderByRelationAggregateInput
+    newsLetters?: NewsLetterOrderByRelationAggregateInput
+    employees?: EmployeeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10751,7 +14622,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
-    NewsLetter?: NewsLetterListRelationFilter
+    newsLetters?: NewsLetterListRelationFilter
+    employees?: EmployeeListRelationFilter
   }, "id" | "username" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
@@ -10792,6 +14664,197 @@ export namespace Prisma {
     isWelcomed?: BoolWithAggregatesFilter<"User"> | boolean
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
+  }
+
+  export type DepartMentWhereInput = {
+    AND?: DepartMentWhereInput | DepartMentWhereInput[]
+    OR?: DepartMentWhereInput[]
+    NOT?: DepartMentWhereInput | DepartMentWhereInput[]
+    id?: StringFilter<"DepartMent"> | string
+    name?: StringFilter<"DepartMent"> | string
+    about?: StringNullableFilter<"DepartMent"> | string | null
+    headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
+    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    departmentalSectors?: DepartMentalSectorListRelationFilter
+  }
+
+  export type DepartMentOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    about?: SortOrderInput | SortOrder
+    headOfDepartmentId?: SortOrderInput | SortOrder
+    headOfDepartment?: EmployeeOrderByWithRelationInput
+    departmentalSectors?: DepartMentalSectorOrderByRelationAggregateInput
+  }
+
+  export type DepartMentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DepartMentWhereInput | DepartMentWhereInput[]
+    OR?: DepartMentWhereInput[]
+    NOT?: DepartMentWhereInput | DepartMentWhereInput[]
+    name?: StringFilter<"DepartMent"> | string
+    about?: StringNullableFilter<"DepartMent"> | string | null
+    headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
+    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    departmentalSectors?: DepartMentalSectorListRelationFilter
+  }, "id">
+
+  export type DepartMentOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    about?: SortOrderInput | SortOrder
+    headOfDepartmentId?: SortOrderInput | SortOrder
+    _count?: DepartMentCountOrderByAggregateInput
+    _max?: DepartMentMaxOrderByAggregateInput
+    _min?: DepartMentMinOrderByAggregateInput
+  }
+
+  export type DepartMentScalarWhereWithAggregatesInput = {
+    AND?: DepartMentScalarWhereWithAggregatesInput | DepartMentScalarWhereWithAggregatesInput[]
+    OR?: DepartMentScalarWhereWithAggregatesInput[]
+    NOT?: DepartMentScalarWhereWithAggregatesInput | DepartMentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DepartMent"> | string
+    name?: StringWithAggregatesFilter<"DepartMent"> | string
+    about?: StringNullableWithAggregatesFilter<"DepartMent"> | string | null
+    headOfDepartmentId?: StringNullableWithAggregatesFilter<"DepartMent"> | string | null
+  }
+
+  export type DepartMentalSectorWhereInput = {
+    AND?: DepartMentalSectorWhereInput | DepartMentalSectorWhereInput[]
+    OR?: DepartMentalSectorWhereInput[]
+    NOT?: DepartMentalSectorWhereInput | DepartMentalSectorWhereInput[]
+    id?: StringFilter<"DepartMentalSector"> | string
+    name?: StringFilter<"DepartMentalSector"> | string
+    description?: StringNullableFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
+    departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
+    employees?: EmployeeListRelationFilter
+    departMent?: XOR<DepartMentNullableScalarRelationFilter, DepartMentWhereInput> | null
+  }
+
+  export type DepartMentalSectorOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    hierarchy?: SortOrder
+    departMentId?: SortOrderInput | SortOrder
+    employees?: EmployeeOrderByRelationAggregateInput
+    departMent?: DepartMentOrderByWithRelationInput
+  }
+
+  export type DepartMentalSectorWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DepartMentalSectorWhereInput | DepartMentalSectorWhereInput[]
+    OR?: DepartMentalSectorWhereInput[]
+    NOT?: DepartMentalSectorWhereInput | DepartMentalSectorWhereInput[]
+    name?: StringFilter<"DepartMentalSector"> | string
+    description?: StringNullableFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
+    departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
+    employees?: EmployeeListRelationFilter
+    departMent?: XOR<DepartMentNullableScalarRelationFilter, DepartMentWhereInput> | null
+  }, "id">
+
+  export type DepartMentalSectorOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    hierarchy?: SortOrder
+    departMentId?: SortOrderInput | SortOrder
+    _count?: DepartMentalSectorCountOrderByAggregateInput
+    _avg?: DepartMentalSectorAvgOrderByAggregateInput
+    _max?: DepartMentalSectorMaxOrderByAggregateInput
+    _min?: DepartMentalSectorMinOrderByAggregateInput
+    _sum?: DepartMentalSectorSumOrderByAggregateInput
+  }
+
+  export type DepartMentalSectorScalarWhereWithAggregatesInput = {
+    AND?: DepartMentalSectorScalarWhereWithAggregatesInput | DepartMentalSectorScalarWhereWithAggregatesInput[]
+    OR?: DepartMentalSectorScalarWhereWithAggregatesInput[]
+    NOT?: DepartMentalSectorScalarWhereWithAggregatesInput | DepartMentalSectorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DepartMentalSector"> | string
+    name?: StringWithAggregatesFilter<"DepartMentalSector"> | string
+    description?: StringNullableWithAggregatesFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntWithAggregatesFilter<"DepartMentalSector"> | number
+    departMentId?: StringNullableWithAggregatesFilter<"DepartMentalSector"> | string | null
+  }
+
+  export type EmployeeWhereInput = {
+    AND?: EmployeeWhereInput | EmployeeWhereInput[]
+    OR?: EmployeeWhereInput[]
+    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    id?: StringFilter<"Employee"> | string
+    assumedOffice?: IntFilter<"Employee"> | number
+    endedOffice?: IntNullableFilter<"Employee"> | number | null
+    position?: StringFilter<"Employee"> | string
+    hierarchy?: IntFilter<"Employee"> | number
+    shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
+    departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
+    userId?: StringFilter<"Employee"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    departMents?: DepartMentListRelationFilter
+    departMentalSector?: XOR<DepartMentalSectorNullableScalarRelationFilter, DepartMentalSectorWhereInput> | null
+  }
+
+  export type EmployeeOrderByWithRelationInput = {
+    id?: SortOrder
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrderInput | SortOrder
+    position?: SortOrder
+    hierarchy?: SortOrder
+    shortMessageToPublic?: SortOrderInput | SortOrder
+    departMentalSectorId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    departMents?: DepartMentOrderByRelationAggregateInput
+    departMentalSector?: DepartMentalSectorOrderByWithRelationInput
+  }
+
+  export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmployeeWhereInput | EmployeeWhereInput[]
+    OR?: EmployeeWhereInput[]
+    NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    assumedOffice?: IntFilter<"Employee"> | number
+    endedOffice?: IntNullableFilter<"Employee"> | number | null
+    position?: StringFilter<"Employee"> | string
+    hierarchy?: IntFilter<"Employee"> | number
+    shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
+    departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
+    userId?: StringFilter<"Employee"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    departMents?: DepartMentListRelationFilter
+    departMentalSector?: XOR<DepartMentalSectorNullableScalarRelationFilter, DepartMentalSectorWhereInput> | null
+  }, "id">
+
+  export type EmployeeOrderByWithAggregationInput = {
+    id?: SortOrder
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrderInput | SortOrder
+    position?: SortOrder
+    hierarchy?: SortOrder
+    shortMessageToPublic?: SortOrderInput | SortOrder
+    departMentalSectorId?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    _count?: EmployeeCountOrderByAggregateInput
+    _avg?: EmployeeAvgOrderByAggregateInput
+    _max?: EmployeeMaxOrderByAggregateInput
+    _min?: EmployeeMinOrderByAggregateInput
+    _sum?: EmployeeSumOrderByAggregateInput
+  }
+
+  export type EmployeeScalarWhereWithAggregatesInput = {
+    AND?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
+    OR?: EmployeeScalarWhereWithAggregatesInput[]
+    NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Employee"> | string
+    assumedOffice?: IntWithAggregatesFilter<"Employee"> | number
+    endedOffice?: IntNullableWithAggregatesFilter<"Employee"> | number | null
+    position?: StringWithAggregatesFilter<"Employee"> | string
+    hierarchy?: IntWithAggregatesFilter<"Employee"> | number
+    shortMessageToPublic?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    departMentalSectorId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    userId?: StringWithAggregatesFilter<"Employee"> | string
   }
 
   export type EmailVerificationTokenWhereInput = {
@@ -11018,7 +15081,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     newsComments?: NewsCommentListRelationFilter
-    NewsArticleLike?: NewsArticleLikeListRelationFilter
+    newsArticleLikes?: NewsArticleLikeListRelationFilter
   }
 
   export type NewsArticleOrderByWithRelationInput = {
@@ -11033,7 +15096,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
-    NewsArticleLike?: NewsArticleLikeOrderByRelationAggregateInput
+    newsArticleLikes?: NewsArticleLikeOrderByRelationAggregateInput
   }
 
   export type NewsArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -11051,7 +15114,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     newsComments?: NewsCommentListRelationFilter
-    NewsArticleLike?: NewsArticleLikeListRelationFilter
+    newsArticleLikes?: NewsArticleLikeListRelationFilter
   }, "id">
 
   export type NewsArticleOrderByWithAggregationInput = {
@@ -11220,7 +15283,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11243,7 +15307,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -11266,7 +15331,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11289,7 +15355,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -11341,6 +15408,196 @@ export namespace Prisma {
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type DepartMentCreateInput = {
+    id?: string
+    name: string
+    about?: string | null
+    headOfDepartment?: EmployeeCreateNestedOneWithoutDepartMentsInput
+    departmentalSectors?: DepartMentalSectorCreateNestedManyWithoutDepartMentInput
+  }
+
+  export type DepartMentUncheckedCreateInput = {
+    id?: string
+    name: string
+    about?: string | null
+    headOfDepartmentId?: string | null
+    departmentalSectors?: DepartMentalSectorUncheckedCreateNestedManyWithoutDepartMentInput
+  }
+
+  export type DepartMentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    headOfDepartment?: EmployeeUpdateOneWithoutDepartMentsNestedInput
+    departmentalSectors?: DepartMentalSectorUpdateManyWithoutDepartMentNestedInput
+  }
+
+  export type DepartMentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentalSectors?: DepartMentalSectorUncheckedUpdateManyWithoutDepartMentNestedInput
+  }
+
+  export type DepartMentCreateManyInput = {
+    id?: string
+    name: string
+    about?: string | null
+    headOfDepartmentId?: string | null
+  }
+
+  export type DepartMentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartMentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartMentalSectorCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    employees?: EmployeeCreateNestedManyWithoutDepartMentalSectorInput
+    departMent?: DepartMentCreateNestedOneWithoutDepartmentalSectorsInput
+  }
+
+  export type DepartMentalSectorUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    departMentId?: string | null
+    employees?: EmployeeUncheckedCreateNestedManyWithoutDepartMentalSectorInput
+  }
+
+  export type DepartMentalSectorUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    employees?: EmployeeUpdateManyWithoutDepartMentalSectorNestedInput
+    departMent?: DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput
+  }
+
+  export type DepartMentalSectorUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: EmployeeUncheckedUpdateManyWithoutDepartMentalSectorNestedInput
+  }
+
+  export type DepartMentalSectorCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    departMentId?: string | null
+  }
+
+  export type DepartMentalSectorUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DepartMentalSectorUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EmployeeCreateInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    user: UserCreateNestedOneWithoutEmployeesInput
+    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+  }
+
+  export type EmployeeUncheckedCreateInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    userId: string
+    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+  }
+
+  export type EmployeeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
+    departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
+    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
+  }
+
+  export type EmployeeCreateManyInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    userId: string
+  }
+
+  export type EmployeeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EmployeeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailVerificationTokenCreateInput = {
@@ -11488,7 +15745,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsLetterInput
+    author: UserCreateNestedOneWithoutNewsLettersInput
   }
 
   export type NewsLetterUncheckedCreateInput = {
@@ -11508,7 +15765,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsLetterNestedInput
+    author?: UserUpdateOneRequiredWithoutNewsLettersNestedInput
   }
 
   export type NewsLetterUncheckedUpdateInput = {
@@ -11561,7 +15818,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNewsArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
-    NewsArticleLike?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateInput = {
@@ -11575,7 +15832,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
-    NewsArticleLike?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUpdateInput = {
@@ -11589,7 +15846,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
-    NewsArticleLike?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateInput = {
@@ -11603,7 +15860,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
-    NewsArticleLike?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleCreateManyInput = {
@@ -11706,7 +15963,7 @@ export namespace Prisma {
     id?: string
     createdAt?: Date | string
     liker: UserCreateNestedOneWithoutNewsArticleLikesInput
-    newsArticle: NewsArticleCreateNestedOneWithoutNewsArticleLikeInput
+    newsArticle: NewsArticleCreateNestedOneWithoutNewsArticleLikesInput
   }
 
   export type NewsArticleLikeUncheckedCreateInput = {
@@ -11720,7 +15977,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     liker?: UserUpdateOneRequiredWithoutNewsArticleLikesNestedInput
-    newsArticle?: NewsArticleUpdateOneRequiredWithoutNewsArticleLikeNestedInput
+    newsArticle?: NewsArticleUpdateOneRequiredWithoutNewsArticleLikesNestedInput
   }
 
   export type NewsArticleLikeUncheckedUpdateInput = {
@@ -11838,6 +16095,12 @@ export namespace Prisma {
     none?: NewsLetterWhereInput
   }
 
+  export type EmployeeListRelationFilter = {
+    every?: EmployeeWhereInput
+    some?: EmployeeWhereInput
+    none?: EmployeeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11864,6 +16127,10 @@ export namespace Prisma {
   }
 
   export type NewsLetterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmployeeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11986,6 +16253,198 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EmployeeNullableScalarRelationFilter = {
+    is?: EmployeeWhereInput | null
+    isNot?: EmployeeWhereInput | null
+  }
+
+  export type DepartMentalSectorListRelationFilter = {
+    every?: DepartMentalSectorWhereInput
+    some?: DepartMentalSectorWhereInput
+    none?: DepartMentalSectorWhereInput
+  }
+
+  export type DepartMentalSectorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DepartMentCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    about?: SortOrder
+    headOfDepartmentId?: SortOrder
+  }
+
+  export type DepartMentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    about?: SortOrder
+    headOfDepartmentId?: SortOrder
+  }
+
+  export type DepartMentMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    about?: SortOrder
+    headOfDepartmentId?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DepartMentNullableScalarRelationFilter = {
+    is?: DepartMentWhereInput | null
+    isNot?: DepartMentWhereInput | null
+  }
+
+  export type DepartMentalSectorCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    hierarchy?: SortOrder
+    departMentId?: SortOrder
+  }
+
+  export type DepartMentalSectorAvgOrderByAggregateInput = {
+    hierarchy?: SortOrder
+  }
+
+  export type DepartMentalSectorMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    hierarchy?: SortOrder
+    departMentId?: SortOrder
+  }
+
+  export type DepartMentalSectorMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    hierarchy?: SortOrder
+    departMentId?: SortOrder
+  }
+
+  export type DepartMentalSectorSumOrderByAggregateInput = {
+    hierarchy?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type DepartMentListRelationFilter = {
+    every?: DepartMentWhereInput
+    some?: DepartMentWhereInput
+    none?: DepartMentWhereInput
+  }
+
+  export type DepartMentalSectorNullableScalarRelationFilter = {
+    is?: DepartMentalSectorWhereInput | null
+    isNot?: DepartMentalSectorWhereInput | null
+  }
+
+  export type DepartMentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EmployeeCountOrderByAggregateInput = {
+    id?: SortOrder
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrder
+    position?: SortOrder
+    hierarchy?: SortOrder
+    shortMessageToPublic?: SortOrder
+    departMentalSectorId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EmployeeAvgOrderByAggregateInput = {
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrder
+    hierarchy?: SortOrder
+  }
+
+  export type EmployeeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrder
+    position?: SortOrder
+    hierarchy?: SortOrder
+    shortMessageToPublic?: SortOrder
+    departMentalSectorId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EmployeeMinOrderByAggregateInput = {
+    id?: SortOrder
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrder
+    position?: SortOrder
+    hierarchy?: SortOrder
+    shortMessageToPublic?: SortOrder
+    departMentalSectorId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EmployeeSumOrderByAggregateInput = {
+    assumedOffice?: SortOrder
+    endedOffice?: SortOrder
+    hierarchy?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type BigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
@@ -11995,11 +16454,6 @@ export namespace Prisma {
     gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type EmailVerificationTokenCountOrderByAggregateInput = {
@@ -12264,6 +16718,13 @@ export namespace Prisma {
     connect?: NewsLetterWhereUniqueInput | NewsLetterWhereUniqueInput[]
   }
 
+  export type EmployeeCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
   export type EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<EmailVerificationTokenCreateWithoutUserInput, EmailVerificationTokenUncheckedCreateWithoutUserInput> | EmailVerificationTokenCreateWithoutUserInput[] | EmailVerificationTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmailVerificationTokenCreateOrConnectWithoutUserInput | EmailVerificationTokenCreateOrConnectWithoutUserInput[]
@@ -12304,6 +16765,13 @@ export namespace Prisma {
     connectOrCreate?: NewsLetterCreateOrConnectWithoutAuthorInput | NewsLetterCreateOrConnectWithoutAuthorInput[]
     createMany?: NewsLetterCreateManyAuthorInputEnvelope
     connect?: NewsLetterWhereUniqueInput | NewsLetterWhereUniqueInput[]
+  }
+
+  export type EmployeeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12410,6 +16878,20 @@ export namespace Prisma {
     deleteMany?: NewsLetterScalarWhereInput | NewsLetterScalarWhereInput[]
   }
 
+  export type EmployeeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
   export type EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<EmailVerificationTokenCreateWithoutUserInput, EmailVerificationTokenUncheckedCreateWithoutUserInput> | EmailVerificationTokenCreateWithoutUserInput[] | EmailVerificationTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmailVerificationTokenCreateOrConnectWithoutUserInput | EmailVerificationTokenCreateOrConnectWithoutUserInput[]
@@ -12494,6 +16976,224 @@ export namespace Prisma {
     deleteMany?: NewsLetterScalarWhereInput | NewsLetterScalarWhereInput[]
   }
 
+  export type EmployeeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type EmployeeCreateNestedOneWithoutDepartMentsInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type DepartMentalSectorCreateNestedManyWithoutDepartMentInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
+    createMany?: DepartMentalSectorCreateManyDepartMentInputEnvelope
+    connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+  }
+
+  export type DepartMentalSectorUncheckedCreateNestedManyWithoutDepartMentInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
+    createMany?: DepartMentalSectorCreateManyDepartMentInputEnvelope
+    connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+  }
+
+  export type EmployeeUpdateOneWithoutDepartMentsNestedInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
+    upsert?: EmployeeUpsertWithoutDepartMentsInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutDepartMentsInput, EmployeeUpdateWithoutDepartMentsInput>, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+  }
+
+  export type DepartMentalSectorUpdateManyWithoutDepartMentNestedInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
+    upsert?: DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput | DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput[]
+    createMany?: DepartMentalSectorCreateManyDepartMentInputEnvelope
+    set?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    disconnect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    delete?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    update?: DepartMentalSectorUpdateWithWhereUniqueWithoutDepartMentInput | DepartMentalSectorUpdateWithWhereUniqueWithoutDepartMentInput[]
+    updateMany?: DepartMentalSectorUpdateManyWithWhereWithoutDepartMentInput | DepartMentalSectorUpdateManyWithWhereWithoutDepartMentInput[]
+    deleteMany?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
+  }
+
+  export type DepartMentalSectorUncheckedUpdateManyWithoutDepartMentNestedInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
+    upsert?: DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput | DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput[]
+    createMany?: DepartMentalSectorCreateManyDepartMentInputEnvelope
+    set?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    disconnect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    delete?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
+    update?: DepartMentalSectorUpdateWithWhereUniqueWithoutDepartMentInput | DepartMentalSectorUpdateWithWhereUniqueWithoutDepartMentInput[]
+    updateMany?: DepartMentalSectorUpdateManyWithWhereWithoutDepartMentInput | DepartMentalSectorUpdateManyWithWhereWithoutDepartMentInput[]
+    deleteMany?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
+  }
+
+  export type EmployeeCreateNestedManyWithoutDepartMentalSectorInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
+    createMany?: EmployeeCreateManyDepartMentalSectorInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type DepartMentCreateNestedOneWithoutDepartmentalSectorsInput = {
+    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
+    connect?: DepartMentWhereUniqueInput
+  }
+
+  export type EmployeeUncheckedCreateNestedManyWithoutDepartMentalSectorInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
+    createMany?: EmployeeCreateManyDepartMentalSectorInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EmployeeUpdateManyWithoutDepartMentalSectorNestedInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput | EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput[]
+    createMany?: EmployeeCreateManyDepartMentalSectorInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput | EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput | EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput = {
+    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
+    upsert?: DepartMentUpsertWithoutDepartmentalSectorsInput
+    disconnect?: DepartMentWhereInput | boolean
+    delete?: DepartMentWhereInput | boolean
+    connect?: DepartMentWhereUniqueInput
+    update?: XOR<XOR<DepartMentUpdateToOneWithWhereWithoutDepartmentalSectorsInput, DepartMentUpdateWithoutDepartmentalSectorsInput>, DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput>
+  }
+
+  export type EmployeeUncheckedUpdateManyWithoutDepartMentalSectorNestedInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput | EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput[]
+    createMany?: EmployeeCreateManyDepartMentalSectorInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput | EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput | EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutEmployeesInput = {
+    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DepartMentCreateNestedManyWithoutHeadOfDepartmentInput = {
+    create?: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput> | DepartMentCreateWithoutHeadOfDepartmentInput[] | DepartMentUncheckedCreateWithoutHeadOfDepartmentInput[]
+    connectOrCreate?: DepartMentCreateOrConnectWithoutHeadOfDepartmentInput | DepartMentCreateOrConnectWithoutHeadOfDepartmentInput[]
+    createMany?: DepartMentCreateManyHeadOfDepartmentInputEnvelope
+    connect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+  }
+
+  export type DepartMentalSectorCreateNestedOneWithoutEmployeesInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutEmployeesInput
+    connect?: DepartMentalSectorWhereUniqueInput
+  }
+
+  export type DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput = {
+    create?: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput> | DepartMentCreateWithoutHeadOfDepartmentInput[] | DepartMentUncheckedCreateWithoutHeadOfDepartmentInput[]
+    connectOrCreate?: DepartMentCreateOrConnectWithoutHeadOfDepartmentInput | DepartMentCreateOrConnectWithoutHeadOfDepartmentInput[]
+    createMany?: DepartMentCreateManyHeadOfDepartmentInputEnvelope
+    connect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutEmployeesNestedInput = {
+    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
+    upsert?: UserUpsertWithoutEmployeesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmployeesInput, UserUpdateWithoutEmployeesInput>, UserUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput = {
+    create?: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput> | DepartMentCreateWithoutHeadOfDepartmentInput[] | DepartMentUncheckedCreateWithoutHeadOfDepartmentInput[]
+    connectOrCreate?: DepartMentCreateOrConnectWithoutHeadOfDepartmentInput | DepartMentCreateOrConnectWithoutHeadOfDepartmentInput[]
+    upsert?: DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput | DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput[]
+    createMany?: DepartMentCreateManyHeadOfDepartmentInputEnvelope
+    set?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    disconnect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    delete?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    connect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    update?: DepartMentUpdateWithWhereUniqueWithoutHeadOfDepartmentInput | DepartMentUpdateWithWhereUniqueWithoutHeadOfDepartmentInput[]
+    updateMany?: DepartMentUpdateManyWithWhereWithoutHeadOfDepartmentInput | DepartMentUpdateManyWithWhereWithoutHeadOfDepartmentInput[]
+    deleteMany?: DepartMentScalarWhereInput | DepartMentScalarWhereInput[]
+  }
+
+  export type DepartMentalSectorUpdateOneWithoutEmployeesNestedInput = {
+    create?: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutEmployeesInput
+    upsert?: DepartMentalSectorUpsertWithoutEmployeesInput
+    disconnect?: DepartMentalSectorWhereInput | boolean
+    delete?: DepartMentalSectorWhereInput | boolean
+    connect?: DepartMentalSectorWhereUniqueInput
+    update?: XOR<XOR<DepartMentalSectorUpdateToOneWithWhereWithoutEmployeesInput, DepartMentalSectorUpdateWithoutEmployeesInput>, DepartMentalSectorUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput = {
+    create?: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput> | DepartMentCreateWithoutHeadOfDepartmentInput[] | DepartMentUncheckedCreateWithoutHeadOfDepartmentInput[]
+    connectOrCreate?: DepartMentCreateOrConnectWithoutHeadOfDepartmentInput | DepartMentCreateOrConnectWithoutHeadOfDepartmentInput[]
+    upsert?: DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput | DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput[]
+    createMany?: DepartMentCreateManyHeadOfDepartmentInputEnvelope
+    set?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    disconnect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    delete?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    connect?: DepartMentWhereUniqueInput | DepartMentWhereUniqueInput[]
+    update?: DepartMentUpdateWithWhereUniqueWithoutHeadOfDepartmentInput | DepartMentUpdateWithWhereUniqueWithoutHeadOfDepartmentInput[]
+    updateMany?: DepartMentUpdateManyWithWhereWithoutHeadOfDepartmentInput | DepartMentUpdateManyWithWhereWithoutHeadOfDepartmentInput[]
+    deleteMany?: DepartMentScalarWhereInput | DepartMentScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutEmailVerificationTokensInput = {
     create?: XOR<UserCreateWithoutEmailVerificationTokensInput, UserUncheckedCreateWithoutEmailVerificationTokensInput>
     connectOrCreate?: UserCreateOrConnectWithoutEmailVerificationTokensInput
@@ -12534,18 +17234,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type UserCreateNestedOneWithoutNewsLetterInput = {
-    create?: XOR<UserCreateWithoutNewsLetterInput, UserUncheckedCreateWithoutNewsLetterInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsLetterInput
+  export type UserCreateNestedOneWithoutNewsLettersInput = {
+    create?: XOR<UserCreateWithoutNewsLettersInput, UserUncheckedCreateWithoutNewsLettersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsLettersInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutNewsLetterNestedInput = {
-    create?: XOR<UserCreateWithoutNewsLetterInput, UserUncheckedCreateWithoutNewsLetterInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsLetterInput
-    upsert?: UserUpsertWithoutNewsLetterInput
+  export type UserUpdateOneRequiredWithoutNewsLettersNestedInput = {
+    create?: XOR<UserCreateWithoutNewsLettersInput, UserUncheckedCreateWithoutNewsLettersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsLettersInput
+    upsert?: UserUpsertWithoutNewsLettersInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsLetterInput, UserUpdateWithoutNewsLetterInput>, UserUncheckedUpdateWithoutNewsLetterInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsLettersInput, UserUpdateWithoutNewsLettersInput>, UserUncheckedUpdateWithoutNewsLettersInput>
   }
 
   export type UserCreateNestedOneWithoutNewsArticlesInput = {
@@ -12680,9 +17380,9 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type NewsArticleCreateNestedOneWithoutNewsArticleLikeInput = {
-    create?: XOR<NewsArticleCreateWithoutNewsArticleLikeInput, NewsArticleUncheckedCreateWithoutNewsArticleLikeInput>
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutNewsArticleLikeInput
+  export type NewsArticleCreateNestedOneWithoutNewsArticleLikesInput = {
+    create?: XOR<NewsArticleCreateWithoutNewsArticleLikesInput, NewsArticleUncheckedCreateWithoutNewsArticleLikesInput>
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutNewsArticleLikesInput
     connect?: NewsArticleWhereUniqueInput
   }
 
@@ -12694,12 +17394,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsArticleLikesInput, UserUpdateWithoutNewsArticleLikesInput>, UserUncheckedUpdateWithoutNewsArticleLikesInput>
   }
 
-  export type NewsArticleUpdateOneRequiredWithoutNewsArticleLikeNestedInput = {
-    create?: XOR<NewsArticleCreateWithoutNewsArticleLikeInput, NewsArticleUncheckedCreateWithoutNewsArticleLikeInput>
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutNewsArticleLikeInput
-    upsert?: NewsArticleUpsertWithoutNewsArticleLikeInput
+  export type NewsArticleUpdateOneRequiredWithoutNewsArticleLikesNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutNewsArticleLikesInput, NewsArticleUncheckedCreateWithoutNewsArticleLikesInput>
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutNewsArticleLikesInput
+    upsert?: NewsArticleUpsertWithoutNewsArticleLikesInput
     connect?: NewsArticleWhereUniqueInput
-    update?: XOR<XOR<NewsArticleUpdateToOneWithWhereWithoutNewsArticleLikeInput, NewsArticleUpdateWithoutNewsArticleLikeInput>, NewsArticleUncheckedUpdateWithoutNewsArticleLikeInput>
+    update?: XOR<XOR<NewsArticleUpdateToOneWithWhereWithoutNewsArticleLikesInput, NewsArticleUpdateWithoutNewsArticleLikesInput>, NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12841,6 +17541,60 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedBigIntFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
@@ -12866,17 +17620,6 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -12948,7 +17691,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
-    NewsArticleLike?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateWithoutAuthorInput = {
@@ -12961,7 +17704,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
-    NewsArticleLike?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleCreateOrConnectWithoutAuthorInput = {
@@ -13003,7 +17746,7 @@ export namespace Prisma {
   export type NewsArticleLikeCreateWithoutLikerInput = {
     id?: string
     createdAt?: Date | string
-    newsArticle: NewsArticleCreateNestedOneWithoutNewsArticleLikeInput
+    newsArticle: NewsArticleCreateNestedOneWithoutNewsArticleLikesInput
   }
 
   export type NewsArticleLikeUncheckedCreateWithoutLikerInput = {
@@ -13047,6 +17790,38 @@ export namespace Prisma {
 
   export type NewsLetterCreateManyAuthorInputEnvelope = {
     data: NewsLetterCreateManyAuthorInput | NewsLetterCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmployeeCreateWithoutUserInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutUserInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmployeeCreateManyUserInputEnvelope = {
+    data: EmployeeCreateManyUserInput | EmployeeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -13215,6 +17990,447 @@ export namespace Prisma {
     authorId?: StringFilter<"NewsLetter"> | string
   }
 
+  export type EmployeeUpsertWithWhereUniqueWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    update: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
+    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
+  }
+
+  export type EmployeeUpdateWithWhereUniqueWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    data: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EmployeeUpdateManyWithWhereWithoutUserInput = {
+    where: EmployeeScalarWhereInput
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EmployeeScalarWhereInput = {
+    AND?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    OR?: EmployeeScalarWhereInput[]
+    NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    id?: StringFilter<"Employee"> | string
+    assumedOffice?: IntFilter<"Employee"> | number
+    endedOffice?: IntNullableFilter<"Employee"> | number | null
+    position?: StringFilter<"Employee"> | string
+    hierarchy?: IntFilter<"Employee"> | number
+    shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
+    departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
+    userId?: StringFilter<"Employee"> | string
+  }
+
+  export type EmployeeCreateWithoutDepartMentsInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    user: UserCreateNestedOneWithoutEmployeesInput
+    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutDepartMentsInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    userId: string
+  }
+
+  export type EmployeeCreateOrConnectWithoutDepartMentsInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+  }
+
+  export type DepartMentalSectorCreateWithoutDepartMentInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    employees?: EmployeeCreateNestedManyWithoutDepartMentalSectorInput
+  }
+
+  export type DepartMentalSectorUncheckedCreateWithoutDepartMentInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    employees?: EmployeeUncheckedCreateNestedManyWithoutDepartMentalSectorInput
+  }
+
+  export type DepartMentalSectorCreateOrConnectWithoutDepartMentInput = {
+    where: DepartMentalSectorWhereUniqueInput
+    create: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput>
+  }
+
+  export type DepartMentalSectorCreateManyDepartMentInputEnvelope = {
+    data: DepartMentalSectorCreateManyDepartMentInput | DepartMentalSectorCreateManyDepartMentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmployeeUpsertWithoutDepartMentsInput = {
+    update: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+    create: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutDepartMentsInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+  }
+
+  export type EmployeeUpdateWithoutDepartMentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
+    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutDepartMentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput = {
+    where: DepartMentalSectorWhereUniqueInput
+    update: XOR<DepartMentalSectorUpdateWithoutDepartMentInput, DepartMentalSectorUncheckedUpdateWithoutDepartMentInput>
+    create: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput>
+  }
+
+  export type DepartMentalSectorUpdateWithWhereUniqueWithoutDepartMentInput = {
+    where: DepartMentalSectorWhereUniqueInput
+    data: XOR<DepartMentalSectorUpdateWithoutDepartMentInput, DepartMentalSectorUncheckedUpdateWithoutDepartMentInput>
+  }
+
+  export type DepartMentalSectorUpdateManyWithWhereWithoutDepartMentInput = {
+    where: DepartMentalSectorScalarWhereInput
+    data: XOR<DepartMentalSectorUpdateManyMutationInput, DepartMentalSectorUncheckedUpdateManyWithoutDepartMentInput>
+  }
+
+  export type DepartMentalSectorScalarWhereInput = {
+    AND?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
+    OR?: DepartMentalSectorScalarWhereInput[]
+    NOT?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
+    id?: StringFilter<"DepartMentalSector"> | string
+    name?: StringFilter<"DepartMentalSector"> | string
+    description?: StringNullableFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
+    departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
+  }
+
+  export type EmployeeCreateWithoutDepartMentalSectorInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    user: UserCreateNestedOneWithoutEmployeesInput
+    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutDepartMentalSectorInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    userId: string
+    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutDepartMentalSectorInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput>
+  }
+
+  export type EmployeeCreateManyDepartMentalSectorInputEnvelope = {
+    data: EmployeeCreateManyDepartMentalSectorInput | EmployeeCreateManyDepartMentalSectorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DepartMentCreateWithoutDepartmentalSectorsInput = {
+    id?: string
+    name: string
+    about?: string | null
+    headOfDepartment?: EmployeeCreateNestedOneWithoutDepartMentsInput
+  }
+
+  export type DepartMentUncheckedCreateWithoutDepartmentalSectorsInput = {
+    id?: string
+    name: string
+    about?: string | null
+    headOfDepartmentId?: string | null
+  }
+
+  export type DepartMentCreateOrConnectWithoutDepartmentalSectorsInput = {
+    where: DepartMentWhereUniqueInput
+    create: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+  }
+
+  export type EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput = {
+    where: EmployeeWhereUniqueInput
+    update: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
+    create: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput>
+  }
+
+  export type EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput = {
+    where: EmployeeWhereUniqueInput
+    data: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
+  }
+
+  export type EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput = {
+    where: EmployeeScalarWhereInput
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput>
+  }
+
+  export type DepartMentUpsertWithoutDepartmentalSectorsInput = {
+    update: XOR<DepartMentUpdateWithoutDepartmentalSectorsInput, DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput>
+    create: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+    where?: DepartMentWhereInput
+  }
+
+  export type DepartMentUpdateToOneWithWhereWithoutDepartmentalSectorsInput = {
+    where?: DepartMentWhereInput
+    data: XOR<DepartMentUpdateWithoutDepartmentalSectorsInput, DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput>
+  }
+
+  export type DepartMentUpdateWithoutDepartmentalSectorsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    headOfDepartment?: EmployeeUpdateOneWithoutDepartMentsNestedInput
+  }
+
+  export type DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserCreateWithoutEmployeesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role | null
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutEmployeesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role | null
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutEmployeesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+  }
+
+  export type DepartMentCreateWithoutHeadOfDepartmentInput = {
+    id?: string
+    name: string
+    about?: string | null
+    departmentalSectors?: DepartMentalSectorCreateNestedManyWithoutDepartMentInput
+  }
+
+  export type DepartMentUncheckedCreateWithoutHeadOfDepartmentInput = {
+    id?: string
+    name: string
+    about?: string | null
+    departmentalSectors?: DepartMentalSectorUncheckedCreateNestedManyWithoutDepartMentInput
+  }
+
+  export type DepartMentCreateOrConnectWithoutHeadOfDepartmentInput = {
+    where: DepartMentWhereUniqueInput
+    create: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput>
+  }
+
+  export type DepartMentCreateManyHeadOfDepartmentInputEnvelope = {
+    data: DepartMentCreateManyHeadOfDepartmentInput | DepartMentCreateManyHeadOfDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DepartMentalSectorCreateWithoutEmployeesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    departMent?: DepartMentCreateNestedOneWithoutDepartmentalSectorsInput
+  }
+
+  export type DepartMentalSectorUncheckedCreateWithoutEmployeesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+    departMentId?: string | null
+  }
+
+  export type DepartMentalSectorCreateOrConnectWithoutEmployeesInput = {
+    where: DepartMentalSectorWhereUniqueInput
+    create: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
+  }
+
+  export type UserUpsertWithoutEmployeesInput = {
+    update: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
+    create: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEmployeesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type UserUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput = {
+    where: DepartMentWhereUniqueInput
+    update: XOR<DepartMentUpdateWithoutHeadOfDepartmentInput, DepartMentUncheckedUpdateWithoutHeadOfDepartmentInput>
+    create: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput>
+  }
+
+  export type DepartMentUpdateWithWhereUniqueWithoutHeadOfDepartmentInput = {
+    where: DepartMentWhereUniqueInput
+    data: XOR<DepartMentUpdateWithoutHeadOfDepartmentInput, DepartMentUncheckedUpdateWithoutHeadOfDepartmentInput>
+  }
+
+  export type DepartMentUpdateManyWithWhereWithoutHeadOfDepartmentInput = {
+    where: DepartMentScalarWhereInput
+    data: XOR<DepartMentUpdateManyMutationInput, DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentInput>
+  }
+
+  export type DepartMentScalarWhereInput = {
+    AND?: DepartMentScalarWhereInput | DepartMentScalarWhereInput[]
+    OR?: DepartMentScalarWhereInput[]
+    NOT?: DepartMentScalarWhereInput | DepartMentScalarWhereInput[]
+    id?: StringFilter<"DepartMent"> | string
+    name?: StringFilter<"DepartMent"> | string
+    about?: StringNullableFilter<"DepartMent"> | string | null
+    headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
+  }
+
+  export type DepartMentalSectorUpsertWithoutEmployeesInput = {
+    update: XOR<DepartMentalSectorUpdateWithoutEmployeesInput, DepartMentalSectorUncheckedUpdateWithoutEmployeesInput>
+    create: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
+    where?: DepartMentalSectorWhereInput
+  }
+
+  export type DepartMentalSectorUpdateToOneWithWhereWithoutEmployeesInput = {
+    where?: DepartMentalSectorWhereInput
+    data: XOR<DepartMentalSectorUpdateWithoutEmployeesInput, DepartMentalSectorUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type DepartMentalSectorUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    departMent?: DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput
+  }
+
+  export type DepartMentalSectorUncheckedUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserCreateWithoutEmailVerificationTokensInput = {
     id?: string
     name?: string | null
@@ -13234,7 +18450,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -13256,7 +18473,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -13294,7 +18512,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -13316,7 +18535,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -13338,7 +18558,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -13360,7 +18581,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -13398,7 +18620,8 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -13420,10 +18643,11 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutNewsLetterInput = {
+  export type UserCreateWithoutNewsLettersInput = {
     id?: string
     name?: string | null
     username?: string | null
@@ -13443,9 +18667,10 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutNewsLetterInput = {
+  export type UserUncheckedCreateWithoutNewsLettersInput = {
     id?: string
     name?: string | null
     username?: string | null
@@ -13465,25 +18690,26 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutNewsLetterInput = {
+  export type UserCreateOrConnectWithoutNewsLettersInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNewsLetterInput, UserUncheckedCreateWithoutNewsLetterInput>
+    create: XOR<UserCreateWithoutNewsLettersInput, UserUncheckedCreateWithoutNewsLettersInput>
   }
 
-  export type UserUpsertWithoutNewsLetterInput = {
-    update: XOR<UserUpdateWithoutNewsLetterInput, UserUncheckedUpdateWithoutNewsLetterInput>
-    create: XOR<UserCreateWithoutNewsLetterInput, UserUncheckedCreateWithoutNewsLetterInput>
+  export type UserUpsertWithoutNewsLettersInput = {
+    update: XOR<UserUpdateWithoutNewsLettersInput, UserUncheckedUpdateWithoutNewsLettersInput>
+    create: XOR<UserCreateWithoutNewsLettersInput, UserUncheckedCreateWithoutNewsLettersInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutNewsLetterInput = {
+  export type UserUpdateToOneWithWhereWithoutNewsLettersInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNewsLetterInput, UserUncheckedUpdateWithoutNewsLetterInput>
+    data: XOR<UserUpdateWithoutNewsLettersInput, UserUncheckedUpdateWithoutNewsLettersInput>
   }
 
-  export type UserUpdateWithoutNewsLetterInput = {
+  export type UserUpdateWithoutNewsLettersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13503,9 +18729,10 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutNewsLetterInput = {
+  export type UserUncheckedUpdateWithoutNewsLettersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     username?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13525,6 +18752,7 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNewsArticlesInput = {
@@ -13546,7 +18774,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsArticlesInput = {
@@ -13568,7 +18797,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsArticlesInput = {
@@ -13654,7 +18884,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsArticlesInput = {
@@ -13676,7 +18907,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsCommentUpsertWithWhereUniqueWithoutNewsArticleInput = {
@@ -13730,7 +18962,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsCommentsInput = {
@@ -13752,7 +18985,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsCommentsInput = {
@@ -13770,7 +19004,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNewsArticlesInput
-    NewsArticleLike?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateWithoutNewsCommentsInput = {
@@ -13783,7 +19017,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    NewsArticleLike?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleCreateOrConnectWithoutNewsCommentsInput = {
@@ -13821,7 +19055,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsCommentsInput = {
@@ -13843,7 +19078,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsArticleUpsertWithoutNewsCommentsInput = {
@@ -13867,7 +19103,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
-    NewsArticleLike?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutNewsCommentsInput = {
@@ -13880,7 +19116,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    NewsArticleLike?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type UserCreateWithoutNewsArticleLikesInput = {
@@ -13902,7 +19138,8 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
-    NewsLetter?: NewsLetterCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsArticleLikesInput = {
@@ -13924,7 +19161,8 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
-    NewsLetter?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsArticleLikesInput = {
@@ -13932,7 +19170,7 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutNewsArticleLikesInput, UserUncheckedCreateWithoutNewsArticleLikesInput>
   }
 
-  export type NewsArticleCreateWithoutNewsArticleLikeInput = {
+  export type NewsArticleCreateWithoutNewsArticleLikesInput = {
     id?: string
     imageUrl?: string | null
     title: string
@@ -13945,7 +19183,7 @@ export namespace Prisma {
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
   }
 
-  export type NewsArticleUncheckedCreateWithoutNewsArticleLikeInput = {
+  export type NewsArticleUncheckedCreateWithoutNewsArticleLikesInput = {
     id?: string
     imageUrl?: string | null
     title: string
@@ -13958,9 +19196,9 @@ export namespace Prisma {
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
-  export type NewsArticleCreateOrConnectWithoutNewsArticleLikeInput = {
+  export type NewsArticleCreateOrConnectWithoutNewsArticleLikesInput = {
     where: NewsArticleWhereUniqueInput
-    create: XOR<NewsArticleCreateWithoutNewsArticleLikeInput, NewsArticleUncheckedCreateWithoutNewsArticleLikeInput>
+    create: XOR<NewsArticleCreateWithoutNewsArticleLikesInput, NewsArticleUncheckedCreateWithoutNewsArticleLikesInput>
   }
 
   export type UserUpsertWithoutNewsArticleLikesInput = {
@@ -13993,7 +19231,8 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
-    NewsLetter?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsArticleLikesInput = {
@@ -14015,21 +19254,22 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
-    NewsLetter?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type NewsArticleUpsertWithoutNewsArticleLikeInput = {
-    update: XOR<NewsArticleUpdateWithoutNewsArticleLikeInput, NewsArticleUncheckedUpdateWithoutNewsArticleLikeInput>
-    create: XOR<NewsArticleCreateWithoutNewsArticleLikeInput, NewsArticleUncheckedCreateWithoutNewsArticleLikeInput>
+  export type NewsArticleUpsertWithoutNewsArticleLikesInput = {
+    update: XOR<NewsArticleUpdateWithoutNewsArticleLikesInput, NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput>
+    create: XOR<NewsArticleCreateWithoutNewsArticleLikesInput, NewsArticleUncheckedCreateWithoutNewsArticleLikesInput>
     where?: NewsArticleWhereInput
   }
 
-  export type NewsArticleUpdateToOneWithWhereWithoutNewsArticleLikeInput = {
+  export type NewsArticleUpdateToOneWithWhereWithoutNewsArticleLikesInput = {
     where?: NewsArticleWhereInput
-    data: XOR<NewsArticleUpdateWithoutNewsArticleLikeInput, NewsArticleUncheckedUpdateWithoutNewsArticleLikeInput>
+    data: XOR<NewsArticleUpdateWithoutNewsArticleLikesInput, NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput>
   }
 
-  export type NewsArticleUpdateWithoutNewsArticleLikeInput = {
+  export type NewsArticleUpdateWithoutNewsArticleLikesInput = {
     id?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
@@ -14042,7 +19282,7 @@ export namespace Prisma {
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
   }
 
-  export type NewsArticleUncheckedUpdateWithoutNewsArticleLikeInput = {
+  export type NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput = {
     id?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
@@ -14100,6 +19340,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type EmployeeCreateManyUserInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+  }
+
   export type EmailVerificationTokenUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     expires?: BigIntFieldUpdateOperationsInput | bigint | number
@@ -14143,7 +19393,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
-    NewsArticleLike?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
@@ -14156,7 +19406,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
-    NewsArticleLike?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
@@ -14197,7 +19447,7 @@ export namespace Prisma {
   export type NewsArticleLikeUpdateWithoutLikerInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsArticle?: NewsArticleUpdateOneRequiredWithoutNewsArticleLikeNestedInput
+    newsArticle?: NewsArticleUpdateOneRequiredWithoutNewsArticleLikesNestedInput
   }
 
   export type NewsArticleLikeUncheckedUpdateWithoutLikerInput = {
@@ -14237,6 +19487,136 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmployeeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
+    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartMentalSectorCreateManyDepartMentInput = {
+    id?: string
+    name: string
+    description?: string | null
+    hierarchy: number
+  }
+
+  export type DepartMentalSectorUpdateWithoutDepartMentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    employees?: EmployeeUpdateManyWithoutDepartMentalSectorNestedInput
+  }
+
+  export type DepartMentalSectorUncheckedUpdateWithoutDepartMentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    employees?: EmployeeUncheckedUpdateManyWithoutDepartMentalSectorNestedInput
+  }
+
+  export type DepartMentalSectorUncheckedUpdateManyWithoutDepartMentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type EmployeeCreateManyDepartMentalSectorInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    hierarchy: number
+    shortMessageToPublic?: string | null
+    userId: string
+  }
+
+  export type EmployeeUpdateWithoutDepartMentalSectorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
+    departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutDepartMentalSectorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartMentCreateManyHeadOfDepartmentInput = {
+    id?: string
+    name: string
+    about?: string | null
+  }
+
+  export type DepartMentUpdateWithoutHeadOfDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentalSectors?: DepartMentalSectorUpdateManyWithoutDepartMentNestedInput
+  }
+
+  export type DepartMentUncheckedUpdateWithoutHeadOfDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    departmentalSectors?: DepartMentalSectorUncheckedUpdateManyWithoutDepartMentNestedInput
+  }
+
+  export type DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewsCommentCreateManyNewsArticleInput = {

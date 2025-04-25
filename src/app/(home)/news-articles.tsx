@@ -1,12 +1,13 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { getLastTenNewsArticles } from "./action";
 import ListOfNewsArticles from "./list-of-news-articles";
 
 export async function NewsArticles() {
   const newsArticles = await getLastTenNewsArticles();
+  if(!newsArticles.length) return null;
   return (
     <div className="gap-3 flex flex-col">
       <h1 className="text-xl uppercase font-bold tracking-tighter">
@@ -19,7 +20,7 @@ export async function NewsArticles() {
       >
         <span className="sr-only">View more news articles</span>
         <span>View more</span>
-        <ArrowRightIcon className="group-hover/button:translate-x-2 transition-all duration-200" />
+        <MoveRightIcon className="group-hover/button:translate-x-2 transition-all duration-200" />
       </Link>
     </div>
   );

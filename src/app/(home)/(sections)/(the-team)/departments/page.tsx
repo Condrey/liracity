@@ -5,14 +5,16 @@ import ListOfDepartments from "./list-of-departments";
 export default async function Page() {
   const departments = await getAllDepartmentList();
   return (
-    <div className="pt-[85px]">
-      <div className="flex gap-3 items-center justify-between">
-        <h1>Departments</h1>
-        <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
+    <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
+      <div className="space-y-2">
+        <div className="flex gap-3 items-center justify-between">
+          <h1 className="text-2xl font-bold tracking-tight">Departments</h1>
+          <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
+        </div>
+        <p className="max-w-3xl tracking-wide text-balance hyphens-auto w-full ">
+          {pageDescription}
+        </p>
       </div>
-      <p className="max-w-prose tracking-wide text-balance hyphens-auto w-full mx-auto">
-        {pageDescription}
-      </p>
 
       <ListOfDepartments departments={departments} />
     </div>

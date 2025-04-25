@@ -37,7 +37,7 @@ export default function ListOfDepartments({
           </ButtonAddEditDepartment>
         </EmptyContainer>
       ) : (
-        <div>
+        <div className="space-y-4">
           {data.map((department, index, array) => (
             <DepartmentContainer
               key={department.id}

@@ -73,7 +73,7 @@ export default function FormAddEditDepartmentalSector({
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel required>Department name</FormLabel>
+                <FormLabel required>Departmental sector</FormLabel>
                 <FormControl>
                   <Input placeholder="e.g Information Technology" {...field} />
                 </FormControl>

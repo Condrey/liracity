@@ -6,7 +6,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect } from "react";
 
-const TipTapViewer = ({ content }: { content: any }) => {
+const TipTapViewer = ({ content ,className}: { content: any ,className?:string}) => {
   const editor = useEditor({
     extensions: [
       Superscript,
@@ -25,7 +25,7 @@ const TipTapViewer = ({ content }: { content: any }) => {
       editor.commands.setContent(content);
     }
   }, [editor, content]);
-  return <EditorContent editor={editor} />;
+  return <EditorContent editor={editor} className={className} />;
 };
 
 export default TipTapViewer;

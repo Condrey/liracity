@@ -1,4 +1,4 @@
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 export function YearContainer({ year }: { year: string | undefined }) {
   const currentYear = new Date().getFullYear();
@@ -6,10 +6,10 @@ export function YearContainer({ year }: { year: string | undefined }) {
     <Badge
       variant={
         Number(year || 0) === currentYear
-          ? "go"
+          ? "success"
           : Number(year || 0) < currentYear
             ? "destructive"
-            : "warn"
+            : "warning"
       }
     >
       {year}

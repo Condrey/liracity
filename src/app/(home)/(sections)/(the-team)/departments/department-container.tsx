@@ -11,6 +11,7 @@ import { PlusIcon } from "lucide-react";
 import { Fragment } from "react";
 import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
 import ListOfDepartmentalSectors from "./(departmental-sector)/list-of-departmental-sectors";
+import { formatNumber } from "@/lib/utils";
 
 interface DepartmentContainerProps {
   department: DepartmentData;
@@ -26,8 +27,8 @@ export default function DepartmentContainer({
     <Card>
       <CardHeader>
         <Fragment>
-          <CardTitle>
-            <span className="text-muted-foreground italic">{numbering}. </span>{" "}
+          <CardTitle className="capitalize text-lg sm:text-xl">
+            <span className="text-muted-foreground italic lowercase ">{numbering}. </span>{" "}
             {name} department
           </CardTitle>
           {about && (
@@ -41,16 +42,15 @@ export default function DepartmentContainer({
         <div className="flex items-center gap-3 justify-between">
           <h1
             data-name={name}
-            className="text-xl  first-letter:uppercase  font-bold tracking-tight md:before:content-[attr(data-name)] md:before:pe-2"
+            className="text-xl   capitalize  font-bold tracking-tight md:before:content-[attr(data-name)] md:before:pe-2"
           >
-            departmental sectors
+            departmental sectors <span className="text-muted-foreground  slashed-zero tabular-nums font-normal">({formatNumber(_count.departmentalSectors)})</span>
           </h1>
           <ButtonAddEditDepartmentalSector departMentId={id} size={"sm"}>
             <PlusIcon className="size-4" />
             <span>New</span>
           </ButtonAddEditDepartmentalSector>
         </div>
-        <p>The following are the various sectors under this department;</p>
         <ListOfDepartmentalSectors
           departmentalSectors={departmentalSectors}
           departMentId={id}

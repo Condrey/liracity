@@ -23,7 +23,7 @@ export default async function Page() {
         <PageTitle heading={title} />
         <PageDescription paragraph={pageDescription} />
       </div>
-      <Chart departments={departments} />
+      {/* <Chart departments={departments} /> */}
 
       {/* <ListOfDepartments departments={departments} /> */}
     </div>

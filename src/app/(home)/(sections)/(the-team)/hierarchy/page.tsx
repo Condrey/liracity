@@ -1,14 +1,19 @@
-import {PageDescription, PageTitle} from "@/components/page-utils";
-import { YearContainer } from "@/components/year-container";
+import { PageDescription, PageTitle } from "@/components/page-utils";
+import prisma from "@/lib/prisma";
+import { departmentDataInclude } from "@/lib/types";
+import Chart from "./chart";
 
 export default async function Page() {
+  // const departments = await prisma.departMent.findMany({
+  //   include: departmentDataInclude,
+  // });
   return (
     <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
       <div className="space-y-2">
         <PageTitle heading="Hierarchy" />
-        <PageDescription paragraph={pageDescription}/>
-   
-            </div>
+        <PageDescription paragraph={pageDescription} />
+      </div>
+      <Chart departments={[]} />
 
       {/* <ListOfDepartments departments={departments} /> */}
     </div>

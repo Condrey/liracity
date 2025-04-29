@@ -79,12 +79,12 @@ export const cityGetInvolvedLinks: NavLink[] = [
   },
   {
     title: "FAQs & Public Meetings",
-    href: "/contact-us/faqs-meetings",
+    href: "/faqs-meetings",
     description: "Find common questions and learn about city council meetings.",
   },
   {
     title: "Report an Issue",
-    href: "/contact-us/report",
+    href: "/report",
     description: "Quickly report problems or concerns to city authorities.",
   },
 ];
@@ -102,6 +102,59 @@ export const whatWeDoLinks: NavLink[] = [
   },
 ];
 
+export const cityOpportunityLinks:NavLink[]=[
+  {
+    title: "Careers & Internships",
+    href: "/opportunities/careers-internships",
+    description:
+      "Search job openings and internship programs in the city council.",
+  },
+  {
+    title: "Grants & Scholarships",
+    href: "/opportunities/grants-scholarships",
+    description:
+      "Apply for financial aid, grants, and academic scholarships.",
+  },
+  {
+    title: "Volunteering",
+    href: "/opportunities/volunteering",
+    description: "Give back by volunteering with various city initiatives.",
+  }, {
+    title: "Bid opportunities",
+    href: "/opportunities/bids",
+    description: "Browse open bidding opportunities in the city",
+  },
+]
+
+export const citySportsAndReactionLinks:NavLink[]=[
+  {
+    title: "Events & Facilities",
+    href: "/sports/events-facilities",
+    description:
+      "Participate in sports events and discover local facilities.",
+  },
+  {
+    title: "Programs & Clubs",
+    href: "/sports/programs-clubs",
+    description: "Join sports clubs and development programs across Lira.",
+  },
+]
+
+export const cityAboutLinks:NavLink[] = [
+  {
+    title: "History & Culture",
+    href: "/about-lira#history-culture",
+    description:
+      "Uncover the stories, traditions, and cultural heritage of Lira.",
+  },
+  {
+    title: "Geography & Landmarks",
+    href: "/about-lira#geography",
+    description:
+      "Explore the natural features and key landmarks across Lira.",
+  },
+]
+
 export const navLinks: NavLinkGroup[] = [
   {
     title: "Home",
@@ -114,20 +167,7 @@ export const navLinks: NavLinkGroup[] = [
     href: "/about-lira",
     description: "Discover Lira’s history, culture, and geography.",
     icon: InfoIcon,
-    children: [
-      {
-        title: "History & Culture",
-        href: "/about-lira/history-culture",
-        description:
-          "Uncover the stories, traditions, and cultural heritage of Lira.",
-      },
-      {
-        title: "Geography & Landmarks",
-        href: "/about-lira/geography",
-        description:
-          "Explore the natural features and key landmarks across Lira.",
-      },
-    ],
+    children: cityAboutLinks,
   },
   {
     title: "City Services",
@@ -155,44 +195,14 @@ export const navLinks: NavLinkGroup[] = [
     href: "/opportunities",
     description: "Explore opportunities to grow and serve.",
     icon: BriefcaseBusinessIcon,
-    children: [
-      {
-        title: "Careers & Internships",
-        href: "/opportunities/careers-internships",
-        description:
-          "Search job openings and internship programs in the city council.",
-      },
-      {
-        title: "Grants & Scholarships",
-        href: "/opportunities/grants-scholarships",
-        description:
-          "Apply for financial aid, grants, and academic scholarships.",
-      },
-      {
-        title: "Volunteering",
-        href: "/opportunities/volunteering",
-        description: "Give back by volunteering with various city initiatives.",
-      },
-    ],
+    children: cityOpportunityLinks,
   },
   {
     title: "Sports & Recreation",
     href: "/sports",
     description: "Engage in sports and recreational activities in Lira.",
     icon: TrophyIcon,
-    children: [
-      {
-        title: "Events & Facilities",
-        href: "/sports/events-facilities",
-        description:
-          "Participate in sports events and discover local facilities.",
-      },
-      {
-        title: "Programs & Clubs",
-        href: "/sports/programs-clubs",
-        description: "Join sports clubs and development programs across Lira.",
-      },
-    ],
+    children: citySportsAndReactionLinks,
   },
   {
     title: "Get Involved",

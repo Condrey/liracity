@@ -3,6 +3,8 @@ import Chart from "./chart";
 
 import { whatWeDoLinks } from "@/components/user/constants";
 import { Metadata } from "next";
+import prisma from "@/lib/prisma";
+import { departmentDataInclude } from "@/lib/types";
 
 const { title, description } = whatWeDoLinks.find(
   (val) => val.href === "/hierarchy"
@@ -12,16 +14,16 @@ export const metadata: Metadata = {
   description,
 };
 export default async function Page() {
-  // const departments = await prisma.departMent.findMany({
-  //   include: departmentDataInclude,
-  // });
+  const departments = await prisma.departMent.findMany({
+    include: departmentDataInclude,
+  });
   return (
     <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
       <div className="space-y-2">
         <PageTitle heading={title} />
         <PageDescription paragraph={pageDescription} />
       </div>
-      <Chart departments={[]} />
+      <Chart departments={departments} />
 
       {/* <ListOfDepartments departments={departments} /> */}
     </div>

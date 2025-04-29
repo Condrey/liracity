@@ -74,7 +74,7 @@ export const cityMediaCenterLinks: NavLink[] = [
 export const cityGetInvolvedLinks: NavLink[] = [
   {
     title: "Contact & Feedback",
-    href: "/contact-us/info-feedback",
+    href: "/info-feedback",
     description: "Reach out to us or share your thoughts and suggestions.",
   },
   {

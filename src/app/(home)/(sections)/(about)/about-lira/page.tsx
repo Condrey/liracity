@@ -2,9 +2,15 @@ import { Metadata } from "next"
 import GeographyAndLandmarks from "./geography-and-landmarks"
 import HistoryAndCulture from "./history-and-culture"
 
-export const metadata:Metadata={
-    title:'About'
-}
+const { title, description } = {
+    title: "About",
+    description: `Discover Lira’s history, culture, and geography.`,
+  };
+  
+  export const metadata: Metadata = {
+    title,
+    description,
+  };
 export default function Page(){
     return <div className="*:pt-[85px] scroll-smooth">
         <HistoryAndCulture/>

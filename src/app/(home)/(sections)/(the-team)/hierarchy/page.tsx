@@ -1,8 +1,16 @@
 import { PageDescription, PageTitle } from "@/components/page-utils";
-import prisma from "@/lib/prisma";
-import { departmentDataInclude } from "@/lib/types";
 import Chart from "./chart";
 
+import { whatWeDoLinks } from "@/components/user/constants";
+import { Metadata } from "next";
+
+const { title, description } = whatWeDoLinks.find(
+  (val) => val.href === "/hierarchy"
+)!;
+export const metadata: Metadata = {
+  title,
+  description,
+};
 export default async function Page() {
   // const departments = await prisma.departMent.findMany({
   //   include: departmentDataInclude,
@@ -10,7 +18,7 @@ export default async function Page() {
   return (
     <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
       <div className="space-y-2">
-        <PageTitle heading="Hierarchy" />
+        <PageTitle heading={title} />
         <PageDescription paragraph={pageDescription} />
       </div>
       <Chart departments={[]} />

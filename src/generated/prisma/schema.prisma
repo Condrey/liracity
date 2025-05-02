@@ -44,7 +44,7 @@ model DepartMent {
   id                  String               @id @default(uuid())
   name                String
   about               String?
-  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id])
+  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id], onDelete: SetNull)
   departmentalSectors DepartMentalSector[]
   headOfDepartmentId  String?
 
@@ -57,7 +57,7 @@ model DepartMentalSector {
   description  String?
   hierarchy    Int
   employees    Employee[]
-  departMent   DepartMent? @relation(fields: [departMentId], references: [id])
+  departMent   DepartMent? @relation(fields: [departMentId], references: [id], onDelete: SetNull)
   departMentId String?
 
   @@map("departmental_sectors")
@@ -65,14 +65,14 @@ model DepartMentalSector {
 
 model Employee {
   id                   String              @id @default(uuid())
-  user                 User                @relation(fields: [userId], references: [id])
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   assumedOffice        Int
   endedOffice          Int?
   position             String
   hierarchy            Int
   shortMessageToPublic String?
   departMents          DepartMent[]
-  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
+  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id], onDelete: SetNull)
   departMentalSectorId String?
   userId               String
 
@@ -83,7 +83,7 @@ model EmailVerificationToken {
   id      String @id @default(uuid())
   userId  String
   expires BigInt
-  user    User   @relation(fields: [userId], references: [id])
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("email_verifications")
 }
@@ -114,7 +114,7 @@ model NewsLetter {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String
 
   @@map("news_letters")
@@ -126,7 +126,7 @@ model NewsArticle {
   title            String
   publishedAt      DateTime          @default(now())
   content          String
-  author           User              @relation(fields: [authorId], references: [id])
+  author           User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId         String
   location         String?
   createdAt        DateTime          @default(now())
@@ -140,7 +140,7 @@ model NewsArticle {
 model NewsComment {
   id            String      @id @default(uuid())
   content       String
-  commenter     User        @relation(fields: [commenterId], references: [id])
+  commenter     User        @relation(fields: [commenterId], references: [id], onDelete: Cascade)
   commenterId   String
   newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
   newsArticleId String
@@ -152,7 +152,7 @@ model NewsComment {
 
 model NewsArticleLike {
   id            String      @id @default(uuid())
-  liker         User        @relation(fields: [likerId], references: [id])
+  liker         User        @relation(fields: [likerId], references: [id], onDelete: Cascade)
   likerId       String
   newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
   newsArticleId String

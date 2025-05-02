@@ -1,8 +1,12 @@
 "use server";
 
+import { validateRequest } from "@/auth";
+import { Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
 import { departmentSchema, DepartmentSchema } from "@/lib/validation";
+import { unauthorized } from "next/navigation";
 import { cache } from "react";
 
 async function departments() {
@@ -15,7 +19,12 @@ async function departments() {
 export const getAllDepartmentList = cache(departments);
 
 export async function upsertDepartment(formData: DepartmentSchema) {
-  // TODO: please validate the request 
+
+  const {user} =await  validateRequest()
+  if(!user) return unauthorized()
+    const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
+    if(!isAuthorized) return unauthorized()
+
   const { name, headOfDepartmentId,about, id } = departmentSchema.parse(formData);
   const data = await prisma.departMent.upsert({
     where: { id },

@@ -1,6 +1,74 @@
 import { z } from "zod";
 
-const requiredString = z.string().min(1, "This field is required.").trim();
+
+const requiredString = z
+  .string({ required_error: "This field should have a value" })
+  .trim();
+
+// Signup
+export const signUpSchema = z.object({
+  email: requiredString
+    .min(1, "Please an email is required")
+    .describe("Email for signing up")
+    .email(),
+  username: requiredString
+    .min(1, "You need a username")
+    .describe("User username for the user.")
+    .regex(/^[a-zA-Z0-9_-]+$/, "Only letters, numbers, - and _ are allowed"),
+  password: requiredString
+    .min(8, "Password must be at least 8 characters")
+    .describe("Password for the user."),
+});
+
+export type SignUpValues = z.infer<typeof signUpSchema>;
+
+// Login
+export const loginSchema = z.object({
+  username: requiredString.min(
+    1,
+    "Please input your username that you registered with.",
+  ),
+  password: requiredString
+    .min(1, "Password is required to login")
+    .describe("Password that you registered with."),
+});
+export type LoginValues = z.infer<typeof loginSchema>;
+
+
+//User
+export const userSchema = z.object({
+  name: requiredString
+    .min(1, "Name must be provided.")
+    .transform((val) =>
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
+    ),
+  id: z.string().optional(),
+  username: z.string().optional(),
+  email: z.string().email().optional(),
+  telephone: z.string().optional(),
+});
+export type UserSchema = z.infer<typeof userSchema>;
+
+export const verifyUserSchema = z.object({
+  name: requiredString
+    .min(1, "Name must be provided.")
+    .transform((val) =>
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
+    ),
+  id: requiredString.min(1, "User id is missing"),
+  username: requiredString
+    .min(1, "Please add a user name")
+    .describe("User username for the user.")
+    .regex(/^[a-zA-Z0-9_-]+$/, "Only letters, numbers, - and _ are allowed"),
+  email: requiredString.email().min(1, "A working email is required"),
+  telephone: z.string().trim().optional(),
+  password: requiredString
+    .min(8, "Password must be at least 8 characters")
+    .describe("Password for the user."),
+});
+export type VerifyUserSchema = z.infer<typeof verifyUserSchema>;
+
+
 
 // NewsLetter
 export const newsLetterSubscriptionSchema = z.object({
@@ -33,3 +101,7 @@ export const departmentalSectorSchema = z.object({
   departMentId: requiredString.min(1,'Please choose a department'),
 });
 export type DepartmentalSectorSchema = z.infer<typeof departmentalSectorSchema>;
+
+// miscellaneous 
+export const emailSchema = z.object({ email: z.string().trim().email() });
+export type EmailSchema = z.infer<typeof emailSchema>;

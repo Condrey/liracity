@@ -11,7 +11,7 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   return (
-    <div className="p-4 text-destructive flex flex-col  gap-4 min-h-dvh items-center  max-w-md w-full mx-auto">
+    <div className="p-4 text-destructive flex flex-col  gap-4 min-h-dvh items-center overflow-x-scroll  max-w-md w-full mx-auto">
       <h2 className="text-xl font-semibold">Something went wrong!</h2>
       <div
         className={cn(
@@ -21,7 +21,7 @@ export default function Error({ error, reset }: ErrorProps) {
         )}
       >
         <p>{error.message}</p>
-        <pre className="mt-2 text-sm text-muted-foreground line-clamp-[15] text-ellipsis">
+        <pre className="mt-2 text-sm text-muted-foreground line-clamp-[15] text-ellipsis ">
           {decodeURIComponent(error.stack!)}
         </pre>
         <pre className="mt-2 text-sm text-muted-foreground">

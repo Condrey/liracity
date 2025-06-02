@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 const requiredString = z
   .string({ required_error: "This field should have a value" })
   .trim();
@@ -26,21 +25,29 @@ export type SignUpValues = z.infer<typeof signUpSchema>;
 export const loginSchema = z.object({
   username: requiredString.min(
     1,
-    "Please input your username that you registered with.",
+    "Please input your username or email that you registered with."
   ),
   password: requiredString
     .min(1, "Password is required to login")
     .describe("Password that you registered with."),
 });
 export type LoginValues = z.infer<typeof loginSchema>;
-
+export const staffLoginSchema = z.object({
+  ippsNumber: z
+    .number()
+    .min(1, "Please input your staff assigned IPPS number."),
+  password: requiredString
+    .min(1, "Password is required to login")
+    .describe("Password that you registered with."),
+});
+export type StaffLoginValues = z.infer<typeof staffLoginSchema>;
 
 //User
 export const userSchema = z.object({
   name: requiredString
     .min(1, "Name must be provided.")
     .transform((val) =>
-      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase())
     ),
   id: z.string().optional(),
   username: z.string().optional(),
@@ -53,7 +60,7 @@ export const verifyUserSchema = z.object({
   name: requiredString
     .min(1, "Name must be provided.")
     .transform((val) =>
-      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase())
     ),
   id: requiredString.min(1, "User id is missing"),
   username: requiredString
@@ -68,8 +75,6 @@ export const verifyUserSchema = z.object({
 });
 export type VerifyUserSchema = z.infer<typeof verifyUserSchema>;
 
-
-
 // NewsLetter
 export const newsLetterSubscriptionSchema = z.object({
   email: requiredString.email().min(1, "An email is required."),
@@ -78,6 +83,11 @@ export const newsLetterSubscriptionSchema = z.object({
 export type NewsLetterSubscriptionSchema = z.infer<
   typeof newsLetterSubscriptionSchema
 >;
+export const newsLetterSchema = z.object({
+  name: requiredString,
+  email: requiredString.email(),
+});
+export type NewsLetterSchema = z.infer<typeof newsLetterSchema>;
 
 // Department
 export const departmentSchema = z.object({
@@ -90,18 +100,18 @@ export const departmentSchema = z.object({
 });
 export type DepartmentSchema = z.infer<typeof departmentSchema>;
 
-// Departmental sector 
+// Departmental sector
 export const departmentalSectorSchema = z.object({
   id: z.string().optional(),
   name: requiredString
     .min(1, "Departmental Sector name is missing")
     .transform((value) => value.charAt(0).toUpperCase() + value.slice(1)),
   description: z.string().max(200, "Write within 250 characters").optional(),
-  hierarchy:z.number(),
-  departMentId: requiredString.min(1,'Please choose a department'),
+  hierarchy: z.number(),
+  departMentId: requiredString.min(1, "Please choose a department"),
 });
 export type DepartmentalSectorSchema = z.infer<typeof departmentalSectorSchema>;
 
-// miscellaneous 
+// miscellaneous
 export const emailSchema = z.object({ email: z.string().trim().email() });
 export type EmailSchema = z.infer<typeof emailSchema>;

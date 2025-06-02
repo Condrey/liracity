@@ -11,7 +11,7 @@ const toggleThemes: { name: string; theme: string; icon: LucideIcon }[] = [
 ];
 
 export function ThemeToggler() {
-  const { setTheme, theme: currentTheme } = useTheme();
+  const { setTheme, theme: currentTheme, resolvedTheme } = useTheme();
 
   return (
     <div>
@@ -25,8 +25,8 @@ export function ThemeToggler() {
             onClick={() => setTheme(theme)}
             title={name+' mode'}
           >
-            <Icon />
-            <span className="sr-only">{name}</span>
+            <Icon suppressHydrationWarning />
+            <span className="sr-only">{name} theme mode</span>
           </Button>
         );
       })}

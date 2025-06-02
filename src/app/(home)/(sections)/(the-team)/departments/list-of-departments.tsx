@@ -1,12 +1,18 @@
 "use client";
 
+import { DataTable } from "@/components/data-table/data-table";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAllDepartmentList } from "./action";
-import ButtonAddEditDepartment from "./button-add-department";
+import ButtonAddEditDepartment from "./button-add-edit-department";
+import { useDepartmentsColumns } from "./columns";
 import DepartmentContainer from "./department-container";
+import { PlusIcon } from "lucide-react";
+import { useSession } from "@/app/session-provider";
+import { myPrivileges } from "@/lib/enums";
+import { Role } from "@/generated/prisma";
 
 interface ListOfDepartmentsProps {
   departments: DepartmentData[];
@@ -14,6 +20,10 @@ interface ListOfDepartmentsProps {
 export default function ListOfDepartments({
   departments,
 }: ListOfDepartmentsProps) {
+
+  const {user,} = useSession()
+const isAuthorized = !!user&& myPrivileges[user.role].includes(Role.MODERATOR)
+
   const query = useQuery({
     queryKey: ["department", "list"],
     queryFn: getAllDepartmentList,
@@ -38,13 +48,18 @@ export default function ListOfDepartments({
         </EmptyContainer>
       ) : (
         <div className="space-y-4">
-          {data.map((department, index, array) => (
-            <DepartmentContainer
-              key={department.id}
-              department={department}
-              numbering={`${index + 1} of ${array.length}`}
-            />
-          ))}
+          <DataTable
+            data={data}
+            columns={useDepartmentsColumns()}
+            filterColumn={{ id: "name", label: "department" }}
+            className='w-full'
+          >
+
+           {isAuthorized&& <ButtonAddEditDepartment size='sm' variant={'default'}>
+              <PlusIcon/> New
+            </ButtonAddEditDepartment>}
+          </DataTable>
+        
         </div>
       )}
     </div>

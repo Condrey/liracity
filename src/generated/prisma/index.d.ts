@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Entity
+ * 
+ */
+export type Entity = $Result.DefaultSelection<Prisma.$EntityPayload>
+/**
  * Model DepartMent
  * 
  */
@@ -221,6 +226,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.entity`: Exposes CRUD operations for the **Entity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Entities
+    * const entities = await prisma.entity.findMany()
+    * ```
+    */
+  get entity(): Prisma.EntityDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.departMent`: Exposes CRUD operations for the **DepartMent** model.
@@ -762,6 +777,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Entity: 'Entity',
     DepartMent: 'DepartMent',
     DepartMentalSector: 'DepartMentalSector',
     Employee: 'Employee',
@@ -790,7 +806,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "newsComment" | "newsArticleLike"
+      modelProps: "user" | "entity" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "newsComment" | "newsArticleLike"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -865,6 +881,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Entity: {
+        payload: Prisma.$EntityPayload<ExtArgs>
+        fields: Prisma.EntityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EntityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EntityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          findFirst: {
+            args: Prisma.EntityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EntityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          findMany: {
+            args: Prisma.EntityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>[]
+          }
+          create: {
+            args: Prisma.EntityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          createMany: {
+            args: Prisma.EntityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EntityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>[]
+          }
+          delete: {
+            args: Prisma.EntityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          update: {
+            args: Prisma.EntityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          deleteMany: {
+            args: Prisma.EntityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EntityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EntityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>[]
+          }
+          upsert: {
+            args: Prisma.EntityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EntityPayload>
+          }
+          aggregate: {
+            args: Prisma.EntityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEntity>
+          }
+          groupBy: {
+            args: Prisma.EntityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EntityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EntityCountArgs<ExtArgs>
+            result: $Utils.Optional<EntityCountAggregateOutputType> | number
           }
         }
       }
@@ -1693,6 +1783,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    entity?: EntityOmit
     departMent?: DepartMentOmit
     departMentalSector?: DepartMentalSectorOmit
     employee?: EmployeeOmit
@@ -3366,6 +3457,1001 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Entity
+   */
+
+  export type AggregateEntity = {
+    _count: EntityCountAggregateOutputType | null
+    _min: EntityMinAggregateOutputType | null
+    _max: EntityMaxAggregateOutputType | null
+  }
+
+  export type EntityMinAggregateOutputType = {
+    id: string | null
+    webName: string | null
+    about: string | null
+    historyAndCulture: string | null
+    geographicalLandmarks: string | null
+  }
+
+  export type EntityMaxAggregateOutputType = {
+    id: string | null
+    webName: string | null
+    about: string | null
+    historyAndCulture: string | null
+    geographicalLandmarks: string | null
+  }
+
+  export type EntityCountAggregateOutputType = {
+    id: number
+    webName: number
+    about: number
+    historyAndCulture: number
+    geographicalLandmarks: number
+    _all: number
+  }
+
+
+  export type EntityMinAggregateInputType = {
+    id?: true
+    webName?: true
+    about?: true
+    historyAndCulture?: true
+    geographicalLandmarks?: true
+  }
+
+  export type EntityMaxAggregateInputType = {
+    id?: true
+    webName?: true
+    about?: true
+    historyAndCulture?: true
+    geographicalLandmarks?: true
+  }
+
+  export type EntityCountAggregateInputType = {
+    id?: true
+    webName?: true
+    about?: true
+    historyAndCulture?: true
+    geographicalLandmarks?: true
+    _all?: true
+  }
+
+  export type EntityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Entity to aggregate.
+     */
+    where?: EntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Entities to fetch.
+     */
+    orderBy?: EntityOrderByWithRelationInput | EntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Entities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Entities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Entities
+    **/
+    _count?: true | EntityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EntityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EntityMaxAggregateInputType
+  }
+
+  export type GetEntityAggregateType<T extends EntityAggregateArgs> = {
+        [P in keyof T & keyof AggregateEntity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEntity[P]>
+      : GetScalarType<T[P], AggregateEntity[P]>
+  }
+
+
+
+
+  export type EntityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EntityWhereInput
+    orderBy?: EntityOrderByWithAggregationInput | EntityOrderByWithAggregationInput[]
+    by: EntityScalarFieldEnum[] | EntityScalarFieldEnum
+    having?: EntityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EntityCountAggregateInputType | true
+    _min?: EntityMinAggregateInputType
+    _max?: EntityMaxAggregateInputType
+  }
+
+  export type EntityGroupByOutputType = {
+    id: string
+    webName: string
+    about: string
+    historyAndCulture: string
+    geographicalLandmarks: string
+    _count: EntityCountAggregateOutputType | null
+    _min: EntityMinAggregateOutputType | null
+    _max: EntityMaxAggregateOutputType | null
+  }
+
+  type GetEntityGroupByPayload<T extends EntityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EntityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EntityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EntityGroupByOutputType[P]>
+            : GetScalarType<T[P], EntityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EntitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    webName?: boolean
+    about?: boolean
+    historyAndCulture?: boolean
+    geographicalLandmarks?: boolean
+  }, ExtArgs["result"]["entity"]>
+
+  export type EntitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    webName?: boolean
+    about?: boolean
+    historyAndCulture?: boolean
+    geographicalLandmarks?: boolean
+  }, ExtArgs["result"]["entity"]>
+
+  export type EntitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    webName?: boolean
+    about?: boolean
+    historyAndCulture?: boolean
+    geographicalLandmarks?: boolean
+  }, ExtArgs["result"]["entity"]>
+
+  export type EntitySelectScalar = {
+    id?: boolean
+    webName?: boolean
+    about?: boolean
+    historyAndCulture?: boolean
+    geographicalLandmarks?: boolean
+  }
+
+  export type EntityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "webName" | "about" | "historyAndCulture" | "geographicalLandmarks", ExtArgs["result"]["entity"]>
+
+  export type $EntityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Entity"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      webName: string
+      about: string
+      historyAndCulture: string
+      geographicalLandmarks: string
+    }, ExtArgs["result"]["entity"]>
+    composites: {}
+  }
+
+  type EntityGetPayload<S extends boolean | null | undefined | EntityDefaultArgs> = $Result.GetResult<Prisma.$EntityPayload, S>
+
+  type EntityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EntityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EntityCountAggregateInputType | true
+    }
+
+  export interface EntityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Entity'], meta: { name: 'Entity' } }
+    /**
+     * Find zero or one Entity that matches the filter.
+     * @param {EntityFindUniqueArgs} args - Arguments to find a Entity
+     * @example
+     * // Get one Entity
+     * const entity = await prisma.entity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EntityFindUniqueArgs>(args: SelectSubset<T, EntityFindUniqueArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Entity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EntityFindUniqueOrThrowArgs} args - Arguments to find a Entity
+     * @example
+     * // Get one Entity
+     * const entity = await prisma.entity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EntityFindUniqueOrThrowArgs>(args: SelectSubset<T, EntityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Entity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityFindFirstArgs} args - Arguments to find a Entity
+     * @example
+     * // Get one Entity
+     * const entity = await prisma.entity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EntityFindFirstArgs>(args?: SelectSubset<T, EntityFindFirstArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Entity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityFindFirstOrThrowArgs} args - Arguments to find a Entity
+     * @example
+     * // Get one Entity
+     * const entity = await prisma.entity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EntityFindFirstOrThrowArgs>(args?: SelectSubset<T, EntityFindFirstOrThrowArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Entities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Entities
+     * const entities = await prisma.entity.findMany()
+     * 
+     * // Get first 10 Entities
+     * const entities = await prisma.entity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const entityWithIdOnly = await prisma.entity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EntityFindManyArgs>(args?: SelectSubset<T, EntityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Entity.
+     * @param {EntityCreateArgs} args - Arguments to create a Entity.
+     * @example
+     * // Create one Entity
+     * const Entity = await prisma.entity.create({
+     *   data: {
+     *     // ... data to create a Entity
+     *   }
+     * })
+     * 
+     */
+    create<T extends EntityCreateArgs>(args: SelectSubset<T, EntityCreateArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Entities.
+     * @param {EntityCreateManyArgs} args - Arguments to create many Entities.
+     * @example
+     * // Create many Entities
+     * const entity = await prisma.entity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EntityCreateManyArgs>(args?: SelectSubset<T, EntityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Entities and returns the data saved in the database.
+     * @param {EntityCreateManyAndReturnArgs} args - Arguments to create many Entities.
+     * @example
+     * // Create many Entities
+     * const entity = await prisma.entity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Entities and only return the `id`
+     * const entityWithIdOnly = await prisma.entity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EntityCreateManyAndReturnArgs>(args?: SelectSubset<T, EntityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Entity.
+     * @param {EntityDeleteArgs} args - Arguments to delete one Entity.
+     * @example
+     * // Delete one Entity
+     * const Entity = await prisma.entity.delete({
+     *   where: {
+     *     // ... filter to delete one Entity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EntityDeleteArgs>(args: SelectSubset<T, EntityDeleteArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Entity.
+     * @param {EntityUpdateArgs} args - Arguments to update one Entity.
+     * @example
+     * // Update one Entity
+     * const entity = await prisma.entity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EntityUpdateArgs>(args: SelectSubset<T, EntityUpdateArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Entities.
+     * @param {EntityDeleteManyArgs} args - Arguments to filter Entities to delete.
+     * @example
+     * // Delete a few Entities
+     * const { count } = await prisma.entity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EntityDeleteManyArgs>(args?: SelectSubset<T, EntityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Entities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Entities
+     * const entity = await prisma.entity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EntityUpdateManyArgs>(args: SelectSubset<T, EntityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Entities and returns the data updated in the database.
+     * @param {EntityUpdateManyAndReturnArgs} args - Arguments to update many Entities.
+     * @example
+     * // Update many Entities
+     * const entity = await prisma.entity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Entities and only return the `id`
+     * const entityWithIdOnly = await prisma.entity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EntityUpdateManyAndReturnArgs>(args: SelectSubset<T, EntityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Entity.
+     * @param {EntityUpsertArgs} args - Arguments to update or create a Entity.
+     * @example
+     * // Update or create a Entity
+     * const entity = await prisma.entity.upsert({
+     *   create: {
+     *     // ... data to create a Entity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Entity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EntityUpsertArgs>(args: SelectSubset<T, EntityUpsertArgs<ExtArgs>>): Prisma__EntityClient<$Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Entities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityCountArgs} args - Arguments to filter Entities to count.
+     * @example
+     * // Count the number of Entities
+     * const count = await prisma.entity.count({
+     *   where: {
+     *     // ... the filter for the Entities we want to count
+     *   }
+     * })
+    **/
+    count<T extends EntityCountArgs>(
+      args?: Subset<T, EntityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EntityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Entity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EntityAggregateArgs>(args: Subset<T, EntityAggregateArgs>): Prisma.PrismaPromise<GetEntityAggregateType<T>>
+
+    /**
+     * Group by Entity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EntityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EntityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EntityGroupByArgs['orderBy'] }
+        : { orderBy?: EntityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EntityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEntityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Entity model
+   */
+  readonly fields: EntityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Entity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EntityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Entity model
+   */
+  interface EntityFieldRefs {
+    readonly id: FieldRef<"Entity", 'String'>
+    readonly webName: FieldRef<"Entity", 'String'>
+    readonly about: FieldRef<"Entity", 'String'>
+    readonly historyAndCulture: FieldRef<"Entity", 'String'>
+    readonly geographicalLandmarks: FieldRef<"Entity", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Entity findUnique
+   */
+  export type EntityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter, which Entity to fetch.
+     */
+    where: EntityWhereUniqueInput
+  }
+
+  /**
+   * Entity findUniqueOrThrow
+   */
+  export type EntityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter, which Entity to fetch.
+     */
+    where: EntityWhereUniqueInput
+  }
+
+  /**
+   * Entity findFirst
+   */
+  export type EntityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter, which Entity to fetch.
+     */
+    where?: EntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Entities to fetch.
+     */
+    orderBy?: EntityOrderByWithRelationInput | EntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Entities.
+     */
+    cursor?: EntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Entities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Entities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Entities.
+     */
+    distinct?: EntityScalarFieldEnum | EntityScalarFieldEnum[]
+  }
+
+  /**
+   * Entity findFirstOrThrow
+   */
+  export type EntityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter, which Entity to fetch.
+     */
+    where?: EntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Entities to fetch.
+     */
+    orderBy?: EntityOrderByWithRelationInput | EntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Entities.
+     */
+    cursor?: EntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Entities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Entities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Entities.
+     */
+    distinct?: EntityScalarFieldEnum | EntityScalarFieldEnum[]
+  }
+
+  /**
+   * Entity findMany
+   */
+  export type EntityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter, which Entities to fetch.
+     */
+    where?: EntityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Entities to fetch.
+     */
+    orderBy?: EntityOrderByWithRelationInput | EntityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Entities.
+     */
+    cursor?: EntityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Entities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Entities.
+     */
+    skip?: number
+    distinct?: EntityScalarFieldEnum | EntityScalarFieldEnum[]
+  }
+
+  /**
+   * Entity create
+   */
+  export type EntityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Entity.
+     */
+    data: XOR<EntityCreateInput, EntityUncheckedCreateInput>
+  }
+
+  /**
+   * Entity createMany
+   */
+  export type EntityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Entities.
+     */
+    data: EntityCreateManyInput | EntityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Entity createManyAndReturn
+   */
+  export type EntityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * The data used to create many Entities.
+     */
+    data: EntityCreateManyInput | EntityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Entity update
+   */
+  export type EntityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Entity.
+     */
+    data: XOR<EntityUpdateInput, EntityUncheckedUpdateInput>
+    /**
+     * Choose, which Entity to update.
+     */
+    where: EntityWhereUniqueInput
+  }
+
+  /**
+   * Entity updateMany
+   */
+  export type EntityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Entities.
+     */
+    data: XOR<EntityUpdateManyMutationInput, EntityUncheckedUpdateManyInput>
+    /**
+     * Filter which Entities to update
+     */
+    where?: EntityWhereInput
+    /**
+     * Limit how many Entities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Entity updateManyAndReturn
+   */
+  export type EntityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * The data used to update Entities.
+     */
+    data: XOR<EntityUpdateManyMutationInput, EntityUncheckedUpdateManyInput>
+    /**
+     * Filter which Entities to update
+     */
+    where?: EntityWhereInput
+    /**
+     * Limit how many Entities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Entity upsert
+   */
+  export type EntityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Entity to update in case it exists.
+     */
+    where: EntityWhereUniqueInput
+    /**
+     * In case the Entity found by the `where` argument doesn't exist, create a new Entity with this data.
+     */
+    create: XOR<EntityCreateInput, EntityUncheckedCreateInput>
+    /**
+     * In case the Entity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EntityUpdateInput, EntityUncheckedUpdateInput>
+  }
+
+  /**
+   * Entity delete
+   */
+  export type EntityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
+    /**
+     * Filter which Entity to delete.
+     */
+    where: EntityWhereUniqueInput
+  }
+
+  /**
+   * Entity deleteMany
+   */
+  export type EntityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Entities to delete
+     */
+    where?: EntityWhereInput
+    /**
+     * Limit how many Entities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Entity without action
+   */
+  export type EntityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Entity
+     */
+    select?: EntitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Entity
+     */
+    omit?: EntityOmit<ExtArgs> | null
   }
 
 
@@ -5630,6 +6716,7 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateOutputType = {
     id: string | null
+    ippsNumber: string | null
     assumedOffice: number | null
     endedOffice: number | null
     position: string | null
@@ -5641,6 +6728,7 @@ export namespace Prisma {
 
   export type EmployeeMaxAggregateOutputType = {
     id: string | null
+    ippsNumber: string | null
     assumedOffice: number | null
     endedOffice: number | null
     position: string | null
@@ -5652,6 +6740,7 @@ export namespace Prisma {
 
   export type EmployeeCountAggregateOutputType = {
     id: number
+    ippsNumber: number
     assumedOffice: number
     endedOffice: number
     position: number
@@ -5677,6 +6766,7 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateInputType = {
     id?: true
+    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
@@ -5688,6 +6778,7 @@ export namespace Prisma {
 
   export type EmployeeMaxAggregateInputType = {
     id?: true
+    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
@@ -5699,6 +6790,7 @@ export namespace Prisma {
 
   export type EmployeeCountAggregateInputType = {
     id?: true
+    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
@@ -5797,6 +6889,7 @@ export namespace Prisma {
 
   export type EmployeeGroupByOutputType = {
     id: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice: number | null
     position: string
@@ -5827,6 +6920,7 @@ export namespace Prisma {
 
   export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
@@ -5842,6 +6936,7 @@ export namespace Prisma {
 
   export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
@@ -5855,6 +6950,7 @@ export namespace Prisma {
 
   export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
@@ -5868,6 +6964,7 @@ export namespace Prisma {
 
   export type EmployeeSelectScalar = {
     id?: boolean
+    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
@@ -5877,7 +6974,7 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assumedOffice" | "endedOffice" | "position" | "hierarchy" | "shortMessageToPublic" | "departMentalSectorId" | "userId", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ippsNumber" | "assumedOffice" | "endedOffice" | "position" | "hierarchy" | "shortMessageToPublic" | "departMentalSectorId" | "userId", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     departMents?: boolean | Employee$departMentsArgs<ExtArgs>
@@ -5902,6 +6999,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      ippsNumber: string
       assumedOffice: number
       endedOffice: number | null
       position: string
@@ -6336,6 +7434,7 @@ export namespace Prisma {
    */
   interface EmployeeFieldRefs {
     readonly id: FieldRef<"Employee", 'String'>
+    readonly ippsNumber: FieldRef<"Employee", 'String'>
     readonly assumedOffice: FieldRef<"Employee", 'Int'>
     readonly endedOffice: FieldRef<"Employee", 'Int'>
     readonly position: FieldRef<"Employee", 'String'>
@@ -14311,6 +15410,17 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const EntityScalarFieldEnum: {
+    id: 'id',
+    webName: 'webName',
+    about: 'about',
+    historyAndCulture: 'historyAndCulture',
+    geographicalLandmarks: 'geographicalLandmarks'
+  };
+
+  export type EntityScalarFieldEnum = (typeof EntityScalarFieldEnum)[keyof typeof EntityScalarFieldEnum]
+
+
   export const DepartMentScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -14334,6 +15444,7 @@ export namespace Prisma {
 
   export const EmployeeScalarFieldEnum: {
     id: 'id',
+    ippsNumber: 'ippsNumber',
     assumedOffice: 'assumedOffice',
     endedOffice: 'endedOffice',
     position: 'position',
@@ -14666,6 +15777,58 @@ export namespace Prisma {
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
+  export type EntityWhereInput = {
+    AND?: EntityWhereInput | EntityWhereInput[]
+    OR?: EntityWhereInput[]
+    NOT?: EntityWhereInput | EntityWhereInput[]
+    id?: StringFilter<"Entity"> | string
+    webName?: StringFilter<"Entity"> | string
+    about?: StringFilter<"Entity"> | string
+    historyAndCulture?: StringFilter<"Entity"> | string
+    geographicalLandmarks?: StringFilter<"Entity"> | string
+  }
+
+  export type EntityOrderByWithRelationInput = {
+    id?: SortOrder
+    webName?: SortOrder
+    about?: SortOrder
+    historyAndCulture?: SortOrder
+    geographicalLandmarks?: SortOrder
+  }
+
+  export type EntityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EntityWhereInput | EntityWhereInput[]
+    OR?: EntityWhereInput[]
+    NOT?: EntityWhereInput | EntityWhereInput[]
+    webName?: StringFilter<"Entity"> | string
+    about?: StringFilter<"Entity"> | string
+    historyAndCulture?: StringFilter<"Entity"> | string
+    geographicalLandmarks?: StringFilter<"Entity"> | string
+  }, "id">
+
+  export type EntityOrderByWithAggregationInput = {
+    id?: SortOrder
+    webName?: SortOrder
+    about?: SortOrder
+    historyAndCulture?: SortOrder
+    geographicalLandmarks?: SortOrder
+    _count?: EntityCountOrderByAggregateInput
+    _max?: EntityMaxOrderByAggregateInput
+    _min?: EntityMinOrderByAggregateInput
+  }
+
+  export type EntityScalarWhereWithAggregatesInput = {
+    AND?: EntityScalarWhereWithAggregatesInput | EntityScalarWhereWithAggregatesInput[]
+    OR?: EntityScalarWhereWithAggregatesInput[]
+    NOT?: EntityScalarWhereWithAggregatesInput | EntityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Entity"> | string
+    webName?: StringWithAggregatesFilter<"Entity"> | string
+    about?: StringWithAggregatesFilter<"Entity"> | string
+    historyAndCulture?: StringWithAggregatesFilter<"Entity"> | string
+    geographicalLandmarks?: StringWithAggregatesFilter<"Entity"> | string
+  }
+
   export type DepartMentWhereInput = {
     AND?: DepartMentWhereInput | DepartMentWhereInput[]
     OR?: DepartMentWhereInput[]
@@ -14784,6 +15947,7 @@ export namespace Prisma {
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     id?: StringFilter<"Employee"> | string
+    ippsNumber?: StringFilter<"Employee"> | string
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
@@ -14798,6 +15962,7 @@ export namespace Prisma {
 
   export type EmployeeOrderByWithRelationInput = {
     id?: SortOrder
+    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrderInput | SortOrder
     position?: SortOrder
@@ -14815,6 +15980,7 @@ export namespace Prisma {
     AND?: EmployeeWhereInput | EmployeeWhereInput[]
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
+    ippsNumber?: StringFilter<"Employee"> | string
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
@@ -14829,6 +15995,7 @@ export namespace Prisma {
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
+    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrderInput | SortOrder
     position?: SortOrder
@@ -14848,6 +16015,7 @@ export namespace Prisma {
     OR?: EmployeeScalarWhereWithAggregatesInput[]
     NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Employee"> | string
+    ippsNumber?: StringWithAggregatesFilter<"Employee"> | string
     assumedOffice?: IntWithAggregatesFilter<"Employee"> | number
     endedOffice?: IntNullableWithAggregatesFilter<"Employee"> | number | null
     position?: StringWithAggregatesFilter<"Employee"> | string
@@ -15410,6 +16578,62 @@ export namespace Prisma {
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type EntityCreateInput = {
+    id?: string
+    webName: string
+    about: string
+    historyAndCulture: string
+    geographicalLandmarks: string
+  }
+
+  export type EntityUncheckedCreateInput = {
+    id?: string
+    webName: string
+    about: string
+    historyAndCulture: string
+    geographicalLandmarks: string
+  }
+
+  export type EntityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    webName?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    historyAndCulture?: StringFieldUpdateOperationsInput | string
+    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EntityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    webName?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    historyAndCulture?: StringFieldUpdateOperationsInput | string
+    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EntityCreateManyInput = {
+    id?: string
+    webName: string
+    about: string
+    historyAndCulture: string
+    geographicalLandmarks: string
+  }
+
+  export type EntityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    webName?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    historyAndCulture?: StringFieldUpdateOperationsInput | string
+    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EntityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    webName?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    historyAndCulture?: StringFieldUpdateOperationsInput | string
+    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+  }
+
   export type DepartMentCreateInput = {
     id?: string
     name: string
@@ -15523,6 +16747,7 @@ export namespace Prisma {
 
   export type EmployeeCreateInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -15535,6 +16760,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -15547,6 +16773,7 @@ export namespace Prisma {
 
   export type EmployeeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -15559,6 +16786,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -15571,6 +16799,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -15582,6 +16811,7 @@ export namespace Prisma {
 
   export type EmployeeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -15591,6 +16821,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -16253,6 +17484,30 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EntityCountOrderByAggregateInput = {
+    id?: SortOrder
+    webName?: SortOrder
+    about?: SortOrder
+    historyAndCulture?: SortOrder
+    geographicalLandmarks?: SortOrder
+  }
+
+  export type EntityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    webName?: SortOrder
+    about?: SortOrder
+    historyAndCulture?: SortOrder
+    geographicalLandmarks?: SortOrder
+  }
+
+  export type EntityMinOrderByAggregateInput = {
+    id?: SortOrder
+    webName?: SortOrder
+    about?: SortOrder
+    historyAndCulture?: SortOrder
+    geographicalLandmarks?: SortOrder
+  }
+
   export type EmployeeNullableScalarRelationFilter = {
     is?: EmployeeWhereInput | null
     isNot?: EmployeeWhereInput | null
@@ -16386,6 +17641,7 @@ export namespace Prisma {
 
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
+    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
@@ -16403,6 +17659,7 @@ export namespace Prisma {
 
   export type EmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
+    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
@@ -16414,6 +17671,7 @@ export namespace Prisma {
 
   export type EmployeeMinOrderByAggregateInput = {
     id?: SortOrder
+    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
@@ -17795,6 +19053,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutUserInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -17806,6 +19065,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutUserInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -18011,6 +19271,7 @@ export namespace Prisma {
     OR?: EmployeeScalarWhereInput[]
     NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
     id?: StringFilter<"Employee"> | string
+    ippsNumber?: StringFilter<"Employee"> | string
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
@@ -18022,6 +19283,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutDepartMentsInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -18033,6 +19295,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutDepartMentsInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -18086,6 +19349,7 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutDepartMentsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -18097,6 +19361,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutDepartMentsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -18135,6 +19400,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutDepartMentalSectorInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -18146,6 +19412,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutDepartMentalSectorInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19342,6 +20609,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyUserInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19491,6 +20759,7 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -19502,6 +20771,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -19513,6 +20783,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -19553,6 +20824,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyDepartMentalSectorInput = {
     id?: string
+    ippsNumber?: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19563,6 +20835,7 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -19574,6 +20847,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
@@ -19585,6 +20859,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string

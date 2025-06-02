@@ -1,14 +1,17 @@
-import {PageDescription, PageTitle} from "@/components/page-utils";
-import { getAllDepartmentList } from "./action";
-import ButtonAddEditDepartment from "./button-add-department";
-import ListOfDepartments from "./list-of-departments";
+import { PageDescription, PageTitle } from "@/components/page-utils";
 import { whatWeDoLinks } from "@/components/user/constants";
 import { Metadata } from "next";
+import { getAllDepartmentList } from "./action";
+import ButtonAddEditDepartment from "./button-add-edit-department";
+import ListOfDepartments from "./list-of-departments";
 
-const {title,description} = whatWeDoLinks.find(val=>val.href==='/departments')!
-export const metadata:Metadata={
-    title,description
-}
+const { title, description } = whatWeDoLinks.find(
+  (val) => val.href === "/departments"
+)!;
+export const metadata: Metadata = {
+  title,
+  description,
+};
 export default async function Page() {
   const departments = await getAllDepartmentList();
   return (
@@ -18,7 +21,7 @@ export default async function Page() {
           <PageTitle heading={title} />
           <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
         </div>
-        <PageDescription paragraph={pageDescription}/>
+        <PageDescription paragraph={pageDescription} />
       </div>
 
       <ListOfDepartments departments={departments} />

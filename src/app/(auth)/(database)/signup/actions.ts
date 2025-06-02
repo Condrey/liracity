@@ -30,7 +30,7 @@ export async function signUp(
     });
     if (existingUserName) {
       return {
-        error: "Username is already taken",
+        error: "Username is already taken, please select another",
       };
     }
     const existingEmail = await prisma.user.findFirst({
@@ -43,7 +43,7 @@ export async function signUp(
     });
     if (existingEmail) {
       return {
-        error: "Email is already taken",
+        error: "Email is already taken or has been used to register before, just login",
       };
     }
 

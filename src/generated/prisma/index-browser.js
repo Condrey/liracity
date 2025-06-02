@@ -134,6 +134,14 @@ exports.Prisma.UserScalarFieldEnum = {
   emailVerified: 'emailVerified'
 };
 
+exports.Prisma.EntityScalarFieldEnum = {
+  id: 'id',
+  webName: 'webName',
+  about: 'about',
+  historyAndCulture: 'historyAndCulture',
+  geographicalLandmarks: 'geographicalLandmarks'
+};
+
 exports.Prisma.DepartMentScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -151,6 +159,7 @@ exports.Prisma.DepartMentalSectorScalarFieldEnum = {
 
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
+  ippsNumber: 'ippsNumber',
   assumedOffice: 'assumedOffice',
   endedOffice: 'endedOffice',
   position: 'position',
@@ -240,6 +249,7 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Entity: 'Entity',
   DepartMent: 'DepartMent',
   DepartMentalSector: 'DepartMentalSector',
   Employee: 'Employee',

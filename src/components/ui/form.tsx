@@ -139,6 +139,9 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
     />
   )
 }
+function FormFooter({className,...props}:React.ComponentProps<'div'>){
+  return <div className={cn(className="flex items-center justify-end gap-4",className)} {...props} />
+}
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField()
@@ -169,4 +172,5 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  FormFooter
 }

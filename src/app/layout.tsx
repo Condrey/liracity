@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
+        suppressHydrationWarning 
       >
         <ThemeProvider
           attribute="class"
@@ -44,7 +44,7 @@ export default function RootLayout({
           enableColorScheme
         >
           <ReactQueryProvider>{children}</ReactQueryProvider>
-          <Toaster />
+          <Toaster expand richColors />
         </ThemeProvider>
       </body>
     </html>

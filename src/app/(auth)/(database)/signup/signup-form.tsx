@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { signUp } from "./actions";
+import { toast } from "sonner";
 export default function SignUpForm() {
   const [error, setError] = useState<string>();
   const [isPending, startTransition] = useTransition();
@@ -27,17 +28,18 @@ export default function SignUpForm() {
       password: "",
     },
   });
+ 
+
   async function onSubmit(values: SignUpValues) {
-    setError(undefined);
     startTransition(async () => {
       const { error } = await signUp(values);
-      if (error) setError(error);
+      if (error) toast.error('Self registration error',{position:'top-center',description:error});
     });
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-        {error && <p className="text-center text-destructive">{error}</p>}
+      <form onSubmit={form.handleSubmit(onSubmit)} className="last:pt-6 space-y-4">
+
         <FormField
           control={form.control}
           name="username"
@@ -45,7 +47,7 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>User Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="username goes here ..." />
+                <Input {...field} placeholder="e.g., janedoe " />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -60,7 +62,7 @@ export default function SignUpForm() {
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="Please enter an email ..."
+                  placeholder="e.g., someone@gmail.com"
                   type="email"
                 />
               </FormControl>
@@ -77,8 +79,9 @@ export default function SignUpForm() {
               <FormControl>
                 <PasswordInput
                   {...field}
-                  placeholder="Your password goes here ..."
+                  placeholder="your password goes here"
                   type="password"
+                
                 />
               </FormControl>
               <FormMessage />

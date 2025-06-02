@@ -23,7 +23,7 @@ export function useUpsertDepartmentMutation() {
 
         return [data, ...oldData];
       });
-      toast.info(
+      toast.success(
         `${isSubmission ? "Added" : "Updated"} department successfully`
       );
     },

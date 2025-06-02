@@ -6,8 +6,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const webName = 'Lira City Council'
-export const countryCurrency = "SSP";
+export const webName = 'Lira City'
+export const countryCurrency = "UGX";
 
 export function formatCurrency(price: number | string = 0, currency?: string) {
   const numericPrice = Number(price);

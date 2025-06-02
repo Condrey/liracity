@@ -5,7 +5,7 @@ import DepartmentalSectorContainer from "./departmental-sector-container";
 import Link from "next/link";
 import { MoveRightIcon } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-
+import { DataTable } from "@/components/data-table/data-table";
 interface ListOfDepartmentalSectorsProps {
   departmentalSectors: DepartmentalSectorData[];
   departMentId: string;

@@ -1,44 +1,36 @@
-import LoginImage from "@/assets/login-image.jpg";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { webName } from "@/lib/utils";
 import { Metadata } from "next";
-import Image from "next/image";
-import LoginForm from "./login-form";
-import Link from "next/link";
-import GoogleSignInButton from "./google/google-signin-button";
+import StaffLogin from "./(staff-login)/staff-login";
+import UserLogin from "./(user-login)/user-login";
+import UserTypes from "./user-types";
 
-export const metadata: Metadata = {
-  title: "Login",
+export const generateMetadata=async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}): Promise<Metadata> => {
+  const userType = (await searchParams)['user'] || 'Civilian'
+  return {title: "Login as a "+userType,} 
 };
 export default async function Page() {
   return (
-    <main className="flex min-h-dvh items-center p-5">
-      <div className="mx-auto flex h-full max-h-[40rem] w-full max-w-sm overflow-hidden rounded-xl bg-card shadow-2xl lg:max-w-[64rem]">
-        <div className="w-full space-y-10 overflow-y-auto p-10 md:w-1/2">
-          <h1 className="text-3xl font-bold">{`Login to ${webName}`}</h1>
-          <div className="space-y-5">
-            <GoogleSignInButton />
-            <div className="flex items-center gap-3">
-              <div className="h-px flex-1 bg-muted" />
-              <span>OR</span>
-              <div className="h-px flex-1 bg-muted" />
-            </div>
-            <LoginForm />
-            {/* TODO: I think we do not need sign up in this use-case  */}
-            <Link
-              href={`/signup`}
-              className="block text-center hover:underline"
-            >
-              {`Don't have an account? SignUp`}
-            </Link>
+    <main className="flex h-dvh items-center justify-center ">
+      <div className="flex flex-row-reverse size-full   justify-center md:justify-end overflow-hidden ">
+        <div className="w-full h-dvh flex flex-col sm:space-y-6 space-y-16 overflow-y-auto px-3 md:px-10 p-10 md:w-1/2 md:pt-[8rem]">
+          <div className="space-y-1 text-center md:text-start ">
+            <h1 className="text-3xl text-shadow font-bold uppercase">{`Login to ${webName}`}</h1>
+            
+          </div>
+
+          <div className="space-y-3  max-w-md w-full mx-auto md:me-auto md:ms-0  ">
+            <UserTypes />
           </div>
         </div>
 
-        <Image
-          src={LoginImage}
-          alt=""
-          className="hidden w-1/2 bg-foreground object-cover md:block"
-        />
+        <div className=" hidden w-1/2   bg-cover mask-contain mask-no-repeat md:block h-dvh mask-[url(/uganda.png)] bg-[url(/hero.jpg)]" />
       </div>
     </main>
   );
 }
+

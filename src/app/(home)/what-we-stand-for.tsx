@@ -1,19 +1,22 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { webName } from "@/lib/utils";
 import {
   CodeIcon,
+  CopyIcon,
   FileStackIcon,
   LightbulbIcon,
   MoveRightIcon,
   RocketIcon,
 } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
-export default async function WhatWeStandFor() {
-
-  
+export default function WhatWeStandFor() {
   return (
-    <div className="flex border-y py-3 gap-3">
+    <div className="flex border-y p-3 gap-3">
       <Image
         src={`/logo.png`}
         alt="logo"
@@ -25,17 +28,19 @@ export default async function WhatWeStandFor() {
         <h1 className="text-4xl text-balance  font-bold uppercase">
           {webName}
         </h1>
-        <h2 className="text-2xl decoration-dashed underline font-semibold  text-balance hidden lg:block ">
+        <h2 className="text-2xl underline-offset-[8px] decoration-dashed underline font-semibold  text-balance hidden lg:block ">
           What we stand for
         </h2>
-        <q className="text-xl italic text-muted-foreground">Our building blocks</q>
+        <q className="text-xl italic text-muted-foreground">
+          Our building blocks
+        </q>
         <div className="flex items-center text-xs w-full justify-center gap-0.5 align-middle">
           <span>Vision, mission, mandate, e.t.c </span>
           <MoveRightIcon className="size-4" />
         </div>
       </div>
       <Tabs defaultValue="vision" className=" w-full sm:basis-2/3 md:basis-2/4">
-        <TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1 bg-transparent [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
+        <TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1  [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
           <TabsTrigger value="vision">
             <LightbulbIcon className="hidden sm:block " />
             Vision
@@ -65,18 +70,52 @@ export default async function WhatWeStandFor() {
                 "<RocketIcon className="size-3 mr-1" /> Mission"
               </span>
             </div>
-          
+
             {Array.isArray(value) ? (
-              <ul className=" list-disc pl-6 tracking-wide antialiased">
-                {value.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
+              <div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  title={`Copy ${key} to clipboard`}
+                  onClick={() => {
+                    navigator.clipboard.writeText(
+                      key + " - " + value.slice().join(", ")
+                    );
+                    toast.success(key + " Copied!");
+                  }}
+                  className="float-end ms-4"
+                >
+                  <span className="sr-only">Copy {key} to clipboard</span>
+                  <CopyIcon />
+                </Button>
+                <ul className=" list-disc pl-6 tracking-wide antialiased">
+                  {value.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             ) : (
-              <p className=" first-letter:capitalize">
-                <span className="italic font-medium">{key}</span>{" "}
-                <span className="text-start font-medium">| {webName} –</span> {value}
-              </p>
+              <div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  title={`Copy ${key} to clipboard`}
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(key + " - " + value);
+
+                    toast.success(key + " Copied!");
+                  }}
+                  className="float-end ms-4"
+                >
+                  <span className="sr-only">Copy {key} to clipboard</span>
+                  <CopyIcon />
+                </Button>
+                <p className=" first-letter:capitalize">
+                  <span className="italic font-medium">{key}</span>{" "}
+                  <span className="text-start font-medium">| {webName} –</span>{" "}
+                  {value}
+                </p>
+              </div>
             )}
           </TabsContent>
         ))}

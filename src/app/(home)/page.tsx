@@ -9,7 +9,7 @@ export default function Home() {
     /*pt-[85px]*/
   }
   return (
-    <div className=" size-full space-y-12">
+    <div className="flex flex-col size-full space-y-12">
 
       {/* Hero section  */}
       <HeroSection />

@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { emailSchema, EmailSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { useState,  } from "react";
 import { useForm } from "react-hook-form";
 import {
   checkIsEmailVerified,
@@ -64,7 +64,7 @@ export default function EmailVerificationForm({ email }: { email: string }) {
           <CardTitle>A verification link has been sent.</CardTitle>
           <CardDescription>
             Please check your email for the link. If you did not receive it,
-            please tap on the resend verification link button bellow
+            please tap on the resend verification link button below
           </CardDescription>
         </CardHeader>
         <CardContent>

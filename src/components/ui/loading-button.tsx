@@ -15,11 +15,12 @@ export default function LoadingButton({
   return (
     <Button
       disabled={loading || disabled}
-      className={cn("flex items-center gap-2", className)}
+      className={cn("flex items-center gap-2 ",
+         className)}
       {...props}
     >
       {loading && <Loader2 className="size-5 animate-spin" />}
-      {props.children}
+      <span className={cn("inline-flex",loading&&'[&_svg]:hidden',)}>{props.children}</span>
     </Button>
   );
 }

@@ -14,10 +14,10 @@ export default async function Layout({
     <SessionProvider value={{ session, user }}>
       <div className=" h-full overflow-hidden w-full">
         <header className="fixed top-0 z-50 w-full bg-card/10 backdrop-blur-sm py-1 md:py-3">
-          <TopAppBar className="w-full max-w-7xl mx-auto  px-4 " />
+          <TopAppBar className="w-full max-w-7xl mx-auto  px-3 " />
         </header>
         <main className=" size-full  overflow-y-auto scroll-auto flex flex-col gap-8 ">
-          <div className="px-4 max-w-[70rem]  mx-auto w-full  min-h-[75vh] ">
+          <div className=" max-w-[70rem]  mx-auto w-full  min-h-[75vh] ">
             {children}
           </div>
           <footer className="">

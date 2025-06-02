@@ -30,7 +30,7 @@ export default function TopAppBar({ className }: { className?: string }) {
         {/* For small screens : section */}
         <div className="flex items-center gap-2">
           <SmallScreen />
-          <h2 className=" md:hidden">{webName}</h2>
+          <h2 className=" md:hidden uppercase">{webName}</h2>
         </div>
 
         {/* Logo area  */}
@@ -151,7 +151,7 @@ function SmallScreen() {
         <MenuIcon />
       </SheetTrigger>
       <SheetContent side="left">
-        <SheetTitle>{webName}</SheetTitle>
+        <SheetTitle className="uppercase">{webName}</SheetTitle>
 
         <div className="flex flex-col">
           {navLinks.map((nav, index, array) => {

@@ -40,6 +40,14 @@ model User {
   @@map("users")
 }
 
+model Entity {
+  id                    String @id @default(uuid())
+  webName               String
+  about                 String
+  historyAndCulture     String
+  geographicalLandmarks String
+}
+
 model DepartMent {
   id                  String               @id @default(uuid())
   name                String
@@ -66,6 +74,7 @@ model DepartMentalSector {
 model Employee {
   id                   String              @id @default(uuid())
   user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ippsNumber           String              @default(uuid())
   assumedOffice        Int
   endedOffice          Int?
   position             String

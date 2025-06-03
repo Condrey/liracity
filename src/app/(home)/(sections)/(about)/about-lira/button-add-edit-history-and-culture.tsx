@@ -23,20 +23,20 @@ import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUpsertAboutMutation } from "./mutation";
+import { useUpsertHistoryAndCultureMutation } from "./mutation";
 import { useSession } from "@/app/session-provider";
 import { myPrivileges } from "@/lib/enums";
 import { Role } from "@/generated/prisma";
 
-interface ButtonAddEditAboutProps extends ButtonProps {
-  about?: string;
+interface ButtonAddEditHistoryAndCultureProps extends ButtonProps {
+  historyAndCulture?: string;
 }
 
-export default function ButtonAddEditAbout({
-  about,
+export default function ButtonAddEditHistoryAndCulture({
+  historyAndCulture,
   className,
   ...props
-}: ButtonAddEditAboutProps) {
+}: ButtonAddEditHistoryAndCultureProps) {
   const [open, setOpen] = useState(false);
   const {user} = useSession()
   const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
@@ -45,30 +45,30 @@ export default function ButtonAddEditAbout({
     <>
     {isAuthorized&&  <Button
         onClick={() => setOpen(true)}
-        title={about ? "Update about information" : "Create about information"}
+        title={historyAndCulture ? "Update historyAndCulture information" : "Create historyAndCulture information"}
         className={cn("", className)}
         {...props}
       />}
-      <FormAddEditAbout open={open} setOpen={setOpen} about={about} />
+      <FormAddEditHistoryAndCulture open={open} setOpen={setOpen} historyAndCulture={historyAndCulture} />
     </>
   );
 }
 
-interface FormAddEditAboutProps {
+interface FormAddEditHistoryAndCultureProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  about?: string;
+  historyAndCulture?: string;
 }
-export function FormAddEditAbout({
+export function FormAddEditHistoryAndCulture({
   open,
   setOpen,
-  about,
-}: FormAddEditAboutProps) {
-  const { isPending, mutate } = useUpsertAboutMutation();
+  historyAndCulture,
+}: FormAddEditHistoryAndCultureProps) {
+  const { isPending, mutate } = useUpsertHistoryAndCultureMutation();
   const form = useForm<SingleContentSchema>({
     resolver: zodResolver(singleContentSchema),
     values: {
-      singleContent: about || "",
+      singleContent: historyAndCulture || "",
     },
   });
   function handleSubmit(input: SingleContentSchema) {
@@ -82,7 +82,7 @@ export function FormAddEditAbout({
     <Sheet open={open} onOpenChange={setOpen} modal>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle>{about ? "Edit" : "Add"} about information</SheetTitle>
+          <SheetTitle>{historyAndCulture ? "Edit" : "Add"} history and culture</SheetTitle>
         </SheetHeader>
         <Form {...form}>
           <form
@@ -94,7 +94,7 @@ export function FormAddEditAbout({
               name="singleContent"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel required>About information</FormLabel>
+                  <FormLabel required>History and culture</FormLabel>
                   <FormControl>
                     <TipTapEditorWithHeader
                       includeHeader
@@ -109,7 +109,7 @@ export function FormAddEditAbout({
             />
             <FormFooter>
               <LoadingButton loading={isPending}>
-                {about ? "Update" : "Create"}
+                {historyAndCulture ? "Update" : "Create"}
               </LoadingButton>
             </FormFooter>
           </form>

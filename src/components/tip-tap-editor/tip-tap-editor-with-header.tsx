@@ -6,25 +6,27 @@ import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Typography from "@tiptap/extension-typography";
 
+import { cn } from "@/lib/utils";
+import Code from "@tiptap/extension-code";
+import { Color } from "@tiptap/extension-color";
+import Document from "@tiptap/extension-document";
+import Dropcursor from "@tiptap/extension-dropcursor";
+import Image from "@tiptap/extension-image";
+import ListItem from "@tiptap/extension-list-item";
+import Paragraph from "@tiptap/extension-paragraph";
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
+import Text from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
+import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import "./styles.css";
-
-import { cn } from "@/lib/utils";
-import Code from "@tiptap/extension-code";
-import Document from "@tiptap/extension-document";
-import Dropcursor from "@tiptap/extension-dropcursor";
-import Image from "@tiptap/extension-image";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
 import { ColorHighlighter } from "./custom-extensions/color-highlighter";
 import { SmilieReplacer } from "./custom-extensions/smiley-replacer";
 import TipTapEditorHeader from "./headers/header";
+import "./styles.css";
 
 interface TipTapEditorWithHeaderProps {
   className?: string;
@@ -41,10 +43,41 @@ export default function TipTapEditorWithHeader({
   onTextChanged,
   includeHeader = true,
 }: TipTapEditorWithHeaderProps) {
+  const CustomTableCell = TableCell.extend({
+    addAttributes() {
+      return {
+        // extend the existing attributes …
+        ...this.parent?.(),
+
+        // and add a new one …
+        backgroundColor: {
+          default: null,
+          parseHTML: (element) => element.getAttribute("data-background-color"),
+          renderHTML: (attributes) => {
+            return {
+              "data-background-color": attributes.backgroundColor,
+              style: `background-color: ${attributes.backgroundColor}`,
+            };
+          },
+        },
+      };
+    },
+  });
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit,
+      Color.configure({ types: [TextStyle.name, ListItem.name] }),
+      TextStyle,
+      StarterKit.configure({
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: false,
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: false,
+        },
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -54,8 +87,10 @@ export default function TipTapEditorWithHeader({
       }),
       Superscript,
       Subscript,
-      Table,
-      TableCell,
+      Table.configure({
+        resizable: true,
+      }),
+      CustomTableCell,
       TableHeader,
       TableRow,
       Typography,
@@ -67,6 +102,8 @@ export default function TipTapEditorWithHeader({
       SmilieReplacer,
       Dropcursor,
       Image,
+      ListItem,
+      TextStyle,
     ],
     content: initialContent,
     onUpdate: ({ editor }) => {
@@ -83,7 +120,7 @@ export default function TipTapEditorWithHeader({
       {includeHeader && <TipTapEditorHeader editor={editor} />}
       <EditorContent
         editor={editor}
-        className="min-h-[100px] px-3 *:w-full *:h-full"
+        className="min-h-[100px] px-3 *:w-full *:h-full list-disc"
       />
     </div>
   );

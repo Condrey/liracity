@@ -13,15 +13,21 @@ import {
   AlignLeftIcon,
   AlignRightIcon,
   BoldIcon,
+  Code2Icon,
   Heading1Icon,
   Heading2Icon,
   Heading3Icon,
   HeadingIcon,
   HighlighterIcon,
   ItalicIcon,
+  ListIcon,
+  ListOrderedIcon,
   LucideSubscript,
   LucideSuperscript,
   PilcrowIcon,
+  Quote,
+  QuoteIcon,
+  SeparatorHorizontalIcon,
   TableIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -212,6 +218,79 @@ export default function TipTapEditorHeader({
         </ToggleGroupItem>
       </ToggleGroup>
 
+      {/* Listings  */}
+      <ToggleGroup type="multiple" className="button-group" size="sm">
+        <ToggleGroupItem
+          value="list-bullet"
+          aria-label="Toggle list bullet"
+          title="Toggle list bullet"
+          type="button"
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={
+            editor.isActive("bulletList")
+              ? "is-active bg-primary text-primary-foreground"
+              : "bg-card text-card-foreground"
+          }
+        >
+          <ListIcon className="size-4" />
+        </ToggleGroupItem>{" "}
+        <ToggleGroupItem
+          value="list-ordered"
+          aria-label="Toggle list ordered"
+          title="Toggle list ordered"
+          type="button"
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={
+            editor.isActive("orderedList")
+              ? "is-active bg-primary text-primary-foreground"
+              : "bg-card text-card-foreground"
+          }
+        >
+          <ListOrderedIcon className="size-4" />
+        </ToggleGroupItem>
+      </ToggleGroup>
+
+      {/* others  */}
+      <ToggleGroup type="multiple" className="button-group" size="sm">
+        <ToggleGroupItem
+          value="code-block"
+          aria-label="Toggle code-block"
+          title="Toggle code-block"
+          type="button"
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+          className={
+            editor.isActive("codeBlock")
+              ? "is-active bg-primary text-primary-foreground"
+              : "bg-card text-card-foreground"
+          }
+        >
+          <Code2Icon className="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="blockquote"
+          aria-label="Toggle blockquote"
+          title="Toggle blockquote"
+          type="button"
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          className={
+            editor.isActive("blockquote")
+              ? "is-active bg-primary text-primary-foreground"
+              : "bg-card text-card-foreground"
+          }
+        >
+          <QuoteIcon className="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="horizontal-rule"
+          aria-label="Toggle horizontal-rule"
+          title="Toggle horizontal-rule"
+          type="button"
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        >
+      <SeparatorHorizontalIcon className="size-4" />        </ToggleGroupItem>
+      </ToggleGroup>
+
+      {/* Alignment  */}
       <ToggleGroup type="multiple" className="button-group" size="sm">
         <ToggleGroupItem
           value="left-align"

@@ -11,7 +11,7 @@ export default function GoogleSignInButton() {
     <LoadingButton
     loading={isPending}
       variant="outline"
-      size={'sm'}
+      size={'lg'}
       className="bg-white text-black hover:bg-gray-100 hover:text-black *:inline"
       onClick={()=>startTransition(()=>{})}
     >

@@ -31,13 +31,13 @@ export default function UserTypes() {
               Choose the kind of user type below, either staff or civilian
             </p>
       <TabsContent value="civilian" >
-        <h1 className="text-muted-foreground text-xl w-full text-center py-4">
+        <h1 className="text-muted-foreground text-xl w-full text-center py-4 hidden sm:block">
           Civilian Login
         </h1>
         <UserLogin />
       </TabsContent>
       <TabsContent value="staff">
-        <h1 className="text-muted-foreground text-xl w-full text-center py-4">
+        <h1 className="text-muted-foreground text-xl w-full text-center py-4 hidden sm:block">
           Staff Member Login
         </h1>
         <StaffLogin />

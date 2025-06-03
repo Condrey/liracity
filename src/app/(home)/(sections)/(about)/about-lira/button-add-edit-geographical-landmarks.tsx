@@ -23,20 +23,20 @@ import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useUpsertAboutMutation } from "./mutation";
+import { useUpsertGeographicalLandmarksMutation } from "./mutation";
 import { useSession } from "@/app/session-provider";
 import { myPrivileges } from "@/lib/enums";
 import { Role } from "@/generated/prisma";
 
-interface ButtonAddEditAboutProps extends ButtonProps {
-  about?: string;
+interface ButtonAddEditGeographicalLandmarksProps extends ButtonProps {
+  geographicalLandmarks?: string;
 }
 
-export default function ButtonAddEditAbout({
-  about,
+export default function ButtonAddEditGeographicalLandmarks({
+  geographicalLandmarks,
   className,
   ...props
-}: ButtonAddEditAboutProps) {
+}: ButtonAddEditGeographicalLandmarksProps) {
   const [open, setOpen] = useState(false);
   const {user} = useSession()
   const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
@@ -45,30 +45,30 @@ export default function ButtonAddEditAbout({
     <>
     {isAuthorized&&  <Button
         onClick={() => setOpen(true)}
-        title={about ? "Update about information" : "Create about information"}
+        title={geographicalLandmarks ? "Update geography and landmarks information" : "Create geography and landmarks information"}
         className={cn("", className)}
         {...props}
       />}
-      <FormAddEditAbout open={open} setOpen={setOpen} about={about} />
+      <FormAddEditGeographicalLandmarks open={open} setOpen={setOpen} geographicalLandmarks={geographicalLandmarks} />
     </>
   );
 }
 
-interface FormAddEditAboutProps {
+interface FormAddEditGeographicalLandmarksProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  about?: string;
+  geographicalLandmarks?: string;
 }
-export function FormAddEditAbout({
+export function FormAddEditGeographicalLandmarks({
   open,
   setOpen,
-  about,
-}: FormAddEditAboutProps) {
-  const { isPending, mutate } = useUpsertAboutMutation();
+  geographicalLandmarks,
+}: FormAddEditGeographicalLandmarksProps) {
+  const { isPending, mutate } = useUpsertGeographicalLandmarksMutation();
   const form = useForm<SingleContentSchema>({
     resolver: zodResolver(singleContentSchema),
     values: {
-      singleContent: about || "",
+      singleContent: geographicalLandmarks || "",
     },
   });
   function handleSubmit(input: SingleContentSchema) {
@@ -82,7 +82,7 @@ export function FormAddEditAbout({
     <Sheet open={open} onOpenChange={setOpen} modal>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle>{about ? "Edit" : "Add"} about information</SheetTitle>
+          <SheetTitle>{geographicalLandmarks ? "Edit" : "Add"} geography and landmarks </SheetTitle>
         </SheetHeader>
         <Form {...form}>
           <form
@@ -94,7 +94,7 @@ export function FormAddEditAbout({
               name="singleContent"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel required>About information</FormLabel>
+                  <FormLabel required>Geography and landmarks </FormLabel>
                   <FormControl>
                     <TipTapEditorWithHeader
                       includeHeader
@@ -109,7 +109,7 @@ export function FormAddEditAbout({
             />
             <FormFooter>
               <LoadingButton loading={isPending}>
-                {about ? "Update" : "Create"}
+                {geographicalLandmarks ? "Update" : "Create"}
               </LoadingButton>
             </FormFooter>
           </form>

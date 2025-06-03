@@ -22,12 +22,19 @@
   ol {
     padding: 0 1rem;
     margin: 1.25rem 1rem 1.25rem 0.4rem;
+    list-style-type: disc;
 
     li p {
       margin-top: 0.25em;
       margin-bottom: 0.25em;
     }
   }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+
 
   /* Heading styles */
   h1,
@@ -67,9 +74,9 @@
 
   /* Code and preformatted text styles */
   code {
-    background-color: var(--purple-light);
+    background-color: var(--foreground);
     border-radius: 0.4rem;
-    color: var(--black);
+    color: var(--background);
     font-size: 0.85rem;
     padding: 0.25em 0.3em;
   }
@@ -92,23 +99,25 @@
 
   mark {
     background-color: var(--secondary);
-color: var(--secondary-foreground);
+    color: var(--secondary-foreground);
     border-radius: 0.4rem;
     box-decoration-break: clone;
     padding: 0.1rem 0.3rem;
   }
 
   blockquote {
-    border-left: 3px solid var(--gray-3);
+    border-left: 3px solid var(--warning);
+    background-color: color-mix(in oklab, var(--warning) 5%, transparent);
     margin: 1.5rem 0;
     padding-left: 1rem;
   }
 
   hr {
     border: none;
-    border-top: 1px solid var(--gray-2);
+    border-top: 1px solid var(--secondary);
     margin: 2rem 0;
   }
+
   /* Table-specific styling */
   table {
     border-collapse: collapse;
@@ -126,14 +135,47 @@ color: var(--secondary-foreground);
       position: relative;
       vertical-align: top;
 
-      > * {
+      >* {
         margin-bottom: 0;
       }
     }
 
+    tr {
+      &:nth-child(odd) {
+        background-color: color-mix(in oklab, var(--accent) 30%, transparent);
+      }
+
+      &:is(.dark *) {
+        &:nth-child(odd) {
+          background-color: color-mix(in oklab, var(--accent) 20%, transparent);
+
+        }
+      }
+
+      &:hover {
+        @media (hover: hover) {
+          background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+        }
+      }
+
+      &[data-state="selected"] {
+        background-color: var(--muted);
+      }
+
+      .transition-colors {
+        transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+        transition-timing-function: var(--tw-ease, var(--default-transition-timing-function)
+            /* cubic-bezier(0.4, 0, 0.2, 1) */
+          );
+        transition-duration: var(--tw-duration, var(--default-transition-duration)
+            /* 150ms */
+          );
+      }
+    }
+
     th {
-      background-color: var(--accent);
-      color: var(--accent-foreground);
+      background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+      color: var(--foreground);
       font-weight: bold;
       text-align: left;
     }
@@ -141,7 +183,10 @@ color: var(--secondary-foreground);
     .selectedCell:after {
       background: var(--secondary);
       content: "";
-      left: 0; right: 0; top: 0; bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
       pointer-events: none;
       position: absolute;
       z-index: 2;
@@ -187,4 +232,3 @@ color: var(--secondary-foreground);
   }
 
 }
-

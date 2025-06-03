@@ -7,10 +7,12 @@ import Superscript from "@tiptap/extension-superscript";
 import { Table } from "@tiptap/extension-table";
 import { TableCell } from "@tiptap/extension-table-cell";
 import { TableHeader } from "@tiptap/extension-table-header";
+import { Color } from '@tiptap/extension-color'
 import TableRow from "@tiptap/extension-table-row";
 import Text from "@tiptap/extension-text";
 import Typography from "@tiptap/extension-typography";
-
+import ListItem from '@tiptap/extension-list-item'
+import TextStyle from '@tiptap/extension-text-style'
 import Dropcursor from "@tiptap/extension-dropcursor";
 import Image from "@tiptap/extension-image";
 import { TextAlign } from "@tiptap/extension-text-align";
@@ -29,13 +31,23 @@ const TipTapViewer = ({
 }) => {
   const editor = useEditor({
     extensions: [
+      Color.configure({ types: [TextStyle.name, ListItem.name] }),
+  TextStyle,
+  StarterKit.configure({
+    bulletList: {
+      keepMarks: true,
+      keepAttributes: false, },
+    orderedList: {
+      keepMarks: true,
+      keepAttributes: false, },
+  }),
       Superscript,
       Subscript,
-      StarterKit,
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Table,
-      TableCell,
+ Table.configure({
+        resizable: true,
+      }),      TableCell,
       TableHeader,
       TableRow,
       Typography,
@@ -46,7 +58,7 @@ const TipTapViewer = ({
       ColorHighlighter,
       SmilieReplacer,
       Dropcursor,
-      Image,
+      Image,ListItem,TextStyle
     ],
     immediatelyRender: false,
     content: content,

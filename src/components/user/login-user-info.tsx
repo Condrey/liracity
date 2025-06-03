@@ -21,8 +21,8 @@ export default async function LoginUserInfo() {
   const { user } = await validateRequest();
   if (!user)
     return (
-      <Link href={`/login`} className={buttonVariants()}>
-        Login
+      <Link href={`/login`} className={buttonVariants({variant:'ghost'})}>
+        Login now
       </Link>
     );
 

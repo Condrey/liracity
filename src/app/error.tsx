@@ -20,11 +20,11 @@ export default function Error({ error, reset }: ErrorProps) {
             : "hidden"
         )}
       >
-        <p>{error.message}</p>
-        <pre className="mt-2 text-sm text-muted-foreground line-clamp-[15] text-ellipsis ">
+        <p className="break-all text-wrap">{error.message}</p>
+        <pre className="mt-2 text-sm text-wrap text-muted-foreground line-clamp-[15] break-all text-ellipsis ">
           {decodeURIComponent(error.stack!)}
         </pre>
-        <pre className="mt-2 text-sm text-muted-foreground">
+        <pre className="mt-2 text-wrap break-all text-sm text-muted-foreground">
           Digest: {decodeURIComponent(error.digest || "None")}
         </pre>
       </div>{" "}

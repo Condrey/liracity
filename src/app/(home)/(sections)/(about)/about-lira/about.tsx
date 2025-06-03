@@ -34,7 +34,7 @@ export default function About({ entity }: AboutProps) {
             <ButtonAddEditAbout size={'icon' } variant={'outline'} className="flex-none  mr-2" about={data?.about!}>
                 <Edit3Icon /> 
             </ButtonAddEditAbout>
-            <TipTapViewer content={data?.about} className='text-justify inline' />
+            <TipTapViewer content={data?.about} className=' inline  text-pretty hyphens-auto text-justify' />
         </div>
       )}
     </div>

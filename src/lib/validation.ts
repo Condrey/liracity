@@ -112,6 +112,10 @@ export const departmentalSectorSchema = z.object({
 });
 export type DepartmentalSectorSchema = z.infer<typeof departmentalSectorSchema>;
 
+
 // miscellaneous
 export const emailSchema = z.object({ email: z.string().trim().email() });
 export type EmailSchema = z.infer<typeof emailSchema>;
+
+export const singleContentSchema = z.object({ singleContent: requiredString });
+export type SingleContentSchema = z.infer<typeof singleContentSchema>;

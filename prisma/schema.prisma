@@ -43,9 +43,9 @@ model User {
 model Entity {
   id String @id @default(uuid())
   webName String
-  about String
-  historyAndCulture String
-  geographicalLandmarks String
+  about String?
+  historyAndCulture String?
+  geographicalLandmarks String?
 }
 
 

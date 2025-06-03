@@ -3596,9 +3596,9 @@ export namespace Prisma {
   export type EntityGroupByOutputType = {
     id: string
     webName: string
-    about: string
-    historyAndCulture: string
-    geographicalLandmarks: string
+    about: string | null
+    historyAndCulture: string | null
+    geographicalLandmarks: string | null
     _count: EntityCountAggregateOutputType | null
     _min: EntityMinAggregateOutputType | null
     _max: EntityMaxAggregateOutputType | null
@@ -3658,9 +3658,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       webName: string
-      about: string
-      historyAndCulture: string
-      geographicalLandmarks: string
+      about: string | null
+      historyAndCulture: string | null
+      geographicalLandmarks: string | null
     }, ExtArgs["result"]["entity"]>
     composites: {}
   }
@@ -15783,17 +15783,17 @@ export namespace Prisma {
     NOT?: EntityWhereInput | EntityWhereInput[]
     id?: StringFilter<"Entity"> | string
     webName?: StringFilter<"Entity"> | string
-    about?: StringFilter<"Entity"> | string
-    historyAndCulture?: StringFilter<"Entity"> | string
-    geographicalLandmarks?: StringFilter<"Entity"> | string
+    about?: StringNullableFilter<"Entity"> | string | null
+    historyAndCulture?: StringNullableFilter<"Entity"> | string | null
+    geographicalLandmarks?: StringNullableFilter<"Entity"> | string | null
   }
 
   export type EntityOrderByWithRelationInput = {
     id?: SortOrder
     webName?: SortOrder
-    about?: SortOrder
-    historyAndCulture?: SortOrder
-    geographicalLandmarks?: SortOrder
+    about?: SortOrderInput | SortOrder
+    historyAndCulture?: SortOrderInput | SortOrder
+    geographicalLandmarks?: SortOrderInput | SortOrder
   }
 
   export type EntityWhereUniqueInput = Prisma.AtLeast<{
@@ -15802,17 +15802,17 @@ export namespace Prisma {
     OR?: EntityWhereInput[]
     NOT?: EntityWhereInput | EntityWhereInput[]
     webName?: StringFilter<"Entity"> | string
-    about?: StringFilter<"Entity"> | string
-    historyAndCulture?: StringFilter<"Entity"> | string
-    geographicalLandmarks?: StringFilter<"Entity"> | string
+    about?: StringNullableFilter<"Entity"> | string | null
+    historyAndCulture?: StringNullableFilter<"Entity"> | string | null
+    geographicalLandmarks?: StringNullableFilter<"Entity"> | string | null
   }, "id">
 
   export type EntityOrderByWithAggregationInput = {
     id?: SortOrder
     webName?: SortOrder
-    about?: SortOrder
-    historyAndCulture?: SortOrder
-    geographicalLandmarks?: SortOrder
+    about?: SortOrderInput | SortOrder
+    historyAndCulture?: SortOrderInput | SortOrder
+    geographicalLandmarks?: SortOrderInput | SortOrder
     _count?: EntityCountOrderByAggregateInput
     _max?: EntityMaxOrderByAggregateInput
     _min?: EntityMinOrderByAggregateInput
@@ -15824,9 +15824,9 @@ export namespace Prisma {
     NOT?: EntityScalarWhereWithAggregatesInput | EntityScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Entity"> | string
     webName?: StringWithAggregatesFilter<"Entity"> | string
-    about?: StringWithAggregatesFilter<"Entity"> | string
-    historyAndCulture?: StringWithAggregatesFilter<"Entity"> | string
-    geographicalLandmarks?: StringWithAggregatesFilter<"Entity"> | string
+    about?: StringNullableWithAggregatesFilter<"Entity"> | string | null
+    historyAndCulture?: StringNullableWithAggregatesFilter<"Entity"> | string | null
+    geographicalLandmarks?: StringNullableWithAggregatesFilter<"Entity"> | string | null
   }
 
   export type DepartMentWhereInput = {
@@ -16581,57 +16581,57 @@ export namespace Prisma {
   export type EntityCreateInput = {
     id?: string
     webName: string
-    about: string
-    historyAndCulture: string
-    geographicalLandmarks: string
+    about?: string | null
+    historyAndCulture?: string | null
+    geographicalLandmarks?: string | null
   }
 
   export type EntityUncheckedCreateInput = {
     id?: string
     webName: string
-    about: string
-    historyAndCulture: string
-    geographicalLandmarks: string
+    about?: string | null
+    historyAndCulture?: string | null
+    geographicalLandmarks?: string | null
   }
 
   export type EntityUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     webName?: StringFieldUpdateOperationsInput | string
-    about?: StringFieldUpdateOperationsInput | string
-    historyAndCulture?: StringFieldUpdateOperationsInput | string
-    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    historyAndCulture?: NullableStringFieldUpdateOperationsInput | string | null
+    geographicalLandmarks?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EntityUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     webName?: StringFieldUpdateOperationsInput | string
-    about?: StringFieldUpdateOperationsInput | string
-    historyAndCulture?: StringFieldUpdateOperationsInput | string
-    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    historyAndCulture?: NullableStringFieldUpdateOperationsInput | string | null
+    geographicalLandmarks?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EntityCreateManyInput = {
     id?: string
     webName: string
-    about: string
-    historyAndCulture: string
-    geographicalLandmarks: string
+    about?: string | null
+    historyAndCulture?: string | null
+    geographicalLandmarks?: string | null
   }
 
   export type EntityUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     webName?: StringFieldUpdateOperationsInput | string
-    about?: StringFieldUpdateOperationsInput | string
-    historyAndCulture?: StringFieldUpdateOperationsInput | string
-    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    historyAndCulture?: NullableStringFieldUpdateOperationsInput | string | null
+    geographicalLandmarks?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EntityUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     webName?: StringFieldUpdateOperationsInput | string
-    about?: StringFieldUpdateOperationsInput | string
-    historyAndCulture?: StringFieldUpdateOperationsInput | string
-    geographicalLandmarks?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    historyAndCulture?: NullableStringFieldUpdateOperationsInput | string | null
+    geographicalLandmarks?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DepartMentCreateInput = {

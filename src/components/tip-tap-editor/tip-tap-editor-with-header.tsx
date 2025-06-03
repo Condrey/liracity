@@ -4,6 +4,8 @@ import Highlight from "@tiptap/extension-highlight";
 import Placeholder from "@tiptap/extension-placeholder";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
+import Typography from "@tiptap/extension-typography";
+
 import Table from "@tiptap/extension-table";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
@@ -14,6 +16,14 @@ import StarterKit from "@tiptap/starter-kit";
 import "./styles.css";
 
 import { cn } from "@/lib/utils";
+import Code from "@tiptap/extension-code";
+import Document from "@tiptap/extension-document";
+import Dropcursor from "@tiptap/extension-dropcursor";
+import Image from "@tiptap/extension-image";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
+import { ColorHighlighter } from "./custom-extensions/color-highlighter";
+import { SmilieReplacer } from "./custom-extensions/smiley-replacer";
 import TipTapEditorHeader from "./headers/header";
 
 interface TipTapEditorWithHeaderProps {
@@ -48,6 +58,15 @@ export default function TipTapEditorWithHeader({
       TableCell,
       TableHeader,
       TableRow,
+      Typography,
+      Code,
+      Document,
+      Paragraph,
+      Text,
+      ColorHighlighter,
+      SmilieReplacer,
+      Dropcursor,
+      Image,
     ],
     content: initialContent,
     onUpdate: ({ editor }) => {

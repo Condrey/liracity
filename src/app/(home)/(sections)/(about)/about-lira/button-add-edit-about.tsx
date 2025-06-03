@@ -109,20 +109,7 @@ export function FormAddEditAbout({
             </FormFooter>
           </form>
         </Form>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
-        <p className="block">james</p>
+       
       </SheetContent>
     </Sheet>
   );

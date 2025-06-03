@@ -25,6 +25,7 @@ import {
   TableIcon,
 } from "lucide-react";
 import { useState } from "react";
+import ImageOptions from "./image-options";
 import TableOptions from "./table-options";
 
 interface TipTapEditorHeaderProps {
@@ -273,6 +274,7 @@ export default function TipTapEditorHeader({
         </ToggleGroupItem>
       </ToggleGroup>
 
+      <ImageOptions editor={editor} />
       {/* About the table  */}
       <Button
         title={`${showTableOptions ? "Hide" : "Show"} table options`}

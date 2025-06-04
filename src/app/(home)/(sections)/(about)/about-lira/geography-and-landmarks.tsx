@@ -8,6 +8,8 @@ import { Entity } from "@/generated/prisma";
 import { Edit3Icon } from "lucide-react";
 import ButtonAddEditGeographicalLandmarks from "./button-add-edit-geographical-landmarks";
 import { useEntityQuery } from "./query";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface GeographyAndLandmarksProps {
   entity: Entity;
@@ -21,6 +23,7 @@ export default function GeographyAndLandmarks({
   return (
     <div id="geography" >
       <PageTitle heading="Geography and landmarks" />
+     
       {status === "error" ? (
         <ErrorContainer
           query={query}
@@ -33,19 +36,22 @@ export default function GeographyAndLandmarks({
           </ButtonAddEditGeographicalLandmarks>
         </EmptyContainer>
       ) : (
-        <div className="flex">
-          <ButtonAddEditGeographicalLandmarks
+        <div >
+           <ButtonAddEditGeographicalLandmarks
             size={"icon"}
             variant={"outline"}
-            className="flex-none  mr-2  "
+            className="flex-none m-2"
             geographicalLandmarks={data?.geographicalLandmarks!}
           >
             <Edit3Icon />
           </ButtonAddEditGeographicalLandmarks>
           <TipTapViewer
             content={data?.geographicalLandmarks}
-            className=" inline  text-pretty hyphens-auto text-justify  "
+            className="text-pretty hyphens-auto text-justify z-0"
           />
+           
+         
+        
         </div>
       )}
     </div>

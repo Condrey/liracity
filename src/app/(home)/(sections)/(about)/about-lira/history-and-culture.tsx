@@ -31,11 +31,11 @@ export default function HistoryAndCulture({ entity }: HistoryAndCultureProps) {
           </ButtonAddEditHistoryAndCulture>
         </EmptyContainer>
       ) : (
-        <div className="flex">
+        <div className="">
           <ButtonAddEditHistoryAndCulture
             size={"icon"}
             variant={"outline"}
-            className="flex-none  mr-2"
+            className="flex-none  m-2"
             historyAndCulture={data?.historyAndCulture!}
             
           >

@@ -87,7 +87,7 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
       const numberOfDepartmentalSectors = departmentalSectors.length;
 
       return (
-        <div className="hidden sm:block">
+        <div className="hidden sm:flex flex-col">
           {numberOfDepartmentalSectors === 0 ? (
             <Badge variant={"outline"}>Not added yet</Badge>
           ) : numberOfDepartmentalSectors === 1 ? (

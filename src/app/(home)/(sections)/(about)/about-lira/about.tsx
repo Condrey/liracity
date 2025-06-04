@@ -17,7 +17,7 @@ export default function About({ entity }: AboutProps) {
 
   const { data, status } = query;
   return (
-    <div>
+    <div id='about'>
       {status === "error" ? (
         <ErrorContainer
           query={query}

@@ -50,7 +50,7 @@ const isAuthorized = !!user&& myPrivileges[user.role].includes(Role.MODERATOR)
         <div className="space-y-4">
           <DataTable
             data={data}
-            columns={useDepartmentsColumns()}
+            columns={useDepartmentsColumns}
             filterColumn={{ id: "name", label: "department" }}
             className='w-full'
           >

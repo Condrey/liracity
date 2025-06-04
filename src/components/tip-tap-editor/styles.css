@@ -46,16 +46,23 @@
     line-height: 1.1;
     margin-top: 2.5rem;
     text-wrap: pretty;
+     margin-bottom: calc(var(--spacing) * 0.5)
   }
 
-  h1,
-  h2 {
-    margin-top: 3.5rem;
-    margin-bottom: 1.5rem;
-  }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: var(--text-2xl)
+      /* 1.5rem = 24px */
+    ;
+    line-height: var(--tw-leading, var(--text-2xl--line-height)
+        /* calc(2 / 1.5) ≈ 1.3333 */
+      );
+ --tw-tracking: var(--tracking-tighter)
+        /* -0.05em */
+      ;
+      letter-spacing: var(--tracking-tighter)
+        /* -0.05em */
+      ;
   }
 
   h2 {
@@ -110,6 +117,10 @@
     background-color: color-mix(in oklab, var(--warning) 5%, transparent);
     margin: 1.5rem 0;
     padding-left: 1rem;
+     &::first-letter {
+        font-size: var(--text-2xl) /* 1.5rem = 24px */;
+        line-height: var(--tw-leading, var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */);
+    }
   }
 
   hr {

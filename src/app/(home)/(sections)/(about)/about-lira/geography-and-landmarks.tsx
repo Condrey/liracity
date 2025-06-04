@@ -19,7 +19,7 @@ export default function GeographyAndLandmarks({
   const { data, status } = query;
 
   return (
-    <div id="geography" className="min-h-[70vh] ">
+    <div id="geography" >
       <PageTitle heading="Geography and landmarks" />
       {status === "error" ? (
         <ErrorContainer

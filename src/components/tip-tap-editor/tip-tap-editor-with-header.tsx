@@ -43,26 +43,6 @@ export default function TipTapEditorWithHeader({
   onTextChanged,
   includeHeader = true,
 }: TipTapEditorWithHeaderProps) {
-  const CustomTableCell = TableCell.extend({
-    addAttributes() {
-      return {
-        // extend the existing attributes …
-        ...this.parent?.(),
-
-        // and add a new one …
-        backgroundColor: {
-          default: null,
-          parseHTML: (element) => element.getAttribute("data-background-color"),
-          renderHTML: (attributes) => {
-            return {
-              "data-background-color": attributes.backgroundColor,
-              style: `background-color: ${attributes.backgroundColor}`,
-            };
-          },
-        },
-      };
-    },
-  });
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -90,7 +70,7 @@ export default function TipTapEditorWithHeader({
       Table.configure({
         resizable: true,
       }),
-      CustomTableCell,
+      TableCell,
       TableHeader,
       TableRow,
       Typography,

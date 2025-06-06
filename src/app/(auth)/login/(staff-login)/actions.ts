@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 export async function loginAction(
   credentials: StaffLoginValues,
 ): Promise<{ error: string }> {
-
   const cookieStore = await cookies();
   console.log(credentials);
   const { ippsNumber, password } = staffLoginSchema.parse(credentials);
@@ -21,9 +20,9 @@ export async function loginAction(
         equals: ippsNumber.toString(),
         mode: "insensitive",
       },
-    },include:{user:true}
+    },
+    include: { user: true },
   });
- 
 
   if (!existingUser || !existingUser.user.passwordHash) {
     return {
@@ -53,7 +52,8 @@ export async function loginAction(
     sessionCookie.attributes,
   );
   return redirect(
-    existingUser.user.isVerified ? "/" : `/user-verification/${existingUser.id}`,
+    existingUser.user.isVerified
+      ? "/"
+      : `/user-verification/${existingUser.id}`,
   );
-
 }

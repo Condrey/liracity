@@ -38,17 +38,22 @@ export default function ButtonAddEditAbout({
   ...props
 }: ButtonAddEditAboutProps) {
   const [open, setOpen] = useState(false);
-  const {user} = useSession()
-  const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
+  const { user } = useSession();
+  const isAuthorized =
+    !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 
   return (
     <>
-    {isAuthorized&&  <Button
-        onClick={() => setOpen(true)}
-        title={about ? "Update about information" : "Create about information"}
-        className={cn("", className)}
-        {...props}
-      />}
+      {isAuthorized && (
+        <Button
+          onClick={() => setOpen(true)}
+          title={
+            about ? "Update about information" : "Create about information"
+          }
+          className={cn("", className)}
+          {...props}
+        />
+      )}
       <FormAddEditAbout open={open} setOpen={setOpen} about={about} />
     </>
   );
@@ -114,7 +119,6 @@ export function FormAddEditAbout({
             </FormFooter>
           </form>
         </Form>
-       
       </SheetContent>
     </Sheet>
   );

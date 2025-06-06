@@ -53,16 +53,19 @@ export function DeleteDepartmentalSectorDialog({
   open,
   setOpen,
 }: DeleteDepartmentalSectorDialogProps) {
-  const {mutate,isPending} = useDeleteDepartmentalSectorMutation()
-  function handleDelete(){
-mutate(departmentalSector.id,{onSuccess:()=>setOpen(false)})
+  const { mutate, isPending } = useDeleteDepartmentalSectorMutation();
+  function handleDelete() {
+    mutate(departmentalSector.id, { onSuccess: () => setOpen(false) });
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-destructive ">
-            <AlertTriangleIcon className="inline mr-2 size-10 fill-destructive text-destructive-foreground  " strokeWidth={0.8} />
+            <AlertTriangleIcon
+              className="inline mr-2 size-10 fill-destructive text-destructive-foreground  "
+              strokeWidth={0.8}
+            />
             <span className="uppercase">
               Delete {departmentalSector.name} sector
             </span>
@@ -72,14 +75,20 @@ mutate(departmentalSector.id,{onSuccess:()=>setOpen(false)})
           </DialogDescription>
         </DialogHeader>
         <p>
-          This will delete <strong>{departmentalSector.name}</strong> sector from the <strong>{departmentalSector.departMent?.name}</strong> department and all
-          its <strong>officers</strong> from the database. Continue with caution.
+          This will delete <strong>{departmentalSector.name}</strong> sector
+          from the <strong>{departmentalSector.departMent?.name}</strong>{" "}
+          department and all its <strong>officers</strong> from the database.
+          Continue with caution.
         </p>
         <DialogFooter>
           <Button variant={"outline"} onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <LoadingButton loading={isPending} variant={"destructive"} onClick={handleDelete}>
+          <LoadingButton
+            loading={isPending}
+            variant={"destructive"}
+            onClick={handleDelete}
+          >
             Continue
           </LoadingButton>
         </DialogFooter>

@@ -37,7 +37,6 @@ export default function HistoryAndCulture({ entity }: HistoryAndCultureProps) {
             variant={"outline"}
             className="flex-none  m-2"
             historyAndCulture={data?.historyAndCulture!}
-            
           >
             <Edit3Icon />
           </ButtonAddEditHistoryAndCulture>

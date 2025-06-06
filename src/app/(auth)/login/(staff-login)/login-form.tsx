@@ -31,11 +31,13 @@ export default function LoginForm() {
   });
 
   async function onSubmit(values: StaffLoginValues) {
-
     startTransition(async () => {
       const { error } = await loginAction(values!);
       if (error) {
-        toast.error('LOGIN ERROR',{position:'top-center',description:error});
+        toast.error("LOGIN ERROR", {
+          position: "top-center",
+          description: error,
+        });
       }
     });
   }
@@ -45,7 +47,6 @@ export default function LoginForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="last:pt-6 space-y-4"
       >
-
         <FormField
           control={form.control}
           name="ippsNumber"

@@ -83,20 +83,21 @@ export default function LoginForm() {
             </FormItem>
           )}
         />
-        <LoadingButton
-          loading={isPending}
-          type="submit"
-          className="w-full"
-        >
+        <LoadingButton loading={isPending} type="submit" className="w-full">
           Log in
         </LoadingButton>
         <Link
           href={`/forgot-password/${form.watch("username")}?user=civilian`}
           className="block text-center underline group/link hover:text-primary"
-          onClick={()=>startLinkTransition(()=>{})}
+          onClick={() => startLinkTransition(() => {})}
         >
           <span>Forgot your password?</span>
-          <MoveRightIcon className={cn("inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",isLinkPending&&' visible animate-caret-blink')} />
+          <MoveRightIcon
+            className={cn(
+              "inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",
+              isLinkPending && " visible animate-caret-blink",
+            )}
+          />
         </Link>
       </form>
     </Form>

@@ -27,18 +27,18 @@ export interface LeaderContainer {
 
 // Departmental sectors
 export const departmentalSectorDataInclude = {
-employees:true,
-departMent:true,
-_count:{select:{employees:true,}}
+  employees: true,
+  departMent: true,
+  _count: { select: { employees: true } },
 } satisfies Prisma.DepartMentalSectorInclude;
 export type DepartmentalSectorData = Prisma.DepartMentalSectorGetPayload<{
-    include: typeof departmentalSectorDataInclude;
-  }>;
+  include: typeof departmentalSectorDataInclude;
+}>;
 
 // Department
 export const departmentDataInclude = {
-  departmentalSectors: {include:departmentalSectorDataInclude},
-  headOfDepartment: {include:{user:true}},
+  departmentalSectors: { include: departmentalSectorDataInclude },
+  headOfDepartment: { include: { user: true } },
   _count: { select: { departmentalSectors: true } },
 } satisfies Prisma.DepartMentInclude;
 export type DepartmentData = Prisma.DepartMentGetPayload<{

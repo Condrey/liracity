@@ -79,7 +79,7 @@ export default function WhatWeStandFor() {
                   title={`Copy ${key} to clipboard`}
                   onClick={() => {
                     navigator.clipboard.writeText(
-                      key + " - " + value.slice().join(", ")
+                      key + " - " + value.slice().join(", "),
                     );
                     toast.success(key + " Copied!");
                   }}

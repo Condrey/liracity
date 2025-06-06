@@ -36,7 +36,7 @@ interface DataTableProps<TData, TValue> {
   filterColumn?: { id: string; label?: string };
   children?: React.ReactNode;
   tableHeaderSection?: React.ReactNode;
-  className?:string;
+  className?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -48,7 +48,7 @@ export function DataTable<TData, TValue>({
   filterColumn,
   children,
   tableHeaderSection,
-  className
+  className,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -71,7 +71,12 @@ export function DataTable<TData, TValue>({
     state: { sorting, columnFilters, columnVisibility },
   });
   return (
-    <div className={cn("w-fit max-w-full rounded-md bg-card p-4 shadow-md",className)}>
+    <div
+      className={cn(
+        "w-fit max-w-full rounded-md bg-card p-4 shadow-md",
+        className,
+      )}
+    >
       <div className="w-full">{tableHeaderSection}</div>
       {/* filtering , column visibility and children */}
       <div className="flex items-center gap-2 justify-between py-4">

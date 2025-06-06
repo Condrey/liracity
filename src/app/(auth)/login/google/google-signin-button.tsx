@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
@@ -6,20 +6,18 @@ import Link from "next/link";
 import { useTransition } from "react";
 
 export default function GoogleSignInButton() {
-  const [isPending,startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
   return (
     <LoadingButton
-    loading={isPending}
+      loading={isPending}
       variant="outline"
-      size={'lg'}
+      size={"lg"}
       className="bg-white text-black hover:bg-gray-100 hover:text-black *:inline"
-      onClick={()=>startTransition(()=>{})}
+      onClick={() => startTransition(() => {})}
     >
-      
-        <Link href="/login/google" className="flex items-center gap-2"  >
-          <GoogleIcon  /> Continue with Google
-        </Link>
-    
+      <Link href="/login/google" className="flex items-center gap-2">
+        <GoogleIcon /> Continue with Google
+      </Link>
     </LoadingButton>
   );
 }

@@ -21,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { emailSchema, EmailSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState,  } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   checkIsEmailVerified,
@@ -54,7 +54,7 @@ export default function EmailVerificationForm({ email }: { email: string }) {
     if (error) {
       setError(error);
     }
-    toast.success( "Verification link sent successfully." );
+    toast.success("Verification link sent successfully.");
   }
 
   return (

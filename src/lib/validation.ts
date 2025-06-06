@@ -25,7 +25,7 @@ export type SignUpValues = z.infer<typeof signUpSchema>;
 export const loginSchema = z.object({
   username: requiredString.min(
     1,
-    "Please input your username or email that you registered with."
+    "Please input your username or email that you registered with.",
   ),
   password: requiredString
     .min(1, "Password is required to login")
@@ -47,7 +47,7 @@ export const userSchema = z.object({
   name: requiredString
     .min(1, "Name must be provided.")
     .transform((val) =>
-      val.trim().replace(/\b\w/g, (char) => char.toUpperCase())
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
     ),
   id: z.string().optional(),
   username: z.string().optional(),
@@ -60,7 +60,7 @@ export const verifyUserSchema = z.object({
   name: requiredString
     .min(1, "Name must be provided.")
     .transform((val) =>
-      val.trim().replace(/\b\w/g, (char) => char.toUpperCase())
+      val.trim().replace(/\b\w/g, (char) => char.toUpperCase()),
     ),
   id: requiredString.min(1, "User id is missing"),
   username: requiredString
@@ -111,7 +111,6 @@ export const departmentalSectorSchema = z.object({
   departMentId: requiredString.min(1, "Please choose a department"),
 });
 export type DepartmentalSectorSchema = z.infer<typeof departmentalSectorSchema>;
-
 
 // miscellaneous
 export const emailSchema = z.object({ email: z.string().trim().email() });

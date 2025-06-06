@@ -17,7 +17,7 @@ export default function Error({ error, reset }: ErrorProps) {
         className={cn(
           process.env.NODE_ENV !== "production"
             ? "flex flex-col gap-2"
-            : "hidden"
+            : "hidden",
         )}
       >
         <p className="break-all text-wrap">{error.message}</p>

@@ -34,8 +34,6 @@
     list-style-type: decimal;
   }
 
-
-
   /* Heading styles */
   h1,
   h2,
@@ -46,27 +44,23 @@
     line-height: 1.1;
     margin-top: 1.5rem;
     text-wrap: pretty;
-     margin-bottom: calc(var(--spacing) * 0.5)
+    margin-bottom: calc(var(--spacing) * 0.5);
   }
 
-  i,em {
+  i,
+  em {
     --tw-tracking: var(--tracking-tighter);
     letter-spacing: var(--tracking-tighter);
   }
 
   h1 {
-    font-size: var(--text-2xl)
-      /* 1.5rem = 24px */
-    ;
-    line-height: var(--tw-leading, var(--text-2xl--line-height)
-        /* calc(2 / 1.5) ≈ 1.3333 */
-      );
- --tw-tracking: var(--tracking-tighter)
-        /* -0.05em */
-      ;
-      letter-spacing: var(--tracking-tighter)
-        /* -0.05em */
-      ;
+    font-size: var(--text-2xl) /* 1.5rem = 24px */;
+    line-height: var(
+      --tw-leading,
+      var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */
+    );
+    --tw-tracking: var(--tracking-tighter) /* -0.05em */;
+    letter-spacing: var(--tracking-tighter) /* -0.05em */;
   }
 
   h2 {
@@ -121,9 +115,12 @@
     background-color: color-mix(in oklab, var(--warning) 5%, transparent);
     margin: 1.5rem 0;
     padding-left: 1rem;
-     &::first-letter {
-        font-size: var(--text-2xl) /* 1.5rem = 24px */;
-        line-height: var(--tw-leading, var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */);
+    &::first-letter {
+      font-size: var(--text-2xl) /* 1.5rem = 24px */;
+      line-height: var(
+        --tw-leading,
+        var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */
+      );
     }
   }
 
@@ -150,7 +147,7 @@
       position: relative;
       vertical-align: top;
 
-      >* {
+      > * {
         margin-bottom: 0;
       }
     }
@@ -163,7 +160,6 @@
       &:is(.dark *) {
         &:nth-child(odd) {
           background-color: color-mix(in oklab, var(--accent) 20%, transparent);
-
         }
       }
 
@@ -178,13 +174,19 @@
       }
 
       .transition-colors {
-        transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-        transition-timing-function: var(--tw-ease, var(--default-transition-timing-function)
+        transition-property:
+          color, background-color, border-color, outline-color,
+          text-decoration-color, fill, stroke, --tw-gradient-from,
+          --tw-gradient-via, --tw-gradient-to;
+        transition-timing-function: var(
+          --tw-ease,
+          var(--default-transition-timing-function)
             /* cubic-bezier(0.4, 0, 0.2, 1) */
-          );
-        transition-duration: var(--tw-duration, var(--default-transition-duration)
-            /* 150ms */
-          );
+        );
+        transition-duration: var(
+          --tw-duration,
+          var(--default-transition-duration) /* 150ms */
+        );
       }
     }
 
@@ -245,5 +247,4 @@
       width: 1em;
     }
   }
-
 }

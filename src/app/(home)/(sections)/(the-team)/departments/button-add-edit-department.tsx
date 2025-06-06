@@ -28,7 +28,11 @@ export default function ButtonAddEditDepartment({
       >
         {children}
       </Button>
-      <FormAddEditDepartment open={open} setOpen={setOpen} departmentToEdit={department} />
+      <FormAddEditDepartment
+        open={open}
+        setOpen={setOpen}
+        departmentToEdit={department}
+      />
     </>
   );
 }

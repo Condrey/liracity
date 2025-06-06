@@ -5,13 +5,10 @@ import { NewsArticles } from "./news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
- 
   return (
     <div className="flex flex-col size-full space-y-12">
-
       {/* Hero section  */}
       <HeroSection />
-      
 
       {/* other sections  */}
       {/* What we stand for  */}
@@ -22,7 +19,6 @@ export default function Home() {
       <NewsArticles />
       {/* News letter form */}
       <NewsLetterForm />
-      
     </div>
   );
 }

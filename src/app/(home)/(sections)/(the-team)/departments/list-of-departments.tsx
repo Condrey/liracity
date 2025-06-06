@@ -20,9 +20,9 @@ interface ListOfDepartmentsProps {
 export default function ListOfDepartments({
   departments,
 }: ListOfDepartmentsProps) {
-
-  const {user,} = useSession()
-const isAuthorized = !!user&& myPrivileges[user.role].includes(Role.MODERATOR)
+  const { user } = useSession();
+  const isAuthorized =
+    !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 
   const query = useQuery({
     queryKey: ["department", "list"],
@@ -52,14 +52,18 @@ const isAuthorized = !!user&& myPrivileges[user.role].includes(Role.MODERATOR)
             data={data}
             columns={useDepartmentsColumns}
             filterColumn={{ id: "name", label: "department" }}
-            className='w-full shadow-none '
+            className="w-full shadow-none "
           >
-
-           {isAuthorized&& <ButtonAddEditDepartment size='sm' variant={'default'} className='sm:after:content-["New"]'>
-              <PlusIcon/>
-            </ButtonAddEditDepartment>}
+            {isAuthorized && (
+              <ButtonAddEditDepartment
+                size="sm"
+                variant={"default"}
+                className='sm:after:content-["New"]'
+              >
+                <PlusIcon />
+              </ButtonAddEditDepartment>
+            )}
           </DataTable>
-        
         </div>
       )}
     </div>

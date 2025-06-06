@@ -26,7 +26,7 @@ import { useForm } from "react-hook-form";
 
 export default function ImageOptions({ editor }: { editor: Editor }) {
   const [isPending, startTransition] = useTransition();
-  const [_,setOpen] =useState(false)
+  const [_, setOpen] = useState(false);
   const form = useForm<SingleContentSchema>({
     resolver: zodResolver(singleContentSchema),
     defaultValues: {
@@ -40,11 +40,11 @@ export default function ImageOptions({ editor }: { editor: Editor }) {
         .focus()
         .setImage({ src: input.singleContent, alt: "url image" })
         .run();
-        setOpen(false)
+      setOpen(false);
     });
   }
   return (
-    <Dialog  onOpenChange={setOpen} >
+    <Dialog onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={"ghost"} size={"sm"}>
           <ImageIcon className="size-4" />

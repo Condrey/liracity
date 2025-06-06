@@ -7,7 +7,7 @@ import ListOfNewsArticles from "./list-of-news-articles";
 
 export async function NewsArticles() {
   const newsArticles = await getLastTenNewsArticles();
-  if(!newsArticles.length) return null;
+  if (!newsArticles.length) return null;
   return (
     <div className="gap-3 flex flex-col">
       <h1 className="text-xl uppercase font-bold tracking-tighter">
@@ -16,7 +16,11 @@ export async function NewsArticles() {
       <ListOfNewsArticles newsArticles={newsArticles} />
       <Link
         href={`/media/news-events`}
-        className={cn(buttonVariants(), "group/button max-w-fit w-full ms-auto",newsArticles.length<=4&&'hidden')}
+        className={cn(
+          buttonVariants(),
+          "group/button max-w-fit w-full ms-auto",
+          newsArticles.length <= 4 && "hidden",
+        )}
       >
         <span className="sr-only">View more news articles</span>
         <span>View more</span>

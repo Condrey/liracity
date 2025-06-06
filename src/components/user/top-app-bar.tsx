@@ -22,7 +22,7 @@ export default function TopAppBar({ className }: { className?: string }) {
     <NavigationMenu
       className={cn(
         "w-full h-12  flex justify-between shrink-0 items-center  gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
-        className
+        className,
       )}
     >
       <NavigationMenuList className="flex gap-3 flex-wrap   ">
@@ -51,7 +51,7 @@ export default function TopAppBar({ className }: { className?: string }) {
               key={parentLink}
               className={cn(
                 "hidden  md:flex",
-                !nav.showOnMediumScreen && "md:hidden lg:flex"
+                !nav.showOnMediumScreen && "md:hidden lg:flex",
               )}
             >
               {!!nav.children?.length ? (
@@ -60,7 +60,7 @@ export default function TopAppBar({ className }: { className?: string }) {
                   <NavigationMenuContent
                     className={cn(
                       "z-50 left-0",
-                      alignRight ? "md:-right-10 md:left-auto" : "md:-left-10"
+                      alignRight ? "md:-right-10 md:left-auto" : "md:-left-10",
                     )}
                   >
                     <ul className="grid gap-3 p-4 md:w-[400px]  lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -136,7 +136,7 @@ function ListItem({
           href={href}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
           )}
         >
           <div className="text-sm font-medium leading-none uppercase tracking-tight">

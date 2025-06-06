@@ -21,9 +21,9 @@ export default function GeographyAndLandmarks({
   const { data, status } = query;
 
   return (
-    <div id="geography" >
+    <div id="geography">
       <PageTitle heading="Geography and landmarks" />
-     
+
       {status === "error" ? (
         <ErrorContainer
           query={query}
@@ -36,8 +36,8 @@ export default function GeographyAndLandmarks({
           </ButtonAddEditGeographicalLandmarks>
         </EmptyContainer>
       ) : (
-        <div >
-           <ButtonAddEditGeographicalLandmarks
+        <div>
+          <ButtonAddEditGeographicalLandmarks
             size={"icon"}
             variant={"outline"}
             className="flex-none m-2"
@@ -49,9 +49,6 @@ export default function GeographyAndLandmarks({
             content={data?.geographicalLandmarks}
             className="text-pretty hyphens-auto text-justify z-0"
           />
-           
-         
-        
         </div>
       )}
     </div>

@@ -17,7 +17,7 @@ export default function About({ entity }: AboutProps) {
 
   const { data, status } = query;
   return (
-    <div id='about'>
+    <div id="about">
       {status === "error" ? (
         <ErrorContainer
           query={query}
@@ -30,11 +30,19 @@ export default function About({ entity }: AboutProps) {
           </ButtonAddEditAbout>
         </EmptyContainer>
       ) : (
-        <div className=''>
-            <ButtonAddEditAbout size={'icon' } variant={'outline'} className="flex-none  m-2" about={data?.about!}>
-                <Edit3Icon /> 
-            </ButtonAddEditAbout>
-            <TipTapViewer content={data?.about} className=' inline  text-pretty hyphens-auto text-justify' />
+        <div className="">
+          <ButtonAddEditAbout
+            size={"icon"}
+            variant={"outline"}
+            className="flex-none  m-2"
+            about={data?.about!}
+          >
+            <Edit3Icon />
+          </ButtonAddEditAbout>
+          <TipTapViewer
+            content={data?.about}
+            className=" inline  text-pretty hyphens-auto text-justify"
+          />
         </div>
       )}
     </div>

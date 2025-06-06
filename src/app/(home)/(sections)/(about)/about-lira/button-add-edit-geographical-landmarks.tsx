@@ -94,7 +94,8 @@ export function FormAddEditGeographicalLandmarks({
       <SheetContent side="bottom">
         <SheetHeader>
           <SheetTitle>
-            {geographicalLandmarks ? "Edit" : "Add"} geography and landmarks{" "}
+            {geographicalLandmarks ? "Edit" : "Add"} geography and
+            landmarks{" "}
           </SheetTitle>
         </SheetHeader>
         <Form {...form}>

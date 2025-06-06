@@ -38,18 +38,29 @@ export default function ButtonAddEditHistoryAndCulture({
   ...props
 }: ButtonAddEditHistoryAndCultureProps) {
   const [open, setOpen] = useState(false);
-  const {user} = useSession()
-  const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
+  const { user } = useSession();
+  const isAuthorized =
+    !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 
   return (
     <>
-    {isAuthorized&&  <Button
-        onClick={() => setOpen(true)}
-        title={historyAndCulture ? "Update historyAndCulture information" : "Create historyAndCulture information"}
-        className={cn("", className)}
-        {...props}
-      />}
-      <FormAddEditHistoryAndCulture open={open} setOpen={setOpen} historyAndCulture={historyAndCulture} />
+      {isAuthorized && (
+        <Button
+          onClick={() => setOpen(true)}
+          title={
+            historyAndCulture
+              ? "Update historyAndCulture information"
+              : "Create historyAndCulture information"
+          }
+          className={cn("", className)}
+          {...props}
+        />
+      )}
+      <FormAddEditHistoryAndCulture
+        open={open}
+        setOpen={setOpen}
+        historyAndCulture={historyAndCulture}
+      />
     </>
   );
 }
@@ -82,7 +93,9 @@ export function FormAddEditHistoryAndCulture({
     <Sheet open={open} onOpenChange={setOpen} modal>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle>{historyAndCulture ? "Edit" : "Add"} history and culture</SheetTitle>
+          <SheetTitle>
+            {historyAndCulture ? "Edit" : "Add"} history and culture
+          </SheetTitle>
         </SheetHeader>
         <Form {...form}>
           <form
@@ -114,7 +127,6 @@ export function FormAddEditHistoryAndCulture({
             </FormFooter>
           </form>
         </Form>
-       
       </SheetContent>
     </Sheet>
   );

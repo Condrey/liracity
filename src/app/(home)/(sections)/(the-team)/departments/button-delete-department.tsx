@@ -53,16 +53,19 @@ export function DeleteDepartmentDialog({
   open,
   setOpen,
 }: DeleteDepartmentDialogProps) {
-  const {mutate,isPending} = useDeleteDepartmentMutation()
-  function handleDelete(){
-mutate(department.id,{onSuccess:()=>setOpen(false)})
+  const { mutate, isPending } = useDeleteDepartmentMutation();
+  function handleDelete() {
+    mutate(department.id, { onSuccess: () => setOpen(false) });
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="text-destructive ">
-            <AlertTriangleIcon className="inline mr-2 size-10 fill-destructive text-destructive-foreground  " strokeWidth={0.8} />
+            <AlertTriangleIcon
+              className="inline mr-2 size-10 fill-destructive text-destructive-foreground  "
+              strokeWidth={0.8}
+            />
             <span className="uppercase">
               Delete {department.name} department
             </span>
@@ -79,7 +82,11 @@ mutate(department.id,{onSuccess:()=>setOpen(false)})
           <Button variant={"outline"} onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <LoadingButton loading={isPending} variant={"destructive"} onClick={handleDelete}>
+          <LoadingButton
+            loading={isPending}
+            variant={"destructive"}
+            onClick={handleDelete}
+          >
             Continue
           </LoadingButton>
         </DialogFooter>

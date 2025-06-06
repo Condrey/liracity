@@ -15,7 +15,12 @@ export default function NewsArticleContainer({
   newsArticle: { imageUrl, title, publishedAt, location, _count, author },
 }: NewsContainerProps) {
   return (
-    <Card className={cn("py-0 pb-6 group/article cursor-pointer hover:bg-primary hover:text-primary-foreground hover:shadow-md", className)}>
+    <Card
+      className={cn(
+        "py-0 pb-6 group/article cursor-pointer hover:bg-primary hover:text-primary-foreground hover:shadow-md",
+        className,
+      )}
+    >
       <CardContent className="px-0 relative flex flex-col justify-center items-center from-secondary to-background overflow-hidden  bg-radial">
         <Image
           src={imageUrl || "/logo.png"}
@@ -24,8 +29,14 @@ export default function NewsArticleContainer({
           height={500}
           className="w-full h-48 object-cover rounded-md group-hover/article:scale-110 transition-all duration-300"
         />
-        <Button   className={cn("hidden group-hover/article:block",'max-w-fit absolute max-h-fit m-auto size-full')}>
-        Read article</Button>
+        <Button
+          className={cn(
+            "hidden group-hover/article:block",
+            "max-w-fit absolute max-h-fit m-auto size-full",
+          )}
+        >
+          Read article
+        </Button>
       </CardContent>
       <CardHeader>
         <h1 className="text-lg leading-tight tracking-tight text-balance  line-clamp-3 text-ellipsis">

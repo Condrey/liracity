@@ -16,10 +16,10 @@ export default function ListOfNewsArticles({
 }: ListOfNewsArticlesProps) {
   const query: DefinedUseQueryResult<NewsArticleData[]> = useQuery({
     queryKey: ["last-ten-news-articles"],
-    refetchOnWindowFocus:false,
+    refetchOnWindowFocus: false,
     queryFn: getLastTenNewsArticles,
     initialData: newsArticles,
-    retry:4
+    retry: 4,
   });
 
   return (
@@ -36,7 +36,11 @@ export default function ListOfNewsArticles({
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 ">
           {query.data.map((article) => (
-            <NewsArticleContainer key={article.id} newsArticle={article} className="shadow-none " />
+            <NewsArticleContainer
+              key={article.id}
+              newsArticle={article}
+              className="shadow-none "
+            />
           ))}
         </div>
       )}

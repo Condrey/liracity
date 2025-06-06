@@ -19,32 +19,33 @@ async function departments() {
 export const getAllDepartmentList = cache(departments);
 
 export async function upsertDepartment(formData: DepartmentSchema) {
+  const { user } = await validateRequest();
+  if (!user) throw new Error("Unauthorized!");
+  const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+  if (!isAuthorized) throw new Error("Unauthorized!");
 
-  const {user} =await  validateRequest()
-  if(!user) throw new Error('Unauthorized!')
-    const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
-    if(!isAuthorized) throw new Error('Unauthorized!')
-
-  const { name, headOfDepartmentId,about, id } = departmentSchema.parse(formData);
+  const { name, headOfDepartmentId, about, id } =
+    departmentSchema.parse(formData);
   const data = await prisma.departMent.upsert({
     where: { id },
     create: {
-      name,about,
+      name,
+      about,
       headOfDepartmentId,
     },
-    update: { name,about, headOfDepartmentId },
+    update: { name, about, headOfDepartmentId },
     include: departmentDataInclude,
   });
   return data;
 }
 
-export async function deleteDepartment(id:string){
-   const {user} =await  validateRequest()
-  if(!user) throw new Error('Unauthorized!')
-    const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
-    if(!isAuthorized) throw new Error('Unauthorized!')
-return await prisma.departMent.delete({
-  where:{id},
-     include: departmentDataInclude, 
-})
+export async function deleteDepartment(id: string) {
+  const { user } = await validateRequest();
+  if (!user) throw new Error("Unauthorized!");
+  const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+  if (!isAuthorized) throw new Error("Unauthorized!");
+  return await prisma.departMent.delete({
+    where: { id },
+    include: departmentDataInclude,
+  });
 }

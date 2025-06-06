@@ -94,7 +94,7 @@ export default function TipTapEditorWithHeader({
     <div
       className={cn(
         "flex size-full max-h-[20rem] flex-col gap-y-3 overflow-y-auto rounded-md border border-input bg-background pb-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        className
+        className,
       )}
     >
       {includeHeader && <TipTapEditorHeader editor={editor} />}

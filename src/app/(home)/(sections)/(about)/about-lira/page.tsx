@@ -18,8 +18,8 @@ export default async function Page() {
   return (
     <div className="pt-15 space-y-6 scroll-smooth px-3 max-w-3xl mx-auto w-full  ">
       <About entity={entity!} />
-      <HistoryAndCulture entity={entity!}  />
-      <GeographyAndLandmarks entity={entity!}  />
+      <HistoryAndCulture entity={entity!} />
+      <GeographyAndLandmarks entity={entity!} />
     </div>
   );
 }

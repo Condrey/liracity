@@ -15,7 +15,7 @@ export async function logout() {
   cookieStore.set(
     sessionCookie.name,
     sessionCookie.value,
-    sessionCookie.attributes
+    sessionCookie.attributes,
   );
   return redirect("/");
 }

@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
 
 const { title, description } = whatWeDoLinks.find(
-  (val) => val.href === "/hierarchy"
+  (val) => val.href === "/hierarchy",
 )!;
 export const metadata: Metadata = {
   title,

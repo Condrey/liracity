@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
@@ -8,11 +8,11 @@ import { useTransition } from "react";
 import { cn } from "@/lib/utils";
 
 export default function UserLogin() {
-  const [isPending,startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition();
   return (
     <>
       <LoginForm />
-     
+
       <div className="flex items-center gap-3 mt-6">
         <div className="h-px flex-1 bg-muted-foreground" />
         <span className="text-muted-foreground">OR CONTINUE WITH</span>
@@ -21,18 +21,20 @@ export default function UserLogin() {
       <div className="flex justify-center gap-3 w-full items-center pb-6 pt-3">
         <GoogleSignInButton />
       </div>
-       <Link
+      <Link
         href={`/signup`}
         className="block text-center underline group/link hover:text-primary"
-        onClick={()=>startTransition(()=>{})}
+        onClick={() => startTransition(() => {})}
       >
         <span>
           {`Don't have an account?`} <strong>SignUp</strong>
         </span>
-        <MoveRightIcon 
-        className={cn("inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",
-          isPending&&' visible animate-caret-blink'
-        )} />
+        <MoveRightIcon
+          className={cn(
+            "inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",
+            isPending && " visible animate-caret-blink",
+          )}
+        />
       </Link>
     </>
   );

@@ -14,7 +14,7 @@ export async function POST(req: Request) {
         {
           status: 200,
           statusText: "User is already subscribed to receive news letters",
-        }
+        },
       );
     } else {
       await prisma.newsLetterSubscription.create({ data: { email, name } });
@@ -23,14 +23,14 @@ export async function POST(req: Request) {
         {
           status: 200,
           statusText: "Successfully subscribed news letter subscription",
-        }
+        },
       );
     }
   } catch (error) {
     console.error("NewsLetter subscription error: ", error);
     return Response.json(
       { error: "Server error" },
-      { status: 500, statusText: "Server error" }
+      { status: 500, statusText: "Server error" },
     );
   }
 }

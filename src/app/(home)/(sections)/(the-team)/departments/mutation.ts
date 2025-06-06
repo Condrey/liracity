@@ -24,34 +24,34 @@ export function useUpsertDepartmentMutation() {
         return [data, ...oldData];
       });
       toast.success(
-        `${isSubmission ? "Added" : "Updated"} ${data.name} department successfully`
+        `${isSubmission ? "Added" : "Updated"} ${data.name} department successfully`,
       );
     },
     onError(error, variables, context) {
       console.error(error);
-      toast.error(`Failed to ${variables.id ? "update" : "add"} ${variables.name} department.`);
+      toast.error(
+        `Failed to ${variables.id ? "update" : "add"} ${variables.name} department.`,
+      );
     },
   });
   return mutation;
 }
 
-
-export function useDeleteDepartmentMutation(){
-   const queryClient = useQueryClient();
-   return useMutation({
-    mutationFn:deleteDepartment,
+export function useDeleteDepartmentMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteDepartment,
     async onSuccess(data, variables, context) {
-            await queryClient.cancelQueries({ queryKey });
-             queryClient.setQueryData<DepartmentData[]>(queryKey, (oldData) => oldData&& 
-
-          oldData.filter((d) => (d.id !== data.id ))
+      await queryClient.cancelQueries({ queryKey });
+      queryClient.setQueryData<DepartmentData[]>(
+        queryKey,
+        (oldData) => oldData && oldData.filter((d) => d.id !== data.id),
       );
-      toast.success(
-        `Deleted ${data.name} department successfully`
-      );
-    }, onError(error, variables, context) {
+      toast.success(`Deleted ${data.name} department successfully`);
+    },
+    onError(error, variables, context) {
       console.error(error);
       toast.error(`Failed to delete department.`);
     },
-   })
+  });
 }

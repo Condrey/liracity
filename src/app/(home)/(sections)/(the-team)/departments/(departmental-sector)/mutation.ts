@@ -21,7 +21,7 @@ export function useUpsertDepartmentalSectorMutation() {
           return oldData.map((d) => ({
             ...d,
             departmentalSectors: d.departmentalSectors.map((sector) =>
-              sector.id === data.id ? data : sector
+              sector.id === data.id ? data : sector,
             ),
           }));
         }
@@ -29,7 +29,7 @@ export function useUpsertDepartmentalSectorMutation() {
         return oldData.map((d) =>
           d.id === data.departMentId
             ? { ...d, departmentalSectors: [data, ...d.departmentalSectors] }
-            : d
+            : d,
         );
       });
       toast.success(data.departMent?.name, {
@@ -43,7 +43,7 @@ export function useUpsertDepartmentalSectorMutation() {
       toast.error(
         `Failed to ${
           variables.id ? "update" : "add"
-        } this departmental sector.`
+        } this departmental sector.`,
       );
     },
   });
@@ -62,9 +62,9 @@ export function useDeleteDepartmentalSectorMutation() {
           oldData.map((d) => ({
             ...d,
             departmentalSectors: d.departmentalSectors.filter(
-              (ds) => ds.id !== data.id
+              (ds) => ds.id !== data.id,
             ),
-          }))
+          })),
       );
       toast.success(data.departMent?.name, {
         description: `Deleted ${data.name} sector from the ${data.departMent?.name} department successfully`,

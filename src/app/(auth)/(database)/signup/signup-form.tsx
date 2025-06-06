@@ -28,18 +28,23 @@ export default function SignUpForm() {
       password: "",
     },
   });
- 
 
   async function onSubmit(values: SignUpValues) {
     startTransition(async () => {
       const { error } = await signUp(values);
-      if (error) toast.error('Self registration error',{position:'top-center',description:error});
+      if (error)
+        toast.error("Self registration error", {
+          position: "top-center",
+          description: error,
+        });
     });
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="last:pt-6 space-y-4">
-
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="last:pt-6 space-y-4"
+      >
         <FormField
           control={form.control}
           name="username"
@@ -81,7 +86,6 @@ export default function SignUpForm() {
                   {...field}
                   placeholder="your password goes here"
                   type="password"
-                
                 />
               </FormControl>
               <FormMessage />

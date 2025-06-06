@@ -21,7 +21,7 @@ export const sendMail = async (
     replyTo?: string;
     displayName?: string;
     organization?: string;
-  }
+  },
 ) => {
   const mailOptions = {
     from: `"${options.displayName || `${webName} Team`}" <${

@@ -6,7 +6,6 @@ type SessionContext =
   | { user: User; session: Session | null }
   | { user: User | null; session: Session | null };
 
-
 const sessionContext = createContext<SessionContext | null>(null);
 
 export default function SessionProvider({

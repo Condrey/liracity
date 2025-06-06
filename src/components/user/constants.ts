@@ -14,7 +14,7 @@ export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
   title: string;
   href: string;
-  showOnMediumScreen:boolean;
+  showOnMediumScreen: boolean;
   description: string;
   children: NavLink[];
   icon?: LucideIcon;
@@ -104,7 +104,7 @@ export const whatWeDoLinks: NavLink[] = [
   },
 ];
 
-export const cityOpportunityLinks:NavLink[]=[
+export const cityOpportunityLinks: NavLink[] = [
   {
     title: "Careers & Internships",
     href: "/opportunities/careers-internships",
@@ -114,35 +114,34 @@ export const cityOpportunityLinks:NavLink[]=[
   {
     title: "Grants & Scholarships",
     href: "/opportunities/grants-scholarships",
-    description:
-      "Apply for financial aid, grants, and academic scholarships.",
+    description: "Apply for financial aid, grants, and academic scholarships.",
   },
   {
     title: "Volunteering",
     href: "/opportunities/volunteering",
     description: "Give back by volunteering with various city initiatives.",
-  }, {
+  },
+  {
     title: "Bid opportunities",
     href: "/opportunities/bids",
     description: "Browse open bidding opportunities in the city",
   },
-]
+];
 
-export const citySportsAndReactionLinks:NavLink[]=[
+export const citySportsAndReactionLinks: NavLink[] = [
   {
     title: "Events & Facilities",
     href: "/sports/events-facilities",
-    description:
-      "Participate in sports events and discover local facilities.",
+    description: "Participate in sports events and discover local facilities.",
   },
   {
     title: "Programs & Clubs",
     href: "/sports/programs-clubs",
     description: "Join sports clubs and development programs across Lira.",
   },
-]
+];
 
-export const cityAboutLinks:NavLink[] = [
+export const cityAboutLinks: NavLink[] = [
   {
     title: "History & Culture",
     href: "/about-lira#history-culture",
@@ -152,19 +151,18 @@ export const cityAboutLinks:NavLink[] = [
   {
     title: "Geography & Landmarks",
     href: "/about-lira#geography",
-    description:
-      "Explore the natural features and key landmarks across Lira.",
+    description: "Explore the natural features and key landmarks across Lira.",
   },
-]
+];
 
 export const navLinks: NavLinkGroup[] = [
   {
     title: "Home",
     href: "/",
     description: "",
-    icon:HomeIcon,
+    icon: HomeIcon,
     children: [],
-    showOnMediumScreen: true
+    showOnMediumScreen: true,
   },
   {
     title: "About Lira",
@@ -172,7 +170,7 @@ export const navLinks: NavLinkGroup[] = [
     description: `Discover Lira’s history, culture, and geography.`,
     icon: InfoIcon,
     children: cityAboutLinks,
-    showOnMediumScreen: true
+    showOnMediumScreen: true,
   },
   {
     title: "City Services",
@@ -180,7 +178,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Access services offered by the Lira City Council.",
     icon: RadioTowerIcon,
     children: cityServicesLinks,
-    showOnMediumScreen: false
+    showOnMediumScreen: false,
   },
   {
     title: "The team",
@@ -188,7 +186,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Explore the focus areas and functions of the city council.",
     icon: BlocksIcon,
     children: whatWeDoLinks,
-    showOnMediumScreen: true
+    showOnMediumScreen: true,
   },
   {
     title: "Media Center",
@@ -196,7 +194,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Stay updated with the latest from the city council.",
     icon: FilmIcon,
     children: cityMediaCenterLinks,
-    showOnMediumScreen: false
+    showOnMediumScreen: false,
   },
   {
     title: "Opportunities",
@@ -204,7 +202,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Explore opportunities to grow and serve.",
     icon: BriefcaseBusinessIcon,
     children: cityOpportunityLinks,
-    showOnMediumScreen: true
+    showOnMediumScreen: true,
   },
   {
     title: "Sports & Recreation",
@@ -212,7 +210,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Engage in sports and recreational activities in Lira.",
     icon: TrophyIcon,
     children: citySportsAndReactionLinks,
-    showOnMediumScreen: true
+    showOnMediumScreen: true,
   },
   {
     title: "Get Involved",
@@ -220,6 +218,6 @@ export const navLinks: NavLinkGroup[] = [
     description: "Contact, engage, and share feedback with the council.",
     icon: MailPlusIcon,
     children: cityGetInvolvedLinks,
-    showOnMediumScreen: false
+    showOnMediumScreen: false,
   },
 ];

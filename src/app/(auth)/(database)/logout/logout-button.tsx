@@ -8,10 +8,11 @@ import { cn } from "@/lib/utils";
 
 interface LogoutButtonProps extends ButtonProps {
   children: React.ReactNode;
-  className?:string;
+  className?: string;
 }
 export default function LogoutButton({
-  children,className,
+  children,
+  className,
   ...props
 }: LogoutButtonProps) {
   const [isPending, startTransition] = useTransition();
@@ -22,7 +23,7 @@ export default function LogoutButton({
     <LoadingButton
       loading={isPending}
       onClick={() => startTransition(() => logOutClicked())}
-      className={cn('text-inherit',className)}
+      className={cn("text-inherit", className)}
       {...props}
     >
       {children}

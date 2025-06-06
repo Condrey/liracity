@@ -287,7 +287,8 @@ export default function TipTapEditorHeader({
           type="button"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
         >
-      <SeparatorHorizontalIcon className="size-4" />        </ToggleGroupItem>
+          <SeparatorHorizontalIcon className="size-4" />{" "}
+        </ToggleGroupItem>
       </ToggleGroup>
 
       {/* Alignment  */}

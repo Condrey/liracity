@@ -28,9 +28,9 @@ export default function UserTypes() {
         })}
       </TabsList>
       <p className="text-muted-foreground text-start w-full text-xs italic">
-              Choose the kind of user type below, either staff or civilian
-            </p>
-      <TabsContent value="civilian" >
+        Choose the kind of user type below, either staff or civilian
+      </p>
+      <TabsContent value="civilian">
         <h1 className="text-muted-foreground text-xl w-full text-center py-4 hidden sm:block">
           Civilian Login
         </h1>

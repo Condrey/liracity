@@ -28,7 +28,9 @@ export default function DepartmentContainer({
       <CardHeader>
         <Fragment>
           <CardTitle className="capitalize text-lg sm:text-xl">
-            <span className="text-muted-foreground italic lowercase ">{numbering}. </span>{" "}
+            <span className="text-muted-foreground italic lowercase ">
+              {numbering}.{" "}
+            </span>{" "}
             {name} department
           </CardTitle>
           {about && (
@@ -44,7 +46,10 @@ export default function DepartmentContainer({
             data-name={name}
             className="text-xl   capitalize  font-bold tracking-tight md:before:content-[attr(data-name)] md:before:pe-2"
           >
-            departmental sectors <span className="text-muted-foreground  slashed-zero tabular-nums font-normal">({formatNumber(_count.departmentalSectors)})</span>
+            departmental sectors{" "}
+            <span className="text-muted-foreground  slashed-zero tabular-nums font-normal">
+              ({formatNumber(_count.departmentalSectors)})
+            </span>
           </h1>
           <ButtonAddEditDepartmentalSector departMentId={id} size={"sm"}>
             <PlusIcon className="size-4" />

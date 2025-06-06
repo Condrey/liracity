@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 export async function loginAction(
   credentials: LoginValues,
 ): Promise<{ error: string }> {
-
   const cookieStore = await cookies();
   console.log(credentials);
   const { username, password } = loginSchema.parse(credentials);
@@ -23,15 +22,15 @@ export async function loginAction(
       },
     },
   });
-  if(!existingUser){
+  if (!existingUser) {
     existingUser = await prisma.user.findFirst({
-    where: {
-      email: {
-        equals: username,
-        mode: "insensitive",
+      where: {
+        email: {
+          equals: username,
+          mode: "insensitive",
+        },
       },
-    },
-  })
+    });
   }
 
   if (!existingUser || !existingUser.passwordHash) {
@@ -46,7 +45,6 @@ export async function loginAction(
     outputLen: 32,
     parallelism: 1,
   });
-
 
   if (!validPassword) {
     return {
@@ -66,5 +64,4 @@ export async function loginAction(
   return redirect(
     existingUser.isVerified ? "/" : `/user-verification/${existingUser.id}`,
   );
-
 }

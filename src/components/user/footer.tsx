@@ -38,7 +38,7 @@ export default function Footer({ className }: { className?: string }) {
         {/* City media center links  */}
         <LinkGroup title="City Media Center" links={cityMediaCenterLinks} />
         {/* What we do links  */}
-        <LinkGroup title="The team" links={whatWeDoLinks}/>
+        <LinkGroup title="The team" links={whatWeDoLinks} />
         {/* City get involved links  */}
         <LinkGroup title="Get Involved" links={cityGetInvolvedLinks} />
       </div>
@@ -49,7 +49,7 @@ export default function Footer({ className }: { className?: string }) {
             {`Copyright 2025${currentYear <= 2025 ? "" : `- ${currentYear}`},
             ${webName}`}
           </p>
-          <ThemeToggler/>
+          <ThemeToggler />
         </div>
       </div>
     </div>

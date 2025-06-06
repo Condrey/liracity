@@ -23,7 +23,7 @@ export function ThemeToggler() {
             variant={currentTheme === theme ? "secondary" : "ghost"}
             size={"icon"}
             onClick={() => setTheme(theme)}
-            title={name+' mode'}
+            title={name + " mode"}
           >
             <Icon suppressHydrationWarning />
             <span className="sr-only">{name} theme mode</span>

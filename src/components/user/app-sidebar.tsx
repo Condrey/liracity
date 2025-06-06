@@ -31,15 +31,16 @@ import { NavUser } from "./nav-user";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   return (
-    <Sidebar className="md:hidden" collapsible="icon"  {...props}>
+    <Sidebar className="md:hidden" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton className="flex flex-col  w-full  h-fit  data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground items-center justify-center rounded-lg bg-sidebar text-sidebar-foreground">
               <div className="flex flex-col items-center aspect-square size-[160px]  ">
                 <Image src={"/logo.png"} alt="logo" width={150} height={150} />
-                              <span className="text-xl uppercase tracking-tight">{webName}</span>
-
+                <span className="text-xl uppercase tracking-tight">
+                  {webName}
+                </span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -52,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {navLinks.map((item, index) => {
               const ItemIcon = item.icon!;
               const isActive = item.children.some((i) =>
-                pathname.startsWith(i.href)
+                pathname.startsWith(i.href),
               );
               return (
                 <Collapsible
@@ -73,7 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <span
                           className={cn(
                             isActive && "font-semibold",
-                            "line-clamp-1 text-ellipsis break-words"
+                            "line-clamp-1 text-ellipsis break-words",
                           )}
                         >
                           {item.title}
@@ -81,7 +82,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <ChevronRight
                           className={cn(
                             "ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
-                            index === 0 && "hidden"
+                            index === 0 && "hidden",
                           )}
                         />
                         {/* </Link> */}

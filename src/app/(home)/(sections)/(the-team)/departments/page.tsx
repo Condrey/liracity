@@ -6,7 +6,7 @@ import ButtonAddEditDepartment from "./button-add-edit-department";
 import ListOfDepartments from "./list-of-departments";
 
 const { title, description } = whatWeDoLinks.find(
-  (val) => val.href === "/departments"
+  (val) => val.href === "/departments",
 )!;
 export const metadata: Metadata = {
   title,

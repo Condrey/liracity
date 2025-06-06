@@ -2,6 +2,7 @@ import {
   BlocksIcon,
   BriefcaseBusinessIcon,
   FilmIcon,
+  HomeIcon,
   InfoIcon,
   LucideIcon,
   MailPlusIcon,
@@ -161,6 +162,7 @@ export const navLinks: NavLinkGroup[] = [
     title: "Home",
     href: "/",
     description: "",
+    icon:HomeIcon,
     children: [],
     showOnMediumScreen: true
   },

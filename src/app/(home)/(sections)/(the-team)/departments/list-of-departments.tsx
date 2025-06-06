@@ -52,11 +52,11 @@ const isAuthorized = !!user&& myPrivileges[user.role].includes(Role.MODERATOR)
             data={data}
             columns={useDepartmentsColumns}
             filterColumn={{ id: "name", label: "department" }}
-            className='w-full'
+            className='w-full shadow-none '
           >
 
-           {isAuthorized&& <ButtonAddEditDepartment size='sm' variant={'default'}>
-              <PlusIcon/> New
+           {isAuthorized&& <ButtonAddEditDepartment size='sm' variant={'default'} className='sm:after:content-["New"]'>
+              <PlusIcon/>
             </ButtonAddEditDepartment>}
           </DataTable>
         

@@ -11,9 +11,9 @@ import { unauthorized } from "next/navigation";
 export async function upsertDepartmentalSector(formData: DepartmentalSectorSchema) {
   
   const { user } = await validateRequest();
-  if(!user) return unauthorized()
+  if(!user) throw new Error('Unauthorized!')
     const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
-    if(!isAuthorized) return unauthorized()
+    if(!isAuthorized) throw new Error('Unauthorized!')
 
   const { name, description, hierarchy, departMentId, id } = departmentalSectorSchema.parse(formData);
   const data = await prisma.departMentalSector.upsert({
@@ -25,4 +25,17 @@ export async function upsertDepartmentalSector(formData: DepartmentalSectorSchem
     include: departmentalSectorDataInclude,
   });
   return data;
+}
+
+export async function deleteDepartmentalSector(id:string){
+    const { user } = await validateRequest();
+  if(!user) throw new Error('Unauthorized!')
+    const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
+    if(!isAuthorized) throw new Error('Unauthorized!')
+
+      return await prisma.departMentalSector.delete({
+        where:{id},    include: departmentalSectorDataInclude,
+
+      })
+
 }

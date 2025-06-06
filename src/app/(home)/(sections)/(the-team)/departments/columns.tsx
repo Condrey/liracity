@@ -12,6 +12,8 @@ import { cn, formatNumber } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import DropDownMenuDepartment from "./drop-down-menu-department";
+import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
+import { PlusIcon } from "lucide-react";
 
 export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
   {
@@ -85,11 +87,18 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
     cell({ row }) {
       const departmentalSectors = row.original.departmentalSectors;
       const numberOfDepartmentalSectors = departmentalSectors.length;
+      const {user} = useSession()
+      const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
 
       return (
         <div className="hidden sm:flex flex-col">
           {numberOfDepartmentalSectors === 0 ? (
-            <Badge variant={"outline"}>Not added yet</Badge>
+            <>
+            {
+              isAuthorized?<ButtonAddEditDepartmentalSector variant={'outline'} departMentId={row.original.id}>
+<PlusIcon/> New sector
+              </ButtonAddEditDepartmentalSector>:<Badge variant={"outline"}>Not added yet</Badge>
+            }</>
           ) : numberOfDepartmentalSectors === 1 ? (
             <div className="flex gap-1 ">
               <Badge variant={"secondary"} className="w-fit flex flex-wrap">
@@ -110,7 +119,7 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
               <div className="text-muted-foreground inline-flex flex-wrap text-xs  gap-1 ">
                 {departmentalSectors.slice(-3).map((sector) => (
                   <Badge key={sector.id} variant={"secondary"}>
-                    {sector.name}
+                    <span className="break-all text-wrap hyphens-auto">{sector.name}</span>
                   </Badge>
                 ))}
               </div>
@@ -147,7 +156,8 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
                 })
               )}
             >
-              View more
+              <span                   className='sm:after:content-["_more"]'
+>View</span>
             </Link>
           )}
         </div>

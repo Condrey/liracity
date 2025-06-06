@@ -10,21 +10,21 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import LoadingButton from "@/components/ui/loading-button";
-import { DepartmentData } from "@/lib/types";
+import { DepartmentalSectorData, DepartmentData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
-import { useDeleteDepartmentMutation } from "./mutation";
+import { useDeleteDepartmentalSectorMutation } from "./mutation";
 import { departmentSchema } from "@/lib/validation";
 
-interface ButtonDeleteDepartmentProps extends ButtonProps {
-  department: DepartmentData;
+interface ButtonDeleteDepartmentalSectorProps extends ButtonProps {
+  departmentalSector: DepartmentalSectorData;
 }
 
-export default function ButtonDeleteDepartment({
-  department,
+export default function ButtonDeleteDepartmentalSector({
+  departmentalSector,
   variant,
   ...props
-}: ButtonDeleteDepartmentProps) {
+}: ButtonDeleteDepartmentalSectorProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,28 +34,28 @@ export default function ButtonDeleteDepartment({
         variant={variant || "destructive"}
         {...props}
       />
-      <DeleteDepartmentDialog
+      <DeleteDepartmentalSectorDialog
         open={open}
         setOpen={setOpen}
-        department={department}
+        departmentalSector={departmentalSector}
       />
     </>
   );
 }
 
-interface DeleteDepartmentDialogProps {
-  department: DepartmentData;
+interface DeleteDepartmentalSectorDialogProps {
+  departmentalSector: DepartmentalSectorData;
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-export function DeleteDepartmentDialog({
-  department,
+export function DeleteDepartmentalSectorDialog({
+  departmentalSector,
   open,
   setOpen,
-}: DeleteDepartmentDialogProps) {
-  const {mutate,isPending} = useDeleteDepartmentMutation()
+}: DeleteDepartmentalSectorDialogProps) {
+  const {mutate,isPending} = useDeleteDepartmentalSectorMutation()
   function handleDelete(){
-mutate(department.id,{onSuccess:()=>setOpen(false)})
+mutate(departmentalSector.id,{onSuccess:()=>setOpen(false)})
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -64,7 +64,7 @@ mutate(department.id,{onSuccess:()=>setOpen(false)})
           <DialogTitle className="text-destructive ">
             <AlertTriangleIcon className="inline mr-2 size-10 fill-destructive text-destructive-foreground  " strokeWidth={0.8} />
             <span className="uppercase">
-              Delete {department.name} department
+              Delete {departmentalSector.name} sector
             </span>
           </DialogTitle>
           <DialogDescription>
@@ -72,8 +72,8 @@ mutate(department.id,{onSuccess:()=>setOpen(false)})
           </DialogDescription>
         </DialogHeader>
         <p>
-          This will delete <strong>{department.name}</strong> department and all
-          its <strong>sectors</strong> from the database. Continue with caution.
+          This will delete <strong>{departmentalSector.name}</strong> sector from the <strong>{departmentalSector.departMent?.name}</strong> department and all
+          its <strong>officers</strong> from the database. Continue with caution.
         </p>
         <DialogFooter>
           <Button variant={"outline"} onClick={() => setOpen(false)}>

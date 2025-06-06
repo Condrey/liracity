@@ -21,9 +21,9 @@ export const getAllDepartmentList = cache(departments);
 export async function upsertDepartment(formData: DepartmentSchema) {
 
   const {user} =await  validateRequest()
-  if(!user) return unauthorized()
+  if(!user) throw new Error('Unauthorized!')
     const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
-    if(!isAuthorized) return unauthorized()
+    if(!isAuthorized) throw new Error('Unauthorized!')
 
   const { name, headOfDepartmentId,about, id } = departmentSchema.parse(formData);
   const data = await prisma.departMent.upsert({
@@ -36,4 +36,15 @@ export async function upsertDepartment(formData: DepartmentSchema) {
     include: departmentDataInclude,
   });
   return data;
+}
+
+export async function deleteDepartment(id:string){
+   const {user} =await  validateRequest()
+  if(!user) throw new Error('Unauthorized!')
+    const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR)
+    if(!isAuthorized) throw new Error('Unauthorized!')
+return await prisma.departMent.delete({
+  where:{id},
+     include: departmentDataInclude, 
+})
 }

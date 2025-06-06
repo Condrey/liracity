@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 export default async function Page() {
   const departments = await getAllDepartmentList();
   return (
-    <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
-      <div className="space-y-2">
+    <div className="pt-14 w-full max-w-3xl mx-auto space-y-6">
+      <div className="space-y-2 mx-3 ">
         <div className="flex gap-3 items-center justify-between">
           <PageTitle heading={title} />
           <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>

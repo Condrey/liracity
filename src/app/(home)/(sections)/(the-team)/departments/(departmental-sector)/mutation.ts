@@ -3,7 +3,7 @@
 import { DepartmentData } from "@/lib/types";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { upsertDepartmentalSector } from "./action";
+import { deleteDepartmentalSector, upsertDepartmentalSector } from "./action";
 
 const queryKey: QueryKey = ["department", "list"];
 
@@ -32,18 +32,47 @@ export function useUpsertDepartmentalSectorMutation() {
             : d
         );
       });
-      toast.info(
-        `${
-          isSubmission ? "Added" : "Updated"
-        } departmental sectors successfully.`
-      );
+      toast.success(data.departMent?.name, {
+        description: `successfully ${isSubmission ? "Added" : "Updated"} ${
+          data.name
+        } sector to the ${data.departMent?.name} department.`,
+      });
     },
     onError(error, variables, context) {
       console.error(error);
       toast.error(
-        `Failed to ${variables.id ? "update" : "add"} departmental sectors.`
+        `Failed to ${
+          variables.id ? "update" : "add"
+        } this departmental sector.`
       );
     },
   });
   return mutation;
+}
+export function useDeleteDepartmentalSectorMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteDepartmentalSector,
+    async onSuccess(data, variables, context) {
+      await queryClient.cancelQueries({ queryKey });
+      queryClient.setQueryData<DepartmentData[]>(
+        queryKey,
+        (oldData) =>
+          oldData &&
+          oldData.map((d) => ({
+            ...d,
+            departmentalSectors: d.departmentalSectors.filter(
+              (ds) => ds.id !== data.id
+            ),
+          }))
+      );
+      toast.success(data.departMent?.name, {
+        description: `Deleted ${data.name} sector from the ${data.departMent?.name} department successfully`,
+      });
+    },
+    onError(error, variables, context) {
+      console.error(error);
+      toast.error(`Failed to delete this departmental sector.`);
+    },
+  });
 }

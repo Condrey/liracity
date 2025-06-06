@@ -16,7 +16,7 @@ interface ButtonAddEditDepartmentalSectorProps extends ButtonProps {
 export default function ButtonAddEditDepartmentalSector({
   departmentalSector,
   departMentId,
-  children,
+  variant,
   ...props
 }: ButtonAddEditDepartmentalSectorProps) {
   const [open, setOpen] = useState(false);
@@ -29,11 +29,10 @@ export default function ButtonAddEditDepartmentalSector({
             ? `Update ${departmentalSector.name}'s content`
             : "Create a new departmental sector"
         }
+        variant={variant ?? "ghost"}
         onClick={() => setOpen(true)}
         {...props}
-      >
-        {children}
-      </Button>
+      />
       <FormAddEditDepartmentalSector
         open={open}
         setOpen={setOpen}

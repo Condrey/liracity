@@ -87,7 +87,7 @@ export default function FormAddEditDepartment({
             )}
           />
           <div className="flex w-full justify-end items-center gap-4">
-            <LoadingButton loading={isPending}>
+            <LoadingButton loading={isPending} disabled={!form.formState.isDirty}>
               {departmentToEdit ? "Update department" : "Add department"}
             </LoadingButton>
           </div>

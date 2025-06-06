@@ -9,7 +9,7 @@ interface PageDescriptionProps {
     paragraph: string;
   }
 export function PageDescription ({paragraph}:PageDescriptionProps){
-    return  <p className="max-w-3xl tracking-wide    text-balance hyphens-auto w-full ">
+    return  <p className="max-w-3xl tracking-wide text-justify hyphens-auto w-full ">
     {paragraph}
   </p>
 }

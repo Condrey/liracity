@@ -13,6 +13,7 @@ export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
   title: string;
   href: string;
+  showOnMediumScreen:boolean;
   description: string;
   children: NavLink[];
   icon?: LucideIcon;
@@ -161,6 +162,7 @@ export const navLinks: NavLinkGroup[] = [
     href: "/",
     description: "",
     children: [],
+    showOnMediumScreen: true
   },
   {
     title: "About Lira",
@@ -168,6 +170,7 @@ export const navLinks: NavLinkGroup[] = [
     description: `Discover Lira’s history, culture, and geography.`,
     icon: InfoIcon,
     children: cityAboutLinks,
+    showOnMediumScreen: true
   },
   {
     title: "City Services",
@@ -175,6 +178,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Access services offered by the Lira City Council.",
     icon: RadioTowerIcon,
     children: cityServicesLinks,
+    showOnMediumScreen: false
   },
   {
     title: "The team",
@@ -182,6 +186,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Explore the focus areas and functions of the city council.",
     icon: BlocksIcon,
     children: whatWeDoLinks,
+    showOnMediumScreen: true
   },
   {
     title: "Media Center",
@@ -189,6 +194,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Stay updated with the latest from the city council.",
     icon: FilmIcon,
     children: cityMediaCenterLinks,
+    showOnMediumScreen: false
   },
   {
     title: "Opportunities",
@@ -196,6 +202,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Explore opportunities to grow and serve.",
     icon: BriefcaseBusinessIcon,
     children: cityOpportunityLinks,
+    showOnMediumScreen: true
   },
   {
     title: "Sports & Recreation",
@@ -203,6 +210,7 @@ export const navLinks: NavLinkGroup[] = [
     description: "Engage in sports and recreational activities in Lira.",
     icon: TrophyIcon,
     children: citySportsAndReactionLinks,
+    showOnMediumScreen: true
   },
   {
     title: "Get Involved",
@@ -210,5 +218,6 @@ export const navLinks: NavLinkGroup[] = [
     description: "Contact, engage, and share feedback with the council.",
     icon: MailPlusIcon,
     children: cityGetInvolvedLinks,
+    showOnMediumScreen: false
   },
 ];

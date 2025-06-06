@@ -35,6 +35,7 @@ export default function DropDownMenuDepartment({
   const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
   const url = getNavigationLinkWithoutUpdate("/" + department.id);
 
+  const [_, setOpen] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -42,7 +43,7 @@ export default function DropDownMenuDepartment({
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <LoadingButton loading={isPending} size={"icon"} variant={"ghost"}>
             <MoreHorizontalIcon />
@@ -52,22 +53,44 @@ export default function DropDownMenuDepartment({
         <DropdownMenuContent>
           <DropdownMenuGroup>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem asChild onClick={() => startTransition(() => {})}>
+            <DropdownMenuItem
+              asChild
+              onClick={() =>
+                startTransition(() => {
+                  setOpen(false);
+                })
+              }
+            >
               <Link href={url}>
                 <MoveUpRightIcon /> <span>View department</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setOpenEditDialog(true)}>
+            <DropdownMenuItem
+              onClick={() => {
+                setOpen(false);
+                setOpenEditDialog(true);
+              }}
+            >
               <Edit3Icon /> <span>Edit department</span>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setOpenDeleteDialog(true)}>
+            <DropdownMenuItem
+              onClick={() => {
+                setOpen(false);
+                setOpenDeleteDialog(true);
+              }}
+            >
               <Trash2Icon /> <span>Delete department</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </DropdownMenuGroup>
           <DropdownMenuRadioGroup>
             <DropdownMenuLabel>Secondary actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => setOpenCreateDialog(true)}>
+            <DropdownMenuItem
+              onClick={() => {
+                setOpen(false);
+                setOpenCreateDialog(true);
+              }}
+            >
               <PlusIcon /> <span>Add sector</span>
             </DropdownMenuItem>
           </DropdownMenuRadioGroup>

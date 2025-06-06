@@ -13,24 +13,25 @@ import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { Separator } from "../ui/separator";
+import { SidebarTrigger } from "../ui/sidebar";
 import { navLinks } from "./constants";
 import LoginUserInfo from "./login-user-info";
 
 export default function TopAppBar({ className }: { className?: string }) {
   return (
-    <NavigationMenu className={cn("w-full flex  *:flex-1", className)}>
-      <NavigationMenuList className="flex justify-between w-full gap-3 flex-wrap   ">
+    <NavigationMenu
+      className={cn(
+        "w-full h-16 flex justify-between shrink-0 items-center  gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
+        className
+      )}
+    >
+      <NavigationMenuList className="flex gap-3 flex-wrap   ">
         {/* For small screens : section */}
-        <div className="flex items-center gap-2">
-          <SmallScreen />
-          <h2 className=" md:hidden uppercase">{webName}</h2>
+        <div className="flex items-center md:hidden  gap-2">
+          <SidebarTrigger className="-ml-1 "/>
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <h2 className="  uppercase">{webName}</h2>
         </div>
 
         {/* Logo area  */}
@@ -47,14 +48,20 @@ export default function TopAppBar({ className }: { className?: string }) {
           const alignRight = array.length >= 5 && index >= 4;
 
           return (
-            <NavigationMenuItem key={parentLink} className="hidden md:flex">
+            <NavigationMenuItem
+              key={parentLink}
+              className={cn(
+                "hidden  md:flex",
+                !nav.showOnMediumScreen && "md:hidden lg:flex"
+              )}
+            >
               {!!nav.children?.length ? (
                 <>
                   <NavigationMenuTrigger>{nav.title}</NavigationMenuTrigger>
                   <NavigationMenuContent
                     className={cn(
                       "z-50 left-0",
-                      alignRight ? "md:right-10 md:left-auto" : "md:left-10"
+                      alignRight ? "md:-right-10 md:left-auto" : "md:-left-10"
                     )}
                   >
                     <ul className="grid gap-3 p-4 md:w-[400px]  lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -102,7 +109,8 @@ export default function TopAppBar({ className }: { className?: string }) {
             </NavigationMenuItem>
           );
         })}
-
+      </NavigationMenuList>
+      <NavigationMenuList>
         {/* login information area  */}
         <LoginUserInfo />
       </NavigationMenuList>
@@ -141,62 +149,5 @@ function ListItem({
         </Link>
       </NavigationMenuLink>
     </li>
-  );
-}
-
-function SmallScreen() {
-  return (
-    <Sheet>
-      <SheetTrigger className="md:hidden">
-        <MenuIcon />
-      </SheetTrigger>
-      <SheetContent side="left">
-        <SheetTitle className="uppercase">{webName}</SheetTitle>
-
-        <div className="flex flex-col">
-          {navLinks.map((nav, index, array) => {
-            const parentLink = nav.href;
-            const Icon = nav.icon;
-            const alignRight = array.length >= 5 && index >= 4;
-
-            return (
-              <DropdownMenu key={parentLink}>
-                {!!nav.children?.length ? (
-                  <>
-                    <DropdownMenuTrigger>{nav.title}</DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      className={cn(
-                        "z-50 left-0",
-                        alignRight ? "md:right-10 md:left-auto" : "md:left-10"
-                      )}
-                    >
-                      <DropdownMenuItem asChild>
-                        <Link href={parentLink}>{nav.title}</Link>
-                      </DropdownMenuItem>
-
-                      {nav.children.map(({ title, href, description }) => {
-                        return (
-                          <DropdownMenuItem asChild>
-                            <Link key={href} href={href}>
-                              {title}
-                            </Link>
-                          </DropdownMenuItem>
-                        );
-                      })}
-                    </DropdownMenuContent>
-                  </>
-                ) : (
-                  <>
-                    <Link href={parentLink} passHref>
-                      {nav.title}
-                    </Link>
-                  </>
-                )}
-              </DropdownMenu>
-            );
-          })}
-        </div>
-      </SheetContent>
-    </Sheet>
   );
 }

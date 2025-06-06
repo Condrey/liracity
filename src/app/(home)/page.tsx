@@ -5,9 +5,7 @@ import { NewsArticles } from "./news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
-  {
-    /*pt-[85px]*/
-  }
+ 
   return (
     <div className="flex flex-col size-full space-y-12">
 

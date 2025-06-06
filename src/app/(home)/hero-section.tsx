@@ -6,15 +6,17 @@ import Link from "next/link";
 
 export default async function HeroSection() {
   return (
-    <div className="md:h-[75vh] overflow-clip w-full  grid  md:grid-cols-3 xl:grid-cols-4  items-center    ">
+    <div className="md:h-[90vh] lg:max-h-[75vh] overflow-clip w-full   grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
       <Image
         src={`/hero.jpg`}
         alt="hero-image"
         width={640}
         height={800}
-        className="w-full bg-cover md:col-span-2 xl:col-span-3 mt-[50px] md:mt-0 mask-radial-[100%_100%] mask-radial-from-60% md:mask-radial-at-left mask-radial-at-top"
+        objectFit="cover"
+        // placeholder="blur"
+        className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3 mt-14 md:mt-0 mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
       />
-      <article className="md:max-w-prose w-full mx-auto px-3">
+      <article className="lg:max-w-prose shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
         <time className=" ordinal text-sm text-muted-foreground slashed-zero">14th December, 2025</time>
         <h2 className="font-medium tracking-tight line-clamp-2 text-balance">New tax holiday policy on startup business</h2>
        

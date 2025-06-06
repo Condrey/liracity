@@ -22,13 +22,13 @@ export default function WhatWeStandFor() {
         alt="logo"
         height={250}
         width={250}
-        className="basis-1/4 hidden md:block"
+        className="basis-1/4 hidden md:flex shrink-0"
       />
       <div className="basis-1/3 gap-1 *:text-center lg:justify-start  p-3 rounded-md  flex-col md:basis-1/4 hidden md:hidden lg:flex sm:flex justify-center  items-center">
         <h1 className="text-4xl text-balance  font-bold uppercase">
           {webName}
         </h1>
-        <h2 className="text-2xl underline-offset-[8px] decoration-dashed underline font-semibold  text-balance hidden lg:block ">
+        <h2 className="text-2xl underline-offset-[8px]  decoration-dashed underline font-semibold  text-balance hidden lg:block ">
           What we stand for
         </h2>
         <q className="text-xl italic text-muted-foreground">
@@ -39,7 +39,7 @@ export default function WhatWeStandFor() {
           <MoveRightIcon className="size-4" />
         </div>
       </div>
-      <Tabs defaultValue="vision" className=" w-full sm:basis-2/3 md:basis-2/4">
+      <Tabs defaultValue="vision" className=" w-full sm:basis-2/3 md:basis-3/4">
         <TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1  [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
           <TabsTrigger value="vision">
             <LightbulbIcon className="hidden sm:block " />

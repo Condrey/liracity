@@ -25,7 +25,8 @@ import { useTheme } from "next-themes";
 import { useSession } from "@/app/session-provider";
 import { toast } from "sonner";
 import LogoutButton from "@/app/(auth)/(database)/logout/logout-button";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
+import Link from "next/link";
 
 
 export function NavUser() {
@@ -39,7 +40,9 @@ export function NavUser() {
   return (
     <SidebarMenu>
      <SidebarMenuItem>
-        {!user?<Button>Join now</Button> :
+        {!user?  <Link href={`/login`} className={buttonVariants({variant:'ghost',className:"w-full"})}>
+        Login now
+      </Link> :
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton

@@ -39,7 +39,7 @@ export default async function LoginUserInfo() {
       <DropdownMenuContent className="min-w-[15rem] bg-card shadow-md border">
         <DropdownMenuGroup>
           <div className="flex justify-center w-full">
-            <UserAvatar avatarUrl={user.avatarUrl} size={85} />
+            <UserAvatar avatarUrl={user.avatarUrl} size={85} className="flex-0" />
           </div>
           <DropdownMenuLabel className="text-center">
             <div>

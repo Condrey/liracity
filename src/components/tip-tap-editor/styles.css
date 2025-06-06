@@ -44,11 +44,15 @@
   h5,
   h6 {
     line-height: 1.1;
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
     text-wrap: pretty;
      margin-bottom: calc(var(--spacing) * 0.5)
   }
 
+  i,em {
+    --tw-tracking: var(--tracking-tighter);
+    letter-spacing: var(--tracking-tighter);
+  }
 
   h1 {
     font-size: var(--text-2xl)

@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { getAllDepartmentList } from "./action";
 import ButtonAddEditDepartment from "./button-add-edit-department";
 import ListOfDepartments from "./list-of-departments";
+import BodyContainer from "@/app/(home)/body-container";
 
 const { title, description } = whatWeDoLinks.find(
   (val) => val.href === "/departments",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const departments = await getAllDepartmentList();
   return (
-    <div className="pt-14 w-full max-w-3xl mx-auto space-y-6">
+    <BodyContainer>
       <div className="space-y-2 mx-3 ">
         <div className="flex gap-3 items-center justify-between">
           <PageTitle heading={title} />
@@ -25,7 +26,7 @@ export default async function Page() {
       </div>
 
       <ListOfDepartments departments={departments} />
-    </div>
+    </BodyContainer>
   );
 }
 

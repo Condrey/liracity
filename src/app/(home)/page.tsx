@@ -3,10 +3,11 @@ import HeroSection from "./hero-section";
 import MessageFromLeaders from "./message-from-leaders";
 import { NewsArticles } from "./news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
+import BodyContainer from "./body-container";
 
 export default function Home() {
   return (
-    <div className="flex flex-col size-full space-y-12">
+    <BodyContainer className="flex flex-col max-w-none size-full space-y-12">
       {/* Hero section  */}
       <HeroSection />
 
@@ -19,6 +20,6 @@ export default function Home() {
       <NewsArticles />
       {/* News letter form */}
       <NewsLetterForm />
-    </div>
+    </BodyContainer>
   );
 }

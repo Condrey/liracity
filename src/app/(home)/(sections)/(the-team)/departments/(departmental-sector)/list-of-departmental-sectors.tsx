@@ -13,7 +13,7 @@ interface ListOfDepartmentalSectorsProps {
 
 export default function ListOfDepartmentalSectors({
   departmentalSectors: sectors,
-  departMentId,
+  departMentId
 }: ListOfDepartmentalSectorsProps) {
   return (
     <div>
@@ -37,23 +37,14 @@ export default function ListOfDepartmentalSectors({
             The following are the various sectors under this department;
           </p>
           <ul className=" space-y-6 list-decimal list-inside">
-            {sectors.slice(0, 3).map((sector) => (
+            {sectors.map((sector) => (
               <DepartmentalSectorContainer
                 key={sector.id}
                 departmentalSector={sector}
               />
             ))}
           </ul>
-          <Link
-            href={``}
-            className={buttonVariants({
-              variant: "ghost",
-              className: "group/more w-full max-w-fit mx-auto text-primary",
-            })}
-          >
-            <span>View more</span>
-            <MoveRightIcon className="h-4 group-hover/more:translate-x-2 transition-all " />
-          </Link>
+         
         </div>
       )}
     </div>

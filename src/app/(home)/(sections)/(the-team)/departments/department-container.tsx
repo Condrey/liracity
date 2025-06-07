@@ -1,3 +1,4 @@
+'use client'
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import {
   Card,
@@ -7,15 +8,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DepartmentData } from "@/lib/types";
-import { PlusIcon } from "lucide-react";
+import { MoveRightIcon, PlusIcon } from "lucide-react";
 import { Fragment } from "react";
 import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
 import ListOfDepartmentalSectors from "./(departmental-sector)/list-of-departmental-sectors";
 import { formatNumber } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 interface DepartmentContainerProps {
   department: DepartmentData;
-  numbering: string;
+  numbering: string|undefined;
 }
 export default function DepartmentContainer({
   department,
@@ -28,9 +31,9 @@ export default function DepartmentContainer({
       <CardHeader>
         <Fragment>
           <CardTitle className="capitalize text-lg sm:text-xl">
-            <span className="text-muted-foreground italic lowercase ">
+           {!!numbering&& <span className="text-muted-foreground italic lowercase ">
               {numbering}.{" "}
-            </span>{" "}
+            </span>}{" "}
             {name} department
           </CardTitle>
           {about && (
@@ -60,6 +63,16 @@ export default function DepartmentContainer({
           departmentalSectors={departmentalSectors}
           departMentId={id}
         />
+         <Link
+            href={``}
+            className={buttonVariants({
+              variant: "ghost",
+              className: "group/more w-full max-w-fit mx-auto text-primary",
+            })}
+          >
+            <span>View more</span>
+            <MoveRightIcon className="h-4 group-hover/more:translate-x-2 transition-all " />
+          </Link>
       </CardContent>
     </Card>
   );

@@ -3,17 +3,18 @@
 import { useSession } from "@/app/session-provider";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import LoadingButton from "@/components/ui/loading-button";
 import { Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
-import { cn, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
-import DropDownMenuDepartment from "./drop-down-menu-department";
-import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
 import { PlusIcon } from "lucide-react";
+import Link from "next/link";
+import { useTransition } from "react";
+import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
+import DropDownMenuDepartment from "./drop-down-menu-department";
 
 export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
   {
@@ -146,6 +147,7 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
     },
     cell({ row }) {
       const { user } = useSession();
+      const [isPending, startTransition] = useTransition();
       const isAuthorized =
         !!user && myPrivileges[user.role].includes(Role.MODERATOR);
       const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
@@ -156,17 +158,19 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
           {isAuthorized ? (
             <DropDownMenuDepartment department={department} />
           ) : (
-            <Link
-              href={url}
-              className={cn(
-                buttonVariants({
-                  variant: isAuthorized ? "ghost" : "default",
-                  size: isAuthorized ? "icon" : "sm",
-                }),
-              )}
+            <LoadingButton
+              onClick={() => startTransition(() => {})}
+              loading={isPending}
+              variant={isAuthorized ? "ghost" : "default"}
+              size={isAuthorized ? "icon" : "sm"}
+              asChild
             >
-              <span className='sm:after:content-["_more"]'>View</span>
-            </Link>
+          
+                <Link href={url} >
+                  <span className='sm:after:content-["_more"]'>View</span>
+                </Link>
+              
+            </LoadingButton>
           )}
         </div>
       );

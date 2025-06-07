@@ -90,7 +90,7 @@ export function ResponsiveBreadcrumb({
                       >
                         <Link
                           href={getNavigationLinkWithPathnameWithoutUpdate(
-                            item.href ? item.href : "#"
+                            item.href ? item.href : "#",
                           )}
                         >
                           {item.label}
@@ -122,7 +122,7 @@ export function ResponsiveBreadcrumb({
                         <Link
                           key={index}
                           href={getNavigationLinkWithPathnameWithoutUpdate(
-                            item.href ? item.href : "#"
+                            item.href ? item.href : "#",
                           )}
                           onClick={() => startTransition(() => {})}
                           className="py-1 text-sm"
@@ -151,20 +151,19 @@ export function ResponsiveBreadcrumb({
                   url={item.href}
                   label={item.label}
                   isActive={index === itemsToDisplay - 2}
-                  className={cn(
-                    "max-w-20 truncate md:max-w-none ",
-                  )}
+                  className={cn("max-w-20 truncate md:max-w-none ")}
                 />
                 <BreadcrumbSeparator
                   className={cn(index === itemsToDisplay - 2 && "hidden")}
                 />
               </>
             ) : (
-               
-              <ResponsiveNavigationMenuLink 
-              className="max-w-20 truncate md:max-w-none "
-              url="#"
-              label={item.label}  isALink={false} isActive
+              <ResponsiveNavigationMenuLink
+                className="max-w-20 truncate md:max-w-none "
+                url="#"
+                label={item.label}
+                isALink={false}
+                isActive
               />
             )}
           </BreadcrumbItem>
@@ -194,13 +193,18 @@ function ResponsiveNavigationMenuLink({
   const [isPending, startTransition] = React.useTransition();
   const href = getNavigationLinkWithPathnameWithoutUpdate(url);
   return (
-    <Comp asChild className={cn(isActive&&                      "font-bold text-foreground pointer-events-none"
-,className)}>
+    <Comp
+      asChild
+      className={cn(
+        isActive && "font-bold text-foreground pointer-events-none",
+        className,
+      )}
+    >
       <LoadingButton
         loading={isPending}
         onClick={() => startTransition(() => {})}
-        variant={'ghost'}
-        size={'sm'}
+        variant={"ghost"}
+        size={"sm"}
         asChild
       >
         <Link href={href}>{label}</Link>

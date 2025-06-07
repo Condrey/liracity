@@ -18,10 +18,13 @@ async function departments() {
 }
 export const getAllDepartmentList = cache(departments);
 
-async function departmentById(id:string){
-  return await prisma.departMent.findUnique({where:{id},include:departmentDataInclude})
+async function departmentById(id: string) {
+  return await prisma.departMent.findUnique({
+    where: { id },
+    include: departmentDataInclude,
+  });
 }
-export const getDepartmentById = cache(departmentById)
+export const getDepartmentById = cache(departmentById);
 
 export async function upsertDepartment(formData: DepartmentSchema) {
   const { user } = await validateRequest();

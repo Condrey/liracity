@@ -45,7 +45,8 @@ export type DepartmentData = Prisma.DepartMentGetPayload<{
   include: typeof departmentDataInclude;
 }>;
 
-// Msc 
-export type ResponsiveBreadcrumbItem={
-  label:string,href:string
-}
+// Msc
+export type ResponsiveBreadcrumbItem = {
+  label: string;
+  href: string;
+};

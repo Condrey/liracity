@@ -165,11 +165,9 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
               size={isAuthorized ? "icon" : "sm"}
               asChild
             >
-          
-                <Link href={url} >
-                  <span className='sm:after:content-["_more"]'>View</span>
-                </Link>
-              
+              <Link href={url}>
+                <span className='sm:after:content-["_more"]'>View</span>
+              </Link>
             </LoadingButton>
           )}
         </div>

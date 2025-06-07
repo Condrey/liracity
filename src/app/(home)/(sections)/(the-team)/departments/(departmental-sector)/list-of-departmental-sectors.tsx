@@ -13,7 +13,7 @@ interface ListOfDepartmentalSectorsProps {
 
 export default function ListOfDepartmentalSectors({
   departmentalSectors: sectors,
-  departMentId
+  departMentId,
 }: ListOfDepartmentalSectorsProps) {
   return (
     <div>
@@ -44,7 +44,6 @@ export default function ListOfDepartmentalSectors({
               />
             ))}
           </ul>
-         
         </div>
       )}
     </div>

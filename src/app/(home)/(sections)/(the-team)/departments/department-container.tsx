@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import {
   Card,
@@ -18,7 +18,7 @@ import Link from "next/link";
 
 interface DepartmentContainerProps {
   department: DepartmentData;
-  numbering: string|undefined;
+  numbering: string | undefined;
 }
 export default function DepartmentContainer({
   department,
@@ -31,9 +31,11 @@ export default function DepartmentContainer({
       <CardHeader>
         <Fragment>
           <CardTitle className="capitalize text-lg sm:text-xl">
-           {!!numbering&& <span className="text-muted-foreground italic lowercase ">
-              {numbering}.{" "}
-            </span>}{" "}
+            {!!numbering && (
+              <span className="text-muted-foreground italic lowercase ">
+                {numbering}.{" "}
+              </span>
+            )}{" "}
             {name} department
           </CardTitle>
           {about && (
@@ -63,16 +65,16 @@ export default function DepartmentContainer({
           departmentalSectors={departmentalSectors}
           departMentId={id}
         />
-         <Link
-            href={``}
-            className={buttonVariants({
-              variant: "ghost",
-              className: "group/more w-full max-w-fit mx-auto text-primary",
-            })}
-          >
-            <span>View more</span>
-            <MoveRightIcon className="h-4 group-hover/more:translate-x-2 transition-all " />
-          </Link>
+        <Link
+          href={``}
+          className={buttonVariants({
+            variant: "ghost",
+            className: "group/more w-full max-w-fit mx-auto text-primary",
+          })}
+        >
+          <span>View more</span>
+          <MoveRightIcon className="h-4 group-hover/more:translate-x-2 transition-all " />
+        </Link>
       </CardContent>
     </Card>
   );

@@ -32,8 +32,8 @@ export default async function Page({ params }: PageProps) {
   const { departmentId } = await params;
   const id = decodeURIComponent(departmentId);
   const department = await getDepartmentById(id);
-  if(!department) return notFound()
-      const departmentName = department.name;
+  if (!department) return notFound();
+  const departmentName = department.name;
 
   return (
     <BodyContainer>
@@ -41,7 +41,10 @@ export default async function Page({ params }: PageProps) {
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Departments", href: "/departments" },
-          { label: `${departmentName} department`, href: `/departments/${departmentId}` },
+          {
+            label: `${departmentName} department`,
+            href: `/departments/${departmentId}`,
+          },
         ]}
       />
       <div className=""></div>

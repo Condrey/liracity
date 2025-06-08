@@ -52,7 +52,7 @@ export function useDeleteDepartmentMutation() {
     mutationFn: deleteDepartment,
     async onSuccess(data, variables, context) {
       const key2: QueryKey = ["department", data.id];
-const key3: QueryKey = ["sector"];
+      const key3: QueryKey = ["sector"];
 
       await queryClient.cancelQueries({ queryKey });
       queryClient.setQueryData<DepartmentData[]>(

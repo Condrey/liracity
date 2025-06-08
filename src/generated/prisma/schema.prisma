@@ -78,6 +78,7 @@ model Employee {
   assumedOffice        Int
   endedOffice          Int?
   position             String
+  title                String
   hierarchy            Int
   shortMessageToPublic String?
   departMents          DepartMent[]

@@ -41,14 +41,12 @@ model User {
 }
 
 model Entity {
-  id String @id @default(uuid())
-  webName String
-  about String?
-  historyAndCulture String?
+  id                    String  @id @default(uuid())
+  webName               String
+  about                 String?
+  historyAndCulture     String?
   geographicalLandmarks String?
 }
-
-
 
 model DepartMent {
   id                  String               @id @default(uuid())
@@ -67,7 +65,7 @@ model DepartMentalSector {
   description  String?
   hierarchy    Int
   employees    Employee[]
-  departMent   DepartMent? @relation(fields: [departMentId], references: [id],onDelete: SetNull)
+  departMent   DepartMent? @relation(fields: [departMentId], references: [id], onDelete: SetNull)
   departMentId String?
 
   @@map("departmental_sectors")
@@ -76,14 +74,15 @@ model DepartMentalSector {
 model Employee {
   id                   String              @id @default(uuid())
   user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-    ippsNumber           String              @default(uuid())
+  ippsNumber           String              @default(uuid())
   assumedOffice        Int
   endedOffice          Int?
   position             String
+  title                String
   hierarchy            Int
   shortMessageToPublic String?
   departMents          DepartMent[]
-  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id],onDelete: SetNull)
+  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id], onDelete: SetNull)
   departMentalSectorId String?
   userId               String
 
@@ -174,6 +173,7 @@ model NewsArticleLike {
 
 enum Role {
   USER
+  STAFF
   ADMIN
   MODERATOR
 }

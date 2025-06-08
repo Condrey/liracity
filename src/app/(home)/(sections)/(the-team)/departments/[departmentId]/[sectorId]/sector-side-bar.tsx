@@ -3,7 +3,12 @@
 import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import HeadOfDepartmentContainer from "@/components/head-of-department/head-of-department-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { DepartmentalSectorData, DepartmentData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Edit3Icon } from "lucide-react";
@@ -21,7 +26,7 @@ export default function SectorSideBar({
     <div
       className={cn(
         "h-fit w-full lg:max-w-sm space-y-6  hidden lg:flex flex-col",
-        className
+        className,
       )}
     >
       {/* about the department  */}

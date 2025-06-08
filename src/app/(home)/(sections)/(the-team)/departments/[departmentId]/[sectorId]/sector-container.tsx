@@ -15,13 +15,14 @@ interface SectorContainerProps {
 export default function SectorContainer({
   departmentalSector,
 }: SectorContainerProps) {
-  const { name, description, } = departmentalSector;
+  const { name, description } = departmentalSector;
   return (
     <div className="space-y-6 px-3">
       {/* optionally show department details on small screens  */}
-<SectorSideBar
-sector={departmentalSector}
- className="lg:hidden hidden md:flex flex-col w-full "/>
+      <SectorSideBar
+        sector={departmentalSector}
+        className="lg:hidden hidden md:flex flex-col w-full "
+      />
       {/* Sector information  */}
       <div>
         <Fragment>
@@ -36,7 +37,6 @@ sector={departmentalSector}
             >
               <Edit3Icon />
             </ButtonAddEditDepartmentalSector>
-            
           </CardTitle>
           {description && (
             <CardDescription>
@@ -49,7 +49,8 @@ sector={departmentalSector}
         </Fragment>
       </div>
 
-      {/* show the employees  */}<ListOfSectorEmployees sector={departmentalSector}/>
+      {/* show the employees  */}
+      <ListOfSectorEmployees sector={departmentalSector} />
     </div>
   );
 }

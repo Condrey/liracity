@@ -20,8 +20,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
+import FormAddEditEmployee from "../employee/form-add-edit-employee";
 import { DeleteDepartmentalSectorDialog } from "./button-delete-departmental-sector";
 import FormAddEditDepartmentalSector from "./form-add-edit-departmental-sector";
+import { useSession } from "@/app/session-provider";
+import { myPrivileges } from "@/lib/enums";
+import { Role } from "@/generated/prisma";
 
 interface DropDownMenuDepartmentalSectorProps {
   sector: DepartmentalSectorData;
@@ -33,17 +37,20 @@ export default function DropDownMenuDepartmentalSector({
   className,
 }: DropDownMenuDepartmentalSectorProps) {
   const [isPending, startTransition] = useTransition();
+  const [openCreate, setOpenCreate] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
+  const {user} = useSession()
+  const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR)
   const href = getNavigationLinkWithoutUpdate(`/${sector.id}`);
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger className={className} asChild>
-          <LoadingButton loading={isPending} size={"icon"} variant={"ghost"}>
+         {isAuthorized&& <LoadingButton loading={isPending} size={"icon"} variant={"ghost"}>
             <MoreVertical />
-          </LoadingButton>
+          </LoadingButton>}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuGroup>
@@ -65,7 +72,7 @@ export default function DropDownMenuDepartmentalSector({
           </DropdownMenuGroup>
           <DropdownMenuGroup>
             <DropdownMenuLabel>Secondary actions</DropdownMenuLabel>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setOpenCreate(true)}>
               <PlusIcon /> Add employee
             </DropdownMenuItem>
           </DropdownMenuGroup>
@@ -81,6 +88,11 @@ export default function DropDownMenuDepartmentalSector({
         open={openDelete}
         setOpen={setOpenDelete}
         departmentalSector={sector}
+      />
+      <FormAddEditEmployee
+        open={openCreate}
+        setOpen={setOpenCreate}
+        departmentalSectorId={sector.id}
       />
     </>
   );

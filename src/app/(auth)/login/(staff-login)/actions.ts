@@ -14,7 +14,7 @@ export async function loginAction(
   console.log(credentials);
   const { ippsNumber, password } = staffLoginSchema.parse(credentials);
 
-  let existingUser = await prisma.employee.findFirst({
+  const  existingEmployee = await prisma.employee.findFirst({
     where: {
       ippsNumber: {
         equals: ippsNumber.toString(),
@@ -23,14 +23,14 @@ export async function loginAction(
     },
     include: { user: true },
   });
-
-  if (!existingUser || !existingUser.user.passwordHash) {
+let existingUser = existingEmployee?.user
+  if (!existingUser || !existingUser.passwordHash) {
     return {
-      error: "Incorrect Ipps number or password.",
+      error: "Incorrect IPPS number or password.",
     };
   }
 
-  const validPassword = await verify(existingUser.user.passwordHash, password, {
+  const validPassword = await verify(existingUser.passwordHash, password, {
     memoryCost: 19456,
     timeCost: 2,
     outputLen: 32,
@@ -43,7 +43,7 @@ export async function loginAction(
   }
 
   const session = await lucia.createSession(existingUser.id, {
-    role: existingUser.user.role || "USER",
+    role: existingUser.role || "USER",
   });
   const sessionCookie = lucia.createSessionCookie(session.id);
   cookieStore.set(
@@ -52,7 +52,7 @@ export async function loginAction(
     sessionCookie.attributes,
   );
   return redirect(
-    existingUser.user.isVerified
+    existingUser.isVerified
       ? "/"
       : `/user-verification/${existingUser.id}`,
   );

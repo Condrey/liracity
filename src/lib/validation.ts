@@ -75,6 +75,20 @@ export const verifyUserSchema = z.object({
 });
 export type VerifyUserSchema = z.infer<typeof verifyUserSchema>;
 
+// Employee
+export const employeeSchema = z.object({
+  departmentalSectorId: requiredString,
+  userId: requiredString,
+  name: requiredString,
+  ippsNumber: z.number({ required_error: "IPPS number is a must" }),
+  employeeId: requiredString,
+  position: requiredString,
+  assumedOffice: z.number({
+    required_error: "Please enter year staff assumed office.",
+  }),
+});
+export type EmployeeSchema = z.infer<typeof employeeSchema>;
+
 // NewsLetter
 export const newsLetterSubscriptionSchema = z.object({
   email: requiredString.email().min(1, "An email is required."),

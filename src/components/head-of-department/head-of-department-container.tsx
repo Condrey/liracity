@@ -25,7 +25,10 @@ export default function HeadOfDepartmentContainer({
   if (!employee)
     return (
       <EmptyContainer
-        className={cn("border bg-card p-2 rounded-md max-w-sm w-full", className)}
+        className={cn(
+          "border bg-card p-2 rounded-md max-w-sm w-full",
+          className,
+        )}
         message={
           "This department has no head of department added in the system."
         }

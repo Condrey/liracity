@@ -2,6 +2,7 @@ import { Prisma } from "@/generated/prisma";
 
 // User
 export const userDataSelect = {
+  id: true,
   name: true,
   avatarUrl: true,
   telephone: true,
@@ -9,6 +10,14 @@ export const userDataSelect = {
 } satisfies Prisma.UserSelect;
 export type UserDataSelect = Prisma.UserGetPayload<{
   select: typeof userDataSelect;
+}>;
+
+// Employee
+export const employeeDataInclude = {
+  user: { select: userDataSelect },
+} satisfies Prisma.EmployeeInclude;
+export type EmployeeData = Prisma.EmployeeGetPayload<{
+  include: typeof employeeDataInclude;
 }>;
 
 // News Article
@@ -21,14 +30,18 @@ export type NewsArticleData = Prisma.NewsArticleGetPayload<{
 }>;
 
 // Leader container
-export interface LeaderContainer {
+export interface Leader {
   leader: UserDataSelect;
 }
 
 // Departmental sectors
 export const departmentalSectorDataInclude = {
-  employees: true,
-  departMent: true,
+  employees: { include: employeeDataInclude },
+  departMent: {
+    include: {
+      headOfDepartment: { include: { user: { select: userDataSelect } } },
+    },
+  },
   _count: { select: { employees: true } },
 } satisfies Prisma.DepartMentalSectorInclude;
 export type DepartmentalSectorData = Prisma.DepartMentalSectorGetPayload<{
@@ -38,7 +51,7 @@ export type DepartmentalSectorData = Prisma.DepartMentalSectorGetPayload<{
 // Department
 export const departmentDataInclude = {
   departmentalSectors: { include: departmentalSectorDataInclude },
-  headOfDepartment: { include: { user: true } },
+  headOfDepartment: { include: { user: { select: userDataSelect } } },
   _count: { select: { departmentalSectors: true } },
 } satisfies Prisma.DepartMentInclude;
 export type DepartmentData = Prisma.DepartMentGetPayload<{

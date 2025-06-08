@@ -14,7 +14,6 @@ import { DepartmentData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
 import { useDeleteDepartmentMutation } from "./mutation";
-import { departmentSchema } from "@/lib/validation";
 
 interface ButtonDeleteDepartmentProps extends ButtonProps {
   department: DepartmentData;

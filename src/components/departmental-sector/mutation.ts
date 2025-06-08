@@ -13,6 +13,7 @@ export function useUpsertDepartmentalSectorMutation() {
     mutationFn: upsertDepartmentalSector,
     onSuccess: async (data, variables) => {
       await queryClient.cancelQueries({ queryKey });
+      const key2: QueryKey = ["department", data.departMentId];
       const isSubmission = !variables.id;
 
       queryClient.setQueryData<DepartmentData[]>(queryKey, (oldData) => {
@@ -32,6 +33,8 @@ export function useUpsertDepartmentalSectorMutation() {
             : d,
         );
       });
+      queryClient.invalidateQueries({ queryKey: key2 });
+
       toast.success(data.departMent?.name, {
         description: `successfully ${isSubmission ? "Added" : "Updated"} ${
           data.name
@@ -41,9 +44,7 @@ export function useUpsertDepartmentalSectorMutation() {
     onError(error, variables, context) {
       console.error(error);
       toast.error(
-        `Failed to ${
-          variables.id ? "update" : "add"
-        } this departmental sector.`,
+        `Failed to ${variables.id ? "update" : "add"} this departmental sector.`,
       );
     },
   });
@@ -54,6 +55,8 @@ export function useDeleteDepartmentalSectorMutation() {
   return useMutation({
     mutationFn: deleteDepartmentalSector,
     async onSuccess(data, variables, context) {
+      const key2: QueryKey = ["department", data.departMentId];
+
       await queryClient.cancelQueries({ queryKey });
       queryClient.setQueryData<DepartmentData[]>(
         queryKey,
@@ -66,6 +69,8 @@ export function useDeleteDepartmentalSectorMutation() {
             ),
           })),
       );
+      queryClient.invalidateQueries({ queryKey: key2 });
+
       toast.success(data.departMent?.name, {
         description: `Deleted ${data.name} sector from the ${data.departMent?.name} department successfully`,
       });

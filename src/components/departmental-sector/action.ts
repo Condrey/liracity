@@ -9,7 +9,15 @@ import {
   DepartmentalSectorSchema,
   departmentalSectorSchema,
 } from "@/lib/validation";
-import { unauthorized } from "next/navigation";
+import { cache } from "react";
+
+async function departmentalSectorById(id: string) {
+  return await prisma.departMentalSector.findUnique({
+    where: { id },
+    include: departmentalSectorDataInclude,
+  });
+}
+export const getDepartmentalSectorById = cache(departmentalSectorById);
 
 export async function upsertDepartmentalSector(
   formData: DepartmentalSectorSchema,

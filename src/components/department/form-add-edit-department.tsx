@@ -3,6 +3,7 @@ import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-w
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,

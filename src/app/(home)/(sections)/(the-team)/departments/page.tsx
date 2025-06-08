@@ -1,10 +1,10 @@
+import BodyContainer from "@/app/(home)/body-container";
 import { PageDescription, PageTitle } from "@/components/page-utils";
 import { whatWeDoLinks } from "@/components/user/constants";
 import { Metadata } from "next";
-import { getAllDepartmentList } from "./action";
-import ButtonAddEditDepartment from "./button-add-edit-department";
+import { getAllDepartmentList } from "../../../../../components/department/action";
+import ButtonAddEditDepartment from "../../../../../components/department/button-add-edit-department";
 import ListOfDepartments from "./list-of-departments";
-import BodyContainer from "@/app/(home)/body-container";
 
 const { title, description } = whatWeDoLinks.find(
   (val) => val.href === "/departments",

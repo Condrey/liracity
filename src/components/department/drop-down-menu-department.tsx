@@ -1,18 +1,20 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuRadioGroup,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import LoadingButton from "@/components/ui/loading-button";
+import { Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
 import {
   Edit3Icon,
@@ -23,12 +25,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import FormAddEditDepartmentalSector from "./(departmental-sector)/form-add-edit-departmental-sector";
-import { DeleteDepartmentDialog } from "./button-delete-department";
 import FormAddEditDepartment from "./form-add-edit-department";
-import { useSession } from "@/app/session-provider";
-import { myPrivileges } from "@/lib/enums";
-import { Role } from "@/generated/prisma";
+import FormAddEditDepartmentalSector from "../departmental-sector/form-add-edit-departmental-sector";
+import { DeleteDepartmentDialog } from "./button-delete-department";
 
 interface DropDownMenuDepartmentProps {
   department: DepartmentData;

@@ -1,18 +1,17 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import { DataTable } from "@/components/data-table/data-table";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
+import { Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { getAllDepartmentList } from "./action";
-import ButtonAddEditDepartment from "./button-add-edit-department";
-import { useDepartmentsColumns } from "./columns";
-import DepartmentContainer from "./department-container";
 import { PlusIcon } from "lucide-react";
-import { useSession } from "@/app/session-provider";
-import { myPrivileges } from "@/lib/enums";
-import { Role } from "@/generated/prisma";
+import { getAllDepartmentList } from "../../../../../components/department/action";
+import ButtonAddEditDepartment from "../../../../../components/department/button-add-edit-department";
+import { useDepartmentsColumns } from "./columns";
 
 interface ListOfDepartmentsProps {
   departments: DepartmentData[];

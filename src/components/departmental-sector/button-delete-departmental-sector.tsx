@@ -10,11 +10,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import LoadingButton from "@/components/ui/loading-button";
-import { DepartmentalSectorData, DepartmentData } from "@/lib/types";
+import { DepartmentalSectorData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
 import { useDeleteDepartmentalSectorMutation } from "./mutation";
-import { departmentSchema } from "@/lib/validation";
 
 interface ButtonDeleteDepartmentalSectorProps extends ButtonProps {
   departmentalSector: DepartmentalSectorData;
@@ -32,6 +31,7 @@ export default function ButtonDeleteDepartmentalSector({
       <Button
         onClick={() => setOpen(true)}
         variant={variant || "destructive"}
+        title={`Delete ${departmentalSector.name}`}
         {...props}
       />
       <DeleteDepartmentalSectorDialog

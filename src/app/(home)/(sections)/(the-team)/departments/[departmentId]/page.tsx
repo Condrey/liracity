@@ -2,9 +2,9 @@ import BodyContainer from "@/app/(home)/body-container";
 import { ResponsiveBreadcrumb } from "@/components/responsive-breadcrumb";
 import { formatNumber } from "@/lib/utils";
 import { Metadata } from "next";
-import { getDepartmentById } from "../action";
-import DepartmentContainer from "../department-container";
 import { notFound } from "next/navigation";
+import { getDepartmentById } from "../../../../../../components/department/action";
+import DepartmentContent from "./department-content";
 
 interface PageProps {
   params: Promise<{ departmentId: string }>;
@@ -36,7 +36,7 @@ export default async function Page({ params }: PageProps) {
   const departmentName = department.name;
 
   return (
-    <BodyContainer>
+    <BodyContainer className="max-w-7xl">
       <ResponsiveBreadcrumb
         breadcrumbs={[
           { label: "Home", href: "/" },
@@ -47,8 +47,8 @@ export default async function Page({ params }: PageProps) {
           },
         ]}
       />
-      <div className=""></div>
-      <DepartmentContainer department={department} numbering={undefined} />
+
+      <DepartmentContent department={department} />
     </BodyContainer>
   );
 }

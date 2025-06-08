@@ -95,7 +95,7 @@ export const departmentSchema = z.object({
   name: requiredString
     .min(1, "Department name is missing")
     .transform((value) => value.charAt(0).toUpperCase() + value.slice(1)),
-  about: z.string().max(200, "Write within 250 characters").optional(),
+  about: z.string().max(350, "Write within 350 characters").optional(),
   headOfDepartmentId: z.string().optional(),
 });
 export type DepartmentSchema = z.infer<typeof departmentSchema>;
@@ -106,7 +106,7 @@ export const departmentalSectorSchema = z.object({
   name: requiredString
     .min(1, "Departmental Sector name is missing")
     .transform((value) => value.charAt(0).toUpperCase() + value.slice(1)),
-  description: z.string().max(200, "Write within 250 characters").optional(),
+  description: z.string().max(350, "Write within 350 characters").optional(),
   hierarchy: z.number(),
   departMentId: requiredString.min(1, "Please choose a department"),
 });

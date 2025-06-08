@@ -13,8 +13,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
-import ButtonAddEditDepartmentalSector from "./(departmental-sector)/button-add-edit-departmental-sector";
-import DropDownMenuDepartment from "./drop-down-menu-department";
+import DropDownMenuDepartment from "@/components/department/drop-down-menu-department";
+import ButtonAddEditDepartmentalSector from "@/components/departmental-sector/button-add-edit-departmental-sector";
 
 export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
   {

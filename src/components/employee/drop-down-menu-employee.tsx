@@ -68,7 +68,7 @@ export default function DropDownMenuEmployee({
                 })
               }
             >
-              <Link href={url}>
+              <Link href={url} target="_blank" rel="noopener noreferrer">
                 <MoveUpRightIcon /> <span>View employee</span>
               </Link>
             </DropdownMenuItem>

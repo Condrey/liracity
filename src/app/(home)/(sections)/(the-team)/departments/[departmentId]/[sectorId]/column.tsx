@@ -17,7 +17,7 @@ import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { EmployeeData } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { DotIcon } from "lucide-react";
+import { DotIcon, VerifiedIcon } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
 import { toast } from "sonner";
@@ -66,20 +66,20 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
               >
                 {employee.title}
               </Badge>{" "}
-              <span>{user.name}</span>
+              <span>{user.name}</span> {user.isVerified&&<VerifiedIcon  className="inline size-4 fill-success text-success-foreground"/>}
             </div>
             {user.telephone && user.email ? (
-              <div className="flex text-muted-foreground text-xs ">
+              <div className="flex text-muted-foreground items-center text-xs ">
                 <Link
                   href={`mailto:${user.email}`}
-                  className="hover:text-primary hover:underline"
+                  className="hover:text-primary underline"
                 >
                   {user.email}
                 </Link>
                 <DotIcon />
                 <Link
                   href={`tel:${user.telephone}`}
-                  className="hover:text-primary hover:underline"
+                  className="hover:text-primary underline"
                 >
                   {user.telephone}
                 </Link>
@@ -170,7 +170,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
               size={isAuthorized ? "icon" : "sm"}
               asChild
             >
-              <Link href={url}>
+              <Link href={url} target="_blank" rel="noopener noreferrer">
                 <span className='sm:after:content-["_more"]'>View</span>
               </Link>
             </LoadingButton>

@@ -1,7 +1,8 @@
 "use client";
 
-import { DepartmentData } from "@/lib/types";
+import { ChartUser, DepartmentData } from "@/lib/types";
 import { Tree, TreeNode } from "react-organizational-chart";
+import ChartUserContainer from "./chart-user-container";
 
 interface ChartProps {
   departments: DepartmentData[];
@@ -9,18 +10,44 @@ interface ChartProps {
 
 export default function Chart({ departments }: ChartProps) {
   return (
-    <div>
+    <div className="w-full overflow-y-auto scroll-auto rounded-md pb-6 bg-secondary/20 p-3">
       <Tree
-        label="Mayor"
+        label={<ChartUserContainer user={mayor} />}
         lineStyle="dashed"
-        lineColor="var(--color-muted-foreground)"
+        lineColor="var(--color-warning)"
+        lineBorderRadius="calc(var(--spacing) * 2)"
         nodePadding="6px"
       >
-        <TreeNode label={"Town Clerk"}>shoot</TreeNode>
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode label={<ChartUserContainer user={mayor} />}>
+          <TreeNode label={<ChartUserContainer user={mayor} />} />
+          <TreeNode label={<ChartUserContainer user={mayor} />} />
+          <TreeNode label={<ChartUserContainer user={mayor} />} />
+          <TreeNode label={<ChartUserContainer user={mayor} />} />
+          <TreeNode label={<ChartUserContainer user={mayor} />} />
+        </TreeNode>
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode label={<ChartUserContainer user={mayor} />} />
       </Tree>
     </div>
   );
 }
+const mayor: ChartUser = {
+  id: "mayor",
+  avatarUrl: null,
+  email: "mayor@liracity.go.ug",
+  endedOffice: null,
+  hierarchy: 1,
+  name: "Atul Sam",
+  position: "Lira City Mayor",
+  resumedOffice: 2023,
+  telephone: "+256776239674",
+  title: null,
+  isVerified: true,
+};
 
 const data = {
   name: "Alice Johnson",

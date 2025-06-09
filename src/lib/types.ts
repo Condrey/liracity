@@ -7,6 +7,7 @@ export const userDataSelect = {
   avatarUrl: true,
   telephone: true,
   email: true,
+  isVerified: true,
 } satisfies Prisma.UserSelect;
 export type UserDataSelect = Prisma.UserGetPayload<{
   select: typeof userDataSelect;
@@ -62,4 +63,17 @@ export type DepartmentData = Prisma.DepartMentGetPayload<{
 export type ResponsiveBreadcrumbItem = {
   label: string;
   href: string;
+};
+export type ChartUser = {
+  id: string;
+  name: string;
+  resumedOffice: number;
+  endedOffice: number | null;
+  avatarUrl: string | null;
+  isVerified?: boolean;
+  position: string;
+  title: string | null;
+  hierarchy: number;
+  telephone: string;
+  email: string;
 };

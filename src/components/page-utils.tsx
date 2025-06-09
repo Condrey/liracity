@@ -1,9 +1,17 @@
+import { cn } from "@/lib/utils";
+
 interface PageTitleProps {
   heading: string;
+  className?: string;
 }
-export function PageTitle({ heading }: PageTitleProps) {
+export function PageTitle({ heading, className }: PageTitleProps) {
   return (
-    <h1 className="text-2xl mb-1.5 font-bold capitalize tracking-tighter">
+    <h1
+      className={cn(
+        "text-2xl mb-1.5 font-bold capitalize tracking-tighter",
+        className
+      )}
+    >
       {heading}
     </h1>
   );
@@ -11,10 +19,19 @@ export function PageTitle({ heading }: PageTitleProps) {
 
 interface PageDescriptionProps {
   paragraph: string;
+  className?: string;
 }
-export function PageDescription({ paragraph }: PageDescriptionProps) {
+export function PageDescription({
+  paragraph,
+  className,
+}: PageDescriptionProps) {
   return (
-    <p className="max-w-3xl tracking-wide text-justify hyphens-auto w-full ">
+    <p
+      className={cn(
+        "max-w-3xl tracking-wide text-justify hyphens-auto w-full ",
+        className
+      )}
+    >
       {paragraph}
     </p>
   );

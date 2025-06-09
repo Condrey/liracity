@@ -13,6 +13,8 @@ export default function Error({ error, reset }: ErrorProps) {
   return (
     <div className="p-4 text-destructive flex flex-col  gap-4 min-h-dvh items-center overflow-x-scroll  max-w-md w-full mx-auto">
       <h2 className="text-xl font-semibold">Something went wrong!</h2>
+              <p className="break-all text-wrap">{error.message}</p>
+
       <div
         className={cn(
           process.env.NODE_ENV !== "production"
@@ -20,7 +22,6 @@ export default function Error({ error, reset }: ErrorProps) {
             : "hidden",
         )}
       >
-        <p className="break-all text-wrap">{error.message}</p>
         <pre className="mt-2 text-sm text-wrap text-muted-foreground line-clamp-[15] break-all text-ellipsis ">
           {decodeURIComponent(error.stack!)}
         </pre>

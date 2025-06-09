@@ -1,13 +1,14 @@
 import { PageDescription, PageTitle } from "@/components/page-utils";
 import Chart from "./chart";
 
+import BodyContainer from "@/app/(home)/body-container";
 import { whatWeDoLinks } from "@/components/user/constants";
-import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
+import { Metadata } from "next";
 
 const { title, description } = whatWeDoLinks.find(
-  (val) => val.href === "/hierarchy",
+  (val) => val.href === "/hierarchy"
 )!;
 export const metadata: Metadata = {
   title,
@@ -18,15 +19,13 @@ export default async function Page() {
     include: departmentDataInclude,
   });
   return (
-    <div className="pt-[85px] w-full max-w-3xl mx-auto space-y-6">
-      <div className="space-y-2">
+    <BodyContainer className="max-w-7xl">
+      <div className="space-y-2 max-w-3xl w-full mx-auto">
         <PageTitle heading={title} />
-        <PageDescription paragraph={pageDescription} />
+        <PageDescription paragraph={pageDescription} className="mx-auto" />
       </div>
-      {/* <Chart departments={departments} /> */}
-
-      {/* <ListOfDepartments departments={departments} /> */}
-    </div>
+      <Chart departments={departments} />
+    </BodyContainer>
   );
 }
 

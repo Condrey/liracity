@@ -47,7 +47,7 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
           });
       const user = await tx.user.upsert({
         where: { id: userId },
-        create: { name ,passwordHash},
+        create: { name ,passwordHash,role:Role.STAFF},
         update: { name },
       });
       const employee = await tx.employee.upsert({

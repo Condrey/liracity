@@ -52,7 +52,12 @@ export const userSchema = z.object({
   id: z.string().optional(),
   username: z.string().optional(),
   email: z.string().email().optional(),
-  telephone: z.string().optional(),
+  telephone: z.string().optional().refine(
+      (val) => !val || /^\+\d{1,3}\d{7,14}$/.test(val),
+      {
+        message: "Telephone number must start with a '+' followed by country code and number.",
+      }
+    ),
 });
 export type UserSchema = z.infer<typeof userSchema>;
 
@@ -68,7 +73,12 @@ export const verifyUserSchema = z.object({
     .describe("User username for the user.")
     .regex(/^[a-zA-Z0-9_-]+$/, "Only letters, numbers, - and _ are allowed"),
   email: requiredString.email().min(1, "A working email is required"),
-  telephone: z.string().trim().optional(),
+  telephone: z.string().trim().optional().refine(
+      (val) => !val || /^\+\d{1,3}\d{7,14}$/.test(val),
+      {
+        message: "Telephone number must start with a '+' followed by country code and number.",
+      }
+    ),
   password: requiredString
     .min(8, "Password must be at least 8 characters")
     .describe("Password for the user."),

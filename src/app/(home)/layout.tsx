@@ -1,8 +1,9 @@
 import { validateRequest } from "@/auth";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import Footer from "@/components/user/footer";
 import { AppSidebar } from "@/components/user/app-sidebar";
+import Footer from "@/components/user/footer";
 import TopAppBar from "@/components/user/top-app-bar";
+import { redirect } from "next/navigation";
 import SessionProvider from "../session-provider";
 
 export default async function Layout({
@@ -11,6 +12,9 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const { session, user } = await validateRequest();
+  if (!!user && !user.isVerified) {
+    redirect(`/user-verification/${user.id}`);
+  }
 
   return (
     <SessionProvider value={{ session, user }}>

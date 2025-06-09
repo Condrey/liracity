@@ -14,23 +14,20 @@ export async function loginAction(
   console.log(credentials);
   const { ippsNumber, password } = staffLoginSchema.parse(credentials);
 
-  const  existingEmployee = await prisma.employee.findFirst({
+  const  existingEmployee = await prisma.employee.findUnique({
     where: {
-      ippsNumber: {
-        equals: ippsNumber.toString(),
-        mode: "insensitive",
-      },
+      ippsNumber: ippsNumber.toString(),       
     },
     include: { user: true },
   });
 let existingUser = existingEmployee?.user
-  if (!existingUser || !existingUser.passwordHash) {
+  if (!existingEmployee||!existingUser) {
     return {
       error: "Incorrect IPPS number or password.",
     };
   }
 
-  const validPassword = await verify(existingUser.passwordHash, password, {
+  const validPassword = await verify(existingUser.passwordHash!, password, {
     memoryCost: 19456,
     timeCost: 2,
     outputLen: 32,

@@ -74,7 +74,7 @@ model DepartMentalSector {
 model Employee {
   id                   String              @id @default(uuid())
   user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  ippsNumber           String              @default(uuid())
+  ippsNumber           String              @unique
   assumedOffice        Int
   endedOffice          Int?
   position             String

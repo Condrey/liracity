@@ -1,14 +1,12 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import { DataTable } from "@/components/data-table/data-table";
 import ButtonAddEditEmployee from "@/components/employee/button-add-edit-employee";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { DepartmentalSectorData } from "@/lib/types";
-import { useSectorEmployeeColumns } from "./column";
-import { useSession } from "@/app/session-provider";
-import { myPrivileges } from "@/lib/enums";
-import { Role } from "@/generated/prisma";
 import { PlusIcon } from "lucide-react";
+import { useSectorEmployeeColumns } from "./column";
 
 interface ListOfSectorEmployeesProps {
   sector: DepartmentalSectorData;
@@ -18,10 +16,7 @@ export default function ListOfSectorEmployees({
   sector,
 }: ListOfSectorEmployeesProps) {
   const employees = sector.employees;
-  const { user } = useSession();
-  const isAuthorized =
-    !!user && myPrivileges[user.role].includes(Role.MODERATOR);
-  if (!isAuthorized) return null;
+  
   return (
     <div>
       {!employees.length ? (

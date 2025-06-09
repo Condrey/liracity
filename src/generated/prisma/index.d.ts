@@ -15994,10 +15994,10 @@ export namespace Prisma {
 
   export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    ippsNumber?: string
     AND?: EmployeeWhereInput | EmployeeWhereInput[]
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
-    ippsNumber?: StringFilter<"Employee"> | string
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
@@ -16009,7 +16009,7 @@ export namespace Prisma {
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     departMents?: DepartMentListRelationFilter
     departMentalSector?: XOR<DepartMentalSectorNullableScalarRelationFilter, DepartMentalSectorWhereInput> | null
-  }, "id">
+  }, "id" | "ippsNumber">
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16767,7 +16767,7 @@ export namespace Prisma {
 
   export type EmployeeCreateInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -16781,7 +16781,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -16823,7 +16823,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19083,7 +19083,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutUserInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19096,7 +19096,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutUserInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19316,7 +19316,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutDepartMentsInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19329,7 +19329,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutDepartMentsInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19437,7 +19437,7 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutDepartMentalSectorInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -19450,7 +19450,7 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutDepartMentalSectorInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -20648,7 +20648,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyUserInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
@@ -20867,7 +20867,7 @@ export namespace Prisma {
 
   export type EmployeeCreateManyDepartMentalSectorInput = {
     id?: string
-    ippsNumber?: string
+    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string

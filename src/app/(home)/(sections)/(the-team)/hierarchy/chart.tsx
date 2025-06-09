@@ -12,25 +12,20 @@ export default function Chart({ departments }: ChartProps) {
   return (
     <div className="w-full overflow-y-auto scroll-auto rounded-md pb-6 bg-secondary/20 p-3">
       <Tree
-        label={<ChartUserContainer user={mayor} />}
+        label={<ChartUserContainer user={mayor} department="Mayor" />}
         lineStyle="dashed"
         lineColor="var(--color-warning)"
         lineBorderRadius="calc(var(--spacing) * 2)"
         nodePadding="6px"
       >
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
-        <TreeNode label={<ChartUserContainer user={mayor} />}>
-          <TreeNode label={<ChartUserContainer user={mayor} />} />
-          <TreeNode label={<ChartUserContainer user={mayor} />} />
-          <TreeNode label={<ChartUserContainer user={mayor} />} />
-          <TreeNode label={<ChartUserContainer user={mayor} />} />
-          <TreeNode label={<ChartUserContainer user={mayor} />} />
-        </TreeNode>
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
-        <TreeNode label={<ChartUserContainer user={mayor} />} />
+        <TreeNode
+          label={<ChartUserContainer user={mayor} department={"Town clerk"} />}
+        />
+        <TreeNode label={<ChartUserContainer department={"Town clerk"} />} />
+
+        <TreeNode
+          label={<ChartUserContainer user={mayor} department={"Town clerk"} />}
+        />
       </Tree>
     </div>
   );

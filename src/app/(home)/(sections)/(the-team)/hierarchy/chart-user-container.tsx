@@ -7,7 +7,7 @@ import Link from "next/link";
 
 interface ChartUserContainerProps {
   user?: ChartUser;
-  department: string;
+  department: React.ReactNode;
 }
 
 export default function ChartUserContainer({
@@ -24,7 +24,8 @@ export default function ChartUserContainer({
             : user?.hierarchy! >= 3
             ? "bg-success/50"
             : "bg-primary/50",
-          "dark:bg-card dark:border-b"
+          "dark:bg-card ",
+          user && "dark:border-b"
         )}
       >
         {department}

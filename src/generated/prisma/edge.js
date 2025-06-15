@@ -246,7 +246,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\USER\\Documents\\next-apps\\liracity\\src\\generated\\prisma",
+      "value": "C:\\Users\\USER\\Documents\\NEXT-APPS\\liracity\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -260,7 +260,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\USER\\Documents\\next-apps\\liracity\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\USER\\Documents\\NEXT-APPS\\liracity\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -274,11 +274,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgres://neondb_owner:npg_1CdxYe7TcrAQ@ep-flat-leaf-a5f3i7xy-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+        "value": null
       }
     }
   },

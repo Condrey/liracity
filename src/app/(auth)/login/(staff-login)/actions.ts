@@ -35,7 +35,7 @@ let existingUser = existingEmployee?.user
   });
   if (!validPassword) {
     return {
-      error: "Incorrect Ipps number or password.",
+      error: "Incorrect IPPS number or password.",
     };
   }
 

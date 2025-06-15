@@ -6,10 +6,11 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn, webName } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Loader2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTransition } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -25,11 +26,13 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "../ui/sidebar";
-import { navLinks } from "./constants";
+import { NavLink, navLinks } from "./constants";
 import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+
   return (
     <Sidebar className="md:hidden" collapsible="icon" {...props}>
       <SidebarHeader>
@@ -53,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             {navLinks.map((item, index) => {
               const ItemIcon = item.icon!;
               const isActive = item.children.some((i) =>
-                pathname.startsWith(i.href),
+                pathname.startsWith(i.href)
               );
               return (
                 <Collapsible
@@ -73,8 +76,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         {item.icon && <ItemIcon />}
                         <span
                           className={cn(
-                            isActive && "font-semibold",
-                            "line-clamp-1 text-ellipsis break-words",
+                            "line-clamp-1 text-ellipsis break-words"
                           )}
                         >
                           {item.title}
@@ -82,7 +84,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <ChevronRight
                           className={cn(
                             "ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
-                            index === 0 && "hidden",
+                            index === 0 && "hidden"
                           )}
                         />
                         {/* </Link> */}
@@ -91,18 +93,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {item.children?.length ? (
                       <CollapsibleContent>
                         <SidebarMenuSub>
-                          {item.children.map((item) => (
-                            <SidebarMenuSubItem key={item.title}>
-                              <SidebarMenuSubButton
-                                title={item.description}
-                                asChild
-                                // isActive={item.isActive}
-                              >
-                                <Link href={item.href} className="h-fit py-1">
-                                  {item.title}
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
+                          {item.children.map((i) => (
+                            <MenuItem item={i} key={i.href} />
                           ))}
                         </SidebarMenuSub>
                       </CollapsibleContent>
@@ -119,5 +111,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
+  );
+}
+
+function MenuItem({ item }: { item: NavLink }) {
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+  const isActive = pathname.startsWith(item.href) && pathname !== "/";
+  return (
+    <SidebarMenuSubItem key={item.title}>
+      <SidebarMenuSubButton
+        title={item.description}
+        onClick={() => startTransition(() => {})}
+        asChild
+        isActive={isActive}
+      >
+        <Link href={item.href} className="h-fit py-1 flex gap-2">
+          {isPending && <Loader2Icon className="animate-spin size-4" />}
+          {item.title}
+        </Link>
+      </SidebarMenuSubButton>
+    </SidebarMenuSubItem>
   );
 }

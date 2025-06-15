@@ -14,7 +14,7 @@ interface ChartProps {
 export default function Chart({ departments }: ChartProps) {
   return (
     <div className="w-full relative  rounded-md pb-6 bg-secondary/20 p-3">
-      <TransformWrapper initialScale={0.5}>
+      <TransformWrapper centerOnInit>
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <div className="overflow-y-auto scroll-auto w-full">

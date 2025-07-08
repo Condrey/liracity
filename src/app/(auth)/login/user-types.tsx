@@ -20,6 +20,7 @@ export default function UserTypes() {
           return (
             <TabsTrigger
               value={u.user}
+              key={u.user}
               onClick={() => updateSearchParamsAndNavigate(`user`, u.user)}
             >
               {u.label}

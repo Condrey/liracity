@@ -1,11 +1,11 @@
 "use client";
 
-import { DefinedUseQueryResult } from "@tanstack/react-query";
+import { DefinedUseQueryResult, QueryObserverLoadingErrorResult } from "@tanstack/react-query";
 import LoadingButton from "../ui/loading-button";
 
 interface ErrorContainerProps {
   errorMessage: string;
-  query: DefinedUseQueryResult;
+  query: DefinedUseQueryResult|QueryObserverLoadingErrorResult;
 }
 
 export default function ErrorContainer({

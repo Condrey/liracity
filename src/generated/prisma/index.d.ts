@@ -80,9 +80,9 @@ export type NewsArticleLike = $Result.DefaultSelection<Prisma.$NewsArticleLikePa
 export namespace $Enums {
   export const Role: {
   USER: 'USER',
-  STAFF: 'STAFF',
   ADMIN: 'ADMIN',
-  MODERATOR: 'MODERATOR'
+  MODERATOR: 'MODERATOR',
+  STAFF: 'STAFF'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -395,8 +395,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.11.0
+   * Query Engine version: 9c30299f5a0ea26a96790e13f796dc6094db3173
    */
   export type PrismaVersion = {
     client: string
@@ -1890,22 +1890,22 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     emailVerificationTokens: number
-    sessions: number
-    newsArticles: number
+    employees: number
     newsComments: number
     newsArticleLikes: number
+    newsArticles: number
     newsLetters: number
-    employees: number
+    sessions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-    newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
+    employees?: boolean | UserCountOutputTypeCountEmployeesArgs
     newsComments?: boolean | UserCountOutputTypeCountNewsCommentsArgs
     newsArticleLikes?: boolean | UserCountOutputTypeCountNewsArticleLikesArgs
+    newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
     newsLetters?: boolean | UserCountOutputTypeCountNewsLettersArgs
-    employees?: boolean | UserCountOutputTypeCountEmployeesArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   }
 
   // Custom InputTypes
@@ -1929,15 +1929,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNewsArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewsArticleWhereInput
+  export type UserCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
   }
 
   /**
@@ -1957,6 +1950,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountNewsArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArticleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountNewsLettersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsLetterWhereInput
   }
@@ -1964,8 +1964,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmployeeWhereInput
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
 
@@ -2127,6 +2127,7 @@ export namespace Prisma {
     telephone: string | null
     passwordHash: string | null
     googleId: string | null
+    githubId: string | null
     bio: string | null
     isWelcomed: boolean | null
     isVerified: boolean | null
@@ -2144,6 +2145,7 @@ export namespace Prisma {
     telephone: string | null
     passwordHash: string | null
     googleId: string | null
+    githubId: string | null
     bio: string | null
     isWelcomed: boolean | null
     isVerified: boolean | null
@@ -2161,6 +2163,7 @@ export namespace Prisma {
     telephone: number
     passwordHash: number
     googleId: number
+    githubId: number
     bio: number
     isWelcomed: number
     isVerified: number
@@ -2180,6 +2183,7 @@ export namespace Prisma {
     telephone?: true
     passwordHash?: true
     googleId?: true
+    githubId?: true
     bio?: true
     isWelcomed?: true
     isVerified?: true
@@ -2197,6 +2201,7 @@ export namespace Prisma {
     telephone?: true
     passwordHash?: true
     googleId?: true
+    githubId?: true
     bio?: true
     isWelcomed?: true
     isVerified?: true
@@ -2214,6 +2219,7 @@ export namespace Prisma {
     telephone?: true
     passwordHash?: true
     googleId?: true
+    githubId?: true
     bio?: true
     isWelcomed?: true
     isVerified?: true
@@ -2299,11 +2305,12 @@ export namespace Prisma {
     username: string | null
     email: string | null
     avatarUrl: string | null
-    role: $Enums.Role | null
+    role: $Enums.Role
     createdAt: Date
     telephone: string | null
     passwordHash: string | null
     googleId: string | null
+    githubId: string | null
     bio: string | null
     isWelcomed: boolean
     isVerified: boolean
@@ -2338,17 +2345,18 @@ export namespace Prisma {
     telephone?: boolean
     passwordHash?: boolean
     googleId?: boolean
+    githubId?: boolean
     bio?: boolean
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: boolean | User$emailVerificationTokensArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
+    employees?: boolean | User$employeesArgs<ExtArgs>
     newsComments?: boolean | User$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | User$newsArticleLikesArgs<ExtArgs>
+    newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
-    employees?: boolean | User$employeesArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2363,6 +2371,7 @@ export namespace Prisma {
     telephone?: boolean
     passwordHash?: boolean
     googleId?: boolean
+    githubId?: boolean
     bio?: boolean
     isWelcomed?: boolean
     isVerified?: boolean
@@ -2380,6 +2389,7 @@ export namespace Prisma {
     telephone?: boolean
     passwordHash?: boolean
     googleId?: boolean
+    githubId?: boolean
     bio?: boolean
     isWelcomed?: boolean
     isVerified?: boolean
@@ -2397,21 +2407,22 @@ export namespace Prisma {
     telephone?: boolean
     passwordHash?: boolean
     googleId?: boolean
+    githubId?: boolean
     bio?: boolean
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "avatarUrl" | "role" | "createdAt" | "telephone" | "passwordHash" | "googleId" | "bio" | "isWelcomed" | "isVerified" | "emailVerified", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "username" | "email" | "avatarUrl" | "role" | "createdAt" | "telephone" | "passwordHash" | "googleId" | "githubId" | "bio" | "isWelcomed" | "isVerified" | "emailVerified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     emailVerificationTokens?: boolean | User$emailVerificationTokensArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
-    newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
+    employees?: boolean | User$employeesArgs<ExtArgs>
     newsComments?: boolean | User$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | User$newsArticleLikesArgs<ExtArgs>
+    newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
-    employees?: boolean | User$employeesArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2421,12 +2432,12 @@ export namespace Prisma {
     name: "User"
     objects: {
       emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
-      newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
+      employees: Prisma.$EmployeePayload<ExtArgs>[]
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
       newsArticleLikes: Prisma.$NewsArticleLikePayload<ExtArgs>[]
+      newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
       newsLetters: Prisma.$NewsLetterPayload<ExtArgs>[]
-      employees: Prisma.$EmployeePayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2434,11 +2445,12 @@ export namespace Prisma {
       username: string | null
       email: string | null
       avatarUrl: string | null
-      role: $Enums.Role | null
+      role: $Enums.Role
       createdAt: Date
       telephone: string | null
       passwordHash: string | null
       googleId: string | null
+      githubId: string | null
       bio: string | null
       isWelcomed: boolean
       isVerified: boolean
@@ -2838,12 +2850,12 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     emailVerificationTokens<T extends User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    newsArticles<T extends User$newsArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    employees<T extends User$employeesArgs<ExtArgs> = {}>(args?: Subset<T, User$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsComments<T extends User$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsArticleLikes<T extends User$newsArticleLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    newsArticles<T extends User$newsArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsLetters<T extends User$newsLettersArgs<ExtArgs> = {}>(args?: Subset<T, User$newsLettersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    employees<T extends User$employeesArgs<ExtArgs> = {}>(args?: Subset<T, User$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2883,6 +2895,7 @@ export namespace Prisma {
     readonly telephone: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
+    readonly githubId: FieldRef<"User", 'String'>
     readonly bio: FieldRef<"User", 'String'>
     readonly isWelcomed: FieldRef<"User", 'Boolean'>
     readonly isVerified: FieldRef<"User", 'Boolean'>
@@ -3299,51 +3312,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.sessions
+   * User.employees
    */
-  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Session
+     * Select specific fields to fetch from the Employee
      */
-    select?: SessionSelect<ExtArgs> | null
+    select?: EmployeeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Session
+     * Omit specific fields from the Employee
      */
-    omit?: SessionOmit<ExtArgs> | null
+    omit?: EmployeeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SessionInclude<ExtArgs> | null
-    where?: SessionWhereInput
-    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
-    cursor?: SessionWhereUniqueInput
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    cursor?: EmployeeWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.newsArticles
-   */
-  export type User$newsArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsArticle
-     */
-    select?: NewsArticleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsArticle
-     */
-    omit?: NewsArticleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsArticleInclude<ExtArgs> | null
-    where?: NewsArticleWhereInput
-    orderBy?: NewsArticleOrderByWithRelationInput | NewsArticleOrderByWithRelationInput[]
-    cursor?: NewsArticleWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
   }
 
   /**
@@ -3395,6 +3384,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.newsArticles
+   */
+  export type User$newsArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+    orderBy?: NewsArticleOrderByWithRelationInput | NewsArticleOrderByWithRelationInput[]
+    cursor?: NewsArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
    * User.newsLetters
    */
   export type User$newsLettersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3419,27 +3432,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.employees
+   * User.sessions
    */
-  export type User$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employee
+     * Select specific fields to fetch from the Session
      */
-    select?: EmployeeSelect<ExtArgs> | null
+    select?: SessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Employee
+     * Omit specific fields from the Session
      */
-    omit?: EmployeeOmit<ExtArgs> | null
+    omit?: SessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    cursor?: EmployeeWhereUniqueInput
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
   }
 
   /**
@@ -4469,22 +4482,22 @@ export namespace Prisma {
   export type DepartMentMinAggregateOutputType = {
     id: string | null
     name: string | null
-    about: string | null
     headOfDepartmentId: string | null
+    about: string | null
   }
 
   export type DepartMentMaxAggregateOutputType = {
     id: string | null
     name: string | null
-    about: string | null
     headOfDepartmentId: string | null
+    about: string | null
   }
 
   export type DepartMentCountAggregateOutputType = {
     id: number
     name: number
-    about: number
     headOfDepartmentId: number
+    about: number
     _all: number
   }
 
@@ -4492,22 +4505,22 @@ export namespace Prisma {
   export type DepartMentMinAggregateInputType = {
     id?: true
     name?: true
-    about?: true
     headOfDepartmentId?: true
+    about?: true
   }
 
   export type DepartMentMaxAggregateInputType = {
     id?: true
     name?: true
-    about?: true
     headOfDepartmentId?: true
+    about?: true
   }
 
   export type DepartMentCountAggregateInputType = {
     id?: true
     name?: true
-    about?: true
     headOfDepartmentId?: true
+    about?: true
     _all?: true
   }
 
@@ -4586,8 +4599,8 @@ export namespace Prisma {
   export type DepartMentGroupByOutputType = {
     id: string
     name: string
-    about: string | null
     headOfDepartmentId: string | null
+    about: string | null
     _count: DepartMentCountAggregateOutputType | null
     _min: DepartMentMinAggregateOutputType | null
     _max: DepartMentMaxAggregateOutputType | null
@@ -4610,40 +4623,40 @@ export namespace Prisma {
   export type DepartMentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    about?: boolean
     headOfDepartmentId?: boolean
-    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
+    about?: boolean
     departmentalSectors?: boolean | DepartMent$departmentalSectorsArgs<ExtArgs>
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
     _count?: boolean | DepartMentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["departMent"]>
 
   export type DepartMentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    about?: boolean
     headOfDepartmentId?: boolean
+    about?: boolean
     headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
   }, ExtArgs["result"]["departMent"]>
 
   export type DepartMentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    about?: boolean
     headOfDepartmentId?: boolean
+    about?: boolean
     headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
   }, ExtArgs["result"]["departMent"]>
 
   export type DepartMentSelectScalar = {
     id?: boolean
     name?: boolean
-    about?: boolean
     headOfDepartmentId?: boolean
+    about?: boolean
   }
 
-  export type DepartMentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "headOfDepartmentId", ExtArgs["result"]["departMent"]>
+  export type DepartMentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "headOfDepartmentId" | "about", ExtArgs["result"]["departMent"]>
   export type DepartMentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
     departmentalSectors?: boolean | DepartMent$departmentalSectorsArgs<ExtArgs>
+    headOfDepartment?: boolean | DepartMent$headOfDepartmentArgs<ExtArgs>
     _count?: boolean | DepartMentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DepartMentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4656,14 +4669,14 @@ export namespace Prisma {
   export type $DepartMentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DepartMent"
     objects: {
-      headOfDepartment: Prisma.$EmployeePayload<ExtArgs> | null
       departmentalSectors: Prisma.$DepartMentalSectorPayload<ExtArgs>[]
+      headOfDepartment: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      about: string | null
       headOfDepartmentId: string | null
+      about: string | null
     }, ExtArgs["result"]["departMent"]>
     composites: {}
   }
@@ -5058,8 +5071,8 @@ export namespace Prisma {
    */
   export interface Prisma__DepartMentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    headOfDepartment<T extends DepartMent$headOfDepartmentArgs<ExtArgs> = {}>(args?: Subset<T, DepartMent$headOfDepartmentArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     departmentalSectors<T extends DepartMent$departmentalSectorsArgs<ExtArgs> = {}>(args?: Subset<T, DepartMent$departmentalSectorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    headOfDepartment<T extends DepartMent$headOfDepartmentArgs<ExtArgs> = {}>(args?: Subset<T, DepartMent$headOfDepartmentArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5091,8 +5104,8 @@ export namespace Prisma {
   interface DepartMentFieldRefs {
     readonly id: FieldRef<"DepartMent", 'String'>
     readonly name: FieldRef<"DepartMent", 'String'>
-    readonly about: FieldRef<"DepartMent", 'String'>
     readonly headOfDepartmentId: FieldRef<"DepartMent", 'String'>
+    readonly about: FieldRef<"DepartMent", 'String'>
   }
     
 
@@ -5489,25 +5502,6 @@ export namespace Prisma {
   }
 
   /**
-   * DepartMent.headOfDepartment
-   */
-  export type DepartMent$headOfDepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Employee
-     */
-    omit?: EmployeeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-  /**
    * DepartMent.departmentalSectors
    */
   export type DepartMent$departmentalSectorsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5529,6 +5523,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DepartMentalSectorScalarFieldEnum | DepartMentalSectorScalarFieldEnum[]
+  }
+
+  /**
+   * DepartMent.headOfDepartment
+   */
+  export type DepartMent$headOfDepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Employee
+     */
+    omit?: EmployeeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
   }
 
   /**
@@ -5574,24 +5587,24 @@ export namespace Prisma {
     id: string | null
     name: string | null
     description: string | null
-    hierarchy: number | null
     departMentId: string | null
+    hierarchy: number | null
   }
 
   export type DepartMentalSectorMaxAggregateOutputType = {
     id: string | null
     name: string | null
     description: string | null
-    hierarchy: number | null
     departMentId: string | null
+    hierarchy: number | null
   }
 
   export type DepartMentalSectorCountAggregateOutputType = {
     id: number
     name: number
     description: number
-    hierarchy: number
     departMentId: number
+    hierarchy: number
     _all: number
   }
 
@@ -5608,24 +5621,24 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
-    hierarchy?: true
     departMentId?: true
+    hierarchy?: true
   }
 
   export type DepartMentalSectorMaxAggregateInputType = {
     id?: true
     name?: true
     description?: true
-    hierarchy?: true
     departMentId?: true
+    hierarchy?: true
   }
 
   export type DepartMentalSectorCountAggregateInputType = {
     id?: true
     name?: true
     description?: true
-    hierarchy?: true
     departMentId?: true
+    hierarchy?: true
     _all?: true
   }
 
@@ -5719,8 +5732,8 @@ export namespace Prisma {
     id: string
     name: string
     description: string | null
-    hierarchy: number
     departMentId: string | null
+    hierarchy: number
     _count: DepartMentalSectorCountAggregateOutputType | null
     _avg: DepartMentalSectorAvgAggregateOutputType | null
     _sum: DepartMentalSectorSumAggregateOutputType | null
@@ -5746,10 +5759,10 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
-    hierarchy?: boolean
     departMentId?: boolean
-    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
+    hierarchy?: boolean
     departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
     _count?: boolean | DepartMentalSectorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["departMentalSector"]>
 
@@ -5757,8 +5770,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
-    hierarchy?: boolean
     departMentId?: boolean
+    hierarchy?: boolean
     departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
   }, ExtArgs["result"]["departMentalSector"]>
 
@@ -5766,8 +5779,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
-    hierarchy?: boolean
     departMentId?: boolean
+    hierarchy?: boolean
     departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
   }, ExtArgs["result"]["departMentalSector"]>
 
@@ -5775,14 +5788,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
-    hierarchy?: boolean
     departMentId?: boolean
+    hierarchy?: boolean
   }
 
-  export type DepartMentalSectorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "hierarchy" | "departMentId", ExtArgs["result"]["departMentalSector"]>
+  export type DepartMentalSectorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "departMentId" | "hierarchy", ExtArgs["result"]["departMentalSector"]>
   export type DepartMentalSectorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
     departMent?: boolean | DepartMentalSector$departMentArgs<ExtArgs>
+    employees?: boolean | DepartMentalSector$employeesArgs<ExtArgs>
     _count?: boolean | DepartMentalSectorCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DepartMentalSectorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5795,15 +5808,15 @@ export namespace Prisma {
   export type $DepartMentalSectorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DepartMentalSector"
     objects: {
-      employees: Prisma.$EmployeePayload<ExtArgs>[]
       departMent: Prisma.$DepartMentPayload<ExtArgs> | null
+      employees: Prisma.$EmployeePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       description: string | null
-      hierarchy: number
       departMentId: string | null
+      hierarchy: number
     }, ExtArgs["result"]["departMentalSector"]>
     composites: {}
   }
@@ -6198,8 +6211,8 @@ export namespace Prisma {
    */
   export interface Prisma__DepartMentalSectorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    employees<T extends DepartMentalSector$employeesArgs<ExtArgs> = {}>(args?: Subset<T, DepartMentalSector$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     departMent<T extends DepartMentalSector$departMentArgs<ExtArgs> = {}>(args?: Subset<T, DepartMentalSector$departMentArgs<ExtArgs>>): Prisma__DepartMentClient<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    employees<T extends DepartMentalSector$employeesArgs<ExtArgs> = {}>(args?: Subset<T, DepartMentalSector$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6232,8 +6245,8 @@ export namespace Prisma {
     readonly id: FieldRef<"DepartMentalSector", 'String'>
     readonly name: FieldRef<"DepartMentalSector", 'String'>
     readonly description: FieldRef<"DepartMentalSector", 'String'>
-    readonly hierarchy: FieldRef<"DepartMentalSector", 'Int'>
     readonly departMentId: FieldRef<"DepartMentalSector", 'String'>
+    readonly hierarchy: FieldRef<"DepartMentalSector", 'Int'>
   }
     
 
@@ -6630,6 +6643,25 @@ export namespace Prisma {
   }
 
   /**
+   * DepartMentalSector.departMent
+   */
+  export type DepartMentalSector$departMentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartMent
+     */
+    select?: DepartMentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DepartMent
+     */
+    omit?: DepartMentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartMentInclude<ExtArgs> | null
+    where?: DepartMentWhereInput
+  }
+
+  /**
    * DepartMentalSector.employees
    */
   export type DepartMentalSector$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6651,25 +6683,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
-  }
-
-  /**
-   * DepartMentalSector.departMent
-   */
-  export type DepartMentalSector$departMentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the DepartMent
-     */
-    select?: DepartMentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the DepartMent
-     */
-    omit?: DepartMentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: DepartMentInclude<ExtArgs> | null
-    where?: DepartMentWhereInput
   }
 
   /**
@@ -6717,41 +6730,41 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateOutputType = {
     id: string | null
-    ippsNumber: string | null
     assumedOffice: number | null
     endedOffice: number | null
     position: string | null
-    title: string | null
-    hierarchy: number | null
     shortMessageToPublic: string | null
     departMentalSectorId: string | null
     userId: string | null
+    hierarchy: number | null
+    ippsNumber: string | null
+    title: string | null
   }
 
   export type EmployeeMaxAggregateOutputType = {
     id: string | null
-    ippsNumber: string | null
     assumedOffice: number | null
     endedOffice: number | null
     position: string | null
-    title: string | null
-    hierarchy: number | null
     shortMessageToPublic: string | null
     departMentalSectorId: string | null
     userId: string | null
+    hierarchy: number | null
+    ippsNumber: string | null
+    title: string | null
   }
 
   export type EmployeeCountAggregateOutputType = {
     id: number
-    ippsNumber: number
     assumedOffice: number
     endedOffice: number
     position: number
-    title: number
-    hierarchy: number
     shortMessageToPublic: number
     departMentalSectorId: number
     userId: number
+    hierarchy: number
+    ippsNumber: number
+    title: number
     _all: number
   }
 
@@ -6770,41 +6783,41 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateInputType = {
     id?: true
-    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
-    title?: true
-    hierarchy?: true
     shortMessageToPublic?: true
     departMentalSectorId?: true
     userId?: true
+    hierarchy?: true
+    ippsNumber?: true
+    title?: true
   }
 
   export type EmployeeMaxAggregateInputType = {
     id?: true
-    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
-    title?: true
-    hierarchy?: true
     shortMessageToPublic?: true
     departMentalSectorId?: true
     userId?: true
+    hierarchy?: true
+    ippsNumber?: true
+    title?: true
   }
 
   export type EmployeeCountAggregateInputType = {
     id?: true
-    ippsNumber?: true
     assumedOffice?: true
     endedOffice?: true
     position?: true
-    title?: true
-    hierarchy?: true
     shortMessageToPublic?: true
     departMentalSectorId?: true
     userId?: true
+    hierarchy?: true
+    ippsNumber?: true
+    title?: true
     _all?: true
   }
 
@@ -6896,15 +6909,15 @@ export namespace Prisma {
 
   export type EmployeeGroupByOutputType = {
     id: string
-    ippsNumber: string
     assumedOffice: number
     endedOffice: number | null
     position: string
-    title: string
-    hierarchy: number
     shortMessageToPublic: string | null
     departMentalSectorId: string | null
     userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
     _count: EmployeeCountAggregateOutputType | null
     _avg: EmployeeAvgAggregateOutputType | null
     _sum: EmployeeSumAggregateOutputType | null
@@ -6928,98 +6941,98 @@ export namespace Prisma {
 
   export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
-    title?: boolean
-    hierarchy?: boolean
     shortMessageToPublic?: boolean
     departMentalSectorId?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    hierarchy?: boolean
+    ippsNumber?: boolean
+    title?: boolean
     departMents?: boolean | Employee$departMentsArgs<ExtArgs>
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
-    title?: boolean
-    hierarchy?: boolean
     shortMessageToPublic?: boolean
     departMentalSectorId?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    hierarchy?: boolean
+    ippsNumber?: boolean
+    title?: boolean
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
-    title?: boolean
-    hierarchy?: boolean
     shortMessageToPublic?: boolean
     departMentalSectorId?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    hierarchy?: boolean
+    ippsNumber?: boolean
+    title?: boolean
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectScalar = {
     id?: boolean
-    ippsNumber?: boolean
     assumedOffice?: boolean
     endedOffice?: boolean
     position?: boolean
-    title?: boolean
-    hierarchy?: boolean
     shortMessageToPublic?: boolean
     departMentalSectorId?: boolean
     userId?: boolean
+    hierarchy?: boolean
+    ippsNumber?: boolean
+    title?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ippsNumber" | "assumedOffice" | "endedOffice" | "position" | "title" | "hierarchy" | "shortMessageToPublic" | "departMentalSectorId" | "userId", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assumedOffice" | "endedOffice" | "position" | "shortMessageToPublic" | "departMentalSectorId" | "userId" | "hierarchy" | "ippsNumber" | "title", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     departMents?: boolean | Employee$departMentsArgs<ExtArgs>
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     departMentalSector?: boolean | Employee$departMentalSectorArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Employee"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       departMents: Prisma.$DepartMentPayload<ExtArgs>[]
       departMentalSector: Prisma.$DepartMentalSectorPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      ippsNumber: string
       assumedOffice: number
       endedOffice: number | null
       position: string
-      title: string
-      hierarchy: number
       shortMessageToPublic: string | null
       departMentalSectorId: string | null
       userId: string
+      hierarchy: number
+      ippsNumber: string
+      title: string
     }, ExtArgs["result"]["employee"]>
     composites: {}
   }
@@ -7414,9 +7427,9 @@ export namespace Prisma {
    */
   export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     departMents<T extends Employee$departMentsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$departMentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartMentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     departMentalSector<T extends Employee$departMentalSectorArgs<ExtArgs> = {}>(args?: Subset<T, Employee$departMentalSectorArgs<ExtArgs>>): Prisma__DepartMentalSectorClient<$Result.GetResult<Prisma.$DepartMentalSectorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7447,15 +7460,15 @@ export namespace Prisma {
    */
   interface EmployeeFieldRefs {
     readonly id: FieldRef<"Employee", 'String'>
-    readonly ippsNumber: FieldRef<"Employee", 'String'>
     readonly assumedOffice: FieldRef<"Employee", 'Int'>
     readonly endedOffice: FieldRef<"Employee", 'Int'>
     readonly position: FieldRef<"Employee", 'String'>
-    readonly title: FieldRef<"Employee", 'String'>
-    readonly hierarchy: FieldRef<"Employee", 'Int'>
     readonly shortMessageToPublic: FieldRef<"Employee", 'String'>
     readonly departMentalSectorId: FieldRef<"Employee", 'String'>
     readonly userId: FieldRef<"Employee", 'String'>
+    readonly hierarchy: FieldRef<"Employee", 'Int'>
+    readonly ippsNumber: FieldRef<"Employee", 'String'>
+    readonly title: FieldRef<"Employee", 'String'>
   }
     
 
@@ -8993,6 +9006,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     expiresAt: Date | null
+    createdAt: Date | null
+    lastVerifiedAt: Date | null
+    secretHash: string | null
     role: $Enums.Role | null
   }
 
@@ -9000,6 +9016,9 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     expiresAt: Date | null
+    createdAt: Date | null
+    lastVerifiedAt: Date | null
+    secretHash: string | null
     role: $Enums.Role | null
   }
 
@@ -9007,6 +9026,9 @@ export namespace Prisma {
     id: number
     userId: number
     expiresAt: number
+    createdAt: number
+    lastVerifiedAt: number
+    secretHash: number
     role: number
     _all: number
   }
@@ -9016,6 +9038,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     expiresAt?: true
+    createdAt?: true
+    lastVerifiedAt?: true
+    secretHash?: true
     role?: true
   }
 
@@ -9023,6 +9048,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     expiresAt?: true
+    createdAt?: true
+    lastVerifiedAt?: true
+    secretHash?: true
     role?: true
   }
 
@@ -9030,6 +9058,9 @@ export namespace Prisma {
     id?: true
     userId?: true
     expiresAt?: true
+    createdAt?: true
+    lastVerifiedAt?: true
+    secretHash?: true
     role?: true
     _all?: true
   }
@@ -9110,6 +9141,9 @@ export namespace Prisma {
     id: string
     userId: string
     expiresAt: Date
+    createdAt: Date
+    lastVerifiedAt: Date
+    secretHash: string
     role: $Enums.Role
     _count: SessionCountAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
@@ -9134,6 +9168,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
+    lastVerifiedAt?: boolean
+    secretHash?: boolean
     role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
@@ -9142,6 +9179,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
+    lastVerifiedAt?: boolean
+    secretHash?: boolean
     role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
@@ -9150,6 +9190,9 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
+    lastVerifiedAt?: boolean
+    secretHash?: boolean
     role?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
@@ -9158,10 +9201,13 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
+    lastVerifiedAt?: boolean
+    secretHash?: boolean
     role?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "expiresAt" | "role", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "expiresAt" | "createdAt" | "lastVerifiedAt" | "secretHash" | "role", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -9181,6 +9227,9 @@ export namespace Prisma {
       id: string
       userId: string
       expiresAt: Date
+      createdAt: Date
+      lastVerifiedAt: Date
+      secretHash: string
       role: $Enums.Role
     }, ExtArgs["result"]["session"]>
     composites: {}
@@ -9609,6 +9658,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Session", 'String'>
     readonly userId: FieldRef<"Session", 'String'>
     readonly expiresAt: FieldRef<"Session", 'DateTime'>
+    readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly lastVerifiedAt: FieldRef<"Session", 'DateTime'>
+    readonly secretHash: FieldRef<"Session", 'String'>
     readonly role: FieldRef<"Session", 'Role'>
   }
     
@@ -12286,9 +12338,9 @@ export namespace Prisma {
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
@@ -12332,9 +12384,9 @@ export namespace Prisma {
 
   export type NewsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageUrl" | "title" | "publishedAt" | "content" | "authorId" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
   export type NewsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NewsArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12347,9 +12399,9 @@ export namespace Prisma {
   export type $NewsArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "NewsArticle"
     objects: {
-      author: Prisma.$UserPayload<ExtArgs>
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
       newsArticleLikes: Prisma.$NewsArticleLikePayload<ExtArgs>[]
+      author: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12755,9 +12807,9 @@ export namespace Prisma {
    */
   export interface Prisma__NewsArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     newsComments<T extends NewsArticle$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsArticleLikes<T extends NewsArticle$newsArticleLikesArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsArticleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15415,6 +15467,7 @@ export namespace Prisma {
     telephone: 'telephone',
     passwordHash: 'passwordHash',
     googleId: 'googleId',
+    githubId: 'githubId',
     bio: 'bio',
     isWelcomed: 'isWelcomed',
     isVerified: 'isVerified',
@@ -15438,8 +15491,8 @@ export namespace Prisma {
   export const DepartMentScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    about: 'about',
-    headOfDepartmentId: 'headOfDepartmentId'
+    headOfDepartmentId: 'headOfDepartmentId',
+    about: 'about'
   };
 
   export type DepartMentScalarFieldEnum = (typeof DepartMentScalarFieldEnum)[keyof typeof DepartMentScalarFieldEnum]
@@ -15449,8 +15502,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
-    hierarchy: 'hierarchy',
-    departMentId: 'departMentId'
+    departMentId: 'departMentId',
+    hierarchy: 'hierarchy'
   };
 
   export type DepartMentalSectorScalarFieldEnum = (typeof DepartMentalSectorScalarFieldEnum)[keyof typeof DepartMentalSectorScalarFieldEnum]
@@ -15458,15 +15511,15 @@ export namespace Prisma {
 
   export const EmployeeScalarFieldEnum: {
     id: 'id',
-    ippsNumber: 'ippsNumber',
     assumedOffice: 'assumedOffice',
     endedOffice: 'endedOffice',
     position: 'position',
-    title: 'title',
-    hierarchy: 'hierarchy',
     shortMessageToPublic: 'shortMessageToPublic',
     departMentalSectorId: 'departMentalSectorId',
-    userId: 'userId'
+    userId: 'userId',
+    hierarchy: 'hierarchy',
+    ippsNumber: 'ippsNumber',
+    title: 'title'
   };
 
   export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
@@ -15485,6 +15538,9 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    lastVerifiedAt: 'lastVerifiedAt',
+    secretHash: 'secretHash',
     role: 'role'
   };
 
@@ -15683,22 +15739,23 @@ export namespace Prisma {
     username?: StringNullableFilter<"User"> | string | null
     email?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
-    role?: EnumRoleNullableFilter<"User"> | $Enums.Role | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     telephone?: StringNullableFilter<"User"> | string | null
     passwordHash?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
+    githubId?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
     isWelcomed?: BoolFilter<"User"> | boolean
     isVerified?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
     emailVerificationTokens?: EmailVerificationTokenListRelationFilter
-    sessions?: SessionListRelationFilter
-    newsArticles?: NewsArticleListRelationFilter
+    employees?: EmployeeListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
+    newsArticles?: NewsArticleListRelationFilter
     newsLetters?: NewsLetterListRelationFilter
-    employees?: EmployeeListRelationFilter
+    sessions?: SessionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15707,22 +15764,23 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
-    role?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     telephone?: SortOrderInput | SortOrder
     passwordHash?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
+    githubId?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     isWelcomed?: SortOrder
     isVerified?: SortOrder
     emailVerified?: SortOrder
     emailVerificationTokens?: EmailVerificationTokenOrderByRelationAggregateInput
-    sessions?: SessionOrderByRelationAggregateInput
-    newsArticles?: NewsArticleOrderByRelationAggregateInput
+    employees?: EmployeeOrderByRelationAggregateInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
     newsArticleLikes?: NewsArticleLikeOrderByRelationAggregateInput
+    newsArticles?: NewsArticleOrderByRelationAggregateInput
     newsLetters?: NewsLetterOrderByRelationAggregateInput
-    employees?: EmployeeOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15730,12 +15788,13 @@ export namespace Prisma {
     username?: string
     email?: string
     googleId?: string
+    githubId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringNullableFilter<"User"> | string | null
     avatarUrl?: StringNullableFilter<"User"> | string | null
-    role?: EnumRoleNullableFilter<"User"> | $Enums.Role | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     telephone?: StringNullableFilter<"User"> | string | null
     passwordHash?: StringNullableFilter<"User"> | string | null
@@ -15744,13 +15803,13 @@ export namespace Prisma {
     isVerified?: BoolFilter<"User"> | boolean
     emailVerified?: BoolFilter<"User"> | boolean
     emailVerificationTokens?: EmailVerificationTokenListRelationFilter
-    sessions?: SessionListRelationFilter
-    newsArticles?: NewsArticleListRelationFilter
+    employees?: EmployeeListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
+    newsArticles?: NewsArticleListRelationFilter
     newsLetters?: NewsLetterListRelationFilter
-    employees?: EmployeeListRelationFilter
-  }, "id" | "username" | "email" | "googleId">
+    sessions?: SessionListRelationFilter
+  }, "id" | "username" | "email" | "googleId" | "githubId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -15758,11 +15817,12 @@ export namespace Prisma {
     username?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     avatarUrl?: SortOrderInput | SortOrder
-    role?: SortOrderInput | SortOrder
+    role?: SortOrder
     createdAt?: SortOrder
     telephone?: SortOrderInput | SortOrder
     passwordHash?: SortOrderInput | SortOrder
     googleId?: SortOrderInput | SortOrder
+    githubId?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
     isWelcomed?: SortOrder
     isVerified?: SortOrder
@@ -15781,11 +15841,12 @@ export namespace Prisma {
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
-    role?: EnumRoleNullableWithAggregatesFilter<"User"> | $Enums.Role | null
+    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     telephone?: StringNullableWithAggregatesFilter<"User"> | string | null
     passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    githubId?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
     isWelcomed?: BoolWithAggregatesFilter<"User"> | boolean
     isVerified?: BoolWithAggregatesFilter<"User"> | boolean
@@ -15850,19 +15911,19 @@ export namespace Prisma {
     NOT?: DepartMentWhereInput | DepartMentWhereInput[]
     id?: StringFilter<"DepartMent"> | string
     name?: StringFilter<"DepartMent"> | string
-    about?: StringNullableFilter<"DepartMent"> | string | null
     headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
-    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    about?: StringNullableFilter<"DepartMent"> | string | null
     departmentalSectors?: DepartMentalSectorListRelationFilter
+    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
   }
 
   export type DepartMentOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    about?: SortOrderInput | SortOrder
     headOfDepartmentId?: SortOrderInput | SortOrder
-    headOfDepartment?: EmployeeOrderByWithRelationInput
+    about?: SortOrderInput | SortOrder
     departmentalSectors?: DepartMentalSectorOrderByRelationAggregateInput
+    headOfDepartment?: EmployeeOrderByWithRelationInput
   }
 
   export type DepartMentWhereUniqueInput = Prisma.AtLeast<{
@@ -15871,17 +15932,17 @@ export namespace Prisma {
     OR?: DepartMentWhereInput[]
     NOT?: DepartMentWhereInput | DepartMentWhereInput[]
     name?: StringFilter<"DepartMent"> | string
-    about?: StringNullableFilter<"DepartMent"> | string | null
     headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
-    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+    about?: StringNullableFilter<"DepartMent"> | string | null
     departmentalSectors?: DepartMentalSectorListRelationFilter
+    headOfDepartment?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
   }, "id">
 
   export type DepartMentOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    about?: SortOrderInput | SortOrder
     headOfDepartmentId?: SortOrderInput | SortOrder
+    about?: SortOrderInput | SortOrder
     _count?: DepartMentCountOrderByAggregateInput
     _max?: DepartMentMaxOrderByAggregateInput
     _min?: DepartMentMinOrderByAggregateInput
@@ -15893,8 +15954,8 @@ export namespace Prisma {
     NOT?: DepartMentScalarWhereWithAggregatesInput | DepartMentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"DepartMent"> | string
     name?: StringWithAggregatesFilter<"DepartMent"> | string
-    about?: StringNullableWithAggregatesFilter<"DepartMent"> | string | null
     headOfDepartmentId?: StringNullableWithAggregatesFilter<"DepartMent"> | string | null
+    about?: StringNullableWithAggregatesFilter<"DepartMent"> | string | null
   }
 
   export type DepartMentalSectorWhereInput = {
@@ -15904,20 +15965,20 @@ export namespace Prisma {
     id?: StringFilter<"DepartMentalSector"> | string
     name?: StringFilter<"DepartMentalSector"> | string
     description?: StringNullableFilter<"DepartMentalSector"> | string | null
-    hierarchy?: IntFilter<"DepartMentalSector"> | number
     departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
-    employees?: EmployeeListRelationFilter
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
     departMent?: XOR<DepartMentNullableScalarRelationFilter, DepartMentWhereInput> | null
+    employees?: EmployeeListRelationFilter
   }
 
   export type DepartMentalSectorOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
-    hierarchy?: SortOrder
     departMentId?: SortOrderInput | SortOrder
-    employees?: EmployeeOrderByRelationAggregateInput
+    hierarchy?: SortOrder
     departMent?: DepartMentOrderByWithRelationInput
+    employees?: EmployeeOrderByRelationAggregateInput
   }
 
   export type DepartMentalSectorWhereUniqueInput = Prisma.AtLeast<{
@@ -15927,18 +15988,18 @@ export namespace Prisma {
     NOT?: DepartMentalSectorWhereInput | DepartMentalSectorWhereInput[]
     name?: StringFilter<"DepartMentalSector"> | string
     description?: StringNullableFilter<"DepartMentalSector"> | string | null
-    hierarchy?: IntFilter<"DepartMentalSector"> | number
     departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
-    employees?: EmployeeListRelationFilter
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
     departMent?: XOR<DepartMentNullableScalarRelationFilter, DepartMentWhereInput> | null
+    employees?: EmployeeListRelationFilter
   }, "id">
 
   export type DepartMentalSectorOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
-    hierarchy?: SortOrder
     departMentId?: SortOrderInput | SortOrder
+    hierarchy?: SortOrder
     _count?: DepartMentalSectorCountOrderByAggregateInput
     _avg?: DepartMentalSectorAvgOrderByAggregateInput
     _max?: DepartMentalSectorMaxOrderByAggregateInput
@@ -15953,8 +16014,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"DepartMentalSector"> | string
     name?: StringWithAggregatesFilter<"DepartMentalSector"> | string
     description?: StringNullableWithAggregatesFilter<"DepartMentalSector"> | string | null
-    hierarchy?: IntWithAggregatesFilter<"DepartMentalSector"> | number
     departMentId?: StringNullableWithAggregatesFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntWithAggregatesFilter<"DepartMentalSector"> | number
   }
 
   export type EmployeeWhereInput = {
@@ -15962,34 +16023,34 @@ export namespace Prisma {
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     id?: StringFilter<"Employee"> | string
-    ippsNumber?: StringFilter<"Employee"> | string
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
-    title?: StringFilter<"Employee"> | string
-    hierarchy?: IntFilter<"Employee"> | number
     shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
     departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
     userId?: StringFilter<"Employee"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hierarchy?: IntFilter<"Employee"> | number
+    ippsNumber?: StringFilter<"Employee"> | string
+    title?: StringFilter<"Employee"> | string
     departMents?: DepartMentListRelationFilter
     departMentalSector?: XOR<DepartMentalSectorNullableScalarRelationFilter, DepartMentalSectorWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type EmployeeOrderByWithRelationInput = {
     id?: SortOrder
-    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrderInput | SortOrder
     position?: SortOrder
-    title?: SortOrder
-    hierarchy?: SortOrder
     shortMessageToPublic?: SortOrderInput | SortOrder
     departMentalSectorId?: SortOrderInput | SortOrder
     userId?: SortOrder
-    user?: UserOrderByWithRelationInput
+    hierarchy?: SortOrder
+    ippsNumber?: SortOrder
+    title?: SortOrder
     departMents?: DepartMentOrderByRelationAggregateInput
     departMentalSector?: DepartMentalSectorOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -16001,27 +16062,27 @@ export namespace Prisma {
     assumedOffice?: IntFilter<"Employee"> | number
     endedOffice?: IntNullableFilter<"Employee"> | number | null
     position?: StringFilter<"Employee"> | string
-    title?: StringFilter<"Employee"> | string
-    hierarchy?: IntFilter<"Employee"> | number
     shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
     departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
     userId?: StringFilter<"Employee"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    hierarchy?: IntFilter<"Employee"> | number
+    title?: StringFilter<"Employee"> | string
     departMents?: DepartMentListRelationFilter
     departMentalSector?: XOR<DepartMentalSectorNullableScalarRelationFilter, DepartMentalSectorWhereInput> | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "ippsNumber">
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
-    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrderInput | SortOrder
     position?: SortOrder
-    title?: SortOrder
-    hierarchy?: SortOrder
     shortMessageToPublic?: SortOrderInput | SortOrder
     departMentalSectorId?: SortOrderInput | SortOrder
     userId?: SortOrder
+    hierarchy?: SortOrder
+    ippsNumber?: SortOrder
+    title?: SortOrder
     _count?: EmployeeCountOrderByAggregateInput
     _avg?: EmployeeAvgOrderByAggregateInput
     _max?: EmployeeMaxOrderByAggregateInput
@@ -16034,15 +16095,15 @@ export namespace Prisma {
     OR?: EmployeeScalarWhereWithAggregatesInput[]
     NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Employee"> | string
-    ippsNumber?: StringWithAggregatesFilter<"Employee"> | string
     assumedOffice?: IntWithAggregatesFilter<"Employee"> | number
     endedOffice?: IntNullableWithAggregatesFilter<"Employee"> | number | null
     position?: StringWithAggregatesFilter<"Employee"> | string
-    title?: StringWithAggregatesFilter<"Employee"> | string
-    hierarchy?: IntWithAggregatesFilter<"Employee"> | number
     shortMessageToPublic?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     departMentalSectorId?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     userId?: StringWithAggregatesFilter<"Employee"> | string
+    hierarchy?: IntWithAggregatesFilter<"Employee"> | number
+    ippsNumber?: StringWithAggregatesFilter<"Employee"> | string
+    title?: StringWithAggregatesFilter<"Employee"> | string
   }
 
   export type EmailVerificationTokenWhereInput = {
@@ -16099,6 +16160,9 @@ export namespace Prisma {
     id?: StringFilter<"Session"> | string
     userId?: StringFilter<"Session"> | string
     expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastVerifiedAt?: DateTimeFilter<"Session"> | Date | string
+    secretHash?: StringFilter<"Session"> | string
     role?: EnumRoleFilter<"Session"> | $Enums.Role
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -16107,6 +16171,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastVerifiedAt?: SortOrder
+    secretHash?: SortOrder
     role?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -16118,6 +16185,9 @@ export namespace Prisma {
     NOT?: SessionWhereInput | SessionWhereInput[]
     userId?: StringFilter<"Session"> | string
     expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastVerifiedAt?: DateTimeFilter<"Session"> | Date | string
+    secretHash?: StringFilter<"Session"> | string
     role?: EnumRoleFilter<"Session"> | $Enums.Role
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -16126,6 +16196,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastVerifiedAt?: SortOrder
+    secretHash?: SortOrder
     role?: SortOrder
     _count?: SessionCountOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
@@ -16139,6 +16212,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Session"> | string
     userId?: StringWithAggregatesFilter<"Session"> | string
     expiresAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    lastVerifiedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    secretHash?: StringWithAggregatesFilter<"Session"> | string
     role?: EnumRoleWithAggregatesFilter<"Session"> | $Enums.Role
   }
 
@@ -16267,9 +16343,9 @@ export namespace Prisma {
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type NewsArticleOrderByWithRelationInput = {
@@ -16282,9 +16358,9 @@ export namespace Prisma {
     location?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    author?: UserOrderByWithRelationInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
     newsArticleLikes?: NewsArticleLikeOrderByRelationAggregateInput
+    author?: UserOrderByWithRelationInput
   }
 
   export type NewsArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -16300,9 +16376,9 @@ export namespace Prisma {
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type NewsArticleOrderByWithAggregationInput = {
@@ -16457,22 +16533,23 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16481,22 +16558,23 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16505,22 +16583,23 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16529,22 +16608,23 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16553,11 +16633,12 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
@@ -16570,11 +16651,12 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -16587,11 +16669,12 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
@@ -16658,15 +16741,15 @@ export namespace Prisma {
     id?: string
     name: string
     about?: string | null
-    headOfDepartment?: EmployeeCreateNestedOneWithoutDepartMentsInput
     departmentalSectors?: DepartMentalSectorCreateNestedManyWithoutDepartMentInput
+    headOfDepartment?: EmployeeCreateNestedOneWithoutDepartMentsInput
   }
 
   export type DepartMentUncheckedCreateInput = {
     id?: string
     name: string
-    about?: string | null
     headOfDepartmentId?: string | null
+    about?: string | null
     departmentalSectors?: DepartMentalSectorUncheckedCreateNestedManyWithoutDepartMentInput
   }
 
@@ -16674,23 +16757,23 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
-    headOfDepartment?: EmployeeUpdateOneWithoutDepartMentsNestedInput
     departmentalSectors?: DepartMentalSectorUpdateManyWithoutDepartMentNestedInput
+    headOfDepartment?: EmployeeUpdateOneWithoutDepartMentsNestedInput
   }
 
   export type DepartMentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    about?: NullableStringFieldUpdateOperationsInput | string | null
     headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
     departmentalSectors?: DepartMentalSectorUncheckedUpdateManyWithoutDepartMentNestedInput
   }
 
   export type DepartMentCreateManyInput = {
     id?: string
     name: string
-    about?: string | null
     headOfDepartmentId?: string | null
+    about?: string | null
   }
 
   export type DepartMentUpdateManyMutationInput = {
@@ -16702,8 +16785,8 @@ export namespace Prisma {
   export type DepartMentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    about?: NullableStringFieldUpdateOperationsInput | string | null
     headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DepartMentalSectorCreateInput = {
@@ -16711,16 +16794,16 @@ export namespace Prisma {
     name: string
     description?: string | null
     hierarchy: number
-    employees?: EmployeeCreateNestedManyWithoutDepartMentalSectorInput
     departMent?: DepartMentCreateNestedOneWithoutDepartmentalSectorsInput
+    employees?: EmployeeCreateNestedManyWithoutDepartMentalSectorInput
   }
 
   export type DepartMentalSectorUncheckedCreateInput = {
     id?: string
     name: string
     description?: string | null
-    hierarchy: number
     departMentId?: string | null
+    hierarchy: number
     employees?: EmployeeUncheckedCreateNestedManyWithoutDepartMentalSectorInput
   }
 
@@ -16729,16 +16812,16 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     hierarchy?: IntFieldUpdateOperationsInput | number
-    employees?: EmployeeUpdateManyWithoutDepartMentalSectorNestedInput
     departMent?: DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput
+    employees?: EmployeeUpdateManyWithoutDepartMentalSectorNestedInput
   }
 
   export type DepartMentalSectorUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    hierarchy?: IntFieldUpdateOperationsInput | number
     departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
     employees?: EmployeeUncheckedUpdateManyWithoutDepartMentalSectorNestedInput
   }
 
@@ -16746,8 +16829,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    hierarchy: number
     departMentId?: string | null
+    hierarchy: number
   }
 
   export type DepartMentalSectorUpdateManyMutationInput = {
@@ -16761,101 +16844,101 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    hierarchy?: IntFieldUpdateOperationsInput | number
     departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
   }
 
   export type EmployeeCreateInput = {
     id?: string
-    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
-    title: string
-    hierarchy: number
     shortMessageToPublic?: string | null
-    user: UserCreateNestedOneWithoutEmployeesInput
+    hierarchy: number
+    ippsNumber: string
+    title: string
     departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
     departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+    user: UserCreateNestedOneWithoutEmployeesInput
   }
 
   export type EmployeeUncheckedCreateInput = {
     id?: string
-    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
-    title: string
-    hierarchy: number
     shortMessageToPublic?: string | null
     departMentalSectorId?: string | null
     userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
     departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
   }
 
   export type EmployeeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
     departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
   }
 
   export type EmployeeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
     departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
   }
 
   export type EmployeeCreateManyInput = {
     id?: string
-    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
-    title: string
-    hierarchy: number
     shortMessageToPublic?: string | null
     departMentalSectorId?: string | null
     userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
   }
 
   export type EmployeeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmployeeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
     departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmailVerificationTokenCreateInput = {
@@ -16902,6 +16985,9 @@ export namespace Prisma {
   export type SessionCreateInput = {
     id?: string
     expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
     role?: $Enums.Role
     user: UserCreateNestedOneWithoutSessionsInput
   }
@@ -16910,12 +16996,18 @@ export namespace Prisma {
     id?: string
     userId: string
     expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
     role?: $Enums.Role
   }
 
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     user?: UserUpdateOneRequiredWithoutSessionsNestedInput
   }
@@ -16924,6 +17016,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -16931,12 +17026,18 @@ export namespace Prisma {
     id?: string
     userId: string
     expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
     role?: $Enums.Role
   }
 
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -16944,6 +17045,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -17074,9 +17178,9 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author: UserCreateNestedOneWithoutNewsArticlesInput
   }
 
   export type NewsArticleUncheckedCreateInput = {
@@ -17102,9 +17206,9 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
   }
 
   export type NewsArticleUncheckedUpdateInput = {
@@ -17294,11 +17398,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type EnumRoleNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumRoleNullableFilter<$PrismaModel> | $Enums.Role | null
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -17323,16 +17427,10 @@ export namespace Prisma {
     none?: EmailVerificationTokenWhereInput
   }
 
-  export type SessionListRelationFilter = {
-    every?: SessionWhereInput
-    some?: SessionWhereInput
-    none?: SessionWhereInput
-  }
-
-  export type NewsArticleListRelationFilter = {
-    every?: NewsArticleWhereInput
-    some?: NewsArticleWhereInput
-    none?: NewsArticleWhereInput
+  export type EmployeeListRelationFilter = {
+    every?: EmployeeWhereInput
+    some?: EmployeeWhereInput
+    none?: EmployeeWhereInput
   }
 
   export type NewsCommentListRelationFilter = {
@@ -17347,16 +17445,22 @@ export namespace Prisma {
     none?: NewsArticleLikeWhereInput
   }
 
+  export type NewsArticleListRelationFilter = {
+    every?: NewsArticleWhereInput
+    some?: NewsArticleWhereInput
+    none?: NewsArticleWhereInput
+  }
+
   export type NewsLetterListRelationFilter = {
     every?: NewsLetterWhereInput
     some?: NewsLetterWhereInput
     none?: NewsLetterWhereInput
   }
 
-  export type EmployeeListRelationFilter = {
-    every?: EmployeeWhereInput
-    some?: EmployeeWhereInput
-    none?: EmployeeWhereInput
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
   }
 
   export type SortOrderInput = {
@@ -17368,11 +17472,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type SessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type NewsArticleOrderByRelationAggregateInput = {
+  export type EmployeeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17384,11 +17484,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type NewsArticleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type NewsLetterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type EmployeeOrderByRelationAggregateInput = {
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17403,6 +17507,7 @@ export namespace Prisma {
     telephone?: SortOrder
     passwordHash?: SortOrder
     googleId?: SortOrder
+    githubId?: SortOrder
     bio?: SortOrder
     isWelcomed?: SortOrder
     isVerified?: SortOrder
@@ -17420,6 +17525,7 @@ export namespace Prisma {
     telephone?: SortOrder
     passwordHash?: SortOrder
     googleId?: SortOrder
+    githubId?: SortOrder
     bio?: SortOrder
     isWelcomed?: SortOrder
     isVerified?: SortOrder
@@ -17437,6 +17543,7 @@ export namespace Prisma {
     telephone?: SortOrder
     passwordHash?: SortOrder
     googleId?: SortOrder
+    githubId?: SortOrder
     bio?: SortOrder
     isWelcomed?: SortOrder
     isVerified?: SortOrder
@@ -17479,14 +17586,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type EnumRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.Role | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumRoleNullableFilter<$PrismaModel>
-    _max?: NestedEnumRoleNullableFilter<$PrismaModel>
+  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -17535,15 +17642,15 @@ export namespace Prisma {
     geographicalLandmarks?: SortOrder
   }
 
-  export type EmployeeNullableScalarRelationFilter = {
-    is?: EmployeeWhereInput | null
-    isNot?: EmployeeWhereInput | null
-  }
-
   export type DepartMentalSectorListRelationFilter = {
     every?: DepartMentalSectorWhereInput
     some?: DepartMentalSectorWhereInput
     none?: DepartMentalSectorWhereInput
+  }
+
+  export type EmployeeNullableScalarRelationFilter = {
+    is?: EmployeeWhereInput | null
+    isNot?: EmployeeWhereInput | null
   }
 
   export type DepartMentalSectorOrderByRelationAggregateInput = {
@@ -17553,22 +17660,22 @@ export namespace Prisma {
   export type DepartMentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    about?: SortOrder
     headOfDepartmentId?: SortOrder
+    about?: SortOrder
   }
 
   export type DepartMentMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    about?: SortOrder
     headOfDepartmentId?: SortOrder
+    about?: SortOrder
   }
 
   export type DepartMentMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    about?: SortOrder
     headOfDepartmentId?: SortOrder
+    about?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -17591,8 +17698,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    hierarchy?: SortOrder
     departMentId?: SortOrder
+    hierarchy?: SortOrder
   }
 
   export type DepartMentalSectorAvgOrderByAggregateInput = {
@@ -17603,16 +17710,16 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    hierarchy?: SortOrder
     departMentId?: SortOrder
+    hierarchy?: SortOrder
   }
 
   export type DepartMentalSectorMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    hierarchy?: SortOrder
     departMentId?: SortOrder
+    hierarchy?: SortOrder
   }
 
   export type DepartMentalSectorSumOrderByAggregateInput = {
@@ -17646,11 +17753,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type DepartMentListRelationFilter = {
     every?: DepartMentWhereInput
     some?: DepartMentWhereInput
@@ -17662,21 +17764,26 @@ export namespace Prisma {
     isNot?: DepartMentalSectorWhereInput | null
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
   export type DepartMentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
-    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
-    title?: SortOrder
-    hierarchy?: SortOrder
     shortMessageToPublic?: SortOrder
     departMentalSectorId?: SortOrder
     userId?: SortOrder
+    hierarchy?: SortOrder
+    ippsNumber?: SortOrder
+    title?: SortOrder
   }
 
   export type EmployeeAvgOrderByAggregateInput = {
@@ -17687,28 +17794,28 @@ export namespace Prisma {
 
   export type EmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
-    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
-    title?: SortOrder
-    hierarchy?: SortOrder
     shortMessageToPublic?: SortOrder
     departMentalSectorId?: SortOrder
     userId?: SortOrder
+    hierarchy?: SortOrder
+    ippsNumber?: SortOrder
+    title?: SortOrder
   }
 
   export type EmployeeMinOrderByAggregateInput = {
     id?: SortOrder
-    ippsNumber?: SortOrder
     assumedOffice?: SortOrder
     endedOffice?: SortOrder
     position?: SortOrder
-    title?: SortOrder
-    hierarchy?: SortOrder
     shortMessageToPublic?: SortOrder
     departMentalSectorId?: SortOrder
     userId?: SortOrder
+    hierarchy?: SortOrder
+    ippsNumber?: SortOrder
+    title?: SortOrder
   }
 
   export type EmployeeSumOrderByAggregateInput = {
@@ -17786,17 +17893,13 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
-  export type EnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastVerifiedAt?: SortOrder
+    secretHash?: SortOrder
     role?: SortOrder
   }
 
@@ -17804,6 +17907,9 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastVerifiedAt?: SortOrder
+    secretHash?: SortOrder
     role?: SortOrder
   }
 
@@ -17811,17 +17917,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
+    lastVerifiedAt?: SortOrder
+    secretHash?: SortOrder
     role?: SortOrder
-  }
-
-  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRoleFilter<$PrismaModel>
-    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type NewsLetterSubscriptionCountOrderByAggregateInput = {
@@ -17971,18 +18070,11 @@ export namespace Prisma {
     connect?: EmailVerificationTokenWhereUniqueInput | EmailVerificationTokenWhereUniqueInput[]
   }
 
-  export type SessionCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type NewsArticleCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
-    createMany?: NewsArticleCreateManyAuthorInputEnvelope
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  export type EmployeeCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
   }
 
   export type NewsCommentCreateNestedManyWithoutCommenterInput = {
@@ -17999,6 +18091,13 @@ export namespace Prisma {
     connect?: NewsArticleLikeWhereUniqueInput | NewsArticleLikeWhereUniqueInput[]
   }
 
+  export type NewsArticleCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
+    createMany?: NewsArticleCreateManyAuthorInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
   export type NewsLetterCreateNestedManyWithoutAuthorInput = {
     create?: XOR<NewsLetterCreateWithoutAuthorInput, NewsLetterUncheckedCreateWithoutAuthorInput> | NewsLetterCreateWithoutAuthorInput[] | NewsLetterUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: NewsLetterCreateOrConnectWithoutAuthorInput | NewsLetterCreateOrConnectWithoutAuthorInput[]
@@ -18006,11 +18105,11 @@ export namespace Prisma {
     connect?: NewsLetterWhereUniqueInput | NewsLetterWhereUniqueInput[]
   }
 
-  export type EmployeeCreateNestedManyWithoutUserInput = {
-    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
-    createMany?: EmployeeCreateManyUserInputEnvelope
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput = {
@@ -18020,18 +18119,11 @@ export namespace Prisma {
     connect?: EmailVerificationTokenWhereUniqueInput | EmailVerificationTokenWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
-  export type NewsArticleUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
-    createMany?: NewsArticleCreateManyAuthorInputEnvelope
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  export type EmployeeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
   }
 
   export type NewsCommentUncheckedCreateNestedManyWithoutCommenterInput = {
@@ -18048,6 +18140,13 @@ export namespace Prisma {
     connect?: NewsArticleLikeWhereUniqueInput | NewsArticleLikeWhereUniqueInput[]
   }
 
+  export type NewsArticleUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
+    createMany?: NewsArticleCreateManyAuthorInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
   export type NewsLetterUncheckedCreateNestedManyWithoutAuthorInput = {
     create?: XOR<NewsLetterCreateWithoutAuthorInput, NewsLetterUncheckedCreateWithoutAuthorInput> | NewsLetterCreateWithoutAuthorInput[] | NewsLetterUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: NewsLetterCreateOrConnectWithoutAuthorInput | NewsLetterCreateOrConnectWithoutAuthorInput[]
@@ -18055,11 +18154,11 @@ export namespace Prisma {
     connect?: NewsLetterWhereUniqueInput | NewsLetterWhereUniqueInput[]
   }
 
-  export type EmployeeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
-    createMany?: EmployeeCreateManyUserInputEnvelope
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18070,8 +18169,8 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type NullableEnumRoleFieldUpdateOperationsInput = {
-    set?: $Enums.Role | null
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: $Enums.Role
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -18096,32 +18195,18 @@ export namespace Prisma {
     deleteMany?: EmailVerificationTokenScalarWhereInput | EmailVerificationTokenScalarWhereInput[]
   }
 
-  export type SessionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type NewsArticleUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
-    upsert?: NewsArticleUpsertWithWhereUniqueWithoutAuthorInput | NewsArticleUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: NewsArticleCreateManyAuthorInputEnvelope
-    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    update?: NewsArticleUpdateWithWhereUniqueWithoutAuthorInput | NewsArticleUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: NewsArticleUpdateManyWithWhereWithoutAuthorInput | NewsArticleUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  export type EmployeeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
   export type NewsCommentUpdateManyWithoutCommenterNestedInput = {
@@ -18152,6 +18237,20 @@ export namespace Prisma {
     deleteMany?: NewsArticleLikeScalarWhereInput | NewsArticleLikeScalarWhereInput[]
   }
 
+  export type NewsArticleUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutAuthorInput | NewsArticleUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: NewsArticleCreateManyAuthorInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutAuthorInput | NewsArticleUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutAuthorInput | NewsArticleUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
   export type NewsLetterUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<NewsLetterCreateWithoutAuthorInput, NewsLetterUncheckedCreateWithoutAuthorInput> | NewsLetterCreateWithoutAuthorInput[] | NewsLetterUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: NewsLetterCreateOrConnectWithoutAuthorInput | NewsLetterCreateOrConnectWithoutAuthorInput[]
@@ -18166,18 +18265,18 @@ export namespace Prisma {
     deleteMany?: NewsLetterScalarWhereInput | NewsLetterScalarWhereInput[]
   }
 
-  export type EmployeeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
-    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EmployeeCreateManyUserInputEnvelope
-    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput = {
@@ -18194,32 +18293,18 @@ export namespace Prisma {
     deleteMany?: EmailVerificationTokenScalarWhereInput | EmailVerificationTokenScalarWhereInput[]
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
-  export type NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
-    upsert?: NewsArticleUpsertWithWhereUniqueWithoutAuthorInput | NewsArticleUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: NewsArticleCreateManyAuthorInputEnvelope
-    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    update?: NewsArticleUpdateWithWhereUniqueWithoutAuthorInput | NewsArticleUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: NewsArticleUpdateManyWithWhereWithoutAuthorInput | NewsArticleUpdateManyWithWhereWithoutAuthorInput[]
-    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  export type EmployeeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EmployeeCreateManyUserInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
   export type NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput = {
@@ -18250,6 +18335,20 @@ export namespace Prisma {
     deleteMany?: NewsArticleLikeScalarWhereInput | NewsArticleLikeScalarWhereInput[]
   }
 
+  export type NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput> | NewsArticleCreateWithoutAuthorInput[] | NewsArticleUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutAuthorInput | NewsArticleCreateOrConnectWithoutAuthorInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutAuthorInput | NewsArticleUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: NewsArticleCreateManyAuthorInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutAuthorInput | NewsArticleUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutAuthorInput | NewsArticleUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
   export type NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput = {
     create?: XOR<NewsLetterCreateWithoutAuthorInput, NewsLetterUncheckedCreateWithoutAuthorInput> | NewsLetterCreateWithoutAuthorInput[] | NewsLetterUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: NewsLetterCreateOrConnectWithoutAuthorInput | NewsLetterCreateOrConnectWithoutAuthorInput[]
@@ -18264,24 +18363,18 @@ export namespace Prisma {
     deleteMany?: NewsLetterScalarWhereInput | NewsLetterScalarWhereInput[]
   }
 
-  export type EmployeeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput> | EmployeeCreateWithoutUserInput[] | EmployeeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutUserInput | EmployeeCreateOrConnectWithoutUserInput[]
-    upsert?: EmployeeUpsertWithWhereUniqueWithoutUserInput | EmployeeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: EmployeeCreateManyUserInputEnvelope
-    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    update?: EmployeeUpdateWithWhereUniqueWithoutUserInput | EmployeeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: EmployeeUpdateManyWithWhereWithoutUserInput | EmployeeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-  }
-
-  export type EmployeeCreateNestedOneWithoutDepartMentsInput = {
-    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
-    connect?: EmployeeWhereUniqueInput
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type DepartMentalSectorCreateNestedManyWithoutDepartMentInput = {
@@ -18291,21 +18384,17 @@ export namespace Prisma {
     connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
   }
 
+  export type EmployeeCreateNestedOneWithoutDepartMentsInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
   export type DepartMentalSectorUncheckedCreateNestedManyWithoutDepartMentInput = {
     create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
     connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
     createMany?: DepartMentalSectorCreateManyDepartMentInputEnvelope
     connect?: DepartMentalSectorWhereUniqueInput | DepartMentalSectorWhereUniqueInput[]
-  }
-
-  export type EmployeeUpdateOneWithoutDepartMentsNestedInput = {
-    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
-    upsert?: EmployeeUpsertWithoutDepartMentsInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutDepartMentsInput, EmployeeUpdateWithoutDepartMentsInput>, EmployeeUncheckedUpdateWithoutDepartMentsInput>
   }
 
   export type DepartMentalSectorUpdateManyWithoutDepartMentNestedInput = {
@@ -18322,6 +18411,16 @@ export namespace Prisma {
     deleteMany?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
   }
 
+  export type EmployeeUpdateOneWithoutDepartMentsNestedInput = {
+    create?: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentsInput
+    upsert?: EmployeeUpsertWithoutDepartMentsInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutDepartMentsInput, EmployeeUpdateWithoutDepartMentsInput>, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+  }
+
   export type DepartMentalSectorUncheckedUpdateManyWithoutDepartMentNestedInput = {
     create?: XOR<DepartMentalSectorCreateWithoutDepartMentInput, DepartMentalSectorUncheckedCreateWithoutDepartMentInput> | DepartMentalSectorCreateWithoutDepartMentInput[] | DepartMentalSectorUncheckedCreateWithoutDepartMentInput[]
     connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutDepartMentInput | DepartMentalSectorCreateOrConnectWithoutDepartMentInput[]
@@ -18336,17 +18435,17 @@ export namespace Prisma {
     deleteMany?: DepartMentalSectorScalarWhereInput | DepartMentalSectorScalarWhereInput[]
   }
 
+  export type DepartMentCreateNestedOneWithoutDepartmentalSectorsInput = {
+    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
+    connect?: DepartMentWhereUniqueInput
+  }
+
   export type EmployeeCreateNestedManyWithoutDepartMentalSectorInput = {
     create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
     createMany?: EmployeeCreateManyDepartMentalSectorInputEnvelope
     connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-  }
-
-  export type DepartMentCreateNestedOneWithoutDepartmentalSectorsInput = {
-    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
-    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
-    connect?: DepartMentWhereUniqueInput
   }
 
   export type EmployeeUncheckedCreateNestedManyWithoutDepartMentalSectorInput = {
@@ -18364,6 +18463,16 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput = {
+    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
+    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
+    upsert?: DepartMentUpsertWithoutDepartmentalSectorsInput
+    disconnect?: DepartMentWhereInput | boolean
+    delete?: DepartMentWhereInput | boolean
+    connect?: DepartMentWhereUniqueInput
+    update?: XOR<XOR<DepartMentUpdateToOneWithWhereWithoutDepartmentalSectorsInput, DepartMentUpdateWithoutDepartmentalSectorsInput>, DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput>
+  }
+
   export type EmployeeUpdateManyWithoutDepartMentalSectorNestedInput = {
     create?: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput> | EmployeeCreateWithoutDepartMentalSectorInput[] | EmployeeUncheckedCreateWithoutDepartMentalSectorInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutDepartMentalSectorInput | EmployeeCreateOrConnectWithoutDepartMentalSectorInput[]
@@ -18376,16 +18485,6 @@ export namespace Prisma {
     update?: EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput | EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput[]
     updateMany?: EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput | EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput[]
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-  }
-
-  export type DepartMentUpdateOneWithoutDepartmentalSectorsNestedInput = {
-    create?: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
-    connectOrCreate?: DepartMentCreateOrConnectWithoutDepartmentalSectorsInput
-    upsert?: DepartMentUpsertWithoutDepartmentalSectorsInput
-    disconnect?: DepartMentWhereInput | boolean
-    delete?: DepartMentWhereInput | boolean
-    connect?: DepartMentWhereUniqueInput
-    update?: XOR<XOR<DepartMentUpdateToOneWithWhereWithoutDepartmentalSectorsInput, DepartMentUpdateWithoutDepartmentalSectorsInput>, DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput>
   }
 
   export type EmployeeUncheckedUpdateManyWithoutDepartMentalSectorNestedInput = {
@@ -18402,12 +18501,6 @@ export namespace Prisma {
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutEmployeesInput = {
-    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type DepartMentCreateNestedManyWithoutHeadOfDepartmentInput = {
     create?: XOR<DepartMentCreateWithoutHeadOfDepartmentInput, DepartMentUncheckedCreateWithoutHeadOfDepartmentInput> | DepartMentCreateWithoutHeadOfDepartmentInput[] | DepartMentUncheckedCreateWithoutHeadOfDepartmentInput[]
     connectOrCreate?: DepartMentCreateOrConnectWithoutHeadOfDepartmentInput | DepartMentCreateOrConnectWithoutHeadOfDepartmentInput[]
@@ -18419,6 +18512,12 @@ export namespace Prisma {
     create?: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
     connectOrCreate?: DepartMentalSectorCreateOrConnectWithoutEmployeesInput
     connect?: DepartMentalSectorWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutEmployeesInput = {
+    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput = {
@@ -18434,14 +18533,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type UserUpdateOneRequiredWithoutEmployeesNestedInput = {
-    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
-    upsert?: UserUpsertWithoutEmployeesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmployeesInput, UserUpdateWithoutEmployeesInput>, UserUncheckedUpdateWithoutEmployeesInput>
   }
 
   export type DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput = {
@@ -18466,6 +18557,14 @@ export namespace Prisma {
     delete?: DepartMentalSectorWhereInput | boolean
     connect?: DepartMentalSectorWhereUniqueInput
     update?: XOR<XOR<DepartMentalSectorUpdateToOneWithWhereWithoutEmployeesInput, DepartMentalSectorUpdateWithoutEmployeesInput>, DepartMentalSectorUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutEmployeesNestedInput = {
+    create?: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEmployeesInput
+    upsert?: UserUpsertWithoutEmployeesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmployeesInput, UserUpdateWithoutEmployeesInput>, UserUncheckedUpdateWithoutEmployeesInput>
   }
 
   export type DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput = {
@@ -18510,10 +18609,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type EnumRoleFieldUpdateOperationsInput = {
-    set?: $Enums.Role
-  }
-
   export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
     create?: XOR<UserCreateWithoutSessionsInput, UserUncheckedCreateWithoutSessionsInput>
     connectOrCreate?: UserCreateOrConnectWithoutSessionsInput
@@ -18536,12 +18631,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsLettersInput, UserUpdateWithoutNewsLettersInput>, UserUncheckedUpdateWithoutNewsLettersInput>
   }
 
-  export type UserCreateNestedOneWithoutNewsArticlesInput = {
-    create?: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsArticlesInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type NewsCommentCreateNestedManyWithoutNewsArticleInput = {
     create?: XOR<NewsCommentCreateWithoutNewsArticleInput, NewsCommentUncheckedCreateWithoutNewsArticleInput> | NewsCommentCreateWithoutNewsArticleInput[] | NewsCommentUncheckedCreateWithoutNewsArticleInput[]
     connectOrCreate?: NewsCommentCreateOrConnectWithoutNewsArticleInput | NewsCommentCreateOrConnectWithoutNewsArticleInput[]
@@ -18556,6 +18645,12 @@ export namespace Prisma {
     connect?: NewsArticleLikeWhereUniqueInput | NewsArticleLikeWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutNewsArticlesInput = {
+    create?: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsArticlesInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput = {
     create?: XOR<NewsCommentCreateWithoutNewsArticleInput, NewsCommentUncheckedCreateWithoutNewsArticleInput> | NewsCommentCreateWithoutNewsArticleInput[] | NewsCommentUncheckedCreateWithoutNewsArticleInput[]
     connectOrCreate?: NewsCommentCreateOrConnectWithoutNewsArticleInput | NewsCommentCreateOrConnectWithoutNewsArticleInput[]
@@ -18568,14 +18663,6 @@ export namespace Prisma {
     connectOrCreate?: NewsArticleLikeCreateOrConnectWithoutNewsArticleInput | NewsArticleLikeCreateOrConnectWithoutNewsArticleInput[]
     createMany?: NewsArticleLikeCreateManyNewsArticleInputEnvelope
     connect?: NewsArticleLikeWhereUniqueInput | NewsArticleLikeWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutNewsArticlesNestedInput = {
-    create?: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNewsArticlesInput
-    upsert?: UserUpsertWithoutNewsArticlesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsArticlesInput, UserUpdateWithoutNewsArticlesInput>, UserUncheckedUpdateWithoutNewsArticlesInput>
   }
 
   export type NewsCommentUpdateManyWithoutNewsArticleNestedInput = {
@@ -18604,6 +18691,14 @@ export namespace Prisma {
     update?: NewsArticleLikeUpdateWithWhereUniqueWithoutNewsArticleInput | NewsArticleLikeUpdateWithWhereUniqueWithoutNewsArticleInput[]
     updateMany?: NewsArticleLikeUpdateManyWithWhereWithoutNewsArticleInput | NewsArticleLikeUpdateManyWithWhereWithoutNewsArticleInput[]
     deleteMany?: NewsArticleLikeScalarWhereInput | NewsArticleLikeScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutNewsArticlesNestedInput = {
+    create?: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutNewsArticlesInput
+    upsert?: UserUpsertWithoutNewsArticlesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsArticlesInput, UserUpdateWithoutNewsArticlesInput>, UserUncheckedUpdateWithoutNewsArticlesInput>
   }
 
   export type NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput = {
@@ -18718,11 +18813,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedEnumRoleNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumRoleNullableFilter<$PrismaModel> | $Enums.Role | null
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -18797,14 +18892,14 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.Role | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumRoleNullableFilter<$PrismaModel>
-    _max?: NestedEnumRoleNullableFilter<$PrismaModel>
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -18910,23 +19005,6 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
-  export type NestedEnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRoleFilter<$PrismaModel>
-    _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
   export type EmailVerificationTokenCreateWithoutUserInput = {
     id?: string
     expires: bigint | number
@@ -18947,61 +19025,39 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SessionCreateWithoutUserInput = {
+  export type EmployeeCreateWithoutUserInput = {
     id?: string
-    expiresAt: Date | string
-    role?: $Enums.Role
-  }
-
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    expiresAt: Date | string
-    role?: $Enums.Role
-  }
-
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type NewsArticleCreateWithoutAuthorInput = {
-    id?: string
-    imageUrl?: string | null
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    hierarchy: number
+    ippsNumber: string
     title: string
-    publishedAt?: Date | string
-    content: string
-    location?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
-    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
   }
 
-  export type NewsArticleUncheckedCreateWithoutAuthorInput = {
+  export type EmployeeUncheckedCreateWithoutUserInput = {
     id?: string
-    imageUrl?: string | null
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    hierarchy: number
+    ippsNumber: string
     title: string
-    publishedAt?: Date | string
-    content: string
-    location?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
-    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
   }
 
-  export type NewsArticleCreateOrConnectWithoutAuthorInput = {
-    where: NewsArticleWhereUniqueInput
-    create: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput>
+  export type EmployeeCreateOrConnectWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
   }
 
-  export type NewsArticleCreateManyAuthorInputEnvelope = {
-    data: NewsArticleCreateManyAuthorInput | NewsArticleCreateManyAuthorInput[]
+  export type EmployeeCreateManyUserInputEnvelope = {
+    data: EmployeeCreateManyUserInput | EmployeeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -19053,6 +19109,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NewsArticleCreateWithoutAuthorInput = {
+    id?: string
+    imageUrl?: string | null
+    title: string
+    publishedAt?: Date | string
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    imageUrl?: string | null
+    title: string
+    publishedAt?: Date | string
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutAuthorInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type NewsArticleCreateManyAuthorInputEnvelope = {
+    data: NewsArticleCreateManyAuthorInput | NewsArticleCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type NewsLetterCreateWithoutAuthorInput = {
     id?: string
     title: string
@@ -19081,39 +19173,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EmployeeCreateWithoutUserInput = {
+  export type SessionCreateWithoutUserInput = {
     id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
-    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
+    role?: $Enums.Role
   }
 
-  export type EmployeeUncheckedCreateWithoutUserInput = {
+  export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    departMentalSectorId?: string | null
-    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
+    role?: $Enums.Role
   }
 
-  export type EmployeeCreateOrConnectWithoutUserInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type EmployeeCreateManyUserInputEnvelope = {
-    data: EmployeeCreateManyUserInput | EmployeeCreateManyUserInput[]
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -19142,61 +19226,36 @@ export namespace Prisma {
     expires?: BigIntFilter<"EmailVerificationToken"> | bigint | number
   }
 
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  export type EmployeeUpsertWithWhereUniqueWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    update: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
+    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
   }
 
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  export type EmployeeUpdateWithWhereUniqueWithoutUserInput = {
+    where: EmployeeWhereUniqueInput
+    data: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
   }
 
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  export type EmployeeUpdateManyWithWhereWithoutUserInput = {
+    where: EmployeeScalarWhereInput
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
-    expiresAt?: DateTimeFilter<"Session"> | Date | string
-    role?: EnumRoleFilter<"Session"> | $Enums.Role
-  }
-
-  export type NewsArticleUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: NewsArticleWhereUniqueInput
-    update: XOR<NewsArticleUpdateWithoutAuthorInput, NewsArticleUncheckedUpdateWithoutAuthorInput>
-    create: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput>
-  }
-
-  export type NewsArticleUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: NewsArticleWhereUniqueInput
-    data: XOR<NewsArticleUpdateWithoutAuthorInput, NewsArticleUncheckedUpdateWithoutAuthorInput>
-  }
-
-  export type NewsArticleUpdateManyWithWhereWithoutAuthorInput = {
-    where: NewsArticleScalarWhereInput
-    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type NewsArticleScalarWhereInput = {
-    AND?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
-    OR?: NewsArticleScalarWhereInput[]
-    NOT?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
-    id?: StringFilter<"NewsArticle"> | string
-    imageUrl?: StringNullableFilter<"NewsArticle"> | string | null
-    title?: StringFilter<"NewsArticle"> | string
-    publishedAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    content?: StringFilter<"NewsArticle"> | string
-    authorId?: StringFilter<"NewsArticle"> | string
-    location?: StringNullableFilter<"NewsArticle"> | string | null
-    createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+  export type EmployeeScalarWhereInput = {
+    AND?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    OR?: EmployeeScalarWhereInput[]
+    NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    id?: StringFilter<"Employee"> | string
+    assumedOffice?: IntFilter<"Employee"> | number
+    endedOffice?: IntNullableFilter<"Employee"> | number | null
+    position?: StringFilter<"Employee"> | string
+    shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
+    departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
+    userId?: StringFilter<"Employee"> | string
+    hierarchy?: IntFilter<"Employee"> | number
+    ippsNumber?: StringFilter<"Employee"> | string
+    title?: StringFilter<"Employee"> | string
   }
 
   export type NewsCommentUpsertWithWhereUniqueWithoutCommenterInput = {
@@ -19253,6 +19312,37 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"NewsArticleLike"> | Date | string
   }
 
+  export type NewsArticleUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: NewsArticleWhereUniqueInput
+    update: XOR<NewsArticleUpdateWithoutAuthorInput, NewsArticleUncheckedUpdateWithoutAuthorInput>
+    create: XOR<NewsArticleCreateWithoutAuthorInput, NewsArticleUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type NewsArticleUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: NewsArticleWhereUniqueInput
+    data: XOR<NewsArticleUpdateWithoutAuthorInput, NewsArticleUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type NewsArticleUpdateManyWithWhereWithoutAuthorInput = {
+    where: NewsArticleScalarWhereInput
+    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type NewsArticleScalarWhereInput = {
+    AND?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+    OR?: NewsArticleScalarWhereInput[]
+    NOT?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+    id?: StringFilter<"NewsArticle"> | string
+    imageUrl?: StringNullableFilter<"NewsArticle"> | string | null
+    title?: StringFilter<"NewsArticle"> | string
+    publishedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    content?: StringFilter<"NewsArticle"> | string
+    authorId?: StringFilter<"NewsArticle"> | string
+    location?: StringNullableFilter<"NewsArticle"> | string | null
+    createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+  }
+
   export type NewsLetterUpsertWithWhereUniqueWithoutAuthorInput = {
     where: NewsLetterWhereUniqueInput
     update: XOR<NewsLetterUpdateWithoutAuthorInput, NewsLetterUncheckedUpdateWithoutAuthorInput>
@@ -19282,67 +19372,33 @@ export namespace Prisma {
     authorId?: StringFilter<"NewsLetter"> | string
   }
 
-  export type EmployeeUpsertWithWhereUniqueWithoutUserInput = {
-    where: EmployeeWhereUniqueInput
-    update: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
-    create: XOR<EmployeeCreateWithoutUserInput, EmployeeUncheckedCreateWithoutUserInput>
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
   }
 
-  export type EmployeeUpdateWithWhereUniqueWithoutUserInput = {
-    where: EmployeeWhereUniqueInput
-    data: XOR<EmployeeUpdateWithoutUserInput, EmployeeUncheckedUpdateWithoutUserInput>
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
   }
 
-  export type EmployeeUpdateManyWithWhereWithoutUserInput = {
-    where: EmployeeScalarWhereInput
-    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutUserInput>
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type EmployeeScalarWhereInput = {
-    AND?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-    OR?: EmployeeScalarWhereInput[]
-    NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-    id?: StringFilter<"Employee"> | string
-    ippsNumber?: StringFilter<"Employee"> | string
-    assumedOffice?: IntFilter<"Employee"> | number
-    endedOffice?: IntNullableFilter<"Employee"> | number | null
-    position?: StringFilter<"Employee"> | string
-    title?: StringFilter<"Employee"> | string
-    hierarchy?: IntFilter<"Employee"> | number
-    shortMessageToPublic?: StringNullableFilter<"Employee"> | string | null
-    departMentalSectorId?: StringNullableFilter<"Employee"> | string | null
-    userId?: StringFilter<"Employee"> | string
-  }
-
-  export type EmployeeCreateWithoutDepartMentsInput = {
-    id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    user: UserCreateNestedOneWithoutEmployeesInput
-    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutDepartMentsInput = {
-    id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    departMentalSectorId?: string | null
-    userId: string
-  }
-
-  export type EmployeeCreateOrConnectWithoutDepartMentsInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastVerifiedAt?: DateTimeFilter<"Session"> | Date | string
+    secretHash?: StringFilter<"Session"> | string
+    role?: EnumRoleFilter<"Session"> | $Enums.Role
   }
 
   export type DepartMentalSectorCreateWithoutDepartMentInput = {
@@ -19371,41 +19427,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EmployeeUpsertWithoutDepartMentsInput = {
-    update: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+  export type EmployeeCreateWithoutDepartMentsInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    hierarchy: number
+    ippsNumber: string
+    title: string
+    departMentalSector?: DepartMentalSectorCreateNestedOneWithoutEmployeesInput
+    user: UserCreateNestedOneWithoutEmployeesInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutDepartMentsInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
+  }
+
+  export type EmployeeCreateOrConnectWithoutDepartMentsInput = {
+    where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutDepartMentsInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
-  }
-
-  export type EmployeeUpdateWithoutDepartMentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
-    assumedOffice?: IntFieldUpdateOperationsInput | number
-    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
-    position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
-    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
-    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutDepartMentsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
-    assumedOffice?: IntFieldUpdateOperationsInput | number
-    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
-    position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
-    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type DepartMentalSectorUpsertWithWhereUniqueWithoutDepartMentInput = {
@@ -19431,44 +19481,45 @@ export namespace Prisma {
     id?: StringFilter<"DepartMentalSector"> | string
     name?: StringFilter<"DepartMentalSector"> | string
     description?: StringNullableFilter<"DepartMentalSector"> | string | null
-    hierarchy?: IntFilter<"DepartMentalSector"> | number
     departMentId?: StringNullableFilter<"DepartMentalSector"> | string | null
+    hierarchy?: IntFilter<"DepartMentalSector"> | number
   }
 
-  export type EmployeeCreateWithoutDepartMentalSectorInput = {
-    id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    user: UserCreateNestedOneWithoutEmployeesInput
-    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+  export type EmployeeUpsertWithoutDepartMentsInput = {
+    update: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
+    create: XOR<EmployeeCreateWithoutDepartMentsInput, EmployeeUncheckedCreateWithoutDepartMentsInput>
+    where?: EmployeeWhereInput
   }
 
-  export type EmployeeUncheckedCreateWithoutDepartMentalSectorInput = {
-    id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    userId: string
-    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+  export type EmployeeUpdateToOneWithWhereWithoutDepartMentsInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutDepartMentsInput, EmployeeUncheckedUpdateWithoutDepartMentsInput>
   }
 
-  export type EmployeeCreateOrConnectWithoutDepartMentalSectorInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput>
+  export type EmployeeUpdateWithoutDepartMentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
   }
 
-  export type EmployeeCreateManyDepartMentalSectorInputEnvelope = {
-    data: EmployeeCreateManyDepartMentalSectorInput | EmployeeCreateManyDepartMentalSectorInput[]
-    skipDuplicates?: boolean
+  export type EmployeeUncheckedUpdateWithoutDepartMentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type DepartMentCreateWithoutDepartmentalSectorsInput = {
@@ -19481,8 +19532,8 @@ export namespace Prisma {
   export type DepartMentUncheckedCreateWithoutDepartmentalSectorsInput = {
     id?: string
     name: string
-    about?: string | null
     headOfDepartmentId?: string | null
+    about?: string | null
   }
 
   export type DepartMentCreateOrConnectWithoutDepartmentalSectorsInput = {
@@ -19490,20 +19541,40 @@ export namespace Prisma {
     create: XOR<DepartMentCreateWithoutDepartmentalSectorsInput, DepartMentUncheckedCreateWithoutDepartmentalSectorsInput>
   }
 
-  export type EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput = {
+  export type EmployeeCreateWithoutDepartMentalSectorInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    hierarchy: number
+    ippsNumber: string
+    title: string
+    departMents?: DepartMentCreateNestedManyWithoutHeadOfDepartmentInput
+    user: UserCreateNestedOneWithoutEmployeesInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutDepartMentalSectorInput = {
+    id?: string
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
+    departMents?: DepartMentUncheckedCreateNestedManyWithoutHeadOfDepartmentInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutDepartMentalSectorInput = {
     where: EmployeeWhereUniqueInput
-    update: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
     create: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput>
   }
 
-  export type EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput = {
-    where: EmployeeWhereUniqueInput
-    data: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
-  }
-
-  export type EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput = {
-    where: EmployeeScalarWhereInput
-    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput>
+  export type EmployeeCreateManyDepartMentalSectorInputEnvelope = {
+    data: EmployeeCreateManyDepartMentalSectorInput | EmployeeCreateManyDepartMentalSectorInput[]
+    skipDuplicates?: boolean
   }
 
   export type DepartMentUpsertWithoutDepartmentalSectorsInput = {
@@ -19527,59 +19598,24 @@ export namespace Prisma {
   export type DepartMentUncheckedUpdateWithoutDepartmentalSectorsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    about?: NullableStringFieldUpdateOperationsInput | string | null
     headOfDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    about?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type UserCreateWithoutEmployeesInput = {
-    id?: string
-    name?: string | null
-    username?: string | null
-    email?: string | null
-    avatarUrl?: string | null
-    role?: $Enums.Role | null
-    createdAt?: Date | string
-    telephone?: string | null
-    passwordHash?: string | null
-    googleId?: string | null
-    bio?: string | null
-    isWelcomed?: boolean
-    isVerified?: boolean
-    emailVerified?: boolean
-    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
-    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
-    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+  export type EmployeeUpsertWithWhereUniqueWithoutDepartMentalSectorInput = {
+    where: EmployeeWhereUniqueInput
+    update: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
+    create: XOR<EmployeeCreateWithoutDepartMentalSectorInput, EmployeeUncheckedCreateWithoutDepartMentalSectorInput>
   }
 
-  export type UserUncheckedCreateWithoutEmployeesInput = {
-    id?: string
-    name?: string | null
-    username?: string | null
-    email?: string | null
-    avatarUrl?: string | null
-    role?: $Enums.Role | null
-    createdAt?: Date | string
-    telephone?: string | null
-    passwordHash?: string | null
-    googleId?: string | null
-    bio?: string | null
-    isWelcomed?: boolean
-    isVerified?: boolean
-    emailVerified?: boolean
-    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
-    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
-    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+  export type EmployeeUpdateWithWhereUniqueWithoutDepartMentalSectorInput = {
+    where: EmployeeWhereUniqueInput
+    data: XOR<EmployeeUpdateWithoutDepartMentalSectorInput, EmployeeUncheckedUpdateWithoutDepartMentalSectorInput>
   }
 
-  export type UserCreateOrConnectWithoutEmployeesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+  export type EmployeeUpdateManyWithWhereWithoutDepartMentalSectorInput = {
+    where: EmployeeScalarWhereInput
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput>
   }
 
   export type DepartMentCreateWithoutHeadOfDepartmentInput = {
@@ -19618,8 +19654,8 @@ export namespace Prisma {
     id?: string
     name: string
     description?: string | null
-    hierarchy: number
     departMentId?: string | null
+    hierarchy: number
   }
 
   export type DepartMentalSectorCreateOrConnectWithoutEmployeesInput = {
@@ -19627,61 +19663,57 @@ export namespace Prisma {
     create: XOR<DepartMentalSectorCreateWithoutEmployeesInput, DepartMentalSectorUncheckedCreateWithoutEmployeesInput>
   }
 
-  export type UserUpsertWithoutEmployeesInput = {
-    update: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
+  export type UserCreateWithoutEmployeesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEmployeesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEmployeesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutEmployeesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
-  }
-
-  export type UserUpdateWithoutEmployeesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
-    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
-    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutEmployeesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
-    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
-    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type DepartMentUpsertWithWhereUniqueWithoutHeadOfDepartmentInput = {
@@ -19706,8 +19738,8 @@ export namespace Prisma {
     NOT?: DepartMentScalarWhereInput | DepartMentScalarWhereInput[]
     id?: StringFilter<"DepartMent"> | string
     name?: StringFilter<"DepartMent"> | string
-    about?: StringNullableFilter<"DepartMent"> | string | null
     headOfDepartmentId?: StringNullableFilter<"DepartMent"> | string | null
+    about?: StringNullableFilter<"DepartMent"> | string | null
   }
 
   export type DepartMentalSectorUpsertWithoutEmployeesInput = {
@@ -19733,8 +19765,67 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    hierarchy?: IntFieldUpdateOperationsInput | number
     departMentId?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserUpsertWithoutEmployeesInput = {
+    update: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
+    create: XOR<UserCreateWithoutEmployeesInput, UserUncheckedCreateWithoutEmployeesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEmployeesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEmployeesInput, UserUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type UserUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -19743,21 +19834,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -19766,21 +19858,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -19805,21 +19898,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -19828,21 +19922,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -19851,21 +19946,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -19874,21 +19970,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -19913,21 +20010,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -19936,21 +20034,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNewsLettersInput = {
@@ -19959,21 +20058,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsLettersInput = {
@@ -19982,21 +20082,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsLettersInput = {
@@ -20021,21 +20122,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsLettersInput = {
@@ -20044,72 +20146,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserCreateWithoutNewsArticlesInput = {
-    id?: string
-    name?: string | null
-    username?: string | null
-    email?: string | null
-    avatarUrl?: string | null
-    role?: $Enums.Role | null
-    createdAt?: Date | string
-    telephone?: string | null
-    passwordHash?: string | null
-    googleId?: string | null
-    bio?: string | null
-    isWelcomed?: boolean
-    isVerified?: boolean
-    emailVerified?: boolean
-    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
-    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutNewsArticlesInput = {
-    id?: string
-    name?: string | null
-    username?: string | null
-    email?: string | null
-    avatarUrl?: string | null
-    role?: $Enums.Role | null
-    createdAt?: Date | string
-    telephone?: string | null
-    passwordHash?: string | null
-    googleId?: string | null
-    bio?: string | null
-    isWelcomed?: boolean
-    isVerified?: boolean
-    emailVerified?: boolean
-    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
-    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
-    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutNewsArticlesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsCommentCreateWithoutNewsArticleInput = {
@@ -20160,61 +20212,57 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutNewsArticlesInput = {
-    update: XOR<UserUpdateWithoutNewsArticlesInput, UserUncheckedUpdateWithoutNewsArticlesInput>
+  export type UserCreateWithoutNewsArticlesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutNewsArticlesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutNewsArticlesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutNewsArticlesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNewsArticlesInput, UserUncheckedUpdateWithoutNewsArticlesInput>
-  }
-
-  export type UserUpdateWithoutNewsArticlesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
-    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutNewsArticlesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    telephone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    bio?: NullableStringFieldUpdateOperationsInput | string | null
-    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
-    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
-    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsCommentUpsertWithWhereUniqueWithoutNewsArticleInput = {
@@ -20249,27 +20297,87 @@ export namespace Prisma {
     data: XOR<NewsArticleLikeUpdateManyMutationInput, NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleInput>
   }
 
+  export type UserUpsertWithoutNewsArticlesInput = {
+    update: XOR<UserUpdateWithoutNewsArticlesInput, UserUncheckedUpdateWithoutNewsArticlesInput>
+    create: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutNewsArticlesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutNewsArticlesInput, UserUncheckedUpdateWithoutNewsArticlesInput>
+  }
+
+  export type UserUpdateWithoutNewsArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutNewsArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutNewsCommentsInput = {
     id?: string
     name?: string | null
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
-    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsCommentsInput = {
@@ -20278,21 +20386,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
-    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
-    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsCommentsInput = {
@@ -20309,8 +20418,8 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsArticlesInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author: UserCreateNestedOneWithoutNewsArticlesInput
   }
 
   export type NewsArticleUncheckedCreateWithoutNewsCommentsInput = {
@@ -20348,21 +20457,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
-    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsCommentsInput = {
@@ -20371,21 +20481,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
-    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
-    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsArticleUpsertWithoutNewsCommentsInput = {
@@ -20408,8 +20519,8 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutNewsCommentsInput = {
@@ -20431,21 +20542,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
-    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
-    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsArticleLikesInput = {
@@ -20454,21 +20566,22 @@ export namespace Prisma {
     username?: string | null
     email?: string | null
     avatarUrl?: string | null
-    role?: $Enums.Role | null
+    role?: $Enums.Role
     createdAt?: Date | string
     telephone?: string | null
     passwordHash?: string | null
     googleId?: string | null
+    githubId?: string | null
     bio?: string | null
     isWelcomed?: boolean
     isVerified?: boolean
     emailVerified?: boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
-    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
-    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsArticleLikesInput = {
@@ -20485,8 +20598,8 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNewsArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    author: UserCreateNestedOneWithoutNewsArticlesInput
   }
 
   export type NewsArticleUncheckedCreateWithoutNewsArticleLikesInput = {
@@ -20524,21 +20637,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
-    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
-    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsArticleLikesInput = {
@@ -20547,21 +20661,22 @@ export namespace Prisma {
     username?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     telephone?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     isWelcomed?: BoolFieldUpdateOperationsInput | boolean
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
-    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
-    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsArticleUpsertWithoutNewsArticleLikesInput = {
@@ -20584,8 +20699,8 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput = {
@@ -20606,21 +20721,16 @@ export namespace Prisma {
     expires: bigint | number
   }
 
-  export type SessionCreateManyUserInput = {
+  export type EmployeeCreateManyUserInput = {
     id?: string
-    expiresAt: Date | string
-    role?: $Enums.Role
-  }
-
-  export type NewsArticleCreateManyAuthorInput = {
-    id?: string
-    imageUrl?: string | null
+    assumedOffice: number
+    endedOffice?: number | null
+    position: string
+    shortMessageToPublic?: string | null
+    departMentalSectorId?: string | null
+    hierarchy: number
+    ippsNumber: string
     title: string
-    publishedAt?: Date | string
-    content: string
-    location?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type NewsCommentCreateManyCommenterInput = {
@@ -20637,6 +20747,17 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type NewsArticleCreateManyAuthorInput = {
+    id?: string
+    imageUrl?: string | null
+    title: string
+    publishedAt?: Date | string
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type NewsLetterCreateManyAuthorInput = {
     id?: string
     title: string
@@ -20646,16 +20767,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EmployeeCreateManyUserInput = {
+  export type SessionCreateManyUserInput = {
     id?: string
-    ippsNumber: string
-    assumedOffice: number
-    endedOffice?: number | null
-    position: string
-    title: string
-    hierarchy: number
-    shortMessageToPublic?: string | null
-    departMentalSectorId?: string | null
+    expiresAt: Date | string
+    createdAt?: Date | string
+    lastVerifiedAt?: Date | string
+    secretHash?: string
+    role?: $Enums.Role
   }
 
   export type EmailVerificationTokenUpdateWithoutUserInput = {
@@ -20673,59 +20791,42 @@ export namespace Prisma {
     expires?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
-  export type SessionUpdateWithoutUserInput = {
+  export type EmployeeUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  }
-
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  }
-
-  export type NewsArticleUpdateWithoutAuthorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
-    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
+    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
   }
 
-  export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
+  export type EmployeeUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
-    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
   }
 
-  export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
+  export type EmployeeUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    assumedOffice?: IntFieldUpdateOperationsInput | number
+    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
+    position?: StringFieldUpdateOperationsInput | string
+    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
+    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    content?: StringFieldUpdateOperationsInput | string
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NewsCommentUpdateWithoutCommenterInput = {
@@ -20770,6 +20871,43 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NewsArticleUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type NewsLetterUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -20797,42 +20935,31 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmployeeUpdateWithoutUserInput = {
+  export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
-    assumedOffice?: IntFieldUpdateOperationsInput | number
-    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
-    position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
-    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
-    departMentalSector?: DepartMentalSectorUpdateOneWithoutEmployeesNestedInput
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
-  export type EmployeeUncheckedUpdateWithoutUserInput = {
+  export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
-    assumedOffice?: IntFieldUpdateOperationsInput | number
-    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
-    position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
-    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
-    departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
-  export type EmployeeUncheckedUpdateManyWithoutUserInput = {
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
-    assumedOffice?: IntFieldUpdateOperationsInput | number
-    endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
-    position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
-    shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    departMentalSectorId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    secretHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type DepartMentalSectorCreateManyDepartMentInput = {
@@ -20867,52 +20994,52 @@ export namespace Prisma {
 
   export type EmployeeCreateManyDepartMentalSectorInput = {
     id?: string
-    ippsNumber: string
     assumedOffice: number
     endedOffice?: number | null
     position: string
-    title: string
-    hierarchy: number
     shortMessageToPublic?: string | null
     userId: string
+    hierarchy: number
+    ippsNumber: string
+    title: string
   }
 
   export type EmployeeUpdateWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     departMents?: DepartMentUpdateManyWithoutHeadOfDepartmentNestedInput
+    user?: UserUpdateOneRequiredWithoutEmployeesNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     departMents?: DepartMentUncheckedUpdateManyWithoutHeadOfDepartmentNestedInput
   }
 
   export type EmployeeUncheckedUpdateManyWithoutDepartMentalSectorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    ippsNumber?: StringFieldUpdateOperationsInput | string
     assumedOffice?: IntFieldUpdateOperationsInput | number
     endedOffice?: NullableIntFieldUpdateOperationsInput | number | null
     position?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    hierarchy?: IntFieldUpdateOperationsInput | number
     shortMessageToPublic?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    hierarchy?: IntFieldUpdateOperationsInput | number
+    ippsNumber?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type DepartMentCreateManyHeadOfDepartmentInput = {

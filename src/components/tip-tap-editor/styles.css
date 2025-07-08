@@ -191,11 +191,20 @@
     }
 
     th {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      font-weight: bold;
+      text-align: left;
+    }
+
+     &:is(.dark *) {
+       th {
       background-color: color-mix(in oklab, var(--primary) 20%, transparent);
       color: var(--foreground);
       font-weight: bold;
       text-align: left;
     }
+      }
 
     .selectedCell:after {
       background: var(--secondary);

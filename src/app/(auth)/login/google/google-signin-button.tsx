@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
 import Link from "next/link";
 import { useTransition } from "react";

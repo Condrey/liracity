@@ -1,21 +1,23 @@
 "use server";
 
-import { lucia, validateRequest } from "@/auth";
-import { cookies } from "next/headers";
+import { validateRequest } from "@/auth";
 import { redirect } from "next/navigation";
+import { globalPOSTRateLimit } from "../../lib/request";
+import {  invalidateSession } from "../../lib/session";
+import { deleteSessionTokenCookie } from "../../lib/tokens";
 
 export async function logout() {
-  const { session } = await validateRequest();
-  if (!session) {
-    throw new Error("Unauthorized.");
-  }
-  await lucia.invalidateSession(session.id);
-  const sessionCookie = lucia.createBlankSessionCookie();
-  const cookieStore = await cookies();
-  cookieStore.set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  );
-  return redirect("/");
+	if (!globalPOSTRateLimit()) {
+		throw Error("Too many requests");
+	}
+
+	const { session } = await validateRequest();
+	if (!session) {
+		throw new Error("Unauthorized.");
+	}
+
+	invalidateSession(session.id);
+	deleteSessionTokenCookie();
+	// finally
+	return redirect("/");
 }

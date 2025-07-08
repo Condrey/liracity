@@ -1,13 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
+
+// ONline db: https://vercel.com/api/marketplace/sso?integrationConfigurationId=icfg_CR0YDyWYqrQoBR7FvGiwiMoZ&product_id=iap_SYm1SIDap0OBqOvV&resource_id=shiny-wave-94885079&teamId=team_2kW2NcCjaUXcvfsZU68qeuAM
 
 datasource db {
   provider = "postgresql"
@@ -20,22 +16,23 @@ model User {
   username                String?                  @unique
   email                   String?                  @unique
   avatarUrl               String?
-  role                    Role?                    @default(USER)
+  role                    Role                     @default(USER)
   createdAt               DateTime                 @default(now())
   telephone               String?
   passwordHash            String?
   googleId                String?                  @unique
+  githubId                String?                  @unique
   bio                     String?
   isWelcomed              Boolean                  @default(false)
   isVerified              Boolean                  @default(false)
   emailVerified           Boolean                  @default(false)
   emailVerificationTokens EmailVerificationToken[]
-  sessions                Session[]
-  newsArticles            NewsArticle[]
+  employees               Employee[]
   newsComments            NewsComment[]
   newsArticleLikes        NewsArticleLike[]
+  newsArticles            NewsArticle[]
   newsLetters             NewsLetter[]
-  employees               Employee[]
+  sessions                Session[]
 
   @@map("users")
 }
@@ -51,10 +48,10 @@ model Entity {
 model DepartMent {
   id                  String               @id @default(uuid())
   name                String
-  about               String?
-  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id], onDelete: SetNull)
-  departmentalSectors DepartMentalSector[]
   headOfDepartmentId  String?
+  about               String?
+  departmentalSectors DepartMentalSector[]
+  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id])
 
   @@map("departments")
 }
@@ -63,28 +60,28 @@ model DepartMentalSector {
   id           String      @id @default(uuid())
   name         String
   description  String?
-  hierarchy    Int
-  employees    Employee[]
-  departMent   DepartMent? @relation(fields: [departMentId], references: [id], onDelete: SetNull)
   departMentId String?
+  hierarchy    Int
+  departMent   DepartMent? @relation(fields: [departMentId], references: [id])
+  employees    Employee[]
 
   @@map("departmental_sectors")
 }
 
 model Employee {
   id                   String              @id @default(uuid())
-  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  ippsNumber           String              @unique
   assumedOffice        Int
   endedOffice          Int?
   position             String
-  title                String
-  hierarchy            Int
   shortMessageToPublic String?
-  departMents          DepartMent[]
-  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id], onDelete: SetNull)
   departMentalSectorId String?
   userId               String
+  hierarchy            Int
+  ippsNumber           String              @unique
+  title                String
+  departMents          DepartMent[]
+  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("employees")
 }
@@ -99,11 +96,14 @@ model EmailVerificationToken {
 }
 
 model Session {
-  id        String   @id @default(uuid())
-  userId    String
-  expiresAt DateTime
-  role      Role     @default(USER)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String   @id @default(uuid())
+  userId         String
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
+  lastVerifiedAt DateTime @default(now())
+  secretHash     String   @default(uuid())
+  role           Role     @default(USER)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -124,8 +124,8 @@ model NewsLetter {
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("news_letters")
 }
@@ -136,13 +136,13 @@ model NewsArticle {
   title            String
   publishedAt      DateTime          @default(now())
   content          String
-  author           User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId         String
   location         String?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   newsComments     NewsComment[]
   newsArticleLikes NewsArticleLike[]
+  author           User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("news_articles")
 }
@@ -150,30 +150,30 @@ model NewsArticle {
 model NewsComment {
   id            String      @id @default(uuid())
   content       String
-  commenter     User        @relation(fields: [commenterId], references: [id], onDelete: Cascade)
   commenterId   String
-  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
   newsArticleId String
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+  commenter     User        @relation(fields: [commenterId], references: [id], onDelete: Cascade)
+  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
 
   @@map("news_article_comments")
 }
 
 model NewsArticleLike {
   id            String      @id @default(uuid())
-  liker         User        @relation(fields: [likerId], references: [id], onDelete: Cascade)
   likerId       String
-  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
   newsArticleId String
   createdAt     DateTime    @default(now())
+  liker         User        @relation(fields: [likerId], references: [id], onDelete: Cascade)
+  newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
 
   @@map("news_article_likes")
 }
 
 enum Role {
   USER
-  STAFF
   ADMIN
   MODERATOR
+  STAFF
 }

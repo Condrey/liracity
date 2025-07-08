@@ -1,11 +1,12 @@
 "use server";
 
-import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { loginSchema, LoginValues } from "@/lib/validation";
 import { verify } from "@node-rs/argon2";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createSession } from "../../lib/session";
+import { generateSessionToken, setSessionTokenCookie } from "../../lib/tokens";
 
 export async function loginAction(
   credentials: LoginValues,
@@ -52,15 +53,10 @@ export async function loginAction(
     };
   }
 
-  const session = await lucia.createSession(existingUser.id, {
-    role: existingUser.role || "USER",
-  });
-  const sessionCookie = lucia.createSessionCookie(session.id);
-  cookieStore.set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  );
+  const sessionToken = generateSessionToken();
+const session = await createSession(sessionToken, existingUser.id)
+   await setSessionTokenCookie(sessionToken, session.expiresAt)
+
   return redirect(
     existingUser.isVerified ? "/" : `/user-verification/${existingUser.id}`,
   );

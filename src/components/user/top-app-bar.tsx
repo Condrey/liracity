@@ -16,8 +16,10 @@ import { Separator } from "../ui/separator";
 import { SidebarTrigger } from "../ui/sidebar";
 import { navLinks } from "./constants";
 import LoginUserInfo from "./login-user-info";
+import { validateRequest } from "@/auth";
 
-export default function TopAppBar({ className }: { className?: string }) {
+export default async function TopAppBar({ className }: { className?: string }) {
+  const {user}  = await validateRequest()
   return (
     <NavigationMenu
       className={cn(
@@ -26,6 +28,9 @@ export default function TopAppBar({ className }: { className?: string }) {
       )}
     >
       <NavigationMenuList className="flex gap-3 flex-wrap   ">
+        <pre>
+          {JSON.stringify(user, null, 2)}
+        </pre>
         {/* For small screens : section */}
         <div className="flex items-center md:hidden  gap-2">
           <SidebarTrigger className="-ml-1 " />

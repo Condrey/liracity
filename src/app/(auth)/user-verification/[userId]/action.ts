@@ -57,7 +57,7 @@ export async function verifyUser(
     );
     console.log("error", error);
     if (!!error) return error;
-    console.log("Alreadey returned error: ", error);
+    console.log("Already returned error: ", error);
 
     const token = await generateEmailVerificationToken(id);
     await sendEmailVerificationLink({ email, token });

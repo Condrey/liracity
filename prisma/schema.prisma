@@ -2,6 +2,7 @@ generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
+// ONline db: https://vercel.com/api/marketplace/sso?integrationConfigurationId=icfg_CR0YDyWYqrQoBR7FvGiwiMoZ&product_id=iap_SYm1SIDap0OBqOvV&resource_id=shiny-wave-94885079&teamId=team_2kW2NcCjaUXcvfsZU68qeuAM
 
 datasource db {
   provider = "postgresql"
@@ -14,11 +15,12 @@ model User {
   username                String?                  @unique
   email                   String?                  @unique
   avatarUrl               String?
-  role                    Role?                    @default(USER)
+  role                    Role                    @default(USER)
   createdAt               DateTime                 @default(now())
   telephone               String?
   passwordHash            String?
   googleId                String?                  @unique
+  githubId String?                 @unique
   bio                     String?
   isWelcomed              Boolean                  @default(false)
   isVerified              Boolean                  @default(false)
@@ -96,6 +98,9 @@ model Session {
   id        String   @id @default(uuid())
   userId    String
   expiresAt DateTime
+  createdAt DateTime @default(now())
+  lastVerifiedAt DateTime @default(now())
+  secretHash String @default(uuid())
   role      Role     @default(USER)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 

@@ -4,9 +4,18 @@ import { validateRequest } from "@/auth";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
-import { employeeDataInclude } from "@/lib/types";
+import { departmentDataInclude, employeeDataInclude } from "@/lib/types";
 import { employeeSchema, EmployeeSchema } from "@/lib/validation";
 import { hash } from "@node-rs/argon2";
+import { cache } from "react";
+
+
+async function allDepartments(){
+  return await prisma.departMent.findMany({
+    include: departmentDataInclude
+  })
+}
+export const getAllDepartments = cache(allDepartments)
 
 function getTitle(position: string): string {
   return position

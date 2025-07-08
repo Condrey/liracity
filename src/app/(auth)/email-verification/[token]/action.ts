@@ -1,6 +1,5 @@
 "use server";
 
-import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -8,6 +7,8 @@ import { sendEmailVerificationLink } from "../../user-verification/[userId]/emai
 import { sendWelcomeRemarksEmail } from "./email";
 import { generateEmailVerificationToken } from "./token";
 import { Role } from "@/generated/prisma";
+import { createSession } from "../../lib/session";
+import { generateSessionToken, setSessionTokenCookie } from "../../lib/tokens";
 
 export async function resendEmailVerificationLink(
   email: string,
@@ -40,6 +41,8 @@ export async function sendWelcomingRemarks(email: string) {
   if (!user.isWelcomed) {
     await sendWelcomeRemarksEmail({ email, name: user.name! });
   }
+  const sessionToken = generateSessionToken();
+
   const [updatedUser, session] = await Promise.all([
     prisma.user.update({
       where: { email },
@@ -47,16 +50,10 @@ export async function sendWelcomingRemarks(email: string) {
         isWelcomed: true,
       },
     }),
-    lucia.createSession(user.id, {
-      role: user.role || Role.USER,
-    }),
+     await createSession(sessionToken, user.id)
+,
   ]);
-  const cookieStore = await cookies();
-  const sessionCookie = lucia.createSessionCookie(session.id);
-  cookieStore.set(
-    sessionCookie.name,
-    sessionCookie.value,
-    sessionCookie.attributes,
-  );
+    await setSessionTokenCookie(sessionToken, session.expiresAt)
+
   redirect("/");
 }

@@ -58,7 +58,7 @@ const isAuthorized =
         open={open}
         setOpen={setOpen}
         employee={employee}
-        departments={data}
+        departments={data!}
       />
     </>
   );

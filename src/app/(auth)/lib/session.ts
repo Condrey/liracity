@@ -1,8 +1,6 @@
-
 import { Prisma, Role, Session } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
-import { cache } from "react";
 import { validateSessionToken } from "./tokens";
 import { hashSecret } from "./utils";
 
@@ -10,41 +8,43 @@ const inactivityTimeoutSeconds = 60 * 60; // 1 hour
 
 const sessionWithUserInclude = {
 	user: {
-		select: { id: true, role: true, avatarUrl: true, email: true, username: true }
+		select: { id: true, role: true, avatarUrl: true, email: true, username: true, name: true, isVerified: true }
 	}
 } satisfies Prisma.SessionInclude;
-type SessionWithUserData = Prisma.SessionGetPayload<{ include: typeof sessionWithUserInclude}>;
+type SessionWithUserData = Prisma.SessionGetPayload<{ include: typeof sessionWithUserInclude }>;
 
-export type LuciaSession= {
+export type LuciaSession = {
 	id: string;
 	lastVerifiedAt: Date;
 	expiresAt: Date;
 	createdAt: Date;
 	userId: string;
 	role: Role;
-}
-export type  LuciaUser= {
+};
+export type LuciaUser = {
 	role: Role;
 	avatarUrl?: string | null;
 	email?: string | null;
 	id: string;
 	username?: string | null;
-}
+	isVerified: string;
+	name?: string;
+};
 interface LuciaSessionWithToken extends Session {
 	token: string;
 }
 export type SessionValidationResult = { session: LuciaSession; user: LuciaUser } | { session: null; user: null };
 
-export  async function getCurrentSession (): Promise<SessionValidationResult> {
-	const cookieStore  = await cookies()
+export async function getCurrentSession(): Promise<SessionValidationResult> {
+	const cookieStore = await cookies();
 	const token = cookieStore.get("oauth_session")?.value ?? null;
 	if (!token) {
 		return { session: null, user: null };
 	}
 	const result = await validateSessionToken(token);
-	
+
 	return result;
-};
+}
 
 export async function invalidateSession(sessionId: string): Promise<void> {
 	await prisma.session.delete({ where: { id: sessionId } });

@@ -27,7 +27,7 @@ export type LuciaUser = {
 	email?: string | null;
 	id: string;
 	username?: string | null;
-	isVerified: string;
+	isVerified: boolean;
 	name?: string;
 };
 interface LuciaSessionWithToken extends Session {

@@ -59,7 +59,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 			data: { expiresAt: session.expiresAt }
 		});
 	};
-	return { session:session satisfies LuciaSession, user: session.user   };
+	return { session:session satisfies LuciaSession, user: session.user as LuciaUser  };
 }
 
 export async function deleteSessionTokenCookie(): Promise<void> {

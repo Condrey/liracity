@@ -15,5 +15,5 @@ return <Suspense fallback={'Loading'}><AllStaffs/></Suspense>
 async function AllStaffs(){
 const allStaffs = getAllStaffs()
 
-return 
+return <div>All staffs</div>
 }

@@ -28,7 +28,7 @@ export default function StaffList({staffs}:StaffListProps){
             <EmptyContainer message={'There are no staffs in the database yet.'}>
 
             </EmptyContainer>
-            : <DataTable/>
+            : 'list of staff'
         }
     </div>
 }

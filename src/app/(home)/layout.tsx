@@ -22,7 +22,7 @@ export default async function Layout({
         <AppSidebar />
         <SidebarInset>
           <div className=" h-full overflow-hidden w-full">
-            <header className="fixed top-0 z-50  w-full bg-card/10 backdrop-blur-sm ">
+            <header className="fixed top-0 z-50  w-full bg-card ">
               <TopAppBar className="w-full max-w-7xl mx-auto  px-3 " />
             </header>
             <main className=" size-full  overflow-y-auto scroll-auto flex flex-col gap-8 ">

@@ -1,3 +1,4 @@
+import { TypographyH1 } from "@/components/page-utils";
 import {
   Card,
   CardAction,
@@ -11,12 +12,15 @@ import { QuoteIcon } from "lucide-react";
 
 export default function MessageFromLeaders() {
   return (
-    <div className="w-full grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+   <div className='space-y-4'>
+    <TypographyH1 title="Message from Leaders" className="uppercase" />
+     <div className="w-full grid gap-3 sm:grid-cols-2 md:grid-cols-3">
       <LeaderContainer />
       <LeaderContainer />
       <LeaderContainer />
       {/* <LeaderContainer /> */}
     </div>
+   </div>
   );
 }
 

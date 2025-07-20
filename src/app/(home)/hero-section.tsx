@@ -12,7 +12,7 @@ export default async function HeroSection() {
         alt="hero-image"
         width={640}
         height={800}
-        objectFit="cover"
+        // objectFit="cover"
         // placeholder="blur"
         className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3 mt-14 md:mt-0 mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
       />

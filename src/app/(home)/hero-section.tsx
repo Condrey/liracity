@@ -17,14 +17,14 @@ export default async function HeroSection() {
         className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3 mt-14 md:mt-0 mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
       />
       <article className="lg:max-w-prose shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
-        <time className=" ordinal text-sm text-muted-foreground slashed-zero">
+        <time className=" ordinal text-xs text-muted-foreground slashed-zero">
           14th December, 2025
         </time>
-        <h2 className="font-medium tracking-tight line-clamp-2 text-balance">
+        <h2 className="font-medium tracking-tight text-lg line-clamp-2 text-pretty capitalize">
           New tax holiday policy on startup business
         </h2>
 
-        <p className="mt-1 hyphens-auto text-sm leading-relaxed italic sm:not-italic  text-balance text-gray-500 line-clamp-3 xl:line-clamp-5 md:max-w-prose">
+        <p className="mt-1 hyphens-auto text-sm leading-relaxed italic sm:not-italic  text-justify text-gray-500 line-clamp-3 xl:line-clamp-5 md:max-w-prose">
           In a move set to stimulate innovation and boost entrepreneurship, the
           government has announced a new tax holiday for startup businesses
           across the country. This policy, which takes effect starting July 1,

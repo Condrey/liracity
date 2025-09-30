@@ -12,7 +12,7 @@ import { QuoteIcon } from "lucide-react";
 
 export default function MessageFromLeaders() {
   return (
-   <div className='space-y-4'>
+   <div className='space-y-4 max-w-4xl'>
     <TypographyH1 title="Message from Leaders" className="uppercase" />
      <div className="w-full grid gap-3 sm:grid-cols-2 md:grid-cols-3">
       <LeaderContainer />

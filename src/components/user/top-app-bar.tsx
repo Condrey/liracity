@@ -1,20 +1,17 @@
-"use client";
-
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn, webName } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Separator } from "../ui/separator";
-import { SidebarTrigger } from "../ui/sidebar";
-import { navLinks } from "./constants";
 import LoginUserInfo from "./login-user-info";
-import { NavigationMenuItemContent } from "./top-app-bar-nav-item";
+import TopAppBarBigScreen from "./top-app-bar/top-app-bar-big-screen";
 
 export default async function TopAppBar({ className }: { className?: string }) {
 	return (
 		<NavigationMenu
-    viewport={false}
+			viewport={false}
 			className={cn(
 				"w-full h-12  flex justify-between shrink-0 items-center  gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
 				className
@@ -36,9 +33,7 @@ export default async function TopAppBar({ className }: { className?: string }) {
 				</NavigationMenuItem>
 
 				{/* Big screen section: Navigation menu links  */}
-				{navLinks?.map((nav, index, array) => {
-					return <NavigationMenuItemContent key={nav.href} nav={nav} index={index} array={array} />;
-				})}
+				<TopAppBarBigScreen />
 			</NavigationMenuList>
 			<NavigationMenuList>
 				{/* login information area  */}

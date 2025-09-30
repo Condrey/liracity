@@ -10,8 +10,8 @@ import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { TransitionStartFunction, useTransition } from "react";
-import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
-import { NavLinkGroup } from "./constants";
+import { navigationMenuTriggerStyle } from "../../ui/navigation-menu";
+import { NavLinkGroup } from "../constants";
 
 interface NavigationMenuItemContentProps {
 	nav: NavLinkGroup;
@@ -31,27 +31,31 @@ export function NavigationMenuItemContent({ nav, array, index }: NavigationMenuI
 			{!!nav.children?.length ? (
 				<>
 					<NavigationMenuTrigger loading={isPending}>{nav.title}</NavigationMenuTrigger>
-					<NavigationMenuContent 
+					<NavigationMenuContent
 					// className={cn("z-50 left-0", alignRight ? "md:-right-10 md:left-auto" : "md:-left-10")}
 					>
-						<ul className={cn(
-                            "grid gap-3 p-4 md:w-[400px]  lg:w-[500px] lg:grid-cols-[.75fr_1fr]",
-                            alignRight&&'flex flex-col *:break-all ', 
-                        )}>
-							{!alignRight&&<li className="row-span-3">
-								<NavigationMenuLink asChild>
-									<Link
-										className="flex flex-row h-full items-center lg:justify-center w-full select-none lg:flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-										href={parentLink}
-									>
-										{Icon && <Icon className="size-16" strokeWidth={0.5} />}
-										<div className="flex flex-col lg:items-center lg:*:text-center">
-											<div className="mb-2 mt-4 text-lg font-medium tracking-tight uppercase">{nav.title}</div>
-											<p className="text-sm leading-tight text-muted-foreground">{nav.description}</p>
-										</div>
-									</Link>
-								</NavigationMenuLink>
-							</li>}
+						<ul
+							className={cn(
+								"grid gap-3 p-4 md:w-[400px]  lg:w-[500px] lg:grid-cols-[.75fr_1fr]",
+								alignRight && "flex flex-col *:break-all "
+							)}
+						>
+							{!alignRight && (
+								<li className="row-span-3">
+									<NavigationMenuLink asChild>
+										<Link
+											className="flex flex-row h-full items-center lg:justify-center w-full select-none lg:flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+											href={parentLink}
+										>
+											{Icon && <Icon className="size-16" strokeWidth={0.5} />}
+											<div className="flex flex-col lg:items-center lg:*:text-center">
+												<div className="mb-2 mt-4 text-lg font-medium tracking-tight uppercase">{nav.title}</div>
+												<p className="text-sm leading-tight text-muted-foreground">{nav.description}</p>
+											</div>
+										</Link>
+									</NavigationMenuLink>
+								</li>
+							)}
 							{nav.children.map(({ title, href, description }) => {
 								return (
 									<ListItem key={href} href={href} title={title} startTransition={startTransition}>
@@ -64,7 +68,7 @@ export function NavigationMenuItemContent({ nav, array, index }: NavigationMenuI
 				</>
 			) : (
 				<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-					<Link href={parentLink} passHref >
+					<Link href={parentLink} passHref>
 						{nav.title}
 					</Link>
 				</NavigationMenuLink>

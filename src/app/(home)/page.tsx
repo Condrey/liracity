@@ -13,7 +13,9 @@ export default function Home() {
 
       {/* other sections  */}
       {/* What we stand for  */}
+      <div className="border-y ">
       <WhatWeStandFor />
+      </div>
       {/* Message from our leaders  */}
       <MessageFromLeaders />
       {/* Sample news articles  */}

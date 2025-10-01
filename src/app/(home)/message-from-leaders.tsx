@@ -12,7 +12,7 @@ import { QuoteIcon } from "lucide-react";
 
 export default function MessageFromLeaders() {
   return (
-   <div className='space-y-4 max-w-4xl'>
+   <div className='space-y-4 max-w-5xl mx-auto'>
     <TypographyH1 title="Message from Leaders" className="uppercase" />
      <div className="w-full grid gap-3 sm:grid-cols-2 md:grid-cols-3">
       <LeaderContainer />
@@ -30,7 +30,7 @@ function LeaderContainer() {
       <Card className="items-center w-full gap-3  md:mt-[90px]  group-odd:from-warning/10 group-even:from-success/10 md:bg-gradient-to-t ">
         <CardHeader className="w-full gap-0.5 md:*:text-center md:mt-[80px] flex md:flex-col items-center  flex-row  ">
           <UserAvatar
-            avatarUrl={`/logo.png`}
+            avatarUrl={null}
             size={75}
             className=" flex md:hidden mr-3"
           />{" "}
@@ -58,9 +58,9 @@ function LeaderContainer() {
         <CardAction></CardAction>
       </Card>
       <UserAvatar
-        avatarUrl={`/logo.png`}
+        avatarUrl={null}
         size={180}
-        className="absolute top-0 hidden md:flex"
+        className="absolute top-0 hidden md:flex border-2"
       />
     </div>
   );

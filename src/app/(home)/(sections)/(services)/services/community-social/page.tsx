@@ -1,8 +1,8 @@
 import { PageTitle } from "@/components/page-utils";
-import { useCityServicesLinks } from "@/components/user/constants";
+import { cityServicesLinks } from "@/components/user/constants";
 import { Metadata } from "next";
 
-const { title, description } = useCityServicesLinks.find((val) => val.href === "/services/community-social")!;
+const { title, description } = cityServicesLinks.find((val) => val.href === "/services/community-social")!;
 export const metadata: Metadata = {
 	title,
 	description

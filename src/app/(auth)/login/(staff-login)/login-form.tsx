@@ -52,7 +52,7 @@ export default function LoginForm() {
           name="ippsNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Staff IPPS Number</FormLabel>
+              <FormLabel>Employee Number</FormLabel>
               <FormControl>
                 <NumberInput placeholder="e.g., 13578 or 00013578" {...field} />
               </FormControl>

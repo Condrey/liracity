@@ -9,8 +9,8 @@ import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
-import { getAllDepartmentList } from "../../../../../components/department/action";
-import ButtonAddEditDepartment from "../../../../../components/department/button-add-edit-department";
+import { getAllDepartmentList } from "@/components/department/action";
+import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import { useDepartmentsColumns } from "./columns";
 
 interface ListOfDepartmentsProps {

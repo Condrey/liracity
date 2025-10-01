@@ -9,7 +9,7 @@ export default function BodyContainer({
   className?: string;
 }) {
   return (
-    <main className={cn("pt-12 w-full max-w-3xl mx-auto space-y-6", className)}>
+    <main className={cn("pt-12 w-full max-w-9xl mx-auto space-y-6", className)}>
       {children}
     </main>
   );

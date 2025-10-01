@@ -11,19 +11,21 @@ export default function UserLogin() {
   const [isPending, startTransition] = useTransition();
   return (
     <>
-      <LoginForm />
-
-      <div className="flex items-center gap-3 mt-6">
-        <div className="h-px flex-1 bg-muted-foreground" />
-        <span className="text-muted-foreground">OR CONTINUE WITH</span>
-        <div className="h-px flex-1 bg-muted-foreground" />
-      </div>
-      <div className="flex justify-center gap-3 w-full items-center pb-6 pt-3">
+     
+      <div className="flex justify-center gap-3 w-full items-center pt-3">
         <GoogleSignInButton />
       </div>
+      <div className="flex items-center gap-3 my-6">
+        <div className="h-px flex-1 bg-muted-foreground" />
+        <span className="text-muted-foreground uppercase">Or use Email</span>
+        <div className="h-px flex-1 bg-muted-foreground" />
+      </div>
+       <LoginForm />
+
+      
       <Link
         href={`/signup`}
-        className="block text-center underline group/link hover:text-primary"
+        className="block text-center underline group/link hover:text-primary mt-4"
         onClick={() => startTransition(() => {})}
       >
         <span>

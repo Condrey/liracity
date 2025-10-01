@@ -71,7 +71,7 @@ export default function WhatWeStandFor() {
 								</Button>
 								<p className=" first-letter:capitalize">
 									<span className="italic font-medium tracking-tighter text-muted-foreground">{key}</span>{" "}
-									<span className="text-start font-medium text-muted-foreground tracking-tighter">| {webName} –</span>{" "}
+									<span className="text-start font-medium text-muted-foreground tracking-tighter">| {webName}</span>{" "}
 									<span dangerouslySetInnerHTML={{ __html: md.render(value) }} className="whitespace-normal"/>
 								</p>
 							</div>

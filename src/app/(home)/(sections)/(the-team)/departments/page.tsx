@@ -2,8 +2,8 @@ import BodyContainer from "@/app/(home)/body-container";
 import { PageDescription, PageTitle } from "@/components/page-utils";
 import { whatWeDoLinks } from "@/components/user/constants";
 import { Metadata } from "next";
-import { getAllDepartmentList } from "../../../../../components/department/action";
-import ButtonAddEditDepartment from "../../../../../components/department/button-add-edit-department";
+import { getAllDepartmentList } from "@/components/department/action";
+import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import ListOfDepartments from "./list-of-departments";
 
 const { title, description } = whatWeDoLinks.find(
@@ -17,7 +17,7 @@ export default async function Page() {
   const departments = await getAllDepartmentList();
   return (
     <BodyContainer>
-      <div className="space-y-2 mx-3 ">
+      <div className="space-y-2  max-w-fit mx-auto">
         <div className="flex gap-3 items-center justify-between">
           <PageTitle heading={title} />
           <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>

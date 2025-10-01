@@ -20,9 +20,9 @@ export default async function Page() {
   });
   return (
     <BodyContainer className="max-w-7xl">
-      <div className="space-y-2 max-w-3xl w-full mx-auto">
+      <div className="space-y-2 max-w-3xl w-full me-auto">
         <PageTitle heading={title} />
-        <PageDescription paragraph={pageDescription} className="mx-auto" />
+        <PageDescription paragraph={pageDescription} className="me-auto" />
       </div>
       <Chart departments={departments} />
     </BodyContainer>

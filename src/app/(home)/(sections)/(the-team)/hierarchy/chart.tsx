@@ -75,7 +75,7 @@ const townClerk: ChartUser = {
 	hierarchy: 1,
 	name: "Okurut Vincent",
 	position: "City Town Clerk",
-	resumedOffice: 2023,
+	resumedOffice: 2024,
 	telephone: "+256776239674",
 	title: null,
 	isVerified: true

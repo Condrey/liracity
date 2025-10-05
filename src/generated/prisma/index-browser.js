@@ -209,14 +209,37 @@ exports.Prisma.NewsLetterScalarFieldEnum = {
 
 exports.Prisma.NewsArticleScalarFieldEnum = {
   id: 'id',
-  imageUrl: 'imageUrl',
+  coverImage: 'coverImage',
   title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  categoryId: 'categoryId',
   publishedAt: 'publishedAt',
+  status: 'status',
   content: 'content',
   authorId: 'authorId',
   location: 'location',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MediaScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  url: 'url',
+  createdAt: 'createdAt',
+  newsArticleId: 'newsArticleId'
+};
+
+exports.Prisma.NewsArticleCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.NewsCommentScalarFieldEnum = {
@@ -256,6 +279,18 @@ exports.Role = exports.$Enums.Role = {
   STAFF: 'STAFF'
 };
 
+exports.NewsArticleStatus = exports.$Enums.NewsArticleStatus = {
+  PRIVATE: 'PRIVATE',
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.MediaType = exports.$Enums.MediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Entity: 'Entity',
@@ -267,6 +302,9 @@ exports.Prisma.ModelName = {
   NewsLetterSubscription: 'NewsLetterSubscription',
   NewsLetter: 'NewsLetter',
   NewsArticle: 'NewsArticle',
+  Media: 'Media',
+  NewsArticleCategory: 'NewsArticleCategory',
+  Tag: 'Tag',
   NewsComment: 'NewsComment',
   NewsArticleLike: 'NewsArticleLike'
 };

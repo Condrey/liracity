@@ -64,6 +64,21 @@ export type NewsLetter = $Result.DefaultSelection<Prisma.$NewsLetterPayload>
  */
 export type NewsArticle = $Result.DefaultSelection<Prisma.$NewsArticlePayload>
 /**
+ * Model Media
+ * 
+ */
+export type Media = $Result.DefaultSelection<Prisma.$MediaPayload>
+/**
+ * Model NewsArticleCategory
+ * 
+ */
+export type NewsArticleCategory = $Result.DefaultSelection<Prisma.$NewsArticleCategoryPayload>
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
+/**
  * Model NewsComment
  * 
  */
@@ -78,7 +93,25 @@ export type NewsArticleLike = $Result.DefaultSelection<Prisma.$NewsArticleLikePa
  * Enums
  */
 export namespace $Enums {
-  export const Role: {
+  export const MediaType: {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+};
+
+export type MediaType = (typeof MediaType)[keyof typeof MediaType]
+
+
+export const NewsArticleStatus: {
+  PRIVATE: 'PRIVATE',
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+};
+
+export type NewsArticleStatus = (typeof NewsArticleStatus)[keyof typeof NewsArticleStatus]
+
+
+export const Role: {
   USER: 'USER',
   ADMIN: 'ADMIN',
   MODERATOR: 'MODERATOR',
@@ -88,6 +121,14 @@ export namespace $Enums {
 export type Role = (typeof Role)[keyof typeof Role]
 
 }
+
+export type MediaType = $Enums.MediaType
+
+export const MediaType: typeof $Enums.MediaType
+
+export type NewsArticleStatus = $Enums.NewsArticleStatus
+
+export const NewsArticleStatus: typeof $Enums.NewsArticleStatus
 
 export type Role = $Enums.Role
 
@@ -317,6 +358,36 @@ export class PrismaClient<
     * ```
     */
   get newsArticle(): Prisma.NewsArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.media`: Exposes CRUD operations for the **Media** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Media
+    * const media = await prisma.media.findMany()
+    * ```
+    */
+  get media(): Prisma.MediaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newsArticleCategory`: Exposes CRUD operations for the **NewsArticleCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewsArticleCategories
+    * const newsArticleCategories = await prisma.newsArticleCategory.findMany()
+    * ```
+    */
+  get newsArticleCategory(): Prisma.NewsArticleCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tags
+    * const tags = await prisma.tag.findMany()
+    * ```
+    */
+  get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.newsComment`: Exposes CRUD operations for the **NewsComment** model.
@@ -787,6 +858,9 @@ export namespace Prisma {
     NewsLetterSubscription: 'NewsLetterSubscription',
     NewsLetter: 'NewsLetter',
     NewsArticle: 'NewsArticle',
+    Media: 'Media',
+    NewsArticleCategory: 'NewsArticleCategory',
+    Tag: 'Tag',
     NewsComment: 'NewsComment',
     NewsArticleLike: 'NewsArticleLike'
   };
@@ -807,7 +881,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "entity" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "newsComment" | "newsArticleLike"
+      modelProps: "user" | "entity" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "media" | "newsArticleCategory" | "tag" | "newsComment" | "newsArticleLike"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1551,6 +1625,228 @@ export namespace Prisma {
           }
         }
       }
+      Media: {
+        payload: Prisma.$MediaPayload<ExtArgs>
+        fields: Prisma.MediaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MediaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MediaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          findFirst: {
+            args: Prisma.MediaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MediaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          findMany: {
+            args: Prisma.MediaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          create: {
+            args: Prisma.MediaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          createMany: {
+            args: Prisma.MediaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MediaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          delete: {
+            args: Prisma.MediaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          update: {
+            args: Prisma.MediaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          deleteMany: {
+            args: Prisma.MediaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MediaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MediaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>[]
+          }
+          upsert: {
+            args: Prisma.MediaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaPayload>
+          }
+          aggregate: {
+            args: Prisma.MediaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMedia>
+          }
+          groupBy: {
+            args: Prisma.MediaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MediaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MediaCountArgs<ExtArgs>
+            result: $Utils.Optional<MediaCountAggregateOutputType> | number
+          }
+        }
+      }
+      NewsArticleCategory: {
+        payload: Prisma.$NewsArticleCategoryPayload<ExtArgs>
+        fields: Prisma.NewsArticleCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NewsArticleCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NewsArticleCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.NewsArticleCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NewsArticleCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.NewsArticleCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.NewsArticleCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.NewsArticleCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NewsArticleCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.NewsArticleCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          update: {
+            args: Prisma.NewsArticleCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.NewsArticleCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NewsArticleCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NewsArticleCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.NewsArticleCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewsArticleCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.NewsArticleCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewsArticleCategory>
+          }
+          groupBy: {
+            args: Prisma.NewsArticleCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewsArticleCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NewsArticleCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<NewsArticleCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Tag: {
+        payload: Prisma.$TagPayload<ExtArgs>
+        fields: Prisma.TagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findFirst: {
+            args: Prisma.TagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findMany: {
+            args: Prisma.TagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          create: {
+            args: Prisma.TagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          createMany: {
+            args: Prisma.TagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          delete: {
+            args: Prisma.TagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          update: {
+            args: Prisma.TagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          deleteMany: {
+            args: Prisma.TagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          upsert: {
+            args: Prisma.TagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          aggregate: {
+            args: Prisma.TagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTag>
+          }
+          groupBy: {
+            args: Prisma.TagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TagCountArgs<ExtArgs>
+            result: $Utils.Optional<TagCountAggregateOutputType> | number
+          }
+        }
+      }
       NewsComment: {
         payload: Prisma.$NewsCommentPayload<ExtArgs>
         fields: Prisma.NewsCommentFieldRefs
@@ -1793,6 +2089,9 @@ export namespace Prisma {
     newsLetterSubscription?: NewsLetterSubscriptionOmit
     newsLetter?: NewsLetterOmit
     newsArticle?: NewsArticleOmit
+    media?: MediaOmit
+    newsArticleCategory?: NewsArticleCategoryOmit
+    tag?: TagOmit
     newsComment?: NewsCommentOmit
     newsArticleLike?: NewsArticleLikeOmit
   }
@@ -2067,13 +2366,17 @@ export namespace Prisma {
    */
 
   export type NewsArticleCountOutputType = {
+    tags: number
     newsComments: number
     newsArticleLikes: number
+    media: number
   }
 
   export type NewsArticleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | NewsArticleCountOutputTypeCountTagsArgs
     newsComments?: boolean | NewsArticleCountOutputTypeCountNewsCommentsArgs
     newsArticleLikes?: boolean | NewsArticleCountOutputTypeCountNewsArticleLikesArgs
+    media?: boolean | NewsArticleCountOutputTypeCountMediaArgs
   }
 
   // Custom InputTypes
@@ -2090,6 +2393,13 @@ export namespace Prisma {
   /**
    * NewsArticleCountOutputType without action
    */
+  export type NewsArticleCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+  /**
+   * NewsArticleCountOutputType without action
+   */
   export type NewsArticleCountOutputTypeCountNewsCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsCommentWhereInput
   }
@@ -2099,6 +2409,106 @@ export namespace Prisma {
    */
   export type NewsArticleCountOutputTypeCountNewsArticleLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsArticleLikeWhereInput
+  }
+
+  /**
+   * NewsArticleCountOutputType without action
+   */
+  export type NewsArticleCountOutputTypeCountMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaWhereInput
+  }
+
+
+  /**
+   * Count Type MediaCountOutputType
+   */
+
+  export type MediaCountOutputType = {
+    coverImageArticles: number
+  }
+
+  export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coverImageArticles?: boolean | MediaCountOutputTypeCountCoverImageArticlesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaCountOutputType
+     */
+    select?: MediaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountCoverImageArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArticleWhereInput
+  }
+
+
+  /**
+   * Count Type NewsArticleCategoryCountOutputType
+   */
+
+  export type NewsArticleCategoryCountOutputType = {
+    articles: number
+  }
+
+  export type NewsArticleCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | NewsArticleCategoryCountOutputTypeCountArticlesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NewsArticleCategoryCountOutputType without action
+   */
+  export type NewsArticleCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategoryCountOutputType
+     */
+    select?: NewsArticleCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NewsArticleCategoryCountOutputType without action
+   */
+  export type NewsArticleCategoryCountOutputTypeCountArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArticleWhereInput
+  }
+
+
+  /**
+   * Count Type TagCountOutputType
+   */
+
+  export type TagCountOutputType = {
+    articles: number
+  }
+
+  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | TagCountOutputTypeCountArticlesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TagCountOutputType
+     */
+    select?: TagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArticleWhereInput
   }
 
 
@@ -12154,9 +12564,13 @@ export namespace Prisma {
 
   export type NewsArticleMinAggregateOutputType = {
     id: string | null
-    imageUrl: string | null
+    coverImage: string | null
     title: string | null
+    slug: string | null
+    summary: string | null
+    categoryId: string | null
     publishedAt: Date | null
+    status: $Enums.NewsArticleStatus | null
     content: string | null
     authorId: string | null
     location: string | null
@@ -12166,9 +12580,13 @@ export namespace Prisma {
 
   export type NewsArticleMaxAggregateOutputType = {
     id: string | null
-    imageUrl: string | null
+    coverImage: string | null
     title: string | null
+    slug: string | null
+    summary: string | null
+    categoryId: string | null
     publishedAt: Date | null
+    status: $Enums.NewsArticleStatus | null
     content: string | null
     authorId: string | null
     location: string | null
@@ -12178,9 +12596,13 @@ export namespace Prisma {
 
   export type NewsArticleCountAggregateOutputType = {
     id: number
-    imageUrl: number
+    coverImage: number
     title: number
+    slug: number
+    summary: number
+    categoryId: number
     publishedAt: number
+    status: number
     content: number
     authorId: number
     location: number
@@ -12192,9 +12614,13 @@ export namespace Prisma {
 
   export type NewsArticleMinAggregateInputType = {
     id?: true
-    imageUrl?: true
+    coverImage?: true
     title?: true
+    slug?: true
+    summary?: true
+    categoryId?: true
     publishedAt?: true
+    status?: true
     content?: true
     authorId?: true
     location?: true
@@ -12204,9 +12630,13 @@ export namespace Prisma {
 
   export type NewsArticleMaxAggregateInputType = {
     id?: true
-    imageUrl?: true
+    coverImage?: true
     title?: true
+    slug?: true
+    summary?: true
+    categoryId?: true
     publishedAt?: true
+    status?: true
     content?: true
     authorId?: true
     location?: true
@@ -12216,9 +12646,13 @@ export namespace Prisma {
 
   export type NewsArticleCountAggregateInputType = {
     id?: true
-    imageUrl?: true
+    coverImage?: true
     title?: true
+    slug?: true
+    summary?: true
+    categoryId?: true
     publishedAt?: true
+    status?: true
     content?: true
     authorId?: true
     location?: true
@@ -12301,11 +12735,15 @@ export namespace Prisma {
 
   export type NewsArticleGroupByOutputType = {
     id: string
-    imageUrl: string | null
+    coverImage: string | null
     title: string
-    publishedAt: Date
+    slug: string
+    summary: string | null
+    categoryId: string
+    publishedAt: Date | null
+    status: $Enums.NewsArticleStatus
     content: string
-    authorId: string
+    authorId: string | null
     location: string | null
     createdAt: Date
     updatedAt: Date
@@ -12330,51 +12768,75 @@ export namespace Prisma {
 
   export type NewsArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    imageUrl?: boolean
+    coverImage?: boolean
     title?: boolean
+    slug?: boolean
+    summary?: boolean
+    categoryId?: boolean
     publishedAt?: boolean
+    status?: boolean
     content?: boolean
     authorId?: boolean
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    tags?: boolean | NewsArticle$tagsArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
+    media?: boolean | NewsArticle$mediaArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
   export type NewsArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    imageUrl?: boolean
+    coverImage?: boolean
     title?: boolean
+    slug?: boolean
+    summary?: boolean
+    categoryId?: boolean
     publishedAt?: boolean
+    status?: boolean
     content?: boolean
     authorId?: boolean
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
   export type NewsArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    imageUrl?: boolean
+    coverImage?: boolean
     title?: boolean
+    slug?: boolean
+    summary?: boolean
+    categoryId?: boolean
     publishedAt?: boolean
+    status?: boolean
     content?: boolean
     authorId?: boolean
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
   export type NewsArticleSelectScalar = {
     id?: boolean
-    imageUrl?: boolean
+    coverImage?: boolean
     title?: boolean
+    slug?: boolean
+    summary?: boolean
+    categoryId?: boolean
     publishedAt?: boolean
+    status?: boolean
     content?: boolean
     authorId?: boolean
     location?: boolean
@@ -12382,34 +12844,50 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type NewsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "imageUrl" | "title" | "publishedAt" | "content" | "authorId" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
+  export type NewsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "coverImage" | "title" | "slug" | "summary" | "categoryId" | "publishedAt" | "status" | "content" | "authorId" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
   export type NewsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    tags?: boolean | NewsArticle$tagsArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
     newsArticleLikes?: boolean | NewsArticle$newsArticleLikesArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
+    media?: boolean | NewsArticle$mediaArgs<ExtArgs>
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NewsArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }
   export type NewsArticleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
+    author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }
 
   export type $NewsArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "NewsArticle"
     objects: {
+      coverImageMedia: Prisma.$MediaPayload<ExtArgs> | null
+      category: Prisma.$NewsArticleCategoryPayload<ExtArgs>
+      tags: Prisma.$TagPayload<ExtArgs>[]
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
       newsArticleLikes: Prisma.$NewsArticleLikePayload<ExtArgs>[]
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
+      media: Prisma.$MediaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      imageUrl: string | null
+      coverImage: string | null
       title: string
-      publishedAt: Date
+      slug: string
+      summary: string | null
+      categoryId: string
+      publishedAt: Date | null
+      status: $Enums.NewsArticleStatus
       content: string
-      authorId: string
+      authorId: string | null
       location: string | null
       createdAt: Date
       updatedAt: Date
@@ -12807,9 +13285,13 @@ export namespace Prisma {
    */
   export interface Prisma__NewsArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    coverImageMedia<T extends NewsArticle$coverImageMediaArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$coverImageMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    category<T extends NewsArticleCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticleCategoryDefaultArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tags<T extends NewsArticle$tagsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsComments<T extends NewsArticle$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsArticleLikes<T extends NewsArticle$newsArticleLikesArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsArticleLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends NewsArticle$authorArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    media<T extends NewsArticle$mediaArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12840,9 +13322,13 @@ export namespace Prisma {
    */
   interface NewsArticleFieldRefs {
     readonly id: FieldRef<"NewsArticle", 'String'>
-    readonly imageUrl: FieldRef<"NewsArticle", 'String'>
+    readonly coverImage: FieldRef<"NewsArticle", 'String'>
     readonly title: FieldRef<"NewsArticle", 'String'>
+    readonly slug: FieldRef<"NewsArticle", 'String'>
+    readonly summary: FieldRef<"NewsArticle", 'String'>
+    readonly categoryId: FieldRef<"NewsArticle", 'String'>
     readonly publishedAt: FieldRef<"NewsArticle", 'DateTime'>
+    readonly status: FieldRef<"NewsArticle", 'NewsArticleStatus'>
     readonly content: FieldRef<"NewsArticle", 'String'>
     readonly authorId: FieldRef<"NewsArticle", 'String'>
     readonly location: FieldRef<"NewsArticle", 'String'>
@@ -13244,6 +13730,49 @@ export namespace Prisma {
   }
 
   /**
+   * NewsArticle.coverImageMedia
+   */
+  export type NewsArticle$coverImageMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+  }
+
+  /**
+   * NewsArticle.tags
+   */
+  export type NewsArticle$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
    * NewsArticle.newsComments
    */
   export type NewsArticle$newsCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13292,6 +13821,49 @@ export namespace Prisma {
   }
 
   /**
+   * NewsArticle.author
+   */
+  export type NewsArticle$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * NewsArticle.media
+   */
+  export type NewsArticle$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    cursor?: MediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
    * NewsArticle without action
    */
   export type NewsArticleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13307,6 +13879,3188 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: NewsArticleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Media
+   */
+
+  export type AggregateMedia = {
+    _count: MediaCountAggregateOutputType | null
+    _min: MediaMinAggregateOutputType | null
+    _max: MediaMaxAggregateOutputType | null
+  }
+
+  export type MediaMinAggregateOutputType = {
+    id: string | null
+    type: $Enums.MediaType | null
+    url: string | null
+    createdAt: Date | null
+    newsArticleId: string | null
+  }
+
+  export type MediaMaxAggregateOutputType = {
+    id: string | null
+    type: $Enums.MediaType | null
+    url: string | null
+    createdAt: Date | null
+    newsArticleId: string | null
+  }
+
+  export type MediaCountAggregateOutputType = {
+    id: number
+    type: number
+    url: number
+    createdAt: number
+    newsArticleId: number
+    _all: number
+  }
+
+
+  export type MediaMinAggregateInputType = {
+    id?: true
+    type?: true
+    url?: true
+    createdAt?: true
+    newsArticleId?: true
+  }
+
+  export type MediaMaxAggregateInputType = {
+    id?: true
+    type?: true
+    url?: true
+    createdAt?: true
+    newsArticleId?: true
+  }
+
+  export type MediaCountAggregateInputType = {
+    id?: true
+    type?: true
+    url?: true
+    createdAt?: true
+    newsArticleId?: true
+    _all?: true
+  }
+
+  export type MediaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Media to aggregate.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Media
+    **/
+    _count?: true | MediaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MediaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MediaMaxAggregateInputType
+  }
+
+  export type GetMediaAggregateType<T extends MediaAggregateArgs> = {
+        [P in keyof T & keyof AggregateMedia]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMedia[P]>
+      : GetScalarType<T[P], AggregateMedia[P]>
+  }
+
+
+
+
+  export type MediaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaWhereInput
+    orderBy?: MediaOrderByWithAggregationInput | MediaOrderByWithAggregationInput[]
+    by: MediaScalarFieldEnum[] | MediaScalarFieldEnum
+    having?: MediaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MediaCountAggregateInputType | true
+    _min?: MediaMinAggregateInputType
+    _max?: MediaMaxAggregateInputType
+  }
+
+  export type MediaGroupByOutputType = {
+    id: string
+    type: $Enums.MediaType
+    url: string
+    createdAt: Date
+    newsArticleId: string | null
+    _count: MediaCountAggregateOutputType | null
+    _min: MediaMinAggregateOutputType | null
+    _max: MediaMaxAggregateOutputType | null
+  }
+
+  type GetMediaGroupByPayload<T extends MediaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MediaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MediaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MediaGroupByOutputType[P]>
+            : GetScalarType<T[P], MediaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MediaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    url?: boolean
+    createdAt?: boolean
+    newsArticleId?: boolean
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    coverImageArticles?: boolean | Media$coverImageArticlesArgs<ExtArgs>
+    _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    url?: boolean
+    createdAt?: boolean
+    newsArticleId?: boolean
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    url?: boolean
+    createdAt?: boolean
+    newsArticleId?: boolean
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+  }, ExtArgs["result"]["media"]>
+
+  export type MediaSelectScalar = {
+    id?: boolean
+    type?: boolean
+    url?: boolean
+    createdAt?: boolean
+    newsArticleId?: boolean
+  }
+
+  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "url" | "createdAt" | "newsArticleId", ExtArgs["result"]["media"]>
+  export type MediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    coverImageArticles?: boolean | Media$coverImageArticlesArgs<ExtArgs>
+    _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+  }
+  export type MediaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+  }
+
+  export type $MediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Media"
+    objects: {
+      newsArticle: Prisma.$NewsArticlePayload<ExtArgs> | null
+      coverImageArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      type: $Enums.MediaType
+      url: string
+      createdAt: Date
+      newsArticleId: string | null
+    }, ExtArgs["result"]["media"]>
+    composites: {}
+  }
+
+  type MediaGetPayload<S extends boolean | null | undefined | MediaDefaultArgs> = $Result.GetResult<Prisma.$MediaPayload, S>
+
+  type MediaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MediaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MediaCountAggregateInputType | true
+    }
+
+  export interface MediaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Media'], meta: { name: 'Media' } }
+    /**
+     * Find zero or one Media that matches the filter.
+     * @param {MediaFindUniqueArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MediaFindUniqueArgs>(args: SelectSubset<T, MediaFindUniqueArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Media that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MediaFindUniqueOrThrowArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MediaFindUniqueOrThrowArgs>(args: SelectSubset<T, MediaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Media that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindFirstArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MediaFindFirstArgs>(args?: SelectSubset<T, MediaFindFirstArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Media that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindFirstOrThrowArgs} args - Arguments to find a Media
+     * @example
+     * // Get one Media
+     * const media = await prisma.media.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MediaFindFirstOrThrowArgs>(args?: SelectSubset<T, MediaFindFirstOrThrowArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Media that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Media
+     * const media = await prisma.media.findMany()
+     * 
+     * // Get first 10 Media
+     * const media = await prisma.media.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mediaWithIdOnly = await prisma.media.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MediaFindManyArgs>(args?: SelectSubset<T, MediaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Media.
+     * @param {MediaCreateArgs} args - Arguments to create a Media.
+     * @example
+     * // Create one Media
+     * const Media = await prisma.media.create({
+     *   data: {
+     *     // ... data to create a Media
+     *   }
+     * })
+     * 
+     */
+    create<T extends MediaCreateArgs>(args: SelectSubset<T, MediaCreateArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Media.
+     * @param {MediaCreateManyArgs} args - Arguments to create many Media.
+     * @example
+     * // Create many Media
+     * const media = await prisma.media.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MediaCreateManyArgs>(args?: SelectSubset<T, MediaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Media and returns the data saved in the database.
+     * @param {MediaCreateManyAndReturnArgs} args - Arguments to create many Media.
+     * @example
+     * // Create many Media
+     * const media = await prisma.media.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Media and only return the `id`
+     * const mediaWithIdOnly = await prisma.media.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MediaCreateManyAndReturnArgs>(args?: SelectSubset<T, MediaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Media.
+     * @param {MediaDeleteArgs} args - Arguments to delete one Media.
+     * @example
+     * // Delete one Media
+     * const Media = await prisma.media.delete({
+     *   where: {
+     *     // ... filter to delete one Media
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MediaDeleteArgs>(args: SelectSubset<T, MediaDeleteArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Media.
+     * @param {MediaUpdateArgs} args - Arguments to update one Media.
+     * @example
+     * // Update one Media
+     * const media = await prisma.media.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MediaUpdateArgs>(args: SelectSubset<T, MediaUpdateArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Media.
+     * @param {MediaDeleteManyArgs} args - Arguments to filter Media to delete.
+     * @example
+     * // Delete a few Media
+     * const { count } = await prisma.media.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MediaDeleteManyArgs>(args?: SelectSubset<T, MediaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Media
+     * const media = await prisma.media.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MediaUpdateManyArgs>(args: SelectSubset<T, MediaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Media and returns the data updated in the database.
+     * @param {MediaUpdateManyAndReturnArgs} args - Arguments to update many Media.
+     * @example
+     * // Update many Media
+     * const media = await prisma.media.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Media and only return the `id`
+     * const mediaWithIdOnly = await prisma.media.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MediaUpdateManyAndReturnArgs>(args: SelectSubset<T, MediaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Media.
+     * @param {MediaUpsertArgs} args - Arguments to update or create a Media.
+     * @example
+     * // Update or create a Media
+     * const media = await prisma.media.upsert({
+     *   create: {
+     *     // ... data to create a Media
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Media we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MediaUpsertArgs>(args: SelectSubset<T, MediaUpsertArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaCountArgs} args - Arguments to filter Media to count.
+     * @example
+     * // Count the number of Media
+     * const count = await prisma.media.count({
+     *   where: {
+     *     // ... the filter for the Media we want to count
+     *   }
+     * })
+    **/
+    count<T extends MediaCountArgs>(
+      args?: Subset<T, MediaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MediaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MediaAggregateArgs>(args: Subset<T, MediaAggregateArgs>): Prisma.PrismaPromise<GetMediaAggregateType<T>>
+
+    /**
+     * Group by Media.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MediaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MediaGroupByArgs['orderBy'] }
+        : { orderBy?: MediaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MediaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMediaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Media model
+   */
+  readonly fields: MediaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Media.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    newsArticle<T extends Media$newsArticleArgs<ExtArgs> = {}>(args?: Subset<T, Media$newsArticleArgs<ExtArgs>>): Prisma__NewsArticleClient<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    coverImageArticles<T extends Media$coverImageArticlesArgs<ExtArgs> = {}>(args?: Subset<T, Media$coverImageArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Media model
+   */
+  interface MediaFieldRefs {
+    readonly id: FieldRef<"Media", 'String'>
+    readonly type: FieldRef<"Media", 'MediaType'>
+    readonly url: FieldRef<"Media", 'String'>
+    readonly createdAt: FieldRef<"Media", 'DateTime'>
+    readonly newsArticleId: FieldRef<"Media", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Media findUnique
+   */
+  export type MediaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media findUniqueOrThrow
+   */
+  export type MediaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media findFirst
+   */
+  export type MediaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Media.
+     */
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media findFirstOrThrow
+   */
+  export type MediaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Media.
+     */
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media findMany
+   */
+  export type MediaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter, which Media to fetch.
+     */
+    where?: MediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Media to fetch.
+     */
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Media.
+     */
+    cursor?: MediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Media from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Media.
+     */
+    skip?: number
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Media create
+   */
+  export type MediaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Media.
+     */
+    data: XOR<MediaCreateInput, MediaUncheckedCreateInput>
+  }
+
+  /**
+   * Media createMany
+   */
+  export type MediaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Media.
+     */
+    data: MediaCreateManyInput | MediaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Media createManyAndReturn
+   */
+  export type MediaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Media.
+     */
+    data: MediaCreateManyInput | MediaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Media update
+   */
+  export type MediaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Media.
+     */
+    data: XOR<MediaUpdateInput, MediaUncheckedUpdateInput>
+    /**
+     * Choose, which Media to update.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media updateMany
+   */
+  export type MediaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Media.
+     */
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyInput>
+    /**
+     * Filter which Media to update
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Media updateManyAndReturn
+   */
+  export type MediaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * The data used to update Media.
+     */
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyInput>
+    /**
+     * Filter which Media to update
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Media upsert
+   */
+  export type MediaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Media to update in case it exists.
+     */
+    where: MediaWhereUniqueInput
+    /**
+     * In case the Media found by the `where` argument doesn't exist, create a new Media with this data.
+     */
+    create: XOR<MediaCreateInput, MediaUncheckedCreateInput>
+    /**
+     * In case the Media was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MediaUpdateInput, MediaUncheckedUpdateInput>
+  }
+
+  /**
+   * Media delete
+   */
+  export type MediaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    /**
+     * Filter which Media to delete.
+     */
+    where: MediaWhereUniqueInput
+  }
+
+  /**
+   * Media deleteMany
+   */
+  export type MediaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Media to delete
+     */
+    where?: MediaWhereInput
+    /**
+     * Limit how many Media to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Media.newsArticle
+   */
+  export type Media$newsArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+  }
+
+  /**
+   * Media.coverImageArticles
+   */
+  export type Media$coverImageArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+    orderBy?: NewsArticleOrderByWithRelationInput | NewsArticleOrderByWithRelationInput[]
+    cursor?: NewsArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * Media without action
+   */
+  export type MediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NewsArticleCategory
+   */
+
+  export type AggregateNewsArticleCategory = {
+    _count: NewsArticleCategoryCountAggregateOutputType | null
+    _min: NewsArticleCategoryMinAggregateOutputType | null
+    _max: NewsArticleCategoryMaxAggregateOutputType | null
+  }
+
+  export type NewsArticleCategoryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+  }
+
+  export type NewsArticleCategoryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+  }
+
+  export type NewsArticleCategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    _all: number
+  }
+
+
+  export type NewsArticleCategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+  }
+
+  export type NewsArticleCategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+  }
+
+  export type NewsArticleCategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    _all?: true
+  }
+
+  export type NewsArticleCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsArticleCategory to aggregate.
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArticleCategories to fetch.
+     */
+    orderBy?: NewsArticleCategoryOrderByWithRelationInput | NewsArticleCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewsArticleCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArticleCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArticleCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NewsArticleCategories
+    **/
+    _count?: true | NewsArticleCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewsArticleCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewsArticleCategoryMaxAggregateInputType
+  }
+
+  export type GetNewsArticleCategoryAggregateType<T extends NewsArticleCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewsArticleCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewsArticleCategory[P]>
+      : GetScalarType<T[P], AggregateNewsArticleCategory[P]>
+  }
+
+
+
+
+  export type NewsArticleCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewsArticleCategoryWhereInput
+    orderBy?: NewsArticleCategoryOrderByWithAggregationInput | NewsArticleCategoryOrderByWithAggregationInput[]
+    by: NewsArticleCategoryScalarFieldEnum[] | NewsArticleCategoryScalarFieldEnum
+    having?: NewsArticleCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewsArticleCategoryCountAggregateInputType | true
+    _min?: NewsArticleCategoryMinAggregateInputType
+    _max?: NewsArticleCategoryMaxAggregateInputType
+  }
+
+  export type NewsArticleCategoryGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    _count: NewsArticleCategoryCountAggregateOutputType | null
+    _min: NewsArticleCategoryMinAggregateOutputType | null
+    _max: NewsArticleCategoryMaxAggregateOutputType | null
+  }
+
+  type GetNewsArticleCategoryGroupByPayload<T extends NewsArticleCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewsArticleCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewsArticleCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewsArticleCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], NewsArticleCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewsArticleCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    articles?: boolean | NewsArticleCategory$articlesArgs<ExtArgs>
+    _count?: boolean | NewsArticleCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["newsArticleCategory"]>
+
+  export type NewsArticleCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }, ExtArgs["result"]["newsArticleCategory"]>
+
+  export type NewsArticleCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }, ExtArgs["result"]["newsArticleCategory"]>
+
+  export type NewsArticleCategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }
+
+  export type NewsArticleCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug", ExtArgs["result"]["newsArticleCategory"]>
+  export type NewsArticleCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | NewsArticleCategory$articlesArgs<ExtArgs>
+    _count?: boolean | NewsArticleCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type NewsArticleCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type NewsArticleCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $NewsArticleCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NewsArticleCategory"
+    objects: {
+      articles: Prisma.$NewsArticlePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+    }, ExtArgs["result"]["newsArticleCategory"]>
+    composites: {}
+  }
+
+  type NewsArticleCategoryGetPayload<S extends boolean | null | undefined | NewsArticleCategoryDefaultArgs> = $Result.GetResult<Prisma.$NewsArticleCategoryPayload, S>
+
+  type NewsArticleCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NewsArticleCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewsArticleCategoryCountAggregateInputType | true
+    }
+
+  export interface NewsArticleCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewsArticleCategory'], meta: { name: 'NewsArticleCategory' } }
+    /**
+     * Find zero or one NewsArticleCategory that matches the filter.
+     * @param {NewsArticleCategoryFindUniqueArgs} args - Arguments to find a NewsArticleCategory
+     * @example
+     * // Get one NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NewsArticleCategoryFindUniqueArgs>(args: SelectSubset<T, NewsArticleCategoryFindUniqueArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewsArticleCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NewsArticleCategoryFindUniqueOrThrowArgs} args - Arguments to find a NewsArticleCategory
+     * @example
+     * // Get one NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NewsArticleCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, NewsArticleCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArticleCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryFindFirstArgs} args - Arguments to find a NewsArticleCategory
+     * @example
+     * // Get one NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NewsArticleCategoryFindFirstArgs>(args?: SelectSubset<T, NewsArticleCategoryFindFirstArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewsArticleCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryFindFirstOrThrowArgs} args - Arguments to find a NewsArticleCategory
+     * @example
+     * // Get one NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NewsArticleCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, NewsArticleCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewsArticleCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewsArticleCategories
+     * const newsArticleCategories = await prisma.newsArticleCategory.findMany()
+     * 
+     * // Get first 10 NewsArticleCategories
+     * const newsArticleCategories = await prisma.newsArticleCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const newsArticleCategoryWithIdOnly = await prisma.newsArticleCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NewsArticleCategoryFindManyArgs>(args?: SelectSubset<T, NewsArticleCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewsArticleCategory.
+     * @param {NewsArticleCategoryCreateArgs} args - Arguments to create a NewsArticleCategory.
+     * @example
+     * // Create one NewsArticleCategory
+     * const NewsArticleCategory = await prisma.newsArticleCategory.create({
+     *   data: {
+     *     // ... data to create a NewsArticleCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends NewsArticleCategoryCreateArgs>(args: SelectSubset<T, NewsArticleCategoryCreateArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewsArticleCategories.
+     * @param {NewsArticleCategoryCreateManyArgs} args - Arguments to create many NewsArticleCategories.
+     * @example
+     * // Create many NewsArticleCategories
+     * const newsArticleCategory = await prisma.newsArticleCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NewsArticleCategoryCreateManyArgs>(args?: SelectSubset<T, NewsArticleCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many NewsArticleCategories and returns the data saved in the database.
+     * @param {NewsArticleCategoryCreateManyAndReturnArgs} args - Arguments to create many NewsArticleCategories.
+     * @example
+     * // Create many NewsArticleCategories
+     * const newsArticleCategory = await prisma.newsArticleCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many NewsArticleCategories and only return the `id`
+     * const newsArticleCategoryWithIdOnly = await prisma.newsArticleCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NewsArticleCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, NewsArticleCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a NewsArticleCategory.
+     * @param {NewsArticleCategoryDeleteArgs} args - Arguments to delete one NewsArticleCategory.
+     * @example
+     * // Delete one NewsArticleCategory
+     * const NewsArticleCategory = await prisma.newsArticleCategory.delete({
+     *   where: {
+     *     // ... filter to delete one NewsArticleCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NewsArticleCategoryDeleteArgs>(args: SelectSubset<T, NewsArticleCategoryDeleteArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewsArticleCategory.
+     * @param {NewsArticleCategoryUpdateArgs} args - Arguments to update one NewsArticleCategory.
+     * @example
+     * // Update one NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NewsArticleCategoryUpdateArgs>(args: SelectSubset<T, NewsArticleCategoryUpdateArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewsArticleCategories.
+     * @param {NewsArticleCategoryDeleteManyArgs} args - Arguments to filter NewsArticleCategories to delete.
+     * @example
+     * // Delete a few NewsArticleCategories
+     * const { count } = await prisma.newsArticleCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NewsArticleCategoryDeleteManyArgs>(args?: SelectSubset<T, NewsArticleCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsArticleCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewsArticleCategories
+     * const newsArticleCategory = await prisma.newsArticleCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NewsArticleCategoryUpdateManyArgs>(args: SelectSubset<T, NewsArticleCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewsArticleCategories and returns the data updated in the database.
+     * @param {NewsArticleCategoryUpdateManyAndReturnArgs} args - Arguments to update many NewsArticleCategories.
+     * @example
+     * // Update many NewsArticleCategories
+     * const newsArticleCategory = await prisma.newsArticleCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more NewsArticleCategories and only return the `id`
+     * const newsArticleCategoryWithIdOnly = await prisma.newsArticleCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NewsArticleCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, NewsArticleCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one NewsArticleCategory.
+     * @param {NewsArticleCategoryUpsertArgs} args - Arguments to update or create a NewsArticleCategory.
+     * @example
+     * // Update or create a NewsArticleCategory
+     * const newsArticleCategory = await prisma.newsArticleCategory.upsert({
+     *   create: {
+     *     // ... data to create a NewsArticleCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewsArticleCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NewsArticleCategoryUpsertArgs>(args: SelectSubset<T, NewsArticleCategoryUpsertArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewsArticleCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryCountArgs} args - Arguments to filter NewsArticleCategories to count.
+     * @example
+     * // Count the number of NewsArticleCategories
+     * const count = await prisma.newsArticleCategory.count({
+     *   where: {
+     *     // ... the filter for the NewsArticleCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewsArticleCategoryCountArgs>(
+      args?: Subset<T, NewsArticleCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewsArticleCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewsArticleCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewsArticleCategoryAggregateArgs>(args: Subset<T, NewsArticleCategoryAggregateArgs>): Prisma.PrismaPromise<GetNewsArticleCategoryAggregateType<T>>
+
+    /**
+     * Group by NewsArticleCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewsArticleCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewsArticleCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewsArticleCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: NewsArticleCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewsArticleCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewsArticleCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NewsArticleCategory model
+   */
+  readonly fields: NewsArticleCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NewsArticleCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NewsArticleCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    articles<T extends NewsArticleCategory$articlesArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticleCategory$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NewsArticleCategory model
+   */
+  interface NewsArticleCategoryFieldRefs {
+    readonly id: FieldRef<"NewsArticleCategory", 'String'>
+    readonly name: FieldRef<"NewsArticleCategory", 'String'>
+    readonly slug: FieldRef<"NewsArticleCategory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NewsArticleCategory findUnique
+   */
+  export type NewsArticleCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArticleCategory to fetch.
+     */
+    where: NewsArticleCategoryWhereUniqueInput
+  }
+
+  /**
+   * NewsArticleCategory findUniqueOrThrow
+   */
+  export type NewsArticleCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArticleCategory to fetch.
+     */
+    where: NewsArticleCategoryWhereUniqueInput
+  }
+
+  /**
+   * NewsArticleCategory findFirst
+   */
+  export type NewsArticleCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArticleCategory to fetch.
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArticleCategories to fetch.
+     */
+    orderBy?: NewsArticleCategoryOrderByWithRelationInput | NewsArticleCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsArticleCategories.
+     */
+    cursor?: NewsArticleCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArticleCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArticleCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsArticleCategories.
+     */
+    distinct?: NewsArticleCategoryScalarFieldEnum | NewsArticleCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArticleCategory findFirstOrThrow
+   */
+  export type NewsArticleCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArticleCategory to fetch.
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArticleCategories to fetch.
+     */
+    orderBy?: NewsArticleCategoryOrderByWithRelationInput | NewsArticleCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewsArticleCategories.
+     */
+    cursor?: NewsArticleCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArticleCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArticleCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewsArticleCategories.
+     */
+    distinct?: NewsArticleCategoryScalarFieldEnum | NewsArticleCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArticleCategory findMany
+   */
+  export type NewsArticleCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which NewsArticleCategories to fetch.
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewsArticleCategories to fetch.
+     */
+    orderBy?: NewsArticleCategoryOrderByWithRelationInput | NewsArticleCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NewsArticleCategories.
+     */
+    cursor?: NewsArticleCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewsArticleCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewsArticleCategories.
+     */
+    skip?: number
+    distinct?: NewsArticleCategoryScalarFieldEnum | NewsArticleCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArticleCategory create
+   */
+  export type NewsArticleCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a NewsArticleCategory.
+     */
+    data: XOR<NewsArticleCategoryCreateInput, NewsArticleCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * NewsArticleCategory createMany
+   */
+  export type NewsArticleCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NewsArticleCategories.
+     */
+    data: NewsArticleCategoryCreateManyInput | NewsArticleCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NewsArticleCategory createManyAndReturn
+   */
+  export type NewsArticleCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many NewsArticleCategories.
+     */
+    data: NewsArticleCategoryCreateManyInput | NewsArticleCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NewsArticleCategory update
+   */
+  export type NewsArticleCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a NewsArticleCategory.
+     */
+    data: XOR<NewsArticleCategoryUpdateInput, NewsArticleCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which NewsArticleCategory to update.
+     */
+    where: NewsArticleCategoryWhereUniqueInput
+  }
+
+  /**
+   * NewsArticleCategory updateMany
+   */
+  export type NewsArticleCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NewsArticleCategories.
+     */
+    data: XOR<NewsArticleCategoryUpdateManyMutationInput, NewsArticleCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which NewsArticleCategories to update
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * Limit how many NewsArticleCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsArticleCategory updateManyAndReturn
+   */
+  export type NewsArticleCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update NewsArticleCategories.
+     */
+    data: XOR<NewsArticleCategoryUpdateManyMutationInput, NewsArticleCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which NewsArticleCategories to update
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * Limit how many NewsArticleCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsArticleCategory upsert
+   */
+  export type NewsArticleCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the NewsArticleCategory to update in case it exists.
+     */
+    where: NewsArticleCategoryWhereUniqueInput
+    /**
+     * In case the NewsArticleCategory found by the `where` argument doesn't exist, create a new NewsArticleCategory with this data.
+     */
+    create: XOR<NewsArticleCategoryCreateInput, NewsArticleCategoryUncheckedCreateInput>
+    /**
+     * In case the NewsArticleCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewsArticleCategoryUpdateInput, NewsArticleCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * NewsArticleCategory delete
+   */
+  export type NewsArticleCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which NewsArticleCategory to delete.
+     */
+    where: NewsArticleCategoryWhereUniqueInput
+  }
+
+  /**
+   * NewsArticleCategory deleteMany
+   */
+  export type NewsArticleCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewsArticleCategories to delete
+     */
+    where?: NewsArticleCategoryWhereInput
+    /**
+     * Limit how many NewsArticleCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewsArticleCategory.articles
+   */
+  export type NewsArticleCategory$articlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+    orderBy?: NewsArticleOrderByWithRelationInput | NewsArticleOrderByWithRelationInput[]
+    cursor?: NewsArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * NewsArticleCategory without action
+   */
+  export type NewsArticleCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticleCategory
+     */
+    select?: NewsArticleCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticleCategory
+     */
+    omit?: NewsArticleCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Tag
+   */
+
+  export type AggregateTag = {
+    _count: TagCountAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  export type TagMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type TagMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type TagCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type TagMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type TagMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type TagCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tag to aggregate.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tags
+    **/
+    _count?: true | TagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type GetTagAggregateType<T extends TagAggregateArgs> = {
+        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTag[P]>
+      : GetScalarType<T[P], AggregateTag[P]>
+  }
+
+
+
+
+  export type TagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithAggregationInput | TagOrderByWithAggregationInput[]
+    by: TagScalarFieldEnum[] | TagScalarFieldEnum
+    having?: TagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TagCountAggregateInputType | true
+    _min?: TagMinAggregateInputType
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type TagGroupByOutputType = {
+    id: string
+    name: string
+    _count: TagCountAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  type GetTagGroupByPayload<T extends TagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TagGroupByOutputType[P]>
+            : GetScalarType<T[P], TagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    articles?: boolean | Tag$articlesArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["tag"]>
+  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    articles?: boolean | Tag$articlesArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tag"
+    objects: {
+      articles: Prisma.$NewsArticlePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+    }, ExtArgs["result"]["tag"]>
+    composites: {}
+  }
+
+  type TagGetPayload<S extends boolean | null | undefined | TagDefaultArgs> = $Result.GetResult<Prisma.$TagPayload, S>
+
+  type TagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TagCountAggregateInputType | true
+    }
+
+  export interface TagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tag'], meta: { name: 'Tag' } }
+    /**
+     * Find zero or one Tag that matches the filter.
+     * @param {TagFindUniqueArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TagFindUniqueArgs>(args: SelectSubset<T, TagFindUniqueArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TagFindUniqueOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TagFindUniqueOrThrowArgs>(args: SelectSubset<T, TagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TagFindFirstArgs>(args?: SelectSubset<T, TagFindFirstArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TagFindFirstOrThrowArgs>(args?: SelectSubset<T, TagFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tags
+     * const tags = await prisma.tag.findMany()
+     * 
+     * // Get first 10 Tags
+     * const tags = await prisma.tag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TagFindManyArgs>(args?: SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tag.
+     * @param {TagCreateArgs} args - Arguments to create a Tag.
+     * @example
+     * // Create one Tag
+     * const Tag = await prisma.tag.create({
+     *   data: {
+     *     // ... data to create a Tag
+     *   }
+     * })
+     * 
+     */
+    create<T extends TagCreateArgs>(args: SelectSubset<T, TagCreateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tags.
+     * @param {TagCreateManyArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TagCreateManyArgs>(args?: SelectSubset<T, TagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tags and returns the data saved in the database.
+     * @param {TagCreateManyAndReturnArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TagCreateManyAndReturnArgs>(args?: SelectSubset<T, TagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tag.
+     * @param {TagDeleteArgs} args - Arguments to delete one Tag.
+     * @example
+     * // Delete one Tag
+     * const Tag = await prisma.tag.delete({
+     *   where: {
+     *     // ... filter to delete one Tag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TagDeleteArgs>(args: SelectSubset<T, TagDeleteArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tag.
+     * @param {TagUpdateArgs} args - Arguments to update one Tag.
+     * @example
+     * // Update one Tag
+     * const tag = await prisma.tag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TagUpdateArgs>(args: SelectSubset<T, TagUpdateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tags.
+     * @param {TagDeleteManyArgs} args - Arguments to filter Tags to delete.
+     * @example
+     * // Delete a few Tags
+     * const { count } = await prisma.tag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TagDeleteManyArgs>(args?: SelectSubset<T, TagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TagUpdateManyArgs>(args: SelectSubset<T, TagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags and returns the data updated in the database.
+     * @param {TagUpdateManyAndReturnArgs} args - Arguments to update many Tags.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TagUpdateManyAndReturnArgs>(args: SelectSubset<T, TagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tag.
+     * @param {TagUpsertArgs} args - Arguments to update or create a Tag.
+     * @example
+     * // Update or create a Tag
+     * const tag = await prisma.tag.upsert({
+     *   create: {
+     *     // ... data to create a Tag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TagUpsertArgs>(args: SelectSubset<T, TagUpsertArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagCountArgs} args - Arguments to filter Tags to count.
+     * @example
+     * // Count the number of Tags
+     * const count = await prisma.tag.count({
+     *   where: {
+     *     // ... the filter for the Tags we want to count
+     *   }
+     * })
+    **/
+    count<T extends TagCountArgs>(
+      args?: Subset<T, TagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
+
+    /**
+     * Group by Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TagGroupByArgs['orderBy'] }
+        : { orderBy?: TagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tag model
+   */
+  readonly fields: TagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    articles<T extends Tag$articlesArgs<ExtArgs> = {}>(args?: Subset<T, Tag$articlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tag model
+   */
+  interface TagFieldRefs {
+    readonly id: FieldRef<"Tag", 'String'>
+    readonly name: FieldRef<"Tag", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tag findUnique
+   */
+  export type TagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findUniqueOrThrow
+   */
+  export type TagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findFirst
+   */
+  export type TagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findFirstOrThrow
+   */
+  export type TagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findMany
+   */
+  export type TagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tags to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag create
+   */
+  export type TagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tag.
+     */
+    data: XOR<TagCreateInput, TagUncheckedCreateInput>
+  }
+
+  /**
+   * Tag createMany
+   */
+  export type TagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tag createManyAndReturn
+   */
+  export type TagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tag update
+   */
+  export type TagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tag.
+     */
+    data: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+    /**
+     * Choose, which Tag to update.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag updateMany
+   */
+  export type TagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag updateManyAndReturn
+   */
+  export type TagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag upsert
+   */
+  export type TagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tag to update in case it exists.
+     */
+    where: TagWhereUniqueInput
+    /**
+     * In case the Tag found by the `where` argument doesn't exist, create a new Tag with this data.
+     */
+    create: XOR<TagCreateInput, TagUncheckedCreateInput>
+    /**
+     * In case the Tag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+  }
+
+  /**
+   * Tag delete
+   */
+  export type TagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter which Tag to delete.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag deleteMany
+   */
+  export type TagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tags to delete
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag.articles
+   */
+  export type Tag$articlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+    orderBy?: NewsArticleOrderByWithRelationInput | NewsArticleOrderByWithRelationInput[]
+    cursor?: NewsArticleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * Tag without action
+   */
+  export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
   }
 
 
@@ -15572,9 +19326,13 @@ export namespace Prisma {
 
   export const NewsArticleScalarFieldEnum: {
     id: 'id',
-    imageUrl: 'imageUrl',
+    coverImage: 'coverImage',
     title: 'title',
+    slug: 'slug',
+    summary: 'summary',
+    categoryId: 'categoryId',
     publishedAt: 'publishedAt',
+    status: 'status',
     content: 'content',
     authorId: 'authorId',
     location: 'location',
@@ -15583,6 +19341,34 @@ export namespace Prisma {
   };
 
   export type NewsArticleScalarFieldEnum = (typeof NewsArticleScalarFieldEnum)[keyof typeof NewsArticleScalarFieldEnum]
+
+
+  export const MediaScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    url: 'url',
+    createdAt: 'createdAt',
+    newsArticleId: 'newsArticleId'
+  };
+
+  export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
+
+
+  export const NewsArticleCategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug'
+  };
+
+  export type NewsArticleCategoryScalarFieldEnum = (typeof NewsArticleCategoryScalarFieldEnum)[keyof typeof NewsArticleCategoryScalarFieldEnum]
+
+
+  export const TagScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
   export const NewsCommentScalarFieldEnum: {
@@ -15710,6 +19496,34 @@ export namespace Prisma {
    * Reference to a field of type 'BigInt[]'
    */
   export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'NewsArticleStatus'
+   */
+  export type EnumNewsArticleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsArticleStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'NewsArticleStatus[]'
+   */
+  export type ListEnumNewsArticleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NewsArticleStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaType'
+   */
+  export type EnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType'>
+    
+
+
+  /**
+   * Reference to a field of type 'MediaType[]'
+   */
+  export type ListEnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType[]'>
     
 
 
@@ -16335,59 +20149,87 @@ export namespace Prisma {
     OR?: NewsArticleWhereInput[]
     NOT?: NewsArticleWhereInput | NewsArticleWhereInput[]
     id?: StringFilter<"NewsArticle"> | string
-    imageUrl?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
-    publishedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    slug?: StringFilter<"NewsArticle"> | string
+    summary?: StringNullableFilter<"NewsArticle"> | string | null
+    categoryId?: StringFilter<"NewsArticle"> | string
+    publishedAt?: DateTimeNullableFilter<"NewsArticle"> | Date | string | null
+    status?: EnumNewsArticleStatusFilter<"NewsArticle"> | $Enums.NewsArticleStatus
     content?: StringFilter<"NewsArticle"> | string
-    authorId?: StringFilter<"NewsArticle"> | string
+    authorId?: StringNullableFilter<"NewsArticle"> | string | null
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    coverImageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    category?: XOR<NewsArticleCategoryScalarRelationFilter, NewsArticleCategoryWhereInput>
+    tags?: TagListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    media?: MediaListRelationFilter
   }
 
   export type NewsArticleOrderByWithRelationInput = {
     id?: SortOrder
-    imageUrl?: SortOrderInput | SortOrder
+    coverImage?: SortOrderInput | SortOrder
     title?: SortOrder
-    publishedAt?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    categoryId?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
     content?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    coverImageMedia?: MediaOrderByWithRelationInput
+    category?: NewsArticleCategoryOrderByWithRelationInput
+    tags?: TagOrderByRelationAggregateInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
     newsArticleLikes?: NewsArticleLikeOrderByRelationAggregateInput
     author?: UserOrderByWithRelationInput
+    media?: MediaOrderByRelationAggregateInput
   }
 
   export type NewsArticleWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    slug?: string
     AND?: NewsArticleWhereInput | NewsArticleWhereInput[]
     OR?: NewsArticleWhereInput[]
     NOT?: NewsArticleWhereInput | NewsArticleWhereInput[]
-    imageUrl?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
-    publishedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    summary?: StringNullableFilter<"NewsArticle"> | string | null
+    categoryId?: StringFilter<"NewsArticle"> | string
+    publishedAt?: DateTimeNullableFilter<"NewsArticle"> | Date | string | null
+    status?: EnumNewsArticleStatusFilter<"NewsArticle"> | $Enums.NewsArticleStatus
     content?: StringFilter<"NewsArticle"> | string
-    authorId?: StringFilter<"NewsArticle"> | string
+    authorId?: StringNullableFilter<"NewsArticle"> | string | null
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    coverImageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    category?: XOR<NewsArticleCategoryScalarRelationFilter, NewsArticleCategoryWhereInput>
+    tags?: TagListRelationFilter
     newsComments?: NewsCommentListRelationFilter
     newsArticleLikes?: NewsArticleLikeListRelationFilter
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    media?: MediaListRelationFilter
+  }, "id" | "slug">
 
   export type NewsArticleOrderByWithAggregationInput = {
     id?: SortOrder
-    imageUrl?: SortOrderInput | SortOrder
+    coverImage?: SortOrderInput | SortOrder
     title?: SortOrder
-    publishedAt?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    categoryId?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    status?: SortOrder
     content?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16401,14 +20243,161 @@ export namespace Prisma {
     OR?: NewsArticleScalarWhereWithAggregatesInput[]
     NOT?: NewsArticleScalarWhereWithAggregatesInput | NewsArticleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"NewsArticle"> | string
-    imageUrl?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+    coverImage?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
     title?: StringWithAggregatesFilter<"NewsArticle"> | string
-    publishedAt?: DateTimeWithAggregatesFilter<"NewsArticle"> | Date | string
+    slug?: StringWithAggregatesFilter<"NewsArticle"> | string
+    summary?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+    categoryId?: StringWithAggregatesFilter<"NewsArticle"> | string
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"NewsArticle"> | Date | string | null
+    status?: EnumNewsArticleStatusWithAggregatesFilter<"NewsArticle"> | $Enums.NewsArticleStatus
     content?: StringWithAggregatesFilter<"NewsArticle"> | string
-    authorId?: StringWithAggregatesFilter<"NewsArticle"> | string
+    authorId?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
     location?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"NewsArticle"> | Date | string
+  }
+
+  export type MediaWhereInput = {
+    AND?: MediaWhereInput | MediaWhereInput[]
+    OR?: MediaWhereInput[]
+    NOT?: MediaWhereInput | MediaWhereInput[]
+    id?: StringFilter<"Media"> | string
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    url?: StringFilter<"Media"> | string
+    createdAt?: DateTimeFilter<"Media"> | Date | string
+    newsArticleId?: StringNullableFilter<"Media"> | string | null
+    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    coverImageArticles?: NewsArticleListRelationFilter
+  }
+
+  export type MediaOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    newsArticleId?: SortOrderInput | SortOrder
+    newsArticle?: NewsArticleOrderByWithRelationInput
+    coverImageArticles?: NewsArticleOrderByRelationAggregateInput
+  }
+
+  export type MediaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MediaWhereInput | MediaWhereInput[]
+    OR?: MediaWhereInput[]
+    NOT?: MediaWhereInput | MediaWhereInput[]
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    url?: StringFilter<"Media"> | string
+    createdAt?: DateTimeFilter<"Media"> | Date | string
+    newsArticleId?: StringNullableFilter<"Media"> | string | null
+    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    coverImageArticles?: NewsArticleListRelationFilter
+  }, "id">
+
+  export type MediaOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    newsArticleId?: SortOrderInput | SortOrder
+    _count?: MediaCountOrderByAggregateInput
+    _max?: MediaMaxOrderByAggregateInput
+    _min?: MediaMinOrderByAggregateInput
+  }
+
+  export type MediaScalarWhereWithAggregatesInput = {
+    AND?: MediaScalarWhereWithAggregatesInput | MediaScalarWhereWithAggregatesInput[]
+    OR?: MediaScalarWhereWithAggregatesInput[]
+    NOT?: MediaScalarWhereWithAggregatesInput | MediaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Media"> | string
+    type?: EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
+    url?: StringWithAggregatesFilter<"Media"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Media"> | Date | string
+    newsArticleId?: StringNullableWithAggregatesFilter<"Media"> | string | null
+  }
+
+  export type NewsArticleCategoryWhereInput = {
+    AND?: NewsArticleCategoryWhereInput | NewsArticleCategoryWhereInput[]
+    OR?: NewsArticleCategoryWhereInput[]
+    NOT?: NewsArticleCategoryWhereInput | NewsArticleCategoryWhereInput[]
+    id?: StringFilter<"NewsArticleCategory"> | string
+    name?: StringFilter<"NewsArticleCategory"> | string
+    slug?: StringFilter<"NewsArticleCategory"> | string
+    articles?: NewsArticleListRelationFilter
+  }
+
+  export type NewsArticleCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    articles?: NewsArticleOrderByRelationAggregateInput
+  }
+
+  export type NewsArticleCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: NewsArticleCategoryWhereInput | NewsArticleCategoryWhereInput[]
+    OR?: NewsArticleCategoryWhereInput[]
+    NOT?: NewsArticleCategoryWhereInput | NewsArticleCategoryWhereInput[]
+    name?: StringFilter<"NewsArticleCategory"> | string
+    articles?: NewsArticleListRelationFilter
+  }, "id" | "slug">
+
+  export type NewsArticleCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    _count?: NewsArticleCategoryCountOrderByAggregateInput
+    _max?: NewsArticleCategoryMaxOrderByAggregateInput
+    _min?: NewsArticleCategoryMinOrderByAggregateInput
+  }
+
+  export type NewsArticleCategoryScalarWhereWithAggregatesInput = {
+    AND?: NewsArticleCategoryScalarWhereWithAggregatesInput | NewsArticleCategoryScalarWhereWithAggregatesInput[]
+    OR?: NewsArticleCategoryScalarWhereWithAggregatesInput[]
+    NOT?: NewsArticleCategoryScalarWhereWithAggregatesInput | NewsArticleCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"NewsArticleCategory"> | string
+    name?: StringWithAggregatesFilter<"NewsArticleCategory"> | string
+    slug?: StringWithAggregatesFilter<"NewsArticleCategory"> | string
+  }
+
+  export type TagWhereInput = {
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    id?: StringFilter<"Tag"> | string
+    name?: StringFilter<"Tag"> | string
+    articles?: NewsArticleListRelationFilter
+  }
+
+  export type TagOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    articles?: NewsArticleOrderByRelationAggregateInput
+  }
+
+  export type TagWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    articles?: NewsArticleListRelationFilter
+  }, "id" | "name">
+
+  export type TagOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: TagCountOrderByAggregateInput
+    _max?: TagMaxOrderByAggregateInput
+    _min?: TagMinOrderByAggregateInput
+  }
+
+  export type TagScalarWhereWithAggregatesInput = {
+    AND?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    OR?: TagScalarWhereWithAggregatesInput[]
+    NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Tag"> | string
+    name?: StringWithAggregatesFilter<"Tag"> | string
   }
 
   export type NewsCommentWhereInput = {
@@ -17171,67 +21160,95 @@ export namespace Prisma {
 
   export type NewsArticleCreateInput = {
     id?: string
-    imageUrl?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
-    author: UserCreateNestedOneWithoutNewsArticlesInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
-    authorId: string
+    authorId?: string | null
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleCreateManyInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
-    authorId: string
+    authorId?: string | null
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17239,9 +21256,11 @@ export namespace Prisma {
 
   export type NewsArticleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17250,14 +21269,162 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaCreateInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageMediaInput
+  }
+
+  export type MediaUncheckedCreateInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput
+  }
+
+  export type MediaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput
+  }
+
+  export type MediaCreateManyInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+  }
+
+  export type MediaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NewsArticleCategoryCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    articles?: NewsArticleCreateNestedManyWithoutCategoryInput
+  }
+
+  export type NewsArticleCategoryUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    articles?: NewsArticleUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type NewsArticleCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    articles?: NewsArticleUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type NewsArticleCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    articles?: NewsArticleUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type NewsArticleCategoryCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type NewsArticleCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsArticleCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TagCreateInput = {
+    id?: string
+    name: string
+    articles?: NewsArticleCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateInput = {
+    id?: string
+    name: string
+    articles?: NewsArticleUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    articles?: NewsArticleUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    articles?: NewsArticleUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagCreateManyInput = {
+    id?: string
+    name: string
+  }
+
+  export type TagUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TagUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NewsCommentCreateInput = {
@@ -17974,11 +22141,68 @@ export namespace Prisma {
     authorId?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumNewsArticleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NewsArticleStatus | EnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNewsArticleStatusFilter<$PrismaModel> | $Enums.NewsArticleStatus
+  }
+
+  export type MediaNullableScalarRelationFilter = {
+    is?: MediaWhereInput | null
+    isNot?: MediaWhereInput | null
+  }
+
+  export type NewsArticleCategoryScalarRelationFilter = {
+    is?: NewsArticleCategoryWhereInput
+    isNot?: NewsArticleCategoryWhereInput
+  }
+
+  export type TagListRelationFilter = {
+    every?: TagWhereInput
+    some?: TagWhereInput
+    none?: TagWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type MediaListRelationFilter = {
+    every?: MediaWhereInput
+    some?: MediaWhereInput
+    none?: MediaWhereInput
+  }
+
+  export type TagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MediaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type NewsArticleCountOrderByAggregateInput = {
     id?: SortOrder
-    imageUrl?: SortOrder
+    coverImage?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    categoryId?: SortOrder
     publishedAt?: SortOrder
+    status?: SortOrder
     content?: SortOrder
     authorId?: SortOrder
     location?: SortOrder
@@ -17988,9 +22212,13 @@ export namespace Prisma {
 
   export type NewsArticleMaxOrderByAggregateInput = {
     id?: SortOrder
-    imageUrl?: SortOrder
+    coverImage?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    categoryId?: SortOrder
     publishedAt?: SortOrder
+    status?: SortOrder
     content?: SortOrder
     authorId?: SortOrder
     location?: SortOrder
@@ -18000,14 +22228,121 @@ export namespace Prisma {
 
   export type NewsArticleMinOrderByAggregateInput = {
     id?: SortOrder
-    imageUrl?: SortOrder
+    coverImage?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    categoryId?: SortOrder
     publishedAt?: SortOrder
+    status?: SortOrder
     content?: SortOrder
     authorId?: SortOrder
     location?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumNewsArticleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NewsArticleStatus | EnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNewsArticleStatusWithAggregatesFilter<$PrismaModel> | $Enums.NewsArticleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNewsArticleStatusFilter<$PrismaModel>
+    _max?: NestedEnumNewsArticleStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMediaTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
+  }
+
+  export type NewsArticleNullableScalarRelationFilter = {
+    is?: NewsArticleWhereInput | null
+    isNot?: NewsArticleWhereInput | null
+  }
+
+  export type MediaCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    newsArticleId?: SortOrder
+  }
+
+  export type MediaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    newsArticleId?: SortOrder
+  }
+
+  export type MediaMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    url?: SortOrder
+    createdAt?: SortOrder
+    newsArticleId?: SortOrder
+  }
+
+  export type EnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaTypeFilter<$PrismaModel>
+  }
+
+  export type NewsArticleCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type NewsArticleCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type NewsArticleCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type TagCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type TagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type TagMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
   }
 
   export type NewsArticleScalarRelationFilter = {
@@ -18631,6 +22966,24 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsLettersInput, UserUpdateWithoutNewsLettersInput>, UserUncheckedUpdateWithoutNewsLettersInput>
   }
 
+  export type MediaCreateNestedOneWithoutCoverImageArticlesInput = {
+    create?: XOR<MediaCreateWithoutCoverImageArticlesInput, MediaUncheckedCreateWithoutCoverImageArticlesInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutCoverImageArticlesInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type NewsArticleCategoryCreateNestedOneWithoutArticlesInput = {
+    create?: XOR<NewsArticleCategoryCreateWithoutArticlesInput, NewsArticleCategoryUncheckedCreateWithoutArticlesInput>
+    connectOrCreate?: NewsArticleCategoryCreateOrConnectWithoutArticlesInput
+    connect?: NewsArticleCategoryWhereUniqueInput
+  }
+
+  export type TagCreateNestedManyWithoutArticlesInput = {
+    create?: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput> | TagCreateWithoutArticlesInput[] | TagUncheckedCreateWithoutArticlesInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutArticlesInput | TagCreateOrConnectWithoutArticlesInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
   export type NewsCommentCreateNestedManyWithoutNewsArticleInput = {
     create?: XOR<NewsCommentCreateWithoutNewsArticleInput, NewsCommentUncheckedCreateWithoutNewsArticleInput> | NewsCommentCreateWithoutNewsArticleInput[] | NewsCommentUncheckedCreateWithoutNewsArticleInput[]
     connectOrCreate?: NewsCommentCreateOrConnectWithoutNewsArticleInput | NewsCommentCreateOrConnectWithoutNewsArticleInput[]
@@ -18651,6 +23004,19 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type MediaCreateNestedManyWithoutNewsArticleInput = {
+    create?: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput> | MediaCreateWithoutNewsArticleInput[] | MediaUncheckedCreateWithoutNewsArticleInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutNewsArticleInput | MediaCreateOrConnectWithoutNewsArticleInput[]
+    createMany?: MediaCreateManyNewsArticleInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutArticlesInput = {
+    create?: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput> | TagCreateWithoutArticlesInput[] | TagUncheckedCreateWithoutArticlesInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutArticlesInput | TagCreateOrConnectWithoutArticlesInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
   export type NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput = {
     create?: XOR<NewsCommentCreateWithoutNewsArticleInput, NewsCommentUncheckedCreateWithoutNewsArticleInput> | NewsCommentCreateWithoutNewsArticleInput[] | NewsCommentUncheckedCreateWithoutNewsArticleInput[]
     connectOrCreate?: NewsCommentCreateOrConnectWithoutNewsArticleInput | NewsCommentCreateOrConnectWithoutNewsArticleInput[]
@@ -18663,6 +23029,52 @@ export namespace Prisma {
     connectOrCreate?: NewsArticleLikeCreateOrConnectWithoutNewsArticleInput | NewsArticleLikeCreateOrConnectWithoutNewsArticleInput[]
     createMany?: NewsArticleLikeCreateManyNewsArticleInputEnvelope
     connect?: NewsArticleLikeWhereUniqueInput | NewsArticleLikeWhereUniqueInput[]
+  }
+
+  export type MediaUncheckedCreateNestedManyWithoutNewsArticleInput = {
+    create?: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput> | MediaCreateWithoutNewsArticleInput[] | MediaUncheckedCreateWithoutNewsArticleInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutNewsArticleInput | MediaCreateOrConnectWithoutNewsArticleInput[]
+    createMany?: MediaCreateManyNewsArticleInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumNewsArticleStatusFieldUpdateOperationsInput = {
+    set?: $Enums.NewsArticleStatus
+  }
+
+  export type MediaUpdateOneWithoutCoverImageArticlesNestedInput = {
+    create?: XOR<MediaCreateWithoutCoverImageArticlesInput, MediaUncheckedCreateWithoutCoverImageArticlesInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutCoverImageArticlesInput
+    upsert?: MediaUpsertWithoutCoverImageArticlesInput
+    disconnect?: MediaWhereInput | boolean
+    delete?: MediaWhereInput | boolean
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutCoverImageArticlesInput, MediaUpdateWithoutCoverImageArticlesInput>, MediaUncheckedUpdateWithoutCoverImageArticlesInput>
+  }
+
+  export type NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput = {
+    create?: XOR<NewsArticleCategoryCreateWithoutArticlesInput, NewsArticleCategoryUncheckedCreateWithoutArticlesInput>
+    connectOrCreate?: NewsArticleCategoryCreateOrConnectWithoutArticlesInput
+    upsert?: NewsArticleCategoryUpsertWithoutArticlesInput
+    connect?: NewsArticleCategoryWhereUniqueInput
+    update?: XOR<XOR<NewsArticleCategoryUpdateToOneWithWhereWithoutArticlesInput, NewsArticleCategoryUpdateWithoutArticlesInput>, NewsArticleCategoryUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type TagUpdateManyWithoutArticlesNestedInput = {
+    create?: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput> | TagCreateWithoutArticlesInput[] | TagUncheckedCreateWithoutArticlesInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutArticlesInput | TagCreateOrConnectWithoutArticlesInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutArticlesInput | TagUpsertWithWhereUniqueWithoutArticlesInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutArticlesInput | TagUpdateWithWhereUniqueWithoutArticlesInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutArticlesInput | TagUpdateManyWithWhereWithoutArticlesInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type NewsCommentUpdateManyWithoutNewsArticleNestedInput = {
@@ -18693,12 +23105,41 @@ export namespace Prisma {
     deleteMany?: NewsArticleLikeScalarWhereInput | NewsArticleLikeScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutNewsArticlesNestedInput = {
+  export type UserUpdateOneWithoutNewsArticlesNestedInput = {
     create?: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
     connectOrCreate?: UserCreateOrConnectWithoutNewsArticlesInput
     upsert?: UserUpsertWithoutNewsArticlesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNewsArticlesInput, UserUpdateWithoutNewsArticlesInput>, UserUncheckedUpdateWithoutNewsArticlesInput>
+  }
+
+  export type MediaUpdateManyWithoutNewsArticleNestedInput = {
+    create?: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput> | MediaCreateWithoutNewsArticleInput[] | MediaUncheckedCreateWithoutNewsArticleInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutNewsArticleInput | MediaCreateOrConnectWithoutNewsArticleInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutNewsArticleInput | MediaUpsertWithWhereUniqueWithoutNewsArticleInput[]
+    createMany?: MediaCreateManyNewsArticleInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutNewsArticleInput | MediaUpdateWithWhereUniqueWithoutNewsArticleInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutNewsArticleInput | MediaUpdateManyWithWhereWithoutNewsArticleInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutArticlesNestedInput = {
+    create?: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput> | TagCreateWithoutArticlesInput[] | TagUncheckedCreateWithoutArticlesInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutArticlesInput | TagCreateOrConnectWithoutArticlesInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutArticlesInput | TagUpsertWithWhereUniqueWithoutArticlesInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutArticlesInput | TagUpdateWithWhereUniqueWithoutArticlesInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutArticlesInput | TagUpdateManyWithWhereWithoutArticlesInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
   }
 
   export type NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput = {
@@ -18727,6 +23168,162 @@ export namespace Prisma {
     update?: NewsArticleLikeUpdateWithWhereUniqueWithoutNewsArticleInput | NewsArticleLikeUpdateWithWhereUniqueWithoutNewsArticleInput[]
     updateMany?: NewsArticleLikeUpdateManyWithWhereWithoutNewsArticleInput | NewsArticleLikeUpdateManyWithWhereWithoutNewsArticleInput[]
     deleteMany?: NewsArticleLikeScalarWhereInput | NewsArticleLikeScalarWhereInput[]
+  }
+
+  export type MediaUncheckedUpdateManyWithoutNewsArticleNestedInput = {
+    create?: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput> | MediaCreateWithoutNewsArticleInput[] | MediaUncheckedCreateWithoutNewsArticleInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutNewsArticleInput | MediaCreateOrConnectWithoutNewsArticleInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutNewsArticleInput | MediaUpsertWithWhereUniqueWithoutNewsArticleInput[]
+    createMany?: MediaCreateManyNewsArticleInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutNewsArticleInput | MediaUpdateWithWhereUniqueWithoutNewsArticleInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutNewsArticleInput | MediaUpdateManyWithWhereWithoutNewsArticleInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type NewsArticleCreateNestedOneWithoutMediaInput = {
+    create?: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutMediaInput
+    connect?: NewsArticleWhereUniqueInput
+  }
+
+  export type NewsArticleCreateNestedManyWithoutCoverImageMediaInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
+    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
+    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type EnumMediaTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MediaType
+  }
+
+  export type NewsArticleUpdateOneWithoutMediaNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutMediaInput
+    upsert?: NewsArticleUpsertWithoutMediaInput
+    disconnect?: NewsArticleWhereInput | boolean
+    delete?: NewsArticleWhereInput | boolean
+    connect?: NewsArticleWhereUniqueInput
+    update?: XOR<XOR<NewsArticleUpdateToOneWithWhereWithoutMediaInput, NewsArticleUpdateWithoutMediaInput>, NewsArticleUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type NewsArticleUpdateManyWithoutCoverImageMediaNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput[]
+    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput | NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput[]
+    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput | NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
+  export type NewsArticleCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput> | NewsArticleCreateWithoutCategoryInput[] | NewsArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCategoryInput | NewsArticleCreateOrConnectWithoutCategoryInput[]
+    createMany?: NewsArticleCreateManyCategoryInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type NewsArticleUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput> | NewsArticleCreateWithoutCategoryInput[] | NewsArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCategoryInput | NewsArticleCreateOrConnectWithoutCategoryInput[]
+    createMany?: NewsArticleCreateManyCategoryInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type NewsArticleUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput> | NewsArticleCreateWithoutCategoryInput[] | NewsArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCategoryInput | NewsArticleCreateOrConnectWithoutCategoryInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCategoryInput | NewsArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: NewsArticleCreateManyCategoryInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCategoryInput | NewsArticleUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCategoryInput | NewsArticleUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput> | NewsArticleCreateWithoutCategoryInput[] | NewsArticleUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCategoryInput | NewsArticleCreateOrConnectWithoutCategoryInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCategoryInput | NewsArticleUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: NewsArticleCreateManyCategoryInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCategoryInput | NewsArticleUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCategoryInput | NewsArticleUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
+  export type NewsArticleCreateNestedManyWithoutTagsInput = {
+    create?: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput> | NewsArticleCreateWithoutTagsInput[] | NewsArticleUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutTagsInput | NewsArticleCreateOrConnectWithoutTagsInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type NewsArticleUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput> | NewsArticleCreateWithoutTagsInput[] | NewsArticleUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutTagsInput | NewsArticleCreateOrConnectWithoutTagsInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
+  export type NewsArticleUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput> | NewsArticleCreateWithoutTagsInput[] | NewsArticleUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutTagsInput | NewsArticleCreateOrConnectWithoutTagsInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutTagsInput | NewsArticleUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutTagsInput | NewsArticleUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutTagsInput | NewsArticleUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput> | NewsArticleCreateWithoutTagsInput[] | NewsArticleUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutTagsInput | NewsArticleCreateOrConnectWithoutTagsInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutTagsInput | NewsArticleUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutTagsInput | NewsArticleUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutTagsInput | NewsArticleUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutNewsCommentsInput = {
@@ -19005,6 +23602,65 @@ export namespace Prisma {
     _max?: NestedBigIntFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumNewsArticleStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.NewsArticleStatus | EnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNewsArticleStatusFilter<$PrismaModel> | $Enums.NewsArticleStatus
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumNewsArticleStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.NewsArticleStatus | EnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.NewsArticleStatus[] | ListEnumNewsArticleStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumNewsArticleStatusWithAggregatesFilter<$PrismaModel> | $Enums.NewsArticleStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumNewsArticleStatusFilter<$PrismaModel>
+    _max?: NestedEnumNewsArticleStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMediaTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeFilter<$PrismaModel> | $Enums.MediaType
+  }
+
+  export type NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MediaType | EnumMediaTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MediaType[] | ListEnumMediaTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMediaTypeWithAggregatesFilter<$PrismaModel> | $Enums.MediaType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMediaTypeFilter<$PrismaModel>
+    _max?: NestedEnumMediaTypeFilter<$PrismaModel>
+  }
+
   export type EmailVerificationTokenCreateWithoutUserInput = {
     id?: string
     expires: bigint | number
@@ -19111,28 +23767,40 @@ export namespace Prisma {
 
   export type NewsArticleCreateWithoutAuthorInput = {
     id?: string
-    imageUrl?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateWithoutAuthorInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleCreateOrConnectWithoutAuthorInput = {
@@ -19333,11 +24001,15 @@ export namespace Prisma {
     OR?: NewsArticleScalarWhereInput[]
     NOT?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
     id?: StringFilter<"NewsArticle"> | string
-    imageUrl?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
-    publishedAt?: DateTimeFilter<"NewsArticle"> | Date | string
+    slug?: StringFilter<"NewsArticle"> | string
+    summary?: StringNullableFilter<"NewsArticle"> | string | null
+    categoryId?: StringFilter<"NewsArticle"> | string
+    publishedAt?: DateTimeNullableFilter<"NewsArticle"> | Date | string | null
+    status?: EnumNewsArticleStatusFilter<"NewsArticle"> | $Enums.NewsArticleStatus
     content?: StringFilter<"NewsArticle"> | string
-    authorId?: StringFilter<"NewsArticle"> | string
+    authorId?: StringNullableFilter<"NewsArticle"> | string | null
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
@@ -20164,6 +24836,59 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type MediaCreateWithoutCoverImageArticlesInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutCoverImageArticlesInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+  }
+
+  export type MediaCreateOrConnectWithoutCoverImageArticlesInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutCoverImageArticlesInput, MediaUncheckedCreateWithoutCoverImageArticlesInput>
+  }
+
+  export type NewsArticleCategoryCreateWithoutArticlesInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type NewsArticleCategoryUncheckedCreateWithoutArticlesInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type NewsArticleCategoryCreateOrConnectWithoutArticlesInput = {
+    where: NewsArticleCategoryWhereUniqueInput
+    create: XOR<NewsArticleCategoryCreateWithoutArticlesInput, NewsArticleCategoryUncheckedCreateWithoutArticlesInput>
+  }
+
+  export type TagCreateWithoutArticlesInput = {
+    id?: string
+    name: string
+  }
+
+  export type TagUncheckedCreateWithoutArticlesInput = {
+    id?: string
+    name: string
+  }
+
+  export type TagCreateOrConnectWithoutArticlesInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput>
+  }
+
   export type NewsCommentCreateWithoutNewsArticleInput = {
     id?: string
     content: string
@@ -20265,6 +24990,106 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutNewsArticlesInput, UserUncheckedCreateWithoutNewsArticlesInput>
   }
 
+  export type MediaCreateWithoutNewsArticleInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutNewsArticleInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput
+  }
+
+  export type MediaCreateOrConnectWithoutNewsArticleInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput>
+  }
+
+  export type MediaCreateManyNewsArticleInputEnvelope = {
+    data: MediaCreateManyNewsArticleInput | MediaCreateManyNewsArticleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaUpsertWithoutCoverImageArticlesInput = {
+    update: XOR<MediaUpdateWithoutCoverImageArticlesInput, MediaUncheckedUpdateWithoutCoverImageArticlesInput>
+    create: XOR<MediaCreateWithoutCoverImageArticlesInput, MediaUncheckedCreateWithoutCoverImageArticlesInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutCoverImageArticlesInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutCoverImageArticlesInput, MediaUncheckedUpdateWithoutCoverImageArticlesInput>
+  }
+
+  export type MediaUpdateWithoutCoverImageArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutCoverImageArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NewsArticleCategoryUpsertWithoutArticlesInput = {
+    update: XOR<NewsArticleCategoryUpdateWithoutArticlesInput, NewsArticleCategoryUncheckedUpdateWithoutArticlesInput>
+    create: XOR<NewsArticleCategoryCreateWithoutArticlesInput, NewsArticleCategoryUncheckedCreateWithoutArticlesInput>
+    where?: NewsArticleCategoryWhereInput
+  }
+
+  export type NewsArticleCategoryUpdateToOneWithWhereWithoutArticlesInput = {
+    where?: NewsArticleCategoryWhereInput
+    data: XOR<NewsArticleCategoryUpdateWithoutArticlesInput, NewsArticleCategoryUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type NewsArticleCategoryUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type NewsArticleCategoryUncheckedUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutArticlesInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutArticlesInput, TagUncheckedUpdateWithoutArticlesInput>
+    create: XOR<TagCreateWithoutArticlesInput, TagUncheckedCreateWithoutArticlesInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutArticlesInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutArticlesInput, TagUncheckedUpdateWithoutArticlesInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutArticlesInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutArticlesInput>
+  }
+
+  export type TagScalarWhereInput = {
+    AND?: TagScalarWhereInput | TagScalarWhereInput[]
+    OR?: TagScalarWhereInput[]
+    NOT?: TagScalarWhereInput | TagScalarWhereInput[]
+    id?: StringFilter<"Tag"> | string
+    name?: StringFilter<"Tag"> | string
+  }
+
   export type NewsCommentUpsertWithWhereUniqueWithoutNewsArticleInput = {
     where: NewsCommentWhereUniqueInput
     update: XOR<NewsCommentUpdateWithoutNewsArticleInput, NewsCommentUncheckedUpdateWithoutNewsArticleInput>
@@ -20356,6 +25181,312 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type MediaUpsertWithWhereUniqueWithoutNewsArticleInput = {
+    where: MediaWhereUniqueInput
+    update: XOR<MediaUpdateWithoutNewsArticleInput, MediaUncheckedUpdateWithoutNewsArticleInput>
+    create: XOR<MediaCreateWithoutNewsArticleInput, MediaUncheckedCreateWithoutNewsArticleInput>
+  }
+
+  export type MediaUpdateWithWhereUniqueWithoutNewsArticleInput = {
+    where: MediaWhereUniqueInput
+    data: XOR<MediaUpdateWithoutNewsArticleInput, MediaUncheckedUpdateWithoutNewsArticleInput>
+  }
+
+  export type MediaUpdateManyWithWhereWithoutNewsArticleInput = {
+    where: MediaScalarWhereInput
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyWithoutNewsArticleInput>
+  }
+
+  export type MediaScalarWhereInput = {
+    AND?: MediaScalarWhereInput | MediaScalarWhereInput[]
+    OR?: MediaScalarWhereInput[]
+    NOT?: MediaScalarWhereInput | MediaScalarWhereInput[]
+    id?: StringFilter<"Media"> | string
+    type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
+    url?: StringFilter<"Media"> | string
+    createdAt?: DateTimeFilter<"Media"> | Date | string
+    newsArticleId?: StringNullableFilter<"Media"> | string | null
+  }
+
+  export type NewsArticleCreateWithoutMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutMediaInput = {
+    id?: string
+    coverImage?: string | null
+    title: string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutMediaInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
+  }
+
+  export type NewsArticleCreateWithoutCoverImageMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutCoverImageMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutCoverImageMediaInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput>
+  }
+
+  export type NewsArticleCreateManyCoverImageMediaInputEnvelope = {
+    data: NewsArticleCreateManyCoverImageMediaInput | NewsArticleCreateManyCoverImageMediaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewsArticleUpsertWithoutMediaInput = {
+    update: XOR<NewsArticleUpdateWithoutMediaInput, NewsArticleUncheckedUpdateWithoutMediaInput>
+    create: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
+    where?: NewsArticleWhereInput
+  }
+
+  export type NewsArticleUpdateToOneWithWhereWithoutMediaInput = {
+    where?: NewsArticleWhereInput
+    data: XOR<NewsArticleUpdateWithoutMediaInput, NewsArticleUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type NewsArticleUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput = {
+    where: NewsArticleWhereUniqueInput
+    update: XOR<NewsArticleUpdateWithoutCoverImageMediaInput, NewsArticleUncheckedUpdateWithoutCoverImageMediaInput>
+    create: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput>
+  }
+
+  export type NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput = {
+    where: NewsArticleWhereUniqueInput
+    data: XOR<NewsArticleUpdateWithoutCoverImageMediaInput, NewsArticleUncheckedUpdateWithoutCoverImageMediaInput>
+  }
+
+  export type NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput = {
+    where: NewsArticleScalarWhereInput
+    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutCoverImageMediaInput>
+  }
+
+  export type NewsArticleCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    coverImage?: string | null
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutCategoryInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type NewsArticleCreateManyCategoryInputEnvelope = {
+    data: NewsArticleCreateManyCategoryInput | NewsArticleCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NewsArticleUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: NewsArticleWhereUniqueInput
+    update: XOR<NewsArticleUpdateWithoutCategoryInput, NewsArticleUncheckedUpdateWithoutCategoryInput>
+    create: XOR<NewsArticleCreateWithoutCategoryInput, NewsArticleUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type NewsArticleUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: NewsArticleWhereUniqueInput
+    data: XOR<NewsArticleUpdateWithoutCategoryInput, NewsArticleUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type NewsArticleUpdateManyWithWhereWithoutCategoryInput = {
+    where: NewsArticleScalarWhereInput
+    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type NewsArticleCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutTagsInput = {
+    id?: string
+    coverImage?: string | null
+    title: string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutTagsInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput>
+  }
+
+  export type NewsArticleUpsertWithWhereUniqueWithoutTagsInput = {
+    where: NewsArticleWhereUniqueInput
+    update: XOR<NewsArticleUpdateWithoutTagsInput, NewsArticleUncheckedUpdateWithoutTagsInput>
+    create: XOR<NewsArticleCreateWithoutTagsInput, NewsArticleUncheckedCreateWithoutTagsInput>
+  }
+
+  export type NewsArticleUpdateWithWhereUniqueWithoutTagsInput = {
+    where: NewsArticleWhereUniqueInput
+    data: XOR<NewsArticleUpdateWithoutTagsInput, NewsArticleUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type NewsArticleUpdateManyWithWhereWithoutTagsInput = {
+    where: NewsArticleScalarWhereInput
+    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutTagsInput>
+  }
+
   export type UserCreateWithoutNewsCommentsInput = {
     id?: string
     name?: string | null
@@ -20411,28 +25542,40 @@ export namespace Prisma {
 
   export type NewsArticleCreateWithoutNewsCommentsInput = {
     id?: string
-    imageUrl?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
-    author: UserCreateNestedOneWithoutNewsArticlesInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateWithoutNewsCommentsInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
-    authorId: string
+    authorId?: string | null
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleCreateOrConnectWithoutNewsCommentsInput = {
@@ -20512,28 +25655,40 @@ export namespace Prisma {
 
   export type NewsArticleUpdateWithoutNewsCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutNewsCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type UserCreateWithoutNewsArticleLikesInput = {
@@ -20591,28 +25746,40 @@ export namespace Prisma {
 
   export type NewsArticleCreateWithoutNewsArticleLikesInput = {
     id?: string
-    imageUrl?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
-    author: UserCreateNestedOneWithoutNewsArticlesInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleUncheckedCreateWithoutNewsArticleLikesInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
-    authorId: string
+    authorId?: string | null
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
   }
 
   export type NewsArticleCreateOrConnectWithoutNewsArticleLikesInput = {
@@ -20692,28 +25859,40 @@ export namespace Prisma {
 
   export type NewsArticleUpdateWithoutNewsArticleLikesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
-    author?: UserUpdateOneRequiredWithoutNewsArticlesNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type EmailVerificationTokenCreateManyUserInput = {
@@ -20749,9 +25928,13 @@ export namespace Prisma {
 
   export type NewsArticleCreateManyAuthorInput = {
     id?: string
-    imageUrl?: string | null
+    coverImage?: string | null
     title: string
-    publishedAt?: Date | string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
     content: string
     location?: string | null
     createdAt?: Date | string
@@ -20873,35 +26056,51 @@ export namespace Prisma {
 
   export type NewsArticleUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
   export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
-    publishedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
     content?: StringFieldUpdateOperationsInput | string
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21082,6 +26281,28 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type MediaCreateManyNewsArticleInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    createdAt?: Date | string
+  }
+
+  export type TagUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TagUncheckedUpdateWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TagUncheckedUpdateManyWithoutArticlesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
   export type NewsCommentUpdateWithoutNewsArticleInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
@@ -21122,6 +26343,219 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     likerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaUpdateWithoutNewsArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutNewsArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateManyWithoutNewsArticleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NewsArticleCreateManyCoverImageMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NewsArticleUpdateWithoutCoverImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateWithoutCoverImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutCoverImageMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NewsArticleCreateManyCategoryInput = {
+    id?: string
+    coverImage?: string | null
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NewsArticleUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    tags?: TagUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NewsArticleUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
+    author?: UserUpdateOneWithoutNewsArticlesNestedInput
+    media?: MediaUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
+    media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumNewsArticleStatusFieldUpdateOperationsInput | $Enums.NewsArticleStatus
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

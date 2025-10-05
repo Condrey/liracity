@@ -2,6 +2,7 @@ generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
+
 // ONline db: https://vercel.com/api/marketplace/sso?integrationConfigurationId=icfg_CR0YDyWYqrQoBR7FvGiwiMoZ&product_id=iap_SYm1SIDap0OBqOvV&resource_id=shiny-wave-94885079&teamId=team_2kW2NcCjaUXcvfsZU68qeuAM
 
 datasource db {
@@ -15,12 +16,12 @@ model User {
   username                String?                  @unique
   email                   String?                  @unique
   avatarUrl               String?
-  role                    Role                    @default(USER)
+  role                    Role                     @default(USER)
   createdAt               DateTime                 @default(now())
   telephone               String?
   passwordHash            String?
   googleId                String?                  @unique
-  githubId String?                 @unique
+  githubId                String?                  @unique
   bio                     String?
   isWelcomed              Boolean                  @default(false)
   isVerified              Boolean                  @default(false)
@@ -95,14 +96,14 @@ model EmailVerificationToken {
 }
 
 model Session {
-  id        String   @id @default(uuid())
-  userId    String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  id             String   @id @default(uuid())
+  userId         String
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
   lastVerifiedAt DateTime @default(now())
-  secretHash String @default(uuid())
-  role      Role     @default(USER)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  secretHash     String   @default(uuid())
+  role           Role     @default(USER)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -130,20 +131,65 @@ model NewsLetter {
 }
 
 model NewsArticle {
-  id               String            @id @default(uuid())
-  imageUrl         String?
+  id               String              @id @default(uuid())
+  coverImage       String?
+  coverImageMedia  Media?              @relation("coverImage", fields: [coverImage], references: [id], onDelete: SetNull)
   title            String
-  publishedAt      DateTime          @default(now())
+  slug             String              @unique
+  summary          String?
+  category         NewsArticleCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  tags             Tag[]               @relation("ArticleTags")
+  publishedAt      DateTime?
+  status           NewsArticleStatus   @default(DRAFT)
   content          String
-  authorId         String
+  authorId         String?
   location         String?
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
   newsComments     NewsComment[]
   newsArticleLikes NewsArticleLike[]
-  author           User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author           User?               @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  media            Media[]             @relation("otherMedia")
 
   @@map("news_articles")
+}
+
+model Media {
+  id                 String        @id @default(uuid())
+  type               MediaType
+  url                String
+  newsArticle        NewsArticle?  @relation("otherMedia", fields: [newsArticleId], references: [id], onDelete: SetNull)
+  createdAt          DateTime      @default(now())
+  newsArticleId      String?
+  coverImageArticles NewsArticle[] @relation("coverImage")
+
+  @@map("attachment_media")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model NewsArticleCategory {
+  id       String        @id @default(uuid())
+  name     String
+  slug     String        @unique
+  articles NewsArticle[]
+}
+
+model Tag {
+  id       String        @id @default(uuid())
+  name     String        @unique
+  articles NewsArticle[] @relation("ArticleTags")
+}
+
+enum NewsArticleStatus {
+  PRIVATE
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 model NewsComment {

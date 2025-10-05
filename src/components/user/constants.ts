@@ -1,14 +1,47 @@
+import { NewsArticleStatus, Role } from "@/generated/prisma";
 import {
 	BlocksIcon,
 	BriefcaseBusinessIcon,
 	FilmIcon,
 	HomeIcon,
+	InboxIcon,
 	InfoIcon,
+	LetterTextIcon,
+	LockIcon,
 	LucideIcon,
 	MailPlusIcon,
 	RadioTowerIcon,
-	TrophyIcon
+	TrophyIcon,
+	UploadIcon
 } from "lucide-react";
+
+export const MAX_ATTACHMENTS = 5;
+export const allNewsArticleStatuses = Object.values(NewsArticleStatus);
+export const newsArticleStatuses: Record<NewsArticleStatus, { newsArticleStatus: string; icon: LucideIcon }> = {
+	DRAFT: {
+		newsArticleStatus: "Draft",
+		icon: LetterTextIcon
+	},
+	PUBLISHED: {
+		newsArticleStatus: "Published",
+		icon: UploadIcon
+	},
+	PRIVATE: {
+		newsArticleStatus: "Private",
+		icon: LockIcon
+	},
+	ARCHIVED: {
+		newsArticleStatus: "Archived",
+		icon: InboxIcon
+	}
+};
+export const allRoles = Object.values(Role);
+export const userRoles: Record<Role, Role[]> = {
+	USER: [],
+	ADMIN: allRoles,
+	MODERATOR: ["STAFF", "USER"],
+	STAFF: ["USER"]
+};
 
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {

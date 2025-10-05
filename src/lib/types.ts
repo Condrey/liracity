@@ -24,6 +24,8 @@ export type EmployeeData = Prisma.EmployeeGetPayload<{
 // News Article
 export const newsArticleDataInclude = {
 	author: { select: userDataSelect },
+	coverImageMedia: { select: { url: true } },
+	tags: true,
 	_count: { select: { newsArticleLikes: true, newsComments: true } }
 } satisfies Prisma.NewsArticleInclude;
 export type NewsArticleData = Prisma.NewsArticleGetPayload<{
@@ -77,3 +79,8 @@ export type ChartUser = {
 	telephone: string;
 	email: string;
 };
+export interface Attachment {
+	file: File;
+	mediaId?: string;
+	isUploading: boolean;
+}

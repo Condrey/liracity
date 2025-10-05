@@ -131,20 +131,65 @@ model NewsLetter {
 }
 
 model NewsArticle {
-  id               String            @id @default(uuid())
-  imageUrl         String?
+  id               String              @id @default(uuid())
+  coverImage       String?
+  coverImageMedia  Media?              @relation("coverImage", fields: [coverImage], references: [id], onDelete: SetNull)
   title            String
-  publishedAt      DateTime          @default(now())
+  slug             String              @unique
+  summary          String?
+  category         NewsArticleCategory @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  tags             Tag[]               @relation("ArticleTags")
+  publishedAt      DateTime?
+  status           NewsArticleStatus   @default(DRAFT)
   content          String
-  authorId         String
+  authorId         String?
   location         String?
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
   newsComments     NewsComment[]
   newsArticleLikes NewsArticleLike[]
-  author           User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author           User?               @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  media            Media[]             @relation("otherMedia")
 
   @@map("news_articles")
+}
+
+model Media {
+  id                 String        @id @default(uuid())
+  type               MediaType
+  url                String
+  newsArticle        NewsArticle?  @relation("otherMedia", fields: [newsArticleId], references: [id], onDelete: SetNull)
+  createdAt          DateTime      @default(now())
+  newsArticleId      String?
+  coverImageArticles NewsArticle[] @relation("coverImage")
+
+  @@map("attachment_media")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model NewsArticleCategory {
+  id       String        @id @default(uuid())
+  name     String
+  slug     String        @unique
+  articles NewsArticle[]
+}
+
+model Tag {
+  id       String        @id @default(uuid())
+  name     String        @unique
+  articles NewsArticle[] @relation("ArticleTags")
+}
+
+enum NewsArticleStatus {
+  PRIVATE
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
 
 model NewsComment {

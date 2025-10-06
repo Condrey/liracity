@@ -5,7 +5,7 @@ import { Button, ButtonProps } from "@/components/ui/button";
 import { userRoles } from "@/components/user/constants";
 import { NewsArticleData } from "@/lib/types";
 import { useState } from "react";
-import SheetAddEditNewsArticle from "./(news)/form/sheet-add-edit-news-article";
+import SheetAddEditNewsArticle from "./form/sheet-add-edit-news-article";
 
 interface ButtonAddEditNewsArticleProps extends ButtonProps {
 	newsArticle?: NewsArticleData;

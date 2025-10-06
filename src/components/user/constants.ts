@@ -17,22 +17,33 @@ import {
 
 export const MAX_ATTACHMENTS = 5;
 export const allNewsArticleStatuses = Object.values(NewsArticleStatus);
-export const newsArticleStatuses: Record<NewsArticleStatus, { newsArticleStatus: string; icon: LucideIcon }> = {
+export const newsArticleStatuses: Record<
+	NewsArticleStatus,
+	{
+		newsArticleStatus: string;
+		icon: LucideIcon;
+		variant: "default" | "success" | "outline" | "destructive" | "secondary" | "warning" | null | undefined;
+	}
+> = {
 	DRAFT: {
 		newsArticleStatus: "Draft",
-		icon: LetterTextIcon
+		icon: LetterTextIcon,
+		variant: "warning"
 	},
 	PUBLISHED: {
 		newsArticleStatus: "Published",
-		icon: UploadIcon
+		icon: UploadIcon,
+		variant: "success"
 	},
 	PRIVATE: {
 		newsArticleStatus: "Private",
-		icon: LockIcon
+		icon: LockIcon,
+		variant: "destructive"
 	},
 	ARCHIVED: {
 		newsArticleStatus: "Archived",
-		icon: InboxIcon
+		icon: InboxIcon,
+		variant: "outline"
 	}
 };
 export const allRoles = Object.values(Role);

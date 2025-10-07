@@ -1,4 +1,4 @@
-import { MAX_ATTACHMENTS } from "@/components/user/constants";
+import { MAX_ATTACHMENTS } from "@/lib/constants";
 import { Attachment } from "@/lib/types";
 import { useUploadThing } from "@/utils/uplaodthing";
 import { useState } from "react";
@@ -12,7 +12,7 @@ export function useOtherMediaUploads() {
 		onBeforeUploadBegin(files) {
 			const renamedFiles = files.map((file) => {
 				const extension = file.name.split(".").pop();
-				return new File([file], `attachment_${crypto.randomUUID()}.${extension}`, {
+				return new File([file], `news_${crypto.randomUUID()}.${extension}`, {
 					type: file.type
 				});
 			});
@@ -89,11 +89,11 @@ export function useCoverImageUpload() {
 	const [coverImages, setCoverImages] = useState<Attachment[]>([]);
 	const [uploadProgress, setUploadProgress] = useState<number>();
 
-	const { startUpload, isUploading } = useUploadThing("newsCoverImageAttachment", {
+	const { startUpload, isUploading } = useUploadThing("coverImageAttachment", {
 		onBeforeUploadBegin(files) {
 			const renamedFiles = files.map((file) => {
 				const extension = file.name.split(".").pop();
-				return new File([file], `cover_image_${crypto.randomUUID()}.${extension}`, {
+				return new File([file], `news_cover_image_${crypto.randomUUID()}.${extension}`, {
 					type: file.type
 				});
 			});

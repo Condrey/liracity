@@ -3,9 +3,9 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/compon
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn, webName } from "@/lib/utils";
+import UserMenuButton from "@/utils/user-menu-button";
 import Image from "next/image";
 import Link from "next/link";
-import LoginUserInfo from "./login-user-info";
 import TopAppBarBigScreen from "./top-app-bar/top-app-bar-big-screen";
 
 export default async function TopAppBar({ className }: { className?: string }) {
@@ -37,7 +37,7 @@ export default async function TopAppBar({ className }: { className?: string }) {
 			</NavigationMenuList>
 			<NavigationMenuList>
 				{/* login information area  */}
-				<LoginUserInfo />
+				<UserMenuButton />
 			</NavigationMenuList>
 		</NavigationMenu>
 	);

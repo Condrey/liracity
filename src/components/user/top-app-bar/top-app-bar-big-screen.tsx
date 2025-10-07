@@ -1,6 +1,6 @@
 "use client";
 
-import { navLinks } from "../constants";
+import { navLinks } from "../../../lib/constants";
 import { NavigationMenuItemContent } from "./top-app-bar-nav-item";
 
 export default function TopAppBarBigScreen() {

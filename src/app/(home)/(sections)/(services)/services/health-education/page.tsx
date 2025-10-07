@@ -1,5 +1,5 @@
 import { PageTitle } from "@/components/page-utils";
-import { cityServicesLinks } from "@/components/user/constants";
+import { cityServicesLinks } from "@/lib/constants";
 import { Metadata } from "next";
 
 const { title, description } = cityServicesLinks.find((val) => val.href === "/services/health-education")!;
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 export default function Page() {
 	return (
-		<div className="pt-[85px]">
+		<div className="">
 			<PageTitle heading={title} />
 		</div>
 	);

@@ -1,18 +1,22 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Item, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemTitle } from "@/components/ui/item";
+import LoadingButton from "@/components/ui/loading-button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { newsArticleStatuses } from "@/components/user/constants";
+import { Role } from "@/generated/prisma";
+import { myPrivileges, newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { MapPinIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useTransition } from "react";
 import { getAllNewsArticles } from "./action";
 import ButtonAddEditNewsArticle from "./button-add-edit-news-article";
 
@@ -48,57 +52,80 @@ export default function ListOfNewsArticles({ initialData, limit }: ListOfNewsArt
 }
 
 export function NewsArticleContainer({
-	newsArticle: { title, id, coverImageMedia, createdAt, summary, content, status, tags, location, publishedAt },
+	newsArticle: { title, id, coverImage, createdAt, slug, summary, content, status, tags, location, publishedAt },
 	className
 }: {
 	newsArticle: NewsArticleData;
 	className?: string;
 }) {
+	const [isPending, startTransition] = useTransition();
 	const { newsArticleStatus, icon, variant } = newsArticleStatuses[status];
+	const Icon = icon;
+	const { user } = useSession();
+	const isNotVisitor = myPrivileges[user?.role || Role.USER].includes(Role.STAFF);
 	return (
 		<Item
 			variant="outline"
-			className={cn("p-0 pb-6 group/article cursor-pointer hover:bg-muted  hover:shadow-md", className)}
+			className={cn(
+				"p-0 pb-6 group/article cursor-pointer hover:bg-muted  hover:shadow-md",
+				isPending && "animate-pulse",
+				className
+			)}
+			onClick={() => startTransition(() => {})}
+			asChild
 		>
-			<ItemHeader className="px-0 relative overflow-hidden flex flex-col justify-center items-center ">
-				<Image
-					src={coverImageMedia?.url!}
-					alt={title}
-					width={500}
-					height={600}
-					className="aspect-square w-full mask-b-from-10% mask-b-to-90% rounded-sm object-cover  group-hover/article:scale-110 transition-all duration-300"
-				/>
-				<Button
-					className={cn("hidden group-hover/article:block", "max-w-fit absolute max-h-fit m-auto size-full py-3")}
-				>
-					Read article
-				</Button>
-			</ItemHeader>
-			<ItemFooter className="gap-1 px-3 space-x-1 flex-wrap justify-start">
-				<Badge variant={variant}>{newsArticleStatus}</Badge>
-				<p className="space-x-1.5 line-clamp-1">
-					{tags.map((tag) => (
-						<span className={"bg-secondary px-1 text-secondary-foreground"} key={tag.id}>
-							#{tag.name}
-						</span>
-					))}
-				</p>
-				<span className="text-muted-foreground text-sm">
-					<MapPinIcon className="size-4 inline-flex fill-muted-foreground text-card" />
-					{location}
-				</span>
-				{!!publishedAt && (
-					<p>
-						<span className="text-xs">Published {formatDateToLocal(publishedAt)}</span>
+			<Link href={`/media/news-events/news/${slug}`}>
+				<ItemHeader className="px-0 flex-1 relative overflow-hidden flex flex-col justify-center items-center ">
+					<Image
+						src={coverImage?.url!}
+						alt={title}
+						width={500}
+						height={600}
+						className="aspect-square w-full mask-b-from-10% mask-b-to-90% rounded-sm object-cover  group-hover/article:scale-110 transition-all duration-300"
+					/>
+					<LoadingButton
+						loading={isPending}
+						className={cn(
+							"hidden group-hover/article:block",
+							"max-w-fit absolute max-h-fit m-auto size-full py-3",
+							isPending && "block"
+						)}
+					>
+						Read article
+					</LoadingButton>
+					<Badge className="absolute bg-amber-300 text-amber-950 top-0 left-0">News article</Badge>
+				</ItemHeader>
+				<ItemFooter className="gap-1 px-3 space-x-1 flex-wrap justify-start">
+					{isNotVisitor && (
+						<Badge variant={variant}>
+							<Icon />
+							{newsArticleStatus}
+						</Badge>
+					)}
+					<p className="space-x-1.5 line-clamp-1">
+						{tags.map((tag) => (
+							<span className={"bg-secondary px-1 text-secondary-foreground"} key={tag.id}>
+								#{tag.name}
+							</span>
+						))}
 					</p>
-				)}
-			</ItemFooter>
-			<ItemContent className="px-3">
-				<ItemTitle>{title}</ItemTitle>
-				<ItemDescription>
-					<TipTapViewer content={summary ?? content} />
-				</ItemDescription>
-			</ItemContent>
+					<span className="text-muted-foreground text-sm">
+						<MapPinIcon className="size-4 inline-flex fill-muted-foreground text-card" />
+						{location}
+					</span>
+					{!!publishedAt && (
+						<p>
+							<span className="text-xs">Published {formatDateToLocal(publishedAt)}</span>
+						</p>
+					)}
+				</ItemFooter>
+				<ItemContent className="px-3">
+					<ItemTitle>{title}</ItemTitle>
+					<ItemDescription>
+						<TipTapViewer content={summary ?? content} />
+					</ItemDescription>
+				</ItemContent>
+			</Link>
 		</Item>
 	);
 }
@@ -106,15 +133,13 @@ export function NewsArticleContainer({
 export function NewsArticleContainerSkeleton() {
 	return (
 		<Item variant="outline" className={cn("p-0 pb-6 animate-pulse cursor-wait")}>
-			<Skeleton className="w-full h-[250px]  rounded-sm " />
+			<Skeleton className="w-full h-[200px]  rounded-sm " />
 			<ItemFooter className="gap-1 px-3 space-x-1 flex-wrap justify-start">
-				<Skeleton className="h-9 w-16" />
-				<div className="space-x-1.5 flex ">
-					{Array.from({ length: 3 }, (_, index) => (
-						<Skeleton key={index} className="h-6 w-12" />
+				<div className="space-x-2 flex ">
+					{Array.from({ length: 2 }, (_, index) => (
+						<Skeleton key={index} className="h-6 w-32 " />
 					))}
 				</div>
-				<Skeleton className="h-6 w-12" />
 			</ItemFooter>
 			<ItemContent className="px-3">
 				<Skeleton className="h-6 w-2/3" />

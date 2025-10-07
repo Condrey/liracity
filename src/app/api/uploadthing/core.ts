@@ -1,5 +1,5 @@
 import { validateRequest } from "@/auth";
-import { MAX_ATTACHMENTS } from "@/components/user/constants";
+import { MAX_ATTACHMENTS } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { createUploadthing, FileRouter } from "uploadthing/next";
 import { UploadThingError, UTApi } from "uploadthing/server";
@@ -32,7 +32,7 @@ const avatarRouter = f({
 		return { avatarUrl: newAvatarUrl };
 	});
 
-const newsCoverImageRouter = f({
+const coverImageRouter = f({
 	image: { maxFileSize: "512KB" }
 })
 	.middleware(async () => {
@@ -75,7 +75,7 @@ const attachmentRouter = f({
 export const appFileRouter = {
 	// avatar: avatarRouter,
 	attachment: attachmentRouter,
-	newsCoverImageAttachment: newsCoverImageRouter
+	coverImageAttachment: coverImageRouter
 } satisfies FileRouter;
 
 export type AppFileRouter = typeof appFileRouter;

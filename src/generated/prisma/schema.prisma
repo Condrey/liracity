@@ -33,6 +33,9 @@ model User {
   newsArticles            NewsArticle[]
   newsLetters             NewsLetter[]
   sessions                Session[]
+  events                  Event[]
+  eventComments           EventComment[]
+  eventLikes              EventLike[]
 
   @@map("users")
 }
@@ -132,8 +135,8 @@ model NewsLetter {
 
 model NewsArticle {
   id               String              @id @default(uuid())
-  coverImage       String?
-  coverImageMedia  Media?              @relation("coverImage", fields: [coverImage], references: [id], onDelete: SetNull)
+  coverImageId     String?
+  coverImage       Media?              @relation("coverImage", fields: [coverImageId], references: [id], onDelete: SetNull)
   title            String
   slug             String              @unique
   summary          String?
@@ -159,10 +162,14 @@ model Media {
   id                 String        @id @default(uuid())
   type               MediaType
   url                String
-  newsArticle        NewsArticle?  @relation("otherMedia", fields: [newsArticleId], references: [id], onDelete: SetNull)
+  format             String        @default("png")
   createdAt          DateTime      @default(now())
-  newsArticleId      String?
   coverImageArticles NewsArticle[] @relation("coverImage")
+  newsArticle        NewsArticle?  @relation("otherMedia", fields: [newsArticleId], references: [id], onDelete: SetNull)
+  newsArticleId      String?
+  events             Event[]       @relation("EventCoverImage")
+  event              Event?        @relation("EventMedia", fields: [eventId], references: [id])
+  eventId            String?
 
   @@map("attachment_media")
 }
@@ -186,10 +193,10 @@ model Tag {
 }
 
 enum NewsArticleStatus {
-  PRIVATE
   DRAFT
   PUBLISHED
   ARCHIVED
+  PRIVATE
 }
 
 model NewsComment {
@@ -213,7 +220,71 @@ model NewsArticleLike {
   liker         User        @relation(fields: [likerId], references: [id], onDelete: Cascade)
   newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
 
+  @@unique([likerId, newsArticleId]) //prevent multiple likes by same person
   @@map("news_article_likes")
+}
+
+model Event {
+  id           String        @id @default(uuid())
+  title        String
+  slug         String        @unique
+  summary      String?
+  description  String
+  category     EventCategory @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  startDate    DateTime
+  endDate      DateTime?
+  location     String
+  coverImageId String?
+  coverImage   Media?        @relation("EventCoverImage", fields: [coverImageId], references: [id], onDelete: SetNull)
+  media        Media[]       @relation("EventMedia")
+
+  status   EventStatus @default(DRAFT)
+  authorId String?
+  author   User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eventComments EventComment[]
+  eventLikes    EventLike[]
+
+  @@map("events")
+}
+
+model EventCategory {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  slug   String  @unique
+  events Event[]
+
+  @@map("event_categories")
+}
+
+model EventComment {
+  id        String   @id @default(uuid())
+  content   String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model EventLike {
+  id      String @id @default(uuid())
+  userId  String
+  eventId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId]) // Prevent multiple likes by same user
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  CANCELLED
 }
 
 enum Role {

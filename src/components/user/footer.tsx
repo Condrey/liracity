@@ -1,11 +1,11 @@
 "use client";
 
+import { cityGetInvolvedLinks, cityMediaCenterLinks, cityServicesLinks, NavLink, whatWeDoLinks } from "@/lib/constants";
 import { cn, webName } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ThemeToggler } from "../theme-toggler";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { cityGetInvolvedLinks, cityMediaCenterLinks, cityServicesLinks, NavLink, whatWeDoLinks } from "./constants";
 
 export default function Footer({ className }: { className?: string }) {
 	const currentYear = new Date().getFullYear();

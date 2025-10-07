@@ -88,6 +88,26 @@ export type NewsComment = $Result.DefaultSelection<Prisma.$NewsCommentPayload>
  * 
  */
 export type NewsArticleLike = $Result.DefaultSelection<Prisma.$NewsArticleLikePayload>
+/**
+ * Model Event
+ * 
+ */
+export type Event = $Result.DefaultSelection<Prisma.$EventPayload>
+/**
+ * Model EventCategory
+ * 
+ */
+export type EventCategory = $Result.DefaultSelection<Prisma.$EventCategoryPayload>
+/**
+ * Model EventComment
+ * 
+ */
+export type EventComment = $Result.DefaultSelection<Prisma.$EventCommentPayload>
+/**
+ * Model EventLike
+ * 
+ */
+export type EventLike = $Result.DefaultSelection<Prisma.$EventLikePayload>
 
 /**
  * Enums
@@ -102,13 +122,22 @@ export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
 
 export const NewsArticleStatus: {
-  PRIVATE: 'PRIVATE',
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED'
+  ARCHIVED: 'ARCHIVED',
+  PRIVATE: 'PRIVATE'
 };
 
 export type NewsArticleStatus = (typeof NewsArticleStatus)[keyof typeof NewsArticleStatus]
+
+
+export const EventStatus: {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]
 
 
 export const Role: {
@@ -129,6 +158,10 @@ export const MediaType: typeof $Enums.MediaType
 export type NewsArticleStatus = $Enums.NewsArticleStatus
 
 export const NewsArticleStatus: typeof $Enums.NewsArticleStatus
+
+export type EventStatus = $Enums.EventStatus
+
+export const EventStatus: typeof $Enums.EventStatus
 
 export type Role = $Enums.Role
 
@@ -408,6 +441,46 @@ export class PrismaClient<
     * ```
     */
   get newsArticleLike(): Prisma.NewsArticleLikeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.event`: Exposes CRUD operations for the **Event** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Events
+    * const events = await prisma.event.findMany()
+    * ```
+    */
+  get event(): Prisma.EventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventCategory`: Exposes CRUD operations for the **EventCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventCategories
+    * const eventCategories = await prisma.eventCategory.findMany()
+    * ```
+    */
+  get eventCategory(): Prisma.EventCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventComment`: Exposes CRUD operations for the **EventComment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventComments
+    * const eventComments = await prisma.eventComment.findMany()
+    * ```
+    */
+  get eventComment(): Prisma.EventCommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventLike`: Exposes CRUD operations for the **EventLike** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventLikes
+    * const eventLikes = await prisma.eventLike.findMany()
+    * ```
+    */
+  get eventLike(): Prisma.EventLikeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -862,7 +935,11 @@ export namespace Prisma {
     NewsArticleCategory: 'NewsArticleCategory',
     Tag: 'Tag',
     NewsComment: 'NewsComment',
-    NewsArticleLike: 'NewsArticleLike'
+    NewsArticleLike: 'NewsArticleLike',
+    Event: 'Event',
+    EventCategory: 'EventCategory',
+    EventComment: 'EventComment',
+    EventLike: 'EventLike'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -881,7 +958,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "entity" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "media" | "newsArticleCategory" | "tag" | "newsComment" | "newsArticleLike"
+      modelProps: "user" | "entity" | "departMent" | "departMentalSector" | "employee" | "emailVerificationToken" | "session" | "newsLetterSubscription" | "newsLetter" | "newsArticle" | "media" | "newsArticleCategory" | "tag" | "newsComment" | "newsArticleLike" | "event" | "eventCategory" | "eventComment" | "eventLike"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1995,6 +2072,302 @@ export namespace Prisma {
           }
         }
       }
+      Event: {
+        payload: Prisma.$EventPayload<ExtArgs>
+        fields: Prisma.EventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          findFirst: {
+            args: Prisma.EventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          findMany: {
+            args: Prisma.EventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          create: {
+            args: Prisma.EventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          createMany: {
+            args: Prisma.EventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          delete: {
+            args: Prisma.EventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          update: {
+            args: Prisma.EventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventPayload>
+          }
+          aggregate: {
+            args: Prisma.EventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEvent>
+          }
+          groupBy: {
+            args: Prisma.EventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventCountArgs<ExtArgs>
+            result: $Utils.Optional<EventCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventCategory: {
+        payload: Prisma.$EventCategoryPayload<ExtArgs>
+        fields: Prisma.EventCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.EventCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.EventCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.EventCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.EventCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.EventCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          update: {
+            args: Prisma.EventCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.EventCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventCategory>
+          }
+          groupBy: {
+            args: Prisma.EventCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<EventCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventComment: {
+        payload: Prisma.$EventCommentPayload<ExtArgs>
+        fields: Prisma.EventCommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventCommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventCommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          findFirst: {
+            args: Prisma.EventCommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventCommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          findMany: {
+            args: Prisma.EventCommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>[]
+          }
+          create: {
+            args: Prisma.EventCommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          createMany: {
+            args: Prisma.EventCommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventCommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>[]
+          }
+          delete: {
+            args: Prisma.EventCommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          update: {
+            args: Prisma.EventCommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventCommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventCommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventCommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventCommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventCommentPayload>
+          }
+          aggregate: {
+            args: Prisma.EventCommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventComment>
+          }
+          groupBy: {
+            args: Prisma.EventCommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventCommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventCommentCountArgs<ExtArgs>
+            result: $Utils.Optional<EventCommentCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventLike: {
+        payload: Prisma.$EventLikePayload<ExtArgs>
+        fields: Prisma.EventLikeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventLikeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventLikeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          findFirst: {
+            args: Prisma.EventLikeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventLikeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          findMany: {
+            args: Prisma.EventLikeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>[]
+          }
+          create: {
+            args: Prisma.EventLikeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          createMany: {
+            args: Prisma.EventLikeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventLikeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>[]
+          }
+          delete: {
+            args: Prisma.EventLikeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          update: {
+            args: Prisma.EventLikeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          deleteMany: {
+            args: Prisma.EventLikeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventLikeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventLikeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>[]
+          }
+          upsert: {
+            args: Prisma.EventLikeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventLikePayload>
+          }
+          aggregate: {
+            args: Prisma.EventLikeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventLike>
+          }
+          groupBy: {
+            args: Prisma.EventLikeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventLikeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventLikeCountArgs<ExtArgs>
+            result: $Utils.Optional<EventLikeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2094,6 +2467,10 @@ export namespace Prisma {
     tag?: TagOmit
     newsComment?: NewsCommentOmit
     newsArticleLike?: NewsArticleLikeOmit
+    event?: EventOmit
+    eventCategory?: EventCategoryOmit
+    eventComment?: EventCommentOmit
+    eventLike?: EventLikeOmit
   }
 
   /* Types for Logging */
@@ -2195,6 +2572,9 @@ export namespace Prisma {
     newsArticles: number
     newsLetters: number
     sessions: number
+    events: number
+    eventComments: number
+    eventLikes: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2205,6 +2585,9 @@ export namespace Prisma {
     newsArticles?: boolean | UserCountOutputTypeCountNewsArticlesArgs
     newsLetters?: boolean | UserCountOutputTypeCountNewsLettersArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    events?: boolean | UserCountOutputTypeCountEventsArgs
+    eventComments?: boolean | UserCountOutputTypeCountEventCommentsArgs
+    eventLikes?: boolean | UserCountOutputTypeCountEventLikesArgs
   }
 
   // Custom InputTypes
@@ -2265,6 +2648,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEventCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventCommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEventLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventLikeWhereInput
   }
 
 
@@ -2425,10 +2829,12 @@ export namespace Prisma {
 
   export type MediaCountOutputType = {
     coverImageArticles: number
+    events: number
   }
 
   export type MediaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     coverImageArticles?: boolean | MediaCountOutputTypeCountCoverImageArticlesArgs
+    events?: boolean | MediaCountOutputTypeCountEventsArgs
   }
 
   // Custom InputTypes
@@ -2447,6 +2853,13 @@ export namespace Prisma {
    */
   export type MediaCountOutputTypeCountCoverImageArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsArticleWhereInput
+  }
+
+  /**
+   * MediaCountOutputType without action
+   */
+  export type MediaCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
   }
 
 
@@ -2509,6 +2922,86 @@ export namespace Prisma {
    */
   export type TagCountOutputTypeCountArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NewsArticleWhereInput
+  }
+
+
+  /**
+   * Count Type EventCountOutputType
+   */
+
+  export type EventCountOutputType = {
+    media: number
+    eventComments: number
+    eventLikes: number
+  }
+
+  export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | EventCountOutputTypeCountMediaArgs
+    eventComments?: boolean | EventCountOutputTypeCountEventCommentsArgs
+    eventLikes?: boolean | EventCountOutputTypeCountEventLikesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCountOutputType
+     */
+    select?: EventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountEventCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventCommentWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountEventLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventLikeWhereInput
+  }
+
+
+  /**
+   * Count Type EventCategoryCountOutputType
+   */
+
+  export type EventCategoryCountOutputType = {
+    events: number
+  }
+
+  export type EventCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | EventCategoryCountOutputTypeCountEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventCategoryCountOutputType without action
+   */
+  export type EventCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategoryCountOutputType
+     */
+    select?: EventCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCategoryCountOutputType without action
+   */
+  export type EventCategoryCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
   }
 
 
@@ -2767,6 +3260,9 @@ export namespace Prisma {
     newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    events?: boolean | User$eventsArgs<ExtArgs>
+    eventComments?: boolean | User$eventCommentsArgs<ExtArgs>
+    eventLikes?: boolean | User$eventLikesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2833,6 +3329,9 @@ export namespace Prisma {
     newsArticles?: boolean | User$newsArticlesArgs<ExtArgs>
     newsLetters?: boolean | User$newsLettersArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    events?: boolean | User$eventsArgs<ExtArgs>
+    eventComments?: boolean | User$eventCommentsArgs<ExtArgs>
+    eventLikes?: boolean | User$eventLikesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2848,6 +3347,9 @@ export namespace Prisma {
       newsArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
       newsLetters: Prisma.$NewsLetterPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
+      events: Prisma.$EventPayload<ExtArgs>[]
+      eventComments: Prisma.$EventCommentPayload<ExtArgs>[]
+      eventLikes: Prisma.$EventLikePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3266,6 +3768,9 @@ export namespace Prisma {
     newsArticles<T extends User$newsArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$newsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsLetters<T extends User$newsLettersArgs<ExtArgs> = {}>(args?: Subset<T, User$newsLettersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    events<T extends User$eventsArgs<ExtArgs> = {}>(args?: Subset<T, User$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    eventComments<T extends User$eventCommentsArgs<ExtArgs> = {}>(args?: Subset<T, User$eventCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    eventLikes<T extends User$eventLikesArgs<ExtArgs> = {}>(args?: Subset<T, User$eventLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3863,6 +4368,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.events
+   */
+  export type User$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * User.eventComments
+   */
+  export type User$eventCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    where?: EventCommentWhereInput
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    cursor?: EventCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventCommentScalarFieldEnum | EventCommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.eventLikes
+   */
+  export type User$eventLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    where?: EventLikeWhereInput
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    cursor?: EventLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventLikeScalarFieldEnum | EventLikeScalarFieldEnum[]
   }
 
   /**
@@ -12564,7 +13141,7 @@ export namespace Prisma {
 
   export type NewsArticleMinAggregateOutputType = {
     id: string | null
-    coverImage: string | null
+    coverImageId: string | null
     title: string | null
     slug: string | null
     summary: string | null
@@ -12580,7 +13157,7 @@ export namespace Prisma {
 
   export type NewsArticleMaxAggregateOutputType = {
     id: string | null
-    coverImage: string | null
+    coverImageId: string | null
     title: string | null
     slug: string | null
     summary: string | null
@@ -12596,7 +13173,7 @@ export namespace Prisma {
 
   export type NewsArticleCountAggregateOutputType = {
     id: number
-    coverImage: number
+    coverImageId: number
     title: number
     slug: number
     summary: number
@@ -12614,7 +13191,7 @@ export namespace Prisma {
 
   export type NewsArticleMinAggregateInputType = {
     id?: true
-    coverImage?: true
+    coverImageId?: true
     title?: true
     slug?: true
     summary?: true
@@ -12630,7 +13207,7 @@ export namespace Prisma {
 
   export type NewsArticleMaxAggregateInputType = {
     id?: true
-    coverImage?: true
+    coverImageId?: true
     title?: true
     slug?: true
     summary?: true
@@ -12646,7 +13223,7 @@ export namespace Prisma {
 
   export type NewsArticleCountAggregateInputType = {
     id?: true
-    coverImage?: true
+    coverImageId?: true
     title?: true
     slug?: true
     summary?: true
@@ -12735,7 +13312,7 @@ export namespace Prisma {
 
   export type NewsArticleGroupByOutputType = {
     id: string
-    coverImage: string | null
+    coverImageId: string | null
     title: string
     slug: string
     summary: string | null
@@ -12768,7 +13345,7 @@ export namespace Prisma {
 
   export type NewsArticleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    coverImage?: boolean
+    coverImageId?: boolean
     title?: boolean
     slug?: boolean
     summary?: boolean
@@ -12780,7 +13357,7 @@ export namespace Prisma {
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     tags?: boolean | NewsArticle$tagsArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
@@ -12792,7 +13369,7 @@ export namespace Prisma {
 
   export type NewsArticleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    coverImage?: boolean
+    coverImageId?: boolean
     title?: boolean
     slug?: boolean
     summary?: boolean
@@ -12804,14 +13381,14 @@ export namespace Prisma {
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
   export type NewsArticleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    coverImage?: boolean
+    coverImageId?: boolean
     title?: boolean
     slug?: boolean
     summary?: boolean
@@ -12823,14 +13400,14 @@ export namespace Prisma {
     location?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }, ExtArgs["result"]["newsArticle"]>
 
   export type NewsArticleSelectScalar = {
     id?: boolean
-    coverImage?: boolean
+    coverImageId?: boolean
     title?: boolean
     slug?: boolean
     summary?: boolean
@@ -12844,9 +13421,9 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type NewsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "coverImage" | "title" | "slug" | "summary" | "categoryId" | "publishedAt" | "status" | "content" | "authorId" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
+  export type NewsArticleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "coverImageId" | "title" | "slug" | "summary" | "categoryId" | "publishedAt" | "status" | "content" | "authorId" | "location" | "createdAt" | "updatedAt", ExtArgs["result"]["newsArticle"]>
   export type NewsArticleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     tags?: boolean | NewsArticle$tagsArgs<ExtArgs>
     newsComments?: boolean | NewsArticle$newsCommentsArgs<ExtArgs>
@@ -12856,12 +13433,12 @@ export namespace Prisma {
     _count?: boolean | NewsArticleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NewsArticleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }
   export type NewsArticleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    coverImageMedia?: boolean | NewsArticle$coverImageMediaArgs<ExtArgs>
+    coverImage?: boolean | NewsArticle$coverImageArgs<ExtArgs>
     category?: boolean | NewsArticleCategoryDefaultArgs<ExtArgs>
     author?: boolean | NewsArticle$authorArgs<ExtArgs>
   }
@@ -12869,7 +13446,7 @@ export namespace Prisma {
   export type $NewsArticlePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "NewsArticle"
     objects: {
-      coverImageMedia: Prisma.$MediaPayload<ExtArgs> | null
+      coverImage: Prisma.$MediaPayload<ExtArgs> | null
       category: Prisma.$NewsArticleCategoryPayload<ExtArgs>
       tags: Prisma.$TagPayload<ExtArgs>[]
       newsComments: Prisma.$NewsCommentPayload<ExtArgs>[]
@@ -12879,7 +13456,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      coverImage: string | null
+      coverImageId: string | null
       title: string
       slug: string
       summary: string | null
@@ -13285,7 +13862,7 @@ export namespace Prisma {
    */
   export interface Prisma__NewsArticleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    coverImageMedia<T extends NewsArticle$coverImageMediaArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$coverImageMediaArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    coverImage<T extends NewsArticle$coverImageArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$coverImageArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     category<T extends NewsArticleCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticleCategoryDefaultArgs<ExtArgs>>): Prisma__NewsArticleCategoryClient<$Result.GetResult<Prisma.$NewsArticleCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends NewsArticle$tagsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     newsComments<T extends NewsArticle$newsCommentsArgs<ExtArgs> = {}>(args?: Subset<T, NewsArticle$newsCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13322,7 +13899,7 @@ export namespace Prisma {
    */
   interface NewsArticleFieldRefs {
     readonly id: FieldRef<"NewsArticle", 'String'>
-    readonly coverImage: FieldRef<"NewsArticle", 'String'>
+    readonly coverImageId: FieldRef<"NewsArticle", 'String'>
     readonly title: FieldRef<"NewsArticle", 'String'>
     readonly slug: FieldRef<"NewsArticle", 'String'>
     readonly summary: FieldRef<"NewsArticle", 'String'>
@@ -13730,9 +14307,9 @@ export namespace Prisma {
   }
 
   /**
-   * NewsArticle.coverImageMedia
+   * NewsArticle.coverImage
    */
-  export type NewsArticle$coverImageMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type NewsArticle$coverImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Media
      */
@@ -13896,24 +14473,30 @@ export namespace Prisma {
     id: string | null
     type: $Enums.MediaType | null
     url: string | null
+    format: string | null
     createdAt: Date | null
     newsArticleId: string | null
+    eventId: string | null
   }
 
   export type MediaMaxAggregateOutputType = {
     id: string | null
     type: $Enums.MediaType | null
     url: string | null
+    format: string | null
     createdAt: Date | null
     newsArticleId: string | null
+    eventId: string | null
   }
 
   export type MediaCountAggregateOutputType = {
     id: number
     type: number
     url: number
+    format: number
     createdAt: number
     newsArticleId: number
+    eventId: number
     _all: number
   }
 
@@ -13922,24 +14505,30 @@ export namespace Prisma {
     id?: true
     type?: true
     url?: true
+    format?: true
     createdAt?: true
     newsArticleId?: true
+    eventId?: true
   }
 
   export type MediaMaxAggregateInputType = {
     id?: true
     type?: true
     url?: true
+    format?: true
     createdAt?: true
     newsArticleId?: true
+    eventId?: true
   }
 
   export type MediaCountAggregateInputType = {
     id?: true
     type?: true
     url?: true
+    format?: true
     createdAt?: true
     newsArticleId?: true
+    eventId?: true
     _all?: true
   }
 
@@ -14019,8 +14608,10 @@ export namespace Prisma {
     id: string
     type: $Enums.MediaType
     url: string
+    format: string
     createdAt: Date
     newsArticleId: string | null
+    eventId: string | null
     _count: MediaCountAggregateOutputType | null
     _min: MediaMinAggregateOutputType | null
     _max: MediaMaxAggregateOutputType | null
@@ -14044,10 +14635,14 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     url?: boolean
+    format?: boolean
     createdAt?: boolean
     newsArticleId?: boolean
-    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    eventId?: boolean
     coverImageArticles?: boolean | Media$coverImageArticlesArgs<ExtArgs>
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    events?: boolean | Media$eventsArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
@@ -14055,53 +14650,69 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     url?: boolean
+    format?: boolean
     createdAt?: boolean
     newsArticleId?: boolean
+    eventId?: boolean
     newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
   export type MediaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     type?: boolean
     url?: boolean
+    format?: boolean
     createdAt?: boolean
     newsArticleId?: boolean
+    eventId?: boolean
     newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
   }, ExtArgs["result"]["media"]>
 
   export type MediaSelectScalar = {
     id?: boolean
     type?: boolean
     url?: boolean
+    format?: boolean
     createdAt?: boolean
     newsArticleId?: boolean
+    eventId?: boolean
   }
 
-  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "url" | "createdAt" | "newsArticleId", ExtArgs["result"]["media"]>
+  export type MediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "url" | "format" | "createdAt" | "newsArticleId" | "eventId", ExtArgs["result"]["media"]>
   export type MediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
     coverImageArticles?: boolean | Media$coverImageArticlesArgs<ExtArgs>
+    newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    events?: boolean | Media$eventsArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
     _count?: boolean | MediaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
   }
   export type MediaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     newsArticle?: boolean | Media$newsArticleArgs<ExtArgs>
+    event?: boolean | Media$eventArgs<ExtArgs>
   }
 
   export type $MediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Media"
     objects: {
-      newsArticle: Prisma.$NewsArticlePayload<ExtArgs> | null
       coverImageArticles: Prisma.$NewsArticlePayload<ExtArgs>[]
+      newsArticle: Prisma.$NewsArticlePayload<ExtArgs> | null
+      events: Prisma.$EventPayload<ExtArgs>[]
+      event: Prisma.$EventPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       type: $Enums.MediaType
       url: string
+      format: string
       createdAt: Date
       newsArticleId: string | null
+      eventId: string | null
     }, ExtArgs["result"]["media"]>
     composites: {}
   }
@@ -14496,8 +15107,10 @@ export namespace Prisma {
    */
   export interface Prisma__MediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    newsArticle<T extends Media$newsArticleArgs<ExtArgs> = {}>(args?: Subset<T, Media$newsArticleArgs<ExtArgs>>): Prisma__NewsArticleClient<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     coverImageArticles<T extends Media$coverImageArticlesArgs<ExtArgs> = {}>(args?: Subset<T, Media$coverImageArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    newsArticle<T extends Media$newsArticleArgs<ExtArgs> = {}>(args?: Subset<T, Media$newsArticleArgs<ExtArgs>>): Prisma__NewsArticleClient<$Result.GetResult<Prisma.$NewsArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    events<T extends Media$eventsArgs<ExtArgs> = {}>(args?: Subset<T, Media$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    event<T extends Media$eventArgs<ExtArgs> = {}>(args?: Subset<T, Media$eventArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14530,8 +15143,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Media", 'String'>
     readonly type: FieldRef<"Media", 'MediaType'>
     readonly url: FieldRef<"Media", 'String'>
+    readonly format: FieldRef<"Media", 'String'>
     readonly createdAt: FieldRef<"Media", 'DateTime'>
     readonly newsArticleId: FieldRef<"Media", 'String'>
+    readonly eventId: FieldRef<"Media", 'String'>
   }
     
 
@@ -14928,25 +15543,6 @@ export namespace Prisma {
   }
 
   /**
-   * Media.newsArticle
-   */
-  export type Media$newsArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewsArticle
-     */
-    select?: NewsArticleSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewsArticle
-     */
-    omit?: NewsArticleOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NewsArticleInclude<ExtArgs> | null
-    where?: NewsArticleWhereInput
-  }
-
-  /**
    * Media.coverImageArticles
    */
   export type Media$coverImageArticlesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14968,6 +15564,68 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: NewsArticleScalarFieldEnum | NewsArticleScalarFieldEnum[]
+  }
+
+  /**
+   * Media.newsArticle
+   */
+  export type Media$newsArticleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewsArticle
+     */
+    select?: NewsArticleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewsArticle
+     */
+    omit?: NewsArticleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NewsArticleInclude<ExtArgs> | null
+    where?: NewsArticleWhereInput
+  }
+
+  /**
+   * Media.events
+   */
+  export type Media$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Media.event
+   */
+  export type Media$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
   }
 
   /**
@@ -19197,6 +19855,4471 @@ export namespace Prisma {
 
 
   /**
+   * Model Event
+   */
+
+  export type AggregateEvent = {
+    _count: EventCountAggregateOutputType | null
+    _min: EventMinAggregateOutputType | null
+    _max: EventMaxAggregateOutputType | null
+  }
+
+  export type EventMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    summary: string | null
+    description: string | null
+    categoryId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    location: string | null
+    coverImageId: string | null
+    status: $Enums.EventStatus | null
+    authorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    summary: string | null
+    description: string | null
+    categoryId: string | null
+    startDate: Date | null
+    endDate: Date | null
+    location: string | null
+    coverImageId: string | null
+    status: $Enums.EventStatus | null
+    authorId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EventCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    summary: number
+    description: number
+    categoryId: number
+    startDate: number
+    endDate: number
+    location: number
+    coverImageId: number
+    status: number
+    authorId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EventMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    description?: true
+    categoryId?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    coverImageId?: true
+    status?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    description?: true
+    categoryId?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    coverImageId?: true
+    status?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EventCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    summary?: true
+    description?: true
+    categoryId?: true
+    startDate?: true
+    endDate?: true
+    location?: true
+    coverImageId?: true
+    status?: true
+    authorId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Event to aggregate.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Events
+    **/
+    _count?: true | EventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventMaxAggregateInputType
+  }
+
+  export type GetEventAggregateType<T extends EventAggregateArgs> = {
+        [P in keyof T & keyof AggregateEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEvent[P]>
+      : GetScalarType<T[P], AggregateEvent[P]>
+  }
+
+
+
+
+  export type EventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithAggregationInput | EventOrderByWithAggregationInput[]
+    by: EventScalarFieldEnum[] | EventScalarFieldEnum
+    having?: EventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventCountAggregateInputType | true
+    _min?: EventMinAggregateInputType
+    _max?: EventMaxAggregateInputType
+  }
+
+  export type EventGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    summary: string | null
+    description: string
+    categoryId: string
+    startDate: Date
+    endDate: Date | null
+    location: string
+    coverImageId: string | null
+    status: $Enums.EventStatus
+    authorId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EventCountAggregateOutputType | null
+    _min: EventMinAggregateOutputType | null
+    _max: EventMaxAggregateOutputType | null
+  }
+
+  type GetEventGroupByPayload<T extends EventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventGroupByOutputType[P]>
+            : GetScalarType<T[P], EventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    description?: boolean
+    categoryId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    coverImageId?: boolean
+    status?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    media?: boolean | Event$mediaArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+    eventComments?: boolean | Event$eventCommentsArgs<ExtArgs>
+    eventLikes?: boolean | Event$eventLikesArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    description?: boolean
+    categoryId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    coverImageId?: boolean
+    status?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    description?: boolean
+    categoryId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    coverImageId?: boolean
+    status?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+  }, ExtArgs["result"]["event"]>
+
+  export type EventSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    summary?: boolean
+    description?: boolean
+    categoryId?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    location?: boolean
+    coverImageId?: boolean
+    status?: boolean
+    authorId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "summary" | "description" | "categoryId" | "startDate" | "endDate" | "location" | "coverImageId" | "status" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    media?: boolean | Event$mediaArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+    eventComments?: boolean | Event$eventCommentsArgs<ExtArgs>
+    eventLikes?: boolean | Event$eventLikesArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+  }
+  export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | EventCategoryDefaultArgs<ExtArgs>
+    coverImage?: boolean | Event$coverImageArgs<ExtArgs>
+    author?: boolean | Event$authorArgs<ExtArgs>
+  }
+
+  export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Event"
+    objects: {
+      category: Prisma.$EventCategoryPayload<ExtArgs>
+      coverImage: Prisma.$MediaPayload<ExtArgs> | null
+      media: Prisma.$MediaPayload<ExtArgs>[]
+      author: Prisma.$UserPayload<ExtArgs> | null
+      eventComments: Prisma.$EventCommentPayload<ExtArgs>[]
+      eventLikes: Prisma.$EventLikePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      summary: string | null
+      description: string
+      categoryId: string
+      startDate: Date
+      endDate: Date | null
+      location: string
+      coverImageId: string | null
+      status: $Enums.EventStatus
+      authorId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["event"]>
+    composites: {}
+  }
+
+  type EventGetPayload<S extends boolean | null | undefined | EventDefaultArgs> = $Result.GetResult<Prisma.$EventPayload, S>
+
+  type EventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventCountAggregateInputType | true
+    }
+
+  export interface EventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Event'], meta: { name: 'Event' } }
+    /**
+     * Find zero or one Event that matches the filter.
+     * @param {EventFindUniqueArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventFindUniqueArgs>(args: SelectSubset<T, EventFindUniqueArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Event that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventFindUniqueOrThrowArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventFindUniqueOrThrowArgs>(args: SelectSubset<T, EventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Event that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindFirstArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventFindFirstArgs>(args?: SelectSubset<T, EventFindFirstArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Event that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindFirstOrThrowArgs} args - Arguments to find a Event
+     * @example
+     * // Get one Event
+     * const event = await prisma.event.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventFindFirstOrThrowArgs>(args?: SelectSubset<T, EventFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Events that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Events
+     * const events = await prisma.event.findMany()
+     * 
+     * // Get first 10 Events
+     * const events = await prisma.event.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventWithIdOnly = await prisma.event.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventFindManyArgs>(args?: SelectSubset<T, EventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Event.
+     * @param {EventCreateArgs} args - Arguments to create a Event.
+     * @example
+     * // Create one Event
+     * const Event = await prisma.event.create({
+     *   data: {
+     *     // ... data to create a Event
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventCreateArgs>(args: SelectSubset<T, EventCreateArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Events.
+     * @param {EventCreateManyArgs} args - Arguments to create many Events.
+     * @example
+     * // Create many Events
+     * const event = await prisma.event.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventCreateManyArgs>(args?: SelectSubset<T, EventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Events and returns the data saved in the database.
+     * @param {EventCreateManyAndReturnArgs} args - Arguments to create many Events.
+     * @example
+     * // Create many Events
+     * const event = await prisma.event.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Events and only return the `id`
+     * const eventWithIdOnly = await prisma.event.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventCreateManyAndReturnArgs>(args?: SelectSubset<T, EventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Event.
+     * @param {EventDeleteArgs} args - Arguments to delete one Event.
+     * @example
+     * // Delete one Event
+     * const Event = await prisma.event.delete({
+     *   where: {
+     *     // ... filter to delete one Event
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventDeleteArgs>(args: SelectSubset<T, EventDeleteArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Event.
+     * @param {EventUpdateArgs} args - Arguments to update one Event.
+     * @example
+     * // Update one Event
+     * const event = await prisma.event.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventUpdateArgs>(args: SelectSubset<T, EventUpdateArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Events.
+     * @param {EventDeleteManyArgs} args - Arguments to filter Events to delete.
+     * @example
+     * // Delete a few Events
+     * const { count } = await prisma.event.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventDeleteManyArgs>(args?: SelectSubset<T, EventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Events.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Events
+     * const event = await prisma.event.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventUpdateManyArgs>(args: SelectSubset<T, EventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Events and returns the data updated in the database.
+     * @param {EventUpdateManyAndReturnArgs} args - Arguments to update many Events.
+     * @example
+     * // Update many Events
+     * const event = await prisma.event.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Events and only return the `id`
+     * const eventWithIdOnly = await prisma.event.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventUpdateManyAndReturnArgs>(args: SelectSubset<T, EventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Event.
+     * @param {EventUpsertArgs} args - Arguments to update or create a Event.
+     * @example
+     * // Update or create a Event
+     * const event = await prisma.event.upsert({
+     *   create: {
+     *     // ... data to create a Event
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Event we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventUpsertArgs>(args: SelectSubset<T, EventUpsertArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Events.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCountArgs} args - Arguments to filter Events to count.
+     * @example
+     * // Count the number of Events
+     * const count = await prisma.event.count({
+     *   where: {
+     *     // ... the filter for the Events we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventCountArgs>(
+      args?: Subset<T, EventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Event.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventAggregateArgs>(args: Subset<T, EventAggregateArgs>): Prisma.PrismaPromise<GetEventAggregateType<T>>
+
+    /**
+     * Group by Event.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventGroupByArgs['orderBy'] }
+        : { orderBy?: EventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Event model
+   */
+  readonly fields: EventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Event.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends EventCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventCategoryDefaultArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    coverImage<T extends Event$coverImageArgs<ExtArgs> = {}>(args?: Subset<T, Event$coverImageArgs<ExtArgs>>): Prisma__MediaClient<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    media<T extends Event$mediaArgs<ExtArgs> = {}>(args?: Subset<T, Event$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    author<T extends Event$authorArgs<ExtArgs> = {}>(args?: Subset<T, Event$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    eventComments<T extends Event$eventCommentsArgs<ExtArgs> = {}>(args?: Subset<T, Event$eventCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    eventLikes<T extends Event$eventLikesArgs<ExtArgs> = {}>(args?: Subset<T, Event$eventLikesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Event model
+   */
+  interface EventFieldRefs {
+    readonly id: FieldRef<"Event", 'String'>
+    readonly title: FieldRef<"Event", 'String'>
+    readonly slug: FieldRef<"Event", 'String'>
+    readonly summary: FieldRef<"Event", 'String'>
+    readonly description: FieldRef<"Event", 'String'>
+    readonly categoryId: FieldRef<"Event", 'String'>
+    readonly startDate: FieldRef<"Event", 'DateTime'>
+    readonly endDate: FieldRef<"Event", 'DateTime'>
+    readonly location: FieldRef<"Event", 'String'>
+    readonly coverImageId: FieldRef<"Event", 'String'>
+    readonly status: FieldRef<"Event", 'EventStatus'>
+    readonly authorId: FieldRef<"Event", 'String'>
+    readonly createdAt: FieldRef<"Event", 'DateTime'>
+    readonly updatedAt: FieldRef<"Event", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Event findUnique
+   */
+  export type EventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event findUniqueOrThrow
+   */
+  export type EventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event findFirst
+   */
+  export type EventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Events.
+     */
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event findFirstOrThrow
+   */
+  export type EventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Event to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Events.
+     */
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event findMany
+   */
+  export type EventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter, which Events to fetch.
+     */
+    where?: EventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Events to fetch.
+     */
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Events.
+     */
+    cursor?: EventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Events from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Events.
+     */
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * Event create
+   */
+  export type EventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Event.
+     */
+    data: XOR<EventCreateInput, EventUncheckedCreateInput>
+  }
+
+  /**
+   * Event createMany
+   */
+  export type EventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Events.
+     */
+    data: EventCreateManyInput | EventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Event createManyAndReturn
+   */
+  export type EventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * The data used to create many Events.
+     */
+    data: EventCreateManyInput | EventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Event update
+   */
+  export type EventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Event.
+     */
+    data: XOR<EventUpdateInput, EventUncheckedUpdateInput>
+    /**
+     * Choose, which Event to update.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event updateMany
+   */
+  export type EventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Events.
+     */
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyInput>
+    /**
+     * Filter which Events to update
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Event updateManyAndReturn
+   */
+  export type EventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * The data used to update Events.
+     */
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyInput>
+    /**
+     * Filter which Events to update
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Event upsert
+   */
+  export type EventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Event to update in case it exists.
+     */
+    where: EventWhereUniqueInput
+    /**
+     * In case the Event found by the `where` argument doesn't exist, create a new Event with this data.
+     */
+    create: XOR<EventCreateInput, EventUncheckedCreateInput>
+    /**
+     * In case the Event was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventUpdateInput, EventUncheckedUpdateInput>
+  }
+
+  /**
+   * Event delete
+   */
+  export type EventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    /**
+     * Filter which Event to delete.
+     */
+    where: EventWhereUniqueInput
+  }
+
+  /**
+   * Event deleteMany
+   */
+  export type EventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Events to delete
+     */
+    where?: EventWhereInput
+    /**
+     * Limit how many Events to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Event.coverImage
+   */
+  export type Event$coverImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+  }
+
+  /**
+   * Event.media
+   */
+  export type Event$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Media
+     */
+    select?: MediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Media
+     */
+    omit?: MediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaInclude<ExtArgs> | null
+    where?: MediaWhereInput
+    orderBy?: MediaOrderByWithRelationInput | MediaOrderByWithRelationInput[]
+    cursor?: MediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaScalarFieldEnum | MediaScalarFieldEnum[]
+  }
+
+  /**
+   * Event.author
+   */
+  export type Event$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Event.eventComments
+   */
+  export type Event$eventCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    where?: EventCommentWhereInput
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    cursor?: EventCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventCommentScalarFieldEnum | EventCommentScalarFieldEnum[]
+  }
+
+  /**
+   * Event.eventLikes
+   */
+  export type Event$eventLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    where?: EventLikeWhereInput
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    cursor?: EventLikeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventLikeScalarFieldEnum | EventLikeScalarFieldEnum[]
+  }
+
+  /**
+   * Event without action
+   */
+  export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventCategory
+   */
+
+  export type AggregateEventCategory = {
+    _count: EventCategoryCountAggregateOutputType | null
+    _min: EventCategoryMinAggregateOutputType | null
+    _max: EventCategoryMaxAggregateOutputType | null
+  }
+
+  export type EventCategoryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+  }
+
+  export type EventCategoryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+  }
+
+  export type EventCategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    _all: number
+  }
+
+
+  export type EventCategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+  }
+
+  export type EventCategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+  }
+
+  export type EventCategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    _all?: true
+  }
+
+  export type EventCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventCategory to aggregate.
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventCategories to fetch.
+     */
+    orderBy?: EventCategoryOrderByWithRelationInput | EventCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventCategories
+    **/
+    _count?: true | EventCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventCategoryMaxAggregateInputType
+  }
+
+  export type GetEventCategoryAggregateType<T extends EventCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventCategory[P]>
+      : GetScalarType<T[P], AggregateEventCategory[P]>
+  }
+
+
+
+
+  export type EventCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventCategoryWhereInput
+    orderBy?: EventCategoryOrderByWithAggregationInput | EventCategoryOrderByWithAggregationInput[]
+    by: EventCategoryScalarFieldEnum[] | EventCategoryScalarFieldEnum
+    having?: EventCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventCategoryCountAggregateInputType | true
+    _min?: EventCategoryMinAggregateInputType
+    _max?: EventCategoryMaxAggregateInputType
+  }
+
+  export type EventCategoryGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    _count: EventCategoryCountAggregateOutputType | null
+    _min: EventCategoryMinAggregateOutputType | null
+    _max: EventCategoryMaxAggregateOutputType | null
+  }
+
+  type GetEventCategoryGroupByPayload<T extends EventCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], EventCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    events?: boolean | EventCategory$eventsArgs<ExtArgs>
+    _count?: boolean | EventCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventCategory"]>
+
+  export type EventCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }, ExtArgs["result"]["eventCategory"]>
+
+  export type EventCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }, ExtArgs["result"]["eventCategory"]>
+
+  export type EventCategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+  }
+
+  export type EventCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug", ExtArgs["result"]["eventCategory"]>
+  export type EventCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | EventCategory$eventsArgs<ExtArgs>
+    _count?: boolean | EventCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EventCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EventCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventCategory"
+    objects: {
+      events: Prisma.$EventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+    }, ExtArgs["result"]["eventCategory"]>
+    composites: {}
+  }
+
+  type EventCategoryGetPayload<S extends boolean | null | undefined | EventCategoryDefaultArgs> = $Result.GetResult<Prisma.$EventCategoryPayload, S>
+
+  type EventCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventCategoryCountAggregateInputType | true
+    }
+
+  export interface EventCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventCategory'], meta: { name: 'EventCategory' } }
+    /**
+     * Find zero or one EventCategory that matches the filter.
+     * @param {EventCategoryFindUniqueArgs} args - Arguments to find a EventCategory
+     * @example
+     * // Get one EventCategory
+     * const eventCategory = await prisma.eventCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventCategoryFindUniqueArgs>(args: SelectSubset<T, EventCategoryFindUniqueArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventCategoryFindUniqueOrThrowArgs} args - Arguments to find a EventCategory
+     * @example
+     * // Get one EventCategory
+     * const eventCategory = await prisma.eventCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, EventCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryFindFirstArgs} args - Arguments to find a EventCategory
+     * @example
+     * // Get one EventCategory
+     * const eventCategory = await prisma.eventCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventCategoryFindFirstArgs>(args?: SelectSubset<T, EventCategoryFindFirstArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryFindFirstOrThrowArgs} args - Arguments to find a EventCategory
+     * @example
+     * // Get one EventCategory
+     * const eventCategory = await prisma.eventCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, EventCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventCategories
+     * const eventCategories = await prisma.eventCategory.findMany()
+     * 
+     * // Get first 10 EventCategories
+     * const eventCategories = await prisma.eventCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventCategoryWithIdOnly = await prisma.eventCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventCategoryFindManyArgs>(args?: SelectSubset<T, EventCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventCategory.
+     * @param {EventCategoryCreateArgs} args - Arguments to create a EventCategory.
+     * @example
+     * // Create one EventCategory
+     * const EventCategory = await prisma.eventCategory.create({
+     *   data: {
+     *     // ... data to create a EventCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventCategoryCreateArgs>(args: SelectSubset<T, EventCategoryCreateArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventCategories.
+     * @param {EventCategoryCreateManyArgs} args - Arguments to create many EventCategories.
+     * @example
+     * // Create many EventCategories
+     * const eventCategory = await prisma.eventCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventCategoryCreateManyArgs>(args?: SelectSubset<T, EventCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventCategories and returns the data saved in the database.
+     * @param {EventCategoryCreateManyAndReturnArgs} args - Arguments to create many EventCategories.
+     * @example
+     * // Create many EventCategories
+     * const eventCategory = await prisma.eventCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventCategories and only return the `id`
+     * const eventCategoryWithIdOnly = await prisma.eventCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, EventCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventCategory.
+     * @param {EventCategoryDeleteArgs} args - Arguments to delete one EventCategory.
+     * @example
+     * // Delete one EventCategory
+     * const EventCategory = await prisma.eventCategory.delete({
+     *   where: {
+     *     // ... filter to delete one EventCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventCategoryDeleteArgs>(args: SelectSubset<T, EventCategoryDeleteArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventCategory.
+     * @param {EventCategoryUpdateArgs} args - Arguments to update one EventCategory.
+     * @example
+     * // Update one EventCategory
+     * const eventCategory = await prisma.eventCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventCategoryUpdateArgs>(args: SelectSubset<T, EventCategoryUpdateArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventCategories.
+     * @param {EventCategoryDeleteManyArgs} args - Arguments to filter EventCategories to delete.
+     * @example
+     * // Delete a few EventCategories
+     * const { count } = await prisma.eventCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventCategoryDeleteManyArgs>(args?: SelectSubset<T, EventCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventCategories
+     * const eventCategory = await prisma.eventCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventCategoryUpdateManyArgs>(args: SelectSubset<T, EventCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventCategories and returns the data updated in the database.
+     * @param {EventCategoryUpdateManyAndReturnArgs} args - Arguments to update many EventCategories.
+     * @example
+     * // Update many EventCategories
+     * const eventCategory = await prisma.eventCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventCategories and only return the `id`
+     * const eventCategoryWithIdOnly = await prisma.eventCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, EventCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventCategory.
+     * @param {EventCategoryUpsertArgs} args - Arguments to update or create a EventCategory.
+     * @example
+     * // Update or create a EventCategory
+     * const eventCategory = await prisma.eventCategory.upsert({
+     *   create: {
+     *     // ... data to create a EventCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventCategoryUpsertArgs>(args: SelectSubset<T, EventCategoryUpsertArgs<ExtArgs>>): Prisma__EventCategoryClient<$Result.GetResult<Prisma.$EventCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryCountArgs} args - Arguments to filter EventCategories to count.
+     * @example
+     * // Count the number of EventCategories
+     * const count = await prisma.eventCategory.count({
+     *   where: {
+     *     // ... the filter for the EventCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventCategoryCountArgs>(
+      args?: Subset<T, EventCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventCategoryAggregateArgs>(args: Subset<T, EventCategoryAggregateArgs>): Prisma.PrismaPromise<GetEventCategoryAggregateType<T>>
+
+    /**
+     * Group by EventCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: EventCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventCategory model
+   */
+  readonly fields: EventCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    events<T extends EventCategory$eventsArgs<ExtArgs> = {}>(args?: Subset<T, EventCategory$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventCategory model
+   */
+  interface EventCategoryFieldRefs {
+    readonly id: FieldRef<"EventCategory", 'String'>
+    readonly name: FieldRef<"EventCategory", 'String'>
+    readonly slug: FieldRef<"EventCategory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventCategory findUnique
+   */
+  export type EventCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventCategory to fetch.
+     */
+    where: EventCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventCategory findUniqueOrThrow
+   */
+  export type EventCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventCategory to fetch.
+     */
+    where: EventCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventCategory findFirst
+   */
+  export type EventCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventCategory to fetch.
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventCategories to fetch.
+     */
+    orderBy?: EventCategoryOrderByWithRelationInput | EventCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventCategories.
+     */
+    cursor?: EventCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventCategories.
+     */
+    distinct?: EventCategoryScalarFieldEnum | EventCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventCategory findFirstOrThrow
+   */
+  export type EventCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventCategory to fetch.
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventCategories to fetch.
+     */
+    orderBy?: EventCategoryOrderByWithRelationInput | EventCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventCategories.
+     */
+    cursor?: EventCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventCategories.
+     */
+    distinct?: EventCategoryScalarFieldEnum | EventCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventCategory findMany
+   */
+  export type EventCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which EventCategories to fetch.
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventCategories to fetch.
+     */
+    orderBy?: EventCategoryOrderByWithRelationInput | EventCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventCategories.
+     */
+    cursor?: EventCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventCategories.
+     */
+    skip?: number
+    distinct?: EventCategoryScalarFieldEnum | EventCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * EventCategory create
+   */
+  export type EventCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventCategory.
+     */
+    data: XOR<EventCategoryCreateInput, EventCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * EventCategory createMany
+   */
+  export type EventCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventCategories.
+     */
+    data: EventCategoryCreateManyInput | EventCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventCategory createManyAndReturn
+   */
+  export type EventCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventCategories.
+     */
+    data: EventCategoryCreateManyInput | EventCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventCategory update
+   */
+  export type EventCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventCategory.
+     */
+    data: XOR<EventCategoryUpdateInput, EventCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which EventCategory to update.
+     */
+    where: EventCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventCategory updateMany
+   */
+  export type EventCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventCategories.
+     */
+    data: XOR<EventCategoryUpdateManyMutationInput, EventCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which EventCategories to update
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * Limit how many EventCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventCategory updateManyAndReturn
+   */
+  export type EventCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update EventCategories.
+     */
+    data: XOR<EventCategoryUpdateManyMutationInput, EventCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which EventCategories to update
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * Limit how many EventCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventCategory upsert
+   */
+  export type EventCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventCategory to update in case it exists.
+     */
+    where: EventCategoryWhereUniqueInput
+    /**
+     * In case the EventCategory found by the `where` argument doesn't exist, create a new EventCategory with this data.
+     */
+    create: XOR<EventCategoryCreateInput, EventCategoryUncheckedCreateInput>
+    /**
+     * In case the EventCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventCategoryUpdateInput, EventCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * EventCategory delete
+   */
+  export type EventCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which EventCategory to delete.
+     */
+    where: EventCategoryWhereUniqueInput
+  }
+
+  /**
+   * EventCategory deleteMany
+   */
+  export type EventCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventCategories to delete
+     */
+    where?: EventCategoryWhereInput
+    /**
+     * Limit how many EventCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventCategory.events
+   */
+  export type EventCategory$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * EventCategory without action
+   */
+  export type EventCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCategory
+     */
+    select?: EventCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventCategory
+     */
+    omit?: EventCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventComment
+   */
+
+  export type AggregateEventComment = {
+    _count: EventCommentCountAggregateOutputType | null
+    _min: EventCommentMinAggregateOutputType | null
+    _max: EventCommentMaxAggregateOutputType | null
+  }
+
+  export type EventCommentMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    authorId: string | null
+    eventId: string | null
+    createdAt: Date | null
+  }
+
+  export type EventCommentMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    authorId: string | null
+    eventId: string | null
+    createdAt: Date | null
+  }
+
+  export type EventCommentCountAggregateOutputType = {
+    id: number
+    content: number
+    authorId: number
+    eventId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EventCommentMinAggregateInputType = {
+    id?: true
+    content?: true
+    authorId?: true
+    eventId?: true
+    createdAt?: true
+  }
+
+  export type EventCommentMaxAggregateInputType = {
+    id?: true
+    content?: true
+    authorId?: true
+    eventId?: true
+    createdAt?: true
+  }
+
+  export type EventCommentCountAggregateInputType = {
+    id?: true
+    content?: true
+    authorId?: true
+    eventId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EventCommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventComment to aggregate.
+     */
+    where?: EventCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventComments to fetch.
+     */
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventComments
+    **/
+    _count?: true | EventCommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventCommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventCommentMaxAggregateInputType
+  }
+
+  export type GetEventCommentAggregateType<T extends EventCommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventComment[P]>
+      : GetScalarType<T[P], AggregateEventComment[P]>
+  }
+
+
+
+
+  export type EventCommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventCommentWhereInput
+    orderBy?: EventCommentOrderByWithAggregationInput | EventCommentOrderByWithAggregationInput[]
+    by: EventCommentScalarFieldEnum[] | EventCommentScalarFieldEnum
+    having?: EventCommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventCommentCountAggregateInputType | true
+    _min?: EventCommentMinAggregateInputType
+    _max?: EventCommentMaxAggregateInputType
+  }
+
+  export type EventCommentGroupByOutputType = {
+    id: string
+    content: string
+    authorId: string
+    eventId: string
+    createdAt: Date
+    _count: EventCommentCountAggregateOutputType | null
+    _min: EventCommentMinAggregateOutputType | null
+    _max: EventCommentMaxAggregateOutputType | null
+  }
+
+  type GetEventCommentGroupByPayload<T extends EventCommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventCommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventCommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventCommentGroupByOutputType[P]>
+            : GetScalarType<T[P], EventCommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventCommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    authorId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventComment"]>
+
+  export type EventCommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    authorId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventComment"]>
+
+  export type EventCommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    authorId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventComment"]>
+
+  export type EventCommentSelectScalar = {
+    id?: boolean
+    content?: boolean
+    authorId?: boolean
+    eventId?: boolean
+    createdAt?: boolean
+  }
+
+  export type EventCommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "authorId" | "eventId" | "createdAt", ExtArgs["result"]["eventComment"]>
+  export type EventCommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type EventCommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type EventCommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $EventCommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventComment"
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      authorId: string
+      eventId: string
+      createdAt: Date
+    }, ExtArgs["result"]["eventComment"]>
+    composites: {}
+  }
+
+  type EventCommentGetPayload<S extends boolean | null | undefined | EventCommentDefaultArgs> = $Result.GetResult<Prisma.$EventCommentPayload, S>
+
+  type EventCommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventCommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventCommentCountAggregateInputType | true
+    }
+
+  export interface EventCommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventComment'], meta: { name: 'EventComment' } }
+    /**
+     * Find zero or one EventComment that matches the filter.
+     * @param {EventCommentFindUniqueArgs} args - Arguments to find a EventComment
+     * @example
+     * // Get one EventComment
+     * const eventComment = await prisma.eventComment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventCommentFindUniqueArgs>(args: SelectSubset<T, EventCommentFindUniqueArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventComment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventCommentFindUniqueOrThrowArgs} args - Arguments to find a EventComment
+     * @example
+     * // Get one EventComment
+     * const eventComment = await prisma.eventComment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventCommentFindUniqueOrThrowArgs>(args: SelectSubset<T, EventCommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventComment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentFindFirstArgs} args - Arguments to find a EventComment
+     * @example
+     * // Get one EventComment
+     * const eventComment = await prisma.eventComment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventCommentFindFirstArgs>(args?: SelectSubset<T, EventCommentFindFirstArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventComment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentFindFirstOrThrowArgs} args - Arguments to find a EventComment
+     * @example
+     * // Get one EventComment
+     * const eventComment = await prisma.eventComment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventCommentFindFirstOrThrowArgs>(args?: SelectSubset<T, EventCommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventComments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventComments
+     * const eventComments = await prisma.eventComment.findMany()
+     * 
+     * // Get first 10 EventComments
+     * const eventComments = await prisma.eventComment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventCommentWithIdOnly = await prisma.eventComment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventCommentFindManyArgs>(args?: SelectSubset<T, EventCommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventComment.
+     * @param {EventCommentCreateArgs} args - Arguments to create a EventComment.
+     * @example
+     * // Create one EventComment
+     * const EventComment = await prisma.eventComment.create({
+     *   data: {
+     *     // ... data to create a EventComment
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventCommentCreateArgs>(args: SelectSubset<T, EventCommentCreateArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventComments.
+     * @param {EventCommentCreateManyArgs} args - Arguments to create many EventComments.
+     * @example
+     * // Create many EventComments
+     * const eventComment = await prisma.eventComment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventCommentCreateManyArgs>(args?: SelectSubset<T, EventCommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventComments and returns the data saved in the database.
+     * @param {EventCommentCreateManyAndReturnArgs} args - Arguments to create many EventComments.
+     * @example
+     * // Create many EventComments
+     * const eventComment = await prisma.eventComment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventComments and only return the `id`
+     * const eventCommentWithIdOnly = await prisma.eventComment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventCommentCreateManyAndReturnArgs>(args?: SelectSubset<T, EventCommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventComment.
+     * @param {EventCommentDeleteArgs} args - Arguments to delete one EventComment.
+     * @example
+     * // Delete one EventComment
+     * const EventComment = await prisma.eventComment.delete({
+     *   where: {
+     *     // ... filter to delete one EventComment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventCommentDeleteArgs>(args: SelectSubset<T, EventCommentDeleteArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventComment.
+     * @param {EventCommentUpdateArgs} args - Arguments to update one EventComment.
+     * @example
+     * // Update one EventComment
+     * const eventComment = await prisma.eventComment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventCommentUpdateArgs>(args: SelectSubset<T, EventCommentUpdateArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventComments.
+     * @param {EventCommentDeleteManyArgs} args - Arguments to filter EventComments to delete.
+     * @example
+     * // Delete a few EventComments
+     * const { count } = await prisma.eventComment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventCommentDeleteManyArgs>(args?: SelectSubset<T, EventCommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventComments
+     * const eventComment = await prisma.eventComment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventCommentUpdateManyArgs>(args: SelectSubset<T, EventCommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventComments and returns the data updated in the database.
+     * @param {EventCommentUpdateManyAndReturnArgs} args - Arguments to update many EventComments.
+     * @example
+     * // Update many EventComments
+     * const eventComment = await prisma.eventComment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventComments and only return the `id`
+     * const eventCommentWithIdOnly = await prisma.eventComment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventCommentUpdateManyAndReturnArgs>(args: SelectSubset<T, EventCommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventComment.
+     * @param {EventCommentUpsertArgs} args - Arguments to update or create a EventComment.
+     * @example
+     * // Update or create a EventComment
+     * const eventComment = await prisma.eventComment.upsert({
+     *   create: {
+     *     // ... data to create a EventComment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventComment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventCommentUpsertArgs>(args: SelectSubset<T, EventCommentUpsertArgs<ExtArgs>>): Prisma__EventCommentClient<$Result.GetResult<Prisma.$EventCommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentCountArgs} args - Arguments to filter EventComments to count.
+     * @example
+     * // Count the number of EventComments
+     * const count = await prisma.eventComment.count({
+     *   where: {
+     *     // ... the filter for the EventComments we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventCommentCountArgs>(
+      args?: Subset<T, EventCommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventCommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventCommentAggregateArgs>(args: Subset<T, EventCommentAggregateArgs>): Prisma.PrismaPromise<GetEventCommentAggregateType<T>>
+
+    /**
+     * Group by EventComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventCommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventCommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventCommentGroupByArgs['orderBy'] }
+        : { orderBy?: EventCommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventCommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventComment model
+   */
+  readonly fields: EventCommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventComment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventCommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventComment model
+   */
+  interface EventCommentFieldRefs {
+    readonly id: FieldRef<"EventComment", 'String'>
+    readonly content: FieldRef<"EventComment", 'String'>
+    readonly authorId: FieldRef<"EventComment", 'String'>
+    readonly eventId: FieldRef<"EventComment", 'String'>
+    readonly createdAt: FieldRef<"EventComment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventComment findUnique
+   */
+  export type EventCommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which EventComment to fetch.
+     */
+    where: EventCommentWhereUniqueInput
+  }
+
+  /**
+   * EventComment findUniqueOrThrow
+   */
+  export type EventCommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which EventComment to fetch.
+     */
+    where: EventCommentWhereUniqueInput
+  }
+
+  /**
+   * EventComment findFirst
+   */
+  export type EventCommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which EventComment to fetch.
+     */
+    where?: EventCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventComments to fetch.
+     */
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventComments.
+     */
+    cursor?: EventCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventComments.
+     */
+    distinct?: EventCommentScalarFieldEnum | EventCommentScalarFieldEnum[]
+  }
+
+  /**
+   * EventComment findFirstOrThrow
+   */
+  export type EventCommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which EventComment to fetch.
+     */
+    where?: EventCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventComments to fetch.
+     */
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventComments.
+     */
+    cursor?: EventCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventComments.
+     */
+    distinct?: EventCommentScalarFieldEnum | EventCommentScalarFieldEnum[]
+  }
+
+  /**
+   * EventComment findMany
+   */
+  export type EventCommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which EventComments to fetch.
+     */
+    where?: EventCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventComments to fetch.
+     */
+    orderBy?: EventCommentOrderByWithRelationInput | EventCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventComments.
+     */
+    cursor?: EventCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventComments.
+     */
+    skip?: number
+    distinct?: EventCommentScalarFieldEnum | EventCommentScalarFieldEnum[]
+  }
+
+  /**
+   * EventComment create
+   */
+  export type EventCommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventComment.
+     */
+    data: XOR<EventCommentCreateInput, EventCommentUncheckedCreateInput>
+  }
+
+  /**
+   * EventComment createMany
+   */
+  export type EventCommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventComments.
+     */
+    data: EventCommentCreateManyInput | EventCommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventComment createManyAndReturn
+   */
+  export type EventCommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventComments.
+     */
+    data: EventCommentCreateManyInput | EventCommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventComment update
+   */
+  export type EventCommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventComment.
+     */
+    data: XOR<EventCommentUpdateInput, EventCommentUncheckedUpdateInput>
+    /**
+     * Choose, which EventComment to update.
+     */
+    where: EventCommentWhereUniqueInput
+  }
+
+  /**
+   * EventComment updateMany
+   */
+  export type EventCommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventComments.
+     */
+    data: XOR<EventCommentUpdateManyMutationInput, EventCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which EventComments to update
+     */
+    where?: EventCommentWhereInput
+    /**
+     * Limit how many EventComments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventComment updateManyAndReturn
+   */
+  export type EventCommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * The data used to update EventComments.
+     */
+    data: XOR<EventCommentUpdateManyMutationInput, EventCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which EventComments to update
+     */
+    where?: EventCommentWhereInput
+    /**
+     * Limit how many EventComments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventComment upsert
+   */
+  export type EventCommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventComment to update in case it exists.
+     */
+    where: EventCommentWhereUniqueInput
+    /**
+     * In case the EventComment found by the `where` argument doesn't exist, create a new EventComment with this data.
+     */
+    create: XOR<EventCommentCreateInput, EventCommentUncheckedCreateInput>
+    /**
+     * In case the EventComment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventCommentUpdateInput, EventCommentUncheckedUpdateInput>
+  }
+
+  /**
+   * EventComment delete
+   */
+  export type EventCommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+    /**
+     * Filter which EventComment to delete.
+     */
+    where: EventCommentWhereUniqueInput
+  }
+
+  /**
+   * EventComment deleteMany
+   */
+  export type EventCommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventComments to delete
+     */
+    where?: EventCommentWhereInput
+    /**
+     * Limit how many EventComments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventComment without action
+   */
+  export type EventCommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventComment
+     */
+    select?: EventCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventComment
+     */
+    omit?: EventCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventCommentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventLike
+   */
+
+  export type AggregateEventLike = {
+    _count: EventLikeCountAggregateOutputType | null
+    _min: EventLikeMinAggregateOutputType | null
+    _max: EventLikeMaxAggregateOutputType | null
+  }
+
+  export type EventLikeMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    eventId: string | null
+  }
+
+  export type EventLikeMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    eventId: string | null
+  }
+
+  export type EventLikeCountAggregateOutputType = {
+    id: number
+    userId: number
+    eventId: number
+    _all: number
+  }
+
+
+  export type EventLikeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+  }
+
+  export type EventLikeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+  }
+
+  export type EventLikeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    eventId?: true
+    _all?: true
+  }
+
+  export type EventLikeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventLike to aggregate.
+     */
+    where?: EventLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventLikes to fetch.
+     */
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventLikes
+    **/
+    _count?: true | EventLikeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventLikeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventLikeMaxAggregateInputType
+  }
+
+  export type GetEventLikeAggregateType<T extends EventLikeAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventLike]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventLike[P]>
+      : GetScalarType<T[P], AggregateEventLike[P]>
+  }
+
+
+
+
+  export type EventLikeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventLikeWhereInput
+    orderBy?: EventLikeOrderByWithAggregationInput | EventLikeOrderByWithAggregationInput[]
+    by: EventLikeScalarFieldEnum[] | EventLikeScalarFieldEnum
+    having?: EventLikeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventLikeCountAggregateInputType | true
+    _min?: EventLikeMinAggregateInputType
+    _max?: EventLikeMaxAggregateInputType
+  }
+
+  export type EventLikeGroupByOutputType = {
+    id: string
+    userId: string
+    eventId: string
+    _count: EventLikeCountAggregateOutputType | null
+    _min: EventLikeMinAggregateOutputType | null
+    _max: EventLikeMaxAggregateOutputType | null
+  }
+
+  type GetEventLikeGroupByPayload<T extends EventLikeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventLikeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventLikeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventLikeGroupByOutputType[P]>
+            : GetScalarType<T[P], EventLikeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventLikeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventLike"]>
+
+  export type EventLikeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventLike"]>
+
+  export type EventLikeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventLike"]>
+
+  export type EventLikeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    eventId?: boolean
+  }
+
+  export type EventLikeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "eventId", ExtArgs["result"]["eventLike"]>
+  export type EventLikeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type EventLikeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+  export type EventLikeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    event?: boolean | EventDefaultArgs<ExtArgs>
+  }
+
+  export type $EventLikePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventLike"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      eventId: string
+    }, ExtArgs["result"]["eventLike"]>
+    composites: {}
+  }
+
+  type EventLikeGetPayload<S extends boolean | null | undefined | EventLikeDefaultArgs> = $Result.GetResult<Prisma.$EventLikePayload, S>
+
+  type EventLikeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventLikeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventLikeCountAggregateInputType | true
+    }
+
+  export interface EventLikeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventLike'], meta: { name: 'EventLike' } }
+    /**
+     * Find zero or one EventLike that matches the filter.
+     * @param {EventLikeFindUniqueArgs} args - Arguments to find a EventLike
+     * @example
+     * // Get one EventLike
+     * const eventLike = await prisma.eventLike.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventLikeFindUniqueArgs>(args: SelectSubset<T, EventLikeFindUniqueArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventLike that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventLikeFindUniqueOrThrowArgs} args - Arguments to find a EventLike
+     * @example
+     * // Get one EventLike
+     * const eventLike = await prisma.eventLike.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventLikeFindUniqueOrThrowArgs>(args: SelectSubset<T, EventLikeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventLike that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeFindFirstArgs} args - Arguments to find a EventLike
+     * @example
+     * // Get one EventLike
+     * const eventLike = await prisma.eventLike.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventLikeFindFirstArgs>(args?: SelectSubset<T, EventLikeFindFirstArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventLike that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeFindFirstOrThrowArgs} args - Arguments to find a EventLike
+     * @example
+     * // Get one EventLike
+     * const eventLike = await prisma.eventLike.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventLikeFindFirstOrThrowArgs>(args?: SelectSubset<T, EventLikeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventLikes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventLikes
+     * const eventLikes = await prisma.eventLike.findMany()
+     * 
+     * // Get first 10 EventLikes
+     * const eventLikes = await prisma.eventLike.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventLikeWithIdOnly = await prisma.eventLike.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventLikeFindManyArgs>(args?: SelectSubset<T, EventLikeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventLike.
+     * @param {EventLikeCreateArgs} args - Arguments to create a EventLike.
+     * @example
+     * // Create one EventLike
+     * const EventLike = await prisma.eventLike.create({
+     *   data: {
+     *     // ... data to create a EventLike
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventLikeCreateArgs>(args: SelectSubset<T, EventLikeCreateArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventLikes.
+     * @param {EventLikeCreateManyArgs} args - Arguments to create many EventLikes.
+     * @example
+     * // Create many EventLikes
+     * const eventLike = await prisma.eventLike.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventLikeCreateManyArgs>(args?: SelectSubset<T, EventLikeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventLikes and returns the data saved in the database.
+     * @param {EventLikeCreateManyAndReturnArgs} args - Arguments to create many EventLikes.
+     * @example
+     * // Create many EventLikes
+     * const eventLike = await prisma.eventLike.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventLikes and only return the `id`
+     * const eventLikeWithIdOnly = await prisma.eventLike.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventLikeCreateManyAndReturnArgs>(args?: SelectSubset<T, EventLikeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventLike.
+     * @param {EventLikeDeleteArgs} args - Arguments to delete one EventLike.
+     * @example
+     * // Delete one EventLike
+     * const EventLike = await prisma.eventLike.delete({
+     *   where: {
+     *     // ... filter to delete one EventLike
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventLikeDeleteArgs>(args: SelectSubset<T, EventLikeDeleteArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventLike.
+     * @param {EventLikeUpdateArgs} args - Arguments to update one EventLike.
+     * @example
+     * // Update one EventLike
+     * const eventLike = await prisma.eventLike.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventLikeUpdateArgs>(args: SelectSubset<T, EventLikeUpdateArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventLikes.
+     * @param {EventLikeDeleteManyArgs} args - Arguments to filter EventLikes to delete.
+     * @example
+     * // Delete a few EventLikes
+     * const { count } = await prisma.eventLike.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventLikeDeleteManyArgs>(args?: SelectSubset<T, EventLikeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventLikes
+     * const eventLike = await prisma.eventLike.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventLikeUpdateManyArgs>(args: SelectSubset<T, EventLikeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventLikes and returns the data updated in the database.
+     * @param {EventLikeUpdateManyAndReturnArgs} args - Arguments to update many EventLikes.
+     * @example
+     * // Update many EventLikes
+     * const eventLike = await prisma.eventLike.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventLikes and only return the `id`
+     * const eventLikeWithIdOnly = await prisma.eventLike.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventLikeUpdateManyAndReturnArgs>(args: SelectSubset<T, EventLikeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventLike.
+     * @param {EventLikeUpsertArgs} args - Arguments to update or create a EventLike.
+     * @example
+     * // Update or create a EventLike
+     * const eventLike = await prisma.eventLike.upsert({
+     *   create: {
+     *     // ... data to create a EventLike
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventLike we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventLikeUpsertArgs>(args: SelectSubset<T, EventLikeUpsertArgs<ExtArgs>>): Prisma__EventLikeClient<$Result.GetResult<Prisma.$EventLikePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventLikes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeCountArgs} args - Arguments to filter EventLikes to count.
+     * @example
+     * // Count the number of EventLikes
+     * const count = await prisma.eventLike.count({
+     *   where: {
+     *     // ... the filter for the EventLikes we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventLikeCountArgs>(
+      args?: Subset<T, EventLikeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventLikeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventLikeAggregateArgs>(args: Subset<T, EventLikeAggregateArgs>): Prisma.PrismaPromise<GetEventLikeAggregateType<T>>
+
+    /**
+     * Group by EventLike.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventLikeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventLikeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventLikeGroupByArgs['orderBy'] }
+        : { orderBy?: EventLikeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventLikeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventLikeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventLike model
+   */
+  readonly fields: EventLikeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventLike.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventLikeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventLike model
+   */
+  interface EventLikeFieldRefs {
+    readonly id: FieldRef<"EventLike", 'String'>
+    readonly userId: FieldRef<"EventLike", 'String'>
+    readonly eventId: FieldRef<"EventLike", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventLike findUnique
+   */
+  export type EventLikeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which EventLike to fetch.
+     */
+    where: EventLikeWhereUniqueInput
+  }
+
+  /**
+   * EventLike findUniqueOrThrow
+   */
+  export type EventLikeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which EventLike to fetch.
+     */
+    where: EventLikeWhereUniqueInput
+  }
+
+  /**
+   * EventLike findFirst
+   */
+  export type EventLikeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which EventLike to fetch.
+     */
+    where?: EventLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventLikes to fetch.
+     */
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventLikes.
+     */
+    cursor?: EventLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventLikes.
+     */
+    distinct?: EventLikeScalarFieldEnum | EventLikeScalarFieldEnum[]
+  }
+
+  /**
+   * EventLike findFirstOrThrow
+   */
+  export type EventLikeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which EventLike to fetch.
+     */
+    where?: EventLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventLikes to fetch.
+     */
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventLikes.
+     */
+    cursor?: EventLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventLikes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventLikes.
+     */
+    distinct?: EventLikeScalarFieldEnum | EventLikeScalarFieldEnum[]
+  }
+
+  /**
+   * EventLike findMany
+   */
+  export type EventLikeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter, which EventLikes to fetch.
+     */
+    where?: EventLikeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventLikes to fetch.
+     */
+    orderBy?: EventLikeOrderByWithRelationInput | EventLikeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventLikes.
+     */
+    cursor?: EventLikeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventLikes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventLikes.
+     */
+    skip?: number
+    distinct?: EventLikeScalarFieldEnum | EventLikeScalarFieldEnum[]
+  }
+
+  /**
+   * EventLike create
+   */
+  export type EventLikeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventLike.
+     */
+    data: XOR<EventLikeCreateInput, EventLikeUncheckedCreateInput>
+  }
+
+  /**
+   * EventLike createMany
+   */
+  export type EventLikeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventLikes.
+     */
+    data: EventLikeCreateManyInput | EventLikeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventLike createManyAndReturn
+   */
+  export type EventLikeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventLikes.
+     */
+    data: EventLikeCreateManyInput | EventLikeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventLike update
+   */
+  export type EventLikeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventLike.
+     */
+    data: XOR<EventLikeUpdateInput, EventLikeUncheckedUpdateInput>
+    /**
+     * Choose, which EventLike to update.
+     */
+    where: EventLikeWhereUniqueInput
+  }
+
+  /**
+   * EventLike updateMany
+   */
+  export type EventLikeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventLikes.
+     */
+    data: XOR<EventLikeUpdateManyMutationInput, EventLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which EventLikes to update
+     */
+    where?: EventLikeWhereInput
+    /**
+     * Limit how many EventLikes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventLike updateManyAndReturn
+   */
+  export type EventLikeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * The data used to update EventLikes.
+     */
+    data: XOR<EventLikeUpdateManyMutationInput, EventLikeUncheckedUpdateManyInput>
+    /**
+     * Filter which EventLikes to update
+     */
+    where?: EventLikeWhereInput
+    /**
+     * Limit how many EventLikes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EventLike upsert
+   */
+  export type EventLikeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventLike to update in case it exists.
+     */
+    where: EventLikeWhereUniqueInput
+    /**
+     * In case the EventLike found by the `where` argument doesn't exist, create a new EventLike with this data.
+     */
+    create: XOR<EventLikeCreateInput, EventLikeUncheckedCreateInput>
+    /**
+     * In case the EventLike was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventLikeUpdateInput, EventLikeUncheckedUpdateInput>
+  }
+
+  /**
+   * EventLike delete
+   */
+  export type EventLikeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+    /**
+     * Filter which EventLike to delete.
+     */
+    where: EventLikeWhereUniqueInput
+  }
+
+  /**
+   * EventLike deleteMany
+   */
+  export type EventLikeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventLikes to delete
+     */
+    where?: EventLikeWhereInput
+    /**
+     * Limit how many EventLikes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventLike without action
+   */
+  export type EventLikeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventLike
+     */
+    select?: EventLikeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventLike
+     */
+    omit?: EventLikeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventLikeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -19326,7 +24449,7 @@ export namespace Prisma {
 
   export const NewsArticleScalarFieldEnum: {
     id: 'id',
-    coverImage: 'coverImage',
+    coverImageId: 'coverImageId',
     title: 'title',
     slug: 'slug',
     summary: 'summary',
@@ -19347,8 +24470,10 @@ export namespace Prisma {
     id: 'id',
     type: 'type',
     url: 'url',
+    format: 'format',
     createdAt: 'createdAt',
-    newsArticleId: 'newsArticleId'
+    newsArticleId: 'newsArticleId',
+    eventId: 'eventId'
   };
 
   export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
@@ -19391,6 +24516,55 @@ export namespace Prisma {
   };
 
   export type NewsArticleLikeScalarFieldEnum = (typeof NewsArticleLikeScalarFieldEnum)[keyof typeof NewsArticleLikeScalarFieldEnum]
+
+
+  export const EventScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    summary: 'summary',
+    description: 'description',
+    categoryId: 'categoryId',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    location: 'location',
+    coverImageId: 'coverImageId',
+    status: 'status',
+    authorId: 'authorId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+  export const EventCategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug'
+  };
+
+  export type EventCategoryScalarFieldEnum = (typeof EventCategoryScalarFieldEnum)[keyof typeof EventCategoryScalarFieldEnum]
+
+
+  export const EventCommentScalarFieldEnum: {
+    id: 'id',
+    content: 'content',
+    authorId: 'authorId',
+    eventId: 'eventId',
+    createdAt: 'createdAt'
+  };
+
+  export type EventCommentScalarFieldEnum = (typeof EventCommentScalarFieldEnum)[keyof typeof EventCommentScalarFieldEnum]
+
+
+  export const EventLikeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    eventId: 'eventId'
+  };
+
+  export type EventLikeScalarFieldEnum = (typeof EventLikeScalarFieldEnum)[keyof typeof EventLikeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -19528,6 +24702,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'EventStatus'
+   */
+  export type EnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EventStatus[]'
+   */
+  export type ListEnumEventStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EventStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -19570,6 +24758,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleListRelationFilter
     newsLetters?: NewsLetterListRelationFilter
     sessions?: SessionListRelationFilter
+    events?: EventListRelationFilter
+    eventComments?: EventCommentListRelationFilter
+    eventLikes?: EventLikeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -19595,6 +24786,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleOrderByRelationAggregateInput
     newsLetters?: NewsLetterOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
+    events?: EventOrderByRelationAggregateInput
+    eventComments?: EventCommentOrderByRelationAggregateInput
+    eventLikes?: EventLikeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -19623,6 +24817,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleListRelationFilter
     newsLetters?: NewsLetterListRelationFilter
     sessions?: SessionListRelationFilter
+    events?: EventListRelationFilter
+    eventComments?: EventCommentListRelationFilter
+    eventLikes?: EventLikeListRelationFilter
   }, "id" | "username" | "email" | "googleId" | "githubId">
 
   export type UserOrderByWithAggregationInput = {
@@ -20149,7 +25346,7 @@ export namespace Prisma {
     OR?: NewsArticleWhereInput[]
     NOT?: NewsArticleWhereInput | NewsArticleWhereInput[]
     id?: StringFilter<"NewsArticle"> | string
-    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImageId?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
     slug?: StringFilter<"NewsArticle"> | string
     summary?: StringNullableFilter<"NewsArticle"> | string | null
@@ -20161,7 +25358,7 @@ export namespace Prisma {
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    coverImageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    coverImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     category?: XOR<NewsArticleCategoryScalarRelationFilter, NewsArticleCategoryWhereInput>
     tags?: TagListRelationFilter
     newsComments?: NewsCommentListRelationFilter
@@ -20172,7 +25369,7 @@ export namespace Prisma {
 
   export type NewsArticleOrderByWithRelationInput = {
     id?: SortOrder
-    coverImage?: SortOrderInput | SortOrder
+    coverImageId?: SortOrderInput | SortOrder
     title?: SortOrder
     slug?: SortOrder
     summary?: SortOrderInput | SortOrder
@@ -20184,7 +25381,7 @@ export namespace Prisma {
     location?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    coverImageMedia?: MediaOrderByWithRelationInput
+    coverImage?: MediaOrderByWithRelationInput
     category?: NewsArticleCategoryOrderByWithRelationInput
     tags?: TagOrderByRelationAggregateInput
     newsComments?: NewsCommentOrderByRelationAggregateInput
@@ -20199,7 +25396,7 @@ export namespace Prisma {
     AND?: NewsArticleWhereInput | NewsArticleWhereInput[]
     OR?: NewsArticleWhereInput[]
     NOT?: NewsArticleWhereInput | NewsArticleWhereInput[]
-    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImageId?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
     summary?: StringNullableFilter<"NewsArticle"> | string | null
     categoryId?: StringFilter<"NewsArticle"> | string
@@ -20210,7 +25407,7 @@ export namespace Prisma {
     location?: StringNullableFilter<"NewsArticle"> | string | null
     createdAt?: DateTimeFilter<"NewsArticle"> | Date | string
     updatedAt?: DateTimeFilter<"NewsArticle"> | Date | string
-    coverImageMedia?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    coverImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
     category?: XOR<NewsArticleCategoryScalarRelationFilter, NewsArticleCategoryWhereInput>
     tags?: TagListRelationFilter
     newsComments?: NewsCommentListRelationFilter
@@ -20221,7 +25418,7 @@ export namespace Prisma {
 
   export type NewsArticleOrderByWithAggregationInput = {
     id?: SortOrder
-    coverImage?: SortOrderInput | SortOrder
+    coverImageId?: SortOrderInput | SortOrder
     title?: SortOrder
     slug?: SortOrder
     summary?: SortOrderInput | SortOrder
@@ -20243,7 +25440,7 @@ export namespace Prisma {
     OR?: NewsArticleScalarWhereWithAggregatesInput[]
     NOT?: NewsArticleScalarWhereWithAggregatesInput | NewsArticleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"NewsArticle"> | string
-    coverImage?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
+    coverImageId?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
     title?: StringWithAggregatesFilter<"NewsArticle"> | string
     slug?: StringWithAggregatesFilter<"NewsArticle"> | string
     summary?: StringNullableWithAggregatesFilter<"NewsArticle"> | string | null
@@ -20264,20 +25461,28 @@ export namespace Prisma {
     id?: StringFilter<"Media"> | string
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     url?: StringFilter<"Media"> | string
+    format?: StringFilter<"Media"> | string
     createdAt?: DateTimeFilter<"Media"> | Date | string
     newsArticleId?: StringNullableFilter<"Media"> | string | null
-    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    eventId?: StringNullableFilter<"Media"> | string | null
     coverImageArticles?: NewsArticleListRelationFilter
+    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    events?: EventListRelationFilter
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
   }
 
   export type MediaOrderByWithRelationInput = {
     id?: SortOrder
     type?: SortOrder
     url?: SortOrder
+    format?: SortOrder
     createdAt?: SortOrder
     newsArticleId?: SortOrderInput | SortOrder
-    newsArticle?: NewsArticleOrderByWithRelationInput
+    eventId?: SortOrderInput | SortOrder
     coverImageArticles?: NewsArticleOrderByRelationAggregateInput
+    newsArticle?: NewsArticleOrderByWithRelationInput
+    events?: EventOrderByRelationAggregateInput
+    event?: EventOrderByWithRelationInput
   }
 
   export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -20287,18 +25492,24 @@ export namespace Prisma {
     NOT?: MediaWhereInput | MediaWhereInput[]
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     url?: StringFilter<"Media"> | string
+    format?: StringFilter<"Media"> | string
     createdAt?: DateTimeFilter<"Media"> | Date | string
     newsArticleId?: StringNullableFilter<"Media"> | string | null
-    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    eventId?: StringNullableFilter<"Media"> | string | null
     coverImageArticles?: NewsArticleListRelationFilter
+    newsArticle?: XOR<NewsArticleNullableScalarRelationFilter, NewsArticleWhereInput> | null
+    events?: EventListRelationFilter
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
   }, "id">
 
   export type MediaOrderByWithAggregationInput = {
     id?: SortOrder
     type?: SortOrder
     url?: SortOrder
+    format?: SortOrder
     createdAt?: SortOrder
     newsArticleId?: SortOrderInput | SortOrder
+    eventId?: SortOrderInput | SortOrder
     _count?: MediaCountOrderByAggregateInput
     _max?: MediaMaxOrderByAggregateInput
     _min?: MediaMinOrderByAggregateInput
@@ -20311,8 +25522,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Media"> | string
     type?: EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
     url?: StringWithAggregatesFilter<"Media"> | string
+    format?: StringWithAggregatesFilter<"Media"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Media"> | Date | string
     newsArticleId?: StringNullableWithAggregatesFilter<"Media"> | string | null
+    eventId?: StringNullableWithAggregatesFilter<"Media"> | string | null
   }
 
   export type NewsArticleCategoryWhereInput = {
@@ -20486,6 +25699,7 @@ export namespace Prisma {
 
   export type NewsArticleLikeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    likerId_newsArticleId?: NewsArticleLikeLikerIdNewsArticleIdCompoundUniqueInput
     AND?: NewsArticleLikeWhereInput | NewsArticleLikeWhereInput[]
     OR?: NewsArticleLikeWhereInput[]
     NOT?: NewsArticleLikeWhereInput | NewsArticleLikeWhereInput[]
@@ -20494,7 +25708,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"NewsArticleLike"> | Date | string
     liker?: XOR<UserScalarRelationFilter, UserWhereInput>
     newsArticle?: XOR<NewsArticleScalarRelationFilter, NewsArticleWhereInput>
-  }, "id">
+  }, "id" | "likerId_newsArticleId">
 
   export type NewsArticleLikeOrderByWithAggregationInput = {
     id?: SortOrder
@@ -20514,6 +25728,273 @@ export namespace Prisma {
     likerId?: StringWithAggregatesFilter<"NewsArticleLike"> | string
     newsArticleId?: StringWithAggregatesFilter<"NewsArticleLike"> | string
     createdAt?: DateTimeWithAggregatesFilter<"NewsArticleLike"> | Date | string
+  }
+
+  export type EventWhereInput = {
+    AND?: EventWhereInput | EventWhereInput[]
+    OR?: EventWhereInput[]
+    NOT?: EventWhereInput | EventWhereInput[]
+    id?: StringFilter<"Event"> | string
+    title?: StringFilter<"Event"> | string
+    slug?: StringFilter<"Event"> | string
+    summary?: StringNullableFilter<"Event"> | string | null
+    description?: StringFilter<"Event"> | string
+    categoryId?: StringFilter<"Event"> | string
+    startDate?: DateTimeFilter<"Event"> | Date | string
+    endDate?: DateTimeNullableFilter<"Event"> | Date | string | null
+    location?: StringFilter<"Event"> | string
+    coverImageId?: StringNullableFilter<"Event"> | string | null
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
+    authorId?: StringNullableFilter<"Event"> | string | null
+    createdAt?: DateTimeFilter<"Event"> | Date | string
+    updatedAt?: DateTimeFilter<"Event"> | Date | string
+    category?: XOR<EventCategoryScalarRelationFilter, EventCategoryWhereInput>
+    coverImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    media?: MediaListRelationFilter
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    eventComments?: EventCommentListRelationFilter
+    eventLikes?: EventLikeListRelationFilter
+  }
+
+  export type EventOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    description?: SortOrder
+    categoryId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    location?: SortOrder
+    coverImageId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    category?: EventCategoryOrderByWithRelationInput
+    coverImage?: MediaOrderByWithRelationInput
+    media?: MediaOrderByRelationAggregateInput
+    author?: UserOrderByWithRelationInput
+    eventComments?: EventCommentOrderByRelationAggregateInput
+    eventLikes?: EventLikeOrderByRelationAggregateInput
+  }
+
+  export type EventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: EventWhereInput | EventWhereInput[]
+    OR?: EventWhereInput[]
+    NOT?: EventWhereInput | EventWhereInput[]
+    title?: StringFilter<"Event"> | string
+    summary?: StringNullableFilter<"Event"> | string | null
+    description?: StringFilter<"Event"> | string
+    categoryId?: StringFilter<"Event"> | string
+    startDate?: DateTimeFilter<"Event"> | Date | string
+    endDate?: DateTimeNullableFilter<"Event"> | Date | string | null
+    location?: StringFilter<"Event"> | string
+    coverImageId?: StringNullableFilter<"Event"> | string | null
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
+    authorId?: StringNullableFilter<"Event"> | string | null
+    createdAt?: DateTimeFilter<"Event"> | Date | string
+    updatedAt?: DateTimeFilter<"Event"> | Date | string
+    category?: XOR<EventCategoryScalarRelationFilter, EventCategoryWhereInput>
+    coverImage?: XOR<MediaNullableScalarRelationFilter, MediaWhereInput> | null
+    media?: MediaListRelationFilter
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    eventComments?: EventCommentListRelationFilter
+    eventLikes?: EventLikeListRelationFilter
+  }, "id" | "slug">
+
+  export type EventOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    description?: SortOrder
+    categoryId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrderInput | SortOrder
+    location?: SortOrder
+    coverImageId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    authorId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EventCountOrderByAggregateInput
+    _max?: EventMaxOrderByAggregateInput
+    _min?: EventMinOrderByAggregateInput
+  }
+
+  export type EventScalarWhereWithAggregatesInput = {
+    AND?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
+    OR?: EventScalarWhereWithAggregatesInput[]
+    NOT?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Event"> | string
+    title?: StringWithAggregatesFilter<"Event"> | string
+    slug?: StringWithAggregatesFilter<"Event"> | string
+    summary?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    description?: StringWithAggregatesFilter<"Event"> | string
+    categoryId?: StringWithAggregatesFilter<"Event"> | string
+    startDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    endDate?: DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+    location?: StringWithAggregatesFilter<"Event"> | string
+    coverImageId?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    status?: EnumEventStatusWithAggregatesFilter<"Event"> | $Enums.EventStatus
+    authorId?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+  }
+
+  export type EventCategoryWhereInput = {
+    AND?: EventCategoryWhereInput | EventCategoryWhereInput[]
+    OR?: EventCategoryWhereInput[]
+    NOT?: EventCategoryWhereInput | EventCategoryWhereInput[]
+    id?: StringFilter<"EventCategory"> | string
+    name?: StringFilter<"EventCategory"> | string
+    slug?: StringFilter<"EventCategory"> | string
+    events?: EventListRelationFilter
+  }
+
+  export type EventCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    events?: EventOrderByRelationAggregateInput
+  }
+
+  export type EventCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    slug?: string
+    AND?: EventCategoryWhereInput | EventCategoryWhereInput[]
+    OR?: EventCategoryWhereInput[]
+    NOT?: EventCategoryWhereInput | EventCategoryWhereInput[]
+    events?: EventListRelationFilter
+  }, "id" | "name" | "slug">
+
+  export type EventCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    _count?: EventCategoryCountOrderByAggregateInput
+    _max?: EventCategoryMaxOrderByAggregateInput
+    _min?: EventCategoryMinOrderByAggregateInput
+  }
+
+  export type EventCategoryScalarWhereWithAggregatesInput = {
+    AND?: EventCategoryScalarWhereWithAggregatesInput | EventCategoryScalarWhereWithAggregatesInput[]
+    OR?: EventCategoryScalarWhereWithAggregatesInput[]
+    NOT?: EventCategoryScalarWhereWithAggregatesInput | EventCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventCategory"> | string
+    name?: StringWithAggregatesFilter<"EventCategory"> | string
+    slug?: StringWithAggregatesFilter<"EventCategory"> | string
+  }
+
+  export type EventCommentWhereInput = {
+    AND?: EventCommentWhereInput | EventCommentWhereInput[]
+    OR?: EventCommentWhereInput[]
+    NOT?: EventCommentWhereInput | EventCommentWhereInput[]
+    id?: StringFilter<"EventComment"> | string
+    content?: StringFilter<"EventComment"> | string
+    authorId?: StringFilter<"EventComment"> | string
+    eventId?: StringFilter<"EventComment"> | string
+    createdAt?: DateTimeFilter<"EventComment"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }
+
+  export type EventCommentOrderByWithRelationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+    author?: UserOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type EventCommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EventCommentWhereInput | EventCommentWhereInput[]
+    OR?: EventCommentWhereInput[]
+    NOT?: EventCommentWhereInput | EventCommentWhereInput[]
+    content?: StringFilter<"EventComment"> | string
+    authorId?: StringFilter<"EventComment"> | string
+    eventId?: StringFilter<"EventComment"> | string
+    createdAt?: DateTimeFilter<"EventComment"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }, "id">
+
+  export type EventCommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+    _count?: EventCommentCountOrderByAggregateInput
+    _max?: EventCommentMaxOrderByAggregateInput
+    _min?: EventCommentMinOrderByAggregateInput
+  }
+
+  export type EventCommentScalarWhereWithAggregatesInput = {
+    AND?: EventCommentScalarWhereWithAggregatesInput | EventCommentScalarWhereWithAggregatesInput[]
+    OR?: EventCommentScalarWhereWithAggregatesInput[]
+    NOT?: EventCommentScalarWhereWithAggregatesInput | EventCommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventComment"> | string
+    content?: StringWithAggregatesFilter<"EventComment"> | string
+    authorId?: StringWithAggregatesFilter<"EventComment"> | string
+    eventId?: StringWithAggregatesFilter<"EventComment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EventComment"> | Date | string
+  }
+
+  export type EventLikeWhereInput = {
+    AND?: EventLikeWhereInput | EventLikeWhereInput[]
+    OR?: EventLikeWhereInput[]
+    NOT?: EventLikeWhereInput | EventLikeWhereInput[]
+    id?: StringFilter<"EventLike"> | string
+    userId?: StringFilter<"EventLike"> | string
+    eventId?: StringFilter<"EventLike"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }
+
+  export type EventLikeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+  }
+
+  export type EventLikeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_eventId?: EventLikeUserIdEventIdCompoundUniqueInput
+    AND?: EventLikeWhereInput | EventLikeWhereInput[]
+    OR?: EventLikeWhereInput[]
+    NOT?: EventLikeWhereInput | EventLikeWhereInput[]
+    userId?: StringFilter<"EventLike"> | string
+    eventId?: StringFilter<"EventLike"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+  }, "id" | "userId_eventId">
+
+  export type EventLikeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+    _count?: EventLikeCountOrderByAggregateInput
+    _max?: EventLikeMaxOrderByAggregateInput
+    _min?: EventLikeMinOrderByAggregateInput
+  }
+
+  export type EventLikeScalarWhereWithAggregatesInput = {
+    AND?: EventLikeScalarWhereWithAggregatesInput | EventLikeScalarWhereWithAggregatesInput[]
+    OR?: EventLikeScalarWhereWithAggregatesInput[]
+    NOT?: EventLikeScalarWhereWithAggregatesInput | EventLikeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventLike"> | string
+    userId?: StringWithAggregatesFilter<"EventLike"> | string
+    eventId?: StringWithAggregatesFilter<"EventLike"> | string
   }
 
   export type UserCreateInput = {
@@ -20539,6 +26020,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20564,6 +26048,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -20589,6 +26076,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -20614,6 +26104,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21169,7 +26662,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
@@ -21180,7 +26673,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -21209,7 +26702,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
@@ -21220,7 +26713,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21240,7 +26733,7 @@ export namespace Prisma {
 
   export type NewsArticleCreateManyInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -21269,7 +26762,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21287,50 +26780,65 @@ export namespace Prisma {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageInput
     newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
-    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageMediaInput
+    events?: EventCreateNestedManyWithoutCoverImageInput
+    event?: EventCreateNestedOneWithoutMediaInput
   }
 
   export type MediaUncheckedCreateInput = {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
     newsArticleId?: string | null
-    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput
+    eventId?: string | null
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageInput
+    events?: EventUncheckedCreateNestedManyWithoutCoverImageInput
   }
 
   export type MediaUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageNestedInput
     newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
-    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageMediaNestedInput
+    events?: EventUpdateManyWithoutCoverImageNestedInput
+    event?: EventUpdateOneWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageNestedInput
+    events?: EventUncheckedUpdateManyWithoutCoverImageNestedInput
   }
 
   export type MediaCreateManyInput = {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
     newsArticleId?: string | null
+    eventId?: string | null
   }
 
   export type MediaUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -21338,8 +26846,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type NewsArticleCategoryCreateInput = {
@@ -21535,6 +27045,274 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EventCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCategoryCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    events?: EventCreateNestedManyWithoutCategoryInput
+  }
+
+  export type EventCategoryUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    events?: EventUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type EventCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    events?: EventUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type EventCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    events?: EventUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type EventCategoryCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type EventCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventCommentCreateInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    author: UserCreateNestedOneWithoutEventCommentsInput
+    event: EventCreateNestedOneWithoutEventCommentsInput
+  }
+
+  export type EventCommentUncheckedCreateInput = {
+    id?: string
+    content: string
+    authorId: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type EventCommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutEventCommentsNestedInput
+    event?: EventUpdateOneRequiredWithoutEventCommentsNestedInput
+  }
+
+  export type EventCommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCommentCreateManyInput = {
+    id?: string
+    content: string
+    authorId: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type EventCommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventLikeCreateInput = {
+    id?: string
+    user: UserCreateNestedOneWithoutEventLikesInput
+    event: EventCreateNestedOneWithoutEventLikesInput
+  }
+
+  export type EventLikeUncheckedCreateInput = {
+    id?: string
+    userId: string
+    eventId: string
+  }
+
+  export type EventLikeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutEventLikesNestedInput
+    event?: EventUpdateOneRequiredWithoutEventLikesNestedInput
+  }
+
+  export type EventLikeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventLikeCreateManyInput = {
+    id?: string
+    userId: string
+    eventId: string
+  }
+
+  export type EventLikeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventLikeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -21630,6 +27408,24 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type EventListRelationFilter = {
+    every?: EventWhereInput
+    some?: EventWhereInput
+    none?: EventWhereInput
+  }
+
+  export type EventCommentListRelationFilter = {
+    every?: EventCommentWhereInput
+    some?: EventCommentWhereInput
+    none?: EventCommentWhereInput
+  }
+
+  export type EventLikeListRelationFilter = {
+    every?: EventLikeWhereInput
+    some?: EventLikeWhereInput
+    none?: EventLikeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -21660,6 +27456,18 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventCommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventLikeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -22196,7 +28004,7 @@ export namespace Prisma {
 
   export type NewsArticleCountOrderByAggregateInput = {
     id?: SortOrder
-    coverImage?: SortOrder
+    coverImageId?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     summary?: SortOrder
@@ -22212,7 +28020,7 @@ export namespace Prisma {
 
   export type NewsArticleMaxOrderByAggregateInput = {
     id?: SortOrder
-    coverImage?: SortOrder
+    coverImageId?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     summary?: SortOrder
@@ -22228,7 +28036,7 @@ export namespace Prisma {
 
   export type NewsArticleMinOrderByAggregateInput = {
     id?: SortOrder
-    coverImage?: SortOrder
+    coverImageId?: SortOrder
     title?: SortOrder
     slug?: SortOrder
     summary?: SortOrder
@@ -22278,28 +28086,39 @@ export namespace Prisma {
     isNot?: NewsArticleWhereInput | null
   }
 
+  export type EventNullableScalarRelationFilter = {
+    is?: EventWhereInput | null
+    isNot?: EventWhereInput | null
+  }
+
   export type MediaCountOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
     url?: SortOrder
+    format?: SortOrder
     createdAt?: SortOrder
     newsArticleId?: SortOrder
+    eventId?: SortOrder
   }
 
   export type MediaMaxOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
     url?: SortOrder
+    format?: SortOrder
     createdAt?: SortOrder
     newsArticleId?: SortOrder
+    eventId?: SortOrder
   }
 
   export type MediaMinOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
     url?: SortOrder
+    format?: SortOrder
     createdAt?: SortOrder
     newsArticleId?: SortOrder
+    eventId?: SortOrder
   }
 
   export type EnumMediaTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -22377,6 +28196,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type NewsArticleLikeLikerIdNewsArticleIdCompoundUniqueInput = {
+    likerId: string
+    newsArticleId: string
+  }
+
   export type NewsArticleLikeCountOrderByAggregateInput = {
     id?: SortOrder
     likerId?: SortOrder
@@ -22396,6 +28220,149 @@ export namespace Prisma {
     likerId?: SortOrder
     newsArticleId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type EnumEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+  }
+
+  export type EventCategoryScalarRelationFilter = {
+    is?: EventCategoryWhereInput
+    isNot?: EventCategoryWhereInput
+  }
+
+  export type EventCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    description?: SortOrder
+    categoryId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    coverImageId?: SortOrder
+    status?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    description?: SortOrder
+    categoryId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    coverImageId?: SortOrder
+    status?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EventMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    description?: SortOrder
+    categoryId?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    location?: SortOrder
+    coverImageId?: SortOrder
+    status?: SortOrder
+    authorId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumEventStatusFilter<$PrismaModel>
+  }
+
+  export type EventCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type EventCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type EventCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+  }
+
+  export type EventScalarRelationFilter = {
+    is?: EventWhereInput
+    isNot?: EventWhereInput
+  }
+
+  export type EventCommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EventCommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EventCommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    eventId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EventLikeUserIdEventIdCompoundUniqueInput = {
+    userId: string
+    eventId: string
+  }
+
+  export type EventLikeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+  }
+
+  export type EventLikeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
+  }
+
+  export type EventLikeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    eventId?: SortOrder
   }
 
   export type EmailVerificationTokenCreateNestedManyWithoutUserInput = {
@@ -22447,6 +28414,27 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type EventCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput> | EventCreateWithoutAuthorInput[] | EventUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAuthorInput | EventCreateOrConnectWithoutAuthorInput[]
+    createMany?: EventCreateManyAuthorInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventCommentCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput> | EventCommentCreateWithoutAuthorInput[] | EventCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutAuthorInput | EventCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: EventCommentCreateManyAuthorInputEnvelope
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+  }
+
+  export type EventLikeCreateNestedManyWithoutUserInput = {
+    create?: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput> | EventLikeCreateWithoutUserInput[] | EventLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutUserInput | EventLikeCreateOrConnectWithoutUserInput[]
+    createMany?: EventLikeCreateManyUserInputEnvelope
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+  }
+
   export type EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<EmailVerificationTokenCreateWithoutUserInput, EmailVerificationTokenUncheckedCreateWithoutUserInput> | EmailVerificationTokenCreateWithoutUserInput[] | EmailVerificationTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmailVerificationTokenCreateOrConnectWithoutUserInput | EmailVerificationTokenCreateOrConnectWithoutUserInput[]
@@ -22494,6 +28482,27 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput> | EventCreateWithoutAuthorInput[] | EventUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAuthorInput | EventCreateOrConnectWithoutAuthorInput[]
+    createMany?: EventCreateManyAuthorInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventCommentUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput> | EventCommentCreateWithoutAuthorInput[] | EventCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutAuthorInput | EventCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: EventCommentCreateManyAuthorInputEnvelope
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+  }
+
+  export type EventLikeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput> | EventLikeCreateWithoutUserInput[] | EventLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutUserInput | EventLikeCreateOrConnectWithoutUserInput[]
+    createMany?: EventLikeCreateManyUserInputEnvelope
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -22614,6 +28623,48 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type EventUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput> | EventCreateWithoutAuthorInput[] | EventUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAuthorInput | EventCreateOrConnectWithoutAuthorInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutAuthorInput | EventUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: EventCreateManyAuthorInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutAuthorInput | EventUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutAuthorInput | EventUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventCommentUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput> | EventCommentCreateWithoutAuthorInput[] | EventCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutAuthorInput | EventCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: EventCommentUpsertWithWhereUniqueWithoutAuthorInput | EventCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: EventCommentCreateManyAuthorInputEnvelope
+    set?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    disconnect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    delete?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    update?: EventCommentUpdateWithWhereUniqueWithoutAuthorInput | EventCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: EventCommentUpdateManyWithWhereWithoutAuthorInput | EventCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+  }
+
+  export type EventLikeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput> | EventLikeCreateWithoutUserInput[] | EventLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutUserInput | EventLikeCreateOrConnectWithoutUserInput[]
+    upsert?: EventLikeUpsertWithWhereUniqueWithoutUserInput | EventLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EventLikeCreateManyUserInputEnvelope
+    set?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    disconnect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    delete?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    update?: EventLikeUpdateWithWhereUniqueWithoutUserInput | EventLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EventLikeUpdateManyWithWhereWithoutUserInput | EventLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
+  }
+
   export type EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<EmailVerificationTokenCreateWithoutUserInput, EmailVerificationTokenUncheckedCreateWithoutUserInput> | EmailVerificationTokenCreateWithoutUserInput[] | EmailVerificationTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: EmailVerificationTokenCreateOrConnectWithoutUserInput | EmailVerificationTokenCreateOrConnectWithoutUserInput[]
@@ -22710,6 +28761,48 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput> | EventCreateWithoutAuthorInput[] | EventUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAuthorInput | EventCreateOrConnectWithoutAuthorInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutAuthorInput | EventUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: EventCreateManyAuthorInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutAuthorInput | EventUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutAuthorInput | EventUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventCommentUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput> | EventCommentCreateWithoutAuthorInput[] | EventCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutAuthorInput | EventCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: EventCommentUpsertWithWhereUniqueWithoutAuthorInput | EventCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: EventCommentCreateManyAuthorInputEnvelope
+    set?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    disconnect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    delete?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    update?: EventCommentUpdateWithWhereUniqueWithoutAuthorInput | EventCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: EventCommentUpdateManyWithWhereWithoutAuthorInput | EventCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+  }
+
+  export type EventLikeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput> | EventLikeCreateWithoutUserInput[] | EventLikeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutUserInput | EventLikeCreateOrConnectWithoutUserInput[]
+    upsert?: EventLikeUpsertWithWhereUniqueWithoutUserInput | EventLikeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: EventLikeCreateManyUserInputEnvelope
+    set?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    disconnect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    delete?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    update?: EventLikeUpdateWithWhereUniqueWithoutUserInput | EventLikeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: EventLikeUpdateManyWithWhereWithoutUserInput | EventLikeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
   }
 
   export type DepartMentalSectorCreateNestedManyWithoutDepartMentInput = {
@@ -23184,28 +29277,62 @@ export namespace Prisma {
     deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
   }
 
+  export type NewsArticleCreateNestedManyWithoutCoverImageInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput> | NewsArticleCreateWithoutCoverImageInput[] | NewsArticleUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageInput | NewsArticleCreateOrConnectWithoutCoverImageInput[]
+    createMany?: NewsArticleCreateManyCoverImageInputEnvelope
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  }
+
   export type NewsArticleCreateNestedOneWithoutMediaInput = {
     create?: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
     connectOrCreate?: NewsArticleCreateOrConnectWithoutMediaInput
     connect?: NewsArticleWhereUniqueInput
   }
 
-  export type NewsArticleCreateNestedManyWithoutCoverImageMediaInput = {
-    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
-    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+  export type EventCreateNestedManyWithoutCoverImageInput = {
+    create?: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput> | EventCreateWithoutCoverImageInput[] | EventUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCoverImageInput | EventCreateOrConnectWithoutCoverImageInput[]
+    createMany?: EventCreateManyCoverImageInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventCreateNestedOneWithoutMediaInput = {
+    create?: XOR<EventCreateWithoutMediaInput, EventUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: EventCreateOrConnectWithoutMediaInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type NewsArticleUncheckedCreateNestedManyWithoutCoverImageInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput> | NewsArticleCreateWithoutCoverImageInput[] | NewsArticleUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageInput | NewsArticleCreateOrConnectWithoutCoverImageInput[]
+    createMany?: NewsArticleCreateManyCoverImageInputEnvelope
     connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
   }
 
-  export type NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput = {
-    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
-    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+  export type EventUncheckedCreateNestedManyWithoutCoverImageInput = {
+    create?: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput> | EventCreateWithoutCoverImageInput[] | EventUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCoverImageInput | EventCreateOrConnectWithoutCoverImageInput[]
+    createMany?: EventCreateManyCoverImageInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
   export type EnumMediaTypeFieldUpdateOperationsInput = {
     set?: $Enums.MediaType
+  }
+
+  export type NewsArticleUpdateManyWithoutCoverImageNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput> | NewsArticleCreateWithoutCoverImageInput[] | NewsArticleUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageInput | NewsArticleCreateOrConnectWithoutCoverImageInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageInput[]
+    createMany?: NewsArticleCreateManyCoverImageInputEnvelope
+    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageInput | NewsArticleUpdateManyWithWhereWithoutCoverImageInput[]
+    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
   }
 
   export type NewsArticleUpdateOneWithoutMediaNestedInput = {
@@ -23218,32 +29345,56 @@ export namespace Prisma {
     update?: XOR<XOR<NewsArticleUpdateToOneWithWhereWithoutMediaInput, NewsArticleUpdateWithoutMediaInput>, NewsArticleUncheckedUpdateWithoutMediaInput>
   }
 
-  export type NewsArticleUpdateManyWithoutCoverImageMediaNestedInput = {
-    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
-    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput[]
-    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
+  export type EventUpdateManyWithoutCoverImageNestedInput = {
+    create?: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput> | EventCreateWithoutCoverImageInput[] | EventUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCoverImageInput | EventCreateOrConnectWithoutCoverImageInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCoverImageInput | EventUpsertWithWhereUniqueWithoutCoverImageInput[]
+    createMany?: EventCreateManyCoverImageInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCoverImageInput | EventUpdateWithWhereUniqueWithoutCoverImageInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCoverImageInput | EventUpdateManyWithWhereWithoutCoverImageInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventUpdateOneWithoutMediaNestedInput = {
+    create?: XOR<EventCreateWithoutMediaInput, EventUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: EventCreateOrConnectWithoutMediaInput
+    upsert?: EventUpsertWithoutMediaInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutMediaInput, EventUpdateWithoutMediaInput>, EventUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type NewsArticleUncheckedUpdateManyWithoutCoverImageNestedInput = {
+    create?: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput> | NewsArticleCreateWithoutCoverImageInput[] | NewsArticleUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageInput | NewsArticleCreateOrConnectWithoutCoverImageInput[]
+    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageInput[]
+    createMany?: NewsArticleCreateManyCoverImageInputEnvelope
     set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
     disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
     delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
     connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput[]
-    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput | NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput[]
+    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageInput[]
+    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageInput | NewsArticleUpdateManyWithWhereWithoutCoverImageInput[]
     deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
   }
 
-  export type NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput = {
-    create?: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput> | NewsArticleCreateWithoutCoverImageMediaInput[] | NewsArticleUncheckedCreateWithoutCoverImageMediaInput[]
-    connectOrCreate?: NewsArticleCreateOrConnectWithoutCoverImageMediaInput | NewsArticleCreateOrConnectWithoutCoverImageMediaInput[]
-    upsert?: NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput[]
-    createMany?: NewsArticleCreateManyCoverImageMediaInputEnvelope
-    set?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    disconnect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    delete?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    connect?: NewsArticleWhereUniqueInput | NewsArticleWhereUniqueInput[]
-    update?: NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput | NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput[]
-    updateMany?: NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput | NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput[]
-    deleteMany?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
+  export type EventUncheckedUpdateManyWithoutCoverImageNestedInput = {
+    create?: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput> | EventCreateWithoutCoverImageInput[] | EventUncheckedCreateWithoutCoverImageInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCoverImageInput | EventCreateOrConnectWithoutCoverImageInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCoverImageInput | EventUpsertWithWhereUniqueWithoutCoverImageInput[]
+    createMany?: EventCreateManyCoverImageInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCoverImageInput | EventUpdateWithWhereUniqueWithoutCoverImageInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCoverImageInput | EventUpdateManyWithWhereWithoutCoverImageInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
   export type NewsArticleCreateNestedManyWithoutCategoryInput = {
@@ -23380,6 +29531,280 @@ export namespace Prisma {
     upsert?: NewsArticleUpsertWithoutNewsArticleLikesInput
     connect?: NewsArticleWhereUniqueInput
     update?: XOR<XOR<NewsArticleUpdateToOneWithWhereWithoutNewsArticleLikesInput, NewsArticleUpdateWithoutNewsArticleLikesInput>, NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput>
+  }
+
+  export type EventCategoryCreateNestedOneWithoutEventsInput = {
+    create?: XOR<EventCategoryCreateWithoutEventsInput, EventCategoryUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: EventCategoryCreateOrConnectWithoutEventsInput
+    connect?: EventCategoryWhereUniqueInput
+  }
+
+  export type MediaCreateNestedOneWithoutEventsInput = {
+    create?: XOR<MediaCreateWithoutEventsInput, MediaUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutEventsInput
+    connect?: MediaWhereUniqueInput
+  }
+
+  export type MediaCreateNestedManyWithoutEventInput = {
+    create?: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput> | MediaCreateWithoutEventInput[] | MediaUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutEventInput | MediaCreateOrConnectWithoutEventInput[]
+    createMany?: MediaCreateManyEventInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutEventsInput = {
+    create?: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventCommentCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput> | EventCommentCreateWithoutEventInput[] | EventCommentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutEventInput | EventCommentCreateOrConnectWithoutEventInput[]
+    createMany?: EventCommentCreateManyEventInputEnvelope
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+  }
+
+  export type EventLikeCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput> | EventLikeCreateWithoutEventInput[] | EventLikeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutEventInput | EventLikeCreateOrConnectWithoutEventInput[]
+    createMany?: EventLikeCreateManyEventInputEnvelope
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+  }
+
+  export type MediaUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput> | MediaCreateWithoutEventInput[] | MediaUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutEventInput | MediaCreateOrConnectWithoutEventInput[]
+    createMany?: MediaCreateManyEventInputEnvelope
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type EventCommentUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput> | EventCommentCreateWithoutEventInput[] | EventCommentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutEventInput | EventCommentCreateOrConnectWithoutEventInput[]
+    createMany?: EventCommentCreateManyEventInputEnvelope
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+  }
+
+  export type EventLikeUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput> | EventLikeCreateWithoutEventInput[] | EventLikeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutEventInput | EventLikeCreateOrConnectWithoutEventInput[]
+    createMany?: EventLikeCreateManyEventInputEnvelope
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+  }
+
+  export type EnumEventStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EventStatus
+  }
+
+  export type EventCategoryUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<EventCategoryCreateWithoutEventsInput, EventCategoryUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: EventCategoryCreateOrConnectWithoutEventsInput
+    upsert?: EventCategoryUpsertWithoutEventsInput
+    connect?: EventCategoryWhereUniqueInput
+    update?: XOR<XOR<EventCategoryUpdateToOneWithWhereWithoutEventsInput, EventCategoryUpdateWithoutEventsInput>, EventCategoryUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type MediaUpdateOneWithoutEventsNestedInput = {
+    create?: XOR<MediaCreateWithoutEventsInput, MediaUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: MediaCreateOrConnectWithoutEventsInput
+    upsert?: MediaUpsertWithoutEventsInput
+    disconnect?: MediaWhereInput | boolean
+    delete?: MediaWhereInput | boolean
+    connect?: MediaWhereUniqueInput
+    update?: XOR<XOR<MediaUpdateToOneWithWhereWithoutEventsInput, MediaUpdateWithoutEventsInput>, MediaUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type MediaUpdateManyWithoutEventNestedInput = {
+    create?: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput> | MediaCreateWithoutEventInput[] | MediaUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutEventInput | MediaCreateOrConnectWithoutEventInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutEventInput | MediaUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: MediaCreateManyEventInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutEventInput | MediaUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutEventInput | MediaUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutEventsNestedInput = {
+    create?: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventsInput
+    upsert?: UserUpsertWithoutEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventsInput, UserUpdateWithoutEventsInput>, UserUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type EventCommentUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput> | EventCommentCreateWithoutEventInput[] | EventCommentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutEventInput | EventCommentCreateOrConnectWithoutEventInput[]
+    upsert?: EventCommentUpsertWithWhereUniqueWithoutEventInput | EventCommentUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventCommentCreateManyEventInputEnvelope
+    set?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    disconnect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    delete?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    update?: EventCommentUpdateWithWhereUniqueWithoutEventInput | EventCommentUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventCommentUpdateManyWithWhereWithoutEventInput | EventCommentUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+  }
+
+  export type EventLikeUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput> | EventLikeCreateWithoutEventInput[] | EventLikeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutEventInput | EventLikeCreateOrConnectWithoutEventInput[]
+    upsert?: EventLikeUpsertWithWhereUniqueWithoutEventInput | EventLikeUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventLikeCreateManyEventInputEnvelope
+    set?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    disconnect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    delete?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    update?: EventLikeUpdateWithWhereUniqueWithoutEventInput | EventLikeUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventLikeUpdateManyWithWhereWithoutEventInput | EventLikeUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
+  }
+
+  export type MediaUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput> | MediaCreateWithoutEventInput[] | MediaUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: MediaCreateOrConnectWithoutEventInput | MediaCreateOrConnectWithoutEventInput[]
+    upsert?: MediaUpsertWithWhereUniqueWithoutEventInput | MediaUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: MediaCreateManyEventInputEnvelope
+    set?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    disconnect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    delete?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+    update?: MediaUpdateWithWhereUniqueWithoutEventInput | MediaUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: MediaUpdateManyWithWhereWithoutEventInput | MediaUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: MediaScalarWhereInput | MediaScalarWhereInput[]
+  }
+
+  export type EventCommentUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput> | EventCommentCreateWithoutEventInput[] | EventCommentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventCommentCreateOrConnectWithoutEventInput | EventCommentCreateOrConnectWithoutEventInput[]
+    upsert?: EventCommentUpsertWithWhereUniqueWithoutEventInput | EventCommentUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventCommentCreateManyEventInputEnvelope
+    set?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    disconnect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    delete?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    connect?: EventCommentWhereUniqueInput | EventCommentWhereUniqueInput[]
+    update?: EventCommentUpdateWithWhereUniqueWithoutEventInput | EventCommentUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventCommentUpdateManyWithWhereWithoutEventInput | EventCommentUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+  }
+
+  export type EventLikeUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput> | EventLikeCreateWithoutEventInput[] | EventLikeUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: EventLikeCreateOrConnectWithoutEventInput | EventLikeCreateOrConnectWithoutEventInput[]
+    upsert?: EventLikeUpsertWithWhereUniqueWithoutEventInput | EventLikeUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: EventLikeCreateManyEventInputEnvelope
+    set?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    disconnect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    delete?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    connect?: EventLikeWhereUniqueInput | EventLikeWhereUniqueInput[]
+    update?: EventLikeUpdateWithWhereUniqueWithoutEventInput | EventLikeUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: EventLikeUpdateManyWithWhereWithoutEventInput | EventLikeUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
+  }
+
+  export type EventCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput> | EventCreateWithoutCategoryInput[] | EventUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCategoryInput | EventCreateOrConnectWithoutCategoryInput[]
+    createMany?: EventCreateManyCategoryInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput> | EventCreateWithoutCategoryInput[] | EventUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCategoryInput | EventCreateOrConnectWithoutCategoryInput[]
+    createMany?: EventCreateManyCategoryInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput> | EventCreateWithoutCategoryInput[] | EventUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCategoryInput | EventCreateOrConnectWithoutCategoryInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCategoryInput | EventUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: EventCreateManyCategoryInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCategoryInput | EventUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCategoryInput | EventUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput> | EventCreateWithoutCategoryInput[] | EventUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutCategoryInput | EventCreateOrConnectWithoutCategoryInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutCategoryInput | EventUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: EventCreateManyCategoryInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutCategoryInput | EventUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutCategoryInput | EventUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutEventCommentsInput = {
+    create?: XOR<UserCreateWithoutEventCommentsInput, UserUncheckedCreateWithoutEventCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventCommentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutEventCommentsInput = {
+    create?: XOR<EventCreateWithoutEventCommentsInput, EventUncheckedCreateWithoutEventCommentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutEventCommentsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutEventCommentsNestedInput = {
+    create?: XOR<UserCreateWithoutEventCommentsInput, UserUncheckedCreateWithoutEventCommentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventCommentsInput
+    upsert?: UserUpsertWithoutEventCommentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventCommentsInput, UserUpdateWithoutEventCommentsInput>, UserUncheckedUpdateWithoutEventCommentsInput>
+  }
+
+  export type EventUpdateOneRequiredWithoutEventCommentsNestedInput = {
+    create?: XOR<EventCreateWithoutEventCommentsInput, EventUncheckedCreateWithoutEventCommentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutEventCommentsInput
+    upsert?: EventUpsertWithoutEventCommentsInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutEventCommentsInput, EventUpdateWithoutEventCommentsInput>, EventUncheckedUpdateWithoutEventCommentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutEventLikesInput = {
+    create?: XOR<UserCreateWithoutEventLikesInput, UserUncheckedCreateWithoutEventLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventLikesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutEventLikesInput = {
+    create?: XOR<EventCreateWithoutEventLikesInput, EventUncheckedCreateWithoutEventLikesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutEventLikesInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutEventLikesNestedInput = {
+    create?: XOR<UserCreateWithoutEventLikesInput, UserUncheckedCreateWithoutEventLikesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEventLikesInput
+    upsert?: UserUpsertWithoutEventLikesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEventLikesInput, UserUpdateWithoutEventLikesInput>, UserUncheckedUpdateWithoutEventLikesInput>
+  }
+
+  export type EventUpdateOneRequiredWithoutEventLikesNestedInput = {
+    create?: XOR<EventCreateWithoutEventLikesInput, EventUncheckedCreateWithoutEventLikesInput>
+    connectOrCreate?: EventCreateOrConnectWithoutEventLikesInput
+    upsert?: EventUpsertWithoutEventLikesInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutEventLikesInput, EventUpdateWithoutEventLikesInput>, EventUncheckedUpdateWithoutEventLikesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -23661,6 +30086,23 @@ export namespace Prisma {
     _max?: NestedEnumMediaTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumEventStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusFilter<$PrismaModel> | $Enums.EventStatus
+  }
+
+  export type NestedEnumEventStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EventStatus | EnumEventStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EventStatus[] | ListEnumEventStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEventStatusWithAggregatesFilter<$PrismaModel> | $Enums.EventStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEventStatusFilter<$PrismaModel>
+    _max?: NestedEnumEventStatusFilter<$PrismaModel>
+  }
+
   export type EmailVerificationTokenCreateWithoutUserInput = {
     id?: string
     expires: bigint | number
@@ -23776,7 +30218,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
@@ -23786,7 +30228,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutAuthorInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -23866,6 +30308,98 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutAuthorInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type EventCreateManyAuthorInputEnvelope = {
+    data: EventCreateManyAuthorInput | EventCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventCommentCreateWithoutAuthorInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    event: EventCreateNestedOneWithoutEventCommentsInput
+  }
+
+  export type EventCommentUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    content: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type EventCommentCreateOrConnectWithoutAuthorInput = {
+    where: EventCommentWhereUniqueInput
+    create: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type EventCommentCreateManyAuthorInputEnvelope = {
+    data: EventCommentCreateManyAuthorInput | EventCommentCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventLikeCreateWithoutUserInput = {
+    id?: string
+    event: EventCreateNestedOneWithoutEventLikesInput
+  }
+
+  export type EventLikeUncheckedCreateWithoutUserInput = {
+    id?: string
+    eventId: string
+  }
+
+  export type EventLikeCreateOrConnectWithoutUserInput = {
+    where: EventLikeWhereUniqueInput
+    create: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type EventLikeCreateManyUserInputEnvelope = {
+    data: EventLikeCreateManyUserInput | EventLikeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -24001,7 +30535,7 @@ export namespace Prisma {
     OR?: NewsArticleScalarWhereInput[]
     NOT?: NewsArticleScalarWhereInput | NewsArticleScalarWhereInput[]
     id?: StringFilter<"NewsArticle"> | string
-    coverImage?: StringNullableFilter<"NewsArticle"> | string | null
+    coverImageId?: StringNullableFilter<"NewsArticle"> | string | null
     title?: StringFilter<"NewsArticle"> | string
     slug?: StringFilter<"NewsArticle"> | string
     summary?: StringNullableFilter<"NewsArticle"> | string | null
@@ -24071,6 +30605,94 @@ export namespace Prisma {
     lastVerifiedAt?: DateTimeFilter<"Session"> | Date | string
     secretHash?: StringFilter<"Session"> | string
     role?: EnumRoleFilter<"Session"> | $Enums.Role
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutAuthorInput, EventUncheckedUpdateWithoutAuthorInput>
+    create: XOR<EventCreateWithoutAuthorInput, EventUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutAuthorInput, EventUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutAuthorInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type EventScalarWhereInput = {
+    AND?: EventScalarWhereInput | EventScalarWhereInput[]
+    OR?: EventScalarWhereInput[]
+    NOT?: EventScalarWhereInput | EventScalarWhereInput[]
+    id?: StringFilter<"Event"> | string
+    title?: StringFilter<"Event"> | string
+    slug?: StringFilter<"Event"> | string
+    summary?: StringNullableFilter<"Event"> | string | null
+    description?: StringFilter<"Event"> | string
+    categoryId?: StringFilter<"Event"> | string
+    startDate?: DateTimeFilter<"Event"> | Date | string
+    endDate?: DateTimeNullableFilter<"Event"> | Date | string | null
+    location?: StringFilter<"Event"> | string
+    coverImageId?: StringNullableFilter<"Event"> | string | null
+    status?: EnumEventStatusFilter<"Event"> | $Enums.EventStatus
+    authorId?: StringNullableFilter<"Event"> | string | null
+    createdAt?: DateTimeFilter<"Event"> | Date | string
+    updatedAt?: DateTimeFilter<"Event"> | Date | string
+  }
+
+  export type EventCommentUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: EventCommentWhereUniqueInput
+    update: XOR<EventCommentUpdateWithoutAuthorInput, EventCommentUncheckedUpdateWithoutAuthorInput>
+    create: XOR<EventCommentCreateWithoutAuthorInput, EventCommentUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type EventCommentUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: EventCommentWhereUniqueInput
+    data: XOR<EventCommentUpdateWithoutAuthorInput, EventCommentUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type EventCommentUpdateManyWithWhereWithoutAuthorInput = {
+    where: EventCommentScalarWhereInput
+    data: XOR<EventCommentUpdateManyMutationInput, EventCommentUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type EventCommentScalarWhereInput = {
+    AND?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+    OR?: EventCommentScalarWhereInput[]
+    NOT?: EventCommentScalarWhereInput | EventCommentScalarWhereInput[]
+    id?: StringFilter<"EventComment"> | string
+    content?: StringFilter<"EventComment"> | string
+    authorId?: StringFilter<"EventComment"> | string
+    eventId?: StringFilter<"EventComment"> | string
+    createdAt?: DateTimeFilter<"EventComment"> | Date | string
+  }
+
+  export type EventLikeUpsertWithWhereUniqueWithoutUserInput = {
+    where: EventLikeWhereUniqueInput
+    update: XOR<EventLikeUpdateWithoutUserInput, EventLikeUncheckedUpdateWithoutUserInput>
+    create: XOR<EventLikeCreateWithoutUserInput, EventLikeUncheckedCreateWithoutUserInput>
+  }
+
+  export type EventLikeUpdateWithWhereUniqueWithoutUserInput = {
+    where: EventLikeWhereUniqueInput
+    data: XOR<EventLikeUpdateWithoutUserInput, EventLikeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EventLikeUpdateManyWithWhereWithoutUserInput = {
+    where: EventLikeScalarWhereInput
+    data: XOR<EventLikeUpdateManyMutationInput, EventLikeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type EventLikeScalarWhereInput = {
+    AND?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
+    OR?: EventLikeScalarWhereInput[]
+    NOT?: EventLikeScalarWhereInput | EventLikeScalarWhereInput[]
+    id?: StringFilter<"EventLike"> | string
+    userId?: StringFilter<"EventLike"> | string
+    eventId?: StringFilter<"EventLike"> | string
   }
 
   export type DepartMentalSectorCreateWithoutDepartMentInput = {
@@ -24357,6 +30979,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmployeesInput = {
@@ -24381,6 +31006,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmployeesInput = {
@@ -24474,6 +31102,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmployeesInput = {
@@ -24498,6 +31129,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -24522,6 +31156,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -24546,6 +31183,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -24586,6 +31226,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -24610,6 +31253,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -24634,6 +31280,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -24658,6 +31307,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -24698,6 +31350,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -24722,6 +31377,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutNewsLettersInput = {
@@ -24746,6 +31404,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsLettersInput = {
@@ -24770,6 +31431,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsLettersInput = {
@@ -24810,6 +31474,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsLettersInput = {
@@ -24834,22 +31501,31 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MediaCreateWithoutCoverImageArticlesInput = {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
     newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
+    events?: EventCreateNestedManyWithoutCoverImageInput
+    event?: EventCreateNestedOneWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutCoverImageArticlesInput = {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
     newsArticleId?: string | null
+    eventId?: string | null
+    events?: EventUncheckedCreateNestedManyWithoutCoverImageInput
   }
 
   export type MediaCreateOrConnectWithoutCoverImageArticlesInput = {
@@ -24959,6 +31635,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsArticlesInput = {
@@ -24983,6 +31662,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsArticlesInput = {
@@ -24994,16 +31676,22 @@ export namespace Prisma {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
-    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageMediaInput
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageInput
+    events?: EventCreateNestedManyWithoutCoverImageInput
+    event?: EventCreateNestedOneWithoutMediaInput
   }
 
   export type MediaUncheckedCreateWithoutNewsArticleInput = {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
-    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageMediaInput
+    eventId?: string | null
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageInput
+    events?: EventUncheckedCreateNestedManyWithoutCoverImageInput
   }
 
   export type MediaCreateOrConnectWithoutNewsArticleInput = {
@@ -25031,16 +31719,22 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
+    events?: EventUpdateManyWithoutCoverImageNestedInput
+    event?: EventUpdateOneWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutCoverImageArticlesInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
+    events?: EventUncheckedUpdateManyWithoutCoverImageNestedInput
   }
 
   export type NewsArticleCategoryUpsertWithoutArticlesInput = {
@@ -25155,6 +31849,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsArticlesInput = {
@@ -25179,6 +31876,9 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MediaUpsertWithWhereUniqueWithoutNewsArticleInput = {
@@ -25204,8 +31904,58 @@ export namespace Prisma {
     id?: StringFilter<"Media"> | string
     type?: EnumMediaTypeFilter<"Media"> | $Enums.MediaType
     url?: StringFilter<"Media"> | string
+    format?: StringFilter<"Media"> | string
     createdAt?: DateTimeFilter<"Media"> | Date | string
     newsArticleId?: StringNullableFilter<"Media"> | string | null
+    eventId?: StringNullableFilter<"Media"> | string | null
+  }
+
+  export type NewsArticleCreateWithoutCoverImageInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
+    tags?: TagCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
+    author?: UserCreateNestedOneWithoutNewsArticlesInput
+    media?: MediaCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleUncheckedCreateWithoutCoverImageInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    categoryId: string
+    publishedAt?: Date | string | null
+    status?: $Enums.NewsArticleStatus
+    content: string
+    authorId?: string | null
+    location?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
+  }
+
+  export type NewsArticleCreateOrConnectWithoutCoverImageInput = {
+    where: NewsArticleWhereUniqueInput
+    create: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput>
+  }
+
+  export type NewsArticleCreateManyCoverImageInputEnvelope = {
+    data: NewsArticleCreateManyCoverImageInput | NewsArticleCreateManyCoverImageInput[]
+    skipDuplicates?: boolean
   }
 
   export type NewsArticleCreateWithoutMediaInput = {
@@ -25219,7 +31969,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
@@ -25229,7 +31979,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutMediaInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25251,52 +32001,111 @@ export namespace Prisma {
     create: XOR<NewsArticleCreateWithoutMediaInput, NewsArticleUncheckedCreateWithoutMediaInput>
   }
 
-  export type NewsArticleCreateWithoutCoverImageMediaInput = {
+  export type EventCreateWithoutCoverImageInput = {
     id?: string
     title: string
     slug: string
     summary?: string | null
-    publishedAt?: Date | string | null
-    status?: $Enums.NewsArticleStatus
-    content: string
-    location?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
-    tags?: TagCreateNestedManyWithoutArticlesInput
-    newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
-    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
-    author?: UserCreateNestedOneWithoutNewsArticlesInput
-    media?: MediaCreateNestedManyWithoutNewsArticleInput
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
   }
 
-  export type NewsArticleUncheckedCreateWithoutCoverImageMediaInput = {
+  export type EventUncheckedCreateWithoutCoverImageInput = {
     id?: string
     title: string
     slug: string
     summary?: string | null
+    description: string
     categoryId: string
-    publishedAt?: Date | string | null
-    status?: $Enums.NewsArticleStatus
-    content: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
     authorId?: string | null
-    location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    tags?: TagUncheckedCreateNestedManyWithoutArticlesInput
-    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutNewsArticleInput
-    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutNewsArticleInput
-    media?: MediaUncheckedCreateNestedManyWithoutNewsArticleInput
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
   }
 
-  export type NewsArticleCreateOrConnectWithoutCoverImageMediaInput = {
-    where: NewsArticleWhereUniqueInput
-    create: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput>
+  export type EventCreateOrConnectWithoutCoverImageInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput>
   }
 
-  export type NewsArticleCreateManyCoverImageMediaInputEnvelope = {
-    data: NewsArticleCreateManyCoverImageMediaInput | NewsArticleCreateManyCoverImageMediaInput[]
+  export type EventCreateManyCoverImageInputEnvelope = {
+    data: EventCreateManyCoverImageInput | EventCreateManyCoverImageInput[]
     skipDuplicates?: boolean
+  }
+
+  export type EventCreateWithoutMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutMediaInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutMediaInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutMediaInput, EventUncheckedCreateWithoutMediaInput>
+  }
+
+  export type NewsArticleUpsertWithWhereUniqueWithoutCoverImageInput = {
+    where: NewsArticleWhereUniqueInput
+    update: XOR<NewsArticleUpdateWithoutCoverImageInput, NewsArticleUncheckedUpdateWithoutCoverImageInput>
+    create: XOR<NewsArticleCreateWithoutCoverImageInput, NewsArticleUncheckedCreateWithoutCoverImageInput>
+  }
+
+  export type NewsArticleUpdateWithWhereUniqueWithoutCoverImageInput = {
+    where: NewsArticleWhereUniqueInput
+    data: XOR<NewsArticleUpdateWithoutCoverImageInput, NewsArticleUncheckedUpdateWithoutCoverImageInput>
+  }
+
+  export type NewsArticleUpdateManyWithWhereWithoutCoverImageInput = {
+    where: NewsArticleScalarWhereInput
+    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutCoverImageInput>
   }
 
   export type NewsArticleUpsertWithoutMediaInput = {
@@ -25321,7 +32130,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
@@ -25331,7 +32140,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25348,20 +32157,69 @@ export namespace Prisma {
     newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
-  export type NewsArticleUpsertWithWhereUniqueWithoutCoverImageMediaInput = {
-    where: NewsArticleWhereUniqueInput
-    update: XOR<NewsArticleUpdateWithoutCoverImageMediaInput, NewsArticleUncheckedUpdateWithoutCoverImageMediaInput>
-    create: XOR<NewsArticleCreateWithoutCoverImageMediaInput, NewsArticleUncheckedCreateWithoutCoverImageMediaInput>
+  export type EventUpsertWithWhereUniqueWithoutCoverImageInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutCoverImageInput, EventUncheckedUpdateWithoutCoverImageInput>
+    create: XOR<EventCreateWithoutCoverImageInput, EventUncheckedCreateWithoutCoverImageInput>
   }
 
-  export type NewsArticleUpdateWithWhereUniqueWithoutCoverImageMediaInput = {
-    where: NewsArticleWhereUniqueInput
-    data: XOR<NewsArticleUpdateWithoutCoverImageMediaInput, NewsArticleUncheckedUpdateWithoutCoverImageMediaInput>
+  export type EventUpdateWithWhereUniqueWithoutCoverImageInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutCoverImageInput, EventUncheckedUpdateWithoutCoverImageInput>
   }
 
-  export type NewsArticleUpdateManyWithWhereWithoutCoverImageMediaInput = {
-    where: NewsArticleScalarWhereInput
-    data: XOR<NewsArticleUpdateManyMutationInput, NewsArticleUncheckedUpdateManyWithoutCoverImageMediaInput>
+  export type EventUpdateManyWithWhereWithoutCoverImageInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutCoverImageInput>
+  }
+
+  export type EventUpsertWithoutMediaInput = {
+    update: XOR<EventUpdateWithoutMediaInput, EventUncheckedUpdateWithoutMediaInput>
+    create: XOR<EventCreateWithoutMediaInput, EventUncheckedCreateWithoutMediaInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutMediaInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutMediaInput, EventUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type EventUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type NewsArticleCreateWithoutCategoryInput = {
@@ -25375,7 +32233,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
@@ -25385,7 +32243,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutCategoryInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25439,7 +32297,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
@@ -25449,7 +32307,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutTagsInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25509,6 +32367,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsCommentsInput = {
@@ -25533,6 +32394,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsCommentsInput = {
@@ -25551,7 +32415,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutNewsArticleInput
@@ -25561,7 +32425,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutNewsCommentsInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25616,6 +32480,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsCommentsInput = {
@@ -25640,6 +32507,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsArticleUpsertWithoutNewsCommentsInput = {
@@ -25664,7 +32534,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
@@ -25674,7 +32544,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutNewsCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25713,6 +32583,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNewsArticleLikesInput = {
@@ -25737,6 +32610,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
     newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNewsArticleLikesInput = {
@@ -25755,7 +32631,7 @@ export namespace Prisma {
     location?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    coverImageMedia?: MediaCreateNestedOneWithoutCoverImageArticlesInput
+    coverImage?: MediaCreateNestedOneWithoutCoverImageArticlesInput
     category: NewsArticleCategoryCreateNestedOneWithoutArticlesInput
     tags?: TagCreateNestedManyWithoutArticlesInput
     newsComments?: NewsCommentCreateNestedManyWithoutNewsArticleInput
@@ -25765,7 +32641,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedCreateWithoutNewsArticleLikesInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25820,6 +32696,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNewsArticleLikesInput = {
@@ -25844,6 +32723,9 @@ export namespace Prisma {
     newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
     newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type NewsArticleUpsertWithoutNewsArticleLikesInput = {
@@ -25868,7 +32750,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
@@ -25878,7 +32760,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutNewsArticleLikesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25893,6 +32775,850 @@ export namespace Prisma {
     tags?: TagUncheckedUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUncheckedUpdateManyWithoutNewsArticleNestedInput
     media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
+  }
+
+  export type EventCategoryCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type EventCategoryUncheckedCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    slug: string
+  }
+
+  export type EventCategoryCreateOrConnectWithoutEventsInput = {
+    where: EventCategoryWhereUniqueInput
+    create: XOR<EventCategoryCreateWithoutEventsInput, EventCategoryUncheckedCreateWithoutEventsInput>
+  }
+
+  export type MediaCreateWithoutEventsInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    format?: string
+    createdAt?: Date | string
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageInput
+    newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
+    event?: EventCreateNestedOneWithoutMediaInput
+  }
+
+  export type MediaUncheckedCreateWithoutEventsInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    format?: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+    eventId?: string | null
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageInput
+  }
+
+  export type MediaCreateOrConnectWithoutEventsInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutEventsInput, MediaUncheckedCreateWithoutEventsInput>
+  }
+
+  export type MediaCreateWithoutEventInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    format?: string
+    createdAt?: Date | string
+    coverImageArticles?: NewsArticleCreateNestedManyWithoutCoverImageInput
+    newsArticle?: NewsArticleCreateNestedOneWithoutMediaInput
+    events?: EventCreateNestedManyWithoutCoverImageInput
+  }
+
+  export type MediaUncheckedCreateWithoutEventInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    format?: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+    coverImageArticles?: NewsArticleUncheckedCreateNestedManyWithoutCoverImageInput
+    events?: EventUncheckedCreateNestedManyWithoutCoverImageInput
+  }
+
+  export type MediaCreateOrConnectWithoutEventInput = {
+    where: MediaWhereUniqueInput
+    create: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput>
+  }
+
+  export type MediaCreateManyEventInputEnvelope = {
+    data: MediaCreateManyEventInput | MediaCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutEventsInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEventsInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+  }
+
+  export type EventCommentCreateWithoutEventInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    author: UserCreateNestedOneWithoutEventCommentsInput
+  }
+
+  export type EventCommentUncheckedCreateWithoutEventInput = {
+    id?: string
+    content: string
+    authorId: string
+    createdAt?: Date | string
+  }
+
+  export type EventCommentCreateOrConnectWithoutEventInput = {
+    where: EventCommentWhereUniqueInput
+    create: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventCommentCreateManyEventInputEnvelope = {
+    data: EventCommentCreateManyEventInput | EventCommentCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventLikeCreateWithoutEventInput = {
+    id?: string
+    user: UserCreateNestedOneWithoutEventLikesInput
+  }
+
+  export type EventLikeUncheckedCreateWithoutEventInput = {
+    id?: string
+    userId: string
+  }
+
+  export type EventLikeCreateOrConnectWithoutEventInput = {
+    where: EventLikeWhereUniqueInput
+    create: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventLikeCreateManyEventInputEnvelope = {
+    data: EventLikeCreateManyEventInput | EventLikeCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventCategoryUpsertWithoutEventsInput = {
+    update: XOR<EventCategoryUpdateWithoutEventsInput, EventCategoryUncheckedUpdateWithoutEventsInput>
+    create: XOR<EventCategoryCreateWithoutEventsInput, EventCategoryUncheckedCreateWithoutEventsInput>
+    where?: EventCategoryWhereInput
+  }
+
+  export type EventCategoryUpdateToOneWithWhereWithoutEventsInput = {
+    where?: EventCategoryWhereInput
+    data: XOR<EventCategoryUpdateWithoutEventsInput, EventCategoryUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type EventCategoryUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventCategoryUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MediaUpsertWithoutEventsInput = {
+    update: XOR<MediaUpdateWithoutEventsInput, MediaUncheckedUpdateWithoutEventsInput>
+    create: XOR<MediaCreateWithoutEventsInput, MediaUncheckedCreateWithoutEventsInput>
+    where?: MediaWhereInput
+  }
+
+  export type MediaUpdateToOneWithWhereWithoutEventsInput = {
+    where?: MediaWhereInput
+    data: XOR<MediaUpdateWithoutEventsInput, MediaUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type MediaUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageNestedInput
+    newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
+    event?: EventUpdateOneWithoutMediaNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageNestedInput
+  }
+
+  export type MediaUpsertWithWhereUniqueWithoutEventInput = {
+    where: MediaWhereUniqueInput
+    update: XOR<MediaUpdateWithoutEventInput, MediaUncheckedUpdateWithoutEventInput>
+    create: XOR<MediaCreateWithoutEventInput, MediaUncheckedCreateWithoutEventInput>
+  }
+
+  export type MediaUpdateWithWhereUniqueWithoutEventInput = {
+    where: MediaWhereUniqueInput
+    data: XOR<MediaUpdateWithoutEventInput, MediaUncheckedUpdateWithoutEventInput>
+  }
+
+  export type MediaUpdateManyWithWhereWithoutEventInput = {
+    where: MediaScalarWhereInput
+    data: XOR<MediaUpdateManyMutationInput, MediaUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type UserUpsertWithoutEventsInput = {
+    update: XOR<UserUpdateWithoutEventsInput, UserUncheckedUpdateWithoutEventsInput>
+    create: XOR<UserCreateWithoutEventsInput, UserUncheckedCreateWithoutEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEventsInput, UserUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type UserUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EventCommentUpsertWithWhereUniqueWithoutEventInput = {
+    where: EventCommentWhereUniqueInput
+    update: XOR<EventCommentUpdateWithoutEventInput, EventCommentUncheckedUpdateWithoutEventInput>
+    create: XOR<EventCommentCreateWithoutEventInput, EventCommentUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventCommentUpdateWithWhereUniqueWithoutEventInput = {
+    where: EventCommentWhereUniqueInput
+    data: XOR<EventCommentUpdateWithoutEventInput, EventCommentUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventCommentUpdateManyWithWhereWithoutEventInput = {
+    where: EventCommentScalarWhereInput
+    data: XOR<EventCommentUpdateManyMutationInput, EventCommentUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type EventLikeUpsertWithWhereUniqueWithoutEventInput = {
+    where: EventLikeWhereUniqueInput
+    update: XOR<EventLikeUpdateWithoutEventInput, EventLikeUncheckedUpdateWithoutEventInput>
+    create: XOR<EventLikeCreateWithoutEventInput, EventLikeUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventLikeUpdateWithWhereUniqueWithoutEventInput = {
+    where: EventLikeWhereUniqueInput
+    data: XOR<EventLikeUpdateWithoutEventInput, EventLikeUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventLikeUpdateManyWithWhereWithoutEventInput = {
+    where: EventLikeScalarWhereInput
+    data: XOR<EventLikeUpdateManyMutationInput, EventLikeUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type EventCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutCategoryInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type EventCreateManyCategoryInputEnvelope = {
+    data: EventCreateManyCategoryInput | EventCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutCategoryInput, EventUncheckedUpdateWithoutCategoryInput>
+    create: XOR<EventCreateWithoutCategoryInput, EventUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutCategoryInput, EventUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutCategoryInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type UserCreateWithoutEventCommentsInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEventCommentsInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEventCommentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEventCommentsInput, UserUncheckedCreateWithoutEventCommentsInput>
+  }
+
+  export type EventCreateWithoutEventCommentsInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventLikes?: EventLikeCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutEventCommentsInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventLikes?: EventLikeUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutEventCommentsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutEventCommentsInput, EventUncheckedCreateWithoutEventCommentsInput>
+  }
+
+  export type UserUpsertWithoutEventCommentsInput = {
+    update: XOR<UserUpdateWithoutEventCommentsInput, UserUncheckedUpdateWithoutEventCommentsInput>
+    create: XOR<UserCreateWithoutEventCommentsInput, UserUncheckedCreateWithoutEventCommentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEventCommentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEventCommentsInput, UserUncheckedUpdateWithoutEventCommentsInput>
+  }
+
+  export type UserUpdateWithoutEventCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEventCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type EventUpsertWithoutEventCommentsInput = {
+    update: XOR<EventUpdateWithoutEventCommentsInput, EventUncheckedUpdateWithoutEventCommentsInput>
+    create: XOR<EventCreateWithoutEventCommentsInput, EventUncheckedCreateWithoutEventCommentsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutEventCommentsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutEventCommentsInput, EventUncheckedUpdateWithoutEventCommentsInput>
+  }
+
+  export type EventUpdateWithoutEventCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutEventCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type UserCreateWithoutEventLikesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenCreateNestedManyWithoutUserInput
+    employees?: EmployeeCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterCreateNestedManyWithoutAuthorInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    events?: EventCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutEventLikesInput = {
+    id?: string
+    name?: string | null
+    username?: string | null
+    email?: string | null
+    avatarUrl?: string | null
+    role?: $Enums.Role
+    createdAt?: Date | string
+    telephone?: string | null
+    passwordHash?: string | null
+    googleId?: string | null
+    githubId?: string | null
+    bio?: string | null
+    isWelcomed?: boolean
+    isVerified?: boolean
+    emailVerified?: boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+    employees?: EmployeeUncheckedCreateNestedManyWithoutUserInput
+    newsComments?: NewsCommentUncheckedCreateNestedManyWithoutCommenterInput
+    newsArticleLikes?: NewsArticleLikeUncheckedCreateNestedManyWithoutLikerInput
+    newsArticles?: NewsArticleUncheckedCreateNestedManyWithoutAuthorInput
+    newsLetters?: NewsLetterUncheckedCreateNestedManyWithoutAuthorInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    events?: EventUncheckedCreateNestedManyWithoutAuthorInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutEventLikesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEventLikesInput, UserUncheckedCreateWithoutEventLikesInput>
+  }
+
+  export type EventCreateWithoutEventLikesInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: EventCategoryCreateNestedOneWithoutEventsInput
+    coverImage?: MediaCreateNestedOneWithoutEventsInput
+    media?: MediaCreateNestedManyWithoutEventInput
+    author?: UserCreateNestedOneWithoutEventsInput
+    eventComments?: EventCommentCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutEventLikesInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: MediaUncheckedCreateNestedManyWithoutEventInput
+    eventComments?: EventCommentUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutEventLikesInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutEventLikesInput, EventUncheckedCreateWithoutEventLikesInput>
+  }
+
+  export type UserUpsertWithoutEventLikesInput = {
+    update: XOR<UserUpdateWithoutEventLikesInput, UserUncheckedUpdateWithoutEventLikesInput>
+    create: XOR<UserCreateWithoutEventLikesInput, UserUncheckedCreateWithoutEventLikesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEventLikesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEventLikesInput, UserUncheckedUpdateWithoutEventLikesInput>
+  }
+
+  export type UserUpdateWithoutEventLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    events?: EventUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEventLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
+    githubId?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    isWelcomed?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationTokens?: EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+    employees?: EmployeeUncheckedUpdateManyWithoutUserNestedInput
+    newsComments?: NewsCommentUncheckedUpdateManyWithoutCommenterNestedInput
+    newsArticleLikes?: NewsArticleLikeUncheckedUpdateManyWithoutLikerNestedInput
+    newsArticles?: NewsArticleUncheckedUpdateManyWithoutAuthorNestedInput
+    newsLetters?: NewsLetterUncheckedUpdateManyWithoutAuthorNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    events?: EventUncheckedUpdateManyWithoutAuthorNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type EventUpsertWithoutEventLikesInput = {
+    update: XOR<EventUpdateWithoutEventLikesInput, EventUncheckedUpdateWithoutEventLikesInput>
+    create: XOR<EventCreateWithoutEventLikesInput, EventUncheckedCreateWithoutEventLikesInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutEventLikesInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutEventLikesInput, EventUncheckedUpdateWithoutEventLikesInput>
+  }
+
+  export type EventUpdateWithoutEventLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutEventLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EmailVerificationTokenCreateManyUserInput = {
@@ -25928,7 +33654,7 @@ export namespace Prisma {
 
   export type NewsArticleCreateManyAuthorInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -25957,6 +33683,34 @@ export namespace Prisma {
     lastVerifiedAt?: Date | string
     secretHash?: string
     role?: $Enums.Role
+  }
+
+  export type EventCreateManyAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventCommentCreateManyAuthorInput = {
+    id?: string
+    content: string
+    eventId: string
+    createdAt?: Date | string
+  }
+
+  export type EventLikeCreateManyUserInput = {
+    id?: string
+    eventId: string
   }
 
   export type EmailVerificationTokenUpdateWithoutUserInput = {
@@ -26065,7 +33819,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
@@ -26075,7 +33829,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26094,7 +33848,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26159,6 +33913,96 @@ export namespace Prisma {
     lastVerifiedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     secretHash?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  }
+
+  export type EventUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCommentUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneRequiredWithoutEventCommentsNestedInput
+  }
+
+  export type EventCommentUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCommentUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventLikeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: EventUpdateOneRequiredWithoutEventLikesNestedInput
+  }
+
+  export type EventLikeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventLikeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
   }
 
   export type DepartMentalSectorCreateManyDepartMentInput = {
@@ -26285,7 +34129,9 @@ export namespace Prisma {
     id?: string
     type: $Enums.MediaType
     url: string
+    format?: string
     createdAt?: Date | string
+    eventId?: string | null
   }
 
   export type TagUpdateWithoutArticlesInput = {
@@ -26349,26 +34195,34 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageMediaNestedInput
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageNestedInput
+    events?: EventUpdateManyWithoutCoverImageNestedInput
+    event?: EventUpdateOneWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateWithoutNewsArticleInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageMediaNestedInput
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageNestedInput
+    events?: EventUncheckedUpdateManyWithoutCoverImageNestedInput
   }
 
   export type MediaUncheckedUpdateManyWithoutNewsArticleInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
     url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type NewsArticleCreateManyCoverImageMediaInput = {
+  export type NewsArticleCreateManyCoverImageInput = {
     id?: string
     title: string
     slug: string
@@ -26383,7 +34237,23 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type NewsArticleUpdateWithoutCoverImageMediaInput = {
+  export type EventCreateManyCoverImageInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    categoryId: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type NewsArticleUpdateWithoutCoverImageInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -26402,7 +34272,7 @@ export namespace Prisma {
     media?: MediaUpdateManyWithoutNewsArticleNestedInput
   }
 
-  export type NewsArticleUncheckedUpdateWithoutCoverImageMediaInput = {
+  export type NewsArticleUncheckedUpdateWithoutCoverImageInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -26421,7 +34291,7 @@ export namespace Prisma {
     media?: MediaUncheckedUpdateManyWithoutNewsArticleNestedInput
   }
 
-  export type NewsArticleUncheckedUpdateManyWithoutCoverImageMediaInput = {
+  export type NewsArticleUncheckedUpdateManyWithoutCoverImageInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
@@ -26436,9 +34306,63 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EventUpdateWithoutCoverImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EventCategoryUpdateOneRequiredWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutCoverImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutCoverImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type NewsArticleCreateManyCategoryInput = {
     id?: string
-    coverImage?: string | null
+    coverImageId?: string | null
     title: string
     slug: string
     summary?: string | null
@@ -26462,7 +34386,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     tags?: TagUpdateManyWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
@@ -26472,7 +34396,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26491,7 +34415,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26515,7 +34439,7 @@ export namespace Prisma {
     location?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    coverImageMedia?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
+    coverImage?: MediaUpdateOneWithoutCoverImageArticlesNestedInput
     category?: NewsArticleCategoryUpdateOneRequiredWithoutArticlesNestedInput
     newsComments?: NewsCommentUpdateManyWithoutNewsArticleNestedInput
     newsArticleLikes?: NewsArticleLikeUpdateManyWithoutNewsArticleNestedInput
@@ -26525,7 +34449,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateWithoutTagsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26544,7 +34468,7 @@ export namespace Prisma {
 
   export type NewsArticleUncheckedUpdateManyWithoutTagsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     summary?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26554,6 +34478,164 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     authorId?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaCreateManyEventInput = {
+    id?: string
+    type: $Enums.MediaType
+    url: string
+    format?: string
+    createdAt?: Date | string
+    newsArticleId?: string | null
+  }
+
+  export type EventCommentCreateManyEventInput = {
+    id?: string
+    content: string
+    authorId: string
+    createdAt?: Date | string
+  }
+
+  export type EventLikeCreateManyEventInput = {
+    id?: string
+    userId: string
+  }
+
+  export type MediaUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImageArticles?: NewsArticleUpdateManyWithoutCoverImageNestedInput
+    newsArticle?: NewsArticleUpdateOneWithoutMediaNestedInput
+    events?: EventUpdateManyWithoutCoverImageNestedInput
+  }
+
+  export type MediaUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImageArticles?: NewsArticleUncheckedUpdateManyWithoutCoverImageNestedInput
+    events?: EventUncheckedUpdateManyWithoutCoverImageNestedInput
+  }
+
+  export type MediaUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+    url?: StringFieldUpdateOperationsInput | string
+    format?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    newsArticleId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type EventCommentUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutEventCommentsNestedInput
+  }
+
+  export type EventCommentUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventCommentUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventLikeUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutEventLikesNestedInput
+  }
+
+  export type EventLikeUncheckedUpdateWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventLikeUncheckedUpdateManyWithoutEventInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EventCreateManyCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    description: string
+    startDate: Date | string
+    endDate?: Date | string | null
+    location: string
+    coverImageId?: string | null
+    status?: $Enums.EventStatus
+    authorId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    coverImage?: MediaUpdateOneWithoutEventsNestedInput
+    media?: MediaUpdateManyWithoutEventNestedInput
+    author?: UserUpdateOneWithoutEventsNestedInput
+    eventComments?: EventCommentUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: MediaUncheckedUpdateManyWithoutEventNestedInput
+    eventComments?: EventCommentUncheckedUpdateManyWithoutEventNestedInput
+    eventLikes?: EventLikeUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    coverImageId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumEventStatusFieldUpdateOperationsInput | $Enums.EventStatus
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

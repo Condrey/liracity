@@ -40,7 +40,7 @@ export async function removeNewsArticleMedia(input: { newsArticleId: string; med
 
 	const { newsArticleId, mediaId } = input;
 
-	const updatedFrontFlashcard = await prisma.newsArticle.update({
+	const data = await prisma.newsArticle.update({
 		where: { id: newsArticleId },
 		data: {
 			media: {
@@ -49,7 +49,7 @@ export async function removeNewsArticleMedia(input: { newsArticleId: string; med
 		},
 		include: newsArticleDataInclude
 	});
-	return updatedFrontFlashcard;
+	return data;
 }
 
 export async function upsertNewsArticle({ formData, mediaIds }: { formData: NewsArticleSchema; mediaIds: string[] }) {
@@ -65,6 +65,7 @@ export async function upsertNewsArticle({ formData, mediaIds }: { formData: News
 		})) ?? [];
 
 	const media = mediaIds?.map((mediaId) => ({ id: mediaId })) ?? [];
+	const coverImageId = input.coverImageId;
 
 	return await prisma.newsArticle.upsert({
 		where: { id: input.id },
@@ -77,7 +78,7 @@ export async function upsertNewsArticle({ formData, mediaIds }: { formData: News
 			status: input.status,
 			slug,
 			category: { connect: { id: input.categoryId } },
-			coverImageMedia: { connect: { id: input.coverImage || "" } },
+			...(coverImageId && { coverImage: { connect: { id: coverImageId } } }),
 			author: { connect: { id: authorId } },
 			tags: { connectOrCreate: tags },
 			media: { connect: media }
@@ -91,7 +92,7 @@ export async function upsertNewsArticle({ formData, mediaIds }: { formData: News
 			status: input.status,
 			slug,
 			category: { connect: { id: input.categoryId } },
-			coverImageMedia: { connect: { id: input.coverImage! } },
+			...(coverImageId && { coverImage: { connect: { id: coverImageId } } }),
 			author: { connect: { id: authorId } },
 			tags: { connectOrCreate: tags },
 			media: { connect: media }

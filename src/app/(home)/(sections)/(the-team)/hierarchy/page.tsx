@@ -2,31 +2,29 @@ import { PageDescription, PageTitle } from "@/components/page-utils";
 import Chart from "./chart";
 
 import BodyContainer from "@/app/(home)/body-container";
-import { whatWeDoLinks } from "@/components/user/constants";
+import { whatWeDoLinks } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
 import { Metadata } from "next";
 
-const { title, description } = whatWeDoLinks.find(
-  (val) => val.href === "/hierarchy"
-)!;
+const { title, description } = whatWeDoLinks.find((val) => val.href === "/hierarchy")!;
 export const metadata: Metadata = {
-  title,
-  description,
+	title,
+	description
 };
 export default async function Page() {
-  const departments = await prisma.departMent.findMany({
-    include: departmentDataInclude,
-  });
-  return (
-    <BodyContainer className="max-w-7xl">
-      <div className="space-y-2 max-w-3xl w-full me-auto">
-        <PageTitle heading={title} />
-        <PageDescription paragraph={pageDescription} className="me-auto" />
-      </div>
-      <Chart departments={departments} />
-    </BodyContainer>
-  );
+	const departments = await prisma.departMent.findMany({
+		include: departmentDataInclude
+	});
+	return (
+		<BodyContainer className="max-w-7xl">
+			<div className="space-y-2 max-w-3xl w-full me-auto">
+				<PageTitle heading={title} />
+				<PageDescription paragraph={pageDescription} className="me-auto" />
+			</div>
+			<Chart departments={departments} />
+		</BodyContainer>
+	);
 }
 
 const pageDescription = `Lira City Council works through a number of departments that handle different aspects of city life.

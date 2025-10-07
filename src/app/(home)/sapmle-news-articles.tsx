@@ -5,7 +5,7 @@ import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { getLastTenNewsArticles } from "./action";
 
-export async function NewsArticles() {
+export async function SampleNewsArticles() {
 	const newsArticles = await getLastTenNewsArticles();
 	const limit = 10;
 	const MAX_DISPLAY = 6;

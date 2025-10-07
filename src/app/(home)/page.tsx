@@ -1,17 +1,22 @@
+import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/list-of-events";
 import { NewsArticleContainerSkeleton } from "@/components/news-and-events/news/list-of-news-articles";
 import NewsLetterForm from "@/components/user/news-letter-form";
 import { Suspense } from "react";
+import { getLatestNews } from "./action";
 import BodyContainer from "./body-container";
 import HeroSection from "./hero-section";
 import MessageFromLeaders from "./message-from-leaders";
-import { NewsArticles } from "./news-articles";
+import { SampleEvents } from "./sample-events";
+import { SampleNewsArticles } from "./sapmle-news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
 	return (
 		<BodyContainer className="flex flex-col max-w-none size-full space-y-12">
 			{/* Hero section  */}
-			<HeroSection />
+			<Suspense>
+				<HeroSectionContainer />
+			</Suspense>
 
 			{/* other sections  */}
 			{/* What we stand for  */}
@@ -20,7 +25,7 @@ export default function Home() {
 			</div>
 			{/* Message from our leaders  */}
 			<MessageFromLeaders />
-			{/* Sample news articles  */}
+			{/* Upcoming events  */}
 			<Suspense
 				fallback={
 					<div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -30,10 +35,28 @@ export default function Home() {
 					</div>
 				}
 			>
-				<NewsArticles />
+				<SampleEvents />
+			</Suspense>
+
+			{/* Sample news articles  */}
+			<Suspense
+				fallback={
+					<div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+						{Array.from({ length: 6 }, (_, index) => (
+							<EventsArticleContainerSkeleton key={index} />
+						))}
+					</div>
+				}
+			>
+				<SampleNewsArticles />
 			</Suspense>
 			{/* News letter form */}
 			<NewsLetterForm />
 		</BodyContainer>
 	);
+}
+
+async function HeroSectionContainer() {
+	const latestNews = await getLatestNews();
+	return <HeroSection initialData={latestNews} />;
 }

@@ -57,7 +57,7 @@ export function useDeleteNewsArticleMediaMutation() {
 			queryClient.invalidateQueries({ queryKey });
 
 			// Return a context with the previous state to rollback in case of error
-			toast.success("Success", { description: "flashcard image deleted successfully" });
+			toast.success("Success", { description: "news article image deleted successfully" });
 		},
 		onError(error, variables, context) {
 			console.error(error);

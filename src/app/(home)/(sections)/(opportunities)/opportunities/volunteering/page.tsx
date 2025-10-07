@@ -1,18 +1,16 @@
 import { PageTitle } from "@/components/page-utils";
-import { cityOpportunityLinks, NavLink } from "@/components/user/constants";
+import { cityOpportunityLinks } from "@/lib/constants";
 import { Metadata } from "next";
 
-const { title, description } = cityOpportunityLinks.find(
-  (val) => val.href === "/opportunities/volunteering",
-)!;
+const { title, description } = cityOpportunityLinks.find((val) => val.href === "/opportunities/volunteering")!;
 export const metadata: Metadata = {
-  title,
-  description,
+	title,
+	description
 };
 export default function Page() {
-  return (
-    <div className="pt-[85px]">
-      <PageTitle heading={title} />
-    </div>
-  );
+	return (
+		<div className="">
+			<PageTitle heading={title} />
+		</div>
+	);
 }

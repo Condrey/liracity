@@ -209,7 +209,7 @@ exports.Prisma.NewsLetterScalarFieldEnum = {
 
 exports.Prisma.NewsArticleScalarFieldEnum = {
   id: 'id',
-  coverImage: 'coverImage',
+  coverImageId: 'coverImageId',
   title: 'title',
   slug: 'slug',
   summary: 'summary',
@@ -227,8 +227,10 @@ exports.Prisma.MediaScalarFieldEnum = {
   id: 'id',
   type: 'type',
   url: 'url',
+  format: 'format',
   createdAt: 'createdAt',
-  newsArticleId: 'newsArticleId'
+  newsArticleId: 'newsArticleId',
+  eventId: 'eventId'
 };
 
 exports.Prisma.NewsArticleCategoryScalarFieldEnum = {
@@ -258,6 +260,43 @@ exports.Prisma.NewsArticleLikeScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  description: 'description',
+  categoryId: 'categoryId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  location: 'location',
+  coverImageId: 'coverImageId',
+  status: 'status',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug'
+};
+
+exports.Prisma.EventCommentScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  authorId: 'authorId',
+  eventId: 'eventId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EventLikeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  eventId: 'eventId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -280,15 +319,21 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.NewsArticleStatus = exports.$Enums.NewsArticleStatus = {
-  PRIVATE: 'PRIVATE',
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED'
+  ARCHIVED: 'ARCHIVED',
+  PRIVATE: 'PRIVATE'
 };
 
 exports.MediaType = exports.$Enums.MediaType = {
   IMAGE: 'IMAGE',
   VIDEO: 'VIDEO'
+};
+
+exports.EventStatus = exports.$Enums.EventStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {
@@ -306,7 +351,11 @@ exports.Prisma.ModelName = {
   NewsArticleCategory: 'NewsArticleCategory',
   Tag: 'Tag',
   NewsComment: 'NewsComment',
-  NewsArticleLike: 'NewsArticleLike'
+  NewsArticleLike: 'NewsArticleLike',
+  Event: 'Event',
+  EventCategory: 'EventCategory',
+  EventComment: 'EventComment',
+  EventLike: 'EventLike'
 };
 
 /**

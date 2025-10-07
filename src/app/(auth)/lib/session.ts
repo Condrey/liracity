@@ -8,7 +8,17 @@ const inactivityTimeoutSeconds = 60 * 60; // 1 hour
 
 const sessionWithUserInclude = {
 	user: {
-		select: { id: true, role: true, avatarUrl: true, email: true, username: true, name: true, isVerified: true }
+		select: {
+			id: true,
+			role: true,
+			avatarUrl: true,
+			email: true,
+			username: true,
+			name: true,
+			isVerified: true,
+			bio: true,
+			telephone: true
+		}
 	}
 } satisfies Prisma.SessionInclude;
 type SessionWithUserData = Prisma.SessionGetPayload<{ include: typeof sessionWithUserInclude }>;
@@ -20,15 +30,21 @@ export type LuciaSession = {
 	createdAt: Date;
 	userId: string;
 	role: Role;
+	// bio: string | null;
+	// username: string | null;
+	// telephone: string | null;
+	// name: string;
 };
 export type LuciaUser = {
 	role: Role;
-	avatarUrl?: string | null;
-	email?: string | null;
+	avatarUrl: string | null;
+	email: string | null;
 	id: string;
-	username?: string | null;
+	username: string | null;
 	isVerified: boolean;
-	name?: string;
+	name: string;
+	bio: string | null;
+	telephone: string | null;
 };
 interface LuciaSessionWithToken extends Session {
 	token: string;

@@ -8,7 +8,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
-import { newsArticleStatuses } from "@/components/user/constants";
+import { newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { newsArticleSchema, NewsArticleSchema } from "@/lib/validation";
@@ -48,7 +48,7 @@ export default function SheetAddEditNewsArticle({
 			status: newsArticle?.status || "DRAFT",
 			authorId: newsArticle?.authorId || userId || "",
 			content: newsArticle?.content || "",
-			coverImage: newsArticle?.coverImage,
+			coverImageId: newsArticle?.coverImageId,
 			location: newsArticle?.location,
 			slug: newsArticle?.slug,
 			summary: newsArticle?.summary,
@@ -169,7 +169,7 @@ export default function SheetAddEditNewsArticle({
 									<div className="flex  gap-4">
 										<FormField
 											control={form.control}
-											name="coverImage"
+											name="coverImageId"
 											render={({ field }) => (
 												<FormItem className="max-w-fit">
 													<FormLabel>Cover image</FormLabel>

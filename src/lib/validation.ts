@@ -1,4 +1,4 @@
-import { NewsArticleStatus } from "@/generated/prisma";
+import { EventStatus, NewsArticleStatus } from "@/generated/prisma";
 import { z } from "zod";
 
 const requiredString = z.string({ required_error: "This field should have a value" }).trim();
@@ -126,7 +126,7 @@ export const newsArticleSchema = z.object({
 	id: z.string().optional(),
 	title: requiredString.min(1, "Please add a title"),
 	slug: z.string().optional(),
-	coverImage: z.string().optional().nullable(),
+	coverImageId: z.string().optional().nullable(),
 	summary: z.string().optional().nullable(),
 	publishedAt: z.coerce.date().optional().nullable(),
 	status: z.nativeEnum(NewsArticleStatus),
@@ -134,7 +134,7 @@ export const newsArticleSchema = z.object({
 	authorId: requiredString,
 	categoryId: requiredString,
 	tags: z.array(tagSchema).optional(),
-	location: z.string().optional().nullable()
+	location: z.string().trim().optional().nullable()
 });
 export type NewsArticleSchema = z.infer<typeof newsArticleSchema>;
 
@@ -144,6 +144,30 @@ export const newsArticleCategorySchema = z.object({
 	name: requiredString.min(1, "Please provide a category")
 });
 export type NewsArticleCategorySchema = z.infer<typeof newsArticleCategorySchema>;
+
+// Event
+export const eventSchema = z.object({
+	id: z.string().optional(),
+	title: requiredString.min(1, "Please add a title"),
+	slug: z.string().optional(),
+	coverImageId: z.string().optional().nullable(),
+	summary: z.string().optional().nullable(),
+	status: z.nativeEnum(EventStatus),
+	description: requiredString,
+	authorId: requiredString,
+	categoryId: requiredString,
+	location: requiredString,
+	startDate: z.coerce.date(),
+	endDate: z.coerce.date().optional().nullable()
+});
+export type EventSchema = z.infer<typeof eventSchema>;
+
+// Event  category
+export const eventCategorySchema = z.object({
+	id: z.string().optional(),
+	name: requiredString.min(1, "Please provide a category")
+});
+export type EventCategorySchema = z.infer<typeof eventCategorySchema>;
 
 // miscellaneous
 export const emailSchema = z.object({ email: z.string().trim().email() });

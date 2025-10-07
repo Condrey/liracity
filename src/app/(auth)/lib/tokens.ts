@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { deleteSessionById, getSessionById, LuciaSession, LuciaUser, SessionValidationResult } from "./session";
 import { constantTimeEqual, generateSecureRandomString, hashSecret, stringToUint8Array } from "./utils";
 
-const activityCheckIntervalSeconds = 60 * 60; // 1 hour
+const activityCheckIntervalSeconds = 60 * 60 * 3; // 3 hours
 
 export function generateSessionToken(): string {
 	const id = generateSecureRandomString();
@@ -22,18 +22,17 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 	const sessionId = tokenParts[0];
 	const sessionSecret = tokenParts[1];
 
-
 	const session = await getSessionById(sessionId);
 	if (!session) {
-        console.error('No session found for ID:', sessionId);
+		console.error("No session found for ID:", sessionId);
 		return { session: null, user: null };
 	}
-    
+
 	const tokenSecretHash = await hashSecret(sessionSecret);
-    const sessionSecretHashBytes = stringToUint8Array(session.secretHash);
+	const sessionSecretHashBytes = stringToUint8Array(session.secretHash);
 	const validSecret = constantTimeEqual(tokenSecretHash, sessionSecretHashBytes);
 	if (!validSecret) {
-        console.error('Session secret does not match for session ID:', sessionId);
+		console.error("Session secret does not match for session ID:", sessionId);
 		return { session: null, user: null };
 	}
 
@@ -43,7 +42,7 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 	}
 	if (now.getTime() - session.lastVerifiedAt.getTime() >= activityCheckIntervalSeconds * 1000) {
 		session.lastVerifiedAt = now;
-		 await prisma.session.update({
+		await prisma.session.update({
 			where: {
 				id: session.id
 			},
@@ -58,8 +57,8 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 			where: { id: sessionId },
 			data: { expiresAt: session.expiresAt }
 		});
-	};
-	return { session:session satisfies LuciaSession, user: session.user as LuciaUser  };
+	}
+	return { session: session satisfies LuciaSession, user: session.user as LuciaUser };
 }
 
 export async function deleteSessionTokenCookie(): Promise<void> {
@@ -80,7 +79,6 @@ export async function setSessionTokenCookie(token: string, expiresAt: Date): Pro
 		path: "/",
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "lax",
-		expires: expiresAt,
-    
+		expires: expiresAt
 	});
 }

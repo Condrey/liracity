@@ -7,7 +7,9 @@ export const userDataSelect = {
 	avatarUrl: true,
 	telephone: true,
 	email: true,
-	isVerified: true
+	isVerified: true,
+	bio: true,
+	username: true
 } satisfies Prisma.UserSelect;
 export type UserDataSelect = Prisma.UserGetPayload<{
 	select: typeof userDataSelect;
@@ -21,15 +23,33 @@ export type EmployeeData = Prisma.EmployeeGetPayload<{
 	include: typeof employeeDataInclude;
 }>;
 
+// Media
+export const mediaDataInclude = {} satisfies Prisma.MediaInclude;
+export type MediaData = Prisma.MediaGetPayload<{
+	include: typeof mediaDataInclude;
+}>;
+
 // News Article
 export const newsArticleDataInclude = {
 	author: { select: userDataSelect },
-	coverImageMedia: { select: { url: true } },
+	coverImage: { select: { url: true } },
+	category: true,
+	media: true,
 	tags: true,
 	_count: { select: { newsArticleLikes: true, newsComments: true } }
 } satisfies Prisma.NewsArticleInclude;
 export type NewsArticleData = Prisma.NewsArticleGetPayload<{
 	include: typeof newsArticleDataInclude;
+}>;
+
+// Events
+export const eventDataInclude = {
+	author: { select: userDataSelect },
+	coverImage: { select: { url: true } },
+	_count: { select: { eventLikes: true, eventComments: true } }
+} satisfies Prisma.EventInclude;
+export type EventData = Prisma.EventGetPayload<{
+	include: typeof eventDataInclude;
 }>;
 
 // Leader container

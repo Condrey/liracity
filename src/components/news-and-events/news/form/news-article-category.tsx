@@ -27,8 +27,8 @@ export default function NewsArticleCategory({ form }: { form: UseFormReturn<News
 	if (status === "error") return <ErrorContainer errorMessage="Failed to get categories" query={query} />;
 	if (status === "pending")
 		return (
-			<div className="space-y-3">
-				<Skeleton className="w-2/3 h-6" />
+			<div className="space-y-3 flex-1">
+				<Skeleton className="w-2/3 h-5" />
 				<Skeleton className="w-full h-9" />
 			</div>
 		);

@@ -2,7 +2,7 @@ import { AttachmentPreviews } from "@/components/attachment/attachment-previews"
 import { ButtonAddMultipleAttachments } from "@/components/attachment/button-add-attachment";
 import { FormItem, FormLabel } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
-import { MAX_ATTACHMENTS } from "@/components/user/constants";
+import { MAX_ATTACHMENTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";

@@ -2,7 +2,7 @@
 
 import { useSession } from "@/app/session-provider";
 import { Button, ButtonProps } from "@/components/ui/button";
-import { userRoles } from "@/components/user/constants";
+import { myPrivileges } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { useState } from "react";
 import SheetAddEditNewsArticle from "./form/sheet-add-edit-news-article";
@@ -16,7 +16,7 @@ export default function ButtonAddEditNewsArticle({ newsArticle, ...props }: Butt
 	const altId = Date.now().toString();
 	const { user } = useSession();
 	const userId = user?.id;
-	const canUpsert = !!user && userRoles[user.role!].includes("MODERATOR");
+	const canUpsert = !!user && myPrivileges[user.role!].includes("MODERATOR");
 
 	return (
 		<>

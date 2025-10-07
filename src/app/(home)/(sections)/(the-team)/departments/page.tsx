@@ -1,33 +1,31 @@
 import BodyContainer from "@/app/(home)/body-container";
-import { PageDescription, PageTitle } from "@/components/page-utils";
-import { whatWeDoLinks } from "@/components/user/constants";
-import { Metadata } from "next";
 import { getAllDepartmentList } from "@/components/department/action";
 import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
+import { PageDescription, PageTitle } from "@/components/page-utils";
+import { whatWeDoLinks } from "@/lib/constants";
+import { Metadata } from "next";
 import ListOfDepartments from "./list-of-departments";
 
-const { title, description } = whatWeDoLinks.find(
-  (val) => val.href === "/departments",
-)!;
+const { title, description } = whatWeDoLinks.find((val) => val.href === "/departments")!;
 export const metadata: Metadata = {
-  title,
-  description,
+	title,
+	description
 };
 export default async function Page() {
-  const departments = await getAllDepartmentList();
-  return (
-    <BodyContainer>
-      <div className="space-y-2  max-w-fit mx-auto">
-        <div className="flex gap-3 items-center justify-between">
-          <PageTitle heading={title} />
-          <ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
-        </div>
-        <PageDescription paragraph={pageDescription} />
-      </div>
+	const departments = await getAllDepartmentList();
+	return (
+		<BodyContainer>
+			<div className="space-y-2  max-w-fit mx-auto">
+				<div className="flex gap-3 items-center justify-between">
+					<PageTitle heading={title} />
+					<ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
+				</div>
+				<PageDescription paragraph={pageDescription} />
+			</div>
 
-      <ListOfDepartments departments={departments} />
-    </BodyContainer>
-  );
+			<ListOfDepartments departments={departments} />
+		</BodyContainer>
+	);
 }
 
 const pageDescription = `Lira City Council works through a number of departments that handle different aspects of city life.

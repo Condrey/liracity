@@ -4,14 +4,14 @@ import {
 	NavigationMenuContent,
 	NavigationMenuItem,
 	NavigationMenuLink,
-	NavigationMenuTrigger
+	NavigationMenuTrigger,
+	navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { TransitionStartFunction, useTransition } from "react";
-import { navigationMenuTriggerStyle } from "../../ui/navigation-menu";
-import { NavLinkGroup } from "../constants";
+import { NavLinkGroup } from "../../../lib/constants";
 
 interface NavigationMenuItemContentProps {
 	nav: NavLinkGroup;

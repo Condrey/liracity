@@ -23,12 +23,7 @@ export function PageSidebar({
 	...props
 }: React.ComponentProps<typeof Sidebar> & { relatedArticles: NewsArticleData[] }) {
 	return (
-		<Sidebar
-			variant="sidebar"
-			{...props}
-			collapsible="none"
-			className="sticky top-0 right-0 hidden  h-auto border-l lg:flex"
-		>
+		<Sidebar variant="sidebar" {...props} className="">
 			<SidebarHeader>Related News Article</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>

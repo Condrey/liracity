@@ -38,7 +38,8 @@ export default function SheetAddEditNewsArticle({
 	altId,
 	userId
 }: SheetAddEditNewsArticleProps) {
-	const [mediaIds, setMediaIds] = useState<string[]>([]);
+	const prevMediaIds = newsArticle?.media.map((m) => m.id);
+	const [mediaIds, setMediaIds] = useState<string[]>(prevMediaIds || []);
 	const form = useForm<NewsArticleSchema>({
 		resolver: zodResolver(newsArticleSchema),
 		defaultValues: {
@@ -71,11 +72,15 @@ export default function SheetAddEditNewsArticle({
 		removeAttachment,
 		reset: resetMediaUploads
 	} = useCoverImageUpload();
-	const coverImageUrl = !attachment ? "" : URL.createObjectURL(attachment.file);
+	const coverImageUrl = !!newsArticle
+		? newsArticle?.coverImage?.url
+		: !attachment
+		? ""
+		: URL.createObjectURL(attachment.file);
 
 	const { isPending, mutate } = useUpsertNewsArticleMutation();
 	function onSubmit(input: NewsArticleSchema) {
-		const newFields = { ...input, coverImage: attachment.mediaId };
+		const newFields = { ...input, coverImage: attachment ? attachment.mediaId : newsArticle?.coverImageId };
 		mutate(
 			{ formData: newFields, mediaIds },
 			{
@@ -90,15 +95,15 @@ export default function SheetAddEditNewsArticle({
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<SheetContent side="bottom" className="h-svh overflow-y-auto bg-muted">
 						<div className="relative max-w-7xl min-h-[100px] w-full mx-auto flex flex-col justify-center">
-							{!!attachment && !!attachment.file && (
+							{coverImageUrl && (
 								<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
-									<Image src={coverImageUrl} alt="Cover image" fill className="object-cover w-full rounded-xl" />
+									<Image src={coverImageUrl!} alt="Cover image" fill className="object-cover w-full rounded-xl" />
 								</div>
 							)}
 							<div
 								className={cn(
 									"w-full absolute h-fit",
-									!!attachment && !!attachment.file && "p-3 bg-background/20 backdrop-blur-2xl max-h-fit my-auto"
+									!!coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl  max-h-fit my-auto"
 								)}
 							>
 								<SheetHeader className=" w-full ">
@@ -149,6 +154,7 @@ export default function SheetAddEditNewsArticle({
 								2
 							)}
 						</pre> */}
+						<pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
 						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
 							{/* main content  */}
 							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">

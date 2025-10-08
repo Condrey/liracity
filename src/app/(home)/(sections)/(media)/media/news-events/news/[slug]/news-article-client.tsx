@@ -13,6 +13,7 @@ import { NewsArticleStatus, Tag } from "@/generated/prisma";
 import { newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { formatDateToLocal } from "@/lib/utils";
+import Linkify from "@/utils/linkify";
 import UserLinkWithTooltip from "@/utils/user-link-with-tooltip";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeftIcon, Edit3Icon, MapPin } from "lucide-react";
@@ -120,7 +121,10 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 				)}
 			</section>
 			<section>
-				<TipTapViewer content={content} className="text-justify leading-relaxed text-xl" />
+				<Linkify>
+					<TipTapViewer content={content} className="text-justify leading-relaxed text-xl" />
+					{/* <div dangerouslySetInnerHTML={{ __html: content }} className="text-justify leading-relaxed text-xl" /> */}
+				</Linkify>
 			</section>
 
 			{!!media && media.length && (

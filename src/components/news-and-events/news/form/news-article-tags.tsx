@@ -4,13 +4,13 @@ import { slugify } from "@/lib/utils";
 import { NewsArticleSchema, TagSchema } from "@/lib/validation";
 import { HashIcon } from "lucide-react";
 import { useState } from "react";
-import { UseFormReturn } from "react-hook-form";
+import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 export default function NewsArticleTag({ form }: { form: UseFormReturn<NewsArticleSchema> }) {
 	return <FormField control={form.control} name="tags" render={({ field }) => <TagsInputField field={field} />} />;
 }
-function TagsInputField({ field }: { field: any }) {
+function TagsInputField({ field }: { field: ControllerRenderProps<NewsArticleSchema, "tags"> }) {
 	// Keep local input text for smooth typing
-	const [tagsInput, setTagsInput] = useState<string>(field.value?.map((t: any) => t.tag).join(", ") ?? "");
+	const [tagsInput, setTagsInput] = useState<string>(field.value?.map((t) => t.name).join(", ") ?? "");
 	const handleBlur = () => {
 		const tagsArray = tagsInput
 			.split(",")

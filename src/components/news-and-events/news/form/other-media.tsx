@@ -112,6 +112,7 @@ export default function OtherMedia({
 					}}
 				/>
 			)}
+			{}
 			{isUploading && (
 				<>
 					<span className="text-sm">{uploadProgress ?? 0}</span>

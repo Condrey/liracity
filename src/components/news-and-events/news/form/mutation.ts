@@ -28,13 +28,16 @@ export function useUpsertNewsArticleMutation() {
 		async onSuccess(data, variables, context) {
 			const queryKey: QueryKey = ["news-article", data.id];
 			const queryKey2: QueryKey = ["news-articles"];
+			const queryKey3: QueryKey = ["news-article", "slug", data.slug];
 
 			await Promise.all([
 				await queryClient.cancelQueries({ queryKey }),
-				await queryClient.cancelQueries({ queryKey: queryKey2 })
+				await queryClient.cancelQueries({ queryKey: queryKey2 }),
+				await queryClient.cancelQueries({ queryKey: queryKey3 })
 			]);
 			queryClient.invalidateQueries({ queryKey });
 			queryClient.invalidateQueries({ queryKey: queryKey2 });
+			queryClient.invalidateQueries({ queryKey: queryKey3 });
 			toast.success(`Successfully submitted the news article`);
 		},
 		onError(error, variables, context) {

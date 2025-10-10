@@ -1,6 +1,7 @@
 "use server";
 
 import { validateRequest } from "@/auth";
+import { NewsArticleStatus } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 import { newsArticleDataInclude } from "@/lib/types";
 import { slugify } from "@/lib/utils";
@@ -50,6 +51,18 @@ export async function removeNewsArticleMedia(input: { newsArticleId: string; med
 		include: newsArticleDataInclude
 	});
 	return data;
+}
+
+export async function updateNewsArticleStatus({
+	newsArticleId,
+	status
+}: {
+	newsArticleId: string;
+	status: NewsArticleStatus;
+}) {
+	const { user } = await validateRequest();
+	if (!user) throw Error("Unauthorized");
+	await prisma.newsArticle.update({ where: { id: newsArticleId }, data: { status } });
 }
 
 export async function upsertNewsArticle({ formData, mediaIds }: { formData: NewsArticleSchema; mediaIds: string[] }) {

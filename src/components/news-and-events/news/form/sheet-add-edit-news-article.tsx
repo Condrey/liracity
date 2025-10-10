@@ -154,7 +154,7 @@ export default function SheetAddEditNewsArticle({
 								2
 							)}
 						</pre> */}
-						<pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
+						{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
 						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
 							{/* main content  */}
 							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">

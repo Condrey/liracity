@@ -1,5 +1,6 @@
 "use client";
 
+import { getLatestNews } from "@/components/news-and-events/news/action";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
@@ -10,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { MoveRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getLatestNews } from "./action";
 
 export default function HeroSection({ initialData }: { initialData: NewsArticleData | null }) {
 	const query = useQuery({

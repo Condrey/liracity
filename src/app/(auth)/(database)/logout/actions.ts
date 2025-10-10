@@ -3,10 +3,10 @@
 import { validateRequest } from "@/auth";
 import { redirect } from "next/navigation";
 import { globalPOSTRateLimit } from "../../lib/request";
-import {  invalidateSession } from "../../lib/session";
+import { invalidateSession } from "../../lib/session";
 import { deleteSessionTokenCookie } from "../../lib/tokens";
 
-export async function logout() {
+export async function logout(redirectUrl?: string) {
 	if (!globalPOSTRateLimit()) {
 		throw Error("Too many requests");
 	}
@@ -18,6 +18,9 @@ export async function logout() {
 
 	invalidateSession(session.id);
 	deleteSessionTokenCookie();
+	if (!redirectUrl || !redirectUrl.startsWith("/")) {
+		redirectUrl = "/";
+	}
 	// finally
-	return redirect("/");
+	return redirect(redirectUrl);
 }

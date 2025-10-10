@@ -34,7 +34,7 @@ export default function Error({ error, reset }: ErrorProps) {
 				</pre>
 			</div>
 			<Button onClick={reset} className="w-full max-w-fit mx-auto">
-				<RefreshCwIcon className=" animate-caret-blink" />
+				<RefreshCwIcon className="" />
 				Try again
 			</Button>
 		</div>

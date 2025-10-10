@@ -2,7 +2,12 @@
 
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { removeNewsArticleMedia, upsertNewsArticle, upsertNewsArticleCategory } from "./action";
+import {
+	removeNewsArticleMedia,
+	updateNewsArticleStatus,
+	upsertNewsArticle,
+	upsertNewsArticleCategory
+} from "./action";
 
 const queryKey: QueryKey = ["news-article-categories"];
 export function useUpsertNewsArticleCategoryMutation() {
@@ -27,8 +32,8 @@ export function useUpsertNewsArticleMutation() {
 		mutationFn: upsertNewsArticle,
 		async onSuccess(data, variables, context) {
 			const queryKey: QueryKey = ["news-article", data.id];
-			const queryKey2: QueryKey = ["news-articles"];
-			const queryKey3: QueryKey = ["news-article", "slug", data.slug];
+			const queryKey2: QueryKey = ["news-article", "slug"];
+			const queryKey3: QueryKey = ["news-articles"];
 
 			await Promise.all([
 				await queryClient.cancelQueries({ queryKey }),
@@ -43,6 +48,32 @@ export function useUpsertNewsArticleMutation() {
 		onError(error, variables, context) {
 			console.error(error);
 			toast.error("Submission error", { description: "There was trouble submitting article. Please try again!" });
+		}
+	});
+}
+
+export function useUpdateNewsArticleStatusMutation() {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: updateNewsArticleStatus,
+		async onSuccess(data, variables, context) {
+			const queryKey: QueryKey = ["news-article", variables.newsArticleId];
+			const queryKey2: QueryKey = ["news-article", "slug"];
+			const queryKey3: QueryKey = ["news-articles"];
+
+			await Promise.all([
+				await queryClient.cancelQueries({ queryKey }),
+				await queryClient.cancelQueries({ queryKey: queryKey2 }),
+				await queryClient.cancelQueries({ queryKey: queryKey3 })
+			]);
+			queryClient.invalidateQueries({ queryKey });
+			queryClient.invalidateQueries({ queryKey: queryKey2 });
+			queryClient.invalidateQueries({ queryKey: queryKey3 });
+			toast.success(`Successfully updated article status`);
+		},
+		onError(error, variables, context) {
+			console.error(error);
+			toast.error("Submission error", { description: "There was trouble updating article. Please try again!" });
 		}
 	});
 }

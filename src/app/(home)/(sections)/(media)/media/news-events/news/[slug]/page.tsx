@@ -1,7 +1,10 @@
+import { validateRequest } from "@/auth";
+import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
+import { NewsArticleStatus, Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import { siteConfig, webName } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
-import { getNewsArticleBySlug, getRelatedNewsArticles } from "./action";
+import { notFound, unauthorized } from "next/navigation";
 import { NewsArticleClient } from "./news-article-client";
 
 interface PageProps {
@@ -89,18 +92,22 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 export default async function Page({ params }: PageProps) {
 	const { slug } = await params;
 	const decodedSlug = decodeURIComponent(slug);
+	const { user } = await validateRequest();
 	const newsArticle = await getNewsArticleBySlug(decodedSlug);
 	if (!newsArticle) return notFound();
-	const relatedArticles = await getRelatedNewsArticles({
+	const relatedArticles = await getRelatedNewsArticlesFromTags({
 		categoryId: newsArticle.categoryId,
 		currentArticleId: newsArticle.id,
 		tagIds: newsArticle.tags.map((t) => t.id)
 	});
+	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	if (newsArticle.status === NewsArticleStatus.DRAFT && !isAnEditor) return unauthorized();
+	if (newsArticle.status === NewsArticleStatus.PRIVATE && !isAStaff) return unauthorized();
 
 	return (
 		<div className="">
 			<NewsArticleClient initialData={newsArticle} slug={decodedSlug} relatedArticles={relatedArticles} />
-			
 		</div>
 	);
 }

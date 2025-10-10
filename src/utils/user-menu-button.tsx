@@ -1,5 +1,6 @@
 "use client";
-import { logout } from "@/app/(auth)/(database)/logout/actions";
+
+import LogoutButton from "@/app/(auth)/(database)/logout/logout-button";
 import { useSession } from "@/app/session-provider";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -12,11 +13,12 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Role } from "@/generated/prisma";
+import { REDIRECT_TO_URL_SEARCH_PARAMS } from "@/lib/constants";
 import { userRoles } from "@/lib/enums";
 import { cn } from "@/lib/utils";
-import { useQueryClient } from "@tanstack/react-query";
 import { LogOutIcon, LucideSettings2 } from "lucide-react";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import UserAvatar from "./user-avatar";
 import UserLinkWithTooltip from "./user-link-with-tooltip";
@@ -28,9 +30,13 @@ interface UserMenuButtonProps {
 
 export default function UserMenuButton({ className, isOnlyInfo = false }: UserMenuButtonProps) {
 	const { user } = useSession();
-	const queryClient = useQueryClient();
-
 	const { role } = userRoles[user?.role || Role.USER];
+
+	const currentPathname = usePathname();
+	const searchParams = useSearchParams();
+	const newParams = new URLSearchParams(searchParams.toString());
+	newParams.set(REDIRECT_TO_URL_SEARCH_PARAMS, currentPathname);
+	const loginUrl = `/login` + "?" + newParams.toString();
 
 	return (
 		<>
@@ -75,21 +81,14 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 							</ThemeToggle>
 						</div>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem
-							variant="destructive"
-							className="cursor-pointer space-x-2 "
-							onClick={() => {
-								queryClient.clear();
-								logout();
-							}}
-						>
-							<LogOutIcon className="mr-2" />
-							<span>Sign out</span>
-						</DropdownMenuItem>
+							<LogoutButton variant={"ghost"} className="flex justify-start ps-3 w-full">
+								<LogOutIcon className="mr-2 text-inherit" />
+								Sign out
+							</LogoutButton>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
-				<Link href={`/login`} className={buttonVariants({ variant: "ghost" })}>
+				<Link href={loginUrl} className={buttonVariants({ variant: "ghost" })}>
 					Login now
 				</Link>
 			)}

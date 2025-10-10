@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
-import { deleteSessionById, getSessionById, LuciaSession, LuciaUser, SessionValidationResult } from "./session";
+import { deleteSessionById, getSessionById, LuciaSession, LuciaUser, sessionExpiryDate, SessionValidationResult } from "./session";
 import { constantTimeEqual, generateSecureRandomString, hashSecret, stringToUint8Array } from "./utils";
 
-const activityCheckIntervalSeconds = 60 * 60 * 3; // 3 hours
+const activityCheckIntervalSeconds = 1000*60 * 60 * 3; // 3 hours
 
 export function generateSessionToken(): string {
 	const id = generateSecureRandomString();
@@ -40,7 +40,10 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 		await deleteSessionById(sessionId);
 		return { session: null, user: null };
 	}
-	if (now.getTime() - session.lastVerifiedAt.getTime() >= activityCheckIntervalSeconds * 1000) {
+	// Has it been 3 hours (activityCheckIntervalSeconds) since the session was last verified 
+	// If yes then set the last time it was verified to now (refresh the timestamp) and in db too
+	// “If it’s been more than 3 hours since we last saw this session active, mark it as active again and save that time in the database.”
+	if (now.getTime() - session.lastVerifiedAt.getTime() >= activityCheckIntervalSeconds ) {
 		session.lastVerifiedAt = now;
 		await prisma.session.update({
 			where: {
@@ -51,8 +54,10 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 			}
 		});
 	}
+	// rolling session expiration: 
+	// If the session is going to expire within 15 days, it’s time to extend its lifetime to 30 days so as to keep active users logged in.
 	if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
-		session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+		session.expiresAt = new Date(Date.now() + sessionExpiryDate); // To expire in 30 days
 		await prisma.session.update({
 			where: { id: sessionId },
 			data: { expiresAt: session.expiresAt }

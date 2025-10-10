@@ -21,7 +21,7 @@ type ArticleImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "widt
 
 export default function ArticleImage({
 	mediaIdentifier,
-	placeholder = "/placeholder.png",
+	placeholder = "/image-placeholder.jpeg",
 	alt,
 	...props
 }: ArticleImageProps) {

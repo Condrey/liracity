@@ -18,16 +18,7 @@ export default function Page() {
           </div>
           <div className="space-y-2 max-w-md md:bg-secondary/50 dark:md:bg-secondary md:backdrop-blur-2xl dark:md:border md:px-3 md:py-5 rounded-md">
             <SignUpForm />
-            <Agreement className="text-center mb-6" />
-            <Link
-              href={`/login`}
-              className="block text-center group/link hover:text-primary"
-            >
-              <span className="underline">
-                Already have an account? <strong>Login</strong>
-              </span>
-              <MoveRightIcon className="ms-2 group-hover/link:visible inline  invisible transition-all ease-in delay-200 " />
-            </Link>
+         
           </div>
         </div>
 		<div className=" hidden w-3/5  md:block h-dvh bg-gradient-to-bl from-black dark:from-black/20 via-yellow-500 dark:via-yellow-500/20 to-red-500 dark:to-red-500/20 ">

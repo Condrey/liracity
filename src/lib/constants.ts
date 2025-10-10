@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 export const MAX_ATTACHMENTS = 5;
+export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
 
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {

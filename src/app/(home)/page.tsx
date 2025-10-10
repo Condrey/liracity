@@ -1,14 +1,14 @@
-import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/list-of-events";
-import { NewsArticleContainerSkeleton } from "@/components/news-and-events/news/list-of-news-articles";
+import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
+import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news-article-container-skeleton";
 import NewsLetterForm from "@/components/user/news-letter-form";
 import { Suspense } from "react";
-import { getLatestNews } from "./action";
 import BodyContainer from "./body-container";
 import HeroSection from "./hero-section";
 import MessageFromLeaders from "./message-from-leaders";
 import { SampleEvents } from "./sample-events";
-import { SampleNewsArticles } from "./sapmle-news-articles";
+import { SampleNewsArticles } from "./sample-news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
+import { getLatestNews } from "@/components/news-and-events/news/action";
 
 export default function Home() {
 	return (

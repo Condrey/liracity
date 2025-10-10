@@ -17,7 +17,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 	return (
 		<SessionProvider value={{ session, user }}>
 			<div className="[--header-height:calc(--spacing(14))]">
-				<SidebarProvider className="flex flex-col">
+				<SidebarProvider className="flex flex-col space-y-6">
 					<header className="sticky top-0 z-50  w-full dark:bg-card bg-primary text-primary-foreground dark:text-card-foreground  dark:border-b">
 						<TopAppBar className="w-full max-w-9xl  py-2 mx-auto  px-3 " />
 					</header>

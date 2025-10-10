@@ -4,7 +4,8 @@ import { cookies } from "next/headers";
 import { validateSessionToken } from "./tokens";
 import { hashSecret } from "./utils";
 
-const inactivityTimeoutSeconds = 60 * 60; // 1 hour
+const inactivityTimeoutSeconds = 1000 * 60 * 60; // 1 hour
+export const sessionExpiryDate = 1000 * 60 * 60 * 24 * 30; //30 days
 
 const sessionWithUserInclude = {
 	user: {
@@ -65,7 +66,7 @@ export async function getCurrentSession(): Promise<SessionValidationResult> {
 export async function invalidateSession(sessionId: string): Promise<void> {
 	await prisma.session.delete({ where: { id: sessionId } });
 }
-
+// To log out user from all devices remotely
 export async function invalidateUserSessions(userId: string): Promise<void> {
 	await prisma.session.deleteMany({ where: { userId } });
 }
@@ -76,7 +77,7 @@ export async function createSession(token: string, userId: string): Promise<Luci
 	const id = tokenParts[0];
 	const secret = tokenParts[1];
 	const secretHash = await hashSecret(secret);
-	const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+	const expiresAt = new Date(Date.now() + sessionExpiryDate);
 
 	const dbSession = await prisma.$transaction(
 		async (tx) => {
@@ -117,7 +118,9 @@ export async function getSessionById(sessionId: string): Promise<SessionWithUser
 		return null;
 	}
 	//  Check expiration
-	if (now.getTime() - session.lastVerifiedAt.getTime() >= inactivityTimeoutSeconds * 1000) {
+	// If the user has been idle for 1 hour (inactivityTimeoutSeconds),
+	// then go ahead and delete their session from the browser.
+	if (now.getTime() - session.lastVerifiedAt.getTime() >= inactivityTimeoutSeconds) {
 		await deleteSessionById(sessionId);
 		return null;
 	}

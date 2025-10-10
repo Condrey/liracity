@@ -1,7 +1,13 @@
+import {
+	getNewsArticlesByHashtag,
+	getOtherNewsArticleHashtags,
+	getRelatedNewsArticlesFromTag
+} from "@/components/news-and-events/news/action";
+import HashtagItem from "@/components/news-and-events/news/hashtag-item";
+import EmptyContainer from "@/components/query-containers/empty-container";
+import { badgeVariants } from "@/components/ui/badge";
 import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
-import { notFound } from "next/navigation";
-import { getNewsArticlesByHashtag, getOtherNewsArticleHashtags, getRelatedNewsArticles } from "./action";
 import { NewsHashtagClient } from "./news-hashtag-client";
 
 interface PageProps {
@@ -85,12 +91,25 @@ export default async function Page({ params }: PageProps) {
 	const decodedHashtag = decodeURIComponent(hashtag);
 	const newsArticles = await getNewsArticlesByHashtag(decodedHashtag);
 	const otherHashTags = await getOtherNewsArticleHashtags(decodedHashtag);
-	const relatedArticles = await getRelatedNewsArticles({
+	const relatedArticles = await getRelatedNewsArticlesFromTag({
 		hashtag: decodedHashtag,
 		currentNewsArticlesIds: newsArticles.map((n) => n.id)
 	});
 
-	if (!newsArticles.length) notFound();
+	if (!newsArticles.length)
+		return (
+			<EmptyContainer message="You may not have the authorization to view the content of this tag, otherwise check your url for typing or pasting errors">
+				<h1 className="text-xl sm:text-2xl first-letter:text-destructive">#{decodedHashtag}</h1>
+				<div className={badgeVariants({ variant: "outline", className: "mt-12 flex gap-4 flex-wrap-reverse px-4 py-4" })}>
+					<p className=" block">Try to choose from other hashtags</p>
+					<div className="flex flex-wrap gap-1">
+						{otherHashTags.map((t) => (
+							<HashtagItem key={t.id} hashtag={t} />
+						))}
+					</div>
+				</div>
+			</EmptyContainer>
+		);
 
 	return (
 		<div className="">

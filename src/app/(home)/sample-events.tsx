@@ -1,13 +1,13 @@
+import { getAllEvents } from "@/components/news-and-events/events/action";
 import ListOfEvents from "@/components/news-and-events/events/list-of-events";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import { getNextTenEvents } from "./action";
 
 export async function SampleEvents() {
-	const events = await getNextTenEvents();
 	const limit = 10;
+	const events = await getAllEvents(limit);
 	const MAX_DISPLAY = 6;
 	if (!events.length) return null;
 	return (

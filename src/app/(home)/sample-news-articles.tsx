@@ -1,14 +1,14 @@
+import { getAllNewsArticles } from "@/components/news-and-events/news/action";
 import ListOfNewsArticles from "@/components/news-and-events/news/list-of-news-articles";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import { getLastTenNewsArticles } from "./action";
 
 export async function SampleNewsArticles() {
-	const newsArticles = await getLastTenNewsArticles();
 	const limit = 10;
 	const MAX_DISPLAY = 6;
+	const newsArticles = await getAllNewsArticles(limit);
 	if (!newsArticles.length) return null;
 	return (
 		<div className="gap-3 flex flex-col">

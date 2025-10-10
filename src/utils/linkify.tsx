@@ -16,7 +16,7 @@ export default function Linkify({ children }: LinkifyProps) {
 	);
 }
 
-function LinkifyUrl({ children }: LinkifyProps) {
+export function LinkifyUrl({ children }: LinkifyProps) {
 	return <LinkItUrl className="text-primary hover:underline">{children}</LinkItUrl>;
 }
 

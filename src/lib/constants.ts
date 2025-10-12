@@ -57,16 +57,16 @@ export const cityMediaCenterLinks: NavLink[] = [
 		href: "/media/news-events",
 		description: "Catch up on the latest city news and upcoming events."
 	},
-	// {
-	// 	title: "Gallery & Publications",
-	// 	href: "/media/gallery-publications",
-	// 	description: "View official reports, photos, and videos from city activities."
-	// },
-	// {
-	// 	title: "Social Media & Podcasts",
-	// 	href: "/media/social-media-podcasts",
-	// 	description: "Engage with us through social media and featured audio stories."
-	// }
+	{
+		title: "Gallery & Publications",
+		href: "/media/gallery-publications",
+		description: "View official reports, photos, and videos from city activities."
+	},
+	{
+		title: "Social Media & Podcasts",
+		href: "/media/social-media-podcasts",
+		description: "Engage with us through social media and featured audio stories."
+	}
 ];
 
 export const cityGetInvolvedLinks: NavLink[] = [
@@ -90,7 +90,7 @@ export const cityGetInvolvedLinks: NavLink[] = [
 export const whatWeDoLinks: NavLink[] = [
 	{
 		title: "Hierarchy",
-		href: "/hierarchy", 
+		href: "/hierarchy",
 		description: "Hierarchy and organography of departments and teams."
 	},
 	{
@@ -137,16 +137,16 @@ export const citySportsAndReactionLinks: NavLink[] = [
 ];
 
 export const cityAboutLinks: NavLink[] = [
-	// {
-	// 	title: "History & Culture",
-	// 	href: "/about-lira#history-culture",
-	// 	description: "Uncover the stories, traditions, and cultural heritage of Lira."
-	// },
-	// {
-	// 	title: "Geography & Landmarks",
-	// 	href: "/about-lira#geography",
-	// 	description: "Explore the natural features and key landmarks across Lira."
-	// }
+	{
+		title: "History & Culture",
+		href: "/about-lira#history-culture",
+		description: "Uncover the stories, traditions, and cultural heritage of Lira."
+	},
+	{
+		title: "Geography & Landmarks",
+		href: "/about-lira#geography",
+		description: "Explore the natural features and key landmarks across Lira."
+	}
 ];
 
 export const navLinks: NavLinkGroup[] = [
@@ -166,14 +166,14 @@ export const navLinks: NavLinkGroup[] = [
 		children: cityAboutLinks,
 		showOnMediumScreen: true
 	},
-	// {
-	// 	title: "City Services",
-	// 	href: "/services",
-	// 	description: "Access services offered by the Lira City Council.",
-	// 	icon: RadioTowerIcon,
-	// 	children: cityServicesLinks,
-	// 	showOnMediumScreen: false
-	// },
+	{
+		title: "City Services",
+		href: "/services",
+		description: "Access services offered by the Lira City Council.",
+		icon: RadioTowerIcon,
+		children: cityServicesLinks,
+		showOnMediumScreen: false
+	},
 	{
 		title: "The team",
 		href: "/the-team",
@@ -190,28 +190,28 @@ export const navLinks: NavLinkGroup[] = [
 		children: cityMediaCenterLinks,
 		showOnMediumScreen: false
 	},
-	// {
-	// 	title: "Opportunities",
-	// 	href: "/opportunities",
-	// 	description: "Explore opportunities to grow and serve.",
-	// 	icon: BriefcaseBusinessIcon,
-	// 	children: cityOpportunityLinks,
-	// 	showOnMediumScreen: true
-	// },
-	// {
-	// 	title: "Sports & Recreation",
-	// 	href: "/sports",
-	// 	description: "Engage in sports and recreational activities in Lira.",
-	// 	icon: TrophyIcon,
-	// 	children: citySportsAndReactionLinks,
-	// 	showOnMediumScreen: true
-	// },
-	// {
-	// 	title: "Get Involved",
-	// 	href: "/contact-us",
-	// 	description: "Contact, engage, and share feedback with the council.",
-	// 	icon: MailPlusIcon,
-	// 	children: cityGetInvolvedLinks,
-	// 	showOnMediumScreen: false
-	// }
+	{
+		title: "Opportunities",
+		href: "/opportunities",
+		description: "Explore opportunities to grow and serve.",
+		icon: BriefcaseBusinessIcon,
+		children: cityOpportunityLinks,
+		showOnMediumScreen: true
+	},
+	{
+		title: "Sports & Recreation",
+		href: "/sports",
+		description: "Engage in sports and recreational activities in Lira.",
+		icon: TrophyIcon,
+		children: citySportsAndReactionLinks,
+		showOnMediumScreen: true
+	},
+	{
+		title: "Get Involved",
+		href: "/contact-us",
+		description: "Contact, engage, and share feedback with the council.",
+		icon: MailPlusIcon,
+		children: cityGetInvolvedLinks,
+		showOnMediumScreen: false
+	}
 ];

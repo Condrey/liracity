@@ -1,8 +1,5 @@
-import ArticleImage from "@/components/news-and-events/article-image";
 import RelatedNewsArticleItem from "@/components/news-and-events/news/related-news-article-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
-import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
-import { Item, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import {
 	Sidebar,
 	SidebarContent,
@@ -13,11 +10,6 @@ import {
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { NewsArticleData } from "@/lib/types";
-import { cn, formatDateToLocal } from "@/lib/utils";
-import { MapPin } from "lucide-react";
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import { useTransition } from "react";
 
 export function PageSidebar({
 	relatedArticles,

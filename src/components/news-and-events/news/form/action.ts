@@ -1,7 +1,8 @@
 "use server";
 
 import { validateRequest } from "@/auth";
-import { NewsArticleStatus } from "@/generated/prisma";
+import { NewsArticleStatus, Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { newsArticleDataInclude } from "@/lib/types";
 import { slugify } from "@/lib/utils";
@@ -110,5 +111,16 @@ export async function upsertNewsArticle({ formData, mediaIds }: { formData: News
 			tags: { connectOrCreate: tags },
 			media: { connect: media }
 		}
+	});
+}
+
+export async function deleteNewsArticle(id: string) {
+	const { user } = await validateRequest();
+	if (!user) throw new Error("Unauthorized!");
+	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	if (!isAuthorized) throw new Error("Unauthorized!");
+	return await prisma.newsArticle.delete({
+		where: { id },
+		include: newsArticleDataInclude
 	});
 }

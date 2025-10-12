@@ -9,43 +9,35 @@ import { Edit3Icon } from "lucide-react";
 import ButtonAddEditHistoryAndCulture from "./button-add-edit-history-and-culture";
 import { useEntityQuery } from "./query";
 
-interface HistoryAndCultureProps {
-  entity: Entity;
+interface HistoryAndCultureProps extends React.ComponentProps<"div"> {
+	entity: Entity;
 }
 export default function HistoryAndCulture({ entity }: HistoryAndCultureProps) {
-  const query = useEntityQuery(entity);
-  const { data, status } = query;
+	const query = useEntityQuery(entity);
+	const { data, status } = query;
 
-  return (
-    <div id="history-culture">
-      <PageTitle heading="History and culture" />
-      {status === "error" ? (
-        <ErrorContainer
-          query={query}
-          errorMessage="Failed to fetch history and culture"
-        />
-      ) : status === "success" && !data?.historyAndCulture ? (
-        <EmptyContainer message="There is no history and culture yet.">
-          <ButtonAddEditHistoryAndCulture variant={"secondary"}>
-            Click to add
-          </ButtonAddEditHistoryAndCulture>
-        </EmptyContainer>
-      ) : (
-        <div className="">
-          <ButtonAddEditHistoryAndCulture
-            size={"icon"}
-            variant={"outline"}
-            className="flex-none  m-2"
-            historyAndCulture={data?.historyAndCulture!}
-          >
-            <Edit3Icon />
-          </ButtonAddEditHistoryAndCulture>
-          <TipTapViewer
-            content={data?.historyAndCulture}
-            className=" inline  text-pretty hyphens-auto text-justify"
-          />
-        </div>
-      )}
-    </div>
-  );
+	return (
+		<>
+			<PageTitle heading="History and culture" />
+			{status === "error" ? (
+				<ErrorContainer query={query} errorMessage="Failed to fetch history and culture" />
+			) : status === "success" && !data?.historyAndCulture ? (
+				<EmptyContainer message="There is no history and culture yet.">
+					<ButtonAddEditHistoryAndCulture variant={"secondary"}>Click to add</ButtonAddEditHistoryAndCulture>
+				</EmptyContainer>
+			) : (
+				<div className="">
+					<ButtonAddEditHistoryAndCulture
+						size={"icon"}
+						variant={"outline"}
+						className="flex-none  m-2"
+						historyAndCulture={data?.historyAndCulture!}
+					>
+						<Edit3Icon />
+					</ButtonAddEditHistoryAndCulture>
+					<TipTapViewer content={data?.historyAndCulture} className=" inline  text-pretty hyphens-auto text-justify" />
+				</div>
+			)}
+		</>
+	);
 }

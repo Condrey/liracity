@@ -25,7 +25,7 @@ export const userRoles: Record<Role, { role: string }> = {
 };
 
 // event
-export const allEventStatuses = Object.values(NewsArticleStatus);
+export const allEventStatuses = Object.values(EventStatus);
 export const eventStatuses: Record<
 	EventStatus,
 	{
@@ -45,9 +45,14 @@ export const eventStatuses: Record<
 		variant: "success"
 	},
 	CANCELLED: {
-		eventStatus: "",
+		eventStatus: "Cancelled",
 		icon: TrashIcon,
-		variant: undefined
+		variant: "destructive"
+	},
+	PRIVATE: {
+		eventStatus: "Private",
+		icon: LockIcon,
+		variant: "destructive"
 	}
 };
 

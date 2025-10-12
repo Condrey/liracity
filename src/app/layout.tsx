@@ -1,7 +1,7 @@
 import ReactQueryProvider from "@/components/react-query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { siteConfig } from "@/lib/utils";
+import { siteConfig, webName } from "@/lib/utils";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
 	title: {
-		template: `%s | ${siteConfig.name}`,
+		template: `%s | ${webName}`,
 		absolute: siteConfig.name,
 		default: siteConfig.name
 	},
@@ -50,7 +50,7 @@ export default function RootLayout({
 						/>
 						{children}
 					</ReactQueryProvider>
-					<Toaster expand richColors  />
+					<Toaster expand richColors />
 				</ThemeProvider>
 			</body>
 		</html>

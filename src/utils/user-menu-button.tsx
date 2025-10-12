@@ -12,6 +12,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import { Spinner } from "@/components/ui/spinner";
 import { Role } from "@/generated/prisma";
 import { REDIRECT_TO_URL_SEARCH_PARAMS } from "@/lib/constants";
 import { userRoles } from "@/lib/enums";
@@ -19,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { LogOutIcon, LucideSettings2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
 import { ThemeToggle } from "./theme-toggle";
 import UserAvatar from "./user-avatar";
 import UserLinkWithTooltip from "./user-link-with-tooltip";
@@ -31,7 +33,7 @@ interface UserMenuButtonProps {
 export default function UserMenuButton({ className, isOnlyInfo = false }: UserMenuButtonProps) {
 	const { user } = useSession();
 	const { role } = userRoles[user?.role || Role.USER];
-
+	const [isPending, startTransition] = useTransition();
 	const currentPathname = usePathname();
 	const searchParams = useSearchParams();
 	const newParams = new URLSearchParams(searchParams.toString());
@@ -81,15 +83,19 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 							</ThemeToggle>
 						</div>
 						<DropdownMenuSeparator />
-							<LogoutButton variant={"ghost"} className="flex justify-start ps-3 w-full">
-								<LogOutIcon className="mr-2 text-inherit" />
-								Sign out
-							</LogoutButton>
+						<LogoutButton variant={"ghost"} className="flex justify-start ps-3 w-full">
+							<LogOutIcon className="mr-2 text-inherit" />
+							Sign out
+						</LogoutButton>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			) : (
-				<Link href={loginUrl} className={buttonVariants({ variant: "ghost" })}>
-					Login now
+				<Link
+					href={loginUrl}
+					className={buttonVariants({ variant: "ghost" })}
+					onClick={() => startTransition(() => {})}
+				>
+					{isPending && <Spinner />}Login now
 				</Link>
 			)}
 		</>

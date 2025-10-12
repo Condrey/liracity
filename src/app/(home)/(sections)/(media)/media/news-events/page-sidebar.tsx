@@ -44,35 +44,6 @@ export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Side
 	const isModerator = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 	const items: SideBarItem[] = [
 		{
-			title: "For events",
-			url: "",
-			icon: CalendarIcon,
-			isActive: true,
-			items: [
-				{
-					title: "Published events",
-					url: "",
-					paramValue: EventStatus.PUBLISHED
-				},
-				{
-					title: "Upcoming events",
-					url: "",
-					paramValue: "UPCOMING"
-				},
-				{
-					title: "Past events",
-					url: "",
-					paramValue: "PAST"
-				},
-				{
-					title: "Cancelled events",
-					url: "",
-					paramValue: EventStatus.CANCELLED
-				}
-			],
-			filter: "eventFilter"
-		},
-		{
 			title: "For News Articles",
 			url: "",
 			icon: NewspaperIcon,
@@ -108,6 +79,54 @@ export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Side
 				}
 			],
 			filter: "newsFilter"
+		},
+		{
+			title: "For events",
+			url: "",
+			icon: CalendarIcon,
+			isActive: true,
+			items: [
+				...(isModerator
+					? [
+							{
+								title: "Drafted events",
+								url: "",
+								paramValue: EventStatus.DRAFT
+							}
+					  ]
+					: []),
+
+				{
+					title: "Published events",
+					url: "",
+					paramValue: EventStatus.PUBLISHED
+				},
+				...(isStaff
+					? [
+							{
+								title: "Private events",
+								url: "",
+								paramValue: EventStatus.PRIVATE
+							}
+					  ]
+					: []),
+				{
+					title: "Upcoming events",
+					url: "",
+					paramValue: "UPCOMING"
+				},
+				{
+					title: "Past events",
+					url: "",
+					paramValue: "PAST"
+				},
+				{
+					title: "Cancelled events",
+					url: "",
+					paramValue: EventStatus.CANCELLED
+				}
+			],
+			filter: "eventFilter"
 		}
 	];
 	return (

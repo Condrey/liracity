@@ -333,7 +333,8 @@ exports.MediaType = exports.$Enums.MediaType = {
 exports.EventStatus = exports.$Enums.EventStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  PRIVATE: 'PRIVATE'
 };
 
 exports.Prisma.ModelName = {

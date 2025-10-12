@@ -1,20 +1,19 @@
 import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
+import { getLatestNews } from "@/components/news-and-events/news/action";
 import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news-article-container-skeleton";
 import NewsLetterForm from "@/components/user/news-letter-form";
 import { Suspense } from "react";
-import BodyContainer from "./body-container";
-import HeroSection from "./hero-section";
+import HeroSection, { HeroSectionLoadingSkeleton } from "./hero-section";
 import MessageFromLeaders from "./message-from-leaders";
 import { SampleEvents } from "./sample-events";
 import { SampleNewsArticles } from "./sample-news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
-import { getLatestNews } from "@/components/news-and-events/news/action";
 
 export default function Home() {
 	return (
-		<BodyContainer className="flex flex-col max-w-none size-full space-y-12">
+		<div className="flex flex-col justify-start max-w-none size-full gap-12">
 			{/* Hero section  */}
-			<Suspense>
+			<Suspense fallback={<HeroSectionLoadingSkeleton/>}>
 				<HeroSectionContainer />
 			</Suspense>
 
@@ -23,8 +22,11 @@ export default function Home() {
 			<div className="border-y ">
 				<WhatWeStandFor />
 			</div>
+
 			{/* Message from our leaders  */}
-			<MessageFromLeaders />
+			{/* <MessageFromLeaders /> */}
+
+
 			{/* Upcoming events  */}
 			<Suspense
 				fallback={
@@ -52,7 +54,7 @@ export default function Home() {
 			</Suspense>
 			{/* News letter form */}
 			<NewsLetterForm />
-		</BodyContainer>
+		</div>
 	);
 }
 

@@ -134,7 +134,8 @@ export type NewsArticleStatus = (typeof NewsArticleStatus)[keyof typeof NewsArti
 export const EventStatus: {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  CANCELLED: 'CANCELLED'
+  CANCELLED: 'CANCELLED',
+  PRIVATE: 'PRIVATE'
 };
 
 export type EventStatus = (typeof EventStatus)[keyof typeof EventStatus]

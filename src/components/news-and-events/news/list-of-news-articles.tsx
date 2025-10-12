@@ -28,7 +28,7 @@ export default function ListOfNewsArticles({ initialData, limit, filter }: ListO
 	if (status === "success" && !data.length)
 		return (
 			<EmptyContainer
-				message={`There are no news articles in the database ${filter ? `matching "${filter}" articles filter` : ""}.`}
+				message={`There are no news articles in the database/ for this user ${filter ? `matching "${filter}" articles filter` : ""}.`}
 			>
 				<ButtonAddEditNewsArticle>Add news Article</ButtonAddEditNewsArticle>
 			</EmptyContainer>

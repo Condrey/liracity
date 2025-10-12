@@ -5,19 +5,22 @@ import ErrorContainer from "@/components/query-containers/error-container";
 import { ItemGroup } from "@/components/ui/item";
 import { EventData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { getAllEvents } from "./action";
+import { getAllEvents, getFilteredEvents } from "./action";
 import ButtonAddEditEventsArticle from "./button-add-edit-event";
 import EventsArticleContainer from "./event-article-container";
+import { EventStatus } from "@/generated/prisma";
 
 interface ListOfEventsProps {
 	initialData: EventData[];
 	limit?: number;
+		filter?: EventStatus;
+	
 }
 
-export default function ListOfEvents({ initialData, limit }: ListOfEventsProps) {
+export default function ListOfEvents({ initialData, limit,filter }: ListOfEventsProps) {
 	const query = useQuery({
-		queryKey: ["events"],
-		queryFn: async () => getAllEvents(limit),
+		queryKey: ["events","filter",filter,"limit",limit],
+		queryFn: async () => (filter?getFilteredEvents(filter): getAllEvents(limit)),
 		initialData
 	});
 	const { data, status } = query;
@@ -25,8 +28,8 @@ export default function ListOfEvents({ initialData, limit }: ListOfEventsProps) 
 		return <ErrorContainer errorMessage={"Failed to fetch events. Please try again!"} query={query} />;
 	if (status === "success" && !data.length)
 		return (
-			<EmptyContainer message={"There are no events in the database. Please add"}>
-				<ButtonAddEditEventsArticle>Add events Article</ButtonAddEditEventsArticle>
+			<EmptyContainer message={`There are no events in the database/ for this user  ${filter ? `matching "${filter}" event filter` : ""}.`}>
+				<ButtonAddEditEventsArticle>Add event</ButtonAddEditEventsArticle>
 			</EmptyContainer>
 		);
 	return (

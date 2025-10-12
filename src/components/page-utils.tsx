@@ -7,7 +7,7 @@ interface PageTitleProps {
 }
 export function PageTitle({ heading, children, className }: PageTitleProps) {
 	return (
-		<div className={cn("flex gap-2", className)}>
+		<div className={cn("flex gap-1", className)}>
 			{children}
 			<h1 className={cn("text-2xl mb-1.5 font-bold capitalize tracking-tighter")}>{heading}</h1>
 		</div>

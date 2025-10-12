@@ -1,6 +1,8 @@
 "use server";
 
 import { validateRequest } from "@/auth";
+import { EventStatus, Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { eventDataInclude } from "@/lib/types";
 import { slugify } from "@/lib/utils";
@@ -87,5 +89,22 @@ export async function upsertEvent({ formData, mediaIds }: { formData: EventSchem
 			author: { connect: { id: authorId } },
 			media: { connect: media }
 		}
+	});
+}
+
+export async function updateEventStatus({ eventId, status }: { eventId: string; status: EventStatus }) {
+	const { user } = await validateRequest();
+	if (!user) throw Error("Unauthorized");
+	await prisma.event.update({ where: { id: eventId }, data: { status } });
+}
+
+export async function deleteEvent(id: string) {
+	const { user } = await validateRequest();
+	if (!user) throw new Error("Unauthorized!");
+	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	if (!isAuthorized) throw new Error("Unauthorized!");
+	return await prisma.event.delete({
+		where: { id },
+		include: eventDataInclude
 	});
 }

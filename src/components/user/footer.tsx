@@ -18,13 +18,15 @@ export default function Footer({ className }: { className?: string }) {
 					<Image src={`/coat-of-arms.png`} height={150} width={150} alt="logo" />
 				</section>
 				{/* City services links  */}
-				<LinkGroup title="City  Services" links={cityServicesLinks} />
+				{/* <LinkGroup title="City  Services" links={cityServicesLinks} /> */}
 				{/* City media center links  */}
 				<LinkGroup title="City Media Center" links={cityMediaCenterLinks} />
 				{/* What we do links  */}
 				<LinkGroup title="The team" links={whatWeDoLinks} />
 				{/* City get involved links  */}
-				<LinkGroup title="Get Involved" links={cityGetInvolvedLinks} />
+				{/* <LinkGroup title="Get Involved" links={cityGetInvolvedLinks} /> */}
+				{/* logo section  */}
+			
 			</div>
 			{/* Copyright details and theme toggler  */}
 			<div className="bg-black dark:bg-background text-muted-foreground tracking-wider capitalize w-full  px-4 py-2 mt-8">

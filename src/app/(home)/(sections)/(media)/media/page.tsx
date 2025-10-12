@@ -1,5 +1,7 @@
+import BodyContainer from "@/app/(home)/body-container";
 import { PageTitle } from "@/components/page-utils";
 import { Metadata } from "next";
+import PageClient from "./page-client";
 
 const { title, description } = {
 	title: "Media center",
@@ -12,8 +14,9 @@ export const metadata: Metadata = {
 };
 export default function Page() {
 	return (
-		<div className="">
+		<BodyContainer className="">
 			<PageTitle heading={title} />
-		</div>
+			<PageClient />
+		</BodyContainer>
 	);
 }

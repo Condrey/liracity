@@ -12,7 +12,7 @@ async function newsArticlesByHashtag(hashtag: string): Promise<NewsArticleData[]
 		where: { tags: { some: { name: hashtag } } },
 		include: newsArticleDataInclude
 	});
-	return filterArticleByAuthorization(data);
+	return filterArticlesByAuthorization(data);
 }
 
 async function relatedArticlesFromTag({
@@ -28,7 +28,7 @@ async function relatedArticlesFromTag({
 		take: 10
 	});
 	const data = relatedTags.map((r) => r.articles).flat();
-	return filterArticleByAuthorization(data);
+	return filterArticlesByAuthorization(data);
 }
 
 async function otherNewsArticleHashtags(hashtag: string) {
@@ -44,7 +44,7 @@ async function newsArticles(limit?: number) {
 		orderBy: { createdAt: "desc" },
 		include: newsArticleDataInclude
 	});
-	return filterArticleByAuthorization(data);
+	return filterArticlesByAuthorization(data);
 }
 
 async function filteredNewsArticles(filter: NewsArticleStatus, limit?: number) {
@@ -54,7 +54,7 @@ async function filteredNewsArticles(filter: NewsArticleStatus, limit?: number) {
 		orderBy: { createdAt: "desc" },
 		include: newsArticleDataInclude
 	});
-	return filterArticleByAuthorization(data);
+	return filterArticlesByAuthorization(data);
 }
 
 async function newsArticleBySlug(slug: string) {
@@ -92,18 +92,8 @@ async function relatedArticlesFromTags({
 		new Map(allArticles.filter((a) => a.id !== currentArticleId).map((a) => [a.id, a])).values()
 	);
 	const data = uniqueArticles.slice(0, 10);
-	return filterArticleByAuthorization(data);
+	return filterArticlesByAuthorization(data);
 }
-const filterArticleByAuthorization = async (articles: NewsArticleData[]): Promise<NewsArticleData[]> => {
-	const { user } = await validateRequest();
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
-	return articles.filter((a) => {
-		if (a.status === NewsArticleStatus.DRAFT && !isAnEditor) return null;
-		else if (a.status === NewsArticleStatus.PRIVATE && !isAStaff) return null;
-		return a;
-	});
-};
 
 async function latestNews() {
 	const { user } = await validateRequest();
@@ -119,6 +109,17 @@ async function latestNews() {
 	});
 	return latestNews;
 }
+
+const filterArticlesByAuthorization = async (articles: NewsArticleData[]): Promise<NewsArticleData[]> => {
+	const { user } = await validateRequest();
+	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
+	return articles.filter((a) => {
+		if (a.status === NewsArticleStatus.DRAFT && !isAnEditor) return null;
+		else if (a.status === NewsArticleStatus.PRIVATE && !isAStaff) return null;
+		return a;
+	});
+};
 
 export const getLatestNews = cache(latestNews);
 export const getNewsArticleBySlug = cache(newsArticleBySlug);

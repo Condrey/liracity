@@ -33,7 +33,8 @@ interface SheetAddEditEventsProps {
 }
 
 export default function SheetAddEditEvents({ event, open, setOpen, altId, userId }: SheetAddEditEventsProps) {
-	const [mediaIds, setMediaIds] = useState<string[]>([]);
+	const prevMediaIds = event?.media.map((m) => m.id);
+	const [mediaIds, setMediaIds] = useState<string[]>(prevMediaIds || []);
 	const form = useForm<EventSchema>({
 		resolver: zodResolver(eventSchema),
 		defaultValues: {
@@ -67,11 +68,11 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 		removeAttachment,
 		reset: resetMediaUploads
 	} = useCoverImageUpload();
-	const coverImageUrl = !attachment ? "" : URL.createObjectURL(attachment.file);
+	const coverImageUrl = !!event ? event?.coverImage?.url : !attachment ? "" : URL.createObjectURL(attachment.file);
 
 	const { isPending, mutate } = useUpsertEventMutation();
 	function onSubmit(input: EventSchema) {
-		const newFields = { ...input, coverImageId: attachment.mediaId };
+		const newFields = { ...input, coverImageId: attachment ? attachment.mediaId : event?.coverImageId };
 		mutate(
 			{ formData: newFields, mediaIds },
 			{
@@ -86,7 +87,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<SheetContent side="bottom" className="h-svh overflow-y-auto bg-muted">
 						<div className="relative max-w-7xl min-h-[100px] w-full mx-auto flex flex-col justify-center">
-							{!!attachment && !!attachment.file && (
+							{coverImageUrl && (
 								<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
 									<Image src={coverImageUrl} alt="Cover image" fill className="object-cover w-full rounded-xl" />
 								</div>
@@ -94,10 +95,10 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 							<div
 								className={cn(
 									"w-full absolute h-fit",
-									!!attachment && !!attachment.file && "p-3 bg-background/20 backdrop-blur-2xl max-h-fit my-auto"
+									coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl max-h-fit my-auto"
 								)}
 							>
-								<SheetHeader className=" w-full ">
+								<SheetHeader className=" w-full  ">
 									<div className="flex gap-3 justify-between items-end">
 										<div>
 											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
@@ -150,7 +151,9 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 								null,
 								2
 							)}
+							
 						</pre> */}
+						<pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
 						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
 							{/* main content  */}
 							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">

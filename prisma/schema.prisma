@@ -285,6 +285,7 @@ enum EventStatus {
   DRAFT
   PUBLISHED
   CANCELLED
+  PRIVATE
 }
 
 enum Role {

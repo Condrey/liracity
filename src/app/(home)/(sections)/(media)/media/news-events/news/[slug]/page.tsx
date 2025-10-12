@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 	const description = (newsArticle.summary || newsArticle.content).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
 	const imageUrl = newsArticle.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
 	const logoUrl = `${siteConfig.url}/${siteConfig.logo}`;
-	const articleUrl = `${siteConfig.url}/news-and-events/news/${newsArticle.slug}`;
+	const articleUrl = `${siteConfig.url}/media/news-and-events/news/${newsArticle.slug}`;
 	const authorName = newsArticle.author?.name || "Lira City Correspondent";
 
 	// --- JSON-LD Structured Data ---

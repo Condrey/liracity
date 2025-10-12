@@ -46,6 +46,8 @@ export type NewsArticleData = Prisma.NewsArticleGetPayload<{
 export const eventDataInclude = {
 	author: { select: userDataSelect },
 	coverImage: { select: { url: true } },
+	category: true,
+	media: true,
 	_count: { select: { eventLikes: true, eventComments: true } }
 } satisfies Prisma.EventInclude;
 export type EventData = Prisma.EventGetPayload<{

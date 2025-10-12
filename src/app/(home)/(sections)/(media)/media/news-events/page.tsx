@@ -1,5 +1,6 @@
+import BodyContainer from "@/app/(home)/body-container";
 import { validateRequest } from "@/auth";
-import { getAllEvents } from "@/components/news-and-events/events/action";
+import { getFilteredEvents } from "@/components/news-and-events/events/action";
 import ButtonAddEditEvent from "@/components/news-and-events/events/button-add-edit-event";
 import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
 import ListOfEvents from "@/components/news-and-events/events/list-of-events";
@@ -9,15 +10,17 @@ import ListOfNewsArticles from "@/components/news-and-events/news/list-of-news-a
 import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news-article-container-skeleton";
 import { PageTitle, TypographyH4 } from "@/components/page-utils";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewsArticleStatus } from "@/generated/prisma";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { EventStatus, NewsArticleStatus } from "@/generated/prisma";
 import { cityMediaCenterLinks } from "@/lib/constants";
 import { PlusIcon } from "lucide-react";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { PageSidebar } from "./page-sidebar";
+import TabList from "./tab-list";
 
 const { title, description } = cityMediaCenterLinks.find((val) => val.href === "/media/news-events")!;
+
 export const metadata: Metadata = {
 	title,
 	description
@@ -28,20 +31,18 @@ interface PageProps {
 }
 export default async function Page({ searchParams }: PageProps) {
 	const { user } = await validateRequest();
-	const newsFilter = (await searchParams).newsFilter;
+	const { newsFilter, eventFilter, defaultNewsEventsTabs } = await searchParams;
+
 	return (
-		<div className="">
-			<Tabs defaultValue="news">
+		<BodyContainer className="">
+			<Tabs defaultValue={defaultNewsEventsTabs || "news"}>
 				<SidebarProvider>
 					<SidebarInset className="">
 						<header className="flex h-fit  flex-col gap-2 ">
 							<PageTitle heading={title} className="" />
 							<div className="flex items-center gap-2 shrink-0 border-y">
 								<div className="bg-muted flex w-full py-1 border-y">
-									<TabsList className="w-full mx-auto max-w-4xl">
-										<TabsTrigger value="news">News articles</TabsTrigger>
-										<TabsTrigger value="events">Events</TabsTrigger>
-									</TabsList>
+									<TabList />
 								</div>
 								<SidebarTrigger className="-mr-1 ml-auto rotate-180" />
 							</div>
@@ -70,11 +71,12 @@ export default async function Page({ searchParams }: PageProps) {
 						</TabsContent>
 						{/* list of events */}
 						<TabsContent value="events" className="space-y-4 pt-4">
-							<div className="space-x-4 flex">
+							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditEvent>
 									<PlusIcon /> event
 								</ButtonAddEditEvent>
 								<TypographyH4 title="Events " />
+								{eventFilter && <span>({eventFilter})</span>}
 							</div>
 
 							<Suspense
@@ -86,14 +88,14 @@ export default async function Page({ searchParams }: PageProps) {
 									</div>
 								}
 							>
-								<ListOfEventsContainer />
+								<ListOfEventsContainer filter={eventFilter || EventStatus.PUBLISHED} />
 							</Suspense>
 						</TabsContent>
 					</SidebarInset>
 					<PageSidebar side="right" user={user} />
 				</SidebarProvider>
 			</Tabs>
-		</div>
+		</BodyContainer>
 	);
 }
 
@@ -102,7 +104,7 @@ async function ListOfNewsArticlesContainer({ filter }: { filter: NewsArticleStat
 	return <ListOfNewsArticles initialData={newsArticles} filter={filter} />;
 }
 
-async function ListOfEventsContainer() {
-	const events = await getAllEvents();
-	return <ListOfEvents initialData={events} />;
+async function ListOfEventsContainer({ filter }: { filter: EventStatus }) {
+	const events = await getFilteredEvents(filter);
+	return <ListOfEvents initialData={events} filter={filter} />;
 }

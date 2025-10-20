@@ -22,6 +22,7 @@ model User {
   passwordHash            String?
   googleId                String?                  @unique
   githubId                String?                  @unique
+  gender                  String?
   bio                     String?
   isWelcomed              Boolean                  @default(false)
   isVerified              Boolean                  @default(false)
@@ -71,22 +72,81 @@ model DepartMentalSector {
   @@map("departmental_sectors")
 }
 
+model Position {
+  id                  String        @id @default(uuid())
+  jobTitle            String
+  departmentalMandate String
+  salaryScale         String
+  reportsTo           Position?     @relation("PositionReportsTo", fields: [reportsToId], references: [id])
+  reportsToId         String?
+  responsibleFor      Position[]    @relation("PositionReportsTo")
+  duties              String[]
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @default(now()) @updatedAt
+  employees           Employee[]
+  appointments        Appointment[]
+
+  @@map("positions")
+}
+
 model Employee {
-  id                   String              @id @default(uuid())
-  assumedOffice        Int
-  endedOffice          Int?
-  position             String
-  shortMessageToPublic String?
-  departMentalSectorId String?
-  userId               String
-  hierarchy            Int
-  ippsNumber           String              @unique
-  title                String
-  departMents          DepartMent[]
-  departMentalSector   DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
-  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                      String              @id @default(uuid())
+  assumedOffice           Int
+  endedOffice             Int?
+  position                Position?           @relation(fields: [positionId], references: [id])
+  shortMessageToPublic    String?
+  departMentalSectorId    String?
+  userId                  String
+  dob                     DateTime?
+  nationalIdNumber        String?
+  fileNumber              String?
+  taxIdentificationNumber String?
+  appointments            Appointment[]
+  supplierNumber          String?
+  employeeStatuses        EmployeeStatus[]
+  hierarchy               Int                 @default(0)
+  ippsNumber              String              @unique
+  departMents             DepartMent[]
+  departMentalSector      DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
+  user                    User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positionId              String?
 
   @@map("employees")
+}
+
+model EmployeeStatus {
+  id           String     @id @default(uuid())
+  type         StatusType @default(PROBATION)
+  date         DateTime   @default(now())
+  minuteNumber String
+  reason       String?
+  Employee     Employee?  @relation(fields: [employeeId], references: [id])
+  employeeId   String?
+}
+
+enum StatusType {
+  PROBATION
+  CONFIRMED
+  SUSPENDED
+  RETIRED
+  RESIGNED
+}
+
+model Appointment {
+  id                     String    @id @default(uuid())
+  number                 Int
+  position               Position  @relation(fields: [positionId], references: [id])
+  basicSalary            Float?
+  organization           String
+  dateOfAppointment      DateTime
+  dateOfAssumptionOfDuty DateTime
+  dutyStation            String
+  minuteNumber           String
+  employee               Employee? @relation(fields: [employeeId], references: [id])
+  employeeId             String?
+  positionId             String
+
+  @@map("appointments")
 }
 
 model EmailVerificationToken {

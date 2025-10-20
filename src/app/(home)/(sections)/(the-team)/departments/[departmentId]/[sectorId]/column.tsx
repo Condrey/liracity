@@ -64,7 +64,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
                     : "success"
                 }
               >
-                {employee.title}
+                {employee.position?.jobTitle}
               </Badge>{" "}
               <span>{user.name}</span> {user.isVerified&&<VerifiedIcon  className="inline size-4 fill-success text-success-foreground"/>}
             </div>
@@ -112,7 +112,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
         !!user && myPrivileges[user.role].includes(Role.MODERATOR);
       return (
         <div className="hidden sm:flex flex-col ">
-          <div>{position}</div>
+          <div>{position?.jobTitle}</div>
           <div className="text-muted-foreground text-xs">
             {assumedOffice} - {endedOffice || "Now"}
           </div>

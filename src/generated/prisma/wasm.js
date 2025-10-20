@@ -132,6 +132,7 @@ exports.Prisma.UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   googleId: 'googleId',
   githubId: 'githubId',
+  gender: 'gender',
   bio: 'bio',
   isWelcomed: 'isWelcomed',
   isVerified: 'isVerified',
@@ -161,17 +162,54 @@ exports.Prisma.DepartMentalSectorScalarFieldEnum = {
   hierarchy: 'hierarchy'
 };
 
+exports.Prisma.PositionScalarFieldEnum = {
+  id: 'id',
+  jobTitle: 'jobTitle',
+  departmentalMandate: 'departmentalMandate',
+  salaryScale: 'salaryScale',
+  reportsToId: 'reportsToId',
+  duties: 'duties',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
   assumedOffice: 'assumedOffice',
   endedOffice: 'endedOffice',
-  position: 'position',
   shortMessageToPublic: 'shortMessageToPublic',
   departMentalSectorId: 'departMentalSectorId',
   userId: 'userId',
+  dob: 'dob',
+  nationalIdNumber: 'nationalIdNumber',
+  fileNumber: 'fileNumber',
+  taxIdentificationNumber: 'taxIdentificationNumber',
+  supplierNumber: 'supplierNumber',
   hierarchy: 'hierarchy',
   ippsNumber: 'ippsNumber',
-  title: 'title'
+  positionId: 'positionId'
+};
+
+exports.Prisma.EmployeeStatusScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  date: 'date',
+  minuteNumber: 'minuteNumber',
+  reason: 'reason',
+  employeeId: 'employeeId'
+};
+
+exports.Prisma.AppointmentScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  basicSalary: 'basicSalary',
+  organization: 'organization',
+  dateOfAppointment: 'dateOfAppointment',
+  dateOfAssumptionOfDuty: 'dateOfAssumptionOfDuty',
+  dutyStation: 'dutyStation',
+  minuteNumber: 'minuteNumber',
+  employeeId: 'employeeId',
+  positionId: 'positionId'
 };
 
 exports.Prisma.EmailVerificationTokenScalarFieldEnum = {
@@ -318,6 +356,14 @@ exports.Role = exports.$Enums.Role = {
   STAFF: 'STAFF'
 };
 
+exports.StatusType = exports.$Enums.StatusType = {
+  PROBATION: 'PROBATION',
+  CONFIRMED: 'CONFIRMED',
+  SUSPENDED: 'SUSPENDED',
+  RETIRED: 'RETIRED',
+  RESIGNED: 'RESIGNED'
+};
+
 exports.NewsArticleStatus = exports.$Enums.NewsArticleStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
@@ -342,7 +388,10 @@ exports.Prisma.ModelName = {
   Entity: 'Entity',
   DepartMent: 'DepartMent',
   DepartMentalSector: 'DepartMentalSector',
+  Position: 'Position',
   Employee: 'Employee',
+  EmployeeStatus: 'EmployeeStatus',
+  Appointment: 'Appointment',
   EmailVerificationToken: 'EmailVerificationToken',
   Session: 'Session',
   NewsLetterSubscription: 'NewsLetterSubscription',

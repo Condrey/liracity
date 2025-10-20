@@ -81,7 +81,7 @@ export default function HeadOfDepartmentContainer({
           </Link>
         </div>
         <div>
-          {employee.position} <DotIcon /> {employee.assumedOffice} -{" "}
+          {employee.position?.jobTitle} <DotIcon /> {employee.assumedOffice} -{" "}
           {employee.endedOffice}
         </div>
       </CardHeader>

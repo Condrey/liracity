@@ -43,7 +43,7 @@ export default function FormAddEditEmployee({
       departmentalSectorId,
       employeeId: employee?.id || "",
       assumedOffice: employee?.assumedOffice || currentYear,
-      position: employee?.position || "",
+      position: employee?.positionId || "",
     },
   });
   const { isPending, mutate } = upsertStaffEmployeeMutation();

@@ -6,8 +6,8 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { extractRouterConfig } from "uploadthing/server";
-
 import { appFileRouter } from "./api/uploadthing/core";
+
 import "./globals.css";
 
 const geistSans = Geist({

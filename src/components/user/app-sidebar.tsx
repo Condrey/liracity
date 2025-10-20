@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTransition } from "react";
-import { NavLink, navLinks } from "../../lib/constants";
+import { NavLink, navLinks } from "@/lib/constants";
 import {
 	Sidebar,
 	SidebarContent,

@@ -79,7 +79,7 @@ export type DepartmentalSectorData = Prisma.DepartMentalSectorGetPayload<{
 // Department
 export const departmentDataInclude = {
 	departmentalSectors: { include: departmentalSectorDataInclude },
-	headOfDepartment: { include: { user: { select: userDataSelect } } },
+	headOfDepartment: { include: employeeDataInclude },
 	_count: { select: { departmentalSectors: true } }
 } satisfies Prisma.DepartMentInclude;
 export type DepartmentData = Prisma.DepartMentGetPayload<{

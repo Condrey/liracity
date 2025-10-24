@@ -33,7 +33,7 @@ const avatarRouter = f({
 	});
 
 const coverImageRouter = f({
-	image: { maxFileSize: "8MB" }
+	image: { maxFileSize: "16MB" }
 })
 	.middleware(async () => {
 		const { user } = await validateRequest();

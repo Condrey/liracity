@@ -33,7 +33,7 @@ const avatarRouter = f({
 	});
 
 const coverImageRouter = f({
-	image: { maxFileSize: "512KB" }
+	image: { maxFileSize: "8MB" }
 })
 	.middleware(async () => {
 		const { user } = await validateRequest();
@@ -53,8 +53,8 @@ const coverImageRouter = f({
 	});
 
 const attachmentRouter = f({
-	image: { maxFileSize: "2MB", maxFileCount: MAX_ATTACHMENTS },
-	video: { maxFileSize: "4MB", maxFileCount: MAX_ATTACHMENTS }
+	image: { maxFileSize: "8MB", maxFileCount: MAX_ATTACHMENTS },
+	video: { maxFileSize: "32MB", maxFileCount: MAX_ATTACHMENTS }
 })
 	.middleware(async () => {
 		const { user } = await validateRequest();

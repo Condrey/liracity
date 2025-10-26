@@ -11,7 +11,7 @@ export async function SampleEvents() {
 	const MAX_DISPLAY = 6;
 	if (!events.length) return null;
 	return (
-		<div className="gap-3 flex flex-col">
+		<div className="gap-3 px-3 flex flex-col">
 			<h1 className="text-xl uppercase font-bold tracking-tighter">Upcoming events</h1>
 			<ListOfEvents initialData={events} limit={limit} />
 			<Link

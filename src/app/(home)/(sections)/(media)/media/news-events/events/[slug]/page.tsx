@@ -23,8 +23,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 
 	const previousImages = (await parent).openGraph?.images || [];
 	const title = event.title;
-	const description = (event.summary
-		||event.description).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
+	const description = (event.summary || event.description).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
 	const imageUrl = event.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
 	const logoUrl = `${siteConfig.url}/${siteConfig.logo}`;
 	const eventUrl = `${siteConfig.url}/media/news-and-events/events/${event.slug}`;
@@ -73,7 +72,8 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 					width: 1200,
 					height: 630,
 					alt: event.title
-				}
+				},
+				...previousImages
 			]
 		},
 		twitter: {

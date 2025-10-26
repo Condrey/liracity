@@ -11,7 +11,7 @@ export async function SampleNewsArticles() {
 	const newsArticles = await getAllNewsArticles(limit);
 	if (!newsArticles.length) return null;
 	return (
-		<div className="gap-3 flex flex-col">
+		<div className="gap-3 flex px-3 flex-col">
 			<h1 className="text-xl uppercase font-bold tracking-tighter">Recent news Articles</h1>
 			<ListOfNewsArticles initialData={newsArticles} limit={limit} />
 			<Link

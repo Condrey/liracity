@@ -1,6 +1,5 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 
-import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn, webName } from "@/lib/utils";
 import UserMenuButton from "@/utils/user-menu-button";
@@ -21,7 +20,6 @@ export default async function TopAppBar({ className }: { className?: string }) {
 				{/* For small screens : section */}
 				<div className="flex items-center md:hidden  gap-2">
 					<SidebarTrigger className="-ml-1 " />
-					<Separator orientation="vertical" className="mr-2 h-4" />
 					<h2 className="  uppercase">{webName}</h2>
 				</div>
 

@@ -2,7 +2,7 @@ import { ButtonAddSingleAttachment } from "@/components/attachment/button-add-at
 import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Badge } from "@/components/ui/badge";
 import { CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import LoadingButton from "@/components/ui/loading-button";
@@ -93,7 +93,7 @@ export default function SheetAddEditNewsArticle({
 		<Sheet open={open} onOpenChange={setOpen}>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<SheetContent side="bottom" className="h-svh overflow-y-auto bg-muted">
+					<SheetContent side="bottom" className="h-svh px-3 overflow-y-auto bg-muted">
 						<div className="relative max-w-7xl min-h-[100px] w-full mx-auto flex flex-col justify-center">
 							{coverImageUrl && (
 								<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
@@ -106,25 +106,27 @@ export default function SheetAddEditNewsArticle({
 									!!coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl  max-h-fit my-auto"
 								)}
 							>
-								<SheetHeader className=" w-full ">
-									<div className="flex gap-3 justify-between items-end">
+								<SheetHeader className=" w-full  max-h-fit ">
+									<div className="flex flex-wrap gap-3 pt-3  w-full justify-between md:items-end">
 										<div>
 											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
 											{!!watchedTitle ? (
 												<CardTitle className="tracking-tighter line-clamp-3 md:line-clamp-1 text-wrap break-all">
-													{watchedTitle}{" "}
+													{watchedTitle}
 												</CardTitle>
 											) : (
 												<SheetTitle>{sheetTitle}</SheetTitle>
 											)}
 											<div>
 												<div className="flex gap-2">
-													<Badge variant={"warning"}>{newsArticleStatus}</Badge>
+													<Badge variant={"warning"} className="max-h-fit">
+														{newsArticleStatus}
+													</Badge>
 													{!watchedTags?.length ? (
 														""
 													) : (
-														<div className="flex gap-0.5">
-															<span className="text-muted-foreground text-sm italic">Hashtag:</span>
+														<div className="flex flex-wrap gap-0.5">
+															<span className="text-muted-foreground hidden md:flex text-sm italic">Hashtag:</span>
 															{watchedTags.map((tag) => (
 																<Badge key={tag.name} variant={"secondary"}>
 																	#{tag.name}
@@ -140,6 +142,7 @@ export default function SheetAddEditNewsArticle({
 											type="submit"
 											size={"lg"}
 											onClick={() => form.handleSubmit(onSubmit)()}
+											className="hidden md:flex"
 										>
 											<SaveIcon /> Submit Article
 										</LoadingButton>
@@ -158,7 +161,7 @@ export default function SheetAddEditNewsArticle({
 						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
 							{/* main content  */}
 							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
-								<div className="">
+								<div className=" space-y-4">
 									<FormField
 										control={form.control}
 										name="title"
@@ -172,7 +175,7 @@ export default function SheetAddEditNewsArticle({
 											</FormItem>
 										)}
 									/>
-									<div className="flex  gap-4">
+									<div className="flex flex-wrap  gap-4">
 										<FormField
 											control={form.control}
 											name="coverImageId"
@@ -198,7 +201,7 @@ export default function SheetAddEditNewsArticle({
 											control={form.control}
 											name="location"
 											render={({ field }) => (
-												<FormItem className="flex-1">
+												<FormItem className="flex-1 min-w-[100px]">
 													<FormLabel>Location</FormLabel>
 													<FormControl>
 														<InputGroup>
@@ -271,6 +274,17 @@ export default function SheetAddEditNewsArticle({
 								</div>
 							</div>
 						</div>
+						<FormFooter className="my-4">
+							<LoadingButton
+								loading={isPending}
+								type="submit"
+								size={"lg"}
+								onClick={() => form.handleSubmit(onSubmit)()}
+								className="md:hidden"
+							>
+								<SaveIcon /> Submit Article
+							</LoadingButton>
+						</FormFooter>
 					</SheetContent>
 				</form>
 			</Form>

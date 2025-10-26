@@ -10,7 +10,7 @@ import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
-import { formatDate } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
@@ -50,7 +50,7 @@ export default function EventsArticleContainer({
 						alt={title}
 						width={500}
 						height={600}
-						className=" w-full touch-none pointer-events-none aspect-video mask-b-from-10% mask-b-to-90% rounded-sm object-cover  group-hover/article:scale-110 transition-all duration-300"
+						className=" w-full min-h-[180px] touch-none pointer-events-none aspect-video mask-b-from-10% mask-b-to-90% rounded-sm object-cover  group-hover/article:scale-110 transition-all duration-300"
 					/>
 					<div
 						className={cn(
@@ -59,7 +59,7 @@ export default function EventsArticleContainer({
 						)}
 					>
 						<span className="bg-primary text-primary-foreground px-1 py-0.5 rounded-2xl overflow-clip">
-							{formatDate(startDate, "PPp")}
+							{format(startDate, "PPp")}
 						</span>
 						{endDate && (
 							<>
@@ -67,7 +67,7 @@ export default function EventsArticleContainer({
 									upto
 								</span>
 								<span className="bg-primary text-primary-foreground px-1 py-0.5 rounded-2xl overflow-clip">
-									{formatDate(endDate, "PPp")}
+									{format(endDate, "PPp")}
 								</span>
 							</>
 						)}

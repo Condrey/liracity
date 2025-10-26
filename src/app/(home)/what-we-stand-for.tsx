@@ -20,7 +20,7 @@ export default function WhatWeStandFor() {
 					<TypographyH3 title={webName} className=" uppercase text-balance text-start" />
 					<h4 className="text-sm text-muted-foreground">Vision, mission, mandate, e.t.c </h4>
 				</div> */}
-				<div className="bg-muted border-y py-1">
+				<div className="bg-muted px-3 border-y py-1">
 					<TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1  max-w-4xl [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
 						<TabsTrigger value="vision">
 							<LightbulbIcon className="hidden sm:block " />
@@ -41,20 +41,20 @@ export default function WhatWeStandFor() {
 					</TabsList>
 				</div>
 
-				{Object.entries(liraCityCouncilProfile).map(([key, value], index) => (
-					<TabsContent
-						key={key}
-						value={key}
-						className="w-full text-justify space-y-3 max-w-prose text-pretty  hyphens-auto"
-					>
-						<div className="text-muted-foreground flex gap-0.5 flex-wrap text-xs">
-							Tap on these <strong>tabs</strong> above to view more. e.g., on{" "}
-							<span className="flex items-center">
-								"<RocketIcon className="size-3 mr-1" /> Mission"
-							</span>
-						</div>
+				{Object.entries(liraCityCouncilProfile).map(([key, value], index) => {
+					return (
+						<TabsContent
+							key={key}
+							value={key}
+							className="w-full px-3 text-justify space-y-3 max-w-prose text-pretty  hyphens-auto"
+						>
+							<div className="text-muted-foreground flex gap-0.5 flex-wrap text-xs">
+								Tap on these <strong>tabs</strong> above to view more. e.g., on{" "}
+								<span className="flex items-center">
+									"<RocketIcon className="size-3 mr-1" /> Mission"
+								</span>
+							</div>
 
-						{
 							<div>
 								<Button
 									variant="outline"
@@ -69,15 +69,18 @@ export default function WhatWeStandFor() {
 									<span className="sr-only">Copy {key} to clipboard</span>
 									<CopyIcon /> Copy
 								</Button>
-								<p className=" first-letter:capitalize">
+								<p className="first-letter:capitalize">
 									<span className="italic font-medium tracking-tighter text-muted-foreground">{key}</span>{" "}
 									<span className="text-start font-medium text-muted-foreground tracking-tighter">| {webName}</span>{" "}
-									<span dangerouslySetInnerHTML={{ __html: md.render(value) }} className="whitespace-normal"/>
+									<span
+										dangerouslySetInnerHTML={{ __html: md.render(value) }}
+										className="whitespace-pre-line md:whitespace-normal text-sm tracking-normal text-pretty hyphens-auto"
+									/>
 								</p>
 							</div>
-						}
-					</TabsContent>
-				))}
+						</TabsContent>
+					);
+				})}
 			</Tabs>
 		</div>
 	);

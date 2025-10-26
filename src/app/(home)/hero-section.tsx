@@ -28,7 +28,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 	if (status === "error") return <ErrorContainer errorMessage="Failed to load landing page" query={query} />;
 	if (status === "success" && !data) return <EmptyContainer message={`Welcome to ${webName}`}></EmptyContainer>;
 	return (
-		<div className="md:h-[90vh] rounded-b-2xl lg:max-h-[75vh] overflow-clip w-full   grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
+		<div className="md:h-[90vh] rounded-b-2xl lg:max-h-[75vh] overflow-clip w-full    grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
 			<Image
 				src={data?.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
@@ -39,13 +39,13 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 				className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3  mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
 			/>
 			<article className="lg:max-w-prose shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
-				<p className="text-xs text-muted-foreground">
-					<time className=" ordinal  slashed-zero">{formatDateToLocal((data?.publishedAt || data?.createdAt)!)}</time>,{" "}
-					{data?.location}
-				</p>
-				<h2 className="font-medium tracking-tight text-lg line-clamp-2 text-pretty capitalize">{data?.title}</h2>
+				<div className="text-xs text-muted-foreground">
+					<time className="ordinal  slashed-zero">{formatDateToLocal((data?.publishedAt || data?.createdAt)!)}</time>,{" "}
+					<address className="inline">{data?.location}</address>
+				</div>
+				<h2 className="font-medium tracking-tight md:leading-relaxed leading-tight text-lg line-clamp-2 text-pretty uppercase md:capitalize">{data?.title}</h2>
 
-				<div className="mt-1 hyphens-auto text-sm leading-relaxed italic sm:not-italic  text-justify text-gray-500 line-clamp-3 xl:line-clamp-5 md:max-w-prose">
+				<div className="mt-1 hyphens-auto text-sm md:leading-relaxed leading-tight md:italic sm:not-italic  md:text-justify md:text-gray-500 line-clamp-4 xl:line-clamp-5 md:max-w-prose">
 					<TipTapViewer content={data?.summary || data?.content} />
 				</div>
 				<div className="w-full flex">
@@ -53,7 +53,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data?.slug}`)}
 						className={cn(
 							buttonVariants({}),
-							"group/read-more w-full max-w-fit md:mx-0 mx-auto sm:ms-auto sm:mx-0 mt-2"
+							"group/read-more w-full md:max-w-fit md:mx-0 mx-auto sm:ms-auto sm:mx-0 mt-2"
 						)}
 						onClick={() => startTransition(() => {})}
 					>

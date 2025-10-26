@@ -30,9 +30,9 @@ export default function Home() {
 			{/* Upcoming events  */}
 			<Suspense
 				fallback={
-					<div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					<div className="grid px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{Array.from({ length: 6 }, (_, index) => (
-							<NewsArticleContainerSkeleton key={index} />
+							<EventsArticleContainerSkeleton key={index} />
 						))}
 					</div>
 				}
@@ -43,9 +43,9 @@ export default function Home() {
 			{/* Sample news articles  */}
 			<Suspense
 				fallback={
-					<div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					<div className="grid px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{Array.from({ length: 6 }, (_, index) => (
-							<EventsArticleContainerSkeleton key={index} />
+							<NewsArticleContainerSkeleton key={index} />
 						))}
 					</div>
 				}

@@ -74,7 +74,8 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 					width: 1200,
 					height: 630,
 					alt: newsArticle.title
-				}
+				},
+				...previousImages
 			]
 		},
 		twitter: {

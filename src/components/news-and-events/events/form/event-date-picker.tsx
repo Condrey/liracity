@@ -57,6 +57,7 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 												selected={field.value}
 												captionLayout="dropdown"
 												onSelect={(date) => {
+													const theDate = date.to
 													field.onChange(date);
 													setOpenFrom(false);
 												}}

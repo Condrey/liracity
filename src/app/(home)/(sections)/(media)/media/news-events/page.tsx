@@ -39,17 +39,17 @@ export default async function Page({ searchParams }: PageProps) {
 				<SidebarProvider>
 					<SidebarInset className="">
 						<header className="flex h-fit  flex-col gap-2 ">
-							<PageTitle heading={title} className="" />
+							<PageTitle heading={title} className="px-3" />
 							<div className="flex items-center gap-2 shrink-0 border-y">
-								<div className="bg-muted flex w-full py-1 border-y">
+								<div className="bg-muted flex px-3 w-full py-1 border-y">
 									<TabList />
 								</div>
-								<SidebarTrigger className="-mr-1 ml-auto rotate-180" />
+								<SidebarTrigger className=" ml-auto mr-3 rotate-180" />
 							</div>
 						</header>
 
 						{/* list of news articles */}
-						<TabsContent value="news" className="space-y-4 pt-4">
+						<TabsContent value="news" className="space-y-4 pt-4 px-3">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditNewsArticle>
 									<PlusIcon /> news
@@ -70,7 +70,7 @@ export default async function Page({ searchParams }: PageProps) {
 							</Suspense>
 						</TabsContent>
 						{/* list of events */}
-						<TabsContent value="events" className="space-y-4 pt-4">
+						<TabsContent value="events" className="space-y-4 pt-4 px-3">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditEvent>
 									<PlusIcon /> event

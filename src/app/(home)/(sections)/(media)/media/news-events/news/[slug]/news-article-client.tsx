@@ -22,7 +22,7 @@ import { NewsArticleData } from "@/lib/types";
 import { formatDateToLocal } from "@/lib/utils";
 import UserLinkWithTooltip from "@/utils/user-link-with-tooltip";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeftIcon, Edit3Icon, MapPin, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
@@ -58,13 +58,13 @@ export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsAr
 	return (
 		<SidebarProvider>
 			<SidebarInset className="">
-				<header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
 					<LoadingButton variant={"ghost"} size={"icon"} loading={isPending} onClick={() => startTransition(() => {})}>
 						<Link href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
-							<ArrowLeftIcon />
+							<MoveLeftIcon />
 						</Link>
 					</LoadingButton>
-					<TypographyH4 title="News Article" />
+					<TypographyH4 title="News & Events" />
 					{isAPublisher && (
 						<ButtonGroup className="max-w-fit mx-auto items-center w-full">
 							{mutationPending && <Spinner />}
@@ -125,34 +125,40 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 	return (
 		<article className="space-y-12">
 			<header>
-				<PageTitle heading={title}>
-					<ButtonAddEditNewsArticle size={"icon"} newsArticle={newsArticle}>
+				<PageTitle heading={title} className="flex-wrap">
+					<ButtonAddEditNewsArticle size={"icon"} newsArticle={newsArticle} className="flex-none">
 						<Edit3Icon />
 					</ButtonAddEditNewsArticle>
-					<ButtonDeleteNewsArticle size={"icon"} variant={"destructive"} newsArticle={newsArticle}>
+					<ButtonDeleteNewsArticle
+						size={"icon"}
+						variant={"destructive"}
+						newsArticle={newsArticle}
+						className="flex-none"
+					>
 						<Trash2Icon />
 					</ButtonDeleteNewsArticle>
 				</PageTitle>
 				<div className="flex gap-2 flex-wrap items-center mb-2">
-					<Badge variant={variant}>
-						<StatusIcon className="mr-1" />
+					<Badge className="" variant={variant}>
+						{/* <StatusIcon className="mr-1" /> */}
 						{newsArticleStatus}
 					</Badge>
 
-					<div className="flex gap-0.5">
+					<div className="inline-flex flex-wrap gap-0.5">
 						{tags.map((tag) => (
 							<HashtagItem key={tag.id} hashtag={tag} />
 						))}
 					</div>
-					<div className="flex">
+					<div className="flex flex-wrap">
 						{location && (
 							<address>
 								<MapPin className="fill-muted-foreground inline-flex text-muted mr-0.5" />
 								{location},
 							</address>
 						)}{" "}
-						{formatDateToLocal(publishedAt || updatedAt > createdAt ? updatedAt : createdAt)}{" "}
-						{updatedAt > createdAt && `(updated)`}
+						<time className="font-semibold md:font-normal">
+							{formatDateToLocal(publishedAt || createdAt)} {updatedAt > createdAt && `(updated)`}
+						</time>
 					</div>
 				</div>
 
@@ -168,7 +174,10 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 				)}
 			</section>
 			<section>
-				<TipTapViewer content={content} className="text-justify leading-relaxed text-xl" />
+				<TipTapViewer
+					content={content}
+					className=" hyphens-auto leading-tight text-justify md:leading-relaxed text-xl"
+				/>
 			</section>
 
 			{!!media && media.length && (
@@ -194,7 +203,7 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 News article Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify leading-relaxed text-xl" />
+					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-relaxed text-xl" />
 				</section>
 			)}
 		</article>

@@ -26,7 +26,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 						<SidebarInset>
 							<div className=" h-full overflow-hidden  w-full">
 								<main className=" size-full   overflow-y-auto scroll-auto flex flex-col gap-8 ">
-									<div className=" max-w-9xl h-full px-3  mx-auto w-full  min-h-[75vh] ">{children}</div>
+									<div className=" max-w-9xl h-full  mx-auto w-full  min-h-[75vh] ">{children}</div>
 									<footer className="w-full">
 										<Footer className="bg-black/80 dark:bg-white/20 *:p-4 w-full  text-background dark:text-foreground " />
 									</footer>

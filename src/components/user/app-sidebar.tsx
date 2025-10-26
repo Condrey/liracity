@@ -1,13 +1,13 @@
 "use client";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { NavLink, navLinks } from "@/lib/constants";
 import { cn, webName } from "@/lib/utils";
 import { ChevronRight, Loader2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTransition } from "react";
-import { NavLink, navLinks } from "@/lib/constants";
 import {
 	Sidebar,
 	SidebarContent,
@@ -57,21 +57,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 								<Collapsible key={item.title} defaultOpen={index === 1} asChild className="group/collapsible">
 									<SidebarMenuItem>
 										<CollapsibleTrigger asChild>
-											<SidebarMenuButton
-												tooltip={item.title}
-												isActive={isActive}
-												//  asChild
-											>
-												{/* <Link href={basePathname+'/'+item.url+'?'+searchParams.toString()}> */}
-												{item.icon && <ItemIcon />}
-												<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
-												<ChevronRight
-													className={cn(
-														"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
-														index === 0 && "hidden"
-													)}
-												/>
-												{/* </Link> */}
+											<SidebarMenuButton tooltip={item.title} isActive={isActive} asChild>
+												<Link href={!item.children.length ? item.href : "#"}>
+													{item.icon && <ItemIcon />}
+													<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
+													<ChevronRight
+														className={cn(
+															"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
+															index === 0 && "hidden"
+														)}
+													/>
+												</Link>
 											</SidebarMenuButton>
 										</CollapsibleTrigger>
 										{item.children?.length ? (

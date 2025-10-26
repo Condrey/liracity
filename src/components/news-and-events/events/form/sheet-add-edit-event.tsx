@@ -2,7 +2,7 @@ import { ButtonAddSingleAttachment } from "@/components/attachment/button-add-at
 import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Badge } from "@/components/ui/badge";
 import { CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@/components/ui/input-group";
 import LoadingButton from "@/components/ui/loading-button";
@@ -98,8 +98,8 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 									coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl max-h-fit my-auto"
 								)}
 							>
-								<SheetHeader className=" w-full  ">
-									<div className="flex gap-3 justify-between items-end">
+								<SheetHeader className=" w-full  max-h-none">
+									<div className="flex gap-3 flex-wrap justify-between items-end">
 										<div>
 											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
 											{!!watchedTitle ? (
@@ -138,6 +138,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 											type="submit"
 											size={"lg"}
 											onClick={() => form.handleSubmit(onSubmit)()}
+											className="ml-auto hidden md:inline-flex"
 										>
 											<SaveIcon /> Submit
 										</LoadingButton>
@@ -153,11 +154,11 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 							)}
 							
 						</pre> */}
-						<pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
-						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
+						{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
+						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 px-3 ">
 							{/* main content  */}
 							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
-								<div className="">
+								<div className="space-y-4">
 									<FormField
 										control={form.control}
 										name="title"
@@ -171,7 +172,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 											</FormItem>
 										)}
 									/>
-									<div className="flex  gap-4">
+									<div className="flex flex-row flex-wrap  gap-4">
 										<FormField
 											control={form.control}
 											name="coverImageId"
@@ -197,7 +198,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 											control={form.control}
 											name="location"
 											render={({ field }) => (
-												<FormItem className="flex-1">
+												<FormItem className="flex-1 min-w-[100px]">
 													<FormLabel>Location</FormLabel>
 													<FormControl>
 														<InputGroup>
@@ -266,6 +267,17 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 								</div>
 							</div>
 						</div>
+						<FormFooter>
+							<LoadingButton
+											loading={isPending}
+											type="submit"
+											size={"lg"}
+											onClick={() => form.handleSubmit(onSubmit)()}
+											className="ml-auto md:hidden"
+										>
+											<SaveIcon /> Submit
+										</LoadingButton>
+						</FormFooter>
 					</SheetContent>
 				</form>
 			</Form>

@@ -32,8 +32,8 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 			<Image
 				src={data?.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
-				width={640}
-				height={800}
+				width={720}
+				height={1800}
 				// objectFit="cover"
 				// placeholder="blur"
 				className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3  mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
@@ -74,10 +74,10 @@ export function HeroSectionLoadingSkeleton() {
 	return (
 		<div className="md:h-[90vh] bg-secondary/10 dark:border  animate-pulse rounded-b-2xl lg:max-h-[75vh] overflow-clip w-full   grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
 			<Skeleton className="w-full lg:h-full bg-primary/20  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3  mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top" />
-			<div className="lg:max-w-prose space-y-2 shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1" >
-				<Skeleton className="h-4 w-11/12"/>
-				<Skeleton className="h-9 w-2/3"/>
-				<Skeleton className="h-40 w-4/5"/>
+			<div className="lg:max-w-prose space-y-2 shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
+				<Skeleton className="h-4 w-11/12" />
+				<Skeleton className="h-9 w-2/3" />
+				<Skeleton className="h-40 w-4/5" />
 			</div>
 		</div>
 	);

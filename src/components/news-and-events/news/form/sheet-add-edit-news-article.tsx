@@ -273,8 +273,7 @@ export default function SheetAddEditNewsArticle({
 									<OtherMedia newsArticleId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
 								</div>
 							</div>
-						</div>
-						<FormFooter className="my-4">
+							<FormFooter className="my-4">
 							<LoadingButton
 								loading={isPending}
 								type="submit"
@@ -285,6 +284,8 @@ export default function SheetAddEditNewsArticle({
 								<SaveIcon /> Submit Article
 							</LoadingButton>
 						</FormFooter>
+						</div>
+						
 					</SheetContent>
 				</form>
 			</Form>

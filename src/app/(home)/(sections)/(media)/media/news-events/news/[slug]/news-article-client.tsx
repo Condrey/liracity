@@ -180,7 +180,7 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 				/>
 			</section>
 
-			{!!media && media.length && (
+			{!!media && !!media.length && (
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the news article" className="uppercase" />
 					<div className=" grid sm:grid-cols-2 md:grid-cols-3  gap-2">

@@ -100,7 +100,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 							>
 								<SheetHeader className=" w-full  max-h-none">
 									<div className="flex gap-3 flex-wrap justify-between items-end">
-										<div>
+										<div className="flex flex-wrap">
 											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
 											{!!watchedTitle ? (
 												<CardTitle className="tracking-tighter line-clamp-3 md:line-clamp-1 text-wrap break-all">
@@ -110,12 +110,12 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 												<SheetTitle>{sheetTitle}</SheetTitle>
 											)}
 											<div>
-												<div className="flex gap-2">
+												<div className="flex gap-2 flex-wrap">
 													<Badge variant={"warning"}>{eventStatus}</Badge>
 													{!!watchedStartDate && (
 														<Badge variant={"secondary"} className="flex gap-0.5">
 															<span className="text-muted-foreground text-sm italic">
-																<CalendarRangeIcon className="inline-flex size-4 mr-1" />
+																<CalendarRangeIcon className="md:inline-flex hidden size-4 mr-1" />
 																Start:
 															</span>
 															{formatDate(watchedStartDate, "PPp")}
@@ -124,7 +124,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 													{!!watchedEndDate && (
 														<Badge variant={"secondary"} className="flex gap-0.5">
 															<span className="text-muted-foreground text-sm italic">
-																<CalendarRangeIcon className="inline-flex size-4 mr-1" />
+																<CalendarRangeIcon className="hidden md:inline-flex size-4 mr-1" />
 																End:
 															</span>
 															{formatDate(watchedEndDate, "PPp")}
@@ -266,18 +266,19 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 									<OtherMedia eventId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
 								</div>
 							</div>
-						</div>
-						<FormFooter>
+								<FormFooter>
 							<LoadingButton
-											loading={isPending}
-											type="submit"
-											size={"lg"}
-											onClick={() => form.handleSubmit(onSubmit)()}
-											className="ml-auto md:hidden"
-										>
-											<SaveIcon /> Submit
-										</LoadingButton>
+								loading={isPending}
+								type="submit"
+								size={"lg"}
+								onClick={() => form.handleSubmit(onSubmit)()}
+								className="ml-auto md:hidden"
+							>
+								<SaveIcon /> Submit
+							</LoadingButton>
 						</FormFooter>
+						</div>
+					
 					</SheetContent>
 				</form>
 			</Form>

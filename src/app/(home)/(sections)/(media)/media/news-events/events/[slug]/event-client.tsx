@@ -22,7 +22,7 @@ import { EventData } from "@/lib/types";
 import { formatDateToLocal } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { formatDate } from "date-fns";
-import { ArrowLeftIcon, Edit3Icon, MapPin, Trash2Icon } from "lucide-react";
+import { ArrowLeftIcon, Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
@@ -59,13 +59,13 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 	return (
 		<SidebarProvider>
 			<SidebarInset className="">
-				<header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+				<header className="flex md:h-16 flex-wrap shrink-0  items-center gap-2 border-b px-4">
 					<LoadingButton variant={"ghost"} size={"icon"} loading={isPending} onClick={() => startTransition(() => {})}>
 						<Link href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
-							<ArrowLeftIcon />
+							<MoveLeftIcon />
 						</Link>
 					</LoadingButton>
-					<TypographyH4 title="Event" />
+					<TypographyH4 title="News & Events" />
 					{isAPublisher && (
 						<ButtonGroup className="max-w-fit mx-auto items-center w-full">
 							{mutationPending && <Spinner />}
@@ -128,40 +128,39 @@ function EventContent({ event }: EventContentProps) {
 	return (
 		<article className="space-y-12">
 			<header>
-				<PageTitle heading={title}>
-					<ButtonAddEditEvent size={"icon"} event={event}>
+				<PageTitle heading={title} className="flex-wrap">
+					<ButtonAddEditEvent size={"icon"} event={event}  className="flex-none ">
 						<Edit3Icon />
 					</ButtonAddEditEvent>
-					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"}>
+					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"} className="flex-none ">
 						<Trash2Icon />
 					</ButtonDeleteEvent>
 				</PageTitle>
 				<div className="flex gap-2 flex-wrap items-center mb-2">
 					<Badge variant={variant}>
-						<StatusIcon className="mr-1" />
+						{/* <StatusIcon className="mr-1" /> */}
 						{eventStatus}
 					</Badge>
-					<div className="flex">
+					<div className="flex flex-wrap">
 						{location && (
 							<address>
 								<MapPin className="fill-muted-foreground inline-flex text-muted mr-0.5" />
 								{location},
 							</address>
-						)}{" "}
-						<span>
+						)}
+						<time className="inline w-fit font-semibold md:font-normal"> <span>
 							{isPassedEvent
 								? `happened ${formatDateToLocal(endDate ?? startDate)}`
 								: `starts ${formatDateToLocal(startDate)}`}
 						</span>
-						{updatedAt > createdAt && `(updated)`}
+						{updatedAt > createdAt && `(updated)`}</time>
 					</div>
 				</div>
 				<hr />
-				<span className="text-sm text-muted-foreground">
-					{" "}
+				<time className="text-sm leading-tight text-muted-foreground">
 					{formatDate(startDate, "PPPPp")}
 					{endDate && <> upto {formatDate(endDate, "PPPPp")}</>}
-				</span>
+				</time>
 			</header>
 			<section>
 				{coverImage && (
@@ -169,10 +168,10 @@ function EventContent({ event }: EventContentProps) {
 				)}
 			</section>
 			<section>
-				<TipTapViewer content={description} className="text-justify leading-relaxed text-xl" />
+				<TipTapViewer content={description} className="text-justify hyphens-auto leading-tight md:leading-relaxed text-xl" />
 			</section>
 
-			{!!media && media.length && (
+			{!!media && !!media.length && (
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the event" className="uppercase" />
 					<div className=" grid sm:grid-cols-2 md:grid-cols-3  gap-2">
@@ -195,7 +194,7 @@ function EventContent({ event }: EventContentProps) {
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify leading-relaxed text-xl" />
+					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed text-xl" />
 				</section>
 			)}
 		</article>

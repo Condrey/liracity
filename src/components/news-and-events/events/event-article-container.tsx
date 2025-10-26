@@ -54,19 +54,19 @@ export default function EventsArticleContainer({
 					/>
 					<div
 						className={cn(
-							"brightness-[30%] ",
+							"brightness-[100%] ",
 							"max-w-fit absolute flex flex-col items-center max-h-fit m-auto size-full py-3"
 						)}
 					>
-						<span className="bg-primary/20 text-primary backdrop-blur-2xl px-1 py-0.5 rounded-2xl overflow-clip">
+						<span className="bg-primary text-primary-foreground px-1 py-0.5 rounded-2xl overflow-clip">
 							{formatDate(startDate, "PPp")}
 						</span>
 						{endDate && (
 							<>
-								<span className="bg-destructive/20 text-destructive backdrop-blur-2xl px-1 py-0.5 rounded-2xl overflow-clip">
+								<span className="bg-destructive text-destructive-foreground px-1 py-0.5 rounded-2xl overflow-clip">
 									upto
 								</span>
-								<span className="bg-primary/20 text-primary backdrop-blur-2xl px-1 py-0.5 rounded-2xl overflow-clip">
+								<span className="bg-primary text-primary-foreground px-1 py-0.5 rounded-2xl overflow-clip">
 									{formatDate(endDate, "PPp")}
 								</span>
 							</>

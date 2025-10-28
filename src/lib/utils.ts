@@ -9,6 +9,16 @@ export function cn(...inputs: ClassValue[]) {
 export const webName = "Lira City";
 export const countryCurrency = "UGX";
 
+export function getTitle(position: string): string {
+	return position
+		.split(" ")
+		.map((word) => {
+			if (word.toLowerCase() === "and") return "";
+			return word.charAt(0).toUpperCase();
+		})
+		.join("");
+}
+
 export const siteConfig = {
 	name: `Lira City – The Official Website of Lira City Council, Uganda`,
 	url: process.env.NEXT_PUBLIC_BASE_URL,

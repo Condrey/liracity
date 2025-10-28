@@ -160,10 +160,11 @@ export const navLinks: NavLinkGroup[] = [
 	},
 	{
 		title: "About Lira",
-		href: "/about-lira#about",
+		href: "/about-lira",
 		description: `Discover Lira’s history, culture, and geography.`,
 		icon: InfoIcon,
-		children: cityAboutLinks,
+		children: [],
+		// children: cityAboutLinks,
 		showOnMediumScreen: true
 	},
 	{

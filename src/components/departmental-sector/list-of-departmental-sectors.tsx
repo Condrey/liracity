@@ -16,7 +16,7 @@ export default function ListOfDepartmentalSectors({
       {!sectors.length ? (
         <EmptyContainer
           message={
-            "There are no departmental sectors added in the database yet, please add"
+            "There are no departmental sections added in the database yet, please add"
           }
           className="min-h-[10rem]"
         >
@@ -24,13 +24,13 @@ export default function ListOfDepartmentalSectors({
             variant={"secondary"}
             departMentId={departMentId}
           >
-            Add a new sector
+            Add a new section
           </ButtonAddEditDepartmentalSector>
         </EmptyContainer>
       ) : (
         <div className="flex flex-col w-full gap-4">
           <p className="italic text-lg">
-            The following are the various sectors under this department;
+            The following are the various sections and their positions under this department;
           </p>
           <ul className=" space-y-6 list-decimal list-inside">
             {sectors.map((sector) => (

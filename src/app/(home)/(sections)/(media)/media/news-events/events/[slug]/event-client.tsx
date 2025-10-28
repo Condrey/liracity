@@ -59,7 +59,7 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 	return (
 		<SidebarProvider>
 			<SidebarInset className="">
-				<header className="flex md:h-16 flex-wrap shrink-0  items-center gap-2 border-b px-4">
+				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
 					<LoadingButton variant={"ghost"} size={"icon"} loading={isPending} onClick={() => startTransition(() => {})}>
 						<Link href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
 							<MoveLeftIcon />
@@ -168,7 +168,7 @@ function EventContent({ event }: EventContentProps) {
 				)}
 			</section>
 			<section>
-				<TipTapViewer content={description} className="text-justify hyphens-auto leading-tight md:leading-relaxed text-xl" />
+				<TipTapViewer content={description} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" />
 			</section>
 
 			{!!media && !!media.length && (
@@ -194,7 +194,7 @@ function EventContent({ event }: EventContentProps) {
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed text-xl" />
+					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" />
 				</section>
 			)}
 		</article>

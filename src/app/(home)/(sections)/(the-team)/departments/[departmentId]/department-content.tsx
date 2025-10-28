@@ -4,8 +4,8 @@ import ErrorContainer from "@/components/query-containers/error-container";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
-import { getDepartmentById } from "../../../../../../components/department/action";
-import HeadOfDepartmentContainer from "../../../../../../components/head-of-department/head-of-department-container";
+import { getDepartmentById } from "@/components/department/action";
+import HeadOfDepartmentContainer from "@/components/head-of-department/head-of-department-container";
 import DepartmentContainer from "./department-container";
 
 interface DepartmentContentProps {

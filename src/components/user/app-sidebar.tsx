@@ -1,6 +1,7 @@
 "use client";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { NavLink, navLinks } from "@/lib/constants";
 import { cn, webName } from "@/lib/utils";
 import { ChevronRight, Loader2Icon } from "lucide-react";
@@ -27,7 +28,7 @@ import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const pathname = usePathname();
-
+	const isSmallScreen = useIsMobile();
 	return (
 		<Sidebar
 			className="top-(--header-height) md:hidden h-[calc(100svh-var(--header-height))]!"
@@ -48,23 +49,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
-					<SidebarGroupLabel>Navigation Menu</SidebarGroupLabel>
-					<SidebarMenu>
+					<SidebarGroupLabel className="hidden sm:flex">Navigation Menu</SidebarGroupLabel>
+					<SidebarMenu className="">
 						{navLinks.map((item, index) => {
 							const ItemIcon = item.icon!;
-							const isActive = item.children.some((i) => pathname.startsWith(i.href));
+							const isActive = !item.children.length
+								? index > 0
+									? pathname.startsWith(item.href)
+									: pathname.endsWith("/")
+								: item.children.some((i) => pathname.startsWith(i.href));
 							return (
 								<Collapsible key={item.title} defaultOpen={index === 1} asChild className="group/collapsible">
 									<SidebarMenuItem>
 										<CollapsibleTrigger asChild>
-											<SidebarMenuButton tooltip={item.title} isActive={isActive} asChild>
+											<SidebarMenuButton
+												tooltip={item.title}
+												isActive={isActive}
+												variant={"default"}
+												size={isSmallScreen ? "default" : "lg"}
+												asChild
+											>
 												<Link href={!item.children.length ? item.href : "#"}>
-													{item.icon && <ItemIcon />}
+													{item.icon && <ItemIcon className="hidden sm:flex" />}
 													<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
 													<ChevronRight
 														className={cn(
 															"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
-															index === 0 && "hidden"
+															!item.children.length && "hidden"
 														)}
 													/>
 												</Link>

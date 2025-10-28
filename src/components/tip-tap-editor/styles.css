@@ -83,6 +83,18 @@
 		padding: 0.25em 0.3em;
 	}
 
+	/* Link styles  */
+	a {
+		color: var(--primary);
+		cursor: pointer;
+		text-decoration: underline;
+
+		&:hover {
+			color: color-mix(in oklab, var(--primary) 80%, transparent);
+			text-decoration: underline;
+		}
+	}
+
 	pre {
 		background: var(--black);
 		border-radius: 0.5rem;

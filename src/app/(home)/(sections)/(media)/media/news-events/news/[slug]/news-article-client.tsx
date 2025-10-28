@@ -176,21 +176,20 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 			<section>
 				<TipTapViewer
 					content={content}
-					className=" hyphens-auto leading-tight text-justify md:leading-relaxed text-xl"
-				/>
+className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" 				/>
 			</section>
 
 			{!!media && !!media.length && (
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the news article" className="uppercase" />
 					<div className=" grid sm:grid-cols-2 md:grid-cols-3  gap-2">
-						{media.map((medium) => {
+						{media.map((medium,index) => {
 							if (medium.type === "IMAGE")
 								return (
 									<ArticleImage
 										key={medium.id}
 										mediaIdentifier={medium.url}
-										alt="other graphic"
+										alt={`other graphic #${index+1}`}
 										height={1080}
 										width={1920}
 										className=" aspect-video "
@@ -203,7 +202,7 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 News article Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-relaxed text-xl" />
+					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"  />
 				</section>
 			)}
 		</article>

@@ -10,7 +10,7 @@ interface ChartProps {
 
 export default function Chart({ departments }: ChartProps) {
 	return (
-		<div className="w-full relative  rounded-md pb-6 bg-secondary/20 p-3">
+		<div className="w-full relative  rounded-md pb-6 bg-secondary/50 py-3">
 			<div className="overflow-y-auto scroll-auto w-full">
 				<Tree
 					label={<ChartUserContainer department="Ministry of Local Government" />}
@@ -26,10 +26,8 @@ export default function Chart({ departments }: ChartProps) {
 									department={
 										<div>
 											<span className="underline underline-offset-4 ">Statutory Bodies</span>
-											<ul className="list-decimal list-inside text-start  ">
-												<li className="list-item flex-none shrink-0 flex-nowrap text-nowrap">
-													City service Commission
-												</li>
+											<ul className="list-decimal list-inside text-start min-w-36 ">
+												<li className="list-item ">City service Commission</li>
 												<li className="list-item">City Land Management Board</li>
 											</ul>
 										</div>

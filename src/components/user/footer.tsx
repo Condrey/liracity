@@ -12,7 +12,7 @@ export default function Footer({ className }: { className?: string }) {
 	return (
 		<div className={cn("flex flex-col ", className)}>
 			{/* sections corner  */}
-			<div className="grid grid-cols-2 sm:grid-cols-3 gap-6  max-w-9xl mx-auto  md:grid-cols-4 xl:grid-cols-5 w-full">
+			<div className="md:grid grid-cols-2 sm:grid-cols-3 gap-6 hidden p-4  max-w-9xl mx-auto  md:grid-cols-4 xl:grid-cols-5 w-full">
 				{/* logo section  */}
 				<section className="flex flex-col items-center  justify-center sm:row-span-2">
 					<Image src={`/coat-of-arms.png`} height={150} width={150} alt="logo" />
@@ -28,9 +28,9 @@ export default function Footer({ className }: { className?: string }) {
 				{/* logo section  */}
 			</div>
 			{/* Copyright details and theme toggler  */}
-			<div className="bg-black dark:bg-background text-muted-foreground tracking-wider capitalize w-full  px-4 py-2 mt-8">
+			<div className="md:bg-black bg-foreground/5 dark:md:bg-background text-muted-foreground tracking-wider capitalize w-full  px-4 py-2 md:mt-8">
 				<div className="w-full flex justify-between items-center max-w-9xl mx-auto">
-					<p className='text-center md:after:content-["_-_The_Republic_Of_Uganda"]'>
+					<p className='text-center text-xs md:text-sm md:after:content-["_-_The_Republic_Of_Uganda"]'>
 						{`Copyright 2025${currentYear <= 2025 ? "" : `- ${currentYear}`},
             ${webName}`}
 					</p>

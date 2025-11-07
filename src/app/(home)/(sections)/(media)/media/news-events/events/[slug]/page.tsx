@@ -1,5 +1,5 @@
 import { validateRequest } from "@/auth";
-import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
+import { getAllEvents, getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
 import { EventStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import { siteConfig } from "@/lib/utils";
@@ -9,6 +9,14 @@ import { EventClient } from "./event-client";
 
 interface PageProps {
 	params: Promise<{ slug: string }>;
+}
+
+export const revalidate = 86400; //24 hours
+export async function generateStaticParams() {
+	const allEvents = await getAllEvents(10);
+	return allEvents.map((e) => ({
+		slug: e.slug
+	}));
 }
 
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
@@ -25,37 +33,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 	const title = event.title;
 	const description = (event.summary || event.description).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
 	const imageUrl = event.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
-	const logoUrl = `${siteConfig.url}/${siteConfig.logo}`;
 	const eventUrl = `${siteConfig.url}/media/news-and-events/events/${event.slug}`;
-
-	// --- JSON-LD Structured Data ---
-	const jsonLd = {
-		"@context": "https://schema.org",
-		"@type": "Event",
-		name: title,
-		description,
-		image: [imageUrl, ...previousImages],
-		startDate: event.startDate.toISOString(),
-		endDate: event.endDate?.toISOString(),
-		eventStatus: "https://schema.org/EventScheduled",
-		eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-		location: {
-			"@type": "Place",
-			name: event.location,
-			address: {
-				"@type": "PostalAddress",
-				addressLocality: "Lira City",
-				addressCountry: "UG"
-			}
-		},
-		organizer: {
-			"@type": "Organization",
-			name: siteConfig.name,
-			url: siteConfig.url,
-			logo: logoUrl
-		},
-		url: eventUrl
-	};
 
 	return {
 		title,
@@ -81,10 +59,6 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 			title,
 			description,
 			images: [imageUrl, ...previousImages]
-		},
-		other: {
-			"script:type": "application/ld+json",
-			"script:innerHTML": JSON.stringify(jsonLd)
 		}
 	};
 }

@@ -1,14 +1,26 @@
 import { validateRequest } from "@/auth";
-import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
+import {
+	getAllNewsArticles,
+	getNewsArticleBySlug,
+	getRelatedNewsArticlesFromTags
+} from "@/components/news-and-events/news/action";
 import { NewsArticleStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
-import { siteConfig, webName } from "@/lib/utils";
+import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
 import { NewsArticleClient } from "./news-article-client";
 
 interface PageProps {
 	params: Promise<{ slug: string }>;
+}
+
+export const revalidate = 86400; //Refresh cached pages once every 24 hours
+export async function generateStaticParams() {
+	const allNewsArticles = await getAllNewsArticles(10);
+	return allNewsArticles.map((e) => ({
+		slug: e.slug
+	}));
 }
 
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
@@ -25,36 +37,8 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 	const title = newsArticle.title;
 	const description = (newsArticle.summary || newsArticle.content).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
 	const imageUrl = newsArticle.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
-	const logoUrl = `${siteConfig.url}/${siteConfig.logo}`;
 	const articleUrl = `${siteConfig.url}/media/news-and-events/news/${newsArticle.slug}`;
 	const authorName = newsArticle.author?.name || "Lira City Correspondent";
-
-	// --- JSON-LD Structured Data ---
-	const jsonLd = {
-		"@context": "https://schema.org",
-		"@type": "NewsArticle",
-		headline: title,
-		image: [imageUrl, ...previousImages],
-		datePublished: newsArticle.publishedAt?.toISOString(),
-		dateModified: newsArticle.updatedAt?.toISOString(),
-		author: {
-			"@type": "Person",
-			name: authorName
-		},
-		publisher: {
-			"@type": "Organization",
-			name: webName,
-			logo: {
-				"@type": "ImageObject",
-				url: logoUrl
-			}
-		},
-		mainEntityOfPage: {
-			"@type": "WebPage",
-			"@id": articleUrl
-		},
-		description
-	};
 
 	return {
 		title,
@@ -83,10 +67,6 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 			title,
 			description,
 			images: [imageUrl, ...previousImages]
-		},
-		other: {
-			"script:type": "application/ld+json",
-			"script:innerHTML": JSON.stringify(jsonLd)
 		}
 	};
 }

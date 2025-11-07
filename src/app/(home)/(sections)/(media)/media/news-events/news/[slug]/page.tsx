@@ -1,9 +1,5 @@
 import { validateRequest } from "@/auth";
-import {
-	getAllNewsArticles,
-	getNewsArticleBySlug,
-	getRelatedNewsArticlesFromTags
-} from "@/components/news-and-events/news/action";
+import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
 import { NewsArticleStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import { siteConfig } from "@/lib/utils";
@@ -15,13 +11,13 @@ interface PageProps {
 	params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 86400; //Refresh cached pages once every 24 hours
-export async function generateStaticParams() {
-	const allNewsArticles = await getAllNewsArticles(10);
-	return allNewsArticles.map((e) => ({
-		slug: e.slug
-	}));
-}
+// export const revalidate = 86400; //Refresh cached pages once every 24 hours
+// export async function generateStaticParams() {
+// 	const allNewsArticles = await getAllNewsArticles(10);
+// 	return allNewsArticles.map((e) => ({
+// 		slug: e.slug
+// 	}));
+// }
 
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
 	const { slug } = await params;

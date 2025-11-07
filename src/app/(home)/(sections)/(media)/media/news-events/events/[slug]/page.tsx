@@ -1,5 +1,5 @@
 import { validateRequest } from "@/auth";
-import { getAllEvents, getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
+import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
 import { EventStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import { siteConfig } from "@/lib/utils";
@@ -11,13 +11,13 @@ interface PageProps {
 	params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 86400; //24 hours
-export async function generateStaticParams() {
-	const allEvents = await getAllEvents(10);
-	return allEvents.map((e) => ({
-		slug: e.slug
-	}));
-}
+// export const revalidate = 86400; //24 hours
+// export async function generateStaticParams() {
+// 	const allEvents = await getAllEvents(10);
+// 	return allEvents.map((e) => ({
+// 		slug: e.slug
+// 	}));
+// }
 
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
 	const { slug } = await params;

@@ -59,12 +59,12 @@ export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsAr
 		<SidebarProvider>
 			<SidebarInset className="">
 				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
-					<LoadingButton variant={"ghost"} size={"icon"} loading={isPending} onClick={() => startTransition(() => {})}>
-						<Link href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
-							<MoveLeftIcon />
+					<LoadingButton variant={"ghost"}  loading={isPending} onClick={() => startTransition(() => {})}>
+						<Link className="flex items-center gap-0.5 flex-row" href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
+							<MoveLeftIcon className="inline-flex "  /> 					<TypographyH4 title="News & Events" />
+
 						</Link>
 					</LoadingButton>
-					<TypographyH4 title="News & Events" />
 					{isAPublisher && (
 						<ButtonGroup className="max-w-fit mx-auto items-center w-full">
 							{mutationPending && <Spinner />}

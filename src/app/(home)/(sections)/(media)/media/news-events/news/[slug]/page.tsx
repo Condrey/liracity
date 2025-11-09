@@ -2,6 +2,7 @@ import { validateRequest } from "@/auth";
 import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
 import { NewsArticleStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
@@ -11,13 +12,21 @@ interface PageProps {
 	params: Promise<{ slug: string }>;
 }
 
-// export const revalidate = 86400; //Refresh cached pages once every 24 hours
-// export async function generateStaticParams() {
-// 	const allNewsArticles = await getAllNewsArticles(10);
-// 	return allNewsArticles.map((e) => ({
-// 		slug: e.slug
-// 	}));
-// }
+export const revalidate = 86400; //24 hours
+export async function generateStaticParams() {
+	const allEvents = await prisma.newsArticle.findMany({
+		take: 10,
+		orderBy: { createdAt: "desc" }
+	});
+	return allEvents
+		.map((e) => {
+			if (e.status === NewsArticleStatus.PUBLISHED)
+				return {
+					slug: e.slug
+				};
+		})
+		.filter(Boolean) as { slug: string }[];
+}
 
 export async function generateMetadata({ params }: PageProps, parent: ResolvingMetadata): Promise<Metadata> {
 	const { slug } = await params;

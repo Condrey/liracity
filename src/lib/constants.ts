@@ -9,6 +9,7 @@ import {
 	RadioTowerIcon,
 	TrophyIcon
 } from "lucide-react";
+import { webName } from "./utils";
 
 export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
@@ -88,6 +89,11 @@ export const cityGetInvolvedLinks: NavLink[] = [
 ];
 
 export const whatWeDoLinks: NavLink[] = [
+	// {
+	// 	title: "All staffs",
+	// 	href: "/all-staffs",
+	// 	description: 	`Browse all staffs of ${webName}`
+	// },
 	{
 		title: "Hierarchy",
 		href: "/hierarchy",

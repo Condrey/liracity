@@ -17,7 +17,7 @@ import { PlusIcon } from "lucide-react";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { PageSidebar } from "./page-sidebar";
-import TabList from "./tab-list";
+import TabList, { TabListSwitchButton } from "./tab-list";
 
 const { title, description } = cityMediaCenterLinks.find((val) => val.href === "/media/news-events")!;
 
@@ -35,9 +35,9 @@ export default async function Page({ searchParams }: PageProps) {
 
 	return (
 		<BodyContainer className="">
-			<Tabs defaultValue={defaultNewsEventsTabs || "news"}>
+			<Tabs value={defaultNewsEventsTabs || "news"}>
 				<SidebarProvider>
-					<SidebarInset className="">
+					<SidebarInset className="space-y-6">
 						<header className="flex h-fit  flex-col gap-2 ">
 							<PageTitle heading={title} className="px-3" />
 							<div className="flex items-center gap-2 shrink-0 border-y">
@@ -48,8 +48,10 @@ export default async function Page({ searchParams }: PageProps) {
 							</div>
 						</header>
 
+						<TabListSwitchButton />
+
 						{/* list of news articles */}
-						<TabsContent value="news" className="space-y-4 pt-4 px-3">
+						<TabsContent value="news" className="space-y-4  px-3">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditNewsArticle>
 									<PlusIcon /> news
@@ -70,7 +72,7 @@ export default async function Page({ searchParams }: PageProps) {
 							</Suspense>
 						</TabsContent>
 						{/* list of events */}
-						<TabsContent value="events" className="space-y-4 pt-4 px-3">
+						<TabsContent value="events" className="space-y-4  px-3">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditEvent>
 									<PlusIcon /> event

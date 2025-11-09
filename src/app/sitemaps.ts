@@ -20,6 +20,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 				};
 		})
 		.filter(Boolean) as MetadataRoute.Sitemap;
+	const articleTagSitemaps = allNewsArticles
+		.map((n) => n.tags)
+		.flat()
+		.map((f) => ({ url: `${baseUrl}/media/news-events/news/hashtag/${f.name}` })) as MetadataRoute.Sitemap;
 
 	// For events
 	const eventsSitemaps = allEvents
@@ -27,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			if (n.status === EventStatus.PUBLISHED)
 				return {
 					url: `${baseUrl}/media/news-events/events/${n.slug}`,
+
 					lastModified: n.updatedAt,
 					changeFrequency: "always",
 					priority: 1
@@ -36,9 +41,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	return [
 		// Insert other pages
+		{ url: "/about-lira", changeFrequency: "monthly", priority: 1 },
+		{ url: "/contact-us", changeFrequency: "monthly", priority: 0.8 },
+		{ url: "/all-staffs", changeFrequency: "monthly", priority: 0.5 },
+		{ url: "/departments", changeFrequency: "monthly", priority: 0.5 },
 		// { url: `${baseUrl}/media/news-events/news`, lastModified: "2025-12-31", changeFrequency: "always", priority: 0.8 },
 		// Our pSEO pages:
 		...eventsSitemaps,
-		...newsArticleSitemaps
+		...newsArticleSitemaps,
+		...articleTagSitemaps
 	];
 }

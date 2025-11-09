@@ -31,7 +31,7 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 			)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${item.slug}`)}>
+			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${item.slug}`)}>
 				{item.coverImage && (
 					<ItemMedia className="pointer-events-none touch-auto w-full flex *:flex-1">
 						<ArticleImage
@@ -55,7 +55,10 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 								{item.location},
 							</>
 						)}{" "}
-						<span>{formatDateToLocal(item.createdAt)}{item.endDate&&<>-{formatDateToLocal(item.endDate)}</>}</span>
+						<span>
+							{formatDateToLocal(item.createdAt)}
+							{item.endDate && <>-{formatDateToLocal(item.endDate)}</>}
+						</span>
 					</div>
 					<ItemDescription>
 						<TipTapViewer content={item.summary || item.description} />

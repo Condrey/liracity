@@ -1,7 +1,8 @@
 import { validateRequest } from "@/auth";
-import { getAllEvents, getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
+import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
 import { EventStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
@@ -13,7 +14,10 @@ interface PageProps {
 
 export const revalidate = 86400; //24 hours
 export async function generateStaticParams() {
-	const allEvents = await getAllEvents(10);
+	const allEvents = await prisma.event.findMany({
+		take: 10,
+		orderBy: { startDate: "desc" }
+	});
 	return allEvents
 		.map((e) => {
 			if (e.status === EventStatus.PUBLISHED)

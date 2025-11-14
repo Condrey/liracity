@@ -22,7 +22,7 @@ import { EventData } from "@/lib/types";
 import { formatDateToLocal } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { formatDate } from "date-fns";
-import { ArrowLeftIcon, Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
@@ -60,11 +60,13 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 		<SidebarProvider>
 			<SidebarInset className="">
 				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
-					<LoadingButton variant={"ghost"}  loading={isPending} onClick={() => startTransition(() => {})}>
-						<Link className="flex items-center gap-0.5 flex-row"  href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
+					<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
+						<Link
+							className="flex items-center gap-0.5 flex-row"
+							href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
+						>
 							<MoveLeftIcon />
-												<TypographyH4 title="News & Events" />
-
+							<TypographyH4 title="News & Events" />
 						</Link>
 					</LoadingButton>
 					{isAPublisher && (
@@ -74,7 +76,7 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 								variant={isADraft ? "default" : "destructive"}
 								onClick={() => onStatusChange(isADraft ? EventStatus.PUBLISHED : EventStatus.DRAFT)}
 							>
-								{isADraft ? "Publish" : "Unpublish"} it
+								{isADraft ? "Publish it" : "Unpublish it"} it
 							</Button>
 							<ButtonGroupSeparator />
 							<Button
@@ -130,7 +132,7 @@ function EventContent({ event }: EventContentProps) {
 		<article className="space-y-12">
 			<header>
 				<PageTitle heading={title} className="flex-wrap">
-					<ButtonAddEditEvent size={"icon"} event={event}  className="flex-none ">
+					<ButtonAddEditEvent size={"icon"} event={event} className="flex-none ">
 						<Edit3Icon />
 					</ButtonAddEditEvent>
 					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"} className="flex-none ">
@@ -149,12 +151,15 @@ function EventContent({ event }: EventContentProps) {
 								{location},
 							</address>
 						)}
-						<time className="inline w-fit font-semibold md:font-normal"> <span>
-							{isPassedEvent
-								? `happened ${formatDateToLocal(endDate ?? startDate)}`
-								: `starts ${formatDateToLocal(startDate)}`}
-						</span>
-						{updatedAt > createdAt && `(updated)`}</time>
+						<time className="inline w-fit font-semibold md:font-normal">
+							{" "}
+							<span>
+								{isPassedEvent
+									? `happened ${formatDateToLocal(endDate ?? startDate)}`
+									: `starts ${formatDateToLocal(startDate)}`}
+							</span>
+							{updatedAt > createdAt && `(updated)`}
+						</time>
 					</div>
 				</div>
 				<hr />
@@ -169,7 +174,10 @@ function EventContent({ event }: EventContentProps) {
 				)}
 			</section>
 			<section>
-				<TipTapViewer content={description} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" />
+				<TipTapViewer
+					content={description}
+					className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+				/>
 			</section>
 
 			{!!media && !!media.length && (
@@ -195,7 +203,10 @@ function EventContent({ event }: EventContentProps) {
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" />
+					<TipTapViewer
+						content={summary}
+						className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+					/>
 				</section>
 			)}
 		</article>

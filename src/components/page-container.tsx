@@ -8,10 +8,10 @@ interface PageContainerProps {
 }
 export default function PageContainer({ showFooter = true, className, children }: PageContainerProps) {
 	return (
-		<div className="h-auto w-full space-y-12 pt-6  ">
+		<div className="h-auto w-full space-y-12   ">
 			<div
 				className={cn(
-					"md:min-h-[75vh] min-h-[84vh] h-full gap-12 w-full mx-auto px-3",
+					"md:min-h-[75vh] min-h-[84vh] pt-6 h-full gap-12 w-full mx-auto px-3",
 					showFooter && "max-w-9xl",
 					className
 				)}

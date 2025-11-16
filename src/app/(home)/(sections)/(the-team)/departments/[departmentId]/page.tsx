@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import { ResponsiveBreadcrumb } from "@/components/responsive-breadcrumb";
 import { formatNumber } from "@/lib/utils";
 import { Metadata } from "next";
@@ -32,7 +31,7 @@ export default async function Page({ params }: PageProps) {
 	const departmentName = department.name;
 
 	return (
-		<BodyContainer className="max-w-7xl pt-4">
+		<div className="max-w-7xl pt-4">
 			<ResponsiveBreadcrumb
 				breadcrumbs={[
 					{ label: "Home", href: "/" },
@@ -45,6 +44,6 @@ export default async function Page({ params }: PageProps) {
 			/>
 
 			<DepartmentContent department={department} />
-		</BodyContainer>
+		</div>
 	);
 }

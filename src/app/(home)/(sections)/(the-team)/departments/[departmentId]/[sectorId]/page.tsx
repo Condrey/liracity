@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import { getDepartmentalSectorById } from "@/components/departmental-sector/action";
 import { ResponsiveBreadcrumb } from "@/components/responsive-breadcrumb";
 import { formatNumber } from "@/lib/utils";
@@ -31,7 +30,7 @@ export default async function Page({ params }: PageProps) {
 	if (!sector) return notFound();
 
 	return (
-		<BodyContainer className="max-w-7xl pt-4">
+		<div className="max-w-7xl pt-4">
 			<ResponsiveBreadcrumb
 				breadcrumbs={[
 					{ label: "Home", href: "/" },
@@ -48,6 +47,6 @@ export default async function Page({ params }: PageProps) {
 			/>
 
 			<SectorContent sector={sector} />
-		</BodyContainer>
+		</div>
 	);
 }

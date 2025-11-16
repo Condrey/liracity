@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import { getAllDepartmentList } from "@/components/department/action";
 import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import { PageDescription, PageTitle } from "@/components/page-utils";
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 export default async function Page() {
 	const departments = await getAllDepartmentList();
 	return (
-		<BodyContainer className="">
+		<div className="">
 			<div className="space-y-2 max-w-fit mx-auto">
 				<div className="flex gap-3 items-center justify-between">
 					<PageTitle heading={title} />
@@ -24,7 +23,7 @@ export default async function Page() {
 			</div>
 
 			<ListOfDepartments departments={departments} />
-		</BodyContainer>
+		</div>
 	);
 }
 

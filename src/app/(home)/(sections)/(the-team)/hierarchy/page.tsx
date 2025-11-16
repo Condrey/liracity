@@ -1,7 +1,6 @@
 import { PageDescription, PageTitle } from "@/components/page-utils";
 import Chart from "./chart";
 
-import BodyContainer from "@/app/(home)/body-container";
 import { whatWeDoLinks } from "@/lib/constants";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
@@ -17,13 +16,13 @@ export default async function Page() {
 		include: departmentDataInclude
 	});
 	return (
-		<BodyContainer className="max-w-7xl px-0">
+		<div className="max-w-7xl px-0">
 			<div className="space-y-2 max-w-3xl w-full me-auto">
 				<PageTitle heading={`${title}/ Organography`} />
 				<PageDescription paragraph={pageDescription} className="me-auto" />
 			</div>
 			<Chart departments={departments} />
-		</BodyContainer>
+		</div>
 	);
 }
 

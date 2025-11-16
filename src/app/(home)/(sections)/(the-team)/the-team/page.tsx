@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import { PageTitle } from "@/components/page-utils";
 import { Metadata } from "next";
 import PageClient from "./page-client";
@@ -14,9 +13,9 @@ export const metadata: Metadata = {
 };
 export default function Page() {
 	return (
-		<BodyContainer className="">
+		<div className="">
 			<PageTitle heading={title} />
 			<PageClient />
-		</BodyContainer>
+		</div>
 	);
 }

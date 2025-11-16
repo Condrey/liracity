@@ -11,7 +11,7 @@ import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
 	return (
-		<PageContainer className="flex flex-col justify-start  pt-0">
+		<PageContainer className="flex flex-col justify-start  pt-0 ">
 			{/* Hero section  */}
 			<Suspense fallback={<HeroSectionLoadingSkeleton />}>
 				<HeroSectionContainer />

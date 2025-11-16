@@ -19,9 +19,9 @@ import { EventStatus, Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
-import { formatDateToLocal } from "@/lib/utils";
+import { getEventStatusAndPeriod } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { formatDate } from "date-fns";
+import { formatDate, isAfter } from "date-fns";
 import { Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -126,8 +126,9 @@ function EventContent({ event }: EventContentProps) {
 	} = event;
 	const { icon, eventStatus, variant } = eventStatuses[status];
 	const StatusIcon = icon;
-	const isPassedEvent = new Date() > startDate;
-
+	const now = new Date();
+	const isPastEvent = !endDate ? isAfter(now, startDate) : isAfter(now, endDate);
+	const { period, status: eventTag } = getEventStatusAndPeriod({ startDate, endDate });
 	return (
 		<article className="space-y-12">
 			<header>
@@ -144,6 +145,7 @@ function EventContent({ event }: EventContentProps) {
 						{/* <StatusIcon className="mr-1" /> */}
 						{eventStatus}
 					</Badge>
+					<Badge variant={isPastEvent ? "destructive" : "success"}>{eventTag}</Badge>
 					<div className="flex flex-wrap">
 						{location && (
 							<address>
@@ -152,19 +154,14 @@ function EventContent({ event }: EventContentProps) {
 							</address>
 						)}
 						<time className="inline w-fit font-semibold md:font-normal">
-							{" "}
-							<span>
-								{isPassedEvent
-									? `happened ${formatDateToLocal(endDate ?? startDate)}`
-									: `starts ${formatDateToLocal(startDate)}`}
-							</span>
-							{updatedAt > createdAt && `(updated)`}
+							<span>{period}</span>&nbsp;
+							<span className="text-muted-foreground">{updatedAt > createdAt && `(updated)`}</span>
 						</time>
 					</div>
 				</div>
 				<hr />
 				<time className="text-sm leading-tight text-muted-foreground">
-					{formatDate(startDate, "PPPPp")}
+					Period: {formatDate(startDate, "PPPPp")}
 					{endDate && <> upto {formatDate(endDate, "PPPPp")}</>}
 				</time>
 			</header>

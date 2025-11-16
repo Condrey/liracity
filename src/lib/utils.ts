@@ -1,5 +1,17 @@
 import { clsx, type ClassValue } from "clsx";
-import { formatDate, formatDistanceToNowStrict } from "date-fns";
+import {
+	differenceInCalendarYears,
+	differenceInDays,
+	differenceInHours,
+	differenceInMonths,
+	formatDate,
+	formatDistanceToNowStrict,
+	isAfter,
+	isBefore,
+	isSameDay,
+	isValid,
+	isWithinInterval
+} from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -47,18 +59,40 @@ export function formatNumber(n: number): string {
 	}).format(n);
 }
 
-export function formatDateToLocal(from: Date) {
-	// const from = new Date(date)
-	const currentDate = new Date();
-	if (currentDate.getTime() - from.getTime() < 24 * 60 * 60 * 1000) {
-		return formatDistanceToNowStrict(from, { addSuffix: true });
-	} else {
-		if (currentDate.getFullYear() === from.getFullYear()) {
-			return formatDate(from, "MMM d");
-		} else {
-			return formatDate(from, "MMM d, yyyy");
-		}
+export function formatDateToLocal(date: Date) {
+	const now = new Date();
+
+	// Handle invalid date
+	if (!isValid(date)) return "Invalid date";
+
+	const hoursDiff = Math.abs(differenceInHours(now, date));
+	const absHours = Math.abs(hoursDiff);
+
+	const daysDiff = differenceInDays(now, date);
+	const absDays = Math.abs(daysDiff);
+
+	const monthsDiff = differenceInMonths(now, date);
+	const absMonths = Math.abs(monthsDiff);
+
+	// < 24 hours ➜ "in 5 hours" / "3 hours ago"
+	if (absHours < 24) {
+		return formatDistanceToNowStrict(date, { addSuffix: true });
 	}
+	// 1–30 days ➜ use "in X days" or "X days ago"
+	if (absDays < 30) {
+		return formatDistanceToNowStrict(date, { addSuffix: true });
+	}
+	// 1–11 months ➜ "in 2 months" / "3 months ago"
+	if (absMonths < 12) {
+		return formatDistanceToNowStrict(date, { addSuffix: true });
+	}
+
+	// Same year but far in the past/future
+	if (differenceInCalendarYears(now, date) === 0) {
+		return formatDate(date, "MMM d, hh:mm a");
+	}
+	// Different year ➜ include year
+	return formatDate(date, "MMM d, yyyy, hh:mm a");
 }
 
 export function slugify(input: string | undefined): string {
@@ -70,4 +104,63 @@ export function slugify(input: string | undefined): string {
 				.replace(/\s+/g, "-") // Replace spaces with hyphens
 				.replace(/-+/g, "-") // Remove multiple consecutive hyphens
 		: "";
+}
+
+export function getEventStatusAndPeriod({ startDate, endDate }: { startDate: Date; endDate: Date | null }) {
+	const now = new Date();
+	let status = "",
+		period = "";
+
+	// .....................................................
+	// Case 1: Event has no end Date
+	// .....................................................
+	if (!endDate) {
+		// If upcoming
+		if (isBefore(now, startDate)) {
+			status = "UPCOMING EVENT";
+			// but same day
+			if (isSameDay(now, startDate)) {
+				// but later
+				period = `starts ${formatDateToLocal(startDate)}`;
+			} else {
+				period = `starting  ${formatDateToLocal(startDate)}`;
+			}
+		}
+		//Exactly when it starts or after
+		else if (isWithinInterval(now, { start: startDate, end: startDate })) {
+			status = "ONGOING EVENT";
+			period = "happening Now";
+		}
+		// If past
+		else if (isAfter(now, startDate)) {
+			status = "PAST EVENT";
+			period = `happened ${formatDateToLocal(startDate)}	`;
+		}
+		return { status, period };
+	}
+	// .....................................................
+	// Case 2: Event has end Date
+	// .....................................................
+	// If upcoming
+	if (isBefore(now, startDate)) {
+		status = "UPCOMING EVENT";
+		// but same day
+		if (isSameDay(now, startDate)) {
+			period = `starts today at ${formatDateToLocal(startDate)}`;
+		} else {
+			period = `starting on ${formatDateToLocal(startDate)}`;
+		}
+	}
+	// If ongoing (start<=now<=end)
+	else if (isWithinInterval(now, { start: startDate, end: endDate })) {
+		status = "ONGOING EVENT";
+		period = `ends ${formatDateToLocal(endDate)}`;
+	}
+
+	// if Past
+	else if (isAfter(now, endDate)) {
+		status = "PAST EVENT";
+		period = `ended ${formatDateToLocal(endDate)}`;
+	}
+	return { status, period };
 }

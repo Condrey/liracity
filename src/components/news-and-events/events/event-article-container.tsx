@@ -9,8 +9,8 @@ import { Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
-import { cn, formatDateToLocal } from "@/lib/utils";
-import { format } from "date-fns";
+import { cn, getEventStatusAndPeriod } from "@/lib/utils";
+import { format, isAfter } from "date-fns";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
@@ -29,7 +29,10 @@ export default function EventsArticleContainer({
 	const Icon = icon;
 	const { user } = useSession();
 	const isNotVisitor = myPrivileges[user?.role || Role.USER].includes(Role.STAFF);
-	const isPassedEvent = new Date() > startDate;
+	const now = new Date();
+	const isPastEvent = !endDate ? isAfter(now, startDate) : isAfter(now, endDate);
+	const { period, status: eventTag } = getEventStatusAndPeriod({ startDate, endDate });
+
 	return (
 		<Link
 			href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${slug}`)}
@@ -74,7 +77,7 @@ export default function EventsArticleContainer({
 					</div>
 					<LoadingButton
 						loading={isPending}
-						variant={isPassedEvent ? "destructive" : "default"}
+						variant={isPastEvent ? "destructive" : "default"}
 						className={cn(
 							"hidden group-hover/article:block",
 							"max-w-fit absolute max-h-fit m-auto -translate-x-1/2 top-1/2 -translate-y-1/2 start-1/2 size-full py-3",
@@ -83,14 +86,9 @@ export default function EventsArticleContainer({
 					>
 						View Event
 					</LoadingButton>
-					<Badge
-						className={cn(
-							"absolute  top-0 left-0",
-							isPassedEvent ? "bg-destructive text-destructive-foreground" : "bg-green-300 text-green-950"
-						)}
-					>
+					<Badge className={cn("absolute  top-0 left-0")} variant={isPastEvent ? "destructive" : "success"}>
 						<CalendarIcon className="" />
-						{isPassedEvent ? "Past" : "Upcoming"} Event
+						{eventTag}
 					</Badge>
 				</ItemHeader>
 				<ItemFooter className="gap-1 px-3 space-x-1 flex-wrap justify-start">
@@ -105,9 +103,7 @@ export default function EventsArticleContainer({
 						{location}
 					</span>
 					<p>
-						<span className="text-xs">
-							{isPassedEvent ? "Happened" : "Happening"} {formatDateToLocal(endDate ?? startDate)}
-						</span>
+						<span className="text-xs">{period}</span>
 					</p>
 				</ItemFooter>
 				<ItemContent className="px-3">

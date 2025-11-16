@@ -78,9 +78,10 @@ function CollapsibleItem({ item, index }: { item: NavLinkGroup; index: number })
 	const [isPending, startTransition] = useTransition();
 
 	function handleClickEvent() {
-		startTransition(() => {
-			isMobile && setOpenMobile(!openMobile);
-		});
+		!item.children.length &&
+			startTransition(() => {
+				isMobile && setOpenMobile(!openMobile);
+			});
 	}
 	return (
 		<Collapsible key={item.title} defaultOpen={index === 1} asChild className="group/collapsible">

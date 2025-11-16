@@ -20,7 +20,9 @@ export default async function TopAppBar({ className }: { className?: string }) {
 				{/* For small screens : section */}
 				<div className="flex items-center md:hidden  gap-2">
 					<SidebarTrigger className="-ml-1 " />
-					<h2 className="  uppercase">{webName}</h2>
+					<Link href={"/"} passHref className="cursor-pointer">
+						<h2 className="  uppercase">{webName}</h2>
+					</Link>
 				</div>
 
 				{/* Logo area  */}

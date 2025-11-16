@@ -2,7 +2,7 @@
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { NavLink, navLinks } from "@/lib/constants";
+import { NavLink, NavLinkGroup, navLinks } from "@/lib/constants";
 import { cn, webName } from "@/lib/utils";
 import { ChevronRight, Loader2Icon } from "lucide-react";
 import Image from "next/image";
@@ -25,11 +25,10 @@ import {
 	SidebarRail,
 	useSidebar
 } from "../ui/sidebar";
+import { Spinner } from "../ui/spinner";
 import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-	const pathname = usePathname();
-	const isSmallScreen = useIsMobile();
 	return (
 		<Sidebar
 			className="top-(--header-height) md:hidden h-[calc(100svh-var(--header-height))]!"
@@ -53,47 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					<SidebarGroupLabel className="hidden sm:flex">Navigation Menu</SidebarGroupLabel>
 					<SidebarMenu className="">
 						{navLinks.map((item, index) => {
-							const ItemIcon = item.icon!;
-							const isActive = !item.children.length
-								? index > 0
-									? pathname.startsWith(item.href)
-									: pathname.endsWith("/")
-								: item.children.some((i) => pathname.startsWith(i.href));
-							return (
-								<Collapsible key={item.title} defaultOpen={index === 1} asChild className="group/collapsible">
-									<SidebarMenuItem>
-										<CollapsibleTrigger asChild>
-											<SidebarMenuButton
-												tooltip={item.title}
-												isActive={isActive}
-												variant={"default"}
-												size={isSmallScreen ? "default" : "lg"}
-												asChild
-											>
-												<Link href={!item.children.length ? item.href : "#"}>
-													{item.icon && <ItemIcon className="hidden sm:flex" />}
-													<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
-													<ChevronRight
-														className={cn(
-															"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
-															!item.children.length && "hidden"
-														)}
-													/>
-												</Link>
-											</SidebarMenuButton>
-										</CollapsibleTrigger>
-										{item.children?.length ? (
-											<CollapsibleContent>
-												<SidebarMenuSub>
-													{item.children.map((i) => (
-														<MenuItem item={i} key={i.href} />
-													))}
-												</SidebarMenuSub>
-											</CollapsibleContent>
-										) : null}
-									</SidebarMenuItem>
-								</Collapsible>
-							);
+							return <CollapsibleItem item={item} index={index} />;
 						})}
 					</SidebarMenu>
 				</SidebarGroup>
@@ -103,6 +62,61 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarFooter>
 			<SidebarRail />
 		</Sidebar>
+	);
+}
+
+function CollapsibleItem({ item, index }: { item: NavLinkGroup; index: number }) {
+	const pathname = usePathname();
+	const isSmallScreen = useIsMobile();
+	const ItemIcon = item.icon!;
+	const isActive = !item.children.length
+		? index > 0
+			? pathname.startsWith(item.href)
+			: pathname.endsWith("/")
+		: item.children.some((i) => pathname.startsWith(i.href));
+	const { isMobile, setOpenMobile, openMobile } = useSidebar();
+	const [isPending, startTransition] = useTransition();
+
+	function handleClickEvent() {
+		startTransition(() => {
+			isMobile && setOpenMobile(!openMobile);
+		});
+	}
+	return (
+		<Collapsible key={item.title} defaultOpen={index === 1} asChild className="group/collapsible">
+			<SidebarMenuItem>
+				<CollapsibleTrigger asChild>
+					<SidebarMenuButton
+						tooltip={item.title}
+						isActive={isActive}
+						variant={"default"}
+						size={isSmallScreen ? "default" : "lg"}
+						onClick={handleClickEvent}
+						asChild
+					>
+						<Link href={!item.children.length ? item.href : "#"}>
+							{isPending ? <Spinner /> : item.icon && <ItemIcon className="hidden sm:flex" />}
+							<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
+							<ChevronRight
+								className={cn(
+									"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
+									!item.children.length && "hidden"
+								)}
+							/>
+						</Link>
+					</SidebarMenuButton>
+				</CollapsibleTrigger>
+				{item.children?.length ? (
+					<CollapsibleContent>
+						<SidebarMenuSub>
+							{item.children.map((i) => (
+								<MenuItem item={i} key={i.href} />
+							))}
+						</SidebarMenuSub>
+					</CollapsibleContent>
+				) : null}
+			</SidebarMenuItem>
+		</Collapsible>
 	);
 }
 

@@ -1,7 +1,7 @@
 import { getAllEvents } from "@/components/news-and-events/events/action";
 import ListOfEvents from "@/components/news-and-events/events/list-of-events";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, webName } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ export async function SampleEvents() {
 	if (!events.length) return null;
 	return (
 		<div className="gap-3 px-3 flex flex-col">
-			<h1 className="text-xl uppercase font-bold tracking-tighter">Upcoming events</h1>
+			<h1 className="text-xl uppercase font-bold tracking-tighter">{webName} events</h1>
 			<ListOfEvents initialData={events} limit={limit} />
 			<Link
 				href={`/media/news-events`}

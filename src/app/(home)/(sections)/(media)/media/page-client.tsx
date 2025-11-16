@@ -9,7 +9,7 @@ import { useTransition } from "react";
 
 export default function PageClient() {
 	return (
-		<ItemGroup className="gap-3 max-w-sm">
+		<ItemGroup className="gap-3 max-w-md">
 			{cityMediaCenterLinks.map((link) => (
 				<PageClientItem key={link.title} link={link} />
 			))}

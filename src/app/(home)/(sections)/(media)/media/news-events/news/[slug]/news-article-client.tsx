@@ -15,6 +15,7 @@ import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
+import Footer from "@/components/user/footer";
 import { NewsArticleStatus, Role, Tag } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges, newsArticleStatuses } from "@/lib/enums";
@@ -59,10 +60,12 @@ export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsAr
 		<SidebarProvider>
 			<SidebarInset className="">
 				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
-					<LoadingButton variant={"ghost"}  loading={isPending} onClick={() => startTransition(() => {})}>
-						<Link className="flex items-center gap-0.5 flex-row" href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}>
-							<MoveLeftIcon className="inline-flex "  /> 					<TypographyH4 title="News & Events" />
-
+					<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
+						<Link
+							className="flex items-center gap-0.5 flex-row"
+							href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
+						>
+							<MoveLeftIcon className="inline-flex " /> <TypographyH4 title="News & Events" />
 						</Link>
 					</LoadingButton>
 					{isAPublisher && (
@@ -94,9 +97,10 @@ export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsAr
 					)}
 					<SidebarTrigger className="-mr-1 ml-auto rotate-180" />
 				</header>
-				<div className="flex flex-1 flex-col gap-4 p-4 max-w-4xl w-full mx-auto">
+				<div className="flex flex-1 flex-col gap-4 p-4 max-w-5xl w-full mx-auto">
 					<ArticleContent newsArticle={data} />
 				</div>
+				<Footer />
 			</SidebarInset>
 			<PageSidebar side="right" relatedArticles={relatedArticles} />
 		</SidebarProvider>
@@ -170,26 +174,27 @@ function ArticleContent({ newsArticle }: ArticleContentProps) {
 			</header>
 			<section>
 				{coverImage && (
-					<ArticleImage mediaIdentifier={coverImage?.url} height={1920} width={1080} alt="news cover image" />
+					<ArticleImage mediaIdentifier={coverImage?.url} width={1920} height={1080} alt="news cover image" />
 				)}
 			</section>
 			<section>
 				<TipTapViewer
 					content={content}
-className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl" 				/>
+					className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+				/>
 			</section>
 
 			{!!media && !!media.length && (
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the news article" className="uppercase" />
 					<div className=" grid sm:grid-cols-2 md:grid-cols-3  gap-2">
-						{media.map((medium,index) => {
+						{media.map((medium, index) => {
 							if (medium.type === "IMAGE")
 								return (
 									<ArticleImage
 										key={medium.id}
 										mediaIdentifier={medium.url}
-										alt={`other graphic #${index+1}`}
+										alt={`other graphic #${index + 1}`}
 										height={1080}
 										width={1920}
 										className=" aspect-video "
@@ -202,7 +207,10 @@ className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl
 			{!!summary && (
 				<section>
 					<TypographyH2 title={`🧠 News article Too Long; Didn't Read:`} className="uppercase " />
-					<TipTapViewer content={summary} className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"  />
+					<TipTapViewer
+						content={summary}
+						className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+					/>
 				</section>
 			)}
 		</article>

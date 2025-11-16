@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 import About from "./about";
@@ -17,10 +16,10 @@ export const metadata: Metadata = {
 export default async function Page() {
 	const entity = await prisma.entity.findFirst();
 	return (
-		<BodyContainer className=" px-3 max-w-3xl  mx-auto w-full  ">
+		<div className="max-w-3xl  mx-auto w-full  ">
 			<About entity={entity!} id="#about" />
-			<HistoryAndCulture entity={entity!} id="#history-culture"  />
+			<HistoryAndCulture entity={entity!} id="#history-culture" />
 			<GeographyAndLandmarks entity={entity!} id="#geography" />
-		</BodyContainer>
+		</div>
 	);
 }

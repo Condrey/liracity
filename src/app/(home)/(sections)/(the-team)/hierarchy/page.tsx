@@ -18,7 +18,7 @@ export default async function Page() {
 	});
 	return (
 		<BodyContainer className="max-w-7xl px-0">
-			<div className="space-y-2 max-w-3xl px-3 w-full me-auto">
+			<div className="space-y-2 max-w-3xl w-full me-auto">
 				<PageTitle heading={`${title}/ Organography`} />
 				<PageDescription paragraph={pageDescription} className="me-auto" />
 			</div>

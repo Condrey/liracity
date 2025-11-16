@@ -15,6 +15,7 @@ import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
+import Footer from "@/components/user/footer";
 import { EventStatus, Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
@@ -98,9 +99,10 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 					)}
 					<SidebarTrigger className="-mr-1 ml-auto rotate-180" />
 				</header>
-				<div className="flex flex-1 flex-col gap-4 p-4 max-w-4xl w-full mx-auto">
+				<div className="flex flex-1 flex-col gap-4 p-4 max-w-5xl w-full mx-auto">
 					<EventContent event={data} />
 				</div>
+				<Footer />
 			</SidebarInset>
 			<PageSidebar side="right" relatedEvents={relatedEvents} />
 		</SidebarProvider>
@@ -167,7 +169,7 @@ function EventContent({ event }: EventContentProps) {
 			</header>
 			<section>
 				{coverImage && (
-					<ArticleImage mediaIdentifier={coverImage?.url} height={1920} width={1080} alt="event cover image" />
+					<ArticleImage mediaIdentifier={coverImage?.url} width={1920} height={1080} alt="event cover image" />
 				)}
 			</section>
 			<section>

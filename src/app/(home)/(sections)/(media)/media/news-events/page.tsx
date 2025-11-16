@@ -1,4 +1,3 @@
-import BodyContainer from "@/app/(home)/body-container";
 import { validateRequest } from "@/auth";
 import { getFilteredEvents } from "@/components/news-and-events/events/action";
 import ButtonAddEditEvent from "@/components/news-and-events/events/button-add-edit-event";
@@ -11,6 +10,7 @@ import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news
 import { PageTitle, TypographyH4 } from "@/components/page-utils";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+import Footer from "@/components/user/footer";
 import { EventStatus, NewsArticleStatus } from "@/generated/prisma";
 import { cityMediaCenterLinks } from "@/lib/constants";
 import { PlusIcon } from "lucide-react";
@@ -34,11 +34,11 @@ export default async function Page({ searchParams }: PageProps) {
 	const { newsFilter, eventFilter, defaultNewsEventsTabs } = await searchParams;
 
 	return (
-		<BodyContainer className="">
+		<div>
 			<Tabs value={defaultNewsEventsTabs || "news"}>
 				<SidebarProvider>
 					<SidebarInset className="space-y-6">
-						<header className="flex h-fit  flex-col gap-2 ">
+						<header className="flex h-fit  flex-col gap-2 sticky top-0 ">
 							<PageTitle heading={title} className="px-3" />
 							<div className="flex items-center gap-2 shrink-0 border-y">
 								<div className="bg-muted flex px-3 w-full py-1 border-y">
@@ -48,10 +48,10 @@ export default async function Page({ searchParams }: PageProps) {
 							</div>
 						</header>
 
-						<TabListSwitchButton />
+						<TabListSwitchButton className="max-w-9xl mx-auto w-full" />
 
 						{/* list of news articles */}
-						<TabsContent value="news" className="space-y-4  px-3">
+						<TabsContent value="news" className="space-y-4 px-3 max-w-9xl mx-auto md:min-h-[65vh] min-h-[44vh]  ">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditNewsArticle>
 									<PlusIcon /> news
@@ -72,7 +72,7 @@ export default async function Page({ searchParams }: PageProps) {
 							</Suspense>
 						</TabsContent>
 						{/* list of events */}
-						<TabsContent value="events" className="space-y-4  px-3">
+						<TabsContent value="events" className="space-y-4  px-3  max-w-9xl mx-auto md:min-h-[65vh] min-h-[44vh] ">
 							<div className="space-x-2 flex items-center ">
 								<ButtonAddEditEvent>
 									<PlusIcon /> event
@@ -93,11 +93,12 @@ export default async function Page({ searchParams }: PageProps) {
 								<ListOfEventsContainer filter={eventFilter || EventStatus.PUBLISHED} />
 							</Suspense>
 						</TabsContent>
+						<Footer />
 					</SidebarInset>
 					<PageSidebar side="right" user={user} />
 				</SidebarProvider>
 			</Tabs>
-		</BodyContainer>
+		</div>
 	);
 }
 

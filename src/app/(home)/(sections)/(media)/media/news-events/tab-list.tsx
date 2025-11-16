@@ -3,10 +3,10 @@
 import { Spinner } from "@/components/ui/spinner";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTransition } from "react";
-import { toast } from "sonner";
 
 const listOfTriggers: { name: string; value: string }[] = [
 	{ name: "news", value: "News articles" },
@@ -30,15 +30,15 @@ export default function TabList() {
 	);
 }
 
-export function TabListSwitchButton() {
+export function TabListSwitchButton({ className }: { className?: string }) {
 	const [isPending, startTransition] = useTransition();
 	const { navigateOnclick } = useCustomSearchParams();
-	const searchParamsForTabs = useSearchParams().get("defaultNewsEventsTabs");
+	const searchParamsForTabs = useSearchParams().get("defaultNewsEventsTabs") ?? "news";
 	function handleClickEvent(name: string) {
 		navigateOnclick("defaultNewsEventsTabs", name);
 	}
 	return (
-		<div className="flex px-3 items-center">
+		<div className={cn("flex px-3 items-center", className)}>
 			<button
 				// loading={isPending}
 				className="underline text-primary hover:cursor-pointer flex gap-2 items-center"

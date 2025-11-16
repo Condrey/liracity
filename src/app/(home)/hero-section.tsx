@@ -28,14 +28,15 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 	if (status === "error") return <ErrorContainer errorMessage="Failed to load landing page" query={query} />;
 	if (status === "success" && !data) return <EmptyContainer message={`Welcome to ${webName}`}></EmptyContainer>;
 	return (
-		<div className="md:h-[90vh] rounded-b-2xl lg:max-h-[75vh] overflow-clip w-full    grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
+		<div className="md:h-[90vh]  md:max-h-fit lg:max-h-[75vh] overflow-clip w-full    grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
 			<Image
 				src={data?.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
-				width={720}
-				height={1800}
+				height={720}
+				width={1800}
 				// objectFit="cover"
-				// placeholder="blur"
+				placeholder="blur"
+				blurDataURL="/image-placeholder.jpeg"
 				className="w-full lg:h-full  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3  mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top"
 			/>
 			<article className="lg:max-w-prose shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
@@ -43,9 +44,11 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 					<time className="ordinal  slashed-zero">{formatDateToLocal((data?.publishedAt || data?.createdAt)!)}</time>,{" "}
 					<address className="inline">{data?.location}</address>
 				</div>
-				<h2 className="font-medium tracking-tight md:leading-relaxed leading-tight text-lg line-clamp-2 text-pretty uppercase md:capitalize">{data?.title}</h2>
+				<h2 className="font-medium tracking-tight md:leading-relaxed leading-tight text-lg line-clamp-2 text-pretty uppercase  md:font-bold md:capitalize">
+					{data?.title}
+				</h2>
 
-				<div className="mt-1 hyphens-auto text-sm md:leading-relaxed leading-tight md:italic sm:not-italic  md:text-justify md:text-gray-500 line-clamp-4 xl:line-clamp-5 md:max-w-prose">
+				<div className="mt-1 hyphens-auto text-sm  leading-tight   md:text-justify  line-clamp-4 xl:line-clamp-5 md:max-w-prose">
 					<TipTapViewer content={data?.summary || data?.content} />
 				</div>
 				<div className="w-full flex">
@@ -72,7 +75,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 
 export function HeroSectionLoadingSkeleton() {
 	return (
-		<div className="md:h-[90vh] bg-secondary/10 dark:border  animate-pulse rounded-b-2xl lg:max-h-[75vh] overflow-clip w-full   grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
+		<div className="md:h-[90vh] bg-secondary/10 dark:border  animate-pulse  lg:max-h-[75vh] overflow-clip w-full   grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
 			<Skeleton className="w-full lg:h-full bg-primary/20  shrink flex-1 bg-cover lg:col-span-2  md:col-span-3 xl:col-span-3  mask-radial-[100%_100%] mask-radial-from-60% lg:mask-radial-at-left mask-radial-at-top" />
 			<div className="lg:max-w-prose space-y-2 shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
 				<Skeleton className="h-4 w-11/12" />

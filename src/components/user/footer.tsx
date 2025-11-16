@@ -10,7 +10,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 export default function Footer({ className }: { className?: string }) {
 	const currentYear = new Date().getFullYear();
 	return (
-		<div className={cn("flex flex-col ", className)}>
+		<footer
+			className={cn(
+				"flex flex-col bg-black/80 dark:bg-white/20  w-full  text-background dark:text-foreground ",
+				className
+			)}
+		>
 			{/* sections corner  */}
 			<div className="md:grid grid-cols-2 sm:grid-cols-3 gap-6 hidden p-4  max-w-9xl mx-auto  md:grid-cols-4 xl:grid-cols-5 w-full">
 				{/* logo section  */}
@@ -37,7 +42,7 @@ export default function Footer({ className }: { className?: string }) {
 					<ThemeToggler />
 				</div>
 			</div>
-		</div>
+		</footer>
 	);
 }
 

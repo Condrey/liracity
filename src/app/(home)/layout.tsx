@@ -1,7 +1,6 @@
 import { validateRequest } from "@/auth";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/user/app-sidebar";
-import Footer from "@/components/user/footer";
 import TopAppBar from "@/components/user/top-app-bar";
 import { redirect } from "next/navigation";
 import SessionProvider from "../session-provider";
@@ -26,10 +25,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 						<SidebarInset>
 							<div className=" h-full overflow-hidden  w-full">
 								<main className=" size-full   overflow-y-auto scroll-auto flex flex-col gap-8 ">
-									<div className=" max-w-9xl h-full  mx-auto w-full  min-h-[75vh] ">{children}</div>
-									<footer className="w-full">
-										<Footer className="bg-black/80 dark:bg-white/20  w-full  text-background dark:text-foreground " />
-									</footer>
+									<div className="h-full  mx-auto w-full   ">{children}</div>
 								</main>
 							</div>
 						</SidebarInset>

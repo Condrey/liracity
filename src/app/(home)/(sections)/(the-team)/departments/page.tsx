@@ -15,7 +15,7 @@ export default async function Page() {
 	const departments = await getAllDepartmentList();
 	return (
 		<BodyContainer className="">
-			<div className="space-y-2 px-3 max-w-fit mx-auto">
+			<div className="space-y-2 max-w-fit mx-auto">
 				<div className="flex gap-3 items-center justify-between">
 					<PageTitle heading={title} />
 					<ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>

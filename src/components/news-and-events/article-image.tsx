@@ -27,7 +27,13 @@ export default function ArticleImage({
 }: ArticleImageProps) {
 	return (
 		<Zoom key={mediaIdentifier}>
-			<Image src={mediaIdentifier || placeholder} alt={alt || ""} {...props} />
+			<Image
+				src={mediaIdentifier || placeholder}
+				alt={alt || ""}
+				blurDataURL={placeholder}
+				placeholder="blur"
+				{...props}
+			/>
 		</Zoom>
 	);
 }

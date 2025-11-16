@@ -16,10 +16,12 @@ async function events(limit?: number) {
 	return filterEventsByAuthorization(data);
 }
 
-async function filteredEvents(filter: string | EventStatus, limit?: number) {
+async function filteredEvents(filter: string | EventStatus | undefined, limit?: number) {
 	let data: EventData[];
 
-	if (allEventStatuses.includes(filter as EventStatus)) {
+	if (!filter) {
+		data = await prisma.event.findMany({ take: limit, orderBy: { createdAt: "desc" }, include: eventDataInclude });
+	} else if (allEventStatuses.includes(filter as EventStatus)) {
 		const newFilter = filter as EventStatus;
 		data = await prisma.event.findMany({
 			where: { status: { equals: newFilter } },
@@ -28,10 +30,35 @@ async function filteredEvents(filter: string | EventStatus, limit?: number) {
 			include: eventDataInclude
 		});
 	} else {
+		const now = new Date();
 		switch (filter) {
 			case "UPCOMING":
 				data = await prisma.event.findMany({
-					where: { startDate: { gt: new Date() } },
+					where: {
+						startDate: { gt: now }
+					},
+					take: limit,
+					orderBy: { createdAt: "desc" },
+					include: eventDataInclude
+				});
+				break;
+			case "ONGOING":
+				data = await prisma.event.findMany({
+					where: {
+						OR: [
+							// A: event has endDate and is within range
+							{
+								endDate: { gte: now },
+								startDate: { lte: now }
+							},
+
+							// B: event has NO endDate but already started
+							{
+								endDate: null,
+								startDate: { equals: now }
+							}
+						]
+					},
 					take: limit,
 					orderBy: { createdAt: "desc" },
 					include: eventDataInclude
@@ -39,7 +66,20 @@ async function filteredEvents(filter: string | EventStatus, limit?: number) {
 				break;
 			case "PAST":
 				data = await prisma.event.findMany({
-					where: { startDate: { lte: new Date() } },
+					where: {
+						OR: [
+							// 1. Events with end date that already ended
+							{
+								endDate: { lt: now }
+							},
+
+							// 2. Events with NO end date but already started
+							{
+								endDate: null,
+								startDate: { lt: now }
+							}
+						]
+					},
 					take: limit,
 					orderBy: { createdAt: "desc" },
 					include: eventDataInclude
@@ -97,4 +137,4 @@ const filterEventsByAuthorization = async (events: EventData[]): Promise<EventDa
 export const getAllEvents = cache(events);
 export const getFilteredEvents = cache(filteredEvents);
 export const getEventBySlug = cache(eventBySlug);
-export const getRelatedArticlesByCategory = cache(relatedArticlesByCategory)
+export const getRelatedArticlesByCategory = cache(relatedArticlesByCategory);

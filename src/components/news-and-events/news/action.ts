@@ -47,8 +47,17 @@ async function newsArticles(limit?: number) {
 	return filterArticlesByAuthorization(data);
 }
 
-async function filteredNewsArticles(filter: NewsArticleStatus, limit?: number) {
-	const data = await prisma.newsArticle.findMany({
+async function filteredNewsArticles(filter: NewsArticleStatus | undefined, limit?: number) {
+	let data: NewsArticleData[];
+
+	if (!filter) {
+		data = await prisma.newsArticle.findMany({
+			take: limit,
+			orderBy: { createdAt: "desc" },
+			include: newsArticleDataInclude
+		});
+	}
+	data = await prisma.newsArticle.findMany({
 		where: { status: { equals: filter } },
 		take: limit,
 		orderBy: { createdAt: "desc" },

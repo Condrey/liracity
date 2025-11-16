@@ -13,9 +13,10 @@ const listOfTriggers: { name: string; value: string }[] = [
 	{ name: "events", value: "Events" }
 ];
 
-export default function TabList() {
+export default function TabList({ setTabValue }: { setTabValue: (tabValue: string) => void }) {
 	const { navigateOnclick } = useCustomSearchParams();
 	function handleClickEvent(name: string) {
+		setTabValue(name);
 		navigateOnclick("defaultNewsEventsTabs", name);
 	}
 

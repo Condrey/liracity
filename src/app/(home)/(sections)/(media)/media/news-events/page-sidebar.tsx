@@ -28,7 +28,7 @@ import { useTransition } from "react";
 type SideBarSubItem = {
 	title: string;
 	url: string;
-	paramValue: string;
+	paramValue: string | undefined;
 };
 type SideBarItem = {
 	title: string;
@@ -49,6 +49,11 @@ export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Side
 			icon: NewspaperIcon,
 			isActive: true,
 			items: [
+				{
+					title: "All articles",
+					url: "",
+					paramValue: ""
+				},
 				...(isStaff
 					? [
 							{
@@ -86,6 +91,11 @@ export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Side
 			icon: CalendarIcon,
 			isActive: true,
 			items: [
+				{
+					title: "All events",
+					url: "",
+					paramValue: ""
+				},
 				...(isModerator
 					? [
 							{
@@ -114,6 +124,11 @@ export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Side
 					title: "Upcoming events",
 					url: "",
 					paramValue: "UPCOMING"
+				},
+				{
+					title: "Ongoing events",
+					url: "",
+					paramValue: "ONGOING"
 				},
 				{
 					title: "Past events",
@@ -185,7 +200,7 @@ function SubmenuItemContainer({ item, subItem }: { item: SideBarItem; subItem: S
 				isActive={filter === subItem.paramValue}
 				onClick={() =>
 					startTransition(() => {
-						navigateOnclick(item.filter, subItem.paramValue);
+						navigateOnclick(item.filter, subItem.paramValue!);
 					})
 				}
 				className="cursor-pointer"

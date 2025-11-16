@@ -3,32 +3,51 @@
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { ItemGroup } from "@/components/ui/item";
+import LoadingButton from "@/components/ui/loading-button";
+import { EventStatus } from "@/generated/prisma";
+import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { EventData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { getAllEvents, getFilteredEvents } from "./action";
+import { useTransition } from "react";
+import { getFilteredEvents } from "./action";
 import ButtonAddEditEventsArticle from "./button-add-edit-event";
 import EventsArticleContainer from "./event-article-container";
-import { EventStatus } from "@/generated/prisma";
 
 interface ListOfEventsProps {
 	initialData: EventData[];
 	limit?: number;
-		filter?: EventStatus;
-	
+	filter?: EventStatus | undefined;
 }
 
-export default function ListOfEvents({ initialData, limit,filter }: ListOfEventsProps) {
+export default function ListOfEvents({ initialData, limit, filter }: ListOfEventsProps) {
 	const query = useQuery({
-		queryKey: ["events","filter",filter,"limit",limit],
-		queryFn: async () => (filter?getFilteredEvents(filter): getAllEvents(limit)),
+		queryKey: ["events", "filter", filter, "limit", limit],
+		queryFn: async () => getFilteredEvents(filter),
 		initialData
 	});
 	const { data, status } = query;
+	const [isPending, startTransition] = useTransition();
+	const { updateSearchParamsAndNavigate } = useCustomSearchParams();
+
 	if (status === "error")
 		return <ErrorContainer errorMessage={"Failed to fetch events. Please try again!"} query={query} />;
 	if (status === "success" && !data.length)
 		return (
-			<EmptyContainer message={`There are no events in the database/ for this user  ${filter ? `matching "${filter}" event filter` : ""}.`}>
+			<EmptyContainer
+				message={`There are no events for this user/ there are no events in the database ${
+					filter ? `matching "${filter}" event filter` : ""
+				}.`}
+			>
+				{!!filter && (
+					<LoadingButton
+						loading={isPending}
+						onClick={() => startTransition(() => updateSearchParamsAndNavigate("eventFilter", ""))}
+						size={"lg"}
+						variant={"link"}
+					>
+						View all events instead
+					</LoadingButton>
+				)}
 				<ButtonAddEditEventsArticle>Add event</ButtonAddEditEventsArticle>
 			</EmptyContainer>
 		);

@@ -22,7 +22,8 @@ import {
 	SidebarMenuSub,
 	SidebarMenuSubButton,
 	SidebarMenuSubItem,
-	SidebarRail
+	SidebarRail,
+	useSidebar
 } from "../ui/sidebar";
 import { NavUser } from "./nav-user";
 
@@ -109,14 +110,16 @@ function MenuItem({ item }: { item: NavLink }) {
 	const pathname = usePathname();
 	const [isPending, startTransition] = useTransition();
 	const isActive = pathname.startsWith(item.href) && pathname !== "/";
+	const { isMobile, setOpenMobile, openMobile } = useSidebar();
+
+	function handleClickEvent() {
+		startTransition(() => {
+			isMobile && setOpenMobile(!openMobile);
+		});
+	}
 	return (
 		<SidebarMenuSubItem key={item.title}>
-			<SidebarMenuSubButton
-				title={item.description}
-				onClick={() => startTransition(() => {})}
-				asChild
-				isActive={isActive}
-			>
+			<SidebarMenuSubButton title={item.description} onClick={handleClickEvent} asChild isActive={isActive}>
 				<Link href={item.href} className="h-fit py-1 flex gap-2">
 					{isPending && <Loader2Icon className="animate-spin size-4" />}
 					{item.title}

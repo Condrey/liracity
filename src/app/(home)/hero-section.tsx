@@ -48,7 +48,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 					{data?.title}
 				</h2>
 
-				<div className="mt-1 hyphens-auto text-sm  leading-tight   md:text-justify  line-clamp-4 xl:line-clamp-5 md:max-w-prose">
+				<div className="mt-1 hyphens-auto text-sm  leading-tight   md:text-justify  line-clamp-4 lg:line-clamp-6 xl:line-clamp-[10] md:max-w-prose">
 					<TipTapViewer content={data?.summary || data?.content} />
 				</div>
 				<div className="w-full flex">

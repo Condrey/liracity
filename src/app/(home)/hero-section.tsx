@@ -44,7 +44,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 					<time className="ordinal  slashed-zero">{formatDateToLocal((data?.publishedAt || data?.createdAt)!)}</time>,{" "}
 					<address className="inline">{data?.location}</address>
 				</div>
-				<h2 className="font-medium tracking-tight md:leading-relaxed leading-tight text-lg line-clamp-2 text-pretty uppercase  md:font-bold md:capitalize">
+				<h2 className="font-medium tracking-tight mb-3 mt-1 uppercase leading-tight text-lg line-clamp-2 text-pretty   md:font-bold ">
 					{data?.title}
 				</h2>
 

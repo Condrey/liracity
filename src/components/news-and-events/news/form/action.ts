@@ -77,7 +77,6 @@ export async function upsertNewsArticle({ formData, mediaIds }: { formData: News
 			where: { name: tag.name },
 			create: { name: tag.name }
 		})) ?? [];
-
 	const media = mediaIds?.map((mediaId) => ({ id: mediaId })) ?? [];
 	const coverImageId = input.coverImageId;
 

@@ -222,7 +222,7 @@ function HashtagItem({ hashtag: tag }: { hashtag: Tag }) {
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 	return (
 		<Button
-			className="bg-secondary text-secondary-foreground hover:text-primary-foreground px-2 py-1 h-fit cursor-pointer hover:bg-primary text-xs"
+			className="bg-secondary text-secondary-foreground hover:text-primary-foreground px-2 py-1 h-fit  hover:bg-primary text-xs"
 			onClick={() => startTransition(() => {})}
 			asChild
 		>

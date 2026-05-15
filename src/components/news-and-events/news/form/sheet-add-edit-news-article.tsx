@@ -75,12 +75,12 @@ export default function SheetAddEditNewsArticle({
 	const coverImageUrl = !!newsArticle
 		? newsArticle?.coverImage?.url
 		: !attachment
-		? ""
-		: URL.createObjectURL(attachment.file);
+			? ""
+			: URL.createObjectURL(attachment.file);
 
 	const { isPending, mutate } = useUpsertNewsArticleMutation();
 	function onSubmit(input: NewsArticleSchema) {
-		const newFields = { ...input, coverImage: attachment ? attachment.mediaId : newsArticle?.coverImageId };
+		const newFields = { ...input, coverImageId: attachment ? attachment.mediaId : newsArticle?.coverImageId };
 		mutate(
 			{ formData: newFields, mediaIds },
 			{
@@ -93,199 +93,208 @@ export default function SheetAddEditNewsArticle({
 		<Sheet open={open} onOpenChange={setOpen}>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
-					<SheetContent side="bottom" className="h-svh px-3 overflow-y-auto bg-muted">
-						<div className="relative max-w-7xl min-h-[100px] w-full mx-auto flex flex-col justify-center">
+					<SheetContent side="bottom" className="h-svh px-3  overflow-y-auto bg-muted">
+						<div className="relative">
 							{coverImageUrl && (
-								<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
-									<Image src={coverImageUrl!} alt="Cover image" fill className="object-cover w-full rounded-xl" />
-								</div>
+								<Image
+									src={coverImageUrl!}
+									alt="Cover image"
+									fill
+									className="object-cover opacity-[2.5%] items-stretch absolute w-full rounded-xl"
+								/>
 							)}
-							<div
-								className={cn(
-									"w-full absolute h-fit",
-									!!coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl  max-h-fit my-auto"
+							<div className="relative w-full  max-w-7xl mx-auto  min-h-[100px] flex flex-col justify-center">
+								{coverImageUrl && (
+									<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
+										<Image src={coverImageUrl!} alt="Cover image" fill className="object-cover w-full rounded-xl" />
+									</div>
 								)}
-							>
-								<SheetHeader className=" w-full  max-h-fit ">
-									<div className="flex flex-wrap gap-3 pt-3  w-full justify-between md:items-end">
-										<div>
-											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
-											{!!watchedTitle ? (
-												<CardTitle className="tracking-tighter line-clamp-3 md:line-clamp-1 text-wrap break-all">
-													{watchedTitle}
-												</CardTitle>
-											) : (
-												<SheetTitle>{sheetTitle}</SheetTitle>
-											)}
-											<div>
-												<div className="flex gap-2">
-													<Badge variant={"warning"} className="max-h-fit">
-														{newsArticleStatus}
-													</Badge>
-													{!watchedTags?.length ? (
-														""
-													) : (
-														<div className="flex flex-wrap gap-0.5">
-															<span className="text-muted-foreground hidden md:flex text-sm italic">Hashtag:</span>
-															{watchedTags.map((tag) => (
-																<Badge key={tag.name} variant={"secondary"}>
-																	#{tag.name}
-																</Badge>
-															))}
-														</div>
-													)}
+								<div
+									className={cn(
+										"w-full absolute h-fit",
+										!!coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl  max-h-fit my-auto"
+									)}
+								>
+									<SheetHeader className=" w-full  max-h-fit ">
+										<div className="flex flex-wrap gap-3 pt-3  w-full justify-between md:items-end">
+											<div className="space-y-0.5">
+												{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
+												{!!watchedTitle ? (
+													<CardTitle className="tracking-tighter line-clamp-3 md:line-clamp-1 text-wrap break-all">
+														{watchedTitle}
+													</CardTitle>
+												) : (
+													<SheetTitle>{sheetTitle}</SheetTitle>
+												)}
+												<div>
+													<div className="flex gap-2">
+														<Badge variant={"warning"} className="max-h-fit">
+															{newsArticleStatus}
+														</Badge>
+														{!watchedTags?.length ? (
+															""
+														) : (
+															<div className="flex flex-wrap gap-0.5">
+																<span className="text-muted-foreground hidden md:flex text-sm italic">Hashtag:</span>
+																{watchedTags.map((tag) => (
+																	<Badge key={tag.name} variant={"secondary"}>
+																		#{tag.name}
+																	</Badge>
+																))}
+															</div>
+														)}
+													</div>
 												</div>
 											</div>
+											<LoadingButton
+												loading={isPending}
+												type="submit"
+												size={"lg"}
+												onClick={() => form.handleSubmit(onSubmit)()}
+												className="hidden md:flex"
+											>
+												<SaveIcon className="inline mr-2" /> Submit Article
+											</LoadingButton>
 										</div>
-										<LoadingButton
-											loading={isPending}
-											type="submit"
-											size={"lg"}
-											onClick={() => form.handleSubmit(onSubmit)()}
-											className="hidden md:flex"
-										>
-											<SaveIcon /> Submit Article
-										</LoadingButton>
-									</div>
-								</SheetHeader>
+									</SheetHeader>
+								</div>
 							</div>
-						</div>
-						{/* <pre>
+							{/* <pre>
 							{JSON.stringify(
 								{ formData: { ...form.watch(), coverImage: !!attachment ? attachment.mediaId : "" }, mediaIds },
 								null,
 								2
 							)}
 						</pre> */}
-						{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
-						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 ">
-							{/* main content  */}
-							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
-								<div className=" space-y-4">
-									<FormField
-										control={form.control}
-										name="title"
-										render={({ field }) => (
-											<FormItem>
-												<CardTitle>Headline</CardTitle>
-												<FormControl>
-													<Input placeholder="enter news headline here" {...field} />
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-									<div className="flex flex-wrap  gap-4">
+							{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
+							<div className="flex-col w-full  max-w-7xl mx-auto md:flex-row flex gap-3 ">
+								{/* main content  */}
+								<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
+									<div className=" space-y-4">
 										<FormField
 											control={form.control}
-											name="coverImageId"
+											name="title"
 											render={({ field }) => (
-												<FormItem className="max-w-fit">
-													<FormLabel>Cover image</FormLabel>
+												<FormItem>
+													<CardTitle>Headline</CardTitle>
 													<FormControl>
-														<ButtonAddSingleAttachment
-															onFilesSelected={startUpload}
-															disabled={isUploading || form.formState.isSubmitting}
-															type="button"
-															variant={"secondary"}
-														>
-															{isUploading && <Spinner />}
-															Choose image
-														</ButtonAddSingleAttachment>
+														<Input placeholder="enter news headline here" {...field} />
 													</FormControl>
 													<FormMessage />
 												</FormItem>
 											)}
 										/>
+										<div className="flex flex-wrap  gap-4">
+											<FormField
+												control={form.control}
+												name="coverImageId"
+												render={({ field }) => (
+													<FormItem className="max-w-fit">
+														<FormLabel>Cover image</FormLabel>
+														<FormControl>
+															<ButtonAddSingleAttachment
+																onFilesSelected={startUpload}
+																disabled={isUploading || form.formState.isSubmitting}
+																type="button"
+																variant={"secondary"}
+															>
+																{isUploading && <Spinner />}
+																Choose image
+															</ButtonAddSingleAttachment>
+														</FormControl>
+														<FormMessage />
+													</FormItem>
+												)}
+											/>
+											<FormField
+												control={form.control}
+												name="location"
+												render={({ field }) => (
+													<FormItem className="flex-1 min-w-[100px]">
+														<FormLabel>Location</FormLabel>
+														<FormControl>
+															<InputGroup>
+																<InputGroupInput
+																	placeholder="which location was the news taken from"
+																	{...field}
+																	value={field.value!}
+																/>
+																<InputGroupAddon align={"inline-end"}>
+																	<InputGroupButton>
+																		<MapPinIcon />
+																	</InputGroupButton>
+																</InputGroupAddon>
+															</InputGroup>
+														</FormControl>
+														<FormMessage />
+													</FormItem>
+												)}
+											/>
+											<NewsArticleCategory form={form} />
+										</div>
+									</div>
+									<div>
 										<FormField
 											control={form.control}
-											name="location"
+											name="content"
 											render={({ field }) => (
-												<FormItem className="flex-1 min-w-[100px]">
-													<FormLabel>Location</FormLabel>
+												<FormItem>
+													<CardTitle>News Content</CardTitle>
 													<FormControl>
-														<InputGroup>
-															<InputGroupInput
-																placeholder="which location was the news taken from"
-																{...field}
-																value={field.value!}
-															/>
-															<InputGroupAddon align={"inline-end"}>
-																<InputGroupButton>
-																	<MapPinIcon />
-																</InputGroupButton>
-															</InputGroupAddon>
-														</InputGroup>
+														<TipTapEditorWithHeader
+															onTextChanged={field.onChange}
+															initialContent={field.value!}
+															placeholder="start typing news article"
+															{...field}
+														/>
 													</FormControl>
 													<FormMessage />
 												</FormItem>
 											)}
 										/>
-										<NewsArticleCategory form={form} />
 									</div>
 								</div>
-								<div>
-									<FormField
-										control={form.control}
-										name="content"
-										render={({ field }) => (
-											<FormItem>
-												<CardTitle>News Content</CardTitle>
-												<FormControl>
-													<TipTapEditorWithHeader
-														onTextChanged={field.onChange}
-														initialContent={field.value!}
-														placeholder="start typing news article"
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
+								{/* lesser content  */}
+								<div className="md:w-1/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
+									<div className="space-y-4">
+										<NewsArticleTag form={form} />
+										<FormField
+											control={form.control}
+											name="summary"
+											render={({ field }) => (
+												<FormItem>
+													<CardTitle>News Summary</CardTitle>
+													<FormControl>
+														<TipTapEditorWithHeader
+															onTextChanged={field.onChange}
+															includeHeader={false}
+															initialContent={field.value!}
+															placeholder="in about 200 words"
+															{...field}
+														/>
+													</FormControl>
+													<FormMessage />
+												</FormItem>
+											)}
+										/>
+									</div>
+									<div>
+										<OtherMedia newsArticleId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
+									</div>
 								</div>
+								<FormFooter className="my-4">
+									<LoadingButton
+										loading={isPending}
+										type="submit"
+										size={"lg"}
+										onClick={() => form.handleSubmit(onSubmit)()}
+										className="md:hidden"
+									>
+										<SaveIcon /> Submit Article
+									</LoadingButton>
+								</FormFooter>
 							</div>
-							{/* lesser content  */}
-							<div className="md:w-1/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
-								<div className="space-y-4">
-									<NewsArticleTag form={form} />
-									<FormField
-										control={form.control}
-										name="summary"
-										render={({ field }) => (
-											<FormItem>
-												<CardTitle>News Summary</CardTitle>
-												<FormControl>
-													<TipTapEditorWithHeader
-														onTextChanged={field.onChange}
-														includeHeader={false}
-														initialContent={field.value!}
-														placeholder="in about 200 words"
-														{...field}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
-									/>
-								</div>
-								<div>
-									<OtherMedia newsArticleId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
-								</div>
-							</div>
-							<FormFooter className="my-4">
-							<LoadingButton
-								loading={isPending}
-								type="submit"
-								size={"lg"}
-								onClick={() => form.handleSubmit(onSubmit)()}
-								className="md:hidden"
-							>
-								<SaveIcon /> Submit Article
-							</LoadingButton>
-						</FormFooter>
 						</div>
-						
 					</SheetContent>
 				</form>
 			</Form>

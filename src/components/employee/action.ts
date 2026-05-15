@@ -6,7 +6,7 @@ import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude, employeeDataInclude } from "@/lib/types";
 import { employeeSchema, EmployeeSchema } from "@/lib/validation";
-import { hash } from "@node-rs/argon2";
+import { hash } from "argon2";
 import { cache } from "react";
 
 async function allDepartments() {
@@ -32,10 +32,10 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 	return await prisma.$transaction(
 		async (tx) => {
 			const passwordHash = await hash("Abc@@@123", {
-				memoryCost: 19456,
-				timeCost: 2,
-				outputLen: 32,
-				parallelism: 1
+				// memoryCost: 19456,
+				// timeCost: 2,
+				// outputLen: 32,
+				// parallelism: 1
 			});
 			const user = await tx.user.upsert({
 				where: { id: userId },

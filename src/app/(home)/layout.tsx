@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import SessionProvider from "../session-provider";
 
 export const iframeHeight = "800px";
+const TOP_APP_BAR_HEIGHT = "48px";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const { session, user } = await validateRequest();
@@ -15,7 +16,15 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
 	return (
 		<SessionProvider value={{ session, user }}>
-			<div className="[--header-height:calc(--spacing(14))]">
+			<div
+				// className="[--header-height:calc(--spacing(14))]"
+				className=""
+				style={
+					{
+						"--header-height": TOP_APP_BAR_HEIGHT
+					} as React.CSSProperties
+				}
+			>
 				<SidebarProvider className="flex flex-col ">
 					<header className="sticky top-0 z-50  w-full dark:bg-card bg-primary text-primary-foreground dark:text-card-foreground  dark:border-b">
 						<TopAppBar className="w-full max-w-9xl  py-2 mx-auto  px-3 " />

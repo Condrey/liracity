@@ -390,7 +390,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/coundrey/Documents/next-apps/liracity/src/generated/prisma",
+      "value": "C:\\Users\\KondreyJames\\Documents\\next-apps\\New folder\\liracity\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -399,12 +399,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/coundrey/Documents/next-apps/liracity/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\KondreyJames\\Documents\\next-apps\\New folder\\liracity\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

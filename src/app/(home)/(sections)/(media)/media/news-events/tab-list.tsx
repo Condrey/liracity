@@ -3,6 +3,7 @@
 import { Spinner } from "@/components/ui/spinner";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { SEARCH_PARAMS_NEWS_EVENTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -17,7 +18,7 @@ export default function TabList({ setTabValue }: { setTabValue: (tabValue: strin
 	const { navigateOnclick } = useCustomSearchParams();
 	function handleClickEvent(name: string) {
 		setTabValue(name);
-		navigateOnclick("defaultNewsEventsTabs", name);
+		navigateOnclick(SEARCH_PARAMS_NEWS_EVENTS, name);
 	}
 
 	return (
@@ -31,18 +32,25 @@ export default function TabList({ setTabValue }: { setTabValue: (tabValue: strin
 	);
 }
 
-export function TabListSwitchButton({ className }: { className?: string }) {
+export function TabListSwitchButton({
+	className,
+	setTabValue
+}: {
+	setTabValue: (tabValue: string) => void;
+	className?: string;
+}) {
 	const [isPending, startTransition] = useTransition();
 	const { navigateOnclick } = useCustomSearchParams();
-	const searchParamsForTabs = useSearchParams().get("defaultNewsEventsTabs") ?? "news";
+	const searchParamsForTabs = useSearchParams().get(SEARCH_PARAMS_NEWS_EVENTS) ?? "news";
 	function handleClickEvent(name: string) {
-		navigateOnclick("defaultNewsEventsTabs", name);
+		setTabValue(name);
+		navigateOnclick(SEARCH_PARAMS_NEWS_EVENTS, name);
 	}
 	return (
 		<div className={cn("flex px-3 items-center", className)}>
 			<button
 				// loading={isPending}
-				className="underline text-primary hover:cursor-pointer flex gap-2 items-center"
+				className="underline text-primary  flex gap-2 items-center"
 				// variant={"link"}
 				// size={"lg"}
 				onClick={() => startTransition(() => handleClickEvent(searchParamsForTabs === "news" ? "events" : "news"))}

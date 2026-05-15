@@ -100,7 +100,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 													navigator.clipboard.writeText(ippsNumber);
 													toast.success("Copied IPPS number to clipboard");
 												}}
-												className="slashed-zero cursor-pointer proportional-nums text-card-foreground underline hover:text-primary"
+												className="slashed-zero proportional-nums text-card-foreground underline hover:text-primary"
 											>
 												{ippsNumber}
 											</button>

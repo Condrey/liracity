@@ -41,7 +41,7 @@ export default function ListOfEvents({ initialData, limit, filter }: ListOfEvent
 				{!!filter && (
 					<LoadingButton
 						loading={isPending}
-						onClick={() => startTransition(() => updateSearchParamsAndNavigate("eventFilter", ""))}
+						onClick={() => startTransition(() => updateSearchParamsAndNavigate("eventsFilter", ""))}
 						size={"lg"}
 						variant={"link"}
 					>
@@ -53,7 +53,7 @@ export default function ListOfEvents({ initialData, limit, filter }: ListOfEvent
 		);
 	return (
 		<div className="flex w-full max-w-9xl flex-col gap-6">
-			<ItemGroup className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+			<ItemGroup className="grid sm:grid-cols-2 md:grid-cols-3 items-stretch lg:grid-cols-4 gap-4">
 				{data.map((eventsArticle) => (
 					<EventsArticleContainer key={eventsArticle.id} eventsArticle={eventsArticle} />
 				))}

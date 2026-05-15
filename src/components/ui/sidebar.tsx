@@ -14,7 +14,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
-const SIDEBAR_COOKIE_NAME = "sidebar_state";
+const DEFAULT_SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 const SIDEBAR_WIDTH = "20rem";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
@@ -49,11 +49,13 @@ function SidebarProvider({
 	className,
 	style,
 	children,
+	cookieName = DEFAULT_SIDEBAR_COOKIE_NAME,
 	...props
 }: React.ComponentProps<"div"> & {
 	defaultOpen?: boolean;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
+	cookieName?: string;
 }) {
 	const isMobile = useIsMobile();
 	const [openMobile, setOpenMobile] = React.useState(false);
@@ -72,7 +74,7 @@ function SidebarProvider({
 			}
 
 			// This sets the cookie to keep the sidebar state.
-			document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+			document.cookie = `${cookieName}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
 		},
 		[setOpenProp, open]
 	);
@@ -140,13 +142,15 @@ function Sidebar({
 	collapsible = "offcanvas",
 	className,
 	children,
+	sidebar,
 	...props
 }: React.ComponentProps<"div"> & {
 	side?: "left" | "right";
 	variant?: "sidebar" | "floating" | "inset";
 	collapsible?: "offcanvas" | "icon" | "none";
+	sidebar?: SidebarContextProps;
 }) {
-	const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+	const { isMobile, state, openMobile, setOpenMobile } = sidebar || useSidebar();
 
 	if (collapsible === "none") {
 		return (
@@ -233,15 +237,14 @@ function Sidebar({
 	);
 }
 
-function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
+function SidebarTrigger({ className, size, onClick, ...props }: React.ComponentProps<typeof Button>) {
 	const { toggleSidebar } = useSidebar();
 
 	return (
 		<Button
 			data-sidebar="trigger"
 			data-slot="sidebar-trigger"
-			variant="ghost"
-			size="icon"
+			size={size || "icon"}
 			className={cn("size-7", className)}
 			onClick={(event) => {
 				onClick?.(event);
@@ -597,7 +600,7 @@ function SidebarMenuSub({ className, ...props }: React.ComponentProps<"ul">) {
 			data-slot="sidebar-menu-sub"
 			data-sidebar="menu-sub"
 			className={cn(
-				"border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
+				"border-sidebar-border mx-3.5 flex min-w-0  translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
 				"group-data-[collapsible=icon]:hidden",
 				className
 			)}
@@ -637,7 +640,7 @@ function SidebarMenuSubButton({
 			data-size={size}
 			data-active={isActive}
 			className={cn(
-				"text-sidebar-foreground  ring-sidebar-ring hover:bg-warning hover:text-warning-foreground active:bg-warning active:text-warning-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+				"text-sidebar-foreground hover:cursor-pointer  ring-sidebar-ring hover:bg-warning hover:text-warning-foreground active:bg-warning active:text-warning-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
 				"data-[active=true]:bg-warning data-[active=true]:text-warning-foreground ",
 				size === "sm" && "text-xs",
 				size === "md" && "text-sm",

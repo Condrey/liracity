@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { staffLoginSchema } from "@/lib/validation";
-import { verify } from "@node-rs/argon2";
+import { verify } from "argon2";
 
 export async function POST(req: Request) {
 	try {
@@ -19,10 +19,10 @@ export async function POST(req: Request) {
 			return Response.json(errorMsg, { status: 401, statusText: errorMsg });
 		}
 		const validPassword = await verify(existingUser.passwordHash!, password, {
-			memoryCost: 19456,
-			timeCost: 2,
-			outputLen: 32,
-			parallelism: 1
+			// memoryCost: 19456,
+			// timeCost: 2,
+			// outputLen: 32,
+			// parallelism: 1,
 		});
 		if (!validPassword) {
 			return Response.json(errorMsg, { status: 401, statusText: errorMsg });

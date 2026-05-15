@@ -26,11 +26,11 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 	});
 	const { data, status } = query;
 	if (status === "error") return <ErrorContainer errorMessage="Failed to load landing page" query={query} />;
-	if (status === "success" && !data) return <EmptyContainer message={`Welcome to ${webName}`}></EmptyContainer>;
+	if (!data) return <EmptyContainer message={`Welcome to ${webName}`}></EmptyContainer>;
 	return (
 		<div className="md:h-[90vh]  md:max-h-fit lg:max-h-[75vh] overflow-clip w-full    grid   md:grid-cols-3 xl:grid-cols-4  items-center    ">
 			<Image
-				src={data?.coverImage?.url || `/hero.jpg`}
+				src={data.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
 				height={720}
 				width={1800}
@@ -41,21 +41,21 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 			/>
 			<article className="lg:max-w-prose shrink-0 md:max-w-fit min-h-fit flex-none  w-full mx-auto px-3 md:col-span-3 lg:col-span-1">
 				<div className="text-xs text-muted-foreground">
-					<time className="ordinal  slashed-zero">{formatDateToLocal((data?.publishedAt || data?.createdAt)!)}</time>,{" "}
-					<address className="inline">{data?.location}</address>
+					<time className="ordinal  slashed-zero">{formatDateToLocal((data.publishedAt || data.createdAt)!)}</time>,{" "}
+					<address className="inline">{data.location}</address>
 				</div>
-				<h2 className="font-medium tracking-tight mb-3 mt-1 uppercase leading-tight text-lg line-clamp-2 text-pretty   md:font-bold ">
-					{data?.title}
+				<h2 className="font-medium text-amber-700 text-shadow-xs md:text-2xl tracking-tight mb-3 mt-1 uppercase leading-tight text-lg line-clamp-2 md:line-clamp-3 text-pretty   md:font-bold ">
+					{data.title}
 				</h2>
 
 				<div className="mt-1 hyphens-auto text-sm  leading-tight   md:text-justify  line-clamp-4 lg:line-clamp-6 xl:line-clamp-[10] md:max-w-prose">
-					<TipTapViewer content={data?.summary || data?.content} />
+					<TipTapViewer content={data.summary || data.content} />
 				</div>
 				<div className="w-full flex">
 					<Link
-						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data?.slug}`)}
+						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data.slug}`)}
 						className={cn(
-							buttonVariants({}),
+							buttonVariants({ size: "default" }),
 							"group/read-more w-full md:max-w-fit md:mx-0 mx-auto sm:ms-auto sm:mx-0 mt-2"
 						)}
 						onClick={() => startTransition(() => {})}

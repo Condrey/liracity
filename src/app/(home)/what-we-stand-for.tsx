@@ -11,8 +11,8 @@ const md = markdownIt("commonmark", { html: false });
 export default function WhatWeStandFor() {
 	return (
 		<div className="flex   w-full me-auto pb-3 gap-4">
-			{/* <div className="hidden aspect-square md:flex size-[250px]">
-				<Image src={`/logo.png`} alt="logo" height={250} width={250} />
+			{/* <div className="hidden aspect-square md:flex h-[250px] w-[300px] bg-card">
+				<Image src={`/logo.png`} alt="logo" height={250} width={300} />
 			</div> */}
 
 			<Tabs defaultValue="vision" className=" w-full rounded-md space-y-4">
@@ -20,7 +20,7 @@ export default function WhatWeStandFor() {
 					<TypographyH3 title={webName} className=" uppercase text-balance text-start" />
 					<h4 className="text-sm text-muted-foreground">Vision, mission, mandate, e.t.c </h4>
 				</div> */}
-				<div className="bg-muted px-3 border-y py-1">
+				<div className="bg-card px-3 border-y py-1">
 					<TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1  max-w-4xl [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
 						<TabsTrigger value="vision">
 							<LightbulbIcon className="hidden sm:block " />
@@ -57,7 +57,7 @@ export default function WhatWeStandFor() {
 
 							<div>
 								<Button
-									variant="outline"
+									variant="secondary"
 									title={`Copy ${key} to clipboard`}
 									onClick={async () => {
 										await navigator.clipboard.writeText(key + " - " + value);

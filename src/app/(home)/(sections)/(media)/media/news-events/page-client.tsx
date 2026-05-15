@@ -8,13 +8,14 @@ import ButtonAddEditNewsArticle from "@/components/news-and-events/news/button-a
 import ListOfNewsArticles from "@/components/news-and-events/news/list-of-news-articles";
 import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news-article-container-skeleton";
 import { PageTitle, TypographyH4 } from "@/components/page-utils";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import Footer from "@/components/user/footer";
 import { cityMediaCenterLinks } from "@/lib/constants";
 import { EventData, NewsArticleData } from "@/lib/types";
-import { PlusIcon } from "lucide-react";
-import { Suspense, useState } from "react";
+import { MenuIcon, PlusIcon } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
 import { PageSidebar } from "./page-sidebar";
 import TabList, { TabListSwitchButton } from "./tab-list";
 
@@ -27,24 +28,36 @@ interface PageClientProps {
 	initialEvents: EventData[];
 }
 export default function PageClient({ searchParams, user, initialEvents, initialNewsArticles }: PageClientProps) {
-	const { newsFilter, eventFilter, defaultNewsEventsTabs } = searchParams;
-	const [tabValue, setTabValue] = useState(defaultNewsEventsTabs || "news");
+	const { newsFilter, eventsFilter, defaultNewsEventsTabs: _defaultNewsEventsTabs } = searchParams;
+	const defaultNewsEventsTabs = _defaultNewsEventsTabs || "news";
+	const [tabValue, setTabValue] = useState(defaultNewsEventsTabs);
+	const sidebar = useSidebar();
+
+	useEffect(() => {
+		setTabValue(defaultNewsEventsTabs);
+	}, [defaultNewsEventsTabs]);
+
 	return (
-		<div>
-			<Tabs onValueChange={setTabValue} defaultValue={tabValue}>
-				<SidebarProvider>
-					<SidebarInset className="space-y-6">
-						<header className="flex h-fit  flex-col gap-2 sticky top-0 ">
+		<div className="h-[calc(100vh-var(--header-height))]">
+			<Tabs onValueChange={setTabValue} value={tabValue}>
+				{/* <pre>{JSON.stringify({ tabValue, defaultNewsEventsTabs }, null, 2)}</pre> */}
+				<SidebarProvider className="" defaultOpen={false} cookieName="NEWS_EVENT_SIDEBAR">
+					<SidebarInset className="space-y-6 ">
+						<header className="flex h-fit bg-background z-50  flex-col gap-2 sticky top-0 ">
 							<PageTitle heading={title} className="px-3" />
 							<div className="flex items-center gap-2 shrink-0 border-y">
-								<div className="bg-muted flex px-3 w-full py-1 border-y">
+								<div className=" flex px-3 bg-card w-full py-1 border-y">
 									<TabList setTabValue={setTabValue} />
 								</div>
-								<SidebarTrigger className=" ml-auto mr-3 rotate-180" />
+								{!sidebar.open && (
+									<Button variant="warning" size={"icon-lg"} onClick={() => sidebar.setOpen(!sidebar.open)}>
+										<MenuIcon />
+									</Button>
+								)}
 							</div>
 						</header>
 
-						<TabListSwitchButton className="max-w-9xl mx-auto w-full" />
+						<TabListSwitchButton setTabValue={setTabValue} className="max-w-9xl mx-auto w-full" />
 
 						{/* list of news articles */}
 						<TabsContent
@@ -81,7 +94,7 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 									<PlusIcon /> event
 								</ButtonAddEditEvent>
 								<TypographyH4 title="Events " />
-								{eventFilter && <span>({eventFilter})</span>}
+								{eventsFilter && <span>({eventsFilter})</span>}
 							</div>
 
 							<Suspense
@@ -93,13 +106,13 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 									</div>
 								}
 							>
-								{/* filter={eventFilter || EventStatus.PUBLISHED} */}
-								<ListOfEvents initialData={initialEvents} filter={eventFilter || undefined} />
+								{/* filter={eventsFilter || EventStatus.PUBLISHED} */}
+								<ListOfEvents initialData={initialEvents} filter={eventsFilter || undefined} />
 							</Suspense>
 						</TabsContent>
 						<Footer />
 					</SidebarInset>
-					<PageSidebar side="right" user={user} />
+					<PageSidebar side="right" user={user} setOpen={sidebar.setOpen} sidebar={sidebar} />
 				</SidebarProvider>
 			</Tabs>
 		</div>

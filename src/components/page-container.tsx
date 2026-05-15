@@ -11,7 +11,7 @@ export default function PageContainer({ showFooter = true, className, children }
 		<div className="h-auto w-full space-y-12   ">
 			<div
 				className={cn(
-					"md:min-h-[75vh] min-h-[84vh] pt-6 h-full gap-12 w-full mx-auto px-3",
+					"md:min-h-[75vh] min-h-[84vh] pt-6 h-full space-y-6 w-full mx-auto px-3",
 					showFooter && "max-w-9xl",
 					className
 				)}

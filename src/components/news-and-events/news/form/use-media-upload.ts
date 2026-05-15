@@ -1,6 +1,6 @@
 import { MAX_ATTACHMENTS } from "@/lib/constants";
 import { Attachment } from "@/lib/types";
-import { useUploadThing } from "@/utils/uplaodthing";
+import { useUploadThing } from "@/utils/uploadthing";
 import { useState } from "react";
 import { toast } from "sonner";
 

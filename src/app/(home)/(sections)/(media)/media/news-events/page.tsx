@@ -16,14 +16,18 @@ interface PageProps {
 	searchParams: Promise<any>;
 }
 export default async function Page({ searchParams }: PageProps) {
-	const { user } = await validateRequest();
-	const _searchParams = await searchParams;
-	const newsArticles = await getFilteredNewsArticles(_searchParams.newsFilter || undefined);
-	const events = await getFilteredEvents(_searchParams.eventFilter || undefined);
+	const [validatedRequest, _searchParams] = await Promise.all([await validateRequest(), await searchParams]);
+	const [newsArticles, events] = await Promise.all([
+		await getFilteredNewsArticles(_searchParams.newsFilter || undefined),
+		await getFilteredEvents(_searchParams.eventsFilter || undefined)
+	]);
 
 	return (
-		<div>
-			<PageClient initialNewsArticles={newsArticles} initialEvents={events} searchParams={_searchParams} user={user} />
-		</div>
+		<PageClient
+			initialNewsArticles={newsArticles}
+			initialEvents={events}
+			searchParams={_searchParams}
+			user={validatedRequest.user}
+		/>
 	);
 }

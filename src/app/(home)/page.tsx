@@ -11,7 +11,7 @@ import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
 	return (
-		<PageContainer className="flex flex-col justify-start px-0  pt-0 ">
+		<PageContainer className="flex flex-col justify-start  px-0  pt-0 ">
 			{/* Hero section  */}
 			<Suspense fallback={<HeroSectionLoadingSkeleton />}>
 				<HeroSectionContainer />
@@ -22,9 +22,6 @@ export default function Home() {
 			<div className="border-y ">
 				<WhatWeStandFor />
 			</div>
-
-			{/* Message from our leaders  */}
-			{/* <MessageFromLeaders /> */}
 
 			{/* Upcoming events  */}
 			<Suspense
@@ -38,6 +35,9 @@ export default function Home() {
 			>
 				<SampleEvents />
 			</Suspense>
+			<hr className="my-6" />
+			{/* Message from our leaders  */}
+			{/* <MessageFromLeaders /> */}
 
 			{/* Sample news articles  */}
 			<Suspense

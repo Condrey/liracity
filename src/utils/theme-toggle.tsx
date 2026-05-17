@@ -21,7 +21,7 @@ export function ThemeToggle({ children, ...props }: ThemeToggleProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button className="relative " title="Theme" {...props}>
+				<Button className="relative" title="Theme" {...props}>
 					<Moon className="hidden size-4 dark:inline" />
 					<Sun className="inline size-4 dark:hidden" />
 					<span className="sr-only">Toggle theme</span>

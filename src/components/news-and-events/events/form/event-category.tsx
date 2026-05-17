@@ -27,9 +27,9 @@ export default function eventCategory({ form }: { form: UseFormReturn<EventSchem
 	if (status === "error") return <ErrorContainer errorMessage="Failed to get categories" query={query} />;
 	if (status === "pending")
 		return (
-			<div className="space-y-3 flex-1">
-				<Skeleton className="w-2/3 h-5" />
-				<Skeleton className="w-full h-9" />
+			<div className="flex-1 space-y-3">
+				<Skeleton className="h-5 w-2/3" />
+				<Skeleton className="h-9 w-full" />
 			</div>
 		);
 	return (
@@ -78,7 +78,7 @@ export default function eventCategory({ form }: { form: UseFormReturn<EventSchem
 														}
 													})
 												}
-												className="w-full max-w-fit mx-auto"
+												className="mx-auto w-full max-w-fit"
 											>
 												Add <q className="ms-1.5">{commandText}</q>
 											</LoadingButton>

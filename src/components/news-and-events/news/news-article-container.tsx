@@ -31,7 +31,7 @@ export default function NewsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"p-0  group/article cursor-pointer h-fit size-auto",
+				"group/article size-auto h-fit cursor-pointer p-0",
 				isPending && "animate-pulse",
 				isHovering && "bg-muted shadow-md",
 				className
@@ -42,7 +42,7 @@ export default function NewsArticleContainer({
 			asChild
 		>
 			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${slug}`)} className="pb-6">
-				<ItemHeader className="px-0 relative min-h-[20px]   overflow-hidden ">
+				<ItemHeader className="relative min-h-[20px] overflow-hidden px-0">
 					<div className="">
 						<ArticleImage
 							mediaIdentifier={coverImage?.url}
@@ -51,7 +51,7 @@ export default function NewsArticleContainer({
 							width={720}
 							height={480}
 							className={cn(
-								" aspect-square touch-none pointer-events-none max-h-[200px]  mask-b-from-10% mask-b-to-90% rounded-sm object-cover  ",
+								"pointer-events-none aspect-square max-h-[200px] touch-none rounded-sm mask-b-from-10% mask-b-to-90% object-cover",
 								isHovering && "scale-110 transition-all duration-300"
 							)}
 						/>
@@ -60,24 +60,24 @@ export default function NewsArticleContainer({
 					<LoadingButton
 						loading={isPending}
 						className={cn(
-							"hidden ",
-							"max-w-fit max-h-fit absolute -translate-x-1/2 top-1/2 -translate-y-1/2 start-1/2 size-full py-3",
+							"hidden",
+							"absolute start-1/2 top-1/2 size-full max-h-fit max-w-fit -translate-x-1/2 -translate-y-1/2 py-3",
 							isPending && "block",
 							isHovering && "block"
 						)}
 					>
 						{isPending ? "Opening" : "Read article"}
 					</LoadingButton>
-					<Badge className="absolute bg-amber-300 text-amber-950 top-0 left-0">News article</Badge>
+					<Badge className="absolute top-0 left-0 bg-amber-300 text-amber-950">News article</Badge>
 				</ItemHeader>
-				<ItemFooter className="gap-1 px-3 space-x-1 flex-wrap justify-start">
+				<ItemFooter className="flex-wrap justify-start gap-1 space-x-1 px-3">
 					{isNotVisitor && (
 						<Badge variant={variant}>
 							<Icon />
 							{newsArticleStatus}
 						</Badge>
 					)}
-					<div className="gap-1.5 flex flex-wrap">
+					<div className="flex flex-wrap gap-1.5">
 						{tags.slice(0, 3).map((tag) => (
 							<span className={"bg-secondary px-1 text-secondary-foreground"} key={tag.id}>
 								#{tag.name}
@@ -86,8 +86,8 @@ export default function NewsArticleContainer({
 						{tags.length > 3 && <span>...</span>}
 					</div>
 					{location && (
-						<address className="text-muted-foreground text-sm">
-							<MapPinIcon className="size-4 inline-flex fill-muted-foreground text-card" />
+						<address className="text-sm text-muted-foreground">
+							<MapPinIcon className="inline-flex size-4 fill-muted-foreground text-card" />
 							{location}
 						</address>
 					)}

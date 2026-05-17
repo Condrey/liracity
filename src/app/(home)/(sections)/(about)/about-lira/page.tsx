@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function Page() {
 	const entity = await prisma.entity.findFirst();
 	return (
-		<div className="max-w-3xl  mx-auto w-full  ">
+		<div className="mx-auto w-full max-w-3xl">
 			<About entity={entity!} id="#about" />
 			<HistoryAndCulture entity={entity!} id="#history-culture" />
 			<GeographyAndLandmarks entity={entity!} id="#geography" />

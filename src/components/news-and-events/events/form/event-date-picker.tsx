@@ -34,13 +34,13 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 									</FormLabel>
 									<Popover open={openFrom} onOpenChange={setOpenFrom}>
 										<PopoverTrigger asChild>
-											<Button variant="outline" id="date-from" className="w-full h-9 justify-between font-normal">
+											<Button variant="outline" id="date-from" className="h-9 w-full justify-between font-normal">
 												{field.value
 													? field.value.toLocaleDateString("en-US", {
 															day: "2-digit",
 															month: "short",
 															year: "numeric"
-													  })
+														})
 													: "Select date"}
 												<ChevronDownIcon />
 											</Button>
@@ -90,7 +90,7 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 											date.setSeconds(0);
 											field.onChange(date);
 										}}
-										className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+										className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
 									/>
 								</div>
 							</div>
@@ -115,13 +115,13 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 									</FormLabel>
 									<Popover open={openTo} onOpenChange={setOpenTo}>
 										<PopoverTrigger asChild>
-											<Button variant="outline" id="date-to" className="w-full h-9 justify-between font-normal">
+											<Button variant="outline" id="date-to" className="h-9 w-full justify-between font-normal">
 												{field.value
 													? field.value.toLocaleDateString("en-US", {
 															day: "2-digit",
 															month: "short",
 															year: "numeric"
-													  })
+														})
 													: "Select date"}
 												<ChevronDownIcon />
 											</Button>
@@ -164,7 +164,7 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 											date.setSeconds(0);
 											field.onChange(date);
 										}}
-										className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+										className="appearance-none bg-background [&::-webkit-calendar-picker-indicator]:hidden"
 									/>
 								</div>
 							</div>

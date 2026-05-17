@@ -9,7 +9,7 @@ import { useTransition } from "react";
 
 export default function PageClient() {
 	return (
-		<ItemGroup className="gap-3 max-w-md">
+		<ItemGroup className="max-w-md gap-3">
 			{cityMediaCenterLinks.map((link) => (
 				<PageClientItem key={link.title} link={link} />
 			))}
@@ -25,7 +25,7 @@ function PageClientItem({ link }: { link: NavLink }) {
 		<Item
 			variant={"outline"}
 			onClick={() => startTransition(() => {})}
-			className={cn(isPending && "bg-muted animate-pulse")}
+			className={cn(isPending && "animate-pulse bg-muted")}
 			asChild
 		>
 			<Link href={getNavigationLinkWithPathnameWithoutUpdate(link.href)}>

@@ -53,7 +53,7 @@ export default function ListOfNewsArticles({ initialData, limit, filter }: ListO
 		);
 	return (
 		<div className="flex w-full max-w-9xl flex-col gap-6">
-			<ItemGroup className="grid sm:grid-cols-2 items-stretch   lg:grid-cols-3 xl:grid-cols-4 gap-4  ">
+			<ItemGroup className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{data.map((newsArticle) => (
 					<NewsArticleContainer key={newsArticle.id} newsArticle={newsArticle} />
 				))}

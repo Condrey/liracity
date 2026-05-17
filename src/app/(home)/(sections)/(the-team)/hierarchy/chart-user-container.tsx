@@ -12,12 +12,12 @@ interface ChartUserContainerProps {
 
 export default function ChartUserContainer({ user, department }: ChartUserContainerProps) {
 	return (
-		<div className="md:max-w-[15rem] max-w-40 text-sm sm:text-sm lg:max-w-xs w-full mx-auto bg-card rounded-md border ">
+		<div className="mx-auto w-full max-w-40 rounded-md border bg-card text-sm sm:text-sm md:max-w-[15rem] lg:max-w-xs">
 			<div
 				className={cn(
-					"text-center break-all uppercase min-w-40 px-3 py-4",
+					"min-w-40 px-3 py-4 text-center break-all uppercase",
 					user?.hierarchy! >= 1 ? "bg-warning/50" : user?.hierarchy! >= 3 ? "bg-success/50" : "bg-primary/50",
-					"dark:bg-card ",
+					"dark:bg-card",
 					user && "dark:border-b"
 				)}
 			>
@@ -25,12 +25,12 @@ export default function ChartUserContainer({ user, department }: ChartUserContai
 			</div>
 			{!!user && (
 				<>
-					<div className="p-3 hidden flex-wrap md:flex flex-col  md:flex-row justify-start items-center gap-3">
-						<UserAvatar avatarUrl={user.avatarUrl} size={75} className="mx-auto max-w-fit w-full" />
-						<div className="flex uppercase max-w-fit w-full mx-auto flex-col justify-start">
-							<strong className="text-xl flex items-center md:tex-2xl line-clamp-2 text-ellipsis tracking-tighter font-bold ">
-								{!!user.title && <span className="text-muted-foreground: ">{user.title}</span>} {user.name}{" "}
-								{user.isVerified && <VerifiedIcon className="fill-success text-success-foreground size-4 inline" />}
+					<div className="hidden flex-col flex-wrap items-center justify-start gap-3 p-3 md:flex md:flex-row">
+						<UserAvatar avatarUrl={user.avatarUrl} size={75} className="mx-auto w-full max-w-fit" />
+						<div className="mx-auto flex w-full max-w-fit flex-col justify-start uppercase">
+							<strong className="md:tex-2xl line-clamp-2 flex items-center text-xl font-bold tracking-tighter text-ellipsis">
+								{!!user.title && <span className="text-muted-foreground:">{user.title}</span>} {user.name}{" "}
+								{user.isVerified && <VerifiedIcon className="inline size-4 fill-success text-success-foreground" />}
 							</strong>
 							<span className="text-sm text-muted-foreground">
 								{user.resumedOffice} - {user.endedOffice ?? "Now"}
@@ -38,9 +38,9 @@ export default function ChartUserContainer({ user, department }: ChartUserContai
 							<span className="text-sm">{user.position}</span>
 						</div>
 					</div>
-					<div className="p-2 dark:border-t md:flex hidden gap-3 justify-evenly">
+					<div className="hidden justify-evenly gap-3 p-2 md:flex dark:border-t">
 						<Link href={`tel:${user.telephone}`} className={buttonVariants({ variant: "outline", size: "sm" })}>
-							<PhoneCallIcon className="size-4 fill-success text-success  dark:text-background" /> Call
+							<PhoneCallIcon className="size-4 fill-success text-success dark:text-background" /> Call
 						</Link>
 						<Link href={`mailto:${user.email}`} className={buttonVariants({ variant: "outline", size: "sm" })}>
 							<MailIcon className="size-4 fill-primary text-primary-foreground dark:text-background" /> Email

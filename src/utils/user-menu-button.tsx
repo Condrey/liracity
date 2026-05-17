@@ -49,7 +49,7 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 					</DropdownMenuTrigger>
 
 					<DropdownMenuContent className="mx-4 flex min-w-60 flex-col p-4">
-						<DropdownMenuGroup className="flex flex-col items-center  text-xs">
+						<DropdownMenuGroup className="flex flex-col items-center text-xs">
 							<div>
 								<UserAvatar avatarUrl={user.avatarUrl} className="size-[150px]" size={150} />
 							</div>
@@ -68,7 +68,7 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 							<>
 								<DropdownMenuSeparator />
 								<DropdownMenuItem>
-									<Link href="/user" className="flex cursor-pointer space-x-2 ">
+									<Link href="/user" className="flex cursor-pointer space-x-2">
 										<LucideSettings2 className="" />
 										<span>User profile</span>
 									</Link>
@@ -77,13 +77,13 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 						)}
 
 						<DropdownMenuSeparator />
-						<div className="flex w-full *:flex-1 items-center justify-center">
-							<ThemeToggle variant={"ghost"} className="flex text-sm flex-row justify-start">
+						<div className="flex w-full items-center justify-center *:flex-1">
+							<ThemeToggle variant={"ghost"} className="flex flex-row justify-start text-sm">
 								Toggle theme
 							</ThemeToggle>
 						</div>
 						<DropdownMenuSeparator />
-						<LogoutButton variant={"ghost"} className="flex justify-start ps-3 w-full">
+						<LogoutButton variant={"ghost"} className="flex w-full justify-start ps-3">
 							<LogOutIcon className="mr-2 text-inherit" />
 							Sign out
 						</LogoutButton>

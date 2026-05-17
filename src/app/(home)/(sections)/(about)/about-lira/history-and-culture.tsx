@@ -30,12 +30,12 @@ export default function HistoryAndCulture({ entity }: HistoryAndCultureProps) {
 					<ButtonAddEditHistoryAndCulture
 						size={"icon"}
 						variant={"outline"}
-						className="flex-none  m-2"
+						className="m-2 flex-none"
 						historyAndCulture={data?.historyAndCulture!}
 					>
 						<Edit3Icon />
 					</ButtonAddEditHistoryAndCulture>
-					<TipTapViewer content={data?.historyAndCulture} className=" inline  text-pretty hyphens-auto text-justify" />
+					<TipTapViewer content={data?.historyAndCulture} className="inline text-justify text-pretty hyphens-auto" />
 				</div>
 			)}
 		</>

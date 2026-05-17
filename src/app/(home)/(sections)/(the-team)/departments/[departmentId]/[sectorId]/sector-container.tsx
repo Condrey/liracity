@@ -17,11 +17,11 @@ export default function SectorContainer({ departmentalSector }: SectorContainerP
 	return (
 		<div className="space-y-6">
 			{/* optionally show department details on small screens  */}
-			<SectorSideBar sector={departmentalSector} className="lg:hidden hidden md:flex flex-col w-full " />
+			<SectorSideBar sector={departmentalSector} className="hidden w-full flex-col md:flex lg:hidden" />
 			{/* Sector information  */}
-			<div className=" px-3">
+			<div className="px-3">
 				<Fragment>
-					<CardTitle className="uppercase tracking-tight font-bold text-lg sm:text-xl">
+					<CardTitle className="text-lg font-bold tracking-tight uppercase sm:text-xl">
 						<span>{name} section</span>
 						<ButtonAddEditDepartmentalSector
 							departMentId={departmentalSector.departMentId!}

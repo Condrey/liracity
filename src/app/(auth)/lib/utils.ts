@@ -17,7 +17,7 @@ export function generateSecureRandomString(): string {
 }
 
 export function stringToUint8Array(str: string): Uint8Array {
-	const hashArray = str.split(',').map(Number)
+	const hashArray = str.split(",").map(Number);
 	return new Uint8Array(hashArray);
 }
 

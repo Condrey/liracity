@@ -12,14 +12,14 @@ export default function Footer({ className }: { className?: string }) {
 	return (
 		<footer
 			className={cn(
-				"flex flex-col bg-black/80 dark:bg-white/20  w-full  text-background dark:text-foreground ",
+				"flex w-full flex-col bg-black/80 text-background dark:bg-white/20 dark:text-foreground",
 				className
 			)}
 		>
 			{/* sections corner  */}
-			<div className="md:grid grid-cols-2 sm:grid-cols-3 gap-6 hidden p-4  max-w-9xl mx-auto  md:grid-cols-4 xl:grid-cols-5 w-full">
+			<div className="mx-auto hidden w-full max-w-9xl grid-cols-2 gap-6 p-4 sm:grid-cols-3 md:grid md:grid-cols-4 xl:grid-cols-5">
 				{/* logo section  */}
-				<section className="flex flex-col items-center  justify-center sm:row-span-2">
+				<section className="flex flex-col items-center justify-center sm:row-span-2">
 					<Image src={`/coat-of-arms.png`} height={150} width={150} alt="logo" />
 				</section>
 				{/* City services links  */}
@@ -33,8 +33,8 @@ export default function Footer({ className }: { className?: string }) {
 				{/* logo section  */}
 			</div>
 			{/* Copyright details and theme toggler  */}
-			<div className="md:bg-black bg-foreground/5 dark:md:bg-background text-muted-foreground tracking-wider capitalize w-full  px-4 py-2 md:mt-8">
-				<div className="w-full flex justify-between items-center max-w-9xl mx-auto">
+			<div className="w-full bg-foreground/5 px-4 py-2 tracking-wider text-muted-foreground capitalize md:mt-8 md:bg-black dark:md:bg-background">
+				<div className="mx-auto flex w-full max-w-9xl items-center justify-between">
 					<p className='text-center text-xs md:text-sm md:after:content-["_-_The_Republic_Of_Uganda"]'>
 						{`Copyright 2025${currentYear <= 2025 ? "" : `- ${currentYear}`},
             ${webName}`}
@@ -49,8 +49,8 @@ export default function Footer({ className }: { className?: string }) {
 function LinkGroup({ title, links }: { title: string; links: NavLink[] }) {
 	return (
 		<section className="flex flex-col gap-4">
-			<h1 className="text-lg font-bold uppercase tracking-tighter">{title}</h1>
-			<div className="gap-3 flex flex-col">
+			<h1 className="text-lg font-bold tracking-tighter uppercase">{title}</h1>
+			<div className="flex flex-col gap-3">
 				{links.map((item) => (
 					<LinkItem key={item.href} item={item} />
 				))}
@@ -67,12 +67,12 @@ function LinkItem({ item }: { item: NavLink }) {
 					<Link
 						href={item.href}
 						passHref
-						className="hover:underline leading-tight tracking-wide hover:text-primary visited:text-amber-500"
+						className="leading-tight tracking-wide visited:text-amber-500 hover:text-primary hover:underline"
 					>
 						{item.title}
 					</Link>
 				</TooltipTrigger>
-				<TooltipContent className="max-w-[200px] ">
+				<TooltipContent className="max-w-[200px]">
 					<p className="text-pretty">{item.description}</p>
 				</TooltipContent>
 			</Tooltip>

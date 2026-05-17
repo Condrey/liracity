@@ -67,7 +67,7 @@ export default function OtherMedia({
 					<div
 						{...routeprops}
 						className={cn(
-							"flex h-[200px] w-full items-center justify-center rounded-2xl px-5 py-3 outline-dashed outline-2 outline-border",
+							"flex h-[200px] w-full items-center justify-center rounded-2xl px-5 py-3 outline-2 outline-border outline-dashed",
 							isDragActive && "outline-primary"
 						)}
 					>
@@ -95,7 +95,7 @@ export default function OtherMedia({
 						editor={editor}
 						onPaste={onPaste}
 						className={cn(
-							"size-full max-h-[20rem] overflow-y-auto  rounded-md bg-secondary/20 h-12 dark:bg-background px-5 py-3"
+							"size-full h-12 max-h-[20rem] overflow-y-auto rounded-md bg-secondary/20 px-5 py-3 dark:bg-background"
 						)}
 					/>
 				</div>

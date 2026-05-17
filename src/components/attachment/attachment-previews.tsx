@@ -40,10 +40,10 @@ export function AttachmentPreview({ attachment: { file, isUploading }, onRemoveC
 					alt="Attachment preview"
 					width={1200}
 					height={1200}
-					className="size-fit min-h-[80px] aspect-square rounded-2xl"
+					className="aspect-square size-fit min-h-[80px] rounded-2xl"
 				/>
 			) : (
-				<video controls className="size-fit min-h-[80px] aspect-square rounded-2xl">
+				<video controls className="aspect-square size-fit min-h-[80px] rounded-2xl">
 					<source src={src} type={file.type} />
 				</video>
 			)}
@@ -52,7 +52,7 @@ export function AttachmentPreview({ attachment: { file, isUploading }, onRemoveC
 				<button
 					onClick={onRemoveClicked}
 					title="Remove media"
-					className="absolute right-3 top-3 rounded-full bg-destructive p-1.5 text-destructive-foreground transition-colors hover:bg-foreground/60"
+					className="absolute top-3 right-3 rounded-full bg-destructive p-1.5 text-destructive-foreground transition-colors hover:bg-foreground/60"
 				>
 					<XIcon size={20} />
 				</button>

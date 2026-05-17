@@ -16,7 +16,7 @@ function TagsInputField({ field }: { field: ControllerRenderProps<NewsArticleSch
 			.split(",")
 			.map((t) => t.trim())
 			.filter(Boolean)
-			.map((t) => ({ name: slugify(t) } as TagSchema));
+			.map((t) => ({ name: slugify(t) }) as TagSchema);
 		field.onChange(tagsArray);
 	};
 	return (

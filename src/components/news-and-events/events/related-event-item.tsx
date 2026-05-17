@@ -28,28 +28,28 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 			size="sm"
 			onClick={() => startTransition(() => {})}
 			className={cn(
-				"px-2 py-1 bg-card transition-shadow hover:shadow-md dark:bg-muted hover:bg-muted hover:cursor-pointer group/item",
-				isPending && "bg-muted animate-pulse"
+				"group/item bg-card px-2 py-1 transition-shadow hover:cursor-pointer hover:bg-muted hover:shadow-md dark:bg-muted",
+				isPending && "animate-pulse bg-muted"
 			)}
 			asChild
 		>
 			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${item.slug}`)}>
 				{item.coverImage && (
-					<ItemMedia className="pointer-events-none overflow-hidden touch-auto w-full flex *:flex-1">
+					<ItemMedia className="pointer-events-none flex w-full touch-auto overflow-hidden *:flex-1">
 						<ArticleImage
 							mediaIdentifier={item.coverImage.url}
 							height={180}
 							width={180}
-							className="h-[110px] w-full object-cover transition-all group-hover/item:scale-110 "
+							className="h-[110px] w-full object-cover transition-all group-hover/item:scale-110"
 						/>
 					</ItemMedia>
 				)}
 				<ItemHeader className="flex-col items-start gap-0.5">
-					<ItemTitle className="border-b mb-1 group-hover/item:font-bold transition-all">{item.title}</ItemTitle>
-					<div className="text-xs block text-start space-x-2 space-y-1.5">
+					<ItemTitle className="mb-1 border-b transition-all group-hover/item:font-bold">{item.title}</ItemTitle>
+					<div className="block space-y-1.5 space-x-2 text-start text-xs">
 						{item.location && (
 							<address>
-								<MapPin className="size-4 inline-flex mr-0.5 fill-muted-foreground text-muted " />
+								<MapPin className="mr-0.5 inline-flex size-4 fill-muted-foreground text-muted" />
 								{item.location},
 							</address>
 						)}
@@ -57,7 +57,7 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 							{/* <StatusIcon className="mr-1" /> */}
 							{eventTag}
 						</Badge>
-						<span className="  uppercase">{period}</span>
+						<span className="uppercase">{period}</span>
 					</div>
 					<ItemDescription>
 						<TipTapViewer content={item.summary || item.description} />

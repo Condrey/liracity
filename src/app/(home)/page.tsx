@@ -11,7 +11,7 @@ import WhatWeStandFor from "./what-we-stand-for";
 
 export default function Home() {
 	return (
-		<PageContainer className="flex flex-col justify-start  px-0  pt-0 ">
+		<PageContainer className="flex flex-col justify-start px-0 pt-0">
 			{/* Hero section  */}
 			<Suspense fallback={<HeroSectionLoadingSkeleton />}>
 				<HeroSectionContainer />
@@ -19,14 +19,14 @@ export default function Home() {
 
 			{/* other sections  */}
 			{/* What we stand for  */}
-			<div className="border-y ">
+			<div className="border-y">
 				<WhatWeStandFor />
 			</div>
 
 			{/* Upcoming events  */}
 			<Suspense
 				fallback={
-					<div className="grid px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					<div className="grid gap-4 px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 						{Array.from({ length: 6 }, (_, index) => (
 							<EventsArticleContainerSkeleton key={index} />
 						))}
@@ -42,7 +42,7 @@ export default function Home() {
 			{/* Sample news articles  */}
 			<Suspense
 				fallback={
-					<div className="grid px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					<div className="grid gap-4 px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 						{Array.from({ length: 6 }, (_, index) => (
 							<NewsArticleContainerSkeleton key={index} />
 						))}

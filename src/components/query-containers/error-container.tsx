@@ -17,13 +17,13 @@ export default function ErrorContainer({ errorMessage, query }: ErrorContainerPr
 	return (
 		<div
 			className={cn(
-				"flex flex-col gap-4 min-h-[20rem] items-center justify-center ",
-				isMobile && "bg-destructive/10  rounded-md p-3",
-				"dark:bg-destructive/10  border-none dark:border dark:p-3"
+				"flex min-h-[20rem] flex-col items-center justify-center gap-4",
+				isMobile && "rounded-md bg-destructive/10 p-3",
+				"border-none dark:border dark:bg-destructive/10 dark:p-3"
 			)}
 		>
-			{!!errorMessage && <BanIcon strokeWidth={0.5} className="text-destructive size-32" />}
-			<p className="max-w-sm text-muted-foreground text-center">{errorMessage}</p>
+			{!!errorMessage && <BanIcon strokeWidth={0.5} className="size-32 text-destructive" />}
+			<p className="max-w-sm text-center text-muted-foreground">{errorMessage}</p>
 			<LoadingButton loading={query.isFetching} variant={"destructive"} onClick={() => query.refetch()}>
 				<Loader2Icon />
 				Refresh

@@ -31,12 +31,12 @@ export default function GeographyAndLandmarks({ entity }: GeographyAndLandmarksP
 					<ButtonAddEditGeographicalLandmarks
 						size={"icon"}
 						variant={"outline"}
-						className="flex-none m-2"
+						className="m-2 flex-none"
 						geographicalLandmarks={data?.geographicalLandmarks!}
 					>
 						<Edit3Icon />
 					</ButtonAddEditGeographicalLandmarks>
-					<TipTapViewer content={data?.geographicalLandmarks} className="text-pretty hyphens-auto text-justify z-0" />
+					<TipTapViewer content={data?.geographicalLandmarks} className="z-0 text-justify text-pretty hyphens-auto" />
 				</div>
 			)}
 		</>

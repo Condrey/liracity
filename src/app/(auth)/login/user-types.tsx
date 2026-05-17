@@ -15,7 +15,7 @@ export default function UserTypes() {
 	];
 	return (
 		<Tabs defaultValue={user || "civilian"}>
-			<TabsList className="w-full *:flex-1 ">
+			<TabsList className="w-full *:flex-1">
 				{users.map((u) => {
 					return (
 						<TabsTrigger value={u.user} key={u.user} onClick={() => updateSearchParamsAndNavigate(`user`, u.user)}>
@@ -24,21 +24,21 @@ export default function UserTypes() {
 					);
 				})}
 			</TabsList>
-			<p className="text-muted-foreground text-start w-full text-xs italic">
+			<p className="w-full text-start text-xs text-muted-foreground italic">
 				Choose the kind of user type below, either staff or civilian
 			</p>
 			<TabsContent
 				value="civilian"
-				className="md:bg-primary/5 dark:md:bg-secondary mt-6 md:backdrop-blur-2xl dark:md:border md:px-3 md:py-5 rounded-md"
+				className="mt-6 rounded-md md:bg-primary/5 md:px-3 md:py-5 md:backdrop-blur-2xl dark:md:border dark:md:bg-secondary"
 			>
-				<h1 className="text-muted-foreground text-xl w-full text-center  hidden sm:block">Civilian Login</h1>
+				<h1 className="hidden w-full text-center text-xl text-muted-foreground sm:block">Civilian Login</h1>
 				<UserLogin />
 			</TabsContent>
 			<TabsContent
 				value="staff"
-				className="md:bg-primary/5 dark:md:bg-secondary mt-6 md:backdrop-blur-2xl dark:md:border md:px-3 md:py-5 rounded-md"
+				className="mt-6 rounded-md md:bg-primary/5 md:px-3 md:py-5 md:backdrop-blur-2xl dark:md:border dark:md:bg-secondary"
 			>
-				<h1 className="text-muted-foreground text-xl w-full text-center hidden sm:block">Staff Member Login</h1>
+				<h1 className="hidden w-full text-center text-xl text-muted-foreground sm:block">Staff Member Login</h1>
 				<StaffLogin />
 			</TabsContent>
 		</Tabs>

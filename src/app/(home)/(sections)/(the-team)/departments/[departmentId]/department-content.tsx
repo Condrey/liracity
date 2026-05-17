@@ -9,39 +9,34 @@ import HeadOfDepartmentContainer from "@/components/head-of-department/head-of-d
 import DepartmentContainer from "./department-container";
 
 interface DepartmentContentProps {
-  department: DepartmentData;
+	department: DepartmentData;
 }
 
-export default function DepartmentContent({
-  department,
-}: DepartmentContentProps) {
-  const query = useQuery({
-    queryKey: ["department", department.id],
-    queryFn: async () => getDepartmentById(department.id),
-    initialData: department,
-    refetchOnWindowFocus: false,
-  });
+export default function DepartmentContent({ department }: DepartmentContentProps) {
+	const query = useQuery({
+		queryKey: ["department", department.id],
+		queryFn: async () => getDepartmentById(department.id),
+		initialData: department,
+		refetchOnWindowFocus: false
+	});
 
-  const { data, status } = query;
-  return (
-    <div>
-      {status === "error" ? (
-        <ErrorContainer
-          errorMessage="Failed to fetch department, please try again"
-          query={query}
-        />
-      ) : status === "success" && !data ? (
-        notFound()
-      ) : (
-        <div className="flex gap-3 justify-between w-full *:flex-1 *:h-fit ">
-          <DepartmentContainer department={data!} />
-          <HeadOfDepartmentContainer
-            employee={department.headOfDepartment}
-            departmentId={data?.id!}
-            className="lg:flex lg:flex-col hidden"
-          />
-        </div>
-      )}
-    </div>
-  );
+	const { data, status } = query;
+	return (
+		<div>
+			{status === "error" ? (
+				<ErrorContainer errorMessage="Failed to fetch department, please try again" query={query} />
+			) : status === "success" && !data ? (
+				notFound()
+			) : (
+				<div className="flex w-full justify-between gap-3 *:h-fit *:flex-1">
+					<DepartmentContainer department={data!} />
+					<HeadOfDepartmentContainer
+						employee={department.headOfDepartment}
+						departmentId={data?.id!}
+						className="hidden lg:flex lg:flex-col"
+					/>
+				</div>
+			)}
+		</div>
+	);
 }

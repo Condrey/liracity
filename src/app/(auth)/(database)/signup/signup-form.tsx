@@ -42,7 +42,7 @@ export default function SignUpForm() {
 		<>
 			{" "}
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="last:pt-6 space-y-4">
+				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 last:pt-6">
 					<FormField
 						control={form.control}
 						name="username"
@@ -87,15 +87,15 @@ export default function SignUpForm() {
 					</LoadingButton>
 				</form>
 			</Form>
-			<Agreement className="text-center mb-6" />
+			<Agreement className="mb-6 text-center" />
 			<Link
 				href={getNavigationLinkWithPathnameWithoutUpdate(`/login`)}
-				className="block text-center group/link hover:text-primary"
+				className="group/link block text-center hover:text-primary"
 			>
 				<span className="underline">
 					Already have an account? <strong>Login</strong>
 				</span>
-				<MoveRightIcon className="ms-2 group-hover/link:visible inline  invisible transition-all ease-in delay-200 " />
+				<MoveRightIcon className="invisible ms-2 inline transition-all delay-200 ease-in group-hover/link:visible" />
 			</Link>
 		</>
 	);

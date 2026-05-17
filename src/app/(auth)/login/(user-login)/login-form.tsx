@@ -46,7 +46,7 @@ export default function LoginForm() {
 	}
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="last:pt-6 space-y-4">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 last:pt-6">
 				<FormField
 					control={form.control}
 					name="username"
@@ -78,14 +78,14 @@ export default function LoginForm() {
 				</LoadingButton>
 				<Link
 					href={`/forgot-password/${form.watch("username")}?user=civilian`}
-					className="block text-center underline group/link hover:text-primary"
+					className="group/link block text-center underline hover:text-primary"
 					onClick={() => startLinkTransition(() => {})}
 				>
 					<span>Forgot your password?</span>
 					<MoveRightIcon
 						className={cn(
-							"inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",
-							isLinkPending && " visible animate-caret-blink"
+							"invisible ms-2 inline transition-all delay-200 ease-linear group-hover/link:visible",
+							isLinkPending && "visible animate-caret-blink"
 						)}
 					/>
 				</Link>

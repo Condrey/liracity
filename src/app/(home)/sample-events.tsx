@@ -11,20 +11,20 @@ export async function SampleEvents() {
 	const MAX_DISPLAY = 6;
 	if (!events.length) return null;
 	return (
-		<div className="gap-3 px-3 flex flex-col">
-			<h1 className="text-xl uppercase font-bold tracking-tighter">{webName} events</h1>
+		<div className="flex flex-col gap-3 px-3">
+			<h1 className="text-xl font-bold tracking-tighter uppercase">{webName} events</h1>
 			<ListOfEvents initialData={events} limit={limit} />
 			<Link
 				href={`/media/news-events`}
 				className={cn(
 					buttonVariants(),
-					"group/button max-w-fit w-full ms-auto",
+					"group/button ms-auto w-full max-w-fit",
 					events.length <= MAX_DISPLAY && "hidden"
 				)}
 			>
 				<span className="sr-only">View more events</span>
 				<span>View more events</span>
-				<MoveRightIcon className="group-hover/button:translate-x-2 transition-all duration-200" />
+				<MoveRightIcon className="transition-all duration-200 group-hover/button:translate-x-2" />
 			</Link>
 		</div>
 	);

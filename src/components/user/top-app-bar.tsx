@@ -12,21 +12,21 @@ export default async function TopAppBar({ className }: { className?: string }) {
 		<NavigationMenu
 			viewport={false}
 			className={cn(
-				"w-full h-12   flex justify-between shrink-0 items-center  gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
+				"flex h-12 w-full shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
 				className
 			)}
 		>
-			<NavigationMenuList className="flex gap-3 flex-wrap   ">
+			<NavigationMenuList className="flex flex-wrap gap-3">
 				{/* For small screens : section */}
-				<div className="flex items-center md:hidden  gap-2">
-					<SidebarTrigger className="-ml-1 " />
+				<div className="flex items-center gap-2 md:hidden">
+					<SidebarTrigger className="-ml-1" />
 					<Link href={"/"} passHref className="cursor-pointer">
-						<h2 className="  uppercase">{webName}</h2>
+						<h2 className="uppercase">{webName}</h2>
 					</Link>
 				</div>
 
 				{/* Logo area  */}
-				<NavigationMenuItem className="xl:block hidden shrink-0">
+				<NavigationMenuItem className="hidden shrink-0 xl:block">
 					<Link href={"/"} passHref>
 						<Image src={`/logo.png`} height={50} width={50} alt="logo" />
 					</Link>

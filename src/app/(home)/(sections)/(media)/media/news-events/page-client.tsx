@@ -41,12 +41,12 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 		<div className="h-[calc(100vh-var(--header-height))]">
 			<Tabs onValueChange={setTabValue} value={tabValue}>
 				{/* <pre>{JSON.stringify({ tabValue, defaultNewsEventsTabs }, null, 2)}</pre> */}
-				<SidebarProvider className="" defaultOpen={false} cookieName="NEWS_EVENT_SIDEBAR">
-					<SidebarInset className="space-y-6 ">
-						<header className="flex h-fit bg-background z-50  flex-col gap-2 sticky top-0 ">
+				<SidebarProvider defaultOpen={false} cookieName="NEWS_EVENT_SIDEBAR">
+					<SidebarInset className="space-y-6">
+						<header className="sticky top-0 z-50 flex h-fit flex-col gap-2 bg-background pt-4">
 							<PageTitle heading={title} className="px-3" />
-							<div className="flex items-center gap-2 shrink-0 border-y">
-								<div className=" flex px-3 bg-card w-full py-1 border-y">
+							<div className="flex shrink-0 items-center gap-2 border-y">
+								<div className="flex w-full border-y bg-card px-3 py-1">
 									<TabList setTabValue={setTabValue} />
 								</div>
 								{!sidebar.open && (
@@ -57,14 +57,11 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 							</div>
 						</header>
 
-						<TabListSwitchButton setTabValue={setTabValue} className="max-w-9xl mx-auto w-full" />
+						<TabListSwitchButton setTabValue={setTabValue} className="mx-auto w-full max-w-9xl" />
 
 						{/* list of news articles */}
-						<TabsContent
-							value="news"
-							className="space-y-4 px-3 w-full max-w-9xl mx-auto md:min-h-[65vh] min-h-[44vh]  "
-						>
-							<div className="space-x-2 flex items-center ">
+						<TabsContent value="news" className="mx-auto min-h-[44vh] w-full max-w-9xl space-y-4 px-3 md:min-h-[65vh]">
+							<div className="flex items-center space-x-2">
 								<ButtonAddEditNewsArticle>
 									<PlusIcon /> news
 								</ButtonAddEditNewsArticle>
@@ -73,7 +70,7 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 							</div>
 							<Suspense
 								fallback={
-									<div className="grid sm:grid-cols-2 w-full md:grid-cols-3 lg:grid-cols-4 gap-4">
+									<div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 										{Array.from({ length: 6 }, (_, index) => (
 											<NewsArticleContainerSkeleton key={index} />
 										))}
@@ -87,9 +84,9 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 						{/* list of events */}
 						<TabsContent
 							value="events"
-							className="space-y-4  px-3 w-full  max-w-9xl mx-auto md:min-h-[65vh] min-h-[44vh] "
+							className="mx-auto min-h-[44vh] w-full max-w-9xl space-y-4 px-3 md:min-h-[65vh]"
 						>
-							<div className="space-x-2 flex items-center ">
+							<div className="flex items-center space-x-2">
 								<ButtonAddEditEvent>
 									<PlusIcon /> event
 								</ButtonAddEditEvent>
@@ -99,7 +96,7 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 
 							<Suspense
 								fallback={
-									<div className="grid sm:grid-cols-2 w-full md:grid-cols-3 lg:grid-cols-4 gap-4">
+									<div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 										{Array.from({ length: 6 }, (_, index) => (
 											<EventsArticleContainerSkeleton key={index} />
 										))}

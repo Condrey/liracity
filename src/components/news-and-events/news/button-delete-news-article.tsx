@@ -65,12 +65,12 @@ export function DeleteNewsArticleDialog({ newsArticle, open, setOpen }: DeleteNe
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle className="text-destructive ">
+					<DialogTitle className="text-destructive">
 						<AlertTriangleIcon
-							className="inline mr-2 size-10 fill-destructive text-destructive-foreground  "
+							className="mr-2 inline size-10 fill-destructive text-destructive-foreground"
 							strokeWidth={0.8}
 						/>
-						<span className="uppercase line-clamp-1 text-ellipsis">Delete {newsArticle.title} newsArticle</span>
+						<span className="line-clamp-1 text-ellipsis uppercase">Delete {newsArticle.title} newsArticle</span>
 					</DialogTitle>
 					<DialogDescription>Dangerous! Please note that this action is irreversible</DialogDescription>
 				</DialogHeader>

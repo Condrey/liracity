@@ -155,12 +155,12 @@ export default function TipTapEditorWithHeader({
 	return (
 		<div
 			className={cn(
-				"flex size-full max-h-none md:max-h-[20rem] flex-col gap-y-3 overflow-y-auto rounded-md border border-input bg-background pb-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+				"flex size-full max-h-none flex-col gap-y-3 overflow-y-auto rounded-md border border-input bg-background pb-4 ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:max-h-[20rem]",
 				className
 			)}
 		>
 			{includeHeader && <TipTapEditorHeader editor={editor} />}
-			<EditorContent editor={editor} className="min-h-[100px] px-3 *:w-full *:h-full list-disc" />
+			<EditorContent editor={editor} className="min-h-[100px] list-disc px-3 *:h-full *:w-full" />
 		</div>
 	);
 }

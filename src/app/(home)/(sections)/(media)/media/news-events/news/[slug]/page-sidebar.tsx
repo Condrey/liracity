@@ -1,5 +1,6 @@
 import RelatedNewsArticleItem from "@/components/news-and-events/news/related-news-article-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
+import { Button } from "@/components/ui/button";
 import {
 	Sidebar,
 	SidebarContent,
@@ -7,17 +8,27 @@ import {
 	SidebarGroupContent,
 	SidebarGroupLabel,
 	SidebarHeader,
+	SidebarMenu,
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { NewsArticleData } from "@/lib/types";
+import { MenuIcon, XIcon } from "lucide-react";
 
 export function PageSidebar({
 	relatedArticles,
+	setOpen,
 	...props
-}: React.ComponentProps<typeof Sidebar> & { relatedArticles: NewsArticleData[] }) {
+}: React.ComponentProps<typeof Sidebar> & { relatedArticles: NewsArticleData[]; setOpen: (open: boolean) => void }) {
 	return (
-		<Sidebar variant="sidebar" {...props} className="">
-			<SidebarHeader>Related News Article</SidebarHeader>
+		<Sidebar variant="sidebar" {...props} className="pt-[var(--header-height)]">
+			<SidebarHeader className="flex-row items-center">
+				{
+					<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
+						<XIcon />
+					</Button>
+				}
+				Related News Article
+			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Browse Related News Articles</SidebarGroupLabel>

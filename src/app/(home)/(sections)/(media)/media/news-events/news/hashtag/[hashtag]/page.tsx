@@ -99,9 +99,11 @@ export default async function Page({ params }: PageProps) {
 	if (!newsArticles.length)
 		return (
 			<EmptyContainer message="You may not have the authorization to view the content of this tag, otherwise check your url for typing or pasting errors">
-				<h1 className="text-xl sm:text-2xl first-letter:text-destructive">#{decodedHashtag}</h1>
-				<div className={badgeVariants({ variant: "outline", className: "mt-12 flex gap-4 flex-wrap-reverse px-4 py-4" })}>
-					<p className=" block">Try to choose from other hashtags</p>
+				<h1 className="text-xl first-letter:text-destructive sm:text-2xl">#{decodedHashtag}</h1>
+				<div
+					className={badgeVariants({ variant: "outline", className: "mt-12 flex flex-wrap-reverse gap-4 px-4 py-4" })}
+				>
+					<p className="block">Try to choose from other hashtags</p>
 					<div className="flex flex-wrap gap-1">
 						{otherHashTags.map((t) => (
 							<HashtagItem key={t.id} hashtag={t} />

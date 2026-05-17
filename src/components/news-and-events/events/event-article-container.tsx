@@ -38,8 +38,8 @@ export default function EventsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"p-0 pb-6 cursor-pointer  flex flex-col  hover:shadow-md  ",
-				" justify-start items-start  aspect-video",
+				"flex cursor-pointer flex-col p-0 pb-6 hover:shadow-md",
+				"aspect-video items-start justify-start",
 				isPending && "animate-pulse",
 				mouseEntered && "shadow-md",
 				className
@@ -51,7 +51,7 @@ export default function EventsArticleContainer({
 		>
 			<Link
 				href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${slug}`)}
-				className="size-full relative flex flex-col overflow-hidden  items-stretch "
+				className="relative flex size-full flex-col items-stretch overflow-hidden"
 			>
 				<ArticleImage
 					mediaIdentifier={coverImage?.url!}
@@ -59,34 +59,36 @@ export default function EventsArticleContainer({
 					width={500}
 					height={600}
 					className={cn(
-						" w-full opacity-15  aspect-video bg-cover touch-none pointer-events-none rounded-sm object-cover",
+						"pointer-events-none aspect-video w-full touch-none rounded-sm bg-cover object-cover opacity-15",
 						mouseEntered && "scale-110 transition-all duration-300"
 					)}
 				/>
-				<ItemContent className="p-3  backdrop-blur-sm flex-1 absolute">
-					<ItemFooter className="gap-1 flex  space-x-1 flex-wrap justify-start">
-						{isNotVisitor && (
-							<Badge variant={variant}>
-								<Icon />
-								{eventStatus}
-							</Badge>
-						)}
-						<span className="text-muted-foreground inline *:inline text-sm">
-							<MapPinIcon className="size-4.5 inline fill-muted-foreground text-card" />
-							{location}
-						</span>
-						<p>
-							<span className="text-xs capitalize">{period}</span>
-						</p>
-					</ItemFooter>
-					<ItemTitle className={cn("line-clamp-2", mouseEntered && "scale-105 transition-all duration-200")}>
-						{title}
-					</ItemTitle>
-					<ItemDescription>
-						<TipTapViewer content={summary ?? description} />
-					</ItemDescription>
-				</ItemContent>
-				<Badge className={cn("absolute  bottom-0 right-0")} variant={isPastEvent ? "destructive" : "success"}>
+				<div className="absolute size-full flex-1 p-3 backdrop-blur-sm">
+					<ItemContent>
+						<ItemFooter className="flex flex-wrap justify-start gap-1 space-x-1">
+							{isNotVisitor && (
+								<Badge variant={variant}>
+									<Icon />
+									{eventStatus}
+								</Badge>
+							)}
+							<span className="inline text-sm text-muted-foreground *:inline">
+								<MapPinIcon className="inline size-4.5 fill-muted-foreground text-card" />
+								{location}
+							</span>
+							<p>
+								<span className="text-xs capitalize">{period}</span>
+							</p>
+						</ItemFooter>
+						<ItemTitle className={cn("line-clamp-2", mouseEntered && "scale-105 transition-all duration-200")}>
+							{title}
+						</ItemTitle>
+						<ItemDescription>
+							<TipTapViewer content={summary ?? description} />
+						</ItemDescription>
+					</ItemContent>
+				</div>
+				<Badge className={cn("absolute right-0 bottom-0")} variant={isPastEvent ? "destructive" : "success"}>
 					<CalendarIcon className="" />
 					{eventTag}
 				</Badge>
@@ -95,10 +97,10 @@ export default function EventsArticleContainer({
 					loading={isPending}
 					variant={isPastEvent ? "destructive" : "default"}
 					className={cn(
-						"hidden absolute  ",
-						"max-w-fit  max-h-fit m-auto  size-full py-3",
-						"-translate-x-1/2 top-1/2 -translate-y-1/2 start-1/2",
-						(isPending || mouseEntered) && "block animate-in ease-in duration-500"
+						"absolute hidden",
+						"m-auto size-full max-h-fit max-w-fit py-3",
+						"start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+						(isPending || mouseEntered) && "block animate-in duration-500 ease-in"
 					)}
 				>
 					Read more...

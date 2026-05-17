@@ -26,7 +26,7 @@ export default function ArticleImage({
 	...props
 }: ArticleImageProps) {
 	return (
-		<Zoom key={mediaIdentifier}>
+		<Zoom key={mediaIdentifier} a11yNameButtonUnzoom="Minimize" a11yNameButtonZoom="Expand">
 			<Image
 				src={mediaIdentifier || placeholder}
 				alt={alt || ""}

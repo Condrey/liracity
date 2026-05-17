@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group";
 import LoadingButton from "@/components/ui/loading-button";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
 import Footer from "@/components/user/footer";
 import { EventStatus, Role } from "@/generated/prisma";
@@ -23,7 +23,7 @@ import { EventData } from "@/lib/types";
 import { getEventStatusAndPeriod } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { formatDate, isAfter } from "date-fns";
-import { Edit3Icon, MapPin, MoveLeftIcon, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MapPin, MenuIcon, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
@@ -39,6 +39,7 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 	const { user } = useSession();
 	const isAPublisher = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 	const [isPending, startTransition] = useTransition();
+	const sidebar = useSidebar();
 
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 	const query = useQuery({
@@ -58,54 +59,60 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 		mutate({ eventId: data?.id!, status });
 	}
 	return (
-		<SidebarProvider>
-			<SidebarInset className="">
-				<header className="flex flex-wrap min-h-16 shrink-0 items-center gap-2 border-b px-2">
-					<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
-						<Link
-							className="flex items-center gap-0.5 flex-row"
-							href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
-						>
-							<MoveLeftIcon />
-							<TypographyH4 title="News & Events" />
-						</Link>
-					</LoadingButton>
-					{isAPublisher && (
-						<ButtonGroup className="max-w-fit mx-auto items-center w-full">
-							{mutationPending && <Spinner />}
-							<Button
-								variant={isADraft ? "default" : "destructive"}
-								onClick={() => onStatusChange(isADraft ? EventStatus.PUBLISHED : EventStatus.DRAFT)}
+		<div className="h-[calc(100vh-var(--header-height))] overflow-y-auto">
+			<SidebarProvider>
+				<SidebarInset className="">
+					<header className="sticky top-0 z-50 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
+						<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
+							<Link
+								className="flex flex-row items-center gap-0.5"
+								href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
 							>
-								{isADraft ? "Publish it" : "Unpublish it"} it
+								<MoveLeftIcon />
+								<TypographyH4 title="News & Events" />
+							</Link>
+						</LoadingButton>
+						{isAPublisher && (
+							<ButtonGroup className="mx-auto w-full max-w-fit items-center">
+								{mutationPending && <Spinner />}
+								<Button
+									variant={isADraft ? "default" : "destructive"}
+									onClick={() => onStatusChange(isADraft ? EventStatus.PUBLISHED : EventStatus.DRAFT)}
+								>
+									{isADraft ? "Publish it" : "Unpublish it"} it
+								</Button>
+								<ButtonGroupSeparator />
+								<Button
+									disabled={data.status === EventStatus.PRIVATE}
+									variant="default"
+									onClick={() => onStatusChange(EventStatus.PRIVATE)}
+								>
+									Mark as Private
+								</Button>
+								<ButtonGroupSeparator />
+								<Button
+									disabled={data.status === EventStatus.CANCELLED}
+									variant={"destructive"}
+									onClick={() => onStatusChange(EventStatus.CANCELLED)}
+								>
+									Cancel it
+								</Button>
+							</ButtonGroup>
+						)}
+						{!sidebar.open && (
+							<Button variant="warning" size={"icon-lg"} onClick={() => sidebar.setOpen(!sidebar.open)}>
+								<MenuIcon />
 							</Button>
-							<ButtonGroupSeparator />
-							<Button
-								disabled={data.status === EventStatus.PRIVATE}
-								variant="default"
-								onClick={() => onStatusChange(EventStatus.PRIVATE)}
-							>
-								Mark as Private
-							</Button>
-							<ButtonGroupSeparator />
-							<Button
-								disabled={data.status === EventStatus.CANCELLED}
-								variant={"destructive"}
-								onClick={() => onStatusChange(EventStatus.CANCELLED)}
-							>
-								Cancel it
-							</Button>
-						</ButtonGroup>
-					)}
-					<SidebarTrigger className="-mr-1 ml-auto rotate-180" />
-				</header>
-				<div className="flex flex-1 flex-col gap-4 p-4 max-w-5xl w-full mx-auto">
-					<EventContent event={data} />
-				</div>
-				<Footer />
-			</SidebarInset>
-			<PageSidebar side="right" relatedEvents={relatedEvents} />
-		</SidebarProvider>
+						)}{" "}
+					</header>
+					<div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-4 p-4">
+						<EventContent event={data} />
+					</div>
+					<Footer />
+				</SidebarInset>
+				<PageSidebar side="right" relatedEvents={relatedEvents} setOpen={sidebar.setOpen} sidebar={sidebar} />
+			</SidebarProvider>
+		</div>
 	);
 }
 interface EventContentProps {
@@ -135,14 +142,14 @@ function EventContent({ event }: EventContentProps) {
 		<article className="space-y-12">
 			<header>
 				<PageTitle heading={title} className="flex-wrap">
-					<ButtonAddEditEvent size={"icon"} event={event} className="flex-none ">
+					<ButtonAddEditEvent size={"icon"} event={event} className="flex-none">
 						<Edit3Icon />
 					</ButtonAddEditEvent>
-					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"} className="flex-none ">
+					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"} className="flex-none">
 						<Trash2Icon />
 					</ButtonDeleteEvent>
 				</PageTitle>
-				<div className="flex gap-2 flex-wrap items-center mb-2">
+				<div className="mb-2 flex flex-wrap items-center gap-2">
 					<Badge variant={variant}>
 						{/* <StatusIcon className="mr-1" /> */}
 						{eventStatus}
@@ -151,7 +158,7 @@ function EventContent({ event }: EventContentProps) {
 					<div className="flex flex-wrap">
 						{location && (
 							<address>
-								<MapPin className="fill-muted-foreground inline-flex text-muted mr-0.5" />
+								<MapPin className="mr-0.5 inline-flex fill-muted-foreground text-muted" />
 								{location},
 							</address>
 						)}
@@ -175,14 +182,14 @@ function EventContent({ event }: EventContentProps) {
 			<section>
 				<TipTapViewer
 					content={description}
-					className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+					className="text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed"
 				/>
 			</section>
 
 			{!!media && !!media.length && (
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the event" className="uppercase" />
-					<div className=" grid sm:grid-cols-2 md:grid-cols-3  gap-2">
+					<div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
 						{media.map((medium) => {
 							if (medium.type === "IMAGE")
 								return (
@@ -192,7 +199,7 @@ function EventContent({ event }: EventContentProps) {
 										alt="other graphic"
 										height={1080}
 										width={1920}
-										className=" aspect-video "
+										className="aspect-video"
 									/>
 								);
 						})}
@@ -201,10 +208,10 @@ function EventContent({ event }: EventContentProps) {
 			)}
 			{!!summary && (
 				<section>
-					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase " />
+					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase" />
 					<TipTapViewer
 						content={summary}
-						className="text-justify hyphens-auto leading-tight md:leading-relaxed md:text-xl"
+						className="text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed"
 					/>
 				</section>
 			)}

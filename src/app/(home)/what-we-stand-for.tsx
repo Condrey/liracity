@@ -10,20 +10,20 @@ const md = markdownIt("commonmark", { html: false });
 
 export default function WhatWeStandFor() {
 	return (
-		<div className="flex   w-full me-auto pb-3 gap-4">
+		<div className="me-auto flex w-full gap-4 pb-3">
 			{/* <div className="hidden aspect-square md:flex h-[250px] w-[300px] bg-card">
 				<Image src={`/logo.png`} alt="logo" height={250} width={300} />
 			</div> */}
 
-			<Tabs defaultValue="vision" className=" w-full rounded-md space-y-4">
+			<Tabs defaultValue="vision" className="w-full space-y-4 rounded-md">
 				{/* <div className="space-y-1 mb-4">
 					<TypographyH3 title={webName} className=" uppercase text-balance text-start" />
 					<h4 className="text-sm text-muted-foreground">Vision, mission, mandate, e.t.c </h4>
 				</div> */}
-				<div className="bg-card px-3 border-y py-1">
-					<TabsList className="w-full h-fit sm:h-9 *:h-8 *:flex-1 gap-1  max-w-4xl [&_svg]:size-4 [&_svg]:hidden sm:[&_svg]:block flex-wrap ">
+				<div className="border-y bg-card px-3 py-1">
+					<TabsList className="h-fit w-full max-w-4xl flex-wrap gap-1 *:h-8 *:flex-1 sm:h-9 [&_svg]:hidden [&_svg]:size-4 sm:[&_svg]:block">
 						<TabsTrigger value="vision">
-							<LightbulbIcon className="hidden sm:block " />
+							<LightbulbIcon className="hidden sm:block" />
 							Vision
 						</TabsTrigger>
 						<TabsTrigger value="mission">
@@ -46,12 +46,12 @@ export default function WhatWeStandFor() {
 						<TabsContent
 							key={key}
 							value={key}
-							className="w-full px-3 text-justify space-y-3 max-w-prose text-pretty  hyphens-auto"
+							className="w-full max-w-prose space-y-3 px-3 text-justify text-pretty hyphens-auto"
 						>
-							<div className="text-muted-foreground flex gap-0.5 flex-wrap text-xs">
+							<div className="flex flex-wrap gap-0.5 text-xs text-muted-foreground">
 								Tap on these <strong>tabs</strong> above to view more. e.g., on{" "}
 								<span className="flex items-center">
-									"<RocketIcon className="size-3 mr-1" /> Mission"
+									"<RocketIcon className="mr-1 size-3" /> Mission"
 								</span>
 							</div>
 
@@ -70,11 +70,11 @@ export default function WhatWeStandFor() {
 									<CopyIcon /> Copy
 								</Button>
 								<p className="first-letter:capitalize">
-									<span className="italic font-medium tracking-tighter text-muted-foreground">{key}</span>{" "}
-									<span className="text-start font-medium text-muted-foreground tracking-tighter">| {webName}</span>{" "}
+									<span className="font-medium tracking-tighter text-muted-foreground italic">{key}</span>{" "}
+									<span className="text-start font-medium tracking-tighter text-muted-foreground">| {webName}</span>{" "}
 									<span
 										dangerouslySetInnerHTML={{ __html: md.render(value) }}
-										className="whitespace-pre-line md:whitespace-normal text-sm tracking-normal text-pretty hyphens-auto"
+										className="text-sm tracking-normal text-pretty hyphens-auto whitespace-pre-line md:whitespace-normal"
 									/>
 								</p>
 							</div>

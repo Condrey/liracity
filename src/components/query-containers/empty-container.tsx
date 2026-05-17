@@ -14,14 +14,14 @@ export default function EmptyContainer({ message, children, className }: EmptyCo
 	return (
 		<div
 			className={cn(
-				"flex flex-col  gap-4 min-h-[20rem] items-center justify-center",
-				isMobile && "bg-muted rounded-md p-3",
-				"dark:bg-muted border-none dark:border dark:p-3",
+				"flex min-h-[20rem] flex-col items-center justify-center gap-4",
+				isMobile && "rounded-md bg-muted p-3",
+				"border-none dark:border dark:bg-muted dark:p-3",
 				className
 			)}
 		>
-			{!!message && <MessageSquareMoreIcon strokeWidth={0.5} className="text-muted-foreground size-32" />}
-			<p className="max-w-sm text-muted-foreground text-center">{message}</p>
+			{!!message && <MessageSquareMoreIcon strokeWidth={0.5} className="size-32 text-muted-foreground" />}
+			<p className="max-w-sm text-center text-muted-foreground">{message}</p>
 			{children}
 		</div>
 	);

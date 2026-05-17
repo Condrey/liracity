@@ -22,7 +22,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma";
 import { SEARCH_PARAMS_NEWS_EVENTS } from "@/lib/constants";
 import { myPrivileges } from "@/lib/enums";
-import { CalendarIcon, ChevronRightIcon, LucideIcon, MenuIcon, NewspaperIcon } from "lucide-react";
+import { CalendarIcon, ChevronRightIcon, LucideIcon, MenuIcon, NewspaperIcon, XIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
@@ -153,8 +153,8 @@ export function PageSidebar({
 		<Sidebar variant="inset" collapsible="offcanvas" className="pt-[var(--header-height)]" {...props}>
 			<SidebarHeader className="flex-row items-center">
 				{
-					<Button className="" variant={"default"} onClick={() => setOpen(false)}>
-						<MenuIcon />
+					<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
+						<XIcon />
 					</Button>
 				}
 				Navigation

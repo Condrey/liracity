@@ -21,17 +21,17 @@ export default function DepartmentalSectorContainer({ departmentalSector: sector
 	const href = getNavigationLinkWithoutUpdate(`/${sector.id}`);
 	// include avatar of at least 3 available staffs
 	return (
-		<Item variant={"muted"} className="font-semibold border p-2 rounded-md ">
+		<Item variant={"muted"} className="rounded-md border p-2 font-semibold">
 			<ItemHeader>
 				<div>
-					<ItemTitle className='capitalize w-full tracking-tight sm:after:content-["_sector"]'>{sector.name}</ItemTitle>
+					<ItemTitle className='w-full tracking-tight capitalize sm:after:content-["_sector"]'>{sector.name}</ItemTitle>
 					<ItemDescription>
-						<span className="font-normal text-sm capitalize">
+						<span className="text-sm font-normal capitalize">
 							{!numberOfStaffs ? (
 								"No staff added yet"
 							) : (
 								<div className="flex items-center gap-1.5">
-									<div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+									<div className="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
 										{sector.employees.slice(0, 7).map((staff) => (
 											<UserAvatar avatarUrl={staff.user.avatarUrl} size={24} />
 										))}
@@ -44,7 +44,7 @@ export default function DepartmentalSectorContainer({ departmentalSector: sector
 				</div>
 				<DropDownMenuDepartmentalSector
 					sector={sector}
-					className="w-fit min-w-fit shrink-0 flex-none flex  float-right"
+					className="float-right flex w-fit min-w-fit flex-none shrink-0"
 				/>
 			</ItemHeader>
 			<ItemContent>
@@ -57,7 +57,7 @@ export default function DepartmentalSectorContainer({ departmentalSector: sector
 					<LoadingButton
 						onClick={() => startTransition(() => {})}
 						loading={isPending}
-						className="w-full max-w-fit ms-auto my-2"
+						className="my-2 ms-auto w-full max-w-fit"
 						asChild
 					>
 						<Link href={href}>View more</Link>

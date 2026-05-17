@@ -65,7 +65,7 @@ function MediaPreview({ mediaItem, isSelected, onSelect }: MediaPreviewProps) {
 		<div className={cn("relative cursor-pointer bg-secondary", isSelected && "outline outline-primary")}>
 			<ArticleImage mediaIdentifier={imageUrl} alt={mediaItem.id} width={100} height={100} onMouseEnter={onSelect} />
 			{imageUrl && (
-				<span className="absolute left-1/2 top-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/40">
+				<span className="absolute top-1/2 left-1/2 flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black/40">
 					<PlayIcon className="size-5 text-white/60" />
 				</span>
 			)}

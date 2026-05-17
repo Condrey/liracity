@@ -16,8 +16,8 @@ interface UserTooltipProps extends PropsWithChildren {
 }
 
 export default function UserTooltip({ user, children }: UserTooltipProps) {
-	const {getNavigationLinkWithPathnameWithoutUpdate} = useCustomSearchParams()
-	const userDetailsUrl = getNavigationLinkWithPathnameWithoutUpdate(`/users/${user.username}`)
+	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
+	const userDetailsUrl = getNavigationLinkWithPathnameWithoutUpdate(`/users/${user.username}`);
 	const { user: loggedInUser } = useSession();
 	//   const followerState: FollowerInfo = {
 	//     followersCount: user._count.followers,
@@ -30,7 +30,7 @@ export default function UserTooltip({ user, children }: UserTooltipProps) {
 			<Tooltip>
 				<TooltipTrigger asChild>{children}</TooltipTrigger>
 				<TooltipContent className="outline">
-					<div className="flex  max-w-80 flex-col gap-3 break-words px-1 py-2.5 md:min-w-52">
+					<div className="flex max-w-80 flex-col gap-3 px-1 py-2.5 break-words md:min-w-52">
 						<div className="flex items-center justify-between gap-2">
 							<Link href={userDetailsUrl}>
 								<UserAvatar size={70} avatarUrl={user.avatarUrl} />

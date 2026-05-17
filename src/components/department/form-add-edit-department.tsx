@@ -69,7 +69,7 @@ export default function FormAddEditDepartment({ open, setOpen, departmentToEdit 
 							</FormItem>
 						)}
 					/>
-					<div className="flex w-full justify-end items-center gap-4">
+					<div className="flex w-full items-center justify-end gap-4">
 						<LoadingButton loading={isPending} disabled={!form.formState.isDirty}>
 							{departmentToEdit ? "Update department" : "Add department"}
 						</LoadingButton>

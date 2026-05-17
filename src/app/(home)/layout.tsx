@@ -25,16 +25,16 @@ export default async function Layout({ children }: { children: React.ReactNode }
 					} as React.CSSProperties
 				}
 			>
-				<SidebarProvider className="flex flex-col ">
-					<header className="sticky top-0 z-50  w-full dark:bg-card bg-primary text-primary-foreground dark:text-card-foreground  dark:border-b">
-						<TopAppBar className="w-full max-w-9xl  py-2 mx-auto  px-3 " />
+				<SidebarProvider className="flex flex-col">
+					<header className="sticky top-0 z-50 w-full bg-primary text-primary-foreground dark:border-b dark:bg-card dark:text-card-foreground">
+						<TopAppBar className="mx-auto w-full max-w-9xl px-3 py-2" />
 					</header>
-					<div className="flex flex-1 size-full ">
+					<div className="flex size-full flex-1">
 						<AppSidebar />
 						<SidebarInset>
-							<div className=" h-full overflow-hidden  w-full">
-								<main className=" size-full   overflow-y-auto scroll-auto flex flex-col gap-8 ">
-									<div className="h-full  mx-auto w-full   ">{children}</div>
+							<div className="h-full w-full overflow-hidden">
+								<main className="flex size-full flex-col gap-8 overflow-y-auto scroll-auto">
+									<div className="mx-auto h-full w-full">{children}</div>
 								</main>
 							</div>
 						</SidebarInset>

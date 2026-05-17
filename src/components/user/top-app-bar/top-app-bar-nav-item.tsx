@@ -26,7 +26,7 @@ export function NavigationMenuItemContent({ nav, array, index }: NavigationMenuI
 	return (
 		<NavigationMenuItem
 			key={parentLink}
-			className={cn("hidden  md:flex", !nav.showOnMediumScreen && "md:hidden lg:flex")}
+			className={cn("hidden md:flex", !nav.showOnMediumScreen && "md:hidden lg:flex")}
 		>
 			{!!nav.children?.length ? (
 				<>
@@ -36,20 +36,20 @@ export function NavigationMenuItemContent({ nav, array, index }: NavigationMenuI
 					>
 						<ul
 							className={cn(
-								"grid gap-3 p-4 md:w-[400px]  lg:w-[500px] lg:grid-cols-[.75fr_1fr]",
-								alignRight && "flex flex-col *:break-all "
+								"grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]",
+								alignRight && "flex flex-col *:break-all"
 							)}
 						>
 							{!alignRight && (
 								<li className="row-span-3">
 									<NavigationMenuLink asChild>
 										<Link
-											className="flex flex-row h-full items-center lg:justify-center w-full select-none lg:flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+											className="flex h-full w-full flex-row items-center justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none select-none focus:shadow-md lg:flex-col lg:justify-center"
 											href={parentLink}
 										>
 											{Icon && <Icon className="size-16" strokeWidth={0.5} />}
 											<div className="flex flex-col lg:items-center lg:*:text-center">
-												<div className="mb-2 mt-4 text-lg font-medium tracking-tight uppercase">{nav.title}</div>
+												<div className="mt-4 mb-2 text-lg font-medium tracking-tight uppercase">{nav.title}</div>
 												<p className="text-sm leading-tight text-muted-foreground">{nav.description}</p>
 											</div>
 										</Link>
@@ -94,12 +94,12 @@ function ListItem({ className, title, children, href, startTransition }: ListIte
 					passHref
 					href={newUrl}
 					className={cn(
-						"block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+						"block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
 						className
 					)}
 					onClick={() => startTransition(() => {})}
 				>
-					<div className="text-sm font-medium leading-none uppercase tracking-tight">{title}</div>
+					<div className="text-sm leading-none font-medium tracking-tight uppercase">{title}</div>
 					<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
 				</Link>
 			</NavigationMenuLink>

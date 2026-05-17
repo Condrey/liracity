@@ -25,7 +25,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 			return <DataTableColumnHeader column={column} title="#" />;
 		},
 		cell({ row }) {
-			return <span className="text-muted-foreground slashed-zero  proportional-nums ">{row.index + 1}</span>;
+			return <span className="text-muted-foreground proportional-nums slashed-zero">{row.index + 1}</span>;
 		}
 	},
 	{
@@ -56,12 +56,12 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 							{user.isVerified && <VerifiedIcon className="inline size-4 fill-success text-success-foreground" />}
 						</div>
 						{user.telephone && user.email ? (
-							<div className="flex text-muted-foreground items-center text-xs ">
-								<Link href={`mailto:${user.email}`} className="hover:text-primary underline">
+							<div className="flex items-center text-xs text-muted-foreground">
+								<Link href={`mailto:${user.email}`} className="underline hover:text-primary">
 									{user.email}
 								</Link>
 								<DotIcon />
-								<Link href={`tel:${user.telephone}`} className="hover:text-primary underline">
+								<Link href={`tel:${user.telephone}`} className="underline hover:text-primary">
 									{user.telephone}
 								</Link>
 							</div>
@@ -83,13 +83,13 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 			const { user } = useSession();
 			const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
 			return (
-				<div className="hidden sm:flex flex-col ">
+				<div className="hidden flex-col sm:flex">
 					<div>{position?.jobTitle}</div>
-					<div className="text-muted-foreground text-xs">
+					<div className="text-xs text-muted-foreground">
 						{assumedOffice} - {endedOffice || "Now"}
 					</div>
 					{isAuthorized && (
-						<div className="text-muted-foreground text-xs">
+						<div className="text-xs text-muted-foreground">
 							IPPS NUMBER:{" "}
 							<strong>
 								<TooltipProvider>
@@ -100,7 +100,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 													navigator.clipboard.writeText(ippsNumber);
 													toast.success("Copied IPPS number to clipboard");
 												}}
-												className="slashed-zero proportional-nums text-card-foreground underline hover:text-primary"
+												className="text-card-foreground proportional-nums slashed-zero underline hover:text-primary"
 											>
 												{ippsNumber}
 											</button>
@@ -130,7 +130,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 			const employee = row.original;
 			const url = getNavigationLinkWithoutUpdate("/" + employee.id);
 			return (
-				<div className="flex gap-2 items-center">
+				<div className="flex items-center gap-2">
 					{isAuthorized ? (
 						<DropDownMenuEmployee employee={employee} />
 					) : (

@@ -1,14 +1,4 @@
-import {
-	BlocksIcon,
-	BriefcaseBusinessIcon,
-	FilmIcon,
-	HomeIcon,
-	InfoIcon,
-	LucideIcon,
-	MailPlusIcon,
-	RadioTowerIcon,
-	TrophyIcon
-} from "lucide-react";
+import { BlocksIcon, FilmIcon, HomeIcon, InfoIcon, LucideIcon, MailPlusIcon } from "lucide-react";
 
 export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
@@ -173,14 +163,14 @@ export const navLinks: NavLinkGroup[] = [
 		// children: cityAboutLinks,
 		showOnMediumScreen: true
 	},
-	{
-		title: "City Services",
-		href: "/services",
-		description: "Access services offered by the Lira City Council.",
-		icon: RadioTowerIcon,
-		children: cityServicesLinks,
-		showOnMediumScreen: false
-	},
+	// {
+	// 	title: "City Services",
+	// 	href: "/services",
+	// 	description: "Access services offered by the Lira City Council.",
+	// 	icon: RadioTowerIcon,
+	// 	children: cityServicesLinks,
+	// 	showOnMediumScreen: false
+	// },
 	{
 		title: "The team",
 		href: "/the-team",
@@ -197,22 +187,22 @@ export const navLinks: NavLinkGroup[] = [
 		children: cityMediaCenterLinks,
 		showOnMediumScreen: false
 	},
-	{
-		title: "Opportunities",
-		href: "/opportunities",
-		description: "Explore opportunities to grow and serve.",
-		icon: BriefcaseBusinessIcon,
-		children: cityOpportunityLinks,
-		showOnMediumScreen: true
-	},
-	{
-		title: "Sports & Recreation",
-		href: "/sports",
-		description: "Engage in sports and recreational activities in Lira.",
-		icon: TrophyIcon,
-		children: citySportsAndReactionLinks,
-		showOnMediumScreen: true
-	},
+	// {
+	// 	title: "Opportunities",
+	// 	href: "/opportunities",
+	// 	description: "Explore opportunities to grow and serve.",
+	// 	icon: BriefcaseBusinessIcon,
+	// 	children: cityOpportunityLinks,
+	// 	showOnMediumScreen: true
+	// },
+	// {
+	// 	title: "Sports & Recreation",
+	// 	href: "/sports",
+	// 	description: "Engage in sports and recreational activities in Lira.",
+	// 	icon: TrophyIcon,
+	// 	children: citySportsAndReactionLinks,
+	// 	showOnMediumScreen: true
+	// },
 	{
 		title: "Get Involved",
 		href: "/contact-us",

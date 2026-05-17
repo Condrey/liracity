@@ -22,7 +22,7 @@ export default function TabList({ setTabValue }: { setTabValue: (tabValue: strin
 	}
 
 	return (
-		<TabsList className="w-full mx-auto max-w-4xl">
+		<TabsList className="mx-auto w-full max-w-4xl">
 			{listOfTriggers.map(({ name, value }) => (
 				<TabsTrigger key={name} value={name} onClick={() => handleClickEvent(name)}>
 					{value}
@@ -47,10 +47,10 @@ export function TabListSwitchButton({
 		navigateOnclick(SEARCH_PARAMS_NEWS_EVENTS, name);
 	}
 	return (
-		<div className={cn("flex px-3 items-center", className)}>
+		<div className={cn("flex items-center px-3", className)}>
 			<button
 				// loading={isPending}
-				className="underline text-primary  flex gap-2 items-center"
+				className="flex items-center gap-2 text-primary underline"
 				// variant={"link"}
 				// size={"lg"}
 				onClick={() => startTransition(() => handleClickEvent(searchParamsForTabs === "news" ? "events" : "news"))}

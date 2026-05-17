@@ -9,7 +9,13 @@ export function PageTitle({ heading, children, className }: PageTitleProps) {
 	return (
 		<div className={cn("flex gap-1", className)}>
 			{children}
-			<h1 className={cn("text-2xl mb-1.5 font-black md:font-bold md:capitalize tracking-tight md:tracking-tighter leading-tight md:leading-normal uppercase")}>{heading}</h1>
+			<h1
+				className={cn(
+					"mb-1.5 text-2xl leading-tight font-black tracking-tight uppercase md:leading-normal md:font-bold md:tracking-tighter md:capitalize"
+				)}
+			>
+				{heading}
+			</h1>
 		</div>
 	);
 }
@@ -19,7 +25,7 @@ interface PageDescriptionProps {
 	className?: string;
 }
 export function PageDescription({ paragraph, className }: PageDescriptionProps) {
-	return <p className={cn("max-w-3xl tracking-wide text-justify hyphens-auto w-full ", className)}>{paragraph}</p>;
+	return <p className={cn("w-full max-w-3xl text-justify tracking-wide hyphens-auto", className)}>{paragraph}</p>;
 }
 
 interface TypographyH1Props {

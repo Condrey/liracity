@@ -14,8 +14,8 @@ export default async function Page() {
 	const departments = await getAllDepartmentList();
 	return (
 		<div className="">
-			<div className="space-y-2 max-w-fit mx-auto">
-				<div className="flex gap-3 items-center justify-between">
+			<div className="mx-auto max-w-fit space-y-2">
+				<div className="flex items-center justify-between gap-3">
 					<PageTitle heading={title} />
 					<ButtonAddEditDepartment>Add department</ButtonAddEditDepartment>
 				</div>

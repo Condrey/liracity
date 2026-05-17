@@ -17,7 +17,7 @@ export default async function Page() {
 	});
 	return (
 		<div className="max-w-7xl px-0">
-			<div className="space-y-2 max-w-3xl w-full me-auto">
+			<div className="me-auto w-full max-w-3xl space-y-2">
 				<PageTitle heading={`${title}/ Organography`} />
 				<PageDescription paragraph={pageDescription} className="me-auto" />
 			</div>

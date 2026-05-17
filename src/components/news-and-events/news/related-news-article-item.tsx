@@ -10,6 +10,7 @@ import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Link from "next/link";
 import { useTransition } from "react";
 
@@ -26,32 +27,42 @@ export default function RelatedNewsArticleItem({ relatedNewsArticle: item }: { r
 			size="sm"
 			onClick={() => startTransition(() => {})}
 			className={cn(
-				"px-2 py-1 bg-card dark:bg-muted hover:bg-muted hover:cursor-pointer",
-				isPending && "bg-muted animate-pulse"
+				"bg-card px-0 pt-0 pb-2 hover:cursor-pointer hover:bg-muted dark:bg-muted",
+				"relative items-start justify-start",
+				isPending && "animate-pulse bg-muted"
 			)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${item.slug}`)}>
+			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${item.slug}`)} className="">
 				{item.coverImage && (
-					<ItemMedia className="pointer-events-none touch-auto w-full flex *:flex-1">
+					<Image
+						src={item.coverImage.url}
+						height={210}
+						width={420}
+						alt=""
+						className="absolute top-0 h-full w-full items-stretch object-cover opacity-[6%]"
+					/>
+				)}
+				{item.coverImage && (
+					<ItemMedia className="pointer-events-none flex w-full touch-auto *:flex-1">
 						<ArticleImage
 							mediaIdentifier={item.coverImage.url}
-							height={180}
-							width={180}
-							className="h-[110px] w-full object-cover "
+							height={210}
+							width={420}
+							className="h-[110px] w-full object-cover"
 						/>
 					</ItemMedia>
 				)}
-				<ItemHeader className="flex-col items-start gap-0.5">
-					<ItemTitle className="border-b mb-1">{item.title}</ItemTitle>
-					<div className="text-xs block text-start">
+				<ItemHeader className="flex-1 flex-col items-start gap-0.5 px-2">
+					<ItemTitle className="mb-1 line-clamp-2 tracking-tighter">{item.title}</ItemTitle>
+					<div className="block text-start text-xs">
 						<Badge variant={variant}>
 							{/* <StatusIcon className="mr-1" /> */}
 							{newsArticleStatus}
 						</Badge>
 						{item.location && (
 							<>
-								<MapPin className="size-3 inline-flex mr-0.5" />
+								<MapPin className="mr-0.5 inline-flex size-3" />
 								{item.location},
 							</>
 						)}{" "}

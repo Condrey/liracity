@@ -31,17 +31,17 @@ import { NavUser } from "./nav-user";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
 		<Sidebar
-			className="top-(--header-height) md:hidden h-[calc(100svh-var(--header-height))]!"
+			className="top-(--header-height) h-[calc(100svh-var(--header-height))]! md:hidden"
 			collapsible="icon"
 			{...props}
 		>
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton className="flex flex-col  w-full  h-fit  data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground items-center justify-center rounded-lg bg-sidebar text-sidebar-foreground">
-							<div className="flex flex-col items-center aspect-square size-[160px]  ">
+						<SidebarMenuButton className="flex h-fit w-full flex-col items-center justify-center rounded-lg bg-sidebar text-sidebar-foreground data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+							<div className="flex aspect-square size-[160px] flex-col items-center">
 								<Image src={"/logo.png"} alt="logo" width={150} height={150} />
-								<span className="text-xl uppercase tracking-tight">{webName}</span>
+								<span className="text-xl tracking-tight uppercase">{webName}</span>
 							</div>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
@@ -97,7 +97,7 @@ function CollapsibleItem({ item, index }: { item: NavLinkGroup; index: number })
 					>
 						<Link href={!item.children.length ? item.href : "#"}>
 							{isPending ? <Spinner /> : item.icon && <ItemIcon className="hidden sm:flex" />}
-							<span className={cn("line-clamp-1 text-ellipsis break-words")}>{item.title}</span>
+							<span className={cn("line-clamp-1 break-words text-ellipsis")}>{item.title}</span>
 							<ChevronRight
 								className={cn(
 									"ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90",
@@ -135,8 +135,8 @@ function MenuItem({ item }: { item: NavLink }) {
 	return (
 		<SidebarMenuSubItem key={item.title}>
 			<SidebarMenuSubButton title={item.description} onClick={handleClickEvent} asChild isActive={isActive}>
-				<Link href={item.href} className="h-fit py-1 flex gap-2">
-					{isPending && <Loader2Icon className="animate-spin size-4" />}
+				<Link href={item.href} className="flex h-fit gap-2 py-1">
+					{isPending && <Loader2Icon className="size-4 animate-spin" />}
 					{item.title}
 				</Link>
 			</SidebarMenuSubButton>

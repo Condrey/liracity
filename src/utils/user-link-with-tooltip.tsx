@@ -14,8 +14,8 @@ interface UserLinkWithTooltipProps extends PropsWithChildren {
 }
 
 export default function UserLinkWithTooltip({ children, username }: UserLinkWithTooltipProps) {
-		const {getNavigationLinkWithPathnameWithoutUpdate} = useCustomSearchParams()
-		const userDetailsUrl = getNavigationLinkWithPathnameWithoutUpdate(`/users/${username}`)
+	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
+	const userDetailsUrl = getNavigationLinkWithPathnameWithoutUpdate(`/users/${username}`);
 	const { data } = useQuery({
 		queryKey: ["user-data", username],
 		queryFn: () => kyInstance.get(`/api/users/username/${username}`).json<UserDataSelect>(),
@@ -37,7 +37,7 @@ export default function UserLinkWithTooltip({ children, username }: UserLinkWith
 	}
 
 	return (
-		<UserTooltip user={data} >
+		<UserTooltip user={data}>
 			<Link href={userDetailsUrl} className="text-primary hover:underline">
 				{children}
 			</Link>

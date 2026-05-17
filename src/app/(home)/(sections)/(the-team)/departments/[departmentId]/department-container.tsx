@@ -20,7 +20,7 @@ export default function DepartmentContainer({ department }: DepartmentContainerP
 		<div className="space-y-6">
 			<CardHeader>
 				<Fragment>
-					<CardTitle className="uppercase tracking-tight font-bold text-lg sm:text-xl">
+					<CardTitle className="text-lg font-bold tracking-tight uppercase sm:text-xl">
 						<span>{name} department</span>
 						<ButtonAddEditDepartment department={department} size="icon" variant={"outline"} className="ml-2">
 							<Edit3Icon />
@@ -36,17 +36,17 @@ export default function DepartmentContainer({ department }: DepartmentContainerP
 			<HeadOfDepartmentContainer
 				employee={headOfDepartment}
 				departmentId={department.id}
-				className="lg:hidden flex-col flex w-full max-w-sm mx-auto"
+				className="mx-auto flex w-full max-w-sm flex-col lg:hidden"
 			/>
 
 			<CardContent className="px-3 md:px-6">
-				<div className="flex items-center gap-3 ">
+				<div className="flex items-center gap-3">
 					<h1
 						data-name={name}
-						className="text-xl   capitalize  font-bold tracking-tight md:before:content-[attr(data-name)] md:before:pe-2"
+						className="text-xl font-bold tracking-tight capitalize md:before:pe-2 md:before:content-[attr(data-name)]"
 					>
 						Departmental sections{" "}
-						<span className="text-muted-foreground  slashed-zero tabular-nums font-normal">
+						<span className="font-normal text-muted-foreground slashed-zero tabular-nums">
 							({formatNumber(_count.departmentalSectors)})
 						</span>
 					</h1>

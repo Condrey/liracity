@@ -1,11 +1,7 @@
-import ArticleImage from "@/components/news-and-events/article-image";
 import HashtagItem from "@/components/news-and-events/news/hashtag-item";
 import RelatedNewsArticleItem from "@/components/news-and-events/news/related-news-article-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
-import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
-import { Badge } from "@/components/ui/badge";
-import { Item, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
-import LoadingButton from "@/components/ui/loading-button";
+import { Button } from "@/components/ui/button";
 import {
 	Sidebar,
 	SidebarContent,
@@ -16,27 +12,31 @@ import {
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { Tag } from "@/generated/prisma";
-import { newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
-import { cn, formatDateToLocal } from "@/lib/utils";
-import { MapPin } from "lucide-react";
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import { useTransition } from "react";
+import { XIcon } from "lucide-react";
 
 export function PageSidebar({
 	relatedArticles,
 	hashtag,
 	otherHashTags,
+	setOpen,
 	...props
 }: React.ComponentProps<typeof Sidebar> & {
 	relatedArticles: NewsArticleData[];
 	hashtag: string;
 	otherHashTags: Tag[];
+	setOpen: (open: boolean) => void;
 }) {
 	return (
-		<Sidebar variant="sidebar" {...props}>
-			<SidebarHeader>Related News Article</SidebarHeader>
+		<Sidebar variant="sidebar" {...props} className="pt-[var(--header-height)]">
+			<SidebarHeader className="flex-row items-center">
+				{
+					<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
+						<XIcon />
+					</Button>
+				}
+				Related News Article
+			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Related News Articles</SidebarGroupLabel>
@@ -65,4 +65,3 @@ export function PageSidebar({
 		</Sidebar>
 	);
 }
-

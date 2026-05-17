@@ -1,18 +1,12 @@
 import { webName } from "@/lib/utils";
 import { sendMail } from "../../(email)/nodemailer";
 
-export const sendWelcomeRemarksEmail = async ({
-  email,
-  name,
-}: {
-  email: string;
-  name: string;
-}) => {
-  const organization = webName + " Management System";
-  const senderName = "Nyande Paul Natalie";
-  const senderTitle = "Support team";
-  const subject = "Welcome remarks!";
-  const htmlContent = `<!DOCTYPE html>
+export const sendWelcomeRemarksEmail = async ({ email, name }: { email: string; name: string }) => {
+	const organization = webName + " Management System";
+	const senderName = "Nyande Paul Natalie";
+	const senderTitle = "Support team";
+	const subject = "Welcome remarks!";
+	const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -91,13 +85,13 @@ export const sendWelcomeRemarksEmail = async ({
 </body>
 </html>
 `;
-  try {
-    await sendMail(email, {
-      subject,
-      html: htmlContent,
-    });
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to send verification link.");
-  }
+	try {
+		await sendMail(email, {
+			subject,
+			html: htmlContent
+		});
+	} catch (error) {
+		console.error(error);
+		throw new Error("Failed to send verification link.");
+	}
 };

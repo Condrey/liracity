@@ -11,20 +11,20 @@ export async function SampleNewsArticles() {
 	const newsArticles = await getAllNewsArticles(limit);
 	if (!newsArticles.length) return null;
 	return (
-		<div className="gap-3 flex px-3 flex-col">
-			<h1 className="text-xl uppercase font-bold tracking-tighter">Recent news Articles</h1>
+		<div className="flex flex-col gap-3 px-3">
+			<h1 className="text-xl font-bold tracking-tighter uppercase">Recent news Articles</h1>
 			<ListOfNewsArticles initialData={newsArticles} limit={limit} />
 			<Link
 				href={`/media/news-events`}
 				className={cn(
 					buttonVariants(),
-					"group/button max-w-fit w-full ms-auto",
+					"group/button ms-auto w-full max-w-fit",
 					newsArticles.length <= MAX_DISPLAY && "hidden"
 				)}
 			>
 				<span className="sr-only">View more news articles</span>
 				<span>View more articles</span>
-				<MoveRightIcon className="group-hover/button:translate-x-2 transition-all duration-200" />
+				<MoveRightIcon className="transition-all duration-200 group-hover/button:translate-x-2" />
 			</Link>
 		</div>
 	);

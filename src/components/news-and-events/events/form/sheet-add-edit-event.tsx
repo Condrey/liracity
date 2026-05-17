@@ -86,36 +86,36 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<SheetContent side="bottom" className="h-svh overflow-y-auto bg-muted">
-						<div className="relative max-w-7xl min-h-[100px] w-full mx-auto flex flex-col justify-center">
+						<div className="relative mx-auto flex min-h-[100px] w-full max-w-7xl flex-col justify-center">
 							{coverImageUrl && (
-								<div className=" w-full min-h-[180px] brightness-50 mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80%">
-									<Image src={coverImageUrl} alt="Cover image" fill className="object-cover w-full rounded-xl" />
+								<div className="min-h-[180px] w-full mask-b-from-50% mask-radial-[50%_90%] mask-radial-from-80% brightness-50">
+									<Image src={coverImageUrl} alt="Cover image" fill className="w-full rounded-xl object-cover" />
 								</div>
 							)}
 							<div
 								className={cn(
-									"w-full absolute h-fit",
-									coverImageUrl && "p-3 bg-background/20 backdrop-blur-2xl max-h-fit my-auto"
+									"absolute h-fit w-full",
+									coverImageUrl && "my-auto max-h-fit bg-background/20 p-3 backdrop-blur-2xl"
 								)}
 							>
-								<SheetHeader className=" w-full  max-h-none">
-									<div className="flex gap-3 flex-wrap justify-between items-end">
+								<SheetHeader className="max-h-none w-full">
+									<div className="flex flex-wrap items-end justify-between gap-3">
 										<div className="flex flex-wrap">
 											{!!watchedTitle && <SheetDescription>{sheetTitle}</SheetDescription>}
 											{!!watchedTitle ? (
-												<CardTitle className="tracking-tighter line-clamp-3 md:line-clamp-1 text-wrap break-all">
+												<CardTitle className="line-clamp-3 tracking-tighter text-wrap break-all md:line-clamp-1">
 													{watchedTitle}
 												</CardTitle>
 											) : (
 												<SheetTitle>{sheetTitle}</SheetTitle>
 											)}
 											<div>
-												<div className="flex gap-2 flex-wrap">
+												<div className="flex flex-wrap gap-2">
 													<Badge variant={"warning"}>{eventStatus}</Badge>
 													{!!watchedStartDate && (
 														<Badge variant={"secondary"} className="flex gap-0.5">
-															<span className="text-muted-foreground text-sm italic">
-																<CalendarRangeIcon className="md:inline-flex hidden size-4 mr-1" />
+															<span className="text-sm text-muted-foreground italic">
+																<CalendarRangeIcon className="mr-1 hidden size-4 md:inline-flex" />
 																Start:
 															</span>
 															{formatDate(watchedStartDate, "PPp")}
@@ -123,8 +123,8 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 													)}
 													{!!watchedEndDate && (
 														<Badge variant={"secondary"} className="flex gap-0.5">
-															<span className="text-muted-foreground text-sm italic">
-																<CalendarRangeIcon className="hidden md:inline-flex size-4 mr-1" />
+															<span className="text-sm text-muted-foreground italic">
+																<CalendarRangeIcon className="mr-1 hidden size-4 md:inline-flex" />
 																End:
 															</span>
 															{formatDate(watchedEndDate, "PPp")}
@@ -155,9 +155,9 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 							
 						</pre> */}
 						{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
-						<div className="w-full flex-col md:flex-row max-w-7xl mx-auto flex gap-3 px-3 ">
+						<div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-3 md:flex-row">
 							{/* main content  */}
-							<div className="md:w-2/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
+							<div className="space-y-4 md:w-2/3 md:*:space-y-4 md:*:border md:*:bg-card md:*:p-3">
 								<div className="space-y-4">
 									<FormField
 										control={form.control}
@@ -172,7 +172,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 											</FormItem>
 										)}
 									/>
-									<div className="flex flex-row flex-wrap  gap-4">
+									<div className="flex flex-row flex-wrap gap-4">
 										<FormField
 											control={form.control}
 											name="coverImageId"
@@ -198,7 +198,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 											control={form.control}
 											name="location"
 											render={({ field }) => (
-												<FormItem className="flex-1 min-w-[100px]">
+												<FormItem className="min-w-[100px] flex-1">
 													<FormLabel>Location</FormLabel>
 													<FormControl>
 														<InputGroup>
@@ -239,7 +239,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 								</div>
 							</div>
 							{/* lesser content  */}
-							<div className="md:w-1/3 space-y-4 md:*:p-3 md:*:bg-card md:*:border md:*:space-y-4">
+							<div className="space-y-4 md:w-1/3 md:*:space-y-4 md:*:border md:*:bg-card md:*:p-3">
 								<div className="space-y-4">
 									<EventDatePicker form={form} />
 									<FormField
@@ -266,19 +266,18 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 									<OtherMedia eventId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
 								</div>
 							</div>
-								<FormFooter>
-							<LoadingButton
-								loading={isPending}
-								type="submit"
-								size={"lg"}
-								onClick={() => form.handleSubmit(onSubmit)()}
-								className="ml-auto md:hidden"
-							>
-								<SaveIcon /> Submit
-							</LoadingButton>
-						</FormFooter>
+							<FormFooter>
+								<LoadingButton
+									loading={isPending}
+									type="submit"
+									size={"lg"}
+									onClick={() => form.handleSubmit(onSubmit)()}
+									className="ml-auto md:hidden"
+								>
+									<SaveIcon /> Submit
+								</LoadingButton>
+							</FormFooter>
 						</div>
-					
 					</SheetContent>
 				</form>
 			</Form>

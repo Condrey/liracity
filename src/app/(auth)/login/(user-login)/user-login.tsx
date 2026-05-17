@@ -14,10 +14,10 @@ export default function UserLogin() {
 
 	return (
 		<>
-			<div className="flex justify-center gap-3 w-full items-center pt-3">
+			<div className="flex w-full items-center justify-center gap-3 pt-3">
 				<GoogleSignInButton />
 			</div>
-			<div className="flex items-center gap-3 my-6">
+			<div className="my-6 flex items-center gap-3">
 				<div className="h-px flex-1 bg-muted-foreground" />
 				<span className="text-muted-foreground uppercase">Or use Email</span>
 				<div className="h-px flex-1 bg-muted-foreground" />
@@ -26,7 +26,7 @@ export default function UserLogin() {
 
 			<Link
 				href={getNavigationLinkWithPathnameWithoutUpdate(`/signup`)}
-				className="block text-center underline group/link hover:text-primary mt-4"
+				className="group/link mt-4 block text-center underline hover:text-primary"
 				onClick={() => startTransition(() => {})}
 			>
 				<span>
@@ -34,8 +34,8 @@ export default function UserLogin() {
 				</span>
 				<MoveRightIcon
 					className={cn(
-						"inline group-hover/link:visible transition-all ease-linear delay-200 ms-2 invisible  ",
-						isPending && " visible animate-caret-blink"
+						"invisible ms-2 inline transition-all delay-200 ease-linear group-hover/link:visible",
+						isPending && "visible animate-caret-blink"
 					)}
 				/>
 			</Link>

@@ -87,9 +87,9 @@ export default function FormAddEditDepartmentalSector({
 								<FormLabel>Brief description</FormLabel>
 								<FormControl>
 									<TipTapEditorWithHeader
-										onTextChanged={field.onChange}
+										onChange={field.onChange}
 										placeholder={`Brief description about ${watchedName || "this"} departmental sector`}
-										initialContent={field.value}
+										value={field.value}
 										includeHeader={false}
 									/>
 								</FormControl>

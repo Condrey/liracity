@@ -1,71 +1,61 @@
-import { Button } from "@/components/ui/button";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger
-} from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import LoadingButton from "@/components/ui/loading-button";
-import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useUploadThing } from "@/utils/uploadthing";
 import { Editor } from "@tiptap/react";
-import { ImageIcon } from "lucide-react";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { ImagePlus } from "lucide-react";
+import { useRef, useState } from "react";
 
-export default function ImageOptions({ editor }: { editor: Editor }) {
-	const [isPending, startTransition] = useTransition();
-	const [_, setOpen] = useState(false);
-	const form = useForm<SingleContentSchema>({
-		resolver: zodResolver(singleContentSchema),
-		defaultValues: {
-			singleContent: ""
+export default function ImageToolbarButton({ editor }: { editor: Editor }) {
+	const inputRef = useRef<HTMLInputElement | null>(null);
+	const [loading, setLoading] = useState(false);
+
+	const { startUpload } = useUploadThing("coverImageAttachment");
+
+	async function onSelect(file: File) {
+		try {
+			setLoading(true);
+
+			const uploaded = await startUpload([file]);
+			if (!uploaded?.[0]) return;
+
+			editor
+				?.chain()
+				.focus()
+				.insertContent({
+					type: "customImage",
+					attrs: {
+						src: uploaded[0].url,
+						alt: file.name,
+						title: file.name,
+						fileKey: uploaded[0].key
+					}
+				})
+				.run();
+		} finally {
+			setLoading(false);
+			inputRef.current!.value = "";
 		}
-	});
-	function handleSubmit(input: SingleContentSchema) {
-		startTransition(() => {
-			editor.chain().focus().setImage({ src: input.singleContent, alt: "url image" }).run();
-			setOpen(false);
-		});
 	}
+
 	return (
-		<Dialog onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button variant={"ghost"} size={"sm"}>
-					<ImageIcon className="size-4" />
-				</Button>
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle className="capitalize">Add an image</DialogTitle>
-					<DialogDescription>Either add an image from the computer or from an online url</DialogDescription>
-				</DialogHeader>
-				<Form {...form}>
-					<div className="space-y-4">
-						<FormField
-							control={form.control}
-							name="singleContent"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel></FormLabel>
-									<FormControl>
-										<Input placeholder="enter the online url here" {...field} />
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						<FormFooter>
-							<LoadingButton type="button" loading={isPending} onClick={() => form.handleSubmit(handleSubmit)()}>
-								Add Image
-							</LoadingButton>
-						</FormFooter>
-					</div>
-				</Form>
-			</DialogContent>
-		</Dialog>
+		<>
+			<button
+				type="button"
+				onClick={() => inputRef.current?.click()}
+				className="flex h-9 items-center gap-2 rounded-lg border px-3 transition-colors hover:bg-muted"
+			>
+				<ImagePlus className="size-4" />
+				{loading ? "Uploading..." : "Image"}
+			</button>
+			<input
+				ref={inputRef}
+				type="file"
+				accept="image/*"
+				className="hidden"
+				onChange={async (e) => {
+					const file = e.target.files?.[0];
+					if (!file) return;
+					await onSelect(file);
+				}}
+			/>
+		</>
 	);
 }

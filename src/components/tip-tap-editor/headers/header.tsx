@@ -7,6 +7,7 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { cn } from "@/lib/utils";
 import { Editor, useEditorState } from "@tiptap/react";
 import {
 	AlignCenterIcon,
@@ -34,14 +35,15 @@ import {
 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import ImageOptions from "./image-options";
+import ImageToolbarButton from "./image-options";
 import TableOptions from "./table-options";
 
 interface TipTapEditorHeaderProps {
 	editor: Editor | null;
+	className?: string;
 }
 
-export default function TipTapEditorHeader({ editor }: TipTapEditorHeaderProps) {
+export default function TipTapEditorHeader({ editor, className }: TipTapEditorHeaderProps) {
 	if (!editor) return null;
 
 	const setLink = useCallback(() => {
@@ -79,7 +81,12 @@ export default function TipTapEditorHeader({ editor }: TipTapEditorHeaderProps) 
 	const [showTableOptions, setShowTableOptions] = useState(false);
 
 	return (
-		<div className="control-group sticky top-0 z-10 flex flex-row flex-wrap items-center gap-4 rounded-md border-b bg-card px-3 py-2">
+		<div
+			className={cn(
+				"control-group sticky top-0 z-10 flex flex-row flex-wrap items-center gap-4 rounded-md border-b bg-card px-3 py-2",
+				className
+			)}
+		>
 			<ToggleGroup type="multiple" className="button-group" size="sm">
 				{/* Headings  */}
 				<DropdownMenu>
@@ -395,7 +402,7 @@ export default function TipTapEditorHeader({ editor }: TipTapEditorHeaderProps) 
 				</ToggleGroupItem>
 			</ToggleGroup>
 
-			<ImageOptions editor={editor} />
+			<ImageToolbarButton editor={editor} />
 			{/* About the table  */}
 			<Button
 				title={`${showTableOptions ? "Hide" : "Show"} table options`}

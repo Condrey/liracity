@@ -1,19 +1,19 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUpsertHistoryAndCultureMutation } from "./mutation";
-import { useSession } from "@/app/session-provider";
-import { myPrivileges } from "@/lib/enums";
-import { Role } from "@/generated/prisma";
 
 interface ButtonAddEditHistoryAndCultureProps extends ButtonProps {
 	historyAndCulture?: string;
@@ -80,8 +80,8 @@ export function FormAddEditHistoryAndCulture({ open, setOpen, historyAndCulture 
 									<FormControl>
 										<TipTapEditorWithHeader
 											includeHeader
-											initialContent={field.value}
-											onTextChanged={field.onChange}
+											value={field.value}
+											onChange={field.onChange}
 											className="max-h-fit"
 										/>
 									</FormControl>

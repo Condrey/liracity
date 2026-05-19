@@ -88,8 +88,8 @@ export function FormAddEditGeographicalLandmarks({
 									<FormControl>
 										<TipTapEditorWithHeader
 											includeHeader
-											initialContent={field.value}
-											onTextChanged={field.onChange}
+											value={field.value}
+											onChange={field.onChange}
 											className="max-h-fit"
 										/>
 									</FormControl>

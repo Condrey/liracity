@@ -20,7 +20,9 @@ export function ThemeToggler() {
 				return (
 					<Button
 						key={name}
-						variant={currentTheme === theme ? "secondary" : "ghost"}
+						className={
+							currentTheme === theme ? "bg-secondary text-secondary-foreground" : "bg-transparent text-foreground"
+						}
 						size={"icon"}
 						onClick={() => setTheme(theme)}
 						title={name + " mode"}

@@ -226,10 +226,9 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 												<CardTitle>Event description</CardTitle>
 												<FormControl>
 													<TipTapEditorWithHeader
-														onTextChanged={field.onChange}
-														initialContent={field.value!}
+														onChange={field.onChange}
+														value={field.value!}
 														placeholder="describe the event "
-														{...field}
 													/>
 												</FormControl>
 												<FormMessage />
@@ -250,11 +249,10 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 												<CardTitle>Event Summary</CardTitle>
 												<FormControl>
 													<TipTapEditorWithHeader
-														onTextChanged={field.onChange}
+														onChange={field.onChange}
 														includeHeader={false}
-														initialContent={field.value!}
+														value={field.value!}
 														placeholder="in about 200 words summarize the event"
-														{...field}
 													/>
 												</FormControl>
 												<FormMessage />

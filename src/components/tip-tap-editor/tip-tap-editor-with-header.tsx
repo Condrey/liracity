@@ -28,26 +28,21 @@ import { ColorHighlighter } from "./custom-extensions/color-highlighter";
 import { SmilieReplacer } from "./custom-extensions/smiley-replacer";
 import TipTapEditorHeader from "./headers/header";
 
+import { useEffect, useMemo } from "react";
+import { CustomImage } from "./custom-extensions/image-node";
 import "./styles.css";
 
 interface TipTapEditorWithHeaderProps {
 	className?: string;
-	initialContent?: string;
+	value?: string;
 	placeholder?: string;
 	includeHeader?: boolean;
-	onTextChanged: (content: string) => void;
+	onChange: (content: string) => void;
 }
-
-export default function TipTapEditorWithHeader({
-	className,
-	initialContent,
-	placeholder = "type here",
-	onTextChanged,
-	includeHeader = true
-}: TipTapEditorWithHeaderProps) {
-	const editor = useEditor({
-		immediatelyRender: false,
-		extensions: [
+export const useTipTapEditor = ({ value, placeholder, onChange }: TipTapEditorWithHeaderProps) => {
+	const extensions = useMemo(
+		() => [
+			CustomImage,
 			Color.configure({ types: [TextStyle.name, ListItem.name] }),
 			TextStyle,
 			StarterKit.configure({
@@ -147,11 +142,35 @@ export default function TipTapEditorWithHeader({
 				}
 			})
 		],
-		content: initialContent,
+		[value]
+	);
+	return useEditor({
+		immediatelyRender: false,
+		extensions,
+		content: value,
 		onUpdate: ({ editor }) => {
-			onTextChanged(editor.getHTML());
+			onChange(editor.getHTML());
 		}
 	});
+};
+export default function TipTapEditorWithHeader({
+	className,
+	value = "",
+	placeholder = "type here",
+	onChange,
+	includeHeader = true
+}: TipTapEditorWithHeaderProps) {
+	const editor = useTipTapEditor({ onChange, value, placeholder });
+
+	useEffect(() => {
+		if (!editor) return;
+
+		const current = editor.getHTML();
+
+		if (current !== value) {
+			editor.commands.setContent(value || "");
+		}
+	}, [editor, value]);
 	return (
 		<div
 			className={cn(
@@ -160,7 +179,7 @@ export default function TipTapEditorWithHeader({
 			)}
 		>
 			{includeHeader && <TipTapEditorHeader editor={editor} />}
-			<EditorContent editor={editor} className="min-h-[100px] list-disc px-3 *:h-full *:w-full" />
+			<EditorContent editor={editor} className={cn("min-h-[100px] flex-1 list-disc px-3 *:h-full *:w-full")} />
 		</div>
 	);
 }

@@ -52,7 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					<SidebarGroupLabel className="hidden sm:flex">Navigation Menu</SidebarGroupLabel>
 					<SidebarMenu className="">
 						{navLinks.map((item, index) => {
-							return <CollapsibleItem item={item} index={index} />;
+							return <CollapsibleItem key={item.href} item={item} index={index} />;
 						})}
 					</SidebarMenu>
 				</SidebarGroup>

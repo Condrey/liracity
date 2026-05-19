@@ -172,7 +172,7 @@ export default function SheetAddEditNewsArticle({
 							</div>
 
 							{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
-							<pre>{JSON.stringify(form.watch("content"), null, 2)}</pre>
+							{/* <pre>{JSON.stringify(form.watch("content"), null, 2)}</pre> */}
 
 							<div className="mx-auto flex w-full max-w-7xl flex-col gap-3 md:flex-row">
 								{/* main content  */}

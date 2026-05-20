@@ -21,7 +21,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect } from "react";
 import { ColorHighlighter } from "./custom-extensions/color-highlighter";
-import { ImageGallery } from "./custom-extensions/image-node";
+import { ImageGallery } from "./custom-extensions/image-extension";
 import { SmilieReplacer } from "./custom-extensions/smiley-replacer";
 
 const TipTapViewer = ({ content, className }: { content: any; className?: string }) => {
@@ -133,7 +133,7 @@ const TipTapViewer = ({ content, className }: { content: any; className?: string
 			editor.commands.setContent(content);
 		}
 	}, [editor, content]);
-	return <EditorContent editor={editor} className={className} />;
+	return <EditorContent editor={editor} className={className} contentEditable={false} />;
 };
 
 export default TipTapViewer;

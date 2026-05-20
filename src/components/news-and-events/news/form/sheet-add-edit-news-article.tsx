@@ -334,7 +334,7 @@ function FullScreenEditor({ formValue: form, ...props }: FullScreenEditorProps) 
 						control={form.control}
 						name="content"
 						render={({ field }) => (
-							<div className="flex size-full h-dvh flex-col overflow-y-auto bg-background">
+							<div className="mx-auto flex size-full h-dvh w-full max-w-7xl flex-col items-stretch overflow-y-auto bg-white">
 								<TipTapValue {...field} />
 							</div>
 						)}
@@ -364,7 +364,7 @@ function TipTapValue({
 
 	return (
 		<>
-			<div className="sticky top-0 z-50 max-h-fit">
+			<div className="sticky top-0 z-50 max-h-fit w-full">
 				<SheetClose asChild>
 					<Button type="button" variant={"destructive"} className="absolute top-2 right-2 z-50">
 						<XIcon className="size-4" />
@@ -372,10 +372,9 @@ function TipTapValue({
 				</SheetClose>
 				<TipTapEditorHeader editor={editor} className="pe-12" />
 			</div>
-			<EditorContent
-				editor={editor}
-				className={cn("size-full min-h-0 flex-1 list-disc px-3 pb-12 *:h-full *:w-full")}
-			/>
+			<div className="flex size-full flex-col">
+				<EditorContent editor={editor} className={cn("min-h-0 w-full flex-1 list-disc px-3 pb-12 *:h-full *:w-full")} />
+			</div>
 		</>
 	);
 }

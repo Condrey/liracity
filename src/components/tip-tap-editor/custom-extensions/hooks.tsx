@@ -5,6 +5,8 @@ import { toast } from "sonner";
 
 export function useUploadTiptapImageMedia(editor: Editor | null) {
 	const [uploadProgress, setUploadProgress] = useState<number>(0);
+	const [isRemoving, setIsRemoving] = useState(false);
+
 	const { startUpload, isUploading } = useUploadThing("attachment", {
 		onUploadProgress: (progress) => {
 			setUploadProgress(progress);
@@ -53,7 +55,7 @@ export function useUploadTiptapImageMedia(editor: Editor | null) {
 
 							tr.setNodeMarkup(pos, undefined, {
 								...node.attrs,
-								src: uploaded[0].url,
+								src: uploaded[0].url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
 								alt: file.name,
 								title: file.name,
 								fileKey: uploaded[0].key,
@@ -111,7 +113,7 @@ export function useUploadTiptapImageMedia(editor: Editor | null) {
 				if (!uploadedFiles?.length) return;
 
 				const finalImages = uploadedFiles.map((file) => ({
-					src: file.url,
+					src: file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
 					alt: file.name,
 					uploading: false,
 					title: file.name,
@@ -144,10 +146,62 @@ export function useUploadTiptapImageMedia(editor: Editor | null) {
 		[editor, startUpload]
 	);
 
+	async function removeImage(fileKey: string | undefined | null) {
+		if (fileKey) {
+			setIsRemoving(true);
+
+			await fetch("/api/uploadthing/delete", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ fileKey })
+			}).then(() => setIsRemoving(false));
+		}
+		setIsRemoving(false);
+	}
+
+	async function removeMultipleImages(fileKeys: string[]) {
+		if (!!fileKeys.length) {
+			setIsRemoving(true);
+			await fetch("/api/uploadthing/delete-multiple", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ fileKeys })
+			}).then(() => setIsRemoving(false));
+		}
+		setIsRemoving(false);
+	}
+
+	const replaceImage = useCallback(
+		async ({ newFile, oldFileKey }: { newFile: File; oldFileKey: string }) => {
+			await removeImage(oldFileKey);
+			setUploadProgress(0);
+			const uploaded = await startUpload([newFile]);
+			if (!uploaded?.[0]) return;
+			setUploadProgress(100);
+			return {
+				src: uploaded[0].url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
+				alt: newFile.name,
+				title: newFile.name,
+				fileKey: uploaded[0].key,
+				uploading: false,
+				progress: 100
+			};
+		},
+		[startUpload]
+	);
+
 	return {
 		uploadSingle,
 		uploadGallery,
+		removeImage,
+		removeMultipleImages,
+		replaceImage,
 		uploadProgress,
-		isUploading
+		isUploading,
+		isRemoving
 	};
 }

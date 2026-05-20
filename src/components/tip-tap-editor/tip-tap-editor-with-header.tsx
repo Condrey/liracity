@@ -31,7 +31,7 @@ import TipTapEditorHeader from "./headers/header";
 import { useDropzone } from "@uploadthing/react";
 import { ClipboardEvent, useEffect } from "react";
 import { useUploadTiptapImageMedia } from "./custom-extensions/hooks";
-import { CustomImage, ImageGallery } from "./custom-extensions/image-node";
+import { CustomImage, ImageGallery } from "./custom-extensions/image-extension";
 import "./styles.css";
 
 interface TipTapEditorWithHeaderProps {

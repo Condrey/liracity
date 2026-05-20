@@ -35,7 +35,7 @@ import {
 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import ImageToolbarButton from "./image-options";
+import ImageToolbarButton from "./image-toolbar-button";
 import TableOptions from "./table-options";
 
 interface TipTapEditorHeaderProps {

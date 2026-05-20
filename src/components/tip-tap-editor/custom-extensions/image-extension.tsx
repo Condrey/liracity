@@ -15,11 +15,6 @@ export const CustomImage = Node.create<ImageOptionsProps>({
 	atom: true,
 	selectable: true,
 	draggable: true,
-	// addOptions() {
-	// 	return {
-	// 		HTMLAttributes: {}
-	// 	};
-	// },
 	addAttributes() {
 		return {
 			src: { default: null },

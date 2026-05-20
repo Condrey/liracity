@@ -53,7 +53,7 @@ export default function SheetAddEditNewsArticle({
 	const [mediaIds, setMediaIds] = useState<string[]>(prevMediaIds || []);
 	const form = useForm<NewsArticleSchema>({
 		resolver: zodResolver(newsArticleSchema),
-		defaultValues: {
+		values: {
 			id: newsArticle?.id || altId,
 			title: newsArticle?.title || "",
 			categoryId: newsArticle?.categoryId || "",
@@ -111,7 +111,7 @@ export default function SheetAddEditNewsArticle({
 									src={coverImageUrl!}
 									alt="Cover image"
 									fill
-									className="absolute w-full items-stretch rounded-xl object-cover opacity-[2.5%]"
+									className="pointer-events-none absolute z-0 w-full cursor-none touch-none items-stretch rounded-xl object-cover opacity-[5%]"
 								/>
 							)}
 							<div className="relative mx-auto flex min-h-[100px] w-full max-w-7xl flex-col justify-center">
@@ -172,25 +172,27 @@ export default function SheetAddEditNewsArticle({
 							</div>
 
 							{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
-							{/* <pre>{JSON.stringify(form.watch("content"), null, 2)}</pre> */}
+							{/* <pre>{JSON.stringify(form.watch("content").split(">"), null, 2)}</pre> */}
 
-							<div className="mx-auto flex w-full max-w-7xl flex-col gap-3 md:flex-row">
+							<div className="mx-auto flex w-full max-w-7xl flex-col gap-3 *:z-10 md:flex-row">
 								{/* main content  */}
 								<div className="space-y-4 md:w-2/3 md:*:space-y-4 md:*:border md:*:bg-card md:*:p-3">
 									<div className="space-y-4">
 										<FormField
 											control={form.control}
 											name="title"
-											render={({ field }) => (
+											render={(render) => (
 												<FormItem>
 													<CardTitle>Headline</CardTitle>
+
 													<FormControl>
-														<Input placeholder="enter news headline here" {...field} />
+														<Input placeholder="enter news headline here" {...render.field} />
 													</FormControl>
 													<FormMessage />
 												</FormItem>
 											)}
 										/>
+
 										<div className="flex flex-wrap gap-4">
 											<FormField
 												control={form.control}

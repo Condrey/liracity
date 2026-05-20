@@ -1,15 +1,19 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useUploadThing } from "@/utils/uploadthing";
 import { NodeViewProps, NodeViewWrapper } from "@tiptap/react";
 import { Trash2Icon, UploadIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function ImageNodeView({ node, updateAttributes, deleteNode }: NodeViewProps) {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const [loading, setLoading] = useState(false);
 
-	const { startUpload } = useUploadThing("coverImageAttachment");
+	const { startUpload } = useUploadThing("attachment");
+	useEffect(() => {
+		setLoading(node.attrs.uploading);
+	}, [node.attrs.uploading]);
 
 	async function removeFile(fileKey?: string) {
 		if (fileKey) {
@@ -44,7 +48,12 @@ export function ImageNodeView({ node, updateAttributes, deleteNode }: NodeViewPr
 	}
 
 	return (
-		<NodeViewWrapper className="group relative my-4 overflow-hidden rounded-xl border">
+		<NodeViewWrapper
+			className={cn(
+				"group relative my-4 overflow-hidden rounded-xl border",
+				loading ? "pointer-events-none animate-pulse opacity-70" : "hover:shadow-lg"
+			)}
+		>
 			<img src={node.attrs.src} className="max-h-[500px] w-full object-cover" />
 
 			<div className="absolute top-2 right-2 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">

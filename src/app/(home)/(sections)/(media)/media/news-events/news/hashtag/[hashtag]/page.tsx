@@ -7,6 +7,7 @@ import HashtagItem from "@/components/news-and-events/news/hashtag-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { badgeVariants } from "@/components/ui/badge";
 import { siteConfig } from "@/lib/utils";
+import { htmlToText } from "html-to-text";
 import { Metadata, ResolvingMetadata } from "next";
 import { NewsHashtagClient } from "./news-hashtag-client";
 
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 						url: logoUrl
 					}
 				},
-				description: (article.summary || article.content).replace(/<[^>]+>/g, "").slice(0, 160) + "..."
+				description: htmlToText(article.summary || article.content).slice(0, 160)
 			}
 		}))
 	};
@@ -69,6 +70,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 		description,
 		alternates: { canonical: hashtagUrl },
 		openGraph: {
+			type: "article",
 			title,
 			description,
 			url: hashtagUrl,

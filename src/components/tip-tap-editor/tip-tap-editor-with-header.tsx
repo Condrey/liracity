@@ -200,13 +200,13 @@ export default function TipTapEditorWithHeader({
 			.map((item) => item.getAsFile())
 			.filter(Boolean) as File[];
 		if (!files.length) {
-			return false;
-		}
-
-		if (files.length === 1) {
-			uploadSingle(files[0]);
+			return e;
 		} else {
-			uploadGallery(files);
+			if (files.length === 1) {
+				uploadSingle(files[0]);
+			} else {
+				uploadGallery(files);
+			}
 		}
 	}
 

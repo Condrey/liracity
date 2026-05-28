@@ -4,6 +4,7 @@ import { NewsArticleStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
+import { htmlToText } from "html-to-text";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
 import { NewsArticleClient } from "./news-article-client";
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 
 	const previousImages = (await parent).openGraph?.images || [];
 	const title = newsArticle.title;
-	const description = (newsArticle.summary || newsArticle.content).replace(/<[^>]+>/g, "").slice(0, 160) + "...";
+	const description = htmlToText(newsArticle.summary || newsArticle.content).slice(0, 160);
 	const imageUrl = newsArticle.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
 	const articleUrl = `${siteConfig.url}/media/news-and-events/news/${newsArticle.slug}`;
 	const authorName = newsArticle.author?.name || "Lira City Correspondent";

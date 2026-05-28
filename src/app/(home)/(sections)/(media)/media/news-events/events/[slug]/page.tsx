@@ -4,7 +4,6 @@ import { EventStatus, Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
-import { htmlToText } from "html-to-text";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
 import { EventClient } from "./event-client";
@@ -41,7 +40,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 
 	const previousImages = (await parent).openGraph?.images || [];
 	const title = event.title;
-	const description = htmlToText(event.summary || event.description).slice(0, 160);
+	const description = (event.summary || event.description).replace(/<[^>]+>/g, "");
 	const imageUrl = event.coverImage?.url || `${siteConfig.url}/${siteConfig.defaultCoverImage}`;
 	const eventUrl = `${siteConfig.url}/media/news-and-events/events/${event.slug}`;
 
@@ -54,6 +53,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 			description,
 			url: eventUrl,
 			type: "article",
+			siteName: siteConfig.name,
 			images: [
 				{
 					url: imageUrl,
@@ -65,6 +65,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 			]
 		},
 		twitter: {
+			site: siteConfig.name,
 			card: "summary_large_image",
 			title,
 			description,

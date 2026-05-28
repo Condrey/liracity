@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 			card: "summary_large_image",
 			title,
 			description,
-			images: [imageUrl, ...previousImages]
+			images: [{ url: imageUrl, width: 1200, height: 630, alt: event.title }, ...previousImages]
 		}
 	};
 }

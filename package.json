@@ -1,5 +1,5 @@
 {
-	"name": "lcc-registry",
+	"name": "liracity",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -48,11 +48,13 @@
 		"@uploadthing/react": "^7.3.3",
 		"arctic": "^3.6.0",
 		"argon2": "^0.44.0",
+		"better-auth": "^1.6.26",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.1.1",
 		"cuid": "^3.0.0",
 		"date-fns": "^4.1.0",
+		"dotenv": "^17.4.2",
 		"eslint-config-next": "15.5.4",
 		"html-to-text": "^9.0.5",
 		"ky": "^1.8.0",
@@ -62,6 +64,10 @@
 		"next": "^16.2.6",
 		"next-themes": "^0.4.6",
 		"nodemailer": "^6.10.1",
+		"pdfjs-dist": "^6.2.108",
+		"pg": "^8.22.0",
+		"pretty-bytes": "^7.1.1",
+		"prisma": "^7.8.0",
 		"radix-ui": "^1.4.3",
 		"react": "19.1.1",
 		"react-day-picker": "^9.11.0",
@@ -76,10 +82,12 @@
 		"tw-animate-css": "^1.2.5",
 		"uploadthing": "^7.7.4",
 		"vaul": "^1.1.2",
-		"zod": "^3.25.67"
+		"zod": "^4.4.3"
 	},
 	"devDependencies": {
-		"@prisma/client": "^6.11.0",
+		"@better-auth/prisma-adapter": "^1.6.19",
+		"@prisma/adapter-pg": "^7.9.1",
+		"@prisma/client": "^7.9.0",
 		"@tailwindcss/postcss": "^4",
 		"@tanstack/eslint-plugin-query": "^5.73.3",
 		"@tanstack/react-query": "^5.74.0",
@@ -92,14 +100,9 @@
 		"@types/uuid": "^10.0.0",
 		"prettier": "^3.8.3",
 		"prettier-plugin-tailwindcss": "^0.8.0",
-		"prisma": "^6.11.0",
 		"tailwindcss": "^4",
 		"tw-animate-css": "^1.3.4",
 		"typescript": "^5",
 		"uuid": "^11.1.0"
-	},
-	"overrides": {
-		"@types/react": "19.1.16",
-		"@types/react-dom": "19.1.9"
 	}
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,7 +10,9 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import LoadingButton from "@/components/ui/loading-button";
+import { Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { myPrivileges } from "@/lib/enums";
 import { DepartmentalSectorData } from "@/lib/types";
 import { Edit3Icon, MoreVertical, MoveUpRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
@@ -17,9 +20,6 @@ import { useState, useTransition } from "react";
 import FormAddEditEmployee from "../employee/form-add-edit-employee";
 import { DeleteDepartmentalSectorDialog } from "./button-delete-departmental-sector";
 import FormAddEditDepartmentalSector from "./form-add-edit-departmental-sector";
-import { useSession } from "@/app/session-provider";
-import { myPrivileges } from "@/lib/enums";
-import { Role } from "@/generated/prisma";
 
 interface DropDownMenuDepartmentalSectorProps {
 	sector: DepartmentalSectorData;
@@ -33,7 +33,7 @@ export default function DropDownMenuDepartmentalSector({ sector, className }: Dr
 	const [openDelete, setOpenDelete] = useState(false);
 	const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const href = getNavigationLinkWithoutUpdate(`/${sector.id}`);
 	return (
 		<>

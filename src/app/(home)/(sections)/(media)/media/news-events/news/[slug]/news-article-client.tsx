@@ -12,7 +12,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
 import Footer from "@/components/user/footer";
-import { NewsArticleStatus, Role } from "@/generated/prisma";
+import { NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
@@ -31,7 +31,7 @@ interface NewsArticleClientProps {
 
 export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsArticleClientProps) {
 	const { user } = useSession();
-	const isAPublisher = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAPublisher = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const [isPending, startTransition] = useTransition();
 
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();

@@ -1,8 +1,8 @@
 "use server";
 
-import { validateRequest } from "@/auth";
-import { EventStatus, Role } from "@/generated/prisma";
+import { EventStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { eventDataInclude } from "@/lib/types";
 import { slugify } from "@/lib/utils";
@@ -101,7 +101,7 @@ export async function updateEventStatus({ eventId, status }: { eventId: string; 
 export async function deleteEvent(id: string) {
 	const { user } = await validateRequest();
 	if (!user) throw new Error("Unauthorized!");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw new Error("Unauthorized!");
 	return await prisma.event.delete({
 		where: { id },

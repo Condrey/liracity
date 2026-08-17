@@ -1,4 +1,4 @@
-import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma";
+import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { InboxIcon, LetterTextIcon, LockIcon, LucideIcon, TrashIcon, UploadIcon } from "lucide-react";
 
 // role

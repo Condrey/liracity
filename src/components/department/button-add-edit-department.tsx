@@ -14,7 +14,7 @@ interface ButtonAddEditDepartmentProps extends ButtonProps {
 }
 export default function ButtonAddEditDepartment({ department, children, ...props }: ButtonAddEditDepartmentProps) {
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) return null;
 	const [open, setOpen] = useState(false);
 	return (

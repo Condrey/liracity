@@ -1,12 +1,11 @@
 "use server";
 
-import { validateRequest } from "@/auth";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
 import { departmentSchema, DepartmentSchema } from "@/lib/validation";
-import { unauthorized } from "next/navigation";
 import { cache } from "react";
 
 async function departments() {
@@ -29,7 +28,7 @@ export const getDepartmentById = cache(departmentById);
 export async function upsertDepartment(formData: DepartmentSchema) {
 	const { user } = await validateRequest();
 	if (!user) throw new Error("Unauthorized!");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw new Error("Unauthorized!");
 
 	const { name, headOfDepartmentId, about, id } = departmentSchema.parse(formData);
@@ -49,7 +48,7 @@ export async function upsertDepartment(formData: DepartmentSchema) {
 export async function deleteDepartment(id: string) {
 	const { user } = await validateRequest();
 	if (!user) throw new Error("Unauthorized!");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw new Error("Unauthorized!");
 	return await prisma.departMent.delete({
 		where: { id },

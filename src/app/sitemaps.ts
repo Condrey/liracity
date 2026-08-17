@@ -1,6 +1,6 @@
 import { getAllEvents } from "@/components/news-and-events/events/action";
 import { getAllNewsArticles } from "@/components/news-and-events/news/action";
-import { EventStatus, NewsArticleStatus } from "@/generated/prisma";
+import { EventStatus, NewsArticleStatus } from "@/generated/prisma/enums";
 import { MetadataRoute } from "next";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;

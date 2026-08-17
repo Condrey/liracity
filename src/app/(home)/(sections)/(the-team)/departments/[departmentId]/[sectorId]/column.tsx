@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import LoadingButton from "@/components/ui/loading-button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import UserAvatar from "@/components/ui/user-avatar";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { EmployeeData } from "@/lib/types";
@@ -81,7 +81,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 		cell({ row }) {
 			const { position, assumedOffice, endedOffice, ippsNumber } = row.original;
 			const { user } = useSession();
-			const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+			const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 			return (
 				<div className="hidden flex-col sm:flex">
 					<div>{position?.jobTitle}</div>
@@ -125,7 +125,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 		cell({ row }) {
 			const { user } = useSession();
 			const [isPending, startTransition] = useTransition();
-			const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+			const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 			const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
 			const employee = row.original;
 			const url = getNavigationLinkWithoutUpdate("/" + employee.id);

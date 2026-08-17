@@ -1,8 +1,8 @@
 "use server";
 
-import { validateRequest } from "@/auth";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { departmentDataInclude, employeeDataInclude } from "@/lib/types";
 import { employeeSchema, EmployeeSchema } from "@/lib/validation";
@@ -18,7 +18,7 @@ export const getAllDepartments = cache(allDepartments);
 
 export async function upsertStaffEmployee(input: EmployeeSchema) {
 	const { user: currentUser } = await validateRequest();
-	const isAuthorized = !!currentUser && myPrivileges[currentUser.role].includes(Role.MODERATOR);
+	const isAuthorized = !!currentUser && myPrivileges[currentUser.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized!");
 	const { departmentalSectorId, ippsNumber, name, userId, employeeId, assumedOffice, position } =
 		employeeSchema.parse(input);
@@ -71,7 +71,7 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 export async function deleteEmployee(id: string) {
 	const { user } = await validateRequest();
 	if (!user) throw new Error("Unauthorized!");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw new Error("Unauthorized!");
 	return await prisma.employee.delete({
 		where: { id },

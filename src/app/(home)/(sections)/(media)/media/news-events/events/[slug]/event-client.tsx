@@ -16,7 +16,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
 import Footer from "@/components/user/footer";
-import { EventStatus, Role } from "@/generated/prisma";
+import { EventStatus, Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
@@ -37,7 +37,7 @@ interface EventClientProps {
 
 export function EventClient({ initialData, slug, relatedEvents }: EventClientProps) {
 	const { user } = useSession();
-	const isAPublisher = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAPublisher = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const [isPending, startTransition] = useTransition();
 	const sidebar = useSidebar();
 

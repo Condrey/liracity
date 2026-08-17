@@ -22,7 +22,7 @@ interface ButtonAddEditAboutProps extends ButtonProps {
 export default function ButtonAddEditAbout({ about, className, ...props }: ButtonAddEditAboutProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 
 	return (
 		<>

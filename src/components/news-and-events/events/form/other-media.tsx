@@ -1,5 +1,3 @@
-import { AttachmentPreviews } from "@/components/attachment/attachment-previews";
-import { ButtonAddMultipleAttachments } from "@/components/attachment/button-add-attachment";
 import { FormItem, FormLabel } from "@/components/ui/form";
 import { Spinner } from "@/components/ui/spinner";
 import { MAX_ATTACHMENTS } from "@/lib/constants";
@@ -12,6 +10,8 @@ import { UploadCloudIcon } from "lucide-react";
 import { ClipboardEvent, useEffect } from "react";
 import { useDeleteEventMediaMutation } from "./mutation";
 import { useOtherMediaUploads } from "./use-media-upload";
+import { ButtonAddMultipleAttachments } from "@/components/uploadthing/button-add-attachment";
+import { AttachmentPreviews } from "@/components/uploadthing/attachment-previews";
 
 export default function OtherMedia({
 	eventId,

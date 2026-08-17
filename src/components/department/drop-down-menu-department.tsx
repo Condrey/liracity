@@ -19,9 +19,9 @@ import { DepartmentData } from "@/lib/types";
 import { Edit3Icon, MoreHorizontalIcon, MoveUpRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import FormAddEditDepartment from "./form-add-edit-department";
 import FormAddEditDepartmentalSector from "../departmental-sector/form-add-edit-departmental-sector";
 import { DeleteDepartmentDialog } from "./button-delete-department";
+import FormAddEditDepartment from "./form-add-edit-department";
 
 interface DropDownMenuDepartmentProps {
 	department: DepartmentData;
@@ -31,7 +31,7 @@ export default function DropDownMenuDepartment({ department }: DropDownMenuDepar
 	const url = getNavigationLinkWithoutUpdate("/" + department.id);
 
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const [_, setOpen] = useState(false);
 	const [openEditDialog, setOpenEditDialog] = useState(false);
 	const [openDeleteDialog, setOpenDeleteDialog] = useState(false);

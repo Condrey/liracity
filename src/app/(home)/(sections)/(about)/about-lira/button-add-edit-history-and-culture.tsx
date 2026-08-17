@@ -26,7 +26,7 @@ export default function ButtonAddEditHistoryAndCulture({
 }: ButtonAddEditHistoryAndCultureProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 
 	return (
 		<>

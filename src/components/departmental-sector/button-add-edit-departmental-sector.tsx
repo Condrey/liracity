@@ -1,12 +1,12 @@
 "use client";
 
+import { useSession } from "@/app/session-provider";
 import { Button, ButtonProps } from "@/components/ui/button";
+import { Role } from "@/generated/prisma";
+import { myPrivileges } from "@/lib/enums";
 import { DepartmentalSectorData } from "@/lib/types";
 import { useState } from "react";
 import FormAddEditDepartmentalSector from "./form-add-edit-departmental-sector";
-import { useSession } from "@/app/session-provider";
-import { Role } from "@/generated/prisma";
-import { myPrivileges } from "@/lib/enums";
 
 // TODO: work on union of this for conditional props
 // Use https://github.com/codinginflow/nextjs-15-wix-store/blob/Final-Project/src/components/WixImage.tsx
@@ -24,7 +24,7 @@ export default function ButtonAddEditDepartmentalSector({
 }: ButtonAddEditDepartmentalSectorProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	return (
 		<>
 			{isAuthorized && (

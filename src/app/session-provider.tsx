@@ -1,10 +1,9 @@
 "use client";
-import { createContext, useContext } from "react";
-import { LuciaSession, LuciaUser } from "./(auth)/lib/session";
 
-type SessionContext =
-	| { user: LuciaUser; session: LuciaSession | null }
-	| { user: LuciaUser | null; session: LuciaSession | null };
+import { SessionUser, User } from "@/lib/auth";
+import { createContext, useContext } from "react";
+
+type SessionContext = { user: User; session: SessionUser | null } | { user: User | null; session: SessionUser | null };
 
 const sessionContext = createContext<SessionContext | null>(null);
 

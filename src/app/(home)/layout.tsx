@@ -1,8 +1,7 @@
-import { validateRequest } from "@/auth";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/user/app-sidebar";
 import TopAppBar from "@/components/user/top-app-bar";
-import { redirect } from "next/navigation";
+import { validateRequest } from "@/lib/get-session";
 import SessionProvider from "../session-provider";
 
 export const iframeHeight = "800px";
@@ -10,9 +9,9 @@ const TOP_APP_BAR_HEIGHT = "48px";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const { session, user } = await validateRequest();
-	if (!!user && !user.isVerified) {
-		redirect(`/user-verification/${user.id}`);
-	}
+	// if (!!user && !user.isVerified) {
+	// 	redirect(`/user-verification/${user.id}`);
+	// }
 
 	return (
 		<SessionProvider value={{ session, user }}>

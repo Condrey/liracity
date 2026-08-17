@@ -1,5 +1,5 @@
-import { validateRequest } from "@/auth";
 import { MAX_ATTACHMENTS } from "@/lib/constants";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { createUploadthing, FileRouter } from "uploadthing/next";
 import { UploadThingError, UTApi } from "uploadthing/server";

@@ -9,9 +9,10 @@ import { extractRouterConfig } from "uploadthing/server";
 import { appFileRouter } from "./api/uploadthing/core";
 
 import "./globals.css";
+import "./typeset.css";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const geist = Geist({
+	variable: "--font-geist",
 	subsets: ["latin"]
 });
 
@@ -36,7 +37,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+			<body className={`${geist.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange enableColorScheme>
 					<ReactQueryProvider>
 						<NextSSRPlugin

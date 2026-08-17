@@ -1,8 +1,8 @@
 "use server";
 
-import { validateRequest } from "@/auth";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { webName } from "@/lib/utils";
 import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
@@ -16,7 +16,7 @@ export const getEntity = cache(entity);
 export async function upsertAbout(input: SingleContentSchema) {
 	const { user } = await validateRequest();
 	if (!user) throw Error("Unauthorized");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized");
 
 	const { singleContent } = singleContentSchema.parse(input);
@@ -30,7 +30,7 @@ export async function upsertAbout(input: SingleContentSchema) {
 export async function upsertHistoryAndCulture(input: SingleContentSchema) {
 	const { user } = await validateRequest();
 	if (!user) throw Error("Unauthorized");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized");
 
 	const { singleContent } = singleContentSchema.parse(input);
@@ -44,7 +44,7 @@ export async function upsertHistoryAndCulture(input: SingleContentSchema) {
 export async function upsertGeographyAndLandmarks(input: SingleContentSchema) {
 	const { user } = await validateRequest();
 	if (!user) throw Error("Unauthorized");
-	const isAuthorized = myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized");
 
 	const { singleContent } = singleContentSchema.parse(input);

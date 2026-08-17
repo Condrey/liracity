@@ -1,6 +1,5 @@
 "use client";
 
-import { LuciaUser } from "@/app/(auth)/lib/session";
 import ButtonAddEditEvent from "@/components/news-and-events/events/button-add-edit-event";
 import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
 import ListOfEvents from "@/components/news-and-events/events/list-of-events";
@@ -12,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import Footer from "@/components/user/footer";
+import { User } from "@/lib/auth";
 import { cityMediaCenterLinks } from "@/lib/constants";
 import { EventData, NewsArticleData } from "@/lib/types";
 import { MenuIcon, PlusIcon } from "lucide-react";
@@ -23,7 +23,7 @@ const { title, description } = cityMediaCenterLinks.find((val) => val.href === "
 
 interface PageClientProps {
 	searchParams: any;
-	user: LuciaUser | null;
+	user: User | null;
 	initialNewsArticles: NewsArticleData[];
 	initialEvents: EventData[];
 }

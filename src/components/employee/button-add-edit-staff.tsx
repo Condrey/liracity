@@ -1,16 +1,15 @@
 "use client";
 
-import { EmployeeData } from "@/lib/types";
-import { Button, ButtonProps } from "../ui/button";
-import { useState } from "react";
-import FormAddEditEmployee from "./form-add-edit-employee";
 import { useSession } from "@/app/session-provider";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import { EmployeeData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { getAllDepartments } from "./action";
-import ErrorContainer from "../query-containers/error-container";
+import { useState } from "react";
 import EmptyContainer from "../query-containers/empty-container";
+import ErrorContainer from "../query-containers/error-container";
+import { Button, ButtonProps } from "../ui/button";
+import { getAllDepartments } from "./action";
 import FormAddEditStaff from "./form-add-edit-staff";
 
 interface ButtonAddEditStaffProps extends ButtonProps {
@@ -24,7 +23,7 @@ export default function ButtonAddEditStaff({ employee, ...props }: ButtonAddEdit
 		queryKey: ["All departments"],
 		queryFn: getAllDepartments
 	});
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) return null;
 	const { data, status } = query;
 	return (

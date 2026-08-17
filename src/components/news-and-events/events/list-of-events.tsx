@@ -4,7 +4,7 @@ import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { ItemGroup } from "@/components/ui/item";
 import LoadingButton from "@/components/ui/loading-button";
-import { EventStatus } from "@/generated/prisma";
+import { EventStatus } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { EventData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";

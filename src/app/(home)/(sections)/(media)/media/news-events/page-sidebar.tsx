@@ -1,6 +1,5 @@
 "use client";
 
-import { LuciaUser } from "@/app/(auth)/lib/session";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
@@ -19,10 +18,11 @@ import {
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
-import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma";
+import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma/enums";
+import { User } from "@/lib/auth";
 import { SEARCH_PARAMS_NEWS_EVENTS } from "@/lib/constants";
 import { myPrivileges } from "@/lib/enums";
-import { CalendarIcon, ChevronRightIcon, LucideIcon, MenuIcon, NewspaperIcon, XIcon } from "lucide-react";
+import { CalendarIcon, ChevronRightIcon, LucideIcon, NewspaperIcon, XIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 
@@ -44,9 +44,9 @@ export function PageSidebar({
 	user,
 	setOpen,
 	...props
-}: React.ComponentProps<typeof Sidebar> & { user: LuciaUser | null; setOpen: (open: boolean) => void }) {
-	const isStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
-	const isModerator = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+}: React.ComponentProps<typeof Sidebar> & { user: User | null; setOpen: (open: boolean) => void }) {
+	const isStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
+	const isModerator = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const items: SideBarItem[] = [
 		{
 			title: "News Articles",

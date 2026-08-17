@@ -1,8 +1,8 @@
 "use server";
 
-import { validateRequest } from "@/auth";
-import { NewsArticleStatus, Role } from "@/generated/prisma";
+import { NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { NewsArticleData, newsArticleDataInclude } from "@/lib/types";
 import { cache } from "react";
@@ -106,8 +106,8 @@ async function relatedArticlesFromTags({
 
 async function latestNews() {
 	const { user } = await validateRequest();
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
 	const latestNews = await prisma.newsArticle.findFirst({
 		where: {
 			createdAt: { lt: new Date() },
@@ -121,8 +121,8 @@ async function latestNews() {
 
 const filterArticlesByAuthorization = async (articles: NewsArticleData[]): Promise<NewsArticleData[]> => {
 	const { user } = await validateRequest();
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
 	return articles.filter((a) => {
 		if (a.status === NewsArticleStatus.DRAFT && !isAnEditor) return null;
 		else if (a.status === NewsArticleStatus.PRIVATE && !isAStaff) return null;

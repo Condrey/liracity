@@ -2,6 +2,8 @@
 
 import { useSession } from "@/app/session-provider";
 import { DataTable } from "@/components/data-table/data-table";
+import { getAllDepartmentList } from "@/components/department/action";
+import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { Role } from "@/generated/prisma";
@@ -9,8 +11,6 @@ import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
-import { getAllDepartmentList } from "@/components/department/action";
-import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import { useDepartmentsColumns } from "./columns";
 
 interface ListOfDepartmentsProps {
@@ -18,7 +18,7 @@ interface ListOfDepartmentsProps {
 }
 export default function ListOfDepartments({ departments }: ListOfDepartmentsProps) {
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 
 	const query = useQuery({
 		queryKey: ["department", "list"],

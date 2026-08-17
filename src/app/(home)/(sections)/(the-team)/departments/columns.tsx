@@ -2,6 +2,8 @@
 
 import { useSession } from "@/app/session-provider";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
+import DropDownMenuDepartment from "@/components/department/drop-down-menu-department";
+import ButtonAddEditDepartmentalSector from "@/components/departmental-sector/button-add-edit-departmental-sector";
 import { Badge } from "@/components/ui/badge";
 import LoadingButton from "@/components/ui/loading-button";
 import { Role } from "@/generated/prisma";
@@ -13,8 +15,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
-import DropDownMenuDepartment from "@/components/department/drop-down-menu-department";
-import ButtonAddEditDepartmentalSector from "@/components/departmental-sector/button-add-edit-departmental-sector";
 
 export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
 	{
@@ -73,7 +73,7 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
 			const departmentalSectors = row.original.departmentalSectors;
 			const numberOfDepartmentalSectors = departmentalSectors.length;
 			const { user } = useSession();
-			const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+			const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 
 			return (
 				<div className="hidden flex-col sm:flex">
@@ -122,7 +122,7 @@ export const useDepartmentsColumns: ColumnDef<DepartmentData>[] = [
 		cell({ row }) {
 			const { user } = useSession();
 			const [isPending, startTransition] = useTransition();
-			const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+			const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 			const { getNavigationLinkWithoutUpdate } = useCustomSearchParams();
 			const department = row.original;
 			const url = getNavigationLinkWithoutUpdate("/" + department.id);

@@ -7,7 +7,6 @@ import {
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuLabel,
-	DropdownMenuRadioGroup,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
@@ -16,11 +15,11 @@ import { Role } from "@/generated/prisma";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { EmployeeData } from "@/lib/types";
-import { Edit3Icon, MoreHorizontalIcon, MoveUpRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MoreHorizontalIcon, MoveUpRightIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
-import FormAddEditEmployee from "./form-add-edit-employee";
 import { DeleteEmployeeDialog } from "./button-delete-employee";
+import FormAddEditEmployee from "./form-add-edit-employee";
 
 interface DropDownMenuEmployeeProps {
 	employee: EmployeeData;
@@ -30,7 +29,7 @@ export default function DropDownMenuEmployee({ employee }: DropDownMenuEmployeeP
 	const url = getNavigationLinkWithoutUpdate("/" + employee.id);
 
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	const [_, setOpen] = useState(false);
 	const [openEditDialog, setOpenEditDialog] = useState(false);
 	const [openDeleteDialog, setOpenDeleteDialog] = useState(false);

@@ -1,26 +1,38 @@
-import { EventStatus, NewsArticleStatus } from "@/generated/prisma";
+import { EventStatus, NewsArticleStatus } from "@/generated/prisma/enums";
 import { z } from "zod";
 
-const requiredString = z.string({ required_error: "This field should have a value" }).trim();
+const requiredString = z.string({ error: "This field should have a value" }).trim();
 
 // Signup
-export const signUpSchema = z.object({
-	email: requiredString.min(1, "Please an email is required").describe("Email for signing up").email(),
-	username: requiredString
-		.min(1, "You need a username")
-		.describe("User username for the user.")
-		.regex(/^[a-zA-Z0-9_-]+$/, "Only letters, numbers, - and _ are allowed"),
-	password: requiredString.min(8, "Password must be at least 8 characters").describe("Password for the user.")
-});
+export const signUpSchema = z
+	.object({
+		email: requiredString.min(1, "Please an email is required").describe("Email for signing up").email(),
+		name: requiredString.min(1, "You need a username").describe("User username for the user."),
+		// .regex(/^[a-zA-Z0-9_-]+$/, "Only letters, numbers, - and _ are allowed")
+		password: requiredString.min(8, "Password must be at least 8 characters").describe("Password for the user."),
+		passwordConfirmation: requiredString
+			.min(8, "Password must be at least 8 characters")
+			.describe("Password confirmation for the user.")
+	})
+	.superRefine((data, ctx) => {
+		if (data.password !== data.passwordConfirmation) {
+			return ctx.addIssue({
+				code: "custom",
+				message: "The passwords entered are not matching",
+				path: ["passwordConfirmation"]
+			});
+		}
+	});
 
-export type SignUpValues = z.infer<typeof signUpSchema>;
+export type SignUpSchema = z.infer<typeof signUpSchema>;
 
 // Login
-export const loginSchema = z.object({
-	username: requiredString.min(1, "Please input your username or email that you registered with."),
-	password: requiredString.min(1, "Password is required to login").describe("Password that you registered with.")
+export const signInSchema = z.object({
+	email: z.email().min(1, "Please input your username or email that you registered with."),
+	password: requiredString.min(1, "Password is required to login").describe("Password that you registered with."),
+	rememberMe: z.boolean()
 });
-export type LoginValues = z.infer<typeof loginSchema>;
+export type SignInSchema = z.infer<typeof signInSchema>;
 export const staffLoginSchema = z.object({
 	ippsNumber: z.number().min(1, "Please input your staff assigned IPPS number."),
 	password: requiredString.min(1, "Password is required to login").describe("Password that you registered with.")
@@ -70,11 +82,11 @@ export const employeeSchema = z.object({
 	departmentalSectorId: requiredString,
 	userId: requiredString,
 	name: requiredString,
-	ippsNumber: z.number({ required_error: "IPPS number is a must" }),
+	ippsNumber: z.number({ error: "IPPS number is a must" }),
 	employeeId: requiredString,
 	position: requiredString,
 	assumedOffice: z.number({
-		required_error: "Please enter year staff assumed office."
+		error: "Please enter year staff assumed office."
 	})
 });
 export type EmployeeSchema = z.infer<typeof employeeSchema>;
@@ -128,8 +140,8 @@ export const newsArticleSchema = z.object({
 	slug: z.string().optional(),
 	coverImageId: z.string().optional().nullable(),
 	summary: z.string().optional().nullable(),
-	publishedAt: z.coerce.date().optional().nullable(),
-	status: z.nativeEnum(NewsArticleStatus),
+	publishedAt: z.date().optional().nullable(),
+	status: z.enum(NewsArticleStatus),
 	content: requiredString,
 	authorId: requiredString,
 	categoryId: requiredString,
@@ -152,13 +164,13 @@ export const eventSchema = z.object({
 	slug: z.string().optional(),
 	coverImageId: z.string().optional().nullable(),
 	summary: z.string().optional().nullable(),
-	status: z.nativeEnum(EventStatus),
+	status: z.enum(EventStatus),
 	description: requiredString,
 	authorId: requiredString,
 	categoryId: requiredString,
 	location: requiredString,
-	startDate: z.coerce.date(),
-	endDate: z.coerce.date().optional().nullable()
+	startDate: z.date(),
+	endDate: z.date().nullish()
 });
 export type EventSchema = z.infer<typeof eventSchema>;
 

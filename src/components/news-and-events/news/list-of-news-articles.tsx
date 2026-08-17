@@ -4,7 +4,7 @@ import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { ItemGroup } from "@/components/ui/item";
 import LoadingButton from "@/components/ui/loading-button";
-import { NewsArticleStatus } from "@/generated/prisma";
+import { NewsArticleStatus } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { NewsArticleData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";

@@ -1,8 +1,8 @@
 "use server";
 
-import { validateRequest } from "@/auth";
-import { EventStatus, Role } from "@/generated/prisma";
+import { EventStatus, Role } from "@/generated/prisma/enums";
 import { allEventStatuses, myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { EventData, eventDataInclude } from "@/lib/types";
 import { cache } from "react";
@@ -125,8 +125,8 @@ async function relatedArticlesByCategory({
 
 const filterEventsByAuthorization = async (events: EventData[]): Promise<EventData[]> => {
 	const { user } = await validateRequest();
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
 	return events.filter((a) => {
 		if (a.status === EventStatus.DRAFT && !isAnEditor) return null;
 		else if (a.status === EventStatus.PRIVATE && !isAStaff) return null;

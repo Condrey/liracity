@@ -1,8 +1,7 @@
 "use client";
 
-import { ChevronsUpDown, LogOut, SunIcon } from "lucide-react";
+import { ChevronsUpDown, LogOutIcon, SunIcon } from "lucide-react";
 
-import LogoutButton from "@/app/(auth)/(database)/logout/logout-button";
 import { useSession } from "@/app/session-provider";
 import {
 	DropdownMenu,
@@ -18,9 +17,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import UserAvatar from "@/components/ui/user-avatar";
+import { authClient } from "@/lib/auth-client";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { buttonVariants } from "../ui/button";
+import { toast } from "sonner";
+import { Button, buttonVariants } from "../ui/button";
 
 export function NavUser() {
 	const { isMobile } = useSidebar();
@@ -28,12 +29,17 @@ export function NavUser() {
 
 	const { user } = useSession();
 
+	async function logoutButtonClicked() {
+		const { error } = await authClient.signOut();
+		if (error) toast.error("Failed to sign out", { description: error.message });
+	}
+
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
 				{!user ? (
 					<Link
-						href={`/login`}
+						href={`/sign-in`}
 						className={buttonVariants({
 							variant: "ghost",
 							className: "w-full"
@@ -48,7 +54,7 @@ export function NavUser() {
 								size="lg"
 								className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 							>
-								<UserAvatar avatarUrl={user.avatarUrl} />
+								<UserAvatar avatarUrl={user.image} />
 
 								<div className="grid flex-1 text-left text-sm leading-tight">
 									<span className="truncate font-semibold">{user.name}</span>
@@ -65,7 +71,7 @@ export function NavUser() {
 						>
 							<DropdownMenuLabel className="p-0 font-normal">
 								<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-									<UserAvatar avatarUrl={user.avatarUrl} />
+									<UserAvatar avatarUrl={user.image} />
 
 									<div className="grid flex-1 text-left text-sm leading-tight">
 										<span className="truncate font-semibold">{user.name}</span>
@@ -102,10 +108,10 @@ export function NavUser() {
 							{/* logging out  */}
 
 							<DropdownMenuItem asChild>
-								<LogoutButton>
-									<LogOut />
+								<Button onClick={() => logoutButtonClicked()}>
+									<LogOutIcon />
 									Log out
-								</LogoutButton>
+								</Button>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>

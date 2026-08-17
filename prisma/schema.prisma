@@ -1,13 +1,12 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 
-// ONline db: https://vercel.com/api/marketplace/sso?integrationConfigurationId=icfg_CR0YDyWYqrQoBR7FvGiwiMoZ&product_id=iap_SYm1SIDap0OBqOvV&resource_id=shiny-wave-94885079&teamId=team_2kW2NcCjaUXcvfsZU68qeuAM
+// Online db: https://vercel.com/api/marketplace/sso?integrationConfigurationId=icfg_CR0YDyWYqrQoBR7FvGiwiMoZ&product_id=iap_SYm1SIDap0OBqOvV&resource_id=shiny-wave-94885079&teamId=team_2kW2NcCjaUXcvfsZU68qeuAM
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -37,6 +36,12 @@ model User {
   events                  Event[]
   eventComments           EventComment[]
   eventLikes              EventLike[]
+
+  image       String?
+  updatedAt   DateTime     @default(now()) @updatedAt
+  accounts    Account[]
+  members     Member[]
+  invitations Invitation[]
 
   @@map("users")
 }
@@ -159,15 +164,22 @@ model EmailVerificationToken {
 }
 
 model Session {
-  id             String   @id @default(uuid())
-  userId         String
-  expiresAt      DateTime
-  createdAt      DateTime @default(now())
-  lastVerifiedAt DateTime @default(now())
-  secretHash     String   @default(uuid())
-  role           Role     @default(USER)
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                   String   @id @default(uuid())
+  userId               String
+  expiresAt            DateTime
+  createdAt            DateTime @default(now())
+  lastVerifiedAt       DateTime @default(now())
+  secretHash           String   @default(uuid())
+  role                 Role     @default(USER)
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token                String   @default(uuid())
+  updatedAt            DateTime @default(now()) @updatedAt
+  ipAddress            String?
+  userAgent            String?
+  activeOrganizationId String?
 
+  @@unique([token])
+  @@index([userId])
   @@map("sessions")
 }
 
@@ -280,7 +292,8 @@ model NewsArticleLike {
   liker         User        @relation(fields: [likerId], references: [id], onDelete: Cascade)
   newsArticle   NewsArticle @relation(fields: [newsArticleId], references: [id], onDelete: Cascade)
 
-  @@unique([likerId, newsArticleId]) //prevent multiple likes by same person
+  //prevent multiple likes by same person
+  @@unique([likerId, newsArticleId])
   @@map("news_article_likes")
 }
 
@@ -338,7 +351,8 @@ model EventLike {
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, eventId]) // Prevent multiple likes by same user
+  // Prevent multiple likes by same user
+  @@unique([userId, eventId])
 }
 
 enum EventStatus {
@@ -353,4 +367,81 @@ enum Role {
   ADMIN
   MODERATOR
   STAFF
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Organization {
+  id          String       @id
+  name        String
+  slug        String
+  logo        String?
+  createdAt   DateTime
+  metadata    String?
+  members     Member[]
+  invitations Invitation[]
+
+  @@unique([slug])
+  @@map("organization")
+}
+
+model Member {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role           String       @default("member")
+  createdAt      DateTime
+
+  @@index([organizationId])
+  @@index([userId])
+  @@map("member")
+}
+
+model Invitation {
+  id             String       @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  email          String
+  role           String?
+  status         String       @default("pending")
+  expiresAt      DateTime
+  createdAt      DateTime     @default(now())
+  inviterId      String
+  user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([email])
+  @@map("invitation")
 }

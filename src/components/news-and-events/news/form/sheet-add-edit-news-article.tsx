@@ -1,4 +1,3 @@
-import { ButtonAddSingleAttachment } from "@/components/attachment/button-add-attachment";
 import TipTapEditorHeader from "@/components/tip-tap-editor/headers/header";
 import TipTapEditorWithHeader, { useTipTapEditor } from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Badge } from "@/components/ui/badge";
@@ -33,6 +32,7 @@ import NewsArticleCategory from "./news-article-category";
 import NewsArticleTag from "./news-article-tags";
 import OtherMedia from "./other-media";
 import { useCoverImageUpload } from "./use-media-upload";
+import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 
 interface SheetAddEditNewsArticleProps {
 	open: boolean;

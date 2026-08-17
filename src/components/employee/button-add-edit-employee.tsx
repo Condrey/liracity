@@ -1,12 +1,12 @@
 "use client";
 
-import { EmployeeData } from "@/lib/types";
-import { Button, ButtonProps } from "../ui/button";
-import { useState } from "react";
-import FormAddEditEmployee from "./form-add-edit-employee";
 import { useSession } from "@/app/session-provider";
 import { Role } from "@/generated/prisma";
 import { myPrivileges } from "@/lib/enums";
+import { EmployeeData } from "@/lib/types";
+import { useState } from "react";
+import { Button, ButtonProps } from "../ui/button";
+import FormAddEditEmployee from "./form-add-edit-employee";
 
 interface ButtonAddEditEmployeeProps extends ButtonProps {
 	departmentalSectorId: string;
@@ -20,7 +20,7 @@ export default function ButtonAddEditEmployee({
 }: ButtonAddEditEmployeeProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) return null;
 	return (
 		<>

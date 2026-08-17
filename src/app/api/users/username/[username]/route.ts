@@ -1,4 +1,4 @@
-import { validateRequest } from "@/auth";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { userDataSelect } from "@/lib/types";
 import { NextRequest } from "next/server";

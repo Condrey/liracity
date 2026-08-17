@@ -3,7 +3,7 @@ import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemFooter, ItemHeader, ItemTitle } from "@/components/ui/item";
 import LoadingButton from "@/components/ui/loading-button";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges, newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
@@ -26,7 +26,7 @@ export default function NewsArticleContainer({
 	const { newsArticleStatus, icon, variant } = newsArticleStatuses[status];
 	const Icon = icon;
 	const { user } = useSession();
-	const isNotVisitor = myPrivileges[user?.role || Role.USER].includes(Role.STAFF);
+	const isNotVisitor = myPrivileges[(user?.role as Role) || Role.USER].includes(Role.STAFF);
 	return (
 		<Item
 			variant="outline"

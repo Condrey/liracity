@@ -1,7 +1,7 @@
-import { validateRequest } from "@/auth";
 import { getFilteredEvents } from "@/components/news-and-events/events/action";
 import { getFilteredNewsArticles } from "@/components/news-and-events/news/action";
 import { cityMediaCenterLinks } from "@/lib/constants";
+import { validateRequest } from "@/lib/get-session";
 import { Metadata } from "next";
 import PageClient from "./page-client";
 

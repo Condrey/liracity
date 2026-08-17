@@ -5,7 +5,7 @@ import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemContent, ItemDescription, ItemFooter, ItemTitle } from "@/components/ui/item";
 import LoadingButton from "@/components/ui/loading-button";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
@@ -29,7 +29,7 @@ export default function EventsArticleContainer({
 	const { eventStatus, icon, variant } = eventStatuses[status];
 	const Icon = icon;
 	const { user } = useSession();
-	const isNotVisitor = myPrivileges[user?.role || Role.USER].includes(Role.STAFF);
+	const isNotVisitor = myPrivileges[(user?.role as Role) || Role.USER].includes(Role.STAFF);
 	const now = new Date();
 	const isPastEvent = !endDate ? isAfter(now, startDate) : isAfter(now, endDate);
 	const { period, status: eventTag } = getEventStatusAndPeriod({ startDate, endDate });

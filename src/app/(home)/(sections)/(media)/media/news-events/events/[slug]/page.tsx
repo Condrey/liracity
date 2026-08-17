@@ -1,7 +1,7 @@
-import { validateRequest } from "@/auth";
 import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
-import { EventStatus, Role } from "@/generated/prisma";
+import { EventStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
@@ -83,8 +83,8 @@ export default async function Page({ params }: PageProps) {
 		categoryId: event.categoryId,
 		currentArticleId: event.id
 	});
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (event.status === EventStatus.DRAFT && !isAnEditor) return unauthorized();
 	if (event.status === EventStatus.PRIVATE && !isAStaff) return unauthorized();
 

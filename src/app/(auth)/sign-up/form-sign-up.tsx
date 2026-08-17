@@ -1,0 +1,142 @@
+"use client";
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
+import { PasswordInput } from "@/components/ui/password-input";
+import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { authClient } from "@/lib/auth-client";
+import { signUpSchema, SignUpSchema } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+export default function SignUpForm() {
+	const [isPending, startTransition] = useTransition();
+	const [error, setError] = useState<string | undefined>(undefined);
+	const router = useRouter();
+	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
+
+	const searchParams = useSearchParams();
+	const [urlRedirect] = useState<string | undefined>(searchParams.get("redirect") as string);
+	const [urlEmail] = useState<string | undefined>(searchParams.get("email") as string);
+
+	const form = useForm<SignUpSchema>({
+		resolver: zodResolver(signUpSchema),
+		defaultValues: {
+			email: urlEmail,
+			name: "",
+			password: "",
+			passwordConfirmation: ""
+		}
+	});
+
+	function submitForm({ email, name, password }: SignUpSchema) {
+		startTransition(async () => {
+			
+			setError(undefined);
+			const { error } = await authClient.signUp.email({
+				email,
+				password,
+				name,
+				callbackURL: urlRedirect || "/"
+			});
+			if (error) {
+				setError(error.message || "Something went wrong.");
+			} else {
+				toast.success("Sign up successful");
+				router.push(urlRedirect || "/");
+			}
+		});
+	}
+
+	return (
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(submitForm)} className="w-full">
+				<Card className="mx-auto w-full max-w-md">
+					<CardHeader>
+						<CardTitle>Self Registration</CardTitle>
+						<CardDescription>Enter your information to register</CardDescription>
+					</CardHeader>
+					<CardContent className="space-y-4">
+						<FormField
+							control={form.control}
+							name="name"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Full name</FormLabel>
+									<FormControl>
+										<Input placeholder="e.g. John Doe" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="email"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Email</FormLabel>
+									<FormControl>
+										<Input type="email" placeholder="e.g. someone@gmail.com" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<FormField
+							control={form.control}
+							name="password"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Password</FormLabel>
+									<FormControl>
+										<PasswordInput placeholder="enter password" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="passwordConfirmation"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Confirm Password</FormLabel>
+									<FormControl>
+										<PasswordInput placeholder="re-enter password" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<div role="alert" className="text-destructive">
+							{error}
+						</div>
+						<LoadingButton loading={isPending} className="w-full">
+							Register
+						</LoadingButton>
+					</CardContent>
+					<CardFooter className="flex flex-row justify-center">
+						<span className="text-center">
+							Already have an account?{" "}
+							<Link
+								href={getNavigationLinkWithPathnameWithoutUpdate("/sign-in")}
+								className="underline hover:text-primary"
+							>
+								Sign in
+							</Link>
+						</span>
+					</CardFooter>
+				</Card>
+			</form>
+		</Form>
+	);
+}

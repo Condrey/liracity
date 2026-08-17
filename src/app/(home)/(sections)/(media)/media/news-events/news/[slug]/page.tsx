@@ -1,7 +1,7 @@
-import { validateRequest } from "@/auth";
 import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
-import { NewsArticleStatus, Role } from "@/generated/prisma";
+import { NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
+import { validateRequest } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
 import { htmlToText } from "html-to-text";
@@ -87,8 +87,8 @@ export default async function Page({ params }: PageProps) {
 		currentArticleId: newsArticle.id,
 		tagIds: newsArticle.tags.map((t) => t.id)
 	});
-	const isAStaff = !!user && myPrivileges[user.role].includes(Role.STAFF);
-	const isAnEditor = !!user && myPrivileges[user.role].includes(Role.MODERATOR);
+	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
+	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 	if (newsArticle.status === NewsArticleStatus.DRAFT && !isAnEditor) return unauthorized();
 	if (newsArticle.status === NewsArticleStatus.PRIVATE && !isAStaff) return unauthorized();
 

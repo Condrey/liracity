@@ -1,4 +1,3 @@
-import { ButtonAddSingleAttachment } from "@/components/attachment/button-add-attachment";
 import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Badge } from "@/components/ui/badge";
 import { CardTitle } from "@/components/ui/card";
@@ -8,6 +7,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
+import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 import { eventStatuses } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -38,18 +38,18 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 	const form = useForm<EventSchema>({
 		resolver: zodResolver(eventSchema),
 		defaultValues: {
-			id: event?.id || altId,
-			title: event?.title || "",
-			categoryId: event?.categoryId || "",
-			status: event?.status || "DRAFT",
-			authorId: event?.authorId || userId || "",
-			description: event?.description || "",
-			coverImageId: event?.coverImageId,
-			location: event?.location || "",
-			slug: event?.slug,
-			summary: event?.summary,
-			startDate: event?.startDate || new Date(),
-			endDate: event?.endDate
+			// id: event?.id || altId,
+			// title: event?.title || "",
+			// categoryId: event?.categoryId || "",
+			// status: event?.status || "DRAFT",
+			// authorId: event?.authorId || userId || "",
+			// description: event?.description || "",
+			// coverImageId: event?.coverImageId,
+			// location: event?.location || "",
+			// slug: event?.slug,
+			// summary: event?.summary,
+			// startDate: event?.startDate || new Date(),
+			// endDate: event?.endDate
 		}
 	});
 	const watchedTitle = form.watch("title");

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import Footer from "@/components/user/footer";
-import { Tag } from "@/generated/prisma";
+import { Tag } from "@/generated/prisma/client";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { NewsArticleData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";

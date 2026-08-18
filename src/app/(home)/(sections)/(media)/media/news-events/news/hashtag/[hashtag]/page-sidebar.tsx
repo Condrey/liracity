@@ -11,7 +11,7 @@ import {
 	SidebarHeader,
 	SidebarRail
 } from "@/components/ui/sidebar";
-import { Tag } from "@/generated/prisma";
+import { Tag } from "@/generated/prisma/client";
 import { NewsArticleData } from "@/lib/types";
 import { XIcon } from "lucide-react";
 

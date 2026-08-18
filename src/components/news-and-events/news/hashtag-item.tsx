@@ -1,7 +1,7 @@
 "use client";
 
 import { badgeVariants } from "@/components/ui/badge";
-import { Tag } from "@/generated/prisma";
+import { Tag } from "@/generated/prisma/client";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

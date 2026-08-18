@@ -1,4 +1,4 @@
-import { Media } from "@/generated/prisma";
+import { Media } from "@/generated/prisma/client";
 import { MediaData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { PlayIcon } from "lucide-react";

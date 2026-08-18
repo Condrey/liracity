@@ -1,8 +1,8 @@
 "use client";
 
+import { Entity } from "@/generated/prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { getEntity } from "./action";
-import { Entity } from "@/generated/prisma";
 
 export const useEntityQuery = (entity: Entity) =>
 	useQuery({

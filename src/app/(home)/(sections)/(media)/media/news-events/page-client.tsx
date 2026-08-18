@@ -43,10 +43,10 @@ export default function PageClient({ searchParams, user, initialEvents, initialN
 				{/* <pre>{JSON.stringify({ tabValue, defaultNewsEventsTabs }, null, 2)}</pre> */}
 				<SidebarProvider defaultOpen={false} cookieName="NEWS_EVENT_SIDEBAR">
 					<SidebarInset className="space-y-6">
-						<header className="sticky top-0 z-50 flex h-fit flex-col gap-2 bg-background pt-4">
+						<header className="sticky top-0 z-20 flex h-fit flex-col gap-2 bg-background pt-4">
 							<PageTitle heading={title} className="px-3" />
-							<div className="flex shrink-0 items-center gap-2 border-y">
-								<div className="flex w-full border-y bg-card px-3 py-1">
+							<div className="b flex shrink-0 items-center gap-2">
+								<div className="flex w-full rounded-sm border-y bg-card px-3 py-1">
 									<TabList setTabValue={setTabValue} />
 								</div>
 								{!sidebar.open && (

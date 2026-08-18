@@ -4,7 +4,7 @@ import { PageTitle } from "@/components/page-utils";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
-import { Entity } from "@/generated/prisma";
+import { Entity } from "@/generated/prisma/client";
 import { Edit3Icon } from "lucide-react";
 import ButtonAddEditGeographicalLandmarks from "./button-add-edit-geographical-landmarks";
 import { useEntityQuery } from "./query";
@@ -36,7 +36,7 @@ export default function GeographyAndLandmarks({ entity }: GeographyAndLandmarksP
 					>
 						<Edit3Icon />
 					</ButtonAddEditGeographicalLandmarks>
-					<TipTapViewer content={data?.geographicalLandmarks} className="z-0 text-justify text-pretty hyphens-auto" />
+					<TipTapViewer content={data?.geographicalLandmarks} />
 				</div>
 			)}
 		</>

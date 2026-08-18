@@ -16,7 +16,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
 	return (
 		<SessionProvider value={{ session, user }}>
 			<div
-				// className="[--header-height:calc(--spacing(14))]"
 				className=""
 				style={
 					{

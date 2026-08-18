@@ -234,7 +234,7 @@ export default function TipTapEditorWithHeader({
 	return (
 		<div
 			className={cn(
-				"flex size-full max-h-none flex-col gap-y-3 overflow-y-auto rounded-md border border-input bg-background pb-4 ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:max-h-[20rem]",
+				"typeset typeset-docs flex size-full max-h-none flex-col gap-y-3 overflow-y-auto rounded-md border border-input bg-background pb-4 ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none md:max-h-[20rem]",
 				isDragActive && "bg-success/10 ring-success",
 				className
 			)}

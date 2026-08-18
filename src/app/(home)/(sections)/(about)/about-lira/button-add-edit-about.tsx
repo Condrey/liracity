@@ -6,7 +6,7 @@ import { Button, ButtonProps } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import { singleContentSchema, SingleContentSchema } from "@/lib/validation";

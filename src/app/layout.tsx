@@ -9,7 +9,6 @@ import { extractRouterConfig } from "uploadthing/server";
 import { appFileRouter } from "./api/uploadthing/core";
 
 import "./globals.css";
-import "./typeset.css";
 
 const geist = Geist({
 	variable: "--font-geist",

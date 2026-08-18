@@ -69,7 +69,9 @@ export default function RelatedNewsArticleItem({ relatedNewsArticle: item }: { r
 						{formatDateToLocal(item.publishedAt || item.createdAt)}
 					</div>
 					<ItemDescription>
-						<TipTapViewer content={item.summary || item.content} />
+						<div className="typeset typeset-notes max-w-[37em]">
+							<TipTapViewer content={item.summary || item.content} />
+						</div>
 					</ItemDescription>
 				</ItemHeader>
 			</Link>

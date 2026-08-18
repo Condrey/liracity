@@ -28,7 +28,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 	if (status === "error") return <ErrorContainer errorMessage="Failed to load landing page" query={query} />;
 	if (!data) return <EmptyContainer message={`Welcome to ${webName}`}></EmptyContainer>;
 	return (
-		<div className="grid w-full items-center overflow-clip md:h-[90vh] md:max-h-fit md:grid-cols-3 lg:max-h-[75vh] xl:grid-cols-4">
+		<div className="grid w-full overflow-clip md:h-[90vh] md:max-h-fit md:grid-cols-3 lg:max-h-[75vh] xl:grid-cols-4">
 			<Image
 				src={data.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
@@ -39,16 +39,16 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 				blurDataURL="/image-placeholder.jpeg"
 				className="w-full flex-1 shrink mask-radial-[100%_100%] mask-radial-from-60% mask-radial-at-top bg-cover md:col-span-3 lg:col-span-2 lg:h-full lg:mask-radial-at-left xl:col-span-3"
 			/>
-			<article className="mx-auto min-h-fit w-full flex-none shrink-0 px-3 md:col-span-3 md:max-w-fit lg:col-span-1 lg:max-w-prose">
+			<article className="mx-auto my-auto max-h-fit w-full flex-none px-3 md:col-span-3 md:max-w-fit md:rounded-md md:bg-card md:p-3 md:pb-8 lg:col-span-1 lg:max-w-prose">
 				<div className="text-xs text-muted-foreground">
 					<time className="ordinal slashed-zero">{formatDateToLocal((data.publishedAt || data.createdAt)!)}</time>,{" "}
 					<address className="inline">{data.location}</address>
 				</div>
-				<h2 className="mt-1 mb-3 line-clamp-2 text-lg leading-tight font-medium tracking-tight text-pretty text-amber-700 uppercase text-shadow-xs md:line-clamp-3 md:text-2xl md:font-bold">
+				<h2 className="mt-1 mb-3 line-clamp-2 text-lg leading-tight font-medium tracking-tight text-pretty text-amber-900 uppercase text-shadow-xs md:line-clamp-3 md:text-2xl md:font-bold">
 					{data.title}
 				</h2>
 
-				<div className="mt-1 line-clamp-4 text-sm leading-tight hyphens-auto md:max-w-prose md:text-justify lg:line-clamp-6 xl:line-clamp-[10]">
+				<div className="typeset typeset-notes mt-1 line-clamp-4 text-sm leading-tight hyphens-auto md:max-w-prose md:text-justify lg:line-clamp-6 xl:line-clamp-[9]">
 					<TipTapViewer content={data.summary || data.content} />
 				</div>
 				<div className="flex w-full">

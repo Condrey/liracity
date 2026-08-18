@@ -6,7 +6,7 @@ import DropDownMenuDepartment from "@/components/department/drop-down-menu-depar
 import ButtonAddEditDepartmentalSector from "@/components/departmental-sector/button-add-edit-departmental-sector";
 import { Badge } from "@/components/ui/badge";
 import LoadingButton from "@/components/ui/loading-button";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";

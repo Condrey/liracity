@@ -2,7 +2,7 @@
 
 import { useSession } from "@/app/session-provider";
 import { Button, ButtonProps } from "@/components/ui/button";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { EmployeeData } from "@/lib/types";
 import { useState } from "react";

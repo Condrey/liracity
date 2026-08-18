@@ -11,7 +11,7 @@ import {
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import LoadingButton from "@/components/ui/loading-button";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { EmployeeData } from "@/lib/types";

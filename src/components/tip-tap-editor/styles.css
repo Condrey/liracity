@@ -17,67 +17,6 @@
 		margin-top: 0;
 	}
 
-	/* List styles */
-	ul,
-	ol {
-		padding: 0 1rem;
-		margin: 1.25rem 1rem 1.25rem 0.4rem;
-		list-style-type: disc;
-
-		li p {
-			margin-top: 0.25em;
-			margin-bottom: 0.25em;
-		}
-	}
-
-	ol {
-		list-style-type: decimal;
-	}
-
-	/* Heading styles */
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		line-height: 1.1;
-		margin-top: 1.5rem;
-		text-wrap: pretty;
-		margin-bottom: calc(var(--spacing) * 0.5);
-	}
-
-	i,
-	em {
-		--tw-tracking: var(--tracking-tighter);
-		letter-spacing: var(--tracking-tighter);
-	}
-
-	h1 {
-		font-size: var(--text-2xl) /* 1.5rem = 24px */;
-		line-height: var(--tw-leading, var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */);
-		--tw-tracking: var(--tracking-tighter) /* -0.05em */;
-		letter-spacing: var(--tracking-tighter) /* -0.05em */;
-		text-align: start;
-	}
-
-	h2 {
-		font-size: 1.2rem;
-		text-align: start;
-	}
-
-	h3 {
-		font-size: 1.1rem;
-		text-align: start;
-	}
-
-	h4,
-	h5,
-	h6 {
-		font-size: 1rem;
-		text-align: start;
-	}
-
 	/* Code and preformatted text styles */
 	code {
 		background-color: var(--foreground);
@@ -125,12 +64,12 @@
 
 	blockquote {
 		border-left: 10px solid var(--warning);
-		border-right: 1px solid var(--warning);
-		border-top: 1px solid var(--warning);
-		border-bottom: 1px solid var(--warning);
+
 		background-color: color-mix(in oklab, var(--warning) 5%, transparent);
-		margin: 1.5rem 0;
-		padding: 1rem;
+		max-width: var(--container-3xl);
+		margin-inline: auto;
+		width: 100%;
+		padding: 0.5rem;
 		&::first-letter {
 			font-size: var(--text-2xl) /* 1.5rem = 24px */;
 			line-height: var(--tw-leading, var(--text-2xl--line-height) /* calc(2 / 1.5) ≈ 1.3333 */);

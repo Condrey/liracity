@@ -3,7 +3,7 @@
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
-import { Entity } from "@/generated/prisma";
+import { Entity } from "@/generated/prisma/client";
 import { Edit3Icon } from "lucide-react";
 import ButtonAddEditAbout from "./button-add-edit-about";
 import { useEntityQuery } from "./query";
@@ -29,7 +29,7 @@ export default function About({ entity }: AboutProps) {
 					<ButtonAddEditAbout size={"icon"} variant={"outline"} className="m-2 flex-none" about={data?.about!}>
 						<Edit3Icon />
 					</ButtonAddEditAbout>
-					<TipTapViewer content={data?.about} className="inline text-justify text-pretty hyphens-auto" />
+					<TipTapViewer content={data?.about} />
 				</div>
 			)}
 		</>

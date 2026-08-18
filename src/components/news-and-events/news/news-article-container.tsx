@@ -31,7 +31,7 @@ export default function NewsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"group/article size-auto h-fit cursor-pointer p-0",
+				"group/article size-auto h-fit cursor-pointer border border-warning/20 p-0",
 				isPending && "animate-pulse",
 				isHovering && "bg-muted shadow-md",
 				className
@@ -51,7 +51,7 @@ export default function NewsArticleContainer({
 							width={720}
 							height={480}
 							className={cn(
-								"pointer-events-none aspect-square max-h-[200px] touch-none rounded-sm mask-b-from-10% mask-b-to-90% object-cover",
+								"pointer-events-none aspect-square max-h-[200px] touch-none rounded-sm mask-b-from-2% object-cover",
 								isHovering && "scale-110 transition-all duration-300"
 							)}
 						/>
@@ -100,7 +100,9 @@ export default function NewsArticleContainer({
 				<ItemContent className="px-3">
 					<ItemTitle className="line-clamp-2">{title}</ItemTitle>
 					<ItemDescription>
-						<TipTapViewer content={summary ?? content} />
+						<div className="typeset typeset-notes max-w-[37em]">
+							<TipTapViewer content={summary ?? content} />
+						</div>
 					</ItemDescription>
 				</ItemContent>
 			</Link>

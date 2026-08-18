@@ -8,6 +8,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
 import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
+import { EventStatus } from "@/generated/prisma/enums";
 import { eventStatuses } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -53,7 +54,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 		}
 	});
 	const watchedTitle = form.watch("title");
-	const watchedStatus = form.watch("status");
+	const watchedStatus = form.watch("status") || EventStatus.DRAFT;
 	const watchedId = form.watch("id")!;
 	const watchedStartDate = form.watch("startDate")!;
 	const watchedEndDate = form.watch("endDate")!;

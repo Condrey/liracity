@@ -12,6 +12,13 @@ import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuLabel,
+	DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
@@ -23,7 +30,7 @@ import { EventData } from "@/lib/types";
 import { getEventStatusAndPeriod } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { formatDate, isAfter } from "date-fns";
-import { Edit3Icon, MapPin, MenuIcon, MoveLeftIcon, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MapPin, MenuIcon, MoreVerticalIcon, MoveLeftIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
@@ -142,12 +149,34 @@ function EventContent({ event }: EventContentProps) {
 		<article className="space-y-12">
 			<header>
 				<PageTitle heading={title} className="flex-wrap">
-					<ButtonAddEditEvent size={"icon"} event={event} className="flex-none">
-						<Edit3Icon />
-					</ButtonAddEditEvent>
-					<ButtonDeleteEvent event={event} size={"icon"} variant={"destructive"} className="flex-none">
-						<Trash2Icon />
-					</ButtonDeleteEvent>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Button size={"icon-lg"} variant={"secondary"} className="rounded-full">
+								<MoreVerticalIcon />
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent>
+							<DropdownMenuGroup className="space-y-1">
+								<DropdownMenuLabel>Action</DropdownMenuLabel>
+								<ButtonAddEditEvent
+									size={"sm"}
+									variant={"ghost"}
+									event={event}
+									className="w-full flex-none justify-start"
+								>
+									<Edit3Icon /> Edit event
+								</ButtonAddEditEvent>
+								<ButtonDeleteEvent
+									event={event}
+									size={"sm"}
+									variant={"ghost"}
+									className="w-full flex-none justify-start"
+								>
+									<Trash2Icon /> Delete event
+								</ButtonDeleteEvent>
+							</DropdownMenuGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</PageTitle>
 				<div className="mb-2 flex flex-wrap items-center gap-2">
 					<Badge variant={variant}>
@@ -179,12 +208,7 @@ function EventContent({ event }: EventContentProps) {
 					<ArticleImage mediaIdentifier={coverImage?.url} width={1920} height={1080} alt="event cover image" />
 				)}
 			</section>
-			<section>
-				<TipTapViewer
-					content={description}
-					className="text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed"
-				/>
-			</section>
+			<TipTapViewer content={description} className="" />
 
 			{!!media && !!media.length && (
 				<section className="space-y-2">
@@ -208,11 +232,8 @@ function EventContent({ event }: EventContentProps) {
 			)}
 			{!!summary && (
 				<section>
-					<TypographyH2 title={`🧠 Event description Too Long; Didn't Read:`} className="uppercase" />
-					<TipTapViewer
-						content={summary}
-						className="text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed"
-					/>
+					<TypographyH2 title={`SUMMARY`} className="uppercase" />
+					<TipTapViewer content={summary} />
 				</section>
 			)}
 		</article>

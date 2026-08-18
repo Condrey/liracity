@@ -18,7 +18,7 @@ export default function PageContainer({ showFooter = true, className, children }
 			>
 				{children}
 			</div>
-			{showFooter && <Footer />}
+			{showFooter && <Footer className="" />}
 		</div>
 	);
 }

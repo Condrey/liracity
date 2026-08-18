@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Code from "@tiptap/extension-code";
 import { Color } from "@tiptap/extension-color";
 import Document from "@tiptap/extension-document";
@@ -133,7 +134,16 @@ const TipTapViewer = ({ content, className }: { content: any; className?: string
 			editor.commands.setContent(content);
 		}
 	}, [editor, content]);
-	return <EditorContent editor={editor} className={className} contentEditable={false} />;
+	return (
+		<EditorContent
+			editor={editor}
+			className={cn(
+				"typeset typeset-docs text-justify leading-tight hyphens-auto md:text-xl md:leading-snug",
+				className
+			)}
+			contentEditable={false}
+		/>
+	);
 };
 
 export default TipTapViewer;

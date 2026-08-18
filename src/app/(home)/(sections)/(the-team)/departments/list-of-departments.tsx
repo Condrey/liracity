@@ -6,7 +6,7 @@ import { getAllDepartmentList } from "@/components/department/action";
 import ButtonAddEditDepartment from "@/components/department/button-add-edit-department";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { DepartmentData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";

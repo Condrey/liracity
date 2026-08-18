@@ -8,10 +8,10 @@ import {
 	navigationMenuTriggerStyle
 } from "@/components/ui/navigation-menu";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { NavLinkGroup } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { TransitionStartFunction, useTransition } from "react";
-import { NavLinkGroup } from "../../../lib/constants";
 
 interface NavigationMenuItemContentProps {
 	nav: NavLinkGroup;

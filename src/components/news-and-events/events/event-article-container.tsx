@@ -63,7 +63,7 @@ export default function EventsArticleContainer({
 						mouseEntered && "scale-110 transition-all duration-300"
 					)}
 				/>
-				<div className="absolute size-full flex-1 p-3 backdrop-blur-sm">
+				<div className="absolute mb-8 size-full flex-1 p-3 backdrop-blur-sm">
 					<ItemContent>
 						<ItemFooter className="flex flex-wrap justify-start gap-1 space-x-1">
 							{isNotVisitor && (
@@ -84,7 +84,9 @@ export default function EventsArticleContainer({
 							{title}
 						</ItemTitle>
 						<ItemDescription>
-							<TipTapViewer content={summary ?? description} />
+							<div className="typeset typeset-notes max-w-[37em]">
+								<TipTapViewer content={summary ?? description} />
+							</div>
 						</ItemDescription>
 					</ItemContent>
 				</div>

@@ -50,7 +50,9 @@ export default function DepartmentalSectorContainer({ departmentalSector: sector
 			<ItemContent>
 				{sector.description && (
 					<ItemDescription>
-						<TipTapViewer className="text-justify hyphens-auto" content={sector.description} />
+						<div className="typeset typeset-notes max-w-[37em]">
+							<TipTapViewer className="text-justify hyphens-auto" content={sector.description} />
+						</div>
 					</ItemDescription>
 				)}
 				<ItemActions>

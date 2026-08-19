@@ -51,13 +51,13 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 			{user ? (
 				<DropdownMenu>
 					<DropdownMenuTrigger className="hover:cursor-pointer">
-						<UserAvatar avatarUrl={user.image} className={cn("size-[2rem]", className)} size={100} />
+						<UserAvatar image={user.image} className={cn("size-[2rem]", className)} size={100} />
 					</DropdownMenuTrigger>
 
 					<DropdownMenuContent className="mx-4 flex min-w-60 flex-col p-4">
 						<DropdownMenuGroup className="flex flex-col items-center text-xs">
 							<div>
-								<UserAvatar avatarUrl={user.image} className="size-[150px]" size={150} />
+								<UserAvatar image={user.image} className="size-[150px]" size={150} />
 							</div>
 							<DropdownMenuLabel>
 								<UserLinkWithTooltip username={user.name!}>

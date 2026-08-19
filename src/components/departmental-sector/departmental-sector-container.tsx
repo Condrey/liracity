@@ -33,7 +33,7 @@ export default function DepartmentalSectorContainer({ departmentalSector: sector
 								<div className="flex items-center gap-1.5">
 									<div className="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
 										{sector.employees.slice(0, 7).map((staff) => (
-											<UserAvatar avatarUrl={staff.user.avatarUrl} size={24} />
+											<UserAvatar image={staff.user.image} size={24} />
 										))}
 									</div>
 									<span> {`${formatNumber(numberOfStaffs)} staff${numberOfStaffs === 1 ? "" : "s"}`}</span>

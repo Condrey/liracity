@@ -166,7 +166,7 @@ function CommandItemOrganization({
 }) {
 	return (
 		<div className={cn("flex w-full gap-2", isChecked && "font-bold text-secondary-foreground", className)}>
-			<UserAvatar avatarUrl={logo} />
+			<UserAvatar image={logo} />
 			<div className="flex flex-col">
 				<span>{name}</span>
 				<span className="text-xs text-muted-foreground">{slug}</span>

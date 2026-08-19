@@ -26,7 +26,7 @@ export default function ChartUserContainer({ user, department }: ChartUserContai
 			{!!user && (
 				<>
 					<div className="hidden flex-col flex-wrap items-center justify-start gap-3 p-3 md:flex md:flex-row">
-						<UserAvatar avatarUrl={user.avatarUrl} size={75} className="mx-auto w-full max-w-fit" />
+						<UserAvatar image={user.image} size={75} className="mx-auto w-full max-w-fit" />
 						<div className="mx-auto flex w-full max-w-fit flex-col justify-start uppercase">
 							<strong className="md:tex-2xl line-clamp-2 flex items-center text-xl font-bold tracking-tighter text-ellipsis">
 								{!!user.title && <span className="text-muted-foreground:">{user.title}</span>} {user.name}{" "}

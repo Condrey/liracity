@@ -67,7 +67,7 @@ export default function Chart({ departments }: ChartProps) {
 }
 const townClerk: ChartUser = {
 	id: "town_clerk",
-	avatarUrl: null,
+	image: null,
 	email: "town-clerk@liracity.go.ug",
 	endedOffice: null,
 	hierarchy: 1,

@@ -14,7 +14,6 @@ model User {
   name                    String?
   username                String?                  @unique
   email                   String?                  @unique
-  avatarUrl               String?
   role                    Role                     @default(USER)
   createdAt               DateTime                 @default(now())
   telephone               String?

@@ -39,7 +39,7 @@ export const useSectorEmployeeColumns: ColumnDef<EmployeeData>[] = [
 			const currentYear = new Date().getFullYear();
 			return (
 				<div className="flex items-center gap-2">
-					<UserAvatar avatarUrl={user.avatarUrl} className="hidden sm:flex" />
+					<UserAvatar image={user.image} className="hidden sm:flex" />
 					<div className="flex flex-col justify-center">
 						<div>
 							<Badge

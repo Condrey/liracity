@@ -14,22 +14,22 @@ const avatarRouter = f({
 		return { user };
 	})
 	.onUploadComplete(async ({ metadata, file }) => {
-		const oldAvatarUrl = metadata.user.avatarUrl;
-		if (oldAvatarUrl) {
-			const key = oldAvatarUrl.split(`/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`)[1];
+		const oldImage = metadata.user.image;
+		if (oldImage) {
+			const key = oldImage.split(`/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`)[1];
 			await new UTApi().deleteFiles(key);
 		}
 
-		const newAvatarUrl = file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`);
+		const newImage = file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`);
 
 		await prisma.user.update({
 			where: { id: metadata.user.id },
 			data: {
-				avatarUrl: newAvatarUrl
+				image: newImage
 			}
 		});
 
-		return { avatarUrl: newAvatarUrl };
+		return { image: newImage };
 	});
 
 const coverImageRouter = f({

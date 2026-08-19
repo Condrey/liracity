@@ -6,10 +6,9 @@ import Linkify from "./linkify";
 
 import { useSession } from "@/app/session-provider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { UserDataSelect } from "@/lib/types";
 import UserAvatar from "./user-avatar";
-import { Button } from "@/components/ui/button";
-import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 
 interface UserTooltipProps extends PropsWithChildren {
 	user: UserDataSelect;
@@ -33,7 +32,7 @@ export default function UserTooltip({ user, children }: UserTooltipProps) {
 					<div className="flex max-w-80 flex-col gap-3 px-1 py-2.5 break-words md:min-w-52">
 						<div className="flex items-center justify-between gap-2">
 							<Link href={userDetailsUrl}>
-								<UserAvatar size={70} avatarUrl={user.avatarUrl} />
+								<UserAvatar size={70} image={user.image} />
 							</Link>
 							{/* {loggedInUser.id !== user.id && (
                 <FollowButton userId={user.id} initialState={followerState} />

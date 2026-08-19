@@ -4,7 +4,7 @@ import { Prisma } from "@/generated/prisma/client";
 export const userDataSelect = {
 	id: true,
 	name: true,
-	avatarUrl: true,
+	image: true,
 	telephone: true,
 	email: true,
 	isVerified: true,
@@ -96,7 +96,7 @@ export type ChartUser = {
 	name: string;
 	resumedOffice: number;
 	endedOffice: number | null;
-	avatarUrl: string | null;
+	image: string | null;
 	isVerified?: boolean;
 	position: string;
 	title: string | null;

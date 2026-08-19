@@ -6,10 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import UserAvatar from "@/components/ui/user-avatar";
 import { EmployeeData } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import { DotIcon, Edit3Icon, MailIcon, PhoneCallIcon } from "lucide-react";
 import Link from "next/link";
 import ButtonAddEditHeadOfDepartment from "./button-add-edit-head-of-department";
-import { cn } from "@/lib/utils";
 
 interface HeadOfDepartmentContainerProps {
 	employee: EmployeeData | null;
@@ -33,12 +33,12 @@ export default function HeadOfDepartmentContainer({
 				</ButtonAddEditHeadOfDepartment>
 			</EmptyContainer>
 		);
-	const { avatarUrl, email, name, telephone, id } = employee.user;
+	const { image, email, name, telephone, id } = employee.user;
 	const { user: currentUser } = useSession();
 	return (
 		<Card className={cn("w-full max-w-sm", className)}>
 			<div>
-				<UserAvatar avatarUrl={avatarUrl} size={150} className="mx-auto w-full max-w-[150px]" />
+				<UserAvatar image={image} size={150} className="mx-auto w-full max-w-[150px]" />
 				<ButtonAddEditHeadOfDepartment
 					departmentId={departmentId}
 					employee={employee}

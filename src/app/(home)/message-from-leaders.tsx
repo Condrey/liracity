@@ -22,7 +22,7 @@ function LeaderContainer() {
 		<div className="group relative flex flex-col items-center">
 			<Card className="w-full items-center gap-3 group-odd:from-warning/10 group-even:from-success/10 md:mt-[90px] md:bg-gradient-to-t">
 				<CardHeader className="flex w-full flex-row items-center gap-0.5 md:mt-[80px] md:flex-col md:*:text-center">
-					<UserAvatar avatarUrl={null} size={75} className="mr-3 flex md:hidden" />{" "}
+					<UserAvatar image={null} size={75} className="mr-3 flex md:hidden" />{" "}
 					<div>
 						<CardTitle className="uppercase transition-all group-even:scale-105 group-even:text-success">
 							John Doe
@@ -44,7 +44,7 @@ function LeaderContainer() {
 				</CardContent>
 				<CardAction></CardAction>
 			</Card>
-			<UserAvatar avatarUrl={null} size={180} className="absolute top-0 hidden border-2 md:flex" />
+			<UserAvatar image={null} size={180} className="absolute top-0 hidden border-2 md:flex" />
 		</div>
 	);
 }

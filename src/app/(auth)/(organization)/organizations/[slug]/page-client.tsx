@@ -1,10 +1,10 @@
 "use client";
 
 import { getOrganizationBySlug } from "@/components/feature/organization/action";
-import ListOfMembers from "@/components/feature/organization/members/list-of-members";
+// import ListOfMembers from "@/components/feature/organization/members/list-of-members";
 import SlugOrganizationDetails from "@/components/feature/organization/slug-organization-details";
-import ErrorContainer from "@/components/query-container/error-container";
-import { ActiveOrganization } from "@/lib/get-session";
+import ErrorContainer from "@/components/query-containers/error-container";
+import { ActiveOrganization } from "@/lib/auth";
 import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 
@@ -27,11 +27,11 @@ export default function PageClient({ slug, initialData }: Props) {
 	return (
 		<div className="mx-auto flex max-w-9xl flex-col gap-4 xl:flex-row">
 			<SlugOrganizationDetails organization={organization} className="max-h-fit w-full md:max-w-sm" />
-			<ListOfMembers
+			{/* <ListOfMembers
 				initialData={organization.members}
 				organizationSlug={organization.slug}
 				organizationId={organization.id}
-			/>
+			/> */}
 		</div>
 	);
 }

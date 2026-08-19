@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { cache, Suspense } from "react";
 import { SideCarousel } from "./about-lira/side-carousel";
 
-export const allMedia = cache(async () => await prisma.media.findMany());
+export const allMedia = cache(async () => await prisma.media.findMany({ take: 50, orderBy: { createdAt: "desc" } }));
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const sideBarMedia = allMedia();

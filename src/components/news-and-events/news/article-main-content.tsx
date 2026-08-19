@@ -116,18 +116,16 @@ export function ArticleMainContent({ newsArticle }: ArticleMainContentProps) {
 				</ButtonGroup>
 			</section>
 			<section className={cn("flex flex-col items-center", showSummary ? "sticky" : "relative")}>
-				<div className="typeset typeset-notes max-w-[37em]">
-					<TipTapViewer
-						content={showSummary && summary ? `<h1>[Summary]</h1> ${summary}` : content}
-						className={cn(
-							"text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed",
-							!showMore
-								? "max-h-[300px] animate-accordion-down overflow-hidden mask-b-from-20% pb-16 transition-all ease-in sm:pb-0"
-								: "animate-accordion-up pb-32 ease-out sm:pb-16",
-							showSummary ? "max-h-none mask-none pb-16" : ""
-						)}
-					/>
-				</div>
+				<TipTapViewer
+					content={showSummary && summary ? `<h1>[Summary]</h1> ${summary}` : content}
+					className={cn(
+						"text-justify leading-tight hyphens-auto md:text-xl md:leading-relaxed",
+						!showMore
+							? "max-h-[300px] animate-accordion-down overflow-hidden mask-b-from-20% pb-16 transition-all ease-in sm:pb-0"
+							: "animate-accordion-up pb-32 ease-out sm:pb-16",
+						showSummary ? "max-h-none mask-none pb-16" : ""
+					)}
+				/>
 				<ButtonGroup className="absolute bottom-0 mx-auto flex w-full max-w-md flex-col-reverse justify-center gap-3 rounded-md bg-secondary/10 px-3 py-2 backdrop-blur-xs sm:flex-row">
 					{summary && (
 						<Button

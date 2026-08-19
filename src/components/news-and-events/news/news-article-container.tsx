@@ -100,9 +100,7 @@ export default function NewsArticleContainer({
 				<ItemContent className="px-3">
 					<ItemTitle className="line-clamp-2">{title}</ItemTitle>
 					<ItemDescription>
-						<div className="typeset typeset-notes max-w-[37em]">
-							<TipTapViewer content={summary ?? content} />
-						</div>
+						<TipTapViewer content={summary ?? content} />
 					</ItemDescription>
 				</ItemContent>
 			</Link>

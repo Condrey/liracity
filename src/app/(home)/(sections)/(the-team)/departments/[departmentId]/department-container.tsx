@@ -28,9 +28,7 @@ export default function DepartmentContainer({ department }: DepartmentContainerP
 					</CardTitle>
 					{about && (
 						<CardDescription>
-							<div className="typeset typeset-notes max-w-[37em]">
-								<TipTapViewer content={about} className="max-w-prose text-justify hyphens-auto" />
-							</div>
+							<TipTapViewer content={about} className="max-w-prose text-justify hyphens-auto" />
 						</CardDescription>
 					)}
 				</Fragment>

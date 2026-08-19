@@ -137,10 +137,7 @@ const TipTapViewer = ({ content, className }: { content: any; className?: string
 	return (
 		<EditorContent
 			editor={editor}
-			className={cn(
-				"typeset typeset-docs text-justify leading-tight hyphens-auto md:text-xl md:leading-snug",
-				className
-			)}
+			className={cn("typeset typeset-docs text-justify leading-tight hyphens-auto md:leading-snug", className)}
 			contentEditable={false}
 		/>
 	);

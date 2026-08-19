@@ -39,18 +39,18 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 	const form = useForm<EventSchema>({
 		resolver: zodResolver(eventSchema),
 		defaultValues: {
-			// id: event?.id || altId,
-			// title: event?.title || "",
-			// categoryId: event?.categoryId || "",
-			// status: event?.status || "DRAFT",
-			// authorId: event?.authorId || userId || "",
-			// description: event?.description || "",
-			// coverImageId: event?.coverImageId,
-			// location: event?.location || "",
-			// slug: event?.slug,
-			// summary: event?.summary,
-			// startDate: event?.startDate || new Date(),
-			// endDate: event?.endDate
+			id: event?.id || altId,
+			title: event?.title || "",
+			categoryId: event?.categoryId || "",
+			status: event?.status || "DRAFT",
+			authorId: event?.authorId || userId || "",
+			description: event?.description || "",
+			coverImageId: event?.coverImageId,
+			location: event?.location || "",
+			slug: event?.slug,
+			summary: event?.summary,
+			startDate: event?.startDate || new Date(),
+			endDate: event?.endDate
 		}
 	});
 	const watchedTitle = form.watch("title");

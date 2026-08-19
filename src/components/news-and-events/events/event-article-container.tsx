@@ -84,9 +84,7 @@ export default function EventsArticleContainer({
 							{title}
 						</ItemTitle>
 						<ItemDescription>
-							<div className="typeset typeset-notes max-w-[37em]">
-								<TipTapViewer content={summary ?? description} />
-							</div>
+							<TipTapViewer content={summary ?? description} className="" />
 						</ItemDescription>
 					</ItemContent>
 				</div>

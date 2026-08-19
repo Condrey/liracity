@@ -69,12 +69,12 @@ export default function WhatWeStandFor() {
 									<span className="sr-only">Copy {key} to clipboard</span>
 									<CopyIcon /> Copy
 								</Button>
-								<div className="typeset-docs first-letter:capitalize">
+								<div className="typeset-docs typeset first-letter:capitalize">
 									<span className="font-medium tracking-tighter text-muted-foreground italic">{key}</span>{" "}
 									<span className="text-start font-medium tracking-tighter text-muted-foreground">| {webName}</span>{" "}
 									<div
 										dangerouslySetInnerHTML={{ __html: md.render(value) }}
-										className="text-sm tracking-normal text-pretty hyphens-auto whitespace-pre-line md:whitespace-normal"
+										// className="text-sm tracking-normal text-pretty hyphens-auto whitespace-pre-line md:whitespace-normal"
 									/>
 								</div>
 							</div>

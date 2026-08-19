@@ -60,9 +60,7 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 						<span className="uppercase">{period}</span>
 					</div>
 					<ItemDescription>
-						<div className="typeset typeset-notes max-w-[37em]">
-							<TipTapViewer content={item.summary || item.description} />
-						</div>
+						<TipTapViewer content={item.summary || item.description} />
 					</ItemDescription>
 				</ItemHeader>
 			</Link>

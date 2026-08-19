@@ -30,12 +30,7 @@ export default function SectorSideBar({ sector, className }: SectorSideBarProps)
 						</ButtonAddEditDepartment>
 					</div>
 					<CardDescription className="">
-						<div className="typeset typeset-notes max-w-[37em]">
-							<TipTapViewer
-								content={sector.departMent?.about}
-								className="max-w-prose text-justify hyphens-auto italic"
-							/>
-						</div>
+						<TipTapViewer content={sector.departMent?.about} className="max-w-prose text-justify hyphens-auto italic" />
 					</CardDescription>
 				</CardHeader>
 			</Card>

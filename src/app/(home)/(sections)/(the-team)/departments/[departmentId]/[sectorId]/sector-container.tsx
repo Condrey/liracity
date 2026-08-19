@@ -35,9 +35,7 @@ export default function SectorContainer({ departmentalSector }: SectorContainerP
 					</CardTitle>
 					{description && (
 						<CardDescription>
-							<div className="typeset typeset-notes max-w-[37em]">
-								<TipTapViewer content={description} className="max-w-prose text-justify hyphens-auto" />
-							</div>
+							<TipTapViewer content={description} className="max-w-prose text-justify hyphens-auto" />
 						</CardDescription>
 					)}
 				</Fragment>

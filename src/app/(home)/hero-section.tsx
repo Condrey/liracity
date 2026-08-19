@@ -48,9 +48,10 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 					{data.title}
 				</h2>
 
-				<div className="typeset typeset-notes mt-1 line-clamp-4 text-sm leading-tight hyphens-auto md:max-w-prose md:text-justify lg:line-clamp-6 xl:line-clamp-[9]">
-					<TipTapViewer content={data.summary || data.content} />
-				</div>
+				<TipTapViewer
+					content={data.summary || data.content}
+					className="line-clamp-4 md:line-clamp-6 xl:line-clamp-[8]"
+				/>
 				<div className="flex w-full">
 					<Link
 						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data.slug}`)}

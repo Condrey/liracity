@@ -103,6 +103,17 @@ export const newsLetterSchema = z.object({
 });
 export type NewsLetterSchema = z.infer<typeof newsLetterSchema>;
 
+// organization
+export const organizationSchema = z.object({
+	id: z.string().optional().describe("Unique identifier(UUIDV4) for the buyer"),
+	name: requiredString.min(1, { error: "Please enter a correct name" }),
+	slug: requiredString.min(1, { error: "Organization Slug is required" }),
+	logo: z.string().optional(),
+	metadata: z.string().optional(),
+	keepCurrentActiveOrganization: z.boolean()
+});
+export type OrganizationSchema = z.infer<typeof organizationSchema>;
+
 // Department
 export const departmentSchema = z.object({
 	id: z.string().optional(),

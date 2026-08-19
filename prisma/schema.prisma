@@ -363,6 +363,7 @@ enum EventStatus {
 }
 
 enum Role {
+  SUPER_ADMIN
   USER
   ADMIN
   MODERATOR
@@ -406,7 +407,8 @@ model Organization {
   name        String
   slug        String
   logo        String?
-  createdAt   DateTime
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   metadata    String?
   members     Member[]
   invitations Invitation[]

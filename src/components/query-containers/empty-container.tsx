@@ -1,28 +1,38 @@
-"use client";
-
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty";
 import { cn } from "@/lib/utils";
-import { MessageSquareMoreIcon } from "lucide-react";
+import { LucideIcon, MessageSquareMoreIcon } from "lucide-react";
 
-interface EmptyContainerProps {
-	message: string | undefined;
+interface Props {
+	message: string;
+	icon?: LucideIcon;
+	description?: string;
+	required?: boolean;
 	children?: React.ReactNode;
 	className?: string;
 }
-export default function EmptyContainer({ message, children, className }: EmptyContainerProps) {
-	const isMobile = useIsMobile();
+
+export default function EmptyContainer({
+	message: title,
+	description,
+	required = false,
+	icon: Icon = MessageSquareMoreIcon,
+	className,
+	children
+}: Props) {
 	return (
-		<div
-			className={cn(
-				"flex min-h-[20rem] flex-col items-center justify-center gap-4",
-				isMobile && "rounded-md bg-muted p-3",
-				"border-none dark:border dark:bg-muted dark:p-3",
-				className
-			)}
-		>
-			{!!message && <MessageSquareMoreIcon strokeWidth={0.5} className="size-32 text-muted-foreground" />}
-			<p className="max-w-sm text-center text-muted-foreground">{message}</p>
-			{children}
-		</div>
+		<Empty className={cn("", className)}>
+			<Icon
+				className={cn(
+					"size-20 fill-accent text-accent-foreground",
+					required && "animate-bounce fill-primary text-primary-foreground"
+				)}
+				strokeWidth={0.5}
+			/>
+			<EmptyHeader>
+				<EmptyTitle className={cn(required && "animate-pulse")}>{title}</EmptyTitle>
+				<EmptyDescription className={cn(required && "animate-pulse")}>{description}</EmptyDescription>
+			</EmptyHeader>
+			<EmptyContent>{children} </EmptyContent>
+		</Empty>
 	);
 }

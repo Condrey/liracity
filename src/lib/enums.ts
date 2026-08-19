@@ -4,6 +4,7 @@ import { InboxIcon, LetterTextIcon, LockIcon, LucideIcon, TrashIcon, UploadIcon 
 // role
 const allRoles = Object.values(Role);
 export const myPrivileges: Record<Role, Role[]> = {
+	SUPER_ADMIN: allRoles,
 	ADMIN: allRoles,
 	MODERATOR: allRoles.filter((role) => role !== Role.ADMIN),
 	STAFF: [Role.STAFF, Role.USER],
@@ -21,6 +22,9 @@ export const userRoles: Record<Role, { role: string }> = {
 	},
 	STAFF: {
 		role: "Staff"
+	},
+	SUPER_ADMIN: {
+		role: "Super administrator"
 	}
 };
 

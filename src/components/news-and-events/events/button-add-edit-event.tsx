@@ -2,6 +2,7 @@
 
 import { useSession } from "@/app/session-provider";
 import { Button, ButtonProps } from "@/components/ui/button";
+import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { useState } from "react";
@@ -16,7 +17,7 @@ export default function ButtonAddEditEvent({ event, ...props }: ButtonAddEditEve
 	const altId = Date.now().toString();
 	const { user } = useSession();
 	const userId = user?.id;
-	const canUpsert = !!user && myPrivileges[user.role!].includes("MODERATOR");
+	const canUpsert = !!user && myPrivileges[user.role as Role].includes("MODERATOR");
 
 	return (
 		<>

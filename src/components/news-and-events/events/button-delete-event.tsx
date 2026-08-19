@@ -11,6 +11,7 @@ import {
 	DialogTitle
 } from "@/components/ui/dialog";
 import LoadingButton from "@/components/ui/loading-button";
+import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
@@ -26,7 +27,7 @@ interface ButtonDeleteEventProps extends ButtonProps {
 export default function ButtonDeleteEvent({ event, variant, ...props }: ButtonDeleteEventProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const canDelete = !!user && myPrivileges[user.role!].includes("MODERATOR");
+	const canDelete = !!user && myPrivileges[user.role as Role].includes("MODERATOR");
 
 	return (
 		<>

@@ -12,7 +12,7 @@ export default async function Page() {
 	return (
 		<main className="mx-auto flex max-w-9xl flex-col space-y-6 px-4">
 			<div className="flex items-center gap-3">
-				<h3>Organizations</h3>
+				<h3>Organizations _</h3>
 				<ButtonAddEditOrganization size={"icon-lg"} variant={"outline"}>
 					<PlusIcon />
 				</ButtonAddEditOrganization>

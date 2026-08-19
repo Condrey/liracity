@@ -30,7 +30,9 @@ export function useOtherMediaUploads() {
 					return {
 						...a,
 						mediaId: uploadResult.serverData.mediaId,
-						isUploading: false
+						isUploading: false,
+						extension: a.file.type,
+						name: a.file.name
 					};
 				})
 			);

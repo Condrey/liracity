@@ -26,7 +26,6 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { ColorHighlighter } from "./custom-extensions/color-highlighter";
 import { SmilieReplacer } from "./custom-extensions/smiley-replacer";
-import TipTapEditorHeader from "./headers/header";
 
 import { useDropzone } from "@uploadthing/react";
 import { ClipboardEvent, useEffect } from "react";
@@ -240,7 +239,7 @@ export default function TipTapEditorWithHeader({
 			)}
 			{...routeprops}
 		>
-			{includeHeader && <TipTapEditorHeader editor={editor} />}
+			{/* {includeHeader && <TipTapEditorHeader editor={editor} />} */}
 			<EditorContent
 				editor={editor}
 				onPaste={onPaste}

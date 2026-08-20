@@ -5,6 +5,7 @@ import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_NEWS } from "@/lib/constants";
 import { newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
@@ -33,7 +34,7 @@ export default function RelatedNewsArticleItem({ relatedNewsArticle: item }: { r
 			)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${item.slug}`)} className="">
+			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_NEWS}/${item.slug}`)} className="">
 				{item.coverImage && (
 					<Image
 						src={item.coverImage.url}

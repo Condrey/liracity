@@ -10,6 +10,9 @@ import { appFileRouter } from "./api/uploadthing/core";
 
 import "./globals.css";
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+
 const geist = Geist({
 	variable: "--font-geist",
 	subsets: ["latin"]
@@ -35,7 +38,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={`${geist.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange enableColorScheme>
 					<ReactQueryProvider>

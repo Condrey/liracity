@@ -1,4 +1,5 @@
 import { Prisma } from "@/generated/prisma/client";
+import { LucideIcon } from "lucide-react";
 
 // User
 export const userDataSelect = {
@@ -110,4 +111,20 @@ export interface Attachment {
 	isUploading: boolean;
 	extension?: string;
 	name?: string;
+	message?: string;
 }
+
+export type SideBarSubItem = {
+	title: string;
+	url: string;
+	paramValue: string | undefined;
+};
+
+export type SideBarItem = {
+	title: string;
+	url: string;
+	icon?: LucideIcon;
+	filter: string;
+	isActive?: boolean;
+	items?: SideBarSubItem[];
+};

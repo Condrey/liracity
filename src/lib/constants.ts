@@ -4,6 +4,14 @@ export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
 export const SEARCH_PARAMS_NEWS_EVENTS = "defaultNewsEventsTabs";
 
+export const LINK_ESSENTIAL_SERVICES = "/services/essential";
+export const LINK_NEWS = "/media/news";
+export const LINK_EVENTS = "/media/events";
+export const LINK_PUBLICATIONS = "/media/publications";
+export const LINK_GALLERY = "/media/gallery";
+export const LINK_SOCIAL_MEDIA = "/media/social-media";
+export const LINK_PODCASTS = "/media/podcasts";
+
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
 	title: string;
@@ -17,7 +25,7 @@ export type NavLinkGroup = {
 export const cityServicesLinks: NavLink[] = [
 	{
 		title: "Essential Services",
-		href: "/services/essential",
+		href: LINK_ESSENTIAL_SERVICES,
 		description: "Access vital services like water, sanitation, waste, and emergency response."
 	},
 	{
@@ -44,20 +52,35 @@ export const cityServicesLinks: NavLink[] = [
 
 export const cityMediaCenterLinks: NavLink[] = [
 	{
-		title: "News & Events",
-		href: "/media/news-events",
-		description: "Catch up on the latest city news and upcoming events."
+		title: "News",
+		href: LINK_NEWS,
+		description: "Catch up on the latest city news"
 	},
 	{
-		title: "Gallery & Publications",
-		href: "/media/gallery-publications",
-		description: "View official reports, photos, and videos from city activities."
+		title: "Events",
+		href: LINK_EVENTS,
+		description: "Catch up on the latest city  upcoming events."
 	},
-	{
-		title: "Social Media & Podcasts",
-		href: "/media/social-media-podcasts",
-		description: "Engage with us through social media and featured audio stories."
-	}
+	// {
+	// 	title: "Publications",
+	// 	href: LINK_PUBLICATIONS,
+	// 	description: "View official reports from city activities."
+	// },
+	// {
+	// 	title: "Gallery",
+	// 	href: LINK_GALLERY,
+	// 	description: "View official  photos, and videos from city activities."
+	// },
+	// {
+	// 	title: "Social Media ",
+	// 	href: LINK_SOCIAL_MEDIA,
+	// 	description: "Engage with us through social media."
+	// },
+	// {
+	// 	title: "Podcasts",
+	// 	href: LINK_PODCASTS,
+	// 	description: "Engage with us through featured audio stories."
+	// }
 ];
 
 export const cityGetInvolvedLinks: NavLink[] = [

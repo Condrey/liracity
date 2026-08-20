@@ -6,6 +6,9 @@ import prisma from "@/lib/prisma";
 import { departmentDataInclude } from "@/lib/types";
 import { Metadata } from "next";
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+
 const { title, description } = whatWeDoLinks.find((val) => val.href === "/hierarchy")!;
 export const metadata: Metadata = {
 	title,

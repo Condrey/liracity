@@ -25,6 +25,7 @@ import { Spinner } from "@/components/ui/spinner";
 import Footer from "@/components/user/footer";
 import { EventStatus, Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_EVENTS } from "@/lib/constants";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { getEventStatusAndPeriod } from "@/lib/utils";
@@ -73,10 +74,10 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 						<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
 							<Link
 								className="flex flex-row items-center gap-0.5"
-								href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
+								href={getNavigationLinkWithPathnameWithoutUpdate(LINK_EVENTS)}
 							>
 								<MoveLeftIcon />
-								<TypographyH4 title="News & Events" />
+								<TypographyH4 title="All Events" />
 							</Link>
 						</LoadingButton>
 						{isAPublisher && (

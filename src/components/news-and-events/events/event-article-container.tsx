@@ -7,6 +7,7 @@ import { Item, ItemContent, ItemDescription, ItemFooter, ItemTitle } from "@/com
 import LoadingButton from "@/components/ui/loading-button";
 import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_EVENTS } from "@/lib/constants";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { cn, getEventStatusAndPeriod } from "@/lib/utils";
@@ -50,7 +51,7 @@ export default function EventsArticleContainer({
 			asChild
 		>
 			<Link
-				href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${slug}`)}
+				href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_EVENTS}/${slug}`)}
 				className="relative flex size-full flex-col items-stretch overflow-hidden"
 			>
 				<ArticleImage

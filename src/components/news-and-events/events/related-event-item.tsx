@@ -5,6 +5,7 @@ import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_EVENTS } from "@/lib/constants";
 import { EventData } from "@/lib/types";
 import { cn, getEventStatusAndPeriod } from "@/lib/utils";
 import { isAfter } from "date-fns";
@@ -33,7 +34,7 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 			)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/events/${item.slug}`)}>
+			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_EVENTS}/${item.slug}`)}>
 				{item.coverImage && (
 					<ItemMedia className="pointer-events-none flex w-full touch-auto overflow-hidden *:flex-1">
 						<ArticleImage

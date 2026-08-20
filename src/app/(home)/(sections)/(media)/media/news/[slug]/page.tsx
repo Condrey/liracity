@@ -1,4 +1,5 @@
 import { getNewsArticleBySlug, getRelatedNewsArticlesFromTags } from "@/components/news-and-events/news/action";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { validateRequest } from "@/lib/get-session";
@@ -8,6 +9,9 @@ import { htmlToText } from "html-to-text";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
 import { NewsArticleClient } from "./news-article-client";
+
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 interface PageProps {
 	params: Promise<{ slug: string }>;
@@ -79,22 +83,38 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 export default async function Page({ params }: PageProps) {
 	const { slug } = await params;
 	const decodedSlug = decodeURIComponent(slug);
+
 	const { user } = await validateRequest();
+
 	const newsArticle = await getNewsArticleBySlug(decodedSlug);
-	if (!newsArticle) return notFound();
+
+	if (!newsArticle) {
+		notFound();
+	}
+
 	const relatedArticles = await getRelatedNewsArticlesFromTags({
 		categoryId: newsArticle.categoryId,
 		currentArticleId: newsArticle.id,
 		tagIds: newsArticle.tags.map((t) => t.id)
 	});
+
 	const isAStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
+
 	const isAnEditor = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
-	if (newsArticle.status === NewsArticleStatus.DRAFT && !isAnEditor) return unauthorized();
-	if (newsArticle.status === NewsArticleStatus.PRIVATE && !isAStaff) return unauthorized();
+
+	if (newsArticle.status === NewsArticleStatus.DRAFT && !isAnEditor) {
+		unauthorized();
+	}
+
+	if (newsArticle.status === NewsArticleStatus.PRIVATE && !isAStaff) {
+		unauthorized();
+	}
 
 	return (
-		<div className="">
-			<NewsArticleClient initialData={newsArticle} slug={decodedSlug} relatedArticles={relatedArticles} />
+		<div className="h-[calc(100vh-var(--header-height))] overflow-y-auto">
+			<SidebarProvider>
+				<NewsArticleClient initialData={newsArticle} slug={decodedSlug} relatedArticles={relatedArticles} />
+			</SidebarProvider>
 		</div>
 	);
 }

@@ -5,6 +5,9 @@ import { validateRequest } from "@/lib/get-session";
 import { Metadata } from "next";
 import PageClient from "./page-client";
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+
 const { title, description } = cityMediaCenterLinks.find((val) => val.href === "/media/news-events")!;
 
 export const metadata: Metadata = {

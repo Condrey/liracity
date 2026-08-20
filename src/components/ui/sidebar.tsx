@@ -2,7 +2,7 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -237,8 +237,8 @@ function Sidebar({
 	);
 }
 
-function SidebarTrigger({ className, size, onClick, ...props }: React.ComponentProps<typeof Button>) {
-	const { toggleSidebar } = useSidebar();
+function SidebarTrigger({ className, size, onClick, variant, ...props }: React.ComponentProps<typeof Button>) {
+	const { toggleSidebar, open } = useSidebar();
 
 	return (
 		<Button
@@ -246,13 +246,14 @@ function SidebarTrigger({ className, size, onClick, ...props }: React.ComponentP
 			data-slot="sidebar-trigger"
 			size={size || "icon"}
 			className={cn("size-7", className)}
+			variant={open ? "destructive" : "warning"}
 			onClick={(event) => {
 				onClick?.(event);
 				toggleSidebar();
 			}}
 			{...props}
 		>
-			<MenuIcon className="size-4" />
+			{open ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);

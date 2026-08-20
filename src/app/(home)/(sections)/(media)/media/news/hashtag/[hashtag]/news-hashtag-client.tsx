@@ -17,6 +17,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
 import { PageSidebar } from "./page-sidebar";
+import { LINK_NEWS } from "@/lib/constants";
 
 interface NewsHashtagClientProps {
 	initialData: NewsArticleData[];
@@ -46,7 +47,7 @@ export function NewsHashtagClient({ initialData, hashtag, relatedArticles, other
 						<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
 							<Link
 								className="flex flex-row items-center gap-0.5"
-								href={getNavigationLinkWithPathnameWithoutUpdate("/media/news-events")}
+								href={getNavigationLinkWithPathnameWithoutUpdate(LINK_NEWS)}
 							>
 								<MoveLeftIcon />
 								<TypographyH4 title={`News Articles: #${hashtag}`} />

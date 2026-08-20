@@ -3,6 +3,9 @@ import prisma from "@/lib/prisma";
 import { cache, Suspense } from "react";
 import { SideCarousel } from "./about-lira/side-carousel";
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+
 export const allMedia = cache(async () => await prisma.media.findMany({ take: 50, orderBy: { createdAt: "desc" } }));
 
 export default async function Layout({ children }: { children: React.ReactNode }) {

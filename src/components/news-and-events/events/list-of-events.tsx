@@ -8,6 +8,7 @@ import { EventStatus } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { EventData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
+import { CalendarIcon } from "lucide-react";
 import { useTransition } from "react";
 import { getFilteredEvents } from "./action";
 import ButtonAddEditEventsArticle from "./button-add-edit-event";
@@ -34,9 +35,11 @@ export default function ListOfEvents({ initialData, limit, filter }: ListOfEvent
 	if (status === "success" && !data.length)
 		return (
 			<EmptyContainer
-				message={`There are no events for this user/ there are no events in the database ${
+				message="Empty events"
+				description={`Either, there are no events for this user or there are no events in the database ${
 					filter ? `matching "${filter}" event filter` : ""
 				}.`}
+				icon={CalendarIcon}
 			>
 				{!!filter && (
 					<LoadingButton

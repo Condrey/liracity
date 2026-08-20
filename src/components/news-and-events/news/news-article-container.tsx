@@ -5,6 +5,7 @@ import { Item, ItemContent, ItemDescription, ItemFooter, ItemHeader, ItemTitle }
 import LoadingButton from "@/components/ui/loading-button";
 import { Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_NEWS } from "@/lib/constants";
 import { myPrivileges, newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
@@ -41,7 +42,7 @@ export default function NewsArticleContainer({
 			onMouseLeave={() => setIsHovering(false)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${slug}`)} className="pb-6">
+			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_NEWS}/${slug}`)} className="pb-6">
 				<ItemHeader className="relative min-h-[20px] overflow-hidden px-0">
 					<div className="">
 						<ArticleImage

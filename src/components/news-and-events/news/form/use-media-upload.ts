@@ -10,6 +10,8 @@ export function useOtherMediaUploads() {
 
 	const { startUpload, isUploading } = useUploadThing("attachment", {
 		onBeforeUploadBegin(files) {
+			console.log("1. UPLOAD: BEFORE_UPLOAD_BEGIN: Renaming files for submission");
+			console.log({ files });
 			const renamedFiles = files.map((file) => {
 				const extension = file.name.split(".").pop();
 				return new File([file], `news_${crypto.randomUUID()}.${extension}`, {
@@ -22,6 +24,8 @@ export function useOtherMediaUploads() {
 		},
 		onUploadProgress: setUploadProgress,
 		onClientUploadComplete(res) {
+			console.log("2. UPLOAD: UPLOAD_COMPLETE: Setting attachments for returning values");
+			console.log({ res });
 			setAttachments((prev) =>
 				prev.map((a) => {
 					const uploadResult = res.find((r) => r.name === a.file.name);
@@ -38,6 +42,8 @@ export function useOtherMediaUploads() {
 			);
 		},
 		onUploadError(e) {
+			console.error("3. UPLOAD: UPLOAD_ERROR: ", e.message);
+
 			setAttachments((prev) => prev?.filter((a) => !a.isUploading));
 			toast.error("Failed", {
 				description: e.message

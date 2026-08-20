@@ -23,7 +23,7 @@ export default function ButtonAddEditNewsArticle({ newsArticle, ...props }: Butt
 		<>
 			{!!canUpsert && (
 				<Button
-					title={newsArticle ? "Edit the news article" : "Update news article"}
+					title={newsArticle ? "Edit the news article" : "Add news article"}
 					onClick={() => setOpen(true)}
 					{...props}
 				/>

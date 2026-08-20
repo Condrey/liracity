@@ -8,6 +8,7 @@ import { NewsArticleStatus } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { NewsArticleData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
+import { Newspaper } from "lucide-react";
 import { useTransition } from "react";
 import { getFilteredNewsArticles } from "./action";
 import ButtonAddEditNewsArticle from "./button-add-edit-news-article";
@@ -34,9 +35,11 @@ export default function ListOfNewsArticles({ initialData, limit, filter }: ListO
 	if (status === "success" && !data.length)
 		return (
 			<EmptyContainer
-				message={`There are no news articles for this user/ there are no news articles in the database ${
+				message={"Empty list"}
+				description={`Either there are no news articles for this user, or there are no news articles in the database ${
 					filter ? `matching "${filter}" articles filter` : ""
 				}.`}
+				icon={Newspaper}
 			>
 				{!!filter && (
 					<LoadingButton

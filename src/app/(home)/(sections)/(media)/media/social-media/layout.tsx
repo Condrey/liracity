@@ -4,9 +4,5 @@ import PageContainer from "@/components/page-container";
 // See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-	return (
-		<PageContainer showFooter={false} className="min-h-auto px-0 pt-0">
-			{children}
-		</PageContainer>
-	);
+	return <PageContainer>{children}</PageContainer>;
 }

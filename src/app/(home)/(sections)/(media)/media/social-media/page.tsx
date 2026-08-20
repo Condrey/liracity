@@ -1,11 +1,11 @@
 import { PageTitle } from "@/components/page-utils";
-import { cityMediaCenterLinks, LINK_PUBLICATIONS } from "@/lib/constants";
+import { cityMediaCenterLinks, LINK_SOCIAL_MEDIA } from "@/lib/constants";
 import { Metadata } from "next";
 
 // TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
 // See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
-const { title, description } = cityMediaCenterLinks.find((val) => val.href === LINK_PUBLICATIONS)!;
+const { title, description } = cityMediaCenterLinks.find((val) => val.href === LINK_SOCIAL_MEDIA)!;
 export const metadata: Metadata = {
 	title,
 	description

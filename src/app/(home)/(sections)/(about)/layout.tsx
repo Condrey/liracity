@@ -7,9 +7,7 @@ export const allMedia = cache(async () => await prisma.media.findMany({ take: 50
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
 	const sideBarMedia = allMedia();
-	await prisma.media.deleteMany({
-		where: { newsArticleId: null, eventId: null }
-	});
+
 	return (
 		<>
 			<div></div>

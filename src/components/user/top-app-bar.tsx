@@ -12,7 +12,7 @@ export default async function TopAppBar({ className }: { className?: string }) {
 		<NavigationMenu
 			viewport={false}
 			className={cn(
-				"flex h-12 w-full shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
+				"z-50 flex h-12 w-full shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12",
 				className
 			)}
 		>

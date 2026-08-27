@@ -24,14 +24,6 @@ export const getOrganizationMembersBySlug = cache(
 			orderBy: [{ role: "asc" }, { user: { name: "asc" } }],
 			include: memberDataInclude
 		})
-
-	//   {
-	// 	const data = await auth.api.listMembers({
-	// 		query: { organizationSlug, filterField: "role", filterOperator: "ne", filterValue: "owner" },
-	// 		headers: await headers()
-	// 	});
-	// 	return data.members;
-	// }
 );
 
 export const getOrganizationMembersById = cache(
@@ -41,13 +33,6 @@ export const getOrganizationMembersById = cache(
 			orderBy: [{ role: "asc" }, { user: { name: "asc" } }],
 			include: memberDataInclude
 		})
-	//   {
-	// 	const data = await auth.api.listMembers({
-	// 		query: { organizationId, filterField: "role", filterOperator: "ne", filterValue: "owner" },
-	// 		headers: await headers()
-	// 	});
-	// 	return data.members;
-	// }
 );
 
 export async function addMembers(input: MultipleMembersSignUpSchema) {

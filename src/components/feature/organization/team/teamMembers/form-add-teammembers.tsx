@@ -11,18 +11,28 @@ import { MemberSignUpSchema, multipleMembersSignUpSchema, MultipleMembersSignUpS
 import { zodResolver } from "@hookform/resolvers/zod";
 import { XIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useAddMemberMutation } from "./mutation";
-import TableRowInputMember from "./table-row-input-member";
-import TableRowViewMember from "./table-row-view-member";
+import TableRowInputMember from "../../members/table-row-input-member";
+import TableRowViewMember from "../../members/table-row-view-member";
+import { useAddTeamMemberMutation } from "./mutation";
 
 interface Props {
 	organizationId: string;
+	teamId: string;
+	organizationName: string;
+	teamName: string;
 	open: boolean;
 	setOpen: (open: boolean) => void;
 }
 
-export default function FormAddMembers({ organizationId, open, setOpen }: Props) {
-	const { mutate, isPending, error } = useAddMemberMutation();
+export default function FormAddTeamMembers({
+	organizationId,
+	organizationName,
+	teamId,
+	teamName,
+	open,
+	setOpen
+}: Props) {
+	const { mutate, isPending, error } = useAddTeamMemberMutation();
 	const form = useForm<MultipleMembersSignUpSchema>({
 		resolver: zodResolver(multipleMembersSignUpSchema),
 		values: {
@@ -33,15 +43,15 @@ export default function FormAddMembers({ organizationId, open, setOpen }: Props)
 	const numberOfEntries = entries.length;
 
 	async function submitEmail(input: MultipleMembersSignUpSchema) {
-		mutate(input, { onSuccess: () => setOpen(false) });
+		mutate({ input, teamId }, { onSuccess: () => setOpen(false) });
 	}
 
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetContent side="top" className="h-dvh">
 				<SheetHeader>
-					<SheetTitle>Add a member</SheetTitle>
-					<SheetDescription>{`Enter the member's name and email here below;`}</SheetDescription>
+					<SheetTitle className="uppercase">{`Add ${teamName} section member(s)`}</SheetTitle>
+					<SheetDescription>{`The entry shall be added to ${teamName} section under ${organizationName} department.`}</SheetDescription>
 				</SheetHeader>
 				{/* <pre>{JSON.stringify(entries, null, 2)}</pre> */}
 				<Form {...form}>

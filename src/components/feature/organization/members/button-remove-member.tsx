@@ -5,12 +5,12 @@ import {
 	Dialog,
 	DialogClose,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger
 } from "@/components/ui/dialog";
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import LoadingButton from "@/components/ui/loading-button";
 import UserAvatar from "@/components/ui/user-avatar";
 import { MemberData } from "@/lib/types";
@@ -48,16 +48,16 @@ export default function ButtonRemoveMember({ member, ...props }: Props) {
 				</DialogHeader>
 
 				<div className="space-y-4">
-					<div className="flex gap-3">
+					<Item variant={"muted"} className="rounded-xl bg-foreground/80 text-background">
 						<UserAvatar image={user.image} />
-						<div className="flex flex-col gap-0.5">
-							<span className="space-x-4">{user.name}</span>
-							<span className="text-xs text-muted-foreground">{user.email}</span>
-						</div>
-					</div>
-					<DialogDescription>
+						<ItemContent className="flex flex-col gap-0.5">
+							<ItemTitle className="space-x-4">{user.name}</ItemTitle>
+							<ItemDescription className="text-xs text-background">{user.email}</ItemDescription>
+						</ItemContent>
+					</Item>
+					<span>
 						{`This action shall remove this user from this ${organization.name} department and not affect other information.`}
-					</DialogDescription>
+					</span>
 					{error && (
 						<div role="alert" className="text-destructive">
 							{error.message}
@@ -68,7 +68,7 @@ export default function ButtonRemoveMember({ member, ...props }: Props) {
 					<DialogClose asChild>
 						<Button variant={"secondary"}>Close</Button>
 					</DialogClose>
-					<LoadingButton loading={isPending} type="button" onClick={removeMember}>
+					<LoadingButton loading={isPending} type="button" variant="destructive" onClick={removeMember}>
 						Confirm
 					</LoadingButton>
 				</DialogFooter>

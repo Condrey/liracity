@@ -3,31 +3,15 @@
 import { authClient } from "@/lib/auth-client";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { addMember } from "./action";
+import { addTeamMembers } from "./action";
 
 const queryKey: QueryKey = ["members", "organization"];
 const queryKey2: QueryKey = ["department", "slug"];
 
-export function useUpdateMemberRoleMutation(organizationSlug: string) {
+export function useAddTeamMemberMutation() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async ({
-			role,
-			memberId,
-			organizationId
-		}: {
-			role: string;
-			memberId: string;
-			organizationId: string;
-		}) => {
-			const { error, data } = await authClient.organization.updateMemberRole({
-				memberId,
-				role,
-				organizationId
-			});
-			if (error) throw new Error(error.message, { cause: error.status });
-			return data;
-		},
+		mutationFn: addTeamMembers,
 		async onSuccess(data, variables) {
 			await Promise.all([
 				await queryClient.cancelQueries({ queryKey }),
@@ -36,28 +20,6 @@ export function useUpdateMemberRoleMutation(organizationSlug: string) {
 
 			queryClient.invalidateQueries({ queryKey });
 			queryClient.invalidateQueries({ queryKey: queryKey2 });
-
-			toast("success", {
-				description: `New role is now ${data.role}`
-			});
-		},
-		onError(error) {
-			console.error(error);
-			toast.error("Failed to update member role", {
-				description: error.message
-			});
-		}
-	});
-}
-
-export function useAddMemberMutation() {
-	const queryClient = useQueryClient();
-	return useMutation({
-		mutationFn: addMember,
-		async onSuccess(data, variables) {
-			await Promise.all([await queryClient.cancelQueries({ queryKey })]);
-
-			queryClient.invalidateQueries({ queryKey });
 
 			toast("success", {
 				description: `Member added successfully.`
@@ -72,7 +34,7 @@ export function useAddMemberMutation() {
 	});
 }
 
-export function useRemoveMemberMutation() {
+export function useRemoveTeamMemberMutation() {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: async ({ organizationId, memberIdOrEmail }: { memberIdOrEmail: string; organizationId: string }) => {

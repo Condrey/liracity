@@ -1,11 +1,8 @@
+import { AppSidebar } from "@/components/feature/user/app-sidebar";
+import TopAppBar from "@/components/feature/user/top-app-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/user/app-sidebar";
-import TopAppBar from "@/components/user/top-app-bar";
 import { validateRequest } from "@/lib/get-session";
-import SessionProvider from "../session-provider";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+import SessionProvider from "@/lib/session-provider";
 
 export const iframeHeight = "800px";
 const TOP_APP_BAR_HEIGHT = "48px";

@@ -4,9 +4,9 @@ import Link from "next/link";
 import { PropsWithChildren } from "react";
 import Linkify from "./linkify";
 
-import { useSession } from "@/app/session-provider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { useSession } from "@/lib/session-provider";
 import { UserDataSelect } from "@/lib/types";
 import UserAvatar from "./user-avatar";
 

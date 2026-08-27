@@ -1,5 +1,5 @@
-import HashtagItem from "@/components/news-and-events/news/hashtag-item";
-import RelatedNewsArticleItem from "@/components/news-and-events/news/related-news-article-item";
+import HashtagItem from "@/components/feature/news-and-events/news/hashtag-item";
+import RelatedNewsArticleItem from "@/components/feature/news-and-events/news/related-news-article-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { Button } from "@/components/ui/button";
 import {

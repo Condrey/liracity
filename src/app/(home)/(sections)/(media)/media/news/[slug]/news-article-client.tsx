@@ -1,9 +1,9 @@
 "use client";
 
-import { useSession } from "@/app/session-provider";
-import { getNewsArticleBySlug } from "@/components/news-and-events/news/action";
-import { ArticleMainContent } from "@/components/news-and-events/news/article-main-content";
-import { useUpdateNewsArticleStatusMutation } from "@/components/news-and-events/news/form/mutation";
+import { getNewsArticleBySlug } from "@/components/feature/news-and-events/news/action";
+import { ArticleMainContent } from "@/components/feature/news-and-events/news/article-main-content";
+import { useUpdateNewsArticleStatusMutation } from "@/components/feature/news-and-events/news/form/mutation";
+import Footer from "@/components/feature/user/footer";
 import { TypographyH4 } from "@/components/page-utils";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
@@ -12,11 +12,11 @@ import { ButtonGroup, ButtonGroupSeparator } from "@/components/ui/button-group"
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
-import Footer from "@/components/user/footer";
 import { NewsArticleStatus, Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { LINK_NEWS } from "@/lib/constants";
 import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { NewsArticleData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { MenuIcon, MoveLeftIcon } from "lucide-react";
@@ -63,7 +63,7 @@ export function NewsArticleClient({ initialData, slug, relatedArticles }: NewsAr
 	return (
 		<>
 			<SidebarInset className="">
-				<header className="sticky top-0 z-50 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
+				<header className="sticky top-0 z-45 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
 					<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
 						<Link
 							className="flex flex-row items-center gap-0.5"

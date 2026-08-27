@@ -1,4 +1,4 @@
-import ButtonAcceptDenyInvitation from "@/components/department/invitations/button-accept-deny-invitation";
+import ButtonAcceptDenyInvitation from "@/components/feature/organization/invitations/button-accept-deny-invitation";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
@@ -10,9 +10,6 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 interface Props {
 	params: Promise<{ id: string }>;

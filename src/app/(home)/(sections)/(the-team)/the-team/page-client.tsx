@@ -2,7 +2,7 @@
 
 import { Item, ItemDescription, ItemGroup, ItemHeader, ItemTitle } from "@/components/ui/item";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
-import { NavLink, whatWeDoLinks } from "@/lib/constants";
+import { NavLink, staffLinks } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useTransition } from "react";
@@ -10,7 +10,7 @@ import { useTransition } from "react";
 export default function PageClient() {
 	return (
 		<ItemGroup className="max-w-sm gap-3">
-			{whatWeDoLinks.map((link) => (
+			{staffLinks.map((link) => (
 				<PageClientItem key={link.title} link={link} />
 			))}
 		</ItemGroup>

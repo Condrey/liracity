@@ -1,16 +1,13 @@
-import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
-import { getLatestNews } from "@/components/news-and-events/news/action";
-import NewsArticleContainerSkeleton from "@/components/news-and-events/news/news-article-container-skeleton";
-import NewsLetterForm from "@/components/user/news-letter-form";
+import { EventsArticleContainerSkeleton } from "@/components/feature/news-and-events/events/event-article-container-skeleton";
+import { getLatestNews } from "@/components/feature/news-and-events/news/action";
+import NewsArticleContainerSkeleton from "@/components/feature/news-and-events/news/news-article-container-skeleton";
+import NewsLetterForm from "@/components/feature/user/news-letter-form";
+import PageContainer from "@/components/page-container";
 import { Suspense } from "react";
-import PageContainer from "../../components/page-container";
 import HeroSection, { HeroSectionLoadingSkeleton } from "./hero-section";
 import { SampleEvents } from "./sample-events";
 import { SampleNewsArticles } from "./sample-news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 export default function Home() {
 	return (

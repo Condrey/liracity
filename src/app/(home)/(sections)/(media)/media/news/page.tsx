@@ -1,12 +1,9 @@
-import { getFilteredNewsArticles } from "@/components/news-and-events/news/action";
+import { getFilteredNewsArticles } from "@/components/feature/news-and-events/news/action";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cityMediaCenterLinks, LINK_NEWS } from "@/lib/constants";
 import { validateRequest } from "@/lib/get-session";
 import { Metadata } from "next";
 import PageClient from "./page-client";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 const { title, description } = cityMediaCenterLinks.find((val) => val.href === LINK_NEWS)!;
 

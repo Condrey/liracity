@@ -1,4 +1,4 @@
-import RelatedEventItem from "@/components/news-and-events/events/related-event-item";
+import RelatedEventItem from "@/components/feature/news-and-events/events/related-event-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { Button } from "@/components/ui/button";
 import {

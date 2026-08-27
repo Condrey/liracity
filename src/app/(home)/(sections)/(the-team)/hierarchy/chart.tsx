@@ -1,14 +1,12 @@
 "use client";
 
-import { ChartUser, DepartmentData } from "@/lib/types";
+import { ChartUser } from "@/lib/types";
 import { Tree, TreeNode } from "react-organizational-chart";
 import ChartUserContainer from "./chart-user-container";
 
-interface ChartProps {
-	departments: DepartmentData[];
-}
+interface ChartProps {}
 
-export default function Chart({ departments }: ChartProps) {
+export default function Chart({}: ChartProps) {
 	return (
 		<div className="relative w-full rounded-md bg-secondary/50 py-3 pb-6">
 			<div className="w-full overflow-y-auto scroll-auto">

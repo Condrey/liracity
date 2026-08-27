@@ -1,4 +1,4 @@
-import RelatedNewsArticleItem from "@/components/news-and-events/news/related-news-article-item";
+import RelatedNewsArticleItem from "@/components/feature/news-and-events/news/related-news-article-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,11 +8,10 @@ import {
 	SidebarGroupContent,
 	SidebarGroupLabel,
 	SidebarHeader,
-	SidebarMenu,
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { NewsArticleData } from "@/lib/types";
-import { MenuIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 
 export function PageSidebar({
 	relatedArticles,

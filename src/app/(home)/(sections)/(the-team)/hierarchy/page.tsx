@@ -1,30 +1,22 @@
 import { PageDescription, PageTitle } from "@/components/page-utils";
 import Chart from "./chart";
 
-import { whatWeDoLinks } from "@/lib/constants";
-import prisma from "@/lib/prisma";
-import { departmentDataInclude } from "@/lib/types";
+import { staffLinks } from "@/lib/constants";
 import { Metadata } from "next";
 
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
-
-const { title, description } = whatWeDoLinks.find((val) => val.href === "/hierarchy")!;
+const { title, description } = staffLinks.find((val) => val.href === "/hierarchy")!;
 export const metadata: Metadata = {
 	title,
 	description
 };
 export default async function Page() {
-	const departments = await prisma.departMent.findMany({
-		include: departmentDataInclude
-	});
 	return (
 		<div className="max-w-7xl px-0">
 			<div className="me-auto w-full max-w-3xl space-y-2">
 				<PageTitle heading={`${title}/ Organography`} />
 				<PageDescription paragraph={pageDescription} className="me-auto" />
 			</div>
-			<Chart departments={departments} />
+			<Chart />
 		</div>
 	);
 }

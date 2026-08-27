@@ -9,8 +9,10 @@ export const userDataSelect = {
 	telephone: true,
 	email: true,
 	isVerified: true,
+	emailVerified: true,
 	bio: true,
-	username: true
+	username: true,
+	role: true
 } satisfies Prisma.UserSelect;
 export type UserDataSelect = Prisma.UserGetPayload<{
 	select: typeof userDataSelect;
@@ -19,9 +21,7 @@ export type UserDataSelect = Prisma.UserGetPayload<{
 // Employee
 export const employeeDataInclude = {
 	user: { select: userDataSelect },
-	departMentalSector: { include: { departMent: true } },
-	departMents: true,
-	position: true
+	currentPosition: true
 } satisfies Prisma.EmployeeInclude;
 export type EmployeeData = Prisma.EmployeeGetPayload<{
 	include: typeof employeeDataInclude;
@@ -63,28 +63,50 @@ export interface Leader {
 	leader: UserDataSelect;
 }
 
-// Departmental sectors
-export const departmentalSectorDataInclude = {
-	employees: { include: employeeDataInclude },
-	departMent: {
-		include: {
-			headOfDepartment: { include: employeeDataInclude }
-		}
-	},
-	_count: { select: { employees: true } }
-} satisfies Prisma.DepartMentalSectorInclude;
-export type DepartmentalSectorData = Prisma.DepartMentalSectorGetPayload<{
-	include: typeof departmentalSectorDataInclude;
+// Team Member
+export const teamMemberDataInclude = {
+	employee: { include: employeeDataInclude },
+	user: { select: userDataSelect },
+	team: { select: { name: true, organizationId: true, organization: { select: { name: true } } } }
+} satisfies Prisma.TeamMemberInclude;
+export type TeamMemberData = Prisma.TeamMemberGetPayload<{
+	include: typeof teamMemberDataInclude;
+}>;
+// Team
+export const teamDataInclude = {
+	organization: {},
+	teammembers: { include: teamMemberDataInclude },
+	_count: { select: { teammembers: true } }
+} satisfies Prisma.TeamInclude;
+export type TeamData = Prisma.TeamGetPayload<{
+	include: typeof teamDataInclude;
 }>;
 
-// Department
-export const departmentDataInclude = {
-	departmentalSectors: { include: departmentalSectorDataInclude },
-	headOfDepartment: { include: employeeDataInclude },
-	_count: { select: { departmentalSectors: true } }
-} satisfies Prisma.DepartMentInclude;
-export type DepartmentData = Prisma.DepartMentGetPayload<{
-	include: typeof departmentDataInclude;
+// Member
+export const memberDataInclude = {
+	organization: {},
+	employee: { include: employeeDataInclude },
+	user: { select: userDataSelect }
+} satisfies Prisma.MemberInclude;
+export type MemberData = Prisma.MemberGetPayload<{
+	include: typeof memberDataInclude;
+}>;
+
+// Organization
+export const organizationDataInclude = {
+	members: {
+		include: memberDataInclude,
+		where: { role: { not: "owner" } },
+		orderBy: [{ role: "asc" }, { user: { name: "asc" } }]
+	},
+	teams: {
+		include: teamDataInclude,
+		orderBy: { name: "asc" }
+	},
+	_count: { select: { teams: true } }
+} satisfies Prisma.OrganizationInclude;
+export type OrganizationData = Prisma.OrganizationGetPayload<{
+	include: typeof organizationDataInclude;
 }>;
 
 // Msc

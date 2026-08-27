@@ -3,6 +3,7 @@ import { BlocksIcon, FilmIcon, HomeIcon, InfoIcon, LucideIcon, MailPlusIcon } fr
 export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
 export const SEARCH_PARAMS_NEWS_EVENTS = "defaultNewsEventsTabs";
+export const DEFAULT_PASSWORD = "defaultPassword123!";
 
 export const LINK_ESSENTIAL_SERVICES = "/services/essential";
 export const LINK_NEWS = "/media/news";
@@ -11,6 +12,7 @@ export const LINK_PUBLICATIONS = "/media/publications";
 export const LINK_GALLERY = "/media/gallery";
 export const LINK_SOCIAL_MEDIA = "/media/social-media";
 export const LINK_PODCASTS = "/media/podcasts";
+export const LINK_DEPARTMENTS = "/departments";
 
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
@@ -60,7 +62,7 @@ export const cityMediaCenterLinks: NavLink[] = [
 		title: "Events",
 		href: LINK_EVENTS,
 		description: "Catch up on the latest city  upcoming events."
-	},
+	}
 	// {
 	// 	title: "Publications",
 	// 	href: LINK_PUBLICATIONS,
@@ -101,7 +103,7 @@ export const cityGetInvolvedLinks: NavLink[] = [
 	}
 ];
 
-export const whatWeDoLinks: NavLink[] = [
+export const staffLinks: NavLink[] = [
 	// {
 	// 	title: "All staffs",
 	// 	href: "/all-staffs",
@@ -114,7 +116,7 @@ export const whatWeDoLinks: NavLink[] = [
 	},
 	{
 		title: "Departments",
-		href: "/departments",
+		href: LINK_DEPARTMENTS,
 		description: "Meet the teams and departments that run the city."
 	}
 ];
@@ -199,7 +201,7 @@ export const navLinks: NavLinkGroup[] = [
 		href: "/the-team",
 		description: "Explore the focus areas and functions of the city council.",
 		icon: BlocksIcon,
-		children: whatWeDoLinks,
+		children: staffLinks,
 		showOnMediumScreen: true
 	},
 	{

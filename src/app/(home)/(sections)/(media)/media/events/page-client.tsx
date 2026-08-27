@@ -1,11 +1,11 @@
 "use client";
 
-import ButtonAddEditEvent from "@/components/news-and-events/events/button-add-edit-event";
-import { EventsArticleContainerSkeleton } from "@/components/news-and-events/events/event-article-container-skeleton";
-import ListOfEvents from "@/components/news-and-events/events/list-of-events";
+import ButtonAddEditEvent from "@/components/feature/news-and-events/events/button-add-edit-event";
+import { EventsArticleContainerSkeleton } from "@/components/feature/news-and-events/events/event-article-container-skeleton";
+import ListOfEvents from "@/components/feature/news-and-events/events/list-of-events";
+import Footer from "@/components/feature/user/footer";
 import { TypographyH4 } from "@/components/page-utils";
 import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import Footer from "@/components/user/footer";
 import { User } from "@/lib/auth";
 import { cityMediaCenterLinks, LINK_EVENTS } from "@/lib/constants";
 import { EventData } from "@/lib/types";

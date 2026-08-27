@@ -17,9 +17,6 @@ model User {
   role                    Role                     @default(USER)
   createdAt               DateTime                 @default(now())
   telephone               String?
-  passwordHash            String?
-  googleId                String?                  @unique
-  githubId                String?                  @unique
   gender                  String?
   bio                     String?
   isWelcomed              Boolean                  @default(false)
@@ -41,6 +38,7 @@ model User {
   accounts    Account[]
   members     Member[]
   invitations Invitation[]
+  teammembers TeamMember[]
 
   @@map("users")
 }
@@ -51,106 +49,6 @@ model Entity {
   about                 String?
   historyAndCulture     String?
   geographicalLandmarks String?
-}
-
-model DepartMent {
-  id                  String               @id @default(uuid())
-  name                String
-  headOfDepartmentId  String?
-  about               String?
-  departmentalSectors DepartMentalSector[]
-  headOfDepartment    Employee?            @relation(fields: [headOfDepartmentId], references: [id])
-
-  @@map("departments")
-}
-
-model DepartMentalSector {
-  id           String      @id @default(uuid())
-  name         String
-  description  String?
-  departMentId String?
-  hierarchy    Int
-  departMent   DepartMent? @relation(fields: [departMentId], references: [id])
-  employees    Employee[]
-
-  @@map("departmental_sectors")
-}
-
-model Position {
-  id                  String        @id @default(uuid())
-  jobTitle            String
-  departmentalMandate String
-  salaryScale         String
-  reportsTo           Position?     @relation("PositionReportsTo", fields: [reportsToId], references: [id])
-  reportsToId         String?
-  responsibleFor      Position[]    @relation("PositionReportsTo")
-  duties              String[]
-  createdAt           DateTime      @default(now())
-  updatedAt           DateTime      @default(now()) @updatedAt
-  employees           Employee[]
-  appointments        Appointment[]
-
-  @@map("positions")
-}
-
-model Employee {
-  id                      String              @id @default(uuid())
-  assumedOffice           Int
-  endedOffice             Int?
-  position                Position?           @relation(fields: [positionId], references: [id])
-  shortMessageToPublic    String?
-  departMentalSectorId    String?
-  userId                  String
-  dob                     DateTime?
-  nationalIdNumber        String?
-  fileNumber              String?
-  taxIdentificationNumber String?
-  appointments            Appointment[]
-  supplierNumber          String?
-  employeeStatuses        EmployeeStatus[]
-  hierarchy               Int                 @default(0)
-  ippsNumber              String              @unique
-  departMents             DepartMent[]
-  departMentalSector      DepartMentalSector? @relation(fields: [departMentalSectorId], references: [id])
-  user                    User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  positionId              String?
-
-  @@map("employees")
-}
-
-model EmployeeStatus {
-  id           String     @id @default(uuid())
-  type         StatusType @default(PROBATION)
-  date         DateTime   @default(now())
-  minuteNumber String
-  reason       String?
-  Employee     Employee?  @relation(fields: [employeeId], references: [id])
-  employeeId   String?
-}
-
-enum StatusType {
-  PROBATION
-  CONFIRMED
-  SUSPENDED
-  RETIRED
-  RESIGNED
-}
-
-model Appointment {
-  id                     String    @id @default(uuid())
-  number                 Int
-  position               Position  @relation(fields: [positionId], references: [id])
-  basicSalary            Float?
-  organization           String
-  dateOfAppointment      DateTime
-  dateOfAssumptionOfDuty DateTime
-  dutyStation            String
-  minuteNumber           String
-  employee               Employee? @relation(fields: [employeeId], references: [id])
-  employeeId             String?
-  positionId             String
-
-  @@map("appointments")
 }
 
 model EmailVerificationToken {
@@ -176,6 +74,8 @@ model Session {
   ipAddress            String?
   userAgent            String?
   activeOrganizationId String?
+
+  activeTeamId String?
 
   @@unique([token])
   @@index([userId])
@@ -233,6 +133,7 @@ model Media {
   id                 String        @id @default(uuid())
   type               MediaType
   url                String
+  name               String?
   format             String        @default("png")
   createdAt          DateTime      @default(now())
   coverImageArticles NewsArticle[] @relation("coverImage")
@@ -366,11 +267,15 @@ enum Role {
   USER
   ADMIN
   MODERATOR
+  HOD
+  HOS
   STAFF
+  COUNCIL
+  STATUTORY
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(uuid())
   accountId             String
   providerId            String
   userId                String
@@ -390,7 +295,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id
+  id         String   @id @default(uuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -402,9 +307,10 @@ model Verification {
 }
 
 model Organization {
-  id          String       @id
+  id          String       @id @default(uuid())
   name        String
   slug        String
+  about       String?
   logo        String?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -412,18 +318,22 @@ model Organization {
   members     Member[]
   invitations Invitation[]
 
+  teams Team[]
+
   @@unique([slug])
   @@map("organization")
 }
 
 model Member {
-  id             String       @id
+  id             String       @id @default(uuid())
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   userId         String
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   role           String       @default("member")
-  createdAt      DateTime
+  createdAt      DateTime     @default(now())
+  employee       Employee?    @relation(fields: [employeeId], references: [id])
+  employeeId     String?
 
   @@index([organizationId])
   @@index([userId])
@@ -431,7 +341,7 @@ model Member {
 }
 
 model Invitation {
-  id             String       @id
+  id             String       @id @default(uuid())
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   email          String
@@ -442,7 +352,101 @@ model Invitation {
   inviterId      String
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
+  teamId String?
+
   @@index([organizationId])
   @@index([email])
   @@map("invitation")
+}
+
+model Team {
+  id             String       @id @default(uuid())
+  name           String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime?    @updatedAt
+  teammembers    TeamMember[]
+
+  @@index([organizationId])
+  @@map("team")
+}
+
+model TeamMember {
+  id         String    @id @default(uuid())
+  teamId     String
+  team       Team      @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime? @default(now())
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  employeeId String?
+
+  @@index([teamId])
+  @@index([userId])
+  @@map("teamMember")
+}
+
+model Position {
+  id             String        @id @default(uuid())
+  jobTitle       String
+  mandate        String?
+  salaryScale    String
+  reportsTo      Position?     @relation("PositionReportsTo", fields: [reportsToId], references: [id])
+  reportsToId    String?
+  responsibleFor Position[]    @relation("PositionReportsTo")
+  duties         String[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now()) @updatedAt
+  employees      Employee[]
+  appointments   Appointment[]
+
+  @@map("positions")
+}
+
+model Employee {
+  id                      String        @id @default(uuid())
+  assumedOffice           Int?
+  endedOffice             Int?
+  currentPosition         Position?     @relation(fields: [positionId], references: [id])
+  shortMessageToPublic    String?
+  dob                     DateTime?
+  nationalIdNumber        String?
+  fileNumber              String?
+  taxIdentificationNumber String?
+  supplierNumber          String?
+  ippsNumber              String        @unique
+  appointments            Appointment[]
+  userId                  String
+  user                    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positionId              String?
+  members                 Member[]
+  teamMembers             TeamMember[]
+
+  @@map("employees")
+}
+
+enum StatusType {
+  PROBATION
+  CONFIRMED
+  SUSPENDED
+  RETIRED
+  RESIGNED
+}
+
+model Appointment {
+  id                     String    @id @default(uuid())
+  number                 Int
+  position               Position  @relation(fields: [positionId], references: [id])
+  basicSalary            Float?
+  organization           String
+  dateOfAppointment      DateTime
+  dateOfAssumptionOfDuty DateTime
+  dutyStation            String
+  minuteNumber           String
+  employee               Employee? @relation(fields: [employeeId], references: [id])
+  employeeId             String?
+  positionId             String
+
+  @@map("appointments")
 }

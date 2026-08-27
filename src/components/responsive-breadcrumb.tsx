@@ -52,8 +52,8 @@ export function ResponsiveBreadcrumb({
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 
 	return (
-		<Breadcrumb className="pt-3 pb-4">
-			<BreadcrumbList>
+		<Breadcrumb className="sticky top-0 rounded-xl bg-background px-4 py-1">
+			<BreadcrumbList className="flex flex-row items-center">
 				<BreadcrumbItem>
 					<BreadcrumbLink asChild>
 						<ResponsiveNavigationMenuLink url={items[0].href ?? "/"} label={items[0].label} />

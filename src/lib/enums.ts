@@ -6,9 +6,13 @@ const allRoles = Object.values(Role);
 export const myPrivileges: Record<Role, Role[]> = {
 	SUPER_ADMIN: allRoles,
 	ADMIN: allRoles,
+	STATUTORY: [],
+	HOD: [],
+	HOS: [],
 	MODERATOR: allRoles.filter((role) => role !== Role.ADMIN),
 	STAFF: [Role.STAFF, Role.USER],
-	USER: []
+	USER: [],
+	COUNCIL: []
 };
 export const userRoles: Record<Role, { role: string }> = {
 	USER: {
@@ -21,10 +25,22 @@ export const userRoles: Record<Role, { role: string }> = {
 		role: "Moderator"
 	},
 	STAFF: {
-		role: "Staff"
+		role: "Staff Member"
 	},
 	SUPER_ADMIN: {
 		role: "Super administrator"
+	},
+	HOD: {
+		role: "Head Of Department"
+	},
+	HOS: {
+		role: "Head Or Section/ Unit"
+	},
+	COUNCIL: {
+		role: "Council Staff"
+	},
+	STATUTORY: {
+		role: "Statutory Staff"
 	}
 };
 

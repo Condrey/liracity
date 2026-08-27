@@ -6,12 +6,6 @@ import { organization } from "better-auth/plugins";
 import prisma from "./prisma";
 
 export const auth = betterAuth({
-	plugins: [
-		organization({
-			requireEmailVerificationOnInvitation: false,
-			organizationHooks: {}
-		})
-	],
 	database: prismaAdapter(prisma, {
 		provider: "postgresql"
 	}),
@@ -25,6 +19,30 @@ export const auth = betterAuth({
 	//     clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 	//   },
 	// },
+	plugins: [
+		organization({
+			requireEmailVerificationOnInvitation: false,
+			schema: {
+				organization: {
+					additionalFields: {
+						about: {
+							type: "string",
+							input: true,
+							required: false
+						}
+					}
+				}
+			},
+			organizationHooks: {},
+			teams: {
+				enabled: true,
+				defaultTeam: {
+					enabled: false
+				}
+			}
+		})
+	],
+
 	emailAndPassword: {
 		enabled: true,
 		password: {
@@ -43,11 +61,12 @@ export const auth = betterAuth({
 		//   text: `Click the link to verify your email: ${url}`
 		// }),
 	},
+
 	user: {
 		additionalFields: {
 			role: {
 				type: "string",
-				input: false,
+				input: true,
 				defaultValue: Role.USER,
 				required: true
 			}

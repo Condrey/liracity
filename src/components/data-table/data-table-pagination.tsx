@@ -4,21 +4,23 @@ import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
 interface DataTablePaginationProps<TData> {
 	table: Table<TData>;
 	ROWS_PER_PAGE?: number;
+	className?: string;
 }
 
-export function DataTablePagination<TData>({ table, ROWS_PER_PAGE = 5 }: DataTablePaginationProps<TData>) {
+export function DataTablePagination<TData>({ table, ROWS_PER_PAGE = 5, className }: DataTablePaginationProps<TData>) {
 	useEffect(() => {
 		table.setPageSize(ROWS_PER_PAGE);
 	}, [ROWS_PER_PAGE, table]);
 	const selectedRows = table.getFilteredSelectedRowModel().rows.length;
 	const totalRows = table.getFilteredRowModel().rows.length;
 	return (
-		<div className="flex flex-col items-center justify-between gap-4 px-2 sm:flex-row sm:gap-2">
+		<div className={cn("flex flex-col items-center justify-between gap-4 px-2 sm:flex-row sm:gap-2", className)}>
 			<div className="hidden flex-1 text-sm text-muted-foreground sm:flex">
 				{selectedRows === 0
 					? `${totalRows.toLocaleString()} item${totalRows === 1 ? "" : "s"}.`

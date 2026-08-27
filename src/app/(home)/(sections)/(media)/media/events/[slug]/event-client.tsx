@@ -1,11 +1,11 @@
 "use client";
 
-import { useSession } from "@/app/session-provider";
-import ArticleImage from "@/components/news-and-events/article-image";
-import { getEventBySlug } from "@/components/news-and-events/events/action";
-import ButtonAddEditEvent from "@/components/news-and-events/events/button-add-edit-event";
-import ButtonDeleteEvent from "@/components/news-and-events/events/button-delete-event";
-import { useUpdateEventStatusMutation } from "@/components/news-and-events/events/form/mutation";
+import ArticleImage from "@/components/feature/news-and-events/article-image";
+import { getEventBySlug } from "@/components/feature/news-and-events/events/action";
+import ButtonAddEditEvent from "@/components/feature/news-and-events/events/button-add-edit-event";
+import ButtonDeleteEvent from "@/components/feature/news-and-events/events/button-delete-event";
+import { useUpdateEventStatusMutation } from "@/components/feature/news-and-events/events/form/mutation";
+import Footer from "@/components/feature/user/footer";
 import { PageTitle, TypographyH2, TypographyH4 } from "@/components/page-utils";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
@@ -22,11 +22,11 @@ import {
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { Spinner } from "@/components/ui/spinner";
-import Footer from "@/components/user/footer";
 import { EventStatus, Role } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { LINK_EVENTS } from "@/lib/constants";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { EventData } from "@/lib/types";
 import { getEventStatusAndPeriod } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -70,7 +70,7 @@ export function EventClient({ initialData, slug, relatedEvents }: EventClientPro
 		<div className="h-[calc(100vh-var(--header-height))] overflow-y-auto">
 			<SidebarProvider>
 				<SidebarInset className="">
-					<header className="sticky top-0 z-50 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
+					<header className="sticky top-0 z-45 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
 						<LoadingButton variant={"ghost"} loading={isPending} onClick={() => startTransition(() => {})}>
 							<Link
 								className="flex flex-row items-center gap-0.5"

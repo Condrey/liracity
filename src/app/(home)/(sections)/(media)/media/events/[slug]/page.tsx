@@ -1,4 +1,4 @@
-import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/news-and-events/events/action";
+import { getEventBySlug, getRelatedArticlesByCategory } from "@/components/feature/news-and-events/events/action";
 import { EventStatus, Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { validateRequest } from "@/lib/get-session";
@@ -7,9 +7,6 @@ import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
 import { EventClient } from "./event-client";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 interface PageProps {
 	params: Promise<{ slug: string }>;

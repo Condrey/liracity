@@ -1,5 +1,5 @@
-import { getAllNewsArticles } from "@/components/news-and-events/news/action";
-import ListOfNewsArticles from "@/components/news-and-events/news/list-of-news-articles";
+import { getAllNewsArticles } from "@/components/feature/news-and-events/news/action";
+import ListOfNewsArticles from "@/components/feature/news-and-events/news/list-of-news-articles";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";

@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "@/app/session-provider";
 import TipTapEditorWithHeader from "@/components/tip-tap-editor/tip-tap-editor-with-header";
 import { Button, ButtonProps } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -8,6 +7,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { cn } from "@/lib/utils";
 import { singleContentSchema, SingleContentSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";

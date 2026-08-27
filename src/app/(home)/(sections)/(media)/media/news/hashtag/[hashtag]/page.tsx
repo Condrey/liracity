@@ -2,17 +2,14 @@ import {
 	getNewsArticlesByHashtag,
 	getOtherNewsArticleHashtags,
 	getRelatedNewsArticlesFromTag
-} from "@/components/news-and-events/news/action";
-import HashtagItem from "@/components/news-and-events/news/hashtag-item";
+} from "@/components/feature/news-and-events/news/action";
+import HashtagItem from "@/components/feature/news-and-events/news/hashtag-item";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import { badgeVariants } from "@/components/ui/badge";
 import { siteConfig } from "@/lib/utils";
 import { htmlToText } from "html-to-text";
 import { Metadata, ResolvingMetadata } from "next";
 import { NewsHashtagClient } from "./news-hashtag-client";
-
-// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
-// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 
 interface PageProps {
 	params: Promise<{ hashtag: string }>;

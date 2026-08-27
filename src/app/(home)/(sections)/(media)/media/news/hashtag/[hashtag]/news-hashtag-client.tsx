@@ -1,15 +1,16 @@
 "use client";
 
-import { getNewsArticlesByHashtag } from "@/components/news-and-events/news/action";
-import NewsArticleContainer from "@/components/news-and-events/news/news-article-container";
+import { getNewsArticlesByHashtag } from "@/components/feature/news-and-events/news/action";
+import NewsArticleContainer from "@/components/feature/news-and-events/news/news-article-container";
+import Footer from "@/components/feature/user/footer";
 import { TypographyH2, TypographyH4 } from "@/components/page-utils";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { Button } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
-import Footer from "@/components/user/footer";
 import { Tag } from "@/generated/prisma/client";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_NEWS } from "@/lib/constants";
 import { NewsArticleData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { MenuIcon, MoveLeftIcon } from "lucide-react";
@@ -17,7 +18,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { useTransition } from "react";
 import { PageSidebar } from "./page-sidebar";
-import { LINK_NEWS } from "@/lib/constants";
 
 interface NewsHashtagClientProps {
 	initialData: NewsArticleData[];

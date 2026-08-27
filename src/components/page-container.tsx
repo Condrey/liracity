@@ -1,4 +1,4 @@
-import Footer from "@/components/user/footer";
+import Footer from "@/components/feature/user/footer";
 import { cn } from "@/lib/utils";
 
 interface PageContainerProps {

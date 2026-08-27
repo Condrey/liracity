@@ -9,6 +9,7 @@ import LoadingButton from "@/components/ui/loading-button";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { authClient } from "@/lib/auth-client";
+import { REDIRECT_TO_URL_SEARCH_PARAMS } from "@/lib/constants";
 import { signInSchema, SignInSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -23,7 +24,7 @@ export default function SignInForm() {
 	const router = useRouter();
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 	const searchParams = useSearchParams();
-	const [urlRedirect] = useState<string | undefined>(searchParams.get("redirect") as string);
+	const [urlRedirect] = useState<string | undefined>(searchParams.get(REDIRECT_TO_URL_SEARCH_PARAMS) as string);
 	const [urlEmail] = useState<string | undefined>(searchParams.get("email") as string);
 
 	const form = useForm<SignInSchema>({

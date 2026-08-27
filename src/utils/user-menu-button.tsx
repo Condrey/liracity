@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "@/app/session-provider";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -16,6 +15,7 @@ import { Role } from "@/generated/prisma/enums";
 import { authClient } from "@/lib/auth-client";
 import { REDIRECT_TO_URL_SEARCH_PARAMS } from "@/lib/constants";
 import { userRoles } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { cn } from "@/lib/utils";
 import { LogOutIcon, LucideSettings2 } from "lucide-react";
 import Link from "next/link";
@@ -42,8 +42,10 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 	const loginUrl = `/sign-in` + "?" + newParams.toString();
 
 	async function signOutButtonClicked() {
-		const { error } = await authClient.signOut();
-		if (error) toast.error("Sign out failed", { description: error.message });
+		startTransition(async () => {
+			const { error } = await authClient.signOut();
+			if (error) toast.error("Sign out failed", { description: error.message });
+		});
 	}
 
 	return (
@@ -89,8 +91,8 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 							</ThemeToggle>
 						</div>
 						<DropdownMenuSeparator />
-						<Button variant={"ghost"} className="flex w-full justify-start ps-3" onClick={() => signOutButtonClicked()}>
-							<LogOutIcon className="mr-2 text-inherit" />
+						<Button variant={"ghost"} className="flex w-full justify-start ps-3" onClick={signOutButtonClicked}>
+							{isPending ? <Spinner className="mr-2 text-inherit" /> : <LogOutIcon className="mr-2 text-inherit" />}
 							Sign out
 						</Button>
 					</DropdownMenuContent>

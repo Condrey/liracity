@@ -1,6 +1,6 @@
 "use client";
 
-import { getLatestNews } from "@/components/news-and-events/news/action";
+import { getLatestNews } from "@/components/feature/news-and-events/news/action";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";

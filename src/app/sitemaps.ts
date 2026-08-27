@@ -1,5 +1,5 @@
-import { getAllEvents } from "@/components/news-and-events/events/action";
-import { getAllNewsArticles } from "@/components/news-and-events/news/action";
+import { getAllEvents } from "@/components/feature/news-and-events/events/action";
+import { getAllNewsArticles } from "@/components/feature/news-and-events/news/action";
 import { EventStatus, NewsArticleStatus } from "@/generated/prisma/enums";
 import { MetadataRoute } from "next";
 

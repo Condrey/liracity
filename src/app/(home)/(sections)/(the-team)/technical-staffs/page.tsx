@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { getAllStaffs } from "./actions";
+import StaffList from "./staff-list";
 
 export const metadata: Metadata = {
 	title: "All Staffs"
@@ -15,7 +16,9 @@ export default function Page() {
 }
 
 async function AllStaffs() {
-	const allStaffs = getAllStaffs();
+	const allStaffs = await getAllStaffs();
 
-	return <div>All staffs</div>;
+	return <div className="pt-8">
+		{/* <StaffList staffs={allStaffs}/> */}
+	</div>;
 }

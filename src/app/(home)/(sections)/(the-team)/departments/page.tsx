@@ -14,13 +14,13 @@ export const metadata: Metadata = {
 export default async function Page() {
 	const departments = await getAllOrganizationList();
 	return (
-		<>
+		<div className="space-y-8 pt-6">
 			<PageTitle heading={title}>
 				<ButtonAddEditDepartment variant={"secondary"}>
 					<PlusIcon />
 				</ButtonAddEditDepartment>
 			</PageTitle>
 			<ListOfOrganizations initialData={departments} />
-		</>
+		</div>
 	);
 }

@@ -33,7 +33,13 @@ export const auth = betterAuth({
 					}
 				}
 			},
-			organizationHooks: {},
+			organizationHooks: {
+				async afterRemoveMember({ member, organization, user }) {
+					await prisma.teamMember.deleteMany({
+						where: { userId: user.id, team: { organizationId: organization.id } }
+					});
+				}
+			},
 			teams: {
 				enabled: true,
 				defaultTeam: {

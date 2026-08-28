@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/feature/user/app-sidebar";
-import TopAppBar from "@/components/feature/user/top-app-bar";
+import TopAppBar from "@/components/feature/user/top-app-bar/top-app-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { validateRequest } from "@/lib/get-session";
 import SessionProvider from "@/lib/session-provider";

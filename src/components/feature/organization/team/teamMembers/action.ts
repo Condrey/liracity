@@ -82,7 +82,8 @@ export async function addTeamMembers({ input, teamId }: { input: MultipleMembers
 			},
 			select: {
 				id: true,
-				email: true
+				email: true,
+				role: true
 			}
 		});
 
@@ -115,7 +116,7 @@ export async function addTeamMembers({ input, teamId }: { input: MultipleMembers
 			.map((user) => ({
 				organizationId: team.organizationId,
 				userId: user.id,
-				role: "member"
+				role: user.role === Role.ADMIN || user.role === Role.HOD || user.role === Role.HOS ? "member" : "admin"
 			}));
 
 		if (newMembers.length > 0) {

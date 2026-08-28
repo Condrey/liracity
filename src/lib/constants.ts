@@ -13,12 +13,13 @@ export const LINK_GALLERY = "/media/gallery";
 export const LINK_SOCIAL_MEDIA = "/media/social-media";
 export const LINK_PODCASTS = "/media/podcasts";
 export const LINK_DEPARTMENTS = "/departments";
+export const LINK_TECHNICAL_STAFFS = "/technical-staffs";
+export const LINK_HIERARCHY = "/hierarchy";
 
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
 	title: string;
 	href: string;
-	showOnMediumScreen: boolean;
 	description: string;
 	children: NavLink[];
 	icon?: LucideIcon;
@@ -104,20 +105,20 @@ export const cityGetInvolvedLinks: NavLink[] = [
 ];
 
 export const staffLinks: NavLink[] = [
-	// {
-	// 	title: "All staffs",
-	// 	href: "/all-staffs",
-	// 	description: 	`Browse all staffs of ${webName}`
-	// },
 	{
-		title: "Hierarchy",
-		href: "/hierarchy",
+		title: "Organogram",
+		href: LINK_HIERARCHY,
 		description: "Hierarchy and organography of departments and teams."
 	},
 	{
 		title: "Departments",
 		href: LINK_DEPARTMENTS,
-		description: "Meet the teams and departments that run the city."
+		description: "Meet the departments that run the city."
+	},
+	{
+		title: "Technical Staffs",
+		href: LINK_TECHNICAL_STAFFS,
+		description: "Meet the technical staffs that run the city."
 	}
 ];
 
@@ -176,17 +177,15 @@ export const navLinks: NavLinkGroup[] = [
 		href: "/",
 		description: "",
 		icon: HomeIcon,
-		children: [],
-		showOnMediumScreen: true
+		children: []
 	},
 	{
 		title: "About Lira",
 		href: "/about-lira",
 		description: `Discover Lira’s history, culture, and geography.`,
 		icon: InfoIcon,
-		children: [],
+		children: []
 		// children: cityAboutLinks,
-		showOnMediumScreen: true
 	},
 	// {
 	// 	title: "City Services",
@@ -194,23 +193,20 @@ export const navLinks: NavLinkGroup[] = [
 	// 	description: "Access services offered by the Lira City Council.",
 	// 	icon: RadioTowerIcon,
 	// 	children: cityServicesLinks,
-	// 	showOnMediumScreen: false
 	// },
 	{
 		title: "The team",
 		href: "/the-team",
 		description: "Explore the focus areas and functions of the city council.",
 		icon: BlocksIcon,
-		children: staffLinks,
-		showOnMediumScreen: true
+		children: staffLinks
 	},
 	{
 		title: "Media Center",
 		href: "/media",
 		description: "Stay updated with the latest from the city council.",
 		icon: FilmIcon,
-		children: cityMediaCenterLinks,
-		showOnMediumScreen: false
+		children: cityMediaCenterLinks
 	},
 	// {
 	// 	title: "Opportunities",
@@ -218,7 +214,6 @@ export const navLinks: NavLinkGroup[] = [
 	// 	description: "Explore opportunities to grow and serve.",
 	// 	icon: BriefcaseBusinessIcon,
 	// 	children: cityOpportunityLinks,
-	// 	showOnMediumScreen: true
 	// },
 	// {
 	// 	title: "Sports & Recreation",
@@ -226,14 +221,12 @@ export const navLinks: NavLinkGroup[] = [
 	// 	description: "Engage in sports and recreational activities in Lira.",
 	// 	icon: TrophyIcon,
 	// 	children: citySportsAndReactionLinks,
-	// 	showOnMediumScreen: true
 	// },
 	{
 		title: "Get Involved",
 		href: "/contact-us",
 		description: "Contact, engage, and share feedback with the council.",
 		icon: MailPlusIcon,
-		children: cityGetInvolvedLinks,
-		showOnMediumScreen: false
+		children: cityGetInvolvedLinks
 	}
 ];

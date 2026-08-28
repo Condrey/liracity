@@ -103,7 +103,7 @@ export const organizationDataInclude = {
 		include: teamDataInclude,
 		orderBy: { name: "asc" }
 	},
-	_count: { select: { teams: true } }
+	_count: { select: { teams: true, members: { where: { role: { not: "owner" } } } } }
 } satisfies Prisma.OrganizationInclude;
 export type OrganizationData = Prisma.OrganizationGetPayload<{
 	include: typeof organizationDataInclude;

@@ -1,11 +1,10 @@
 "use client";
 
+import EmptyContainer from "@/components/query-containers/empty-container";
+import ErrorContainer from "@/components/query-containers/error-container";
 import { EmployeeData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAllStaffs } from "./actions";
-import ErrorContainer from "@/components/query-containers/error-container";
-import EmptyContainer from "@/components/query-containers/empty-container";
-import { DataTable } from "@/components/data-table/data-table";
 
 interface StaffListProps {
 	staffs: EmployeeData[];
@@ -26,7 +25,7 @@ export default function StaffList({ staffs }: StaffListProps) {
 			) : status === "success" && !data.length ? (
 				<EmptyContainer message={"There are no staffs in the database yet."}></EmptyContainer>
 			) : (
-				"list of staff"
+				<pre>{JSON.stringify({ data }, null, 2)}</pre>
 			)}
 		</div>
 	);

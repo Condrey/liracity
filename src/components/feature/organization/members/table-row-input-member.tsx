@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Role } from "@/generated/prisma/enums";
+import { userRoles } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import { memberSignUpSchema, MemberSignUpSchema, MultipleMembersSignUpSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -120,9 +121,9 @@ export default function TableRowInputMember({
 									<SelectContent position="popper">
 										<SelectGroup>
 											<SelectLabel>Choose a role from here</SelectLabel>
-											{[Role.STAFF, Role.HOD, Role.ADMIN].map((role) => (
+											{[Role.STAFF, Role.HOD, Role.ADMIN, Role.HOS].map((role) => (
 												<SelectItem key={role} value={role}>
-													{role}
+													{userRoles[role].role}
 												</SelectItem>
 											))}
 										</SelectGroup>

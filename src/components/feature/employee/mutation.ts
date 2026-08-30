@@ -19,7 +19,7 @@ export function upsertStaffEmployeeMutation() {
 			const isSubmission = !variables.employeeId;
 
 			queryClient.invalidateQueries({ queryKey });
-			toast.success(`successfully ${isSubmission ? "Added" : "Updated"} staff ${data.user.name}`);
+			toast.success(`successfully ${isSubmission ? "Added" : "Updated"} staff `);
 		},
 		onError(error, variables, context) {
 			console.error(error);
@@ -37,7 +37,7 @@ export function useDeleteEmployeeMutation() {
 
 			queryClient.invalidateQueries({ queryKey });
 
-			toast.success(`Successfully deleted ${data.user.name} from the system`);
+			toast.success(`Successfully deleted staff from the system`);
 		},
 		onError(error, variables, context) {
 			console.error(error);

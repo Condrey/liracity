@@ -21,15 +21,7 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 	const { user: currentUser } = await validateRequest();
 	const isAuthorized = !!currentUser && myPrivileges[currentUser.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized!");
-	const {
-		 organizationId,
-		ippsNumber,
-		name,
-		userId,
-		employeeId,
-		assumedOffice,
-		position
-	} = employeeSchema.parse(input);
+	const { organizationId, ippsNumber, name, userId, employeeId, assumedOffice, position } = employeeSchema.parse(input);
 	const existingEmployee = await prisma.employee.findFirst({
 		where: { ippsNumber: `${ippsNumber}` },
 		include: { user: true }
@@ -47,21 +39,21 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 			});
 			const user = await tx.user.upsert({
 				where: { id: userId },
-				create: { name, passwordHash, role: Role.STAFF },
+				create: { name, role: Role.STAFF },
 				update: { name }
 			});
 			const employee = await tx.employee.upsert({
 				where: { id: employeeId },
 				create: {
 					ippsNumber: `${ippsNumber}`,
-					hierarchy: 1,
+
 					positionId: position,
 					assumedOffice,
 					userId: user.id
 				},
 				update: {
 					ippsNumber: `${ippsNumber}`,
-					hierarchy: 1,
+
 					positionId: position,
 					assumedOffice,
 					userId: user.id

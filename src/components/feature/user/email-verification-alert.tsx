@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function EmailVerificationAlert() {
   return (
-    <Alert variant={"warning"} className="max-w-9xl mx-auto">
+    <Alert  className="max-w-9xl mx-auto">
       <MailIcon />
       <AlertTitle>Un-verified email address</AlertTitle>
       <AlertDescription>

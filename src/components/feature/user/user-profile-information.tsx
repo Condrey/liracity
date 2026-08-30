@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { UserAvatar } from "@/components/user-avatar";
+import UserAvatar from "@/components/ui/user-avatar";
 import { User } from "@/lib/auth";
 import { format } from "date-fns";
 import { CalendarDaysIcon, ShieldIcon, UserIcon } from "lucide-react";
@@ -31,7 +31,6 @@ export function UserProfileInformation({ user }: UserProfileInformationProps) {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
           <div className="flex flex-col items-center gap-3">
             <UserAvatar
-              name={user.name}
               image={user.image}
               className="size-32 sm:size-24"
             />

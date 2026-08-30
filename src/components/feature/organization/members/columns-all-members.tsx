@@ -1,23 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Spinner } from "@/components/ui/spinner";
-import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { MemberData } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpRightIcon, TrashIcon } from "lucide-react";
-import Link from "next/link";
-import { useTransition } from "react";
 import DataCellAssumedOffice from "../../employee/data-cell-assumed-office";
 import DataCellCurrentPosition from "../../employee/data-cell-current-position";
-import DataCellAdministrativeRole from "../../user/data-cell-administrative-role";
 import DataCellUser from "../../user/data-cell-user";
 import DataCellOrganization from "../data-cell-organization";
-import ButtonRemoveMember from "./button-remove-member";
+import { useTransition } from "react";
+import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
+import { ArrowUpRightIcon } from "lucide-react";
 
-export const useMembersColumns = (organizationSlug: string): ColumnDef<MemberData>[] => [
+export const useAllMembersColumns = (organizationSlug: string): ColumnDef<MemberData>[] => [
 	{
 		id: "index",
 		header: ({ column }) => <DataTableColumnHeader column={column} title="s/n" />,
@@ -56,28 +54,6 @@ export const useMembersColumns = (organizationSlug: string): ColumnDef<MemberDat
 		cell: ({ row }) => <DataCellAssumedOffice employee={row.original.employee} />
 	},
 	{
-		accessorKey: "role",
-		header: ({ column }) => <DataTableColumnHeader column={column} title="Administrative Role" className="" />,
-		cell({ row }) {
-			const {
-				role,
-				id,
-				organizationId,
-				user: { name: userName }
-			} = row.original;
-
-			return (
-				<DataCellAdministrativeRole
-					role={role}
-					id={id}
-					organizationId={organizationId}
-					userName={userName}
-					organizationSlug={organizationSlug}
-				/>
-			);
-		}
-	},
-	{
 		id: "action",
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Action" />,
 		cell({ row }) {
@@ -86,11 +62,7 @@ export const useMembersColumns = (organizationSlug: string): ColumnDef<MemberDat
 			const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 			const url = getNavigationLinkWithPathnameWithoutUpdate(`/users/${id}`);
 			return (
-				<ButtonGroup>
-					<ButtonRemoveMember member={row.original} variant={"destructive"} size={"sm"}>
-						<TrashIcon />
-						Remove
-					</ButtonRemoveMember>
+				<ButtonGroup>					
 					<Button variant={"secondary"} onClick={() => startTransition(() => {})} size={"sm"} asChild>
 						<Link href={url}>View {isPending ? <Spinner /> : <ArrowUpRightIcon />}</Link>
 					</Button>

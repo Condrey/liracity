@@ -96,10 +96,9 @@ export type VerifyUserSchema = z.infer<typeof verifyUserSchema>;
 
 // Employee
 export const employeeSchema = z.object({
-	departmentalSectorId: requiredString,
+	organizationId: requiredString,
 	userId: requiredString,
 	name: requiredString.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase())),
-
 	ippsNumber: z.number({ error: "IPPS number is a must" }),
 	employeeId: requiredString,
 	position: requiredString,

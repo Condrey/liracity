@@ -17,6 +17,15 @@ export const getMemberByMemberId = cache(async (memberId: string) => {
 	});
 });
 
+export const getAllMembers = cache(
+	async (): Promise<MemberData[]> =>
+		await prisma.member.findMany({
+			where: { role: { not: "owner" } },
+			orderBy: [{ organization: { name: "asc" } }, { role: "asc" }, { user: { name: "asc" } }],
+			include: memberDataInclude
+		})
+);
+
 export const getOrganizationMembersBySlug = cache(
 	async (organizationSlug: string): Promise<MemberData[]> =>
 		await prisma.member.findMany({

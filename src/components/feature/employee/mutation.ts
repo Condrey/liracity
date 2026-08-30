@@ -10,7 +10,7 @@ export function upsertStaffEmployeeMutation() {
 	return useMutation({
 		mutationFn: upsertStaffEmployee,
 		onSuccess: async (data, variables) => {
-			const queryKey: QueryKey = ["sector", variables.departmentalSectorId];
+			const queryKey: QueryKey = ["sector", variables.organizationId];
 			if (typeof data === "string") {
 				toast.warning("Duplicates", { description: data });
 				return;
@@ -33,7 +33,7 @@ export function useDeleteEmployeeMutation() {
 	return useMutation({
 		mutationFn: deleteEmployee,
 		async onSuccess(data, variables, context) {
-			const queryKey: QueryKey = ["sector", data.departMentalSectorId];
+			const queryKey: QueryKey = ["sector", ];
 
 			queryClient.invalidateQueries({ queryKey });
 

@@ -21,8 +21,15 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 	const { user: currentUser } = await validateRequest();
 	const isAuthorized = !!currentUser && myPrivileges[currentUser.role as Role].includes(Role.MODERATOR);
 	if (!isAuthorized) throw Error("Unauthorized!");
-	const { departmentalSectorId, ippsNumber, name, userId, employeeId, assumedOffice, position } =
-		employeeSchema.parse(input);
+	const {
+		 organizationId,
+		ippsNumber,
+		name,
+		userId,
+		employeeId,
+		assumedOffice,
+		position
+	} = employeeSchema.parse(input);
 	const existingEmployee = await prisma.employee.findFirst({
 		where: { ippsNumber: `${ippsNumber}` },
 		include: { user: true }
@@ -46,7 +53,6 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 			const employee = await tx.employee.upsert({
 				where: { id: employeeId },
 				create: {
-					departMentalSectorId: departmentalSectorId,
 					ippsNumber: `${ippsNumber}`,
 					hierarchy: 1,
 					positionId: position,
@@ -54,7 +60,6 @@ export async function upsertStaffEmployee(input: EmployeeSchema) {
 					userId: user.id
 				},
 				update: {
-					departMentalSectorId: departmentalSectorId,
 					ippsNumber: `${ippsNumber}`,
 					hierarchy: 1,
 					positionId: position,

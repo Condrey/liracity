@@ -17,7 +17,7 @@ export default function Chart({}: ChartProps) {
 					lineBorderRadius="calc(var(--spacing) * 2)"
 					nodePadding="6px"
 				>
-					<TreeNode label={<ChartUserContainer department={"City Council (LCV)"} />}>
+					<TreeNode label={<ChartUserContainer department={"Mayor"} />}>
 						<TreeNode
 							label={
 								<ChartUserContainer
@@ -33,7 +33,7 @@ export default function Chart({}: ChartProps) {
 								/>
 							}
 						/>
-						<TreeNode label={<ChartUserContainer department={"Town clerk"} user={townClerk} />}>
+						<TreeNode label={<ChartUserContainer department={"Town clerk"} />}>
 							<TreeNode label={<ChartUserContainer department={"Internal Audit"} />} />
 							<TreeNode label="">
 								<TreeNode label={<ChartUserContainer department={"Health Services"} />} />

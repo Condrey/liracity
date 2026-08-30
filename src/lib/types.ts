@@ -84,7 +84,7 @@ export type TeamData = Prisma.TeamGetPayload<{
 
 // Member
 export const memberDataInclude = {
-	organization: {},
+	organization: { include: { teams: { select: { name: true,teammembers:{select:{userId:true}} } ,} } },
 	employee: { include: employeeDataInclude },
 	user: { select: userDataSelect }
 } satisfies Prisma.MemberInclude;

@@ -2,7 +2,7 @@
 
 import ButtonAddEditDepartment from "@/components/feature/organization/button-add-edit-organization";
 import ButtonDeleteOrganization from "@/components/feature/organization/button-delete-organization";
-import ListOfMembers from "@/components/feature/organization/members/list-of-members";
+import ListOfOrganizationMembers from "@/components/feature/organization/members/list-of-organization-members";
 import ButtonAddEditTeam from "@/components/feature/organization/team/button-add-edit-team";
 import ListOfTeams from "@/components/feature/organization/team/list-of-teams";
 import { PageTitle } from "@/components/page-utils";
@@ -30,7 +30,7 @@ export default function DepartmentContainer({ department }: DepartmentContainerP
 					</ButtonGroup>
 				</PageTitle>
 				{/* iterate the members in the department */}
-				<ListOfMembers initialData={members} organizationId={id} organizationSlug={slug} />
+				<ListOfOrganizationMembers initialData={members} organizationId={id} organizationSlug={slug} />
 			</div>
 			<div>
 				<PageTitle heading={`${name} sections/ units : ${formatNumber(_count.teams)} `}>

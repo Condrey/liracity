@@ -83,12 +83,12 @@ export default function DropDownMenuEmployee({ employee }: DropDownMenuEmployeeP
 					</DropdownMenuGroup>
 				</DropdownMenuContent>
 			</DropdownMenu>
-			<FormAddEditEmployee
+			{/* <FormAddEditEmployee
 				open={openEditDialog}
 				setOpen={setOpenEditDialog}
 				employee={employee}
-				departmentalSectorId={employee.departMentalSectorId!}
-			/>
+				organizationId={employee.organizationId!}
+			/> */}
 			<DeleteEmployeeDialog open={openDeleteDialog} setOpen={setOpenDeleteDialog} employee={employee} />
 		</>
 	);

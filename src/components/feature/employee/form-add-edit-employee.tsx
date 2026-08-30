@@ -15,14 +15,14 @@ import { upsertStaffEmployeeMutation } from "./mutation";
 interface FormAddEditEmployeeProps {
 	open: boolean;
 	setOpen: (open: boolean) => void;
-	departmentalSectorId: string;
+	organizationId: string;
 	employee?: EmployeeData;
 }
 
 export default function FormAddEditEmployee({
 	open,
 	setOpen,
-	departmentalSectorId,
+	organizationId,
 	employee
 }: FormAddEditEmployeeProps) {
 	const currentYear = new Date().getFullYear();
@@ -32,7 +32,7 @@ export default function FormAddEditEmployee({
 			userId: employee?.userId || uuidv4(),
 			ippsNumber: Number(employee?.ippsNumber!),
 			name: employee?.user.name || "",
-			departmentalSectorId,
+			organizationId,
 			employeeId: employee?.id || "",
 			assumedOffice: employee?.assumedOffice || currentYear,
 			position: employee?.positionId || ""

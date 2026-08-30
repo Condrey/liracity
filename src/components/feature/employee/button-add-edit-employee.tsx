@@ -9,13 +9,13 @@ import { Button, ButtonProps } from "../../ui/button";
 import FormAddEditEmployee from "./form-add-edit-employee";
 
 interface ButtonAddEditEmployeeProps extends ButtonProps {
-	departmentalSectorId: string;
+	organizationId: string;
 	employee?: EmployeeData;
 }
 
 export default function ButtonAddEditEmployee({
 	employee,
-	departmentalSectorId,
+	organizationId,
 	...props
 }: ButtonAddEditEmployeeProps) {
 	const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function ButtonAddEditEmployee({
 				open={open}
 				setOpen={setOpen}
 				employee={employee}
-				departmentalSectorId={departmentalSectorId}
+				organizationId={organizationId}
 			/>
 		</>
 	);

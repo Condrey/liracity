@@ -1,6 +1,14 @@
 "use client";
 
-import { DepartmentData, EmployeeData } from "@/lib/types";
+import { NumberInput } from "@/components/number-input/number-input";
+import ResponsiveDrawer from "@/components/responsive-drawer";
+import { Button } from "@/components/ui/button";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { EmployeeData, OrganizationData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { employeeSchema, EmployeeSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,20 +16,12 @@ import { CheckIcon, ChevronsUpDown, ChevronsUpDownIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { NumberInput } from "../../number-input/number-input";
-import ResponsiveDrawer from "../../responsive-drawer";
-import { Button } from "../../ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../ui/command";
-import { Form, FormControl, FormField, FormFooter, FormItem, FormLabel, FormMessage } from "../../ui/form";
-import { Input } from "../../ui/input";
-import LoadingButton from "../../ui/loading-button";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { upsertStaffEmployeeMutation } from "./mutation";
 
 interface FormAddEditStaffProps {
 	open: boolean;
 	setOpen: (open: boolean) => void;
-	departments: DepartmentData[];
+	departments: OrganizationData[];
 	employee?: EmployeeData;
 }
 
@@ -33,14 +33,14 @@ export default function FormAddEditStaff({ open, setOpen, departments, employee 
 			userId: employee?.userId || uuidv4(),
 			ippsNumber: Number(employee?.ippsNumber!),
 			name: employee?.user.name || "",
-			departmentalSectorId: employee?.departMentalSectorId || "",
+			organizationId: employee?.id || "",
 			employeeId: employee?.id || "",
 			assumedOffice: employee?.assumedOffice || currentYear,
 			position: employee?.positionId || ""
 		}
 	});
 	const [departmentId, setDepartmentId] = useState("");
-	const sectors = departments.flatMap((d) => d.departmentalSectors).filter((s) => s.departMentId === departmentId);
+	const sectors = departments.flatMap((d) => d.teams).filter((s) => s.id === departmentId);
 
 	const { isPending, mutate } = upsertStaffEmployeeMutation();
 	function submitInfo(input: EmployeeSchema) {
@@ -99,7 +99,7 @@ export default function FormAddEditStaff({ open, setOpen, departments, employee 
 					</FormItem>
 					<FormField
 						control={form.control}
-						name="departmentalSectorId"
+						name="organizationId"
 						render={({ field }) => (
 							<FormItem className="flex flex-col">
 								<FormLabel>Section</FormLabel>

@@ -4,25 +4,20 @@ import { DataTable } from "@/components/data-table/data-table";
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
 import { MemberData } from "@/lib/types";
-import { MailIcon, PlusIcon, UsersIcon } from "lucide-react";
-import ButtonInviteMember from "../invitations/button-invite-member";
-import ButtonAddMember from "./button-add-members";
-import { useMembersColumns } from "./columns";
-import { useOrganizationMembersQuery } from "./query";
+import { UsersIcon } from "lucide-react";
+import { useAllMembersColumns } from "./columns-all-members";
+import { useAllMembersQuery } from "./query";
+import { TypographyH4 } from "@/components/page-utils";
 
 interface Props {
 	initialData: MemberData[];
-	organizationSlug?: string;
-	organizationId: string;
 }
 
-export default function ListOfMembers({ initialData, organizationSlug, organizationId }: Props) {
-	const query = useOrganizationMembersQuery({
-		organizationSlug,
-		organizationId,
+export default function ListOfMembers({ initialData }: Props) {
+	const query = useAllMembersQuery({
 		initialData
 	});
-	const columns = useMembersColumns(organizationSlug || organizationId!);
+	const columns = useAllMembersColumns("");
 	const { data: members, status, error } = query;
 	if (status === "error") {
 		return <ErrorContainer errorMessage={`Failed to fetch members. ${error.message} `} query={query} />;
@@ -33,9 +28,7 @@ export default function ListOfMembers({ initialData, organizationSlug, organizat
 				icon={UsersIcon}
 				message="No members"
 				description="There are no added members for this department."
-			>
-				<ButtonAddMember organizationId={organizationId}>Add Member</ButtonAddMember>
-			</EmptyContainer>
+			></EmptyContainer>
 		);
 	}
 	return (
@@ -43,14 +36,10 @@ export default function ListOfMembers({ initialData, organizationSlug, organizat
 			data={members}
 			columns={columns}
 			filterColumn={{ id: "user_name", label: "member name" }}
+			tableHeaderSection={
+				<TypographyH4 title='List of Technical Staffs' className="pt-4"/>
+			}
 			className="w-full"
-		>
-			<ButtonInviteMember size={"sm"} variant={"secondary"}>
-				<MailIcon /> Member
-			</ButtonInviteMember>
-			<ButtonAddMember size={"sm"} variant={"secondary"} organizationId={organizationId}>
-				<PlusIcon /> Member
-			</ButtonAddMember>
-		</DataTable>
+		></DataTable>
 	);
 }

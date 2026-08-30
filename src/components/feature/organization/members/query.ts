@@ -3,7 +3,7 @@
 import { useSession } from "@/lib/session-provider";
 import { MemberData, MemberData as PrismaMemberData } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { getMemberByMemberId, getOrganizationMembersById, getOrganizationMembersBySlug } from "./action";
+import { getAllMembers, getMemberByMemberId, getOrganizationMembersById, getOrganizationMembersBySlug } from "./action";
 
 export const useOrganizationMembersQuery = ({
 	organizationSlug,
@@ -21,6 +21,15 @@ export const useOrganizationMembersQuery = ({
 			await (organizationSlug
 				? getOrganizationMembersBySlug(organizationSlug)
 				: getOrganizationMembersById(organizationId))
+	});
+	return query;
+};
+
+export const useAllMembersQuery = ({ initialData }: { initialData: MemberData[] }) => {
+	const query = useQuery({
+		queryKey: ["members"],
+		initialData,
+		queryFn: getAllMembers
 	});
 	return query;
 };

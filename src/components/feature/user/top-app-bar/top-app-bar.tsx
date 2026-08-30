@@ -33,7 +33,7 @@ export default async function TopAppBar({ className }: { className?: string }) {
 			</div>
 
 			{/* Big screen section: Navigation menu links  */}
-			<div className="flex-1">
+			<div className="flex-1 hidden md:flex">
 				<TopAppBarBigScreen />			
 			</div>
 

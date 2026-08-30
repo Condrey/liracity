@@ -14,6 +14,9 @@ import { OrganizationData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
 import { useDeleteOrganizationMutation } from "./mutation";
+import { Role } from "@/generated/prisma/enums";
+import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 
 interface ButtonDeleteOrganizationProps extends ButtonProps {
 	organization: OrganizationData;
@@ -21,6 +24,9 @@ interface ButtonDeleteOrganizationProps extends ButtonProps {
 
 export default function ButtonDeleteOrganization({ organization, variant, ...props }: ButtonDeleteOrganizationProps) {
 	const [open, setOpen] = useState(false);
+	const { user } = useSession();
+	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("SUPER_ADMIN");
+	if (!isAuthorized) return null;
 
 	return (
 		<>

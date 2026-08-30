@@ -17,17 +17,17 @@ interface Props extends ButtonProps {
 export default function ButtonAddEditTeam({ team, organizationId, variant, ...props }: Props) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
-	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
+		const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("HOS");
+		if (!isAuthorized) return null;
+		
 	return (
 		<>
-			{isAuthorized && (
 				<Button
 					title={team ? `Update ${team.name}'s content` : "Create a new departmental sector"}
 					variant={variant ?? "ghost"}
 					onClick={() => setOpen(true)}
 					{...props}
 				/>
-			)}
 			<FormAddEditDepartmentalSector open={open} setOpen={setOpen} organizationId={organizationId} teamToEdit={team} />
 		</>
 	);

@@ -14,6 +14,9 @@ import { TeamData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
 import { useDeleteTeamMutation } from "./mutation";
+import { Role } from "@/generated/prisma/enums";
+import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 
 interface Props extends ButtonProps {
 	team: TeamData;
@@ -21,7 +24,9 @@ interface Props extends ButtonProps {
 
 export default function ButtonDeleteTeam({ team, variant, ...props }: Props) {
 	const [open, setOpen] = useState(false);
-
+const { user } = useSession();
+	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("HOS");
+	if (!isAuthorized) return null;
 	return (
 		<>
 			<Button

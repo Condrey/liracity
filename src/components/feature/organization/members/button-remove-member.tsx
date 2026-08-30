@@ -16,6 +16,9 @@ import UserAvatar from "@/components/ui/user-avatar";
 import { MemberData } from "@/lib/types";
 import { useState } from "react";
 import { useRemoveMemberMutation } from "./mutation";
+import { Role } from "@/generated/prisma/enums";
+import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 
 interface Props extends ButtonProps {
 	member: MemberData;
@@ -25,6 +28,9 @@ export default function ButtonRemoveMember({ member, ...props }: Props) {
 	const [open, setOpen] = useState(false);
 
 	const { mutate, isPending, error } = useRemoveMemberMutation();
+	const { user:userSession } = useSession();
+	const isAuthorized = myPrivileges[(userSession?.role as Role) || Role.USER].includes("HOD");
+	if (!isAuthorized) return null;
 
 	async function removeMember() {
 		mutate(

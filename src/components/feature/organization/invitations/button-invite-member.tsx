@@ -19,7 +19,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
+import { Role } from "@/generated/prisma/enums";
 import { authClient } from "@/lib/auth-client";
+import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -38,6 +41,10 @@ export default function ButtonInviteMember({ ...props }: ButtonProps) {
     resolver: zodResolver(schema),
     defaultValues: { email: "" },
   });
+  const { user } = useSession();
+	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("SUPER_ADMIN");
+	if (!isAuthorized) return null;
+  
   async function submitEmail({ email }: Schema) {
     setError(undefined);
     //Perform the logic

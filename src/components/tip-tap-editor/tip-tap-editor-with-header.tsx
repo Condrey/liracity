@@ -32,6 +32,7 @@ import { ClipboardEvent, useEffect } from "react";
 import { useUploadTiptapImageMedia } from "./custom-extensions/hooks";
 import { CustomImage, ImageGallery } from "./custom-extensions/image-extension";
 import "./styles.css";
+import TipTapEditorHeader from "./headers/header";
 
 interface TipTapEditorWithHeaderProps {
 	className?: string;
@@ -239,7 +240,7 @@ export default function TipTapEditorWithHeader({
 			)}
 			{...routeprops}
 		>
-			{/* {includeHeader && <TipTapEditorHeader editor={editor} />} */}
+			{includeHeader && <TipTapEditorHeader editor={editor} />}
 			<EditorContent
 				editor={editor}
 				onPaste={onPaste}

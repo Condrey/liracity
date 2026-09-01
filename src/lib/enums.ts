@@ -1,4 +1,4 @@
-import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma/enums";
+import { EventStatus, NewsArticleStatus, Role,StationType } from "@/generated/prisma/enums";
 import { InboxIcon, LetterTextIcon, LockIcon, LucideIcon, TrashIcon, UploadIcon } from "lucide-react";
 
 // role
@@ -34,7 +34,7 @@ export const userRoles: Record<Role, { role: string }> = {
 		role: "Head Of Department"
 	},
 	HOS: {
-		role: "Head Or Section/ Unit"
+		role: "Head Of Section/ Unit"
 	},
 	COUNCIL: {
 		role: "Council Staff"
@@ -77,7 +77,6 @@ export const eventStatuses: Record<
 };
 
 // news article
-
 export const allNewsArticleStatuses = Object.values(NewsArticleStatus);
 export const newsArticleStatuses: Record<
 	NewsArticleStatus,
@@ -106,5 +105,23 @@ export const newsArticleStatuses: Record<
 		newsArticleStatus: "Archived",
 		icon: InboxIcon,
 		variant: "outline"
+	}
+};
+
+
+// station types
+export const allStationTypes = Object.values(StationType);
+export const stationTypes: Record<
+	StationType,
+	{
+		title: string;
+		
+	}
+> = {
+	DIVISION: {
+		title: "Division"
+	},
+	HEADQUARTERS: {
+		title: "Head Quarter"
 	}
 };

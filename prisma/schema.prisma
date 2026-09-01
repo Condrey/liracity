@@ -44,11 +44,38 @@ model User {
 }
 
 model Entity {
-  id                    String  @id @default(uuid())
+  id                    String        @id @default(uuid())
   webName               String
   about                 String?
   historyAndCulture     String?
   geographicalLandmarks String?
+  dutyStations          DutyStation[]
+
+  @@map("entities")
+}
+
+model DepartmentalSection {
+  id          String      @id @default(uuid())
+  sectionName String
+  positions   Position[]
+  stationType StationType @default(HEADQUARTERS)
+
+  @@map("departmental_sections")
+}
+
+model DutyStation {
+  id              String      @id @default(uuid())
+  dutyStationName String
+  stationType     StationType @default(DIVISION)
+  entity          Entity?     @relation(fields: [entityId], references: [id])
+  entityId        String?
+
+  @@map("duty_stations")
+}
+
+enum StationType {
+  DIVISION
+  HEADQUARTERS
 }
 
 model EmailVerificationToken {
@@ -388,18 +415,20 @@ model TeamMember {
 }
 
 model Position {
-  id             String        @id @default(uuid())
-  jobTitle       String
-  mandate        String?
-  salaryScale    String
-  reportsTo      Position?     @relation("PositionReportsTo", fields: [reportsToId], references: [id])
-  reportsToId    String?
-  responsibleFor Position[]    @relation("PositionReportsTo")
-  duties         String[]
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @default(now()) @updatedAt
-  employees      Employee[]
-  appointments   Appointment[]
+  id                      String               @id @default(uuid())
+  jobTitle                String
+  jobPurpose              String?
+  salaryScale             String
+  reportsTo               Position?            @relation("PositionReportsTo", fields: [reportsToId], references: [id])
+  reportsToId             String?
+  responsibleFor          Position[]           @relation("PositionReportsTo")
+  dutiesAndQualifications String?
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @default(now()) @updatedAt
+  employees               Employee[]
+  appointments            Appointment[]
+  departmentalSection     DepartmentalSection? @relation(fields: [departmentalSectionId], references: [id])
+  departmentalSectionId   String?
 
   @@map("positions")
 }
@@ -415,7 +444,8 @@ model Employee {
   fileNumber              String?
   taxIdentificationNumber String?
   supplierNumber          String?
-  ippsNumber              String        @unique
+  ippsNumber              String?       @unique
+  employeeType            EmployeeType  @default(STAFF)
   appointments            Appointment[]
   userId                  String
   user                    User          @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -424,6 +454,14 @@ model Employee {
   teamMembers             TeamMember[]
 
   @@map("employees")
+}
+
+enum EmployeeType {
+  STAFF
+  COUNCIL
+  STATUTORY
+  TOWN_CLERK
+  MAYOR
 }
 
 enum StatusType {
@@ -435,18 +473,19 @@ enum StatusType {
 }
 
 model Appointment {
-  id                     String    @id @default(uuid())
+  id                     String     @id @default(uuid())
   number                 Int
-  position               Position  @relation(fields: [positionId], references: [id])
+  position               Position   @relation(fields: [positionId], references: [id])
   basicSalary            Float?
   organization           String
   dateOfAppointment      DateTime
   dateOfAssumptionOfDuty DateTime
   dutyStation            String
   minuteNumber           String
-  employee               Employee? @relation(fields: [employeeId], references: [id])
+  employee               Employee?  @relation(fields: [employeeId], references: [id])
   employeeId             String?
   positionId             String
+  statusType             StatusType @default(PROBATION)
 
   @@map("appointments")
 }

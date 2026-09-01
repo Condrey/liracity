@@ -49,7 +49,7 @@ export default function FormAddEditOrganization({ open, setOpen, organizationToE
 						name="name"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel required>Organization name</FormLabel>
+								<FormLabel required>Department name</FormLabel>
 								<FormControl>
 									<Input placeholder="e.g Administration" {...field} />
 								</FormControl>

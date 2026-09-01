@@ -44,10 +44,11 @@ interface TipTapEditorHeaderProps {
 }
 
 export default function TipTapEditorHeader({ editor, className }: TipTapEditorHeaderProps) {
-	if (!editor) return null;
+	
+	const [showTableOptions, setShowTableOptions] = useState(false);
 
 	const setLink = useCallback(() => {
-		const previousUrl = editor.getAttributes("link").href;
+		const previousUrl = editor?.getAttributes("link").href;
 		const url = window.prompt("URL", previousUrl);
 
 		// cancelled
@@ -57,28 +58,29 @@ export default function TipTapEditorHeader({ editor, className }: TipTapEditorHe
 
 		// empty
 		if (url === "") {
-			editor.chain().focus().extendMarkRange("link").unsetLink().run();
+			editor?.chain().focus().extendMarkRange("link").unsetLink().run();
 
 			return;
 		}
 
 		// update link
 		try {
-			editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+			editor?.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
 		} catch (e) {
 			console.error(e);
 			toast("Failed", { description: "Error creating URL" });
 		}
 	}, [editor]);
 
+
 	const editorState = useEditorState({
 		editor,
 		selector: (ctx) => ({
-			isLink: ctx.editor.isActive("link")
+			isLink: ctx.editor?.isActive("link")
 		})
 	});
+	if(!editor) return  null;
 
-	const [showTableOptions, setShowTableOptions] = useState(false);
 
 	return (
 		<div
@@ -284,15 +286,15 @@ export default function TipTapEditorHeader({ editor, className }: TipTapEditorHe
 			<ButtonGroup>
 				<Button
 					onClick={setLink}
-					variant={!editorState.isLink ? "default" : "secondary"}
-					className={editorState.isLink ? "is-active" : ""}
+					variant={!editorState?.isLink ? "default" : "secondary"}
+					className={editorState?.isLink ? "is-active" : ""}
 				>
 					<Link2Icon />
 				</Button>
 				<Button
 					onClick={() => editor.chain().unsetLink().run()}
-					variant={!editorState.isLink ? "secondary" : "default"}
-					disabled={!editorState.isLink}
+					variant={!editorState?.isLink ? "secondary" : "default"}
+					disabled={!editorState?.isLink}
 				>
 					<Link2OffIcon />
 				</Button>

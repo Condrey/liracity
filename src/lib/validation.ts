@@ -1,4 +1,4 @@
-import { EventStatus, NewsArticleStatus, Role } from "@/generated/prisma/enums";
+import { EventStatus, NewsArticleStatus, Role, StationType } from "@/generated/prisma/enums";
 import { z } from "zod";
 
 const requiredString = z.string({ error: "This field should have a value" }).trim();
@@ -107,6 +107,30 @@ export const employeeSchema = z.object({
 	})
 });
 export type EmployeeSchema = z.infer<typeof employeeSchema>;
+
+// DepartmentalSection
+export const departmentalSectionSchema = z.object({
+	id: z.string().optional(),
+	stationType: z.enum(StationType, { error: "Please choose a correct station type." }),
+	sectionName: requiredString
+		.min(1, "Section name is a must")
+		.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase()))
+});
+export type DepartmentalSectionSchema = z.infer<typeof departmentalSectionSchema>;
+
+// Position
+export const positionSchema = z.object({
+	id: z.string().optional(),
+	salaryScale: requiredString.min(1, "Salary scale is required"),
+	jobPurpose: requiredString.min(10, "Job purpose must be at least 10 characters"),
+	reportsToId: z.string().optional(),
+	jobTitle: requiredString
+		.min(1, "Please enter a job title")
+		.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase())),
+	dutiesAndQualifications: requiredString.min(100, "Description must be at least 100 characters"),
+	departmentalSectionId: requiredString.min(10, "Please indicate the departmental section.")
+});
+export type PositionSchema = z.infer<typeof positionSchema>;
 
 // NewsLetter
 export const newsLetterSubscriptionSchema = z.object({

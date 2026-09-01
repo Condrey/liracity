@@ -27,6 +27,22 @@ export type EmployeeData = Prisma.EmployeeGetPayload<{
 	include: typeof employeeDataInclude;
 }>;
 
+// DepartmentalSection
+export const departmentalSectionDataInclude = {
+	
+} satisfies Prisma.DepartmentalSectionInclude;
+export type DepartmentalSectionData = Prisma.DepartmentalSectionGetPayload<{
+	include: typeof departmentalSectionDataInclude;
+}>;
+
+// Position
+export const positionDataInclude = {
+	departmentalSection:true
+} satisfies Prisma.PositionInclude;
+export type PositionData = Prisma.PositionGetPayload<{
+	include: typeof positionDataInclude;
+}>;
+
 // Media
 export const mediaDataInclude = {} satisfies Prisma.MediaInclude;
 export type MediaData = Prisma.MediaGetPayload<{

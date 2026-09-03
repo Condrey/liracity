@@ -19,7 +19,7 @@ import { useSession } from "@/lib/session-provider";
 import { cn } from "@/lib/utils";
 import { LogOutIcon, LucideSettings2 } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { ThemeToggle } from "./theme-toggle";
@@ -37,6 +37,7 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 	const [isPending, startTransition] = useTransition();
 	const currentPathname = usePathname();
 	const searchParams = useSearchParams();
+	const router = useRouter()
 	const newParams = new URLSearchParams(searchParams.toString());
 	newParams.set(REDIRECT_TO_URL_SEARCH_PARAMS, currentPathname);
 	const loginUrl = `/sign-in` + "?" + newParams.toString();
@@ -44,6 +45,7 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 	async function signOutButtonClicked() {
 		startTransition(async () => {
 			const { error } = await authClient.signOut();
+			router.refresh();
 			if (error) toast.error("Sign out failed", { description: error.message });
 		});
 	}

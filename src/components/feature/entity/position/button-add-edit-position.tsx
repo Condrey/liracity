@@ -12,7 +12,7 @@ interface Props extends ButtonProps {
 	position?: PositionData;
 }
 
-export default function ButtonAddEditDepartmentalSection({ position, ...props }: Props) {
+export default function ButtonAddEditPosition({ position, ...props }: Props) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
 	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("SUPER_ADMIN");

@@ -37,7 +37,8 @@ export type DepartmentalSectionData = Prisma.DepartmentalSectionGetPayload<{
 
 // Position
 export const positionDataInclude = {
-	departmentalSection:true
+	departmentalSection:true,
+	reportsTo:{include:{departmentalSection:true}},responsibleFor:true
 } satisfies Prisma.PositionInclude;
 export type PositionData = Prisma.PositionGetPayload<{
 	include: typeof positionDataInclude;

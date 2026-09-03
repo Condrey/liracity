@@ -2,15 +2,15 @@ import { PageTitle } from "@/components/page-utils";
 import { cityMediaCenterLinks, LINK_SOCIAL_MEDIA } from "@/lib/constants";
 import { Metadata } from "next";
 
-const { title, description } = cityMediaCenterLinks.find((val) => val.href === LINK_SOCIAL_MEDIA)!;
-export const metadata: Metadata = {
-	title,
-	description
-};
+// const { title, description } = cityMediaCenterLinks.find((val) => val.href === LINK_SOCIAL_MEDIA)!;
+// export const metadata: Metadata = {
+// 	title,
+// 	description
+// };
 export default function Page() {
 	return (
 		<div className="">
-			<PageTitle heading={title} />
+			{/* <PageTitle heading={title} /> */}
 		</div>
 	);
 }

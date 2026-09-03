@@ -64,26 +64,26 @@ export const cityMediaCenterLinks: NavLink[] = [
 		href: LINK_EVENTS,
 		description: "Catch up on the latest city  upcoming events."
 	},
-	{
-		title: "Publications",
-		href: LINK_PUBLICATIONS,
-		description: "View official reports from city activities."
-	},
-	{
-		title: "Gallery",
-		href: LINK_GALLERY,
-		description: "View official  photos, and videos from city activities."
-	},
-	{
-		title: "Social Media ",
-		href: LINK_SOCIAL_MEDIA,
-		description: "Engage with us through social media."
-	},
-	{
-		title: "Podcasts",
-		href: LINK_PODCASTS,
-		description: "Engage with us through featured audio stories."
-	}
+	// {
+	// 	title: "Publications",
+	// 	href: LINK_PUBLICATIONS,
+	// 	description: "View official reports from city activities."
+	// },
+	// {
+	// 	title: "Gallery",
+	// 	href: LINK_GALLERY,
+	// 	description: "View official  photos, and videos from city activities."
+	// },
+	// {
+	// 	title: "Social Media ",
+	// 	href: LINK_SOCIAL_MEDIA,
+	// 	description: "Engage with us through social media."
+	// },
+	// {
+	// 	title: "Podcasts",
+	// 	href: LINK_PODCASTS,
+	// 	description: "Engage with us through featured audio stories."
+	// }
 ];
 
 export const cityGetInvolvedLinks: NavLink[] = [
@@ -222,11 +222,11 @@ export const navLinks: NavLinkGroup[] = [
 	// 	icon: TrophyIcon,
 	// 	children: citySportsAndReactionLinks,
 	// },
-	{
-		title: "Get Involved",
-		href: "/contact-us",
-		description: "Contact, engage, and share feedback with the council.",
-		icon: MailPlusIcon,
-		children: cityGetInvolvedLinks
-	}
+	// {
+	// 	title: "Get Involved",
+	// 	href: "/contact-us",
+	// 	description: "Contact, engage, and share feedback with the council.",
+	// 	icon: MailPlusIcon,
+	// 	children: cityGetInvolvedLinks
+	// }
 ];

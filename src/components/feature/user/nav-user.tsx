@@ -21,7 +21,7 @@ import { REDIRECT_TO_URL_SEARCH_PARAMS } from "@/lib/constants";
 import { useSession } from "@/lib/session-provider";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { Button, buttonVariants } from "../../ui/button";
@@ -35,6 +35,7 @@ export function NavUser() {
 	const [isPending, startTransition] = useTransition();
 	const currentPathname = usePathname();
 	const searchParams = useSearchParams();
+	const router = useRouter()
 	const newParams = new URLSearchParams(searchParams.toString());
 	newParams.set(REDIRECT_TO_URL_SEARCH_PARAMS, currentPathname);
 	const loginUrl = `/sign-in` + "?" + newParams.toString();
@@ -43,6 +44,7 @@ export function NavUser() {
 		startTransition(async () => {
 			const { error } = await authClient.signOut();
 			if (error) toast.error("Failed to sign out", { description: error.message });
+			router.refresh();
 		});
 	}
 

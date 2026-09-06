@@ -74,11 +74,11 @@ export async function generateMetadata({ params }: PageProps, parent: ResolvingM
 	};
 }
 export default async function Page({ params }: PageProps) {
-	const { slug } = await params;
+	const [{ slug }, { user }] = await Promise.all([await params, await validateRequest()]);
 	const decodedSlug = decodeURIComponent(slug);
-	const { user } = await validateRequest();
 	const event = await getEventBySlug(decodedSlug);
 	if (!event) return notFound();
+
 	const relatedEvents = await getRelatedArticlesByCategory({
 		categoryId: event.categoryId,
 		currentArticleId: event.id

@@ -82,7 +82,7 @@ function TitleSection({ isAuthorized, event }: { isAuthorized: boolean; event: E
 
 	return (
 		<header>
-			<PageTitle heading={title} className="flex-wrap">
+			<PageTitle heading={title} className="flex-wrap md:text-2xl">
 				{isAuthorized && (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>

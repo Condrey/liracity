@@ -7,12 +7,11 @@ import LoadingButton from "@/components/ui/loading-button";
 import { EventStatus } from "@/generated/prisma/enums";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
 import { EventData } from "@/lib/types";
-import { useQuery } from "@tanstack/react-query";
 import { CalendarIcon } from "lucide-react";
 import { useTransition } from "react";
-import { getFilteredEvents } from "./action";
 import ButtonAddEditEventsArticle from "./button-add-edit-event";
 import EventsArticleContainer from "./event-article-container";
+import { useEventsByFilterQuery } from "./query";
 
 interface ListOfEventsProps {
 	initialData: EventData[];
@@ -21,11 +20,7 @@ interface ListOfEventsProps {
 }
 
 export default function ListOfEvents({ initialData, limit, filter }: ListOfEventsProps) {
-	const query = useQuery({
-		queryKey: ["events", "filter", filter, "limit", limit],
-		queryFn: async () => getFilteredEvents(filter),
-		initialData
-	});
+	const query = useEventsByFilterQuery({ filter: filter || "", limit: limit || 10, initialData });
 	const { data, status } = query;
 	const [isPending, startTransition] = useTransition();
 	const { updateSearchParamsAndNavigate } = useCustomSearchParams();

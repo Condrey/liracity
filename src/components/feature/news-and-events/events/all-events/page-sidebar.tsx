@@ -11,13 +11,14 @@ import {
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { EventStatus, Role } from "@/generated/prisma/enums";
-import { User } from "@/lib/auth";
 import { myPrivileges } from "@/lib/enums";
+import { useSession } from "@/lib/session-provider";
 import { SideBarItem } from "@/lib/types";
 import { CalendarIcon } from "lucide-react";
-import MenuItemContainer from "../../menu-item-container";
+import MenuItemContainer from "../../../menu-item-container";
 
-export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Sidebar> & { user: User | null }) {
+export function PageSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const { user } = useSession();
 	const isStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);
 	const isModerator = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
 

@@ -6,7 +6,7 @@ import PageHeader from "@/components/feature/news-and-events/events/single-event
 import { PageSidebar } from "@/components/feature/news-and-events/events/single-event/page-sidebar";
 import Footer from "@/components/feature/user/footer";
 import ErrorContainer from "@/components/query-containers/error-container";
-import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { EventData } from "@/lib/types";
 import { notFound } from "next/navigation";
 
@@ -17,7 +17,6 @@ interface EventClientProps {
 }
 
 export function PageClient({ initialData, slug, relatedEvents }: EventClientProps) {
-	const sidebar = useSidebar();
 	const query = useEventBySlugQuery(slug, initialData);
 	const { data: event, status } = query;
 
@@ -29,9 +28,7 @@ export function PageClient({ initialData, slug, relatedEvents }: EventClientProp
 			<SidebarProvider>
 				<SidebarInset className="">
 					{/* Page header  */}
-					<header className="sticky top-0 z-45 flex min-h-16 shrink-0 flex-wrap items-center justify-between gap-2 border-b bg-background px-2">
-						<PageHeader event={event} />
-					</header>
+					<PageHeader event={event} />
 					{/* Page content  */}
 					<div className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-4 p-4">
 						<EventContent event={event} relatedEvents={relatedEvents} />
@@ -40,7 +37,7 @@ export function PageClient({ initialData, slug, relatedEvents }: EventClientProp
 					<Footer />
 				</SidebarInset>
 				{/* Page Sidebar for related events  */}
-				<PageSidebar side="right" relatedEvents={relatedEvents} setOpen={sidebar.setOpen} sidebar={sidebar} />
+				<PageSidebar side="right" relatedEvents={relatedEvents} />
 			</SidebarProvider>
 		</div>
 	);

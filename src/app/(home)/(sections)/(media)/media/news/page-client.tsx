@@ -11,7 +11,7 @@ import { cityMediaCenterLinks, LINK_NEWS } from "@/lib/constants";
 import { NewsArticleData } from "@/lib/types";
 import { PlusIcon } from "lucide-react";
 import { Suspense } from "react";
-import MediaPageHeader from "../../page-header";
+import MediaPageHeader from "../../../../../../components/feature/media-page-header";
 import { PageSidebar } from "./page-sidebar";
 
 // import { TabListSwitchButton } from "./tab-list";

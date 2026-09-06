@@ -15,7 +15,7 @@ import { User } from "@/lib/auth";
 import { myPrivileges } from "@/lib/enums";
 import { SideBarItem } from "@/lib/types";
 import { NewspaperIcon } from "lucide-react";
-import MenuItemContainer from "../../menu-item-container";
+import MenuItemContainer from "../../../../../../components/feature/menu-item-container";
 
 export function PageSidebar({ user, ...props }: React.ComponentProps<typeof Sidebar> & { user: User | null }) {
 	const isStaff = !!user && myPrivileges[user.role as Role].includes(Role.STAFF);

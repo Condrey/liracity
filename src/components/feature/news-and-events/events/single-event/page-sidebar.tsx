@@ -1,5 +1,4 @@
 import ListOfRelatedEvents from "@/components/feature/news-and-events/events/list-of-related-events";
-import { Button } from "@/components/ui/button";
 import {
 	Sidebar,
 	SidebarContent,
@@ -10,21 +9,14 @@ import {
 	SidebarRail
 } from "@/components/ui/sidebar";
 import { EventData } from "@/lib/types";
-import { XIcon } from "lucide-react";
 
 export function PageSidebar({
 	relatedEvents,
-	setOpen,
 	...props
-}: React.ComponentProps<typeof Sidebar> & { relatedEvents: EventData[]; setOpen: (open: boolean) => void }) {
+}: React.ComponentProps<typeof Sidebar> & { relatedEvents: EventData[] }) {
 	return (
-		<Sidebar variant="sidebar" {...props} className="pt-[var(--header-height)]">
-			<SidebarHeader className="flex-row items-center">
-				<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
-					<XIcon />
-				</Button>
-				Related Event
-			</SidebarHeader>
+		<Sidebar variant="inset" collapsible="offcanvas" className="pt-[var(--header-height)]" {...props}>
+			<SidebarHeader className="flex-row items-center">Related Event</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Browse Related Events</SidebarGroupLabel>

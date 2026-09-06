@@ -1,65 +1,38 @@
 "use client";
 
-import ButtonAddEditEvent from "@/components/feature/news-and-events/events/button-add-edit-event";
-import { EventsArticleContainerSkeleton } from "@/components/feature/news-and-events/events/event-article-container-skeleton";
-import ListOfEvents from "@/components/feature/news-and-events/events/list-of-events";
+import PageContent from "@/components/feature/news-and-events/events/all-events/page-content";
+import PageHeader from "@/components/feature/news-and-events/events/all-events/page-header";
+import { PageSidebar } from "@/components/feature/news-and-events/events/all-events/page-sidebar";
 import Footer from "@/components/feature/user/footer";
-import { TypographyH4 } from "@/components/page-utils";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { User } from "@/lib/auth";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { cityMediaCenterLinks, LINK_EVENTS } from "@/lib/constants";
 import { EventData } from "@/lib/types";
-import { PlusIcon } from "lucide-react";
-import { Suspense } from "react";
-import MediaPageHeader from "../../page-header";
-import { PageSidebar } from "./page-sidebar";
 
 const { title } = cityMediaCenterLinks.find((val) => val.href === LINK_EVENTS)!;
 
 interface PageClientProps {
 	searchParams: any;
-	user: User | null;
 	initialEvents: EventData[];
 }
-export default function PageClient({ searchParams, user, initialEvents }: PageClientProps) {
+export default function PageClient({ searchParams, initialEvents }: PageClientProps) {
 	const { eventsFilter } = searchParams;
 
 	return (
-		<>
-			<SidebarInset className="space-y-6">
-				<MediaPageHeader
-					title={title}
-					start={
-						<ButtonAddEditEvent>
-							<PlusIcon /> event
-						</ButtonAddEditEvent>
-					}
-					end={<SidebarTrigger size="icon" variant={"destructive"} />}
-					className=""
-				/>
-
-				{/* list of events */}
-				<div className="mx-auto min-h-[44vh] w-full max-w-9xl space-y-4 px-3 md:min-h-[65vh]">
-					<div className="flex items-center space-x-2">
-						<TypographyH4 title="Events " />
-						{eventsFilter && <span>({eventsFilter})</span>}
+		<div className="h-[calc(100vh-var(--header-height))] overflow-y-auto">
+			<SidebarProvider>
+				<SidebarInset className="">
+					{/* Page header  */}
+					<PageHeader title={title} />
+					{/* Page content  */}
+					<div className="mx-auto min-h-[44vh] w-full max-w-9xl space-y-4 px-3 md:min-h-[65vh]">
+						<PageContent events={initialEvents} eventsFilter={eventsFilter} />
 					</div>
-
-					<Suspense
-						fallback={
-							<div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-								{Array.from({ length: 6 }, (_, index) => (
-									<EventsArticleContainerSkeleton key={index} />
-								))}
-							</div>
-						}
-					>
-						<ListOfEvents initialData={initialEvents} filter={eventsFilter || undefined} />
-					</Suspense>
-				</div>
-				<Footer />
-			</SidebarInset>
-			<PageSidebar side="right" user={user} />
-		</>
+					{/* Page Footer  */}
+					<Footer />
+				</SidebarInset>
+				{/* Page Sidebar for filtering events  */}
+				<PageSidebar side="right" />
+			</SidebarProvider>
+		</div>
 	);
 }

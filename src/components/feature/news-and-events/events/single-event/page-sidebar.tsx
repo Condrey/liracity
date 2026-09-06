@@ -1,5 +1,4 @@
-import RelatedEventItem from "@/components/feature/news-and-events/events/related-event-item";
-import EmptyContainer from "@/components/query-containers/empty-container";
+import ListOfRelatedEvents from "@/components/feature/news-and-events/events/list-of-related-events";
 import { Button } from "@/components/ui/button";
 import {
 	Sidebar,
@@ -21,26 +20,16 @@ export function PageSidebar({
 	return (
 		<Sidebar variant="sidebar" {...props} className="pt-[var(--header-height)]">
 			<SidebarHeader className="flex-row items-center">
-				{
-					<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
-						<XIcon />
-					</Button>
-				}
+				<Button className="" size="icon" variant={"destructive"} onClick={() => setOpen(false)}>
+					<XIcon />
+				</Button>
 				Related Event
 			</SidebarHeader>
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupLabel>Browse Related Events</SidebarGroupLabel>
 					<SidebarGroupContent>
-						{!relatedEvents.length ? (
-							<EmptyContainer message="There are no related events to this headline." />
-						) : (
-							<div className="space-y-2">
-								{relatedEvents.map((item) => (
-									<RelatedEventItem relatedEvent={item} key={item.id} />
-								))}
-							</div>
-						)}
+						<ListOfRelatedEvents relatedEvents={relatedEvents} />
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>

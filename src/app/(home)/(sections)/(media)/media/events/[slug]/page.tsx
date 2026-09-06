@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { siteConfig } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound, unauthorized } from "next/navigation";
-import { EventClient } from "./event-client";
+import { PageClient } from "./page-client";
 
 interface PageProps {
 	params: Promise<{ slug: string }>;
@@ -90,7 +90,7 @@ export default async function Page({ params }: PageProps) {
 
 	return (
 		<div className="">
-			<EventClient initialData={event} slug={decodedSlug} relatedEvents={relatedEvents} />
+			<PageClient initialData={event} slug={decodedSlug} relatedEvents={relatedEvents} />
 		</div>
 	);
 }

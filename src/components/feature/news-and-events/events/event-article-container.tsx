@@ -85,7 +85,7 @@ export default function EventsArticleContainer({
 							{title}
 						</ItemTitle>
 						<ItemDescription>
-							<TipTapViewer content={summary ?? description} className="" />
+							<TipTapViewer content={summary ?? description} className="text-sm md:text-sm" />
 						</ItemDescription>
 					</ItemContent>
 				</div>

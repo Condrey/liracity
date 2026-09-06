@@ -46,7 +46,9 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 					</ItemMedia>
 				)}
 				<ItemHeader className="flex-col items-start gap-0.5">
-					<ItemTitle className="mb-1 border-b transition-all group-hover/item:font-bold">{item.title}</ItemTitle>
+					<ItemTitle className="mb-1 line-clamp-2 border-b transition-all group-hover/item:font-bold">
+						{item.title}
+					</ItemTitle>
 					<div className="block space-y-1.5 space-x-2 text-start text-xs">
 						{item.location && (
 							<address>
@@ -61,7 +63,7 @@ export default function RelatedEventItem({ relatedEvent: item }: { relatedEvent:
 						<span className="uppercase">{period}</span>
 					</div>
 					<ItemDescription>
-						<TipTapViewer content={item.summary || item.description} />
+						<TipTapViewer content={item.summary || item.description} className="text-sm md:text-sm" />
 					</ItemDescription>
 				</ItemHeader>
 			</Link>

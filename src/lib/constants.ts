@@ -1,4 +1,4 @@
-import { BlocksIcon, FilmIcon, HomeIcon, InfoIcon, LucideIcon, MailPlusIcon } from "lucide-react";
+import { BlocksIcon, DownloadCloudIcon, FilmIcon, HomeIcon, InfoIcon, LucideIcon } from "lucide-react";
 
 export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
@@ -15,6 +15,7 @@ export const LINK_PODCASTS = "/media/podcasts";
 export const LINK_DEPARTMENTS = "/departments";
 export const LINK_TECHNICAL_STAFFS = "/technical-staffs";
 export const LINK_HIERARCHY = "/hierarchy";
+export const LINK_DOWNLOADS = "/downloads";
 
 export type NavLink = { title: string; href: string; description: string };
 export type NavLinkGroup = {
@@ -63,7 +64,7 @@ export const cityMediaCenterLinks: NavLink[] = [
 		title: "Events",
 		href: LINK_EVENTS,
 		description: "Catch up on the latest city  upcoming events."
-	},
+	}
 	// {
 	// 	title: "Publications",
 	// 	href: LINK_PUBLICATIONS,
@@ -208,6 +209,13 @@ export const navLinks: NavLinkGroup[] = [
 		icon: FilmIcon,
 		children: cityMediaCenterLinks
 	},
+	{
+		title: "Downloads",
+		href: LINK_DOWNLOADS,
+		description: "Find different types of downloads.",
+		icon: DownloadCloudIcon,
+		children: []
+	}
 	// {
 	// 	title: "Opportunities",
 	// 	href: "/opportunities",

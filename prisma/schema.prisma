@@ -161,6 +161,8 @@ model Media {
   type               MediaType
   url                String
   name               String?
+  description        String?
+  isForDownloads     Boolean       @default(false)
   format             String        @default("png")
   createdAt          DateTime      @default(now())
   coverImageArticles NewsArticle[] @relation("coverImage")
@@ -176,6 +178,10 @@ model Media {
 enum MediaType {
   IMAGE
   VIDEO
+  PDF
+  SPREADSHEET
+  POWER_POINT
+  WORD
 }
 
 model NewsArticleCategory {

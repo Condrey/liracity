@@ -28,24 +28,25 @@ export type EmployeeData = Prisma.EmployeeGetPayload<{
 }>;
 
 // DepartmentalSection
-export const departmentalSectionDataInclude = {
-	
-} satisfies Prisma.DepartmentalSectionInclude;
+export const departmentalSectionDataInclude = {} satisfies Prisma.DepartmentalSectionInclude;
 export type DepartmentalSectionData = Prisma.DepartmentalSectionGetPayload<{
 	include: typeof departmentalSectionDataInclude;
 }>;
 
 // Position
 export const positionDataInclude = {
-	departmentalSection:true,
-	reportsTo:{include:{departmentalSection:true}},responsibleFor:true
+	departmentalSection: true,
+	reportsTo: { include: { departmentalSection: true } },
+	responsibleFor: true
 } satisfies Prisma.PositionInclude;
 export type PositionData = Prisma.PositionGetPayload<{
 	include: typeof positionDataInclude;
 }>;
 
 // Media
-export const mediaDataInclude = {} satisfies Prisma.MediaInclude;
+export const mediaDataInclude = {
+	_count: { select: { events: true } }
+} satisfies Prisma.MediaInclude;
 export type MediaData = Prisma.MediaGetPayload<{
 	include: typeof mediaDataInclude;
 }>;
@@ -101,7 +102,7 @@ export type TeamData = Prisma.TeamGetPayload<{
 
 // Member
 export const memberDataInclude = {
-	organization: { include: { teams: { select: { name: true,teammembers:{select:{userId:true}} } ,} } },
+	organization: { include: { teams: { select: { name: true, teammembers: { select: { userId: true } } } } } },
 	employee: { include: employeeDataInclude },
 	user: { select: userDataSelect }
 } satisfies Prisma.MemberInclude;
@@ -151,6 +152,7 @@ export interface Attachment {
 	extension?: string;
 	name?: string;
 	message?: string;
+	size?: number;
 }
 
 export type SideBarSubItem = {

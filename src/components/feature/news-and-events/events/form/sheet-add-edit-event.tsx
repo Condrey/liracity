@@ -7,6 +7,7 @@ import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
+import AttachFileMedia from "@/components/uploadthing/attachment-file-media";
 import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 import { EventStatus } from "@/generated/prisma/enums";
 import { eventStatuses } from "@/lib/enums";
@@ -21,8 +22,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import EventsCategory from "./event-category";
 import { EventDatePicker } from "./event-date-picker";
-import { useUpsertEventMutation } from "./mutation";
-import OtherMedia from "./other-media";
+import { useDeleteEventMediaMutation, useUpsertEventMutation } from "./mutation";
 import { useCoverImageUpload } from "./use-media-upload";
 
 interface SheetAddEditEventsProps {
@@ -72,6 +72,8 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 	const coverImageUrl = !!event ? event?.coverImage?.url : !attachment ? "" : URL.createObjectURL(attachment.file);
 
 	const { isPending, mutate } = useUpsertEventMutation();
+	const mediaMutation = useDeleteEventMediaMutation();
+
 	function onSubmit(input: EventSchema) {
 		const newFields = { ...input, coverImageId: attachment ? attachment.mediaId : event?.coverImageId };
 		mutate(
@@ -262,7 +264,15 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 									/>
 								</div>
 								<div>
-									<OtherMedia eventId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
+									<AttachFileMedia
+										setMediaIds={setMediaIds}
+										onRemoveClicked={(attachment) => {
+											mediaMutation.mutate({
+												eventId: watchedId,
+												mediaId: attachment.mediaId!
+											});
+										}}
+									/>
 								</div>
 							</div>
 							<FormFooter>

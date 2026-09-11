@@ -54,7 +54,8 @@ const coverImageRouter = f({
 
 const attachmentRouter = f({
 	image: { maxFileSize: "8MB", maxFileCount: MAX_ATTACHMENTS },
-	video: { maxFileSize: "32MB", maxFileCount: MAX_ATTACHMENTS }
+	video: { maxFileSize: "32MB", maxFileCount: MAX_ATTACHMENTS },
+	"application/pdf": { maxFileSize: "32MB" }
 })
 	.middleware(async () => {
 		const { user } = await validateRequest();
@@ -73,7 +74,7 @@ const attachmentRouter = f({
 	});
 
 export const appFileRouter = {
-	// avatar: avatarRouter,
+	avatar: avatarRouter,
 	attachment: attachmentRouter,
 	coverImageAttachment: coverImageRouter
 } satisfies FileRouter;

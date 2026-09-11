@@ -30,7 +30,6 @@ export function useOtherMediaUploads() {
 				prev.map((a) => {
 					const uploadResult = res.find((r) => r.name === a.file.name);
 					if (!uploadResult) return a;
-
 					return {
 						...a,
 						mediaId: uploadResult.serverData.mediaId,
@@ -75,7 +74,7 @@ export function useOtherMediaUploads() {
 		setAttachments([]);
 		setUploadProgress(undefined);
 	}
-	function addAttachment(attachments: Attachment[]) {
+	function addAttachments(attachments: Attachment[]) {
 		// Create a Map to remove duplicates and keep only one instance per mediaId
 		const uniqueAttachmentsMap = new Map(attachments.map((attachment) => [attachment.mediaId, attachment]));
 		// Convert the Map back to an array
@@ -85,7 +84,8 @@ export function useOtherMediaUploads() {
 	return {
 		startUpload: handleStartUpload,
 		attachments,
-		addInitialAttachments: addAttachment,
+		setAttachments,
+		addInitialAttachments: addAttachments,
 		isUploading,
 		uploadProgress,
 		removeAttachment,

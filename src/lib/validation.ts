@@ -108,6 +108,14 @@ export const employeeSchema = z.object({
 });
 export type EmployeeSchema = z.infer<typeof employeeSchema>;
 
+// Media
+export const mediaSchema = z.object({
+	id: z.string().optional(),
+	name: requiredString.min(1, "Please provide a name for the media"),
+	description: z.string().optional()
+});
+export type MediaSchema = z.infer<typeof mediaSchema>;
+
 // DepartmentalSection
 export const departmentalSectionSchema = z.object({
 	id: z.string().optional(),

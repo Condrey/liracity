@@ -17,6 +17,8 @@ import {
 	SheetTrigger
 } from "@/components/ui/sheet";
 import { Spinner } from "@/components/ui/spinner";
+import AttachFileMedia from "@/components/uploadthing/attachment-file-media";
+import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 import { newsArticleStatuses } from "@/lib/enums";
 import { NewsArticleData } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -27,12 +29,10 @@ import { FullscreenIcon, MapPinIcon, SaveIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ControllerRenderProps, useForm, UseFormReturn } from "react-hook-form";
-import { useUpsertNewsArticleMutation } from "./mutation";
+import { useCoverImageUpload } from "../../../../uploadthing/use-media-upload";
+import { useDeleteNewsArticleMediaMutation, useUpsertNewsArticleMutation } from "./mutation";
 import NewsArticleCategory from "./news-article-category";
 import NewsArticleTag from "./news-article-tags";
-import OtherMedia from "./other-media";
-import { useCoverImageUpload } from "./use-media-upload";
-import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 
 interface SheetAddEditNewsArticleProps {
 	open: boolean;
@@ -90,6 +90,8 @@ export default function SheetAddEditNewsArticle({
 			: URL.createObjectURL(attachment.file);
 
 	const { isPending, mutate } = useUpsertNewsArticleMutation();
+	const mediaMutation = useDeleteNewsArticleMediaMutation();
+
 	function onSubmit(input: NewsArticleSchema) {
 		const newFields = { ...input, coverImageId: attachment ? attachment.mediaId : newsArticle?.coverImageId };
 		mutate(
@@ -293,7 +295,15 @@ export default function SheetAddEditNewsArticle({
 										/>
 									</div>
 									<div>
-										<OtherMedia newsArticleId={watchedId} mediaIds={(ids) => setMediaIds(ids)} />
+										<AttachFileMedia
+											setMediaIds={setMediaIds}
+											onRemoveClicked={(attachment) => {
+												mediaMutation.mutate({
+													newsArticleId: watchedId,
+													mediaId: attachment.mediaId!
+												});
+											}}
+										/>
 									</div>
 								</div>
 								<FormFooter className="my-4">

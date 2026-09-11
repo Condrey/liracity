@@ -1,6 +1,8 @@
 import { FormItem, FormLabel } from "@/components/ui/form";
-import { Spinner } from "@/components/ui/spinner";
+import { AttachmentPreviews } from "@/components/uploadthing/attachment-previews";
+import { ButtonAddMultipleAttachments } from "@/components/uploadthing/button-add-attachment";
 import { MAX_ATTACHMENTS } from "@/lib/constants";
+import { Attachment } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -8,37 +10,48 @@ import StarterKit from "@tiptap/starter-kit";
 import { useDropzone } from "@uploadthing/react";
 import { UploadCloudIcon } from "lucide-react";
 import { ClipboardEvent, useEffect } from "react";
-import { useDeleteEventMediaMutation } from "./mutation";
 import { useOtherMediaUploads } from "./use-media-upload";
-import { ButtonAddMultipleAttachments } from "@/components/uploadthing/button-add-attachment";
-import { AttachmentPreviews } from "@/components/uploadthing/attachment-previews";
 
-export default function OtherMedia({
-	eventId,
-	mediaIds: setMediaIds
-}: {
-	eventId: string;
-	mediaIds: (ids: string[]) => void;
-}) {
-	const mediaMutation = useDeleteEventMediaMutation();
+interface Props {
+	onRemoveClicked?: (attachment: Attachment) => void;
+	setMediaIds: (mediaIds: string[]) => void;
+	initialAttachments?: Attachment[];
+	title?: string;
+	maxAttachments?: number;
+}
 
+export default function AttachFileMedia({
+	title,
+	onRemoveClicked,
+	setMediaIds,
+	initialAttachments = [],
+	maxAttachments = MAX_ATTACHMENTS
+}: Props) {
 	const {
 		startUpload,
 		attachments,
+		setAttachments,
 		addInitialAttachments,
 		isUploading,
 		uploadProgress,
-		removeAttachment,
-		reset: resetMediaUploads
+		removeAttachment
 	} = useOtherMediaUploads();
 
 	useEffect(() => {
-		setMediaIds(attachments.map((a) => a.mediaId!).filter(Boolean) as string[]);
+		const mediaIds = attachments.map((a) => a.mediaId!).filter(Boolean) as string[];
+		setMediaIds(mediaIds);
 	}, [attachments]);
+
+	// useLayoutEffect(() => {
+	// 	const uniqueAttachmentsMap = new Map(initialAttachments.map((attachment) => [attachment.mediaId, attachment]));
+	// 	const uniqueAttachments = Array.from(uniqueAttachmentsMap.values());
+	// 	setAttachments((prev) => [...prev, ...uniqueAttachments]);
+	// });
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop: startUpload
 	});
+
 	const { onClick, ...routeprops } = getRootProps();
 
 	const editor = useEditor({
@@ -61,8 +74,10 @@ export default function OtherMedia({
 	}
 	return (
 		<FormItem className="flex flex-col gap-3">
-			<FormLabel>Additional Media (image/video) ~ MAX {MAX_ATTACHMENTS}</FormLabel>
-			{attachments.length < MAX_ATTACHMENTS && (
+			<FormLabel>
+				{title || "Additional Media (image/video)"} ~ MAX {maxAttachments}
+			</FormLabel>
+			{attachments.length < maxAttachments && (
 				<div className="space-y-4">
 					<div
 						{...routeprops}
@@ -84,7 +99,7 @@ export default function OtherMedia({
 								<p className="text-center text-muted-foreground">{`Drag 'n' drop some media, or click to select image`}</p>
 								<ButtonAddMultipleAttachments
 									onFilesSelected={startUpload}
-									disabled={isUploading || attachments.length >= MAX_ATTACHMENTS}
+									disabled={isUploading || attachments.length >= maxAttachments}
 								>
 									Choose
 								</ButtonAddMultipleAttachments>
@@ -103,20 +118,12 @@ export default function OtherMedia({
 			{!!attachments.length && (
 				<AttachmentPreviews
 					attachments={attachments}
+					uploadProgress={uploadProgress}
 					onRemoveClicked={(attachment) => {
 						removeAttachment(attachment.file.name);
-						mediaMutation.mutate({
-							eventId,
-							mediaId: attachment.mediaId!
-						});
+						onRemoveClicked?.(attachment);
 					}}
 				/>
-			)}
-			{isUploading && (
-				<>
-					<span className="text-sm">{uploadProgress ?? 0}</span>
-					<Spinner className="size-5 text-primary" />
-				</>
 			)}
 		</FormItem>
 	);

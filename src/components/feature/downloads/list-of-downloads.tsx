@@ -35,23 +35,25 @@ export default function ListOfDownloads({ initialData }: Props) {
 	}
 
 	return (
-		<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-			{data.map((attachment) => (
-				<Item variant="outline" key={attachment.id} className="">
-					<ItemMedia>
-						<PdfPreview source={attachment.url} />
-					</ItemMedia>
-					<ItemContent>
-						<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>
-						<ItemDescription>{attachment.description}</ItemDescription>
-					</ItemContent>
-					<ItemActions>
-						<Button size="icon-lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
-							<DownloadCloudIcon className="" />
-						</Button>
-					</ItemActions>
-				</Item>
-			))}
+		<div className="grid grid-cols-1 gap-4 *:flex-1 md:grid-cols-2">
+			{data.map((attachment) => {
+				return (
+					<Item variant="outline" key={attachment.id} className="">
+						<ItemMedia>
+							<PdfPreview source={attachment.url} />
+						</ItemMedia>
+						<ItemContent>
+							<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>
+							<ItemDescription>{attachment.description}</ItemDescription>
+						</ItemContent>
+						<ItemActions>
+							<Button size="lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
+								<DownloadCloudIcon className="" /> Download
+							</Button>
+						</ItemActions>
+					</Item>
+				);
+			})}
 		</div>
 	);
 }

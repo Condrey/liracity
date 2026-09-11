@@ -12,15 +12,15 @@ export function useOtherMediaUploads() {
 		onBeforeUploadBegin(files) {
 			console.log("1. UPLOAD: BEFORE_UPLOAD_BEGIN: Renaming files for submission");
 			console.log({ files });
-			const renamedFiles = files.map((file) => {
-				const extension = file.name.split(".").pop();
-				return new File([file], `news_${crypto.randomUUID()}.${extension}`, {
-					type: file.type
-				});
-			});
+			// const renamedFiles = files.map((file) => {
+			// 	const extension = file.name.split(".").pop();
+			// 	return new File([file], `news_${crypto.randomUUID()}.${extension}`, {
+			// 		type: file.type
+			// 	});
+			// });
 
-			setAttachments((prev) => [...prev, ...renamedFiles.map((file) => ({ file, isUploading: true }))]);
-			return renamedFiles;
+			setAttachments((prev) => [...prev, ...files.map((file) => ({ file, isUploading: true }))]);
+			return files;
 		},
 		onUploadProgress: setUploadProgress,
 		onClientUploadComplete(res) {

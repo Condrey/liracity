@@ -2,6 +2,9 @@
 
 import EmptyContainer from "@/components/query-containers/empty-container";
 import ErrorContainer from "@/components/query-containers/error-container";
+import { Button } from "@/components/ui/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { PdfPreview } from "@/components/uploadthing/pdf-preview";
 import { MediaData } from "@/lib/types";
 import { DownloadCloudIcon, PlusIcon } from "lucide-react";
 import ButtonAddEditDownload from "./button-add-edit-download";
@@ -32,8 +35,23 @@ export default function ListOfDownloads({ initialData }: Props) {
 	}
 
 	return (
-		<div>
-			<pre>{JSON.stringify(data, null, 2)}</pre>
+		<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+			{data.map((attachment) => (
+				<Item variant="outline" key={attachment.id} className="">
+					<ItemMedia>
+						<PdfPreview source={attachment.url} />
+					</ItemMedia>
+					<ItemContent>
+						<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>
+						<ItemDescription>{attachment.description}</ItemDescription>
+					</ItemContent>
+					<ItemActions>
+						<Button size="icon-lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
+							<DownloadCloudIcon className="" />
+						</Button>
+					</ItemActions>
+				</Item>
+			))}
 		</div>
 	);
 }

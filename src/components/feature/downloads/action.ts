@@ -17,15 +17,15 @@ async function allDownloads() {
 }
 export const getAllDownloads = cache(allDownloads);
 
-export async function upsertDownload({ download, mediaUrl }: { download: MediaSchema; mediaUrl: string }) {
+export async function upsertDownload({ download, mediaId }: { download: MediaSchema; mediaId: string }) {
 	const { id, name, description } = mediaSchema.parse(download);
 	const { user } = await validateRequest();
 	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("HOS");
 	if (!isAuthorized) throw Error("Unauthorized.");
 	return await prisma.media.upsert({
-		where: { id },
-		create: { name, description, url: mediaUrl, type: "PDF", isForDownloads: true },
-		update: { name, description, url: mediaUrl, type: "PDF", isForDownloads: true },
+		where: { id: id || mediaId },
+		create: { name, description, url: mediaId, type: "PDF", isForDownloads: true },
+		update: { name, description, type: "PDF", isForDownloads: true },
 		include: mediaDataInclude
 	});
 }

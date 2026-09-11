@@ -10,7 +10,7 @@ export default async function Page() {
 	const downloads = await getAllDownloads();
 
 	return (
-		<div className="">
+		<div className="mx-auto max-w-9xl px-4 py-12">
 			<ListOfDownloads initialData={downloads} />
 		</div>
 	);

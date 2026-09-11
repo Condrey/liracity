@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
-import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
+import AttachFileMedia from "@/components/uploadthing/attachment-file-media";
 import { MediaData } from "@/lib/types";
 import { mediaSchema, MediaSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +17,7 @@ interface Props {
 	downloadToEdit?: MediaData;
 }
 export default function FormAddEditDownload({ open, setOpen, downloadToEdit }: Props) {
-	const [mediaUrl, setMediaUrl] = useState("");
+	const [mediaIds, setMediaIds] = useState<string[]>([]);
 	const form = useForm<MediaSchema>({
 		resolver: zodResolver(mediaSchema),
 		values: {
@@ -30,7 +30,7 @@ export default function FormAddEditDownload({ open, setOpen, downloadToEdit }: P
 	const { isPending, mutate, error } = useUpsertDownloadMutation();
 	function onSubmit(input: MediaSchema) {
 		mutate(
-			{ download: input, mediaUrl },
+			{ download: input, mediaId: mediaIds[0] },
 			{
 				onSuccess() {
 					setOpen(false);
@@ -48,10 +48,8 @@ export default function FormAddEditDownload({ open, setOpen, downloadToEdit }: P
 				</SheetHeader>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+						<span>{JSON.stringify(mediaIds, null, 2)}</span>
 						<div className="flex flex-col gap-4 md:flex-row">
-							<ButtonAddSingleAttachment disabled onFilesSelected={(file) => {}}>
-								Add attachemnt
-							</ButtonAddSingleAttachment>
 							<div className="space-y-4">
 								<FormField
 									control={form.control}
@@ -80,6 +78,7 @@ export default function FormAddEditDownload({ open, setOpen, downloadToEdit }: P
 									)}
 								/>
 							</div>
+							<AttachFileMedia setMediaIds={setMediaIds} title="Add PDF document" maxAttachments={1} />
 						</div>
 						<div role="alert" className="text-destructive">
 							{error?.message}

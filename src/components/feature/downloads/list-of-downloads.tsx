@@ -9,6 +9,7 @@ import { MediaData } from "@/lib/types";
 import { DownloadCloudIcon, PlusIcon } from "lucide-react";
 import ButtonAddEditDownload from "./button-add-edit-download";
 import { downloadsQuery } from "./query";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
 	initialData: MediaData[];
@@ -38,19 +39,20 @@ export default function ListOfDownloads({ initialData }: Props) {
 		<div className="grid grid-cols-1 gap-4 *:flex-1 md:grid-cols-2">
 			{data.map((attachment) => {
 				return (
-					<Item variant="outline" key={attachment.id} className="">
-						<ItemMedia>
+					<Item variant="outline" size='sm' key={attachment.id} className="p-0 rounded-xl overflow-clip bg-card">
+						<ItemMedia variant={"image"} className="aspect-square relative min-h-32 min-w-32">
 							<PdfPreview source={attachment.url} />
+							<Badge className='absolute top-0 bg-red-500 text-white left-0'>{attachment.type}</Badge>
 						</ItemMedia>
-						<ItemContent>
+						<ItemContent className='pe-4'>
 							<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>
 							<ItemDescription>{attachment.description}</ItemDescription>
+							<ItemActions className='justify-end '>
+								<Button size="lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
+									<DownloadCloudIcon className="" /> Download file
+								</Button>
+							</ItemActions>
 						</ItemContent>
-						<ItemActions>
-							<Button size="lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
-								<DownloadCloudIcon className="" /> Download
-							</Button>
-						</ItemActions>
 					</Item>
 				);
 			})}

@@ -11,9 +11,14 @@ interface Props {
 	fileName?: string;
 	className?: string;
 	children?: React.ReactNode;
+	onExtractionComplete?: (extraction: {
+		previewUrl: string;
+		pages: number | undefined;
+		fileSize: number | undefined;
+	}) => void;
 }
 
-export function PdfPreview({ source, fileName, className, children: titleSection }: Props) {
+export function PdfPreview({ source, fileName, className, children: titleSection, onExtractionComplete }: Props) {
 	const [preview, setPreview] = useState<string | null>(null);
 	const [fileSize, setFileSize] = useState<number | null | undefined>(undefined);
 	const [pages, setPages] = useState<number | undefined>(undefined);
@@ -26,6 +31,7 @@ export function PdfPreview({ source, fileName, className, children: titleSection
 				setPreview(previewUrl);
 				setFileSize(fileSize);
 				setPages(pages);
+				onExtractionComplete?.({ previewUrl, pages, fileSize });
 			}
 		});
 

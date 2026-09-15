@@ -61,10 +61,7 @@ export default function EventContent({ event, relatedEvents }: EventContentProps
 			{/* List of related events  */}
 			<div className="space-y-4">
 				<TypographyH2 title="Related Events" className="uppercase" />
-				<ListOfRelatedEvents
-					relatedEvents={relatedEvents}
-					className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-				/>
+				<ListOfRelatedEvents relatedEvents={relatedEvents} className="grid gap-2 sm:grid-cols-2 md:grid-cols-3" />
 			</div>
 		</article>
 	);

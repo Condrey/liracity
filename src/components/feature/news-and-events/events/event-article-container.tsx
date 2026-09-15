@@ -39,8 +39,8 @@ export default function EventsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"flex cursor-pointer flex-col p-0 pb-6 hover:bg-primary/20",
-				"aspect-video items-start justify-start",
+				"mb-4 flex cursor-pointer flex-col p-0 hover:bg-primary/20 md:pb-6",
+				"mb:aspect-video items-start justify-start",
 				isPending && "animate-pulse",
 				mouseEntered && "shadow-md",
 				className
@@ -60,7 +60,7 @@ export default function EventsArticleContainer({
 					width={500}
 					height={600}
 					className={cn(
-						"pointer-events-none aspect-video w-full touch-none rounded-sm bg-cover object-cover opacity-15",
+						"pointer-events-none max-h-40 min-h-40 w-full touch-none rounded-sm bg-cover object-cover opacity-15 md:aspect-video md:max-h-none",
 						mouseEntered && "scale-110 transition-all duration-300"
 					)}
 				/>
@@ -89,7 +89,7 @@ export default function EventsArticleContainer({
 						>
 							{title}
 						</ItemTitle>
-						<ItemDescription className="line-clamp-3">
+						<ItemDescription className="line-clamp-[4] md:line-clamp-3">
 							<TipTapViewer
 								content={summary ?? description}
 								className="text-start text-sm md:text-sm dark:text-muted-foreground"

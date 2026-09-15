@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { EventSchema } from "@/lib/validation";
+import { isBefore, startOfDay } from "date-fns";
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
@@ -140,7 +141,7 @@ export function EventDatePicker({ form }: { form: UseFormReturn<EventSchema> }) 
 													}
 													setOpenTo(false);
 												}}
-												disabled={(date) => date < (watchedStartDate ?? new Date())}
+												disabled={(date) => isBefore(startOfDay(date), startOfDay(watchedStartDate ?? new Date()))}
 											/>
 										</PopoverContent>
 									</Popover>

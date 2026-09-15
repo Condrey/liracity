@@ -66,7 +66,9 @@ function DownloadItem({ attachment }: { attachment: MediaData }) {
 						setPages(pages);
 					}}
 				/>
-				<Badge className="absolute top-0 left-0 bg-red-500 text-white">{attachment.type}</Badge>
+				<Badge className="absolute top-0 left-0 bg-red-500 text-white dark:bg-red-500 dark:text-white">
+					{attachment.type}
+				</Badge>
 			</ItemMedia>
 			<ItemContent className="py-2 ps-4 pe-4 sm:ps-0">
 				<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>

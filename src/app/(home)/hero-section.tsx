@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { useCustomSearchParams } from "@/hooks/use-custom-search-param";
+import { LINK_NEWS } from "@/lib/constants";
 import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal, webName } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
@@ -51,7 +52,7 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 				<TipTapViewer content={data.summary || data.content} className="line-clamp-4 *:text-lg md:line-clamp-6" />
 				<div className="flex w-full">
 					<Link
-						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data.slug}`)}
+						href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_NEWS}/${data.slug}`)}
 						className={cn(
 							buttonVariants({ size: "default" }),
 							"group/read-more mx-auto mt-2 w-full sm:mx-0 sm:ms-auto md:mx-0 md:max-w-2xs"

@@ -52,8 +52,13 @@ function DownloadItem({ attachment }: { attachment: MediaData }) {
 	const [fileSize, setFileSize] = useState<number | null | undefined>(undefined);
 	const [pages, setPages] = useState<number | undefined>(undefined);
 	return (
-		<Item variant="outline" size="sm" key={attachment.id} className="overflow-clip rounded-xl bg-card p-0">
-			<ItemMedia variant={"image"} className="relative aspect-square min-h-32 min-w-32">
+		<Item
+			variant="outline"
+			size="sm"
+			key={attachment.id}
+			className="overflow-clip rounded-xl bg-card p-0 dark:bg-foreground/5"
+		>
+			<ItemMedia variant={"image"} className="relative mx-auto aspect-square min-h-32 min-w-32">
 				<PdfPreview
 					source={attachment.url}
 					onExtractionComplete={({ fileSize, pages }) => {
@@ -63,14 +68,14 @@ function DownloadItem({ attachment }: { attachment: MediaData }) {
 				/>
 				<Badge className="absolute top-0 left-0 bg-red-500 text-white">{attachment.type}</Badge>
 			</ItemMedia>
-			<ItemContent className="pe-4">
+			<ItemContent className="py-2 ps-4 pe-4 sm:ps-0">
 				<ItemTitle className="line-clamp-2">{attachment.name}</ItemTitle>
 				<ItemDescription>{attachment.description}</ItemDescription>
 				<ItemActions className="flex-wrap justify-between">
 					<div className="flex flex-col justify-center text-sm text-muted-foreground">
 						{pages && fileSize && (
 							<div className="flex flex-row items-center font-bold">
-								<DownloadIcon className="mr-1 inline size-3.5" /> {prettyBytes(fileSize)} ({pages} pages)
+								<DownloadIcon className="mr-1 inline size-3.5" /> {prettyBytes(fileSize)}s [{pages} pages]
 							</div>
 						)}
 						<span className="text-xs text-amber-600 dark:text-warning">
@@ -78,7 +83,12 @@ function DownloadItem({ attachment }: { attachment: MediaData }) {
 							{formatDate(attachment.createdAt, "PPP")}
 						</span>
 					</div>
-					<Button size="lg" variant="secondary" onClick={() => window.open(attachment.url, "_blank")}>
+					<Button
+						size="lg"
+						variant="secondary"
+						onClick={() => window.open(attachment.url, "_blank")}
+						className="mx-auto sm:mx-0 sm:ms-auto"
+					>
 						<DownloadCloudIcon className="" /> Download file
 					</Button>
 				</ItemActions>

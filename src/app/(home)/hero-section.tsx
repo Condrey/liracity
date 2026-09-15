@@ -48,16 +48,13 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 					{data.title}
 				</h2>
 
-				<TipTapViewer
-					content={data.summary || data.content}
-					className="line-clamp-4 md:line-clamp-6 xl:line-clamp-[8]"
-				/>
+				<TipTapViewer content={data.summary || data.content} className="line-clamp-4 *:text-lg md:line-clamp-6" />
 				<div className="flex w-full">
 					<Link
 						href={getNavigationLinkWithPathnameWithoutUpdate(`/media/news-events/news/${data.slug}`)}
 						className={cn(
 							buttonVariants({ size: "default" }),
-							"group/read-more mx-auto mt-2 w-full sm:mx-0 sm:ms-auto md:mx-0 md:max-w-fit"
+							"group/read-more mx-auto mt-2 w-full sm:mx-0 sm:ms-auto md:mx-0 md:max-w-2xs"
 						)}
 						onClick={() => startTransition(() => {})}
 					>

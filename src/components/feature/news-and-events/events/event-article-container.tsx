@@ -39,7 +39,7 @@ export default function EventsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"flex cursor-pointer flex-col p-0 pb-6 hover:shadow-md",
+				"flex cursor-pointer flex-col p-0 pb-6 hover:bg-primary/20",
 				"aspect-video items-start justify-start",
 				isPending && "animate-pulse",
 				mouseEntered && "shadow-md",
@@ -65,7 +65,7 @@ export default function EventsArticleContainer({
 					)}
 				/>
 				<div className="absolute mb-8 size-full flex-1 p-3 backdrop-blur-sm">
-					<ItemContent>
+					<ItemContent className="">
 						<ItemFooter className="flex flex-wrap justify-start gap-1 space-x-1">
 							{isNotVisitor && (
 								<Badge variant={variant}>
@@ -73,23 +73,34 @@ export default function EventsArticleContainer({
 									{eventStatus}
 								</Badge>
 							)}
-							<span className="inline text-sm text-muted-foreground *:inline">
-								<MapPinIcon className="inline size-4.5 fill-muted-foreground text-card" />
+							<span className="inline text-sm *:inline dark:text-warning">
+								<MapPinIcon className="inline size-4.5 fill-muted-foreground text-card dark:fill-warning/20 dark:text-warning" />
 								{location}
 							</span>
 							<p>
 								<span className="text-xs capitalize">{period}</span>
 							</p>
 						</ItemFooter>
-						<ItemTitle className={cn("line-clamp-2", mouseEntered && "scale-105 transition-all duration-200")}>
+						<ItemTitle
+							className={cn(
+								"mb-1.5 line-clamp-2 font-bold uppercase",
+								mouseEntered && "scale-105 transition-all duration-200"
+							)}
+						>
 							{title}
 						</ItemTitle>
-						<ItemDescription>
-							<TipTapViewer content={summary ?? description} className="text-sm md:text-sm" />
+						<ItemDescription className="line-clamp-3">
+							<TipTapViewer
+								content={summary ?? description}
+								className="text-start text-sm text-muted-foreground md:text-sm"
+							/>
 						</ItemDescription>
 					</ItemContent>
 				</div>
-				<Badge className={cn("absolute right-0 bottom-0")} variant={isPastEvent ? "destructive" : "success"}>
+				<Badge
+					className={cn("absolute right-0 bottom-0 backdrop-blur-2xl")}
+					variant={isPastEvent ? "destructive" : "success"}
+				>
 					<CalendarIcon className="" />
 					{eventTag}
 				</Badge>
@@ -99,7 +110,7 @@ export default function EventsArticleContainer({
 					variant={isPastEvent ? "destructive" : "default"}
 					className={cn(
 						"absolute hidden",
-						"m-auto size-full max-h-fit max-w-fit py-3",
+						"max-w-fit backdrop-blur-2xl",
 						"start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
 						(isPending || mouseEntered) && "block animate-in duration-500 ease-in"
 					)}

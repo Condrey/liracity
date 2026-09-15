@@ -62,7 +62,7 @@ export default function NewsArticleContainer({
 						loading={isPending}
 						className={cn(
 							"hidden",
-							"absolute start-1/2 top-1/2 size-full max-h-fit max-w-fit -translate-x-1/2 -translate-y-1/2 py-3",
+							"absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
 							isPending && "block",
 							isHovering && "block"
 						)}
@@ -87,8 +87,8 @@ export default function NewsArticleContainer({
 						{tags.length > 3 && <span>...</span>}
 					</div>
 					{location && (
-						<address className="text-sm text-muted-foreground">
-							<MapPinIcon className="inline-flex size-4 fill-muted-foreground text-card" />
+						<address className="text-sm text-muted-foreground dark:text-warning">
+							<MapPinIcon className="inline-flex size-4 fill-muted-foreground text-card dark:fill-warning/20 dark:text-warning" />
 							{location}
 						</address>
 					)}
@@ -99,9 +99,12 @@ export default function NewsArticleContainer({
 					)}
 				</ItemFooter>
 				<ItemContent className="px-3">
-					<ItemTitle className="line-clamp-2">{title}</ItemTitle>
+					<ItemTitle className="mb-2 line-clamp-2 uppercase">{title}</ItemTitle>
 					<ItemDescription>
-						<TipTapViewer content={summary ?? content} />
+						<TipTapViewer
+							content={summary ?? content}
+							className="text-start text-sm text-muted-foreground md:text-sm"
+						/>
 					</ItemDescription>
 				</ItemContent>
 			</Link>

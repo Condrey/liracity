@@ -237,7 +237,14 @@ function Sidebar({
 	);
 }
 
-function SidebarTrigger({ className, size, onClick, variant, ...props }: React.ComponentProps<typeof Button>) {
+function SidebarTrigger({
+	className,
+	size,
+	onClick,
+	variant,
+	children,
+	...props
+}: React.ComponentProps<typeof Button> & { children?: React.ReactNode }) {
 	const { toggleSidebar, open } = useSidebar();
 
 	return (
@@ -246,14 +253,14 @@ function SidebarTrigger({ className, size, onClick, variant, ...props }: React.C
 			data-slot="sidebar-trigger"
 			size={size || "icon"}
 			className={cn("size-7", className)}
-			variant={open ? "destructive" : "warning"}
+			variant={variant ?? (open ? "destructive" : "warning")}
 			onClick={(event) => {
 				onClick?.(event);
 				toggleSidebar();
 			}}
 			{...props}
 		>
-			{open ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}
+			{!children ? <> {open ? <XIcon className="size-4" /> : <MenuIcon className="size-4" />}</> : children}
 			<span className="sr-only">Toggle Sidebar</span>
 		</Button>
 	);

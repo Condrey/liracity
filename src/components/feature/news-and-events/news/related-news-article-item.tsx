@@ -57,7 +57,7 @@ export default function RelatedNewsArticleItem({ relatedNewsArticle: item }: { r
 				<ItemHeader className="flex-1 flex-col items-start gap-0.5 px-2">
 					<ItemTitle className="mb-1 line-clamp-2 tracking-tighter">{item.title}</ItemTitle>
 					<div className="block text-start text-xs">
-						<Badge variant={variant}>
+						<Badge variant={variant} className="backdrop-blur-2xl">
 							{/* <StatusIcon className="mr-1" /> */}
 							{newsArticleStatus}
 						</Badge>
@@ -69,8 +69,11 @@ export default function RelatedNewsArticleItem({ relatedNewsArticle: item }: { r
 						)}{" "}
 						{formatDateToLocal(item.publishedAt || item.createdAt)}
 					</div>
-					<ItemDescription>
-						<TipTapViewer content={item.summary || item.content} />
+					<ItemDescription className="mt-3 *:text-sm">
+						<TipTapViewer
+							content={item.summary || item.content}
+							className="text-start text-sm md:text-sm dark:text-muted-foreground"
+						/>
 					</ItemDescription>
 				</ItemHeader>
 			</Link>

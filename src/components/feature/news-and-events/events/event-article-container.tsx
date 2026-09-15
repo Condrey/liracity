@@ -73,8 +73,8 @@ export default function EventsArticleContainer({
 									{eventStatus}
 								</Badge>
 							)}
-							<span className="inline text-sm *:inline dark:text-warning">
-								<MapPinIcon className="inline size-4.5 fill-muted-foreground text-card dark:fill-warning/20 dark:text-warning" />
+							<span className="inline text-sm font-bold text-amber-900 *:inline dark:font-normal dark:text-warning">
+								<MapPinIcon className="inline size-4.5 fill-amber-900 text-card dark:fill-warning/20 dark:text-warning" />
 								{location}
 							</span>
 							<p>
@@ -92,7 +92,7 @@ export default function EventsArticleContainer({
 						<ItemDescription className="line-clamp-3">
 							<TipTapViewer
 								content={summary ?? description}
-								className="text-start text-sm text-muted-foreground md:text-sm"
+								className="text-start text-sm md:text-sm dark:text-muted-foreground"
 							/>
 						</ItemDescription>
 					</ItemContent>

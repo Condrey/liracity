@@ -1,15 +1,7 @@
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger, NavigationMenuIndicator
-} from "@/components/ui/navigation-menu"
-
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { cn, webName } from "@/lib/utils";
 import UserMenuButton from "@/utils/user-menu-button";
+import { MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TopAppBarBigScreen from "./top-app-bar-big-screen";
@@ -19,7 +11,9 @@ export default async function TopAppBar({ className }: { className?: string }) {
 		<div className={cn("z-50 flex h-12 w-full shrink-0 items-center justify-between gap-2", className)}>
 			{/* For small screens : section */}
 			<div className="flex items-center gap-2 md:hidden">
-				<SidebarTrigger className="-ml-1" />
+				<SidebarTrigger variant={"default"} className="-ml-1">
+					<MenuIcon />
+				</SidebarTrigger>
 				<Link href={"/"} passHref className="cursor-pointer">
 					<h2 className="uppercase">{webName}</h2>
 				</Link>
@@ -33,8 +27,8 @@ export default async function TopAppBar({ className }: { className?: string }) {
 			</div>
 
 			{/* Big screen section: Navigation menu links  */}
-			<div className="flex-1 hidden md:flex">
-				<TopAppBarBigScreen />			
+			<div className="hidden flex-1 md:flex">
+				<TopAppBarBigScreen />
 			</div>
 
 			{/* login information area  */}

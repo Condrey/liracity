@@ -129,7 +129,7 @@ function TitleSection({ isAuthorized, event }: { isAuthorized: boolean; event: E
 					)}
 					<time className="inline w-fit font-semibold md:font-normal">
 						<span>{period}</span>&nbsp;
-						<span className="text-muted-foreground">{updatedAt > createdAt && `(updated)`}</span>
+						{/* <span className="text-muted-foreground">{updatedAt > createdAt && `(updated)`}</span> */}
 					</time>
 				</div>
 			</div>

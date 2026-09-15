@@ -146,7 +146,7 @@ export function getEventStatusAndPeriod({ startDate, endDate }: { startDate: Dat
 		status = "UPCOMING EVENT";
 		// but same day
 		if (isSameDay(now, startDate)) {
-			period = `starts today at ${formatDateToLocal(startDate)}`;
+			period = `starts today  ${formatDateToLocal(startDate)}`;
 		} else {
 			period = `starting on ${formatDateToLocal(startDate)}`;
 		}

@@ -160,6 +160,7 @@ model Media {
   id                 String        @id @default(uuid())
   type               MediaType
   url                String
+  size              Int?
   name               String?
   description        String?
   isForDownloads     Boolean       @default(false)

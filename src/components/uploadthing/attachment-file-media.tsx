@@ -27,7 +27,7 @@ export default function AttachFileMedia({
 	initialAttachments = [],
 	maxAttachments = MAX_ATTACHMENTS
 }: Props) {
-	const { startUpload, attachments, addInitialAttachments, isUploading, uploadProgress, removeAttachment } =
+	const { startUpload, attachments, addInitialAttachments, isUploading, uploadProgress, removeAttachment, } =
 		useOtherMediaUploads();
 
 	useEffect(() => {

@@ -8,7 +8,7 @@ export function useOtherMediaUploads() {
 	const [attachments, setAttachments] = useState<Attachment[]>([]);
 	const [uploadProgress, setUploadProgress] = useState<number>();
 
-	const { startUpload, isUploading } = useUploadThing("attachment", {
+	const { startUpload, isUploading, } = useUploadThing("attachment", {
 		onBeforeUploadBegin(files) {
 			console.log("1. UPLOAD: BEFORE_UPLOAD_BEGIN: Renaming files for submission");
 			console.log({ files });
@@ -23,6 +23,14 @@ export function useOtherMediaUploads() {
 			return files;
 		},
 		onUploadProgress: setUploadProgress,
+		onUploadError(e) {
+			console.error("_. UPLOAD: UPLOAD_ERROR: ", e.message);
+
+			setAttachments((prev) => prev?.filter((a) => !a.isUploading));
+			toast.error("Failed", {
+				description: e.message
+			});
+		},
 		onClientUploadComplete(res) {
 			console.log("2. UPLOAD: UPLOAD_COMPLETE: Setting attachments for returning values");
 			console.log({ res });
@@ -39,14 +47,6 @@ export function useOtherMediaUploads() {
 					};
 				})
 			);
-		},
-		onUploadError(e) {
-			console.error("3. UPLOAD: UPLOAD_ERROR: ", e.message);
-
-			setAttachments((prev) => prev?.filter((a) => !a.isUploading));
-			toast.error("Failed", {
-				description: e.message
-			});
 		}
 	});
 

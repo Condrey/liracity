@@ -22,6 +22,7 @@ export async function upsertDownload({ download, mediaId }: { download: MediaSch
 	const { user } = await validateRequest();
 	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("HOS");
 	if (!isAuthorized) throw Error("Unauthorized.");
+	console.log("upsertDownload: ", { download, mediaId });
 	return await prisma.media.upsert({
 		where: { id: id || mediaId },
 		create: { name, description, url: mediaId, type: "PDF", isForDownloads: true },

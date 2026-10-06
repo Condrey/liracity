@@ -71,7 +71,6 @@ const attachmentRouter = f({
 			data: {
 				url: file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
 				type: file.type.startsWith("image") ? "IMAGE" : file.type.startsWith("application/pdf") ? "PDF" : "VIDEO",
-				extension: file.name.split(".").pop() || "",
 				name: file.name,
 				size: file.size
 			}

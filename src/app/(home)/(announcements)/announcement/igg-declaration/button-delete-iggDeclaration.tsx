@@ -10,19 +10,19 @@ import {
 	DialogTitle
 } from "@/components/ui/dialog";
 import LoadingButton from "@/components/ui/loading-button";
-import { TeamData } from "@/lib/types";
 import { AlertTriangleIcon } from "lucide-react";
 import { useState } from "react";
-import { useDeleteTeamMutation } from "./mutation";
+import { useDeleteIggDeclarationMutation } from "./mutation";
 import { Role } from "@/generated/prisma/enums";
 import { myPrivileges } from "@/lib/enums";
 import { useSession } from "@/lib/session-provider";
+import { IggDeclaration } from "@/generated/prisma/client";
 
 interface Props extends ButtonProps {
-	team: TeamData;
+	iggDeclaration: IggDeclaration;
 }
 
-export default function ButtonDeleteTeam({ team, variant, ...props }: Props) {
+export default function ButtonDeleteIggDeclaration({ iggDeclaration, variant, ...props }: Props) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
 	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes("HOS");
@@ -32,23 +32,23 @@ export default function ButtonDeleteTeam({ team, variant, ...props }: Props) {
 			<Button
 				onClick={() => setOpen(true)}
 				variant={variant || "destructive"}
-				title={`Delete ${team.name}`}
+				title={`Delete ${iggDeclaration.name}`}
 				{...props}
 			/>
-			<DeleteDepartmentalSectorDialog open={open} setOpen={setOpen} team={team} />
+			<DeleteIggDeclarationDialog open={open} setOpen={setOpen} iggDeclaration={iggDeclaration} />
 		</>
 	);
 }
 
-interface DeleteDepartmentalSectorDialogProps {
-	team: TeamData;
+interface DeleteIggDeclarationDialogProps {
+	iggDeclaration: IggDeclaration;
 	open: boolean;
 	setOpen: (open: boolean) => void;
 }
-export function DeleteDepartmentalSectorDialog({ team, open, setOpen }: DeleteDepartmentalSectorDialogProps) {
-	const { mutate, isPending } = useDeleteTeamMutation();
+export function DeleteIggDeclarationDialog({ iggDeclaration, open, setOpen }: DeleteIggDeclarationDialogProps) {
+	const { mutate, isPending } = useDeleteIggDeclarationMutation();
 	function handleDelete() {
-		mutate(team, { onSuccess: () => setOpen(false) });
+		mutate(iggDeclaration, { onSuccess: () => setOpen(false) });
 	}
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -59,13 +59,12 @@ export function DeleteDepartmentalSectorDialog({ team, open, setOpen }: DeleteDe
 							className="mr-2 inline size-10 fill-destructive text-destructive-foreground"
 							strokeWidth={0.8}
 						/>
-						<span className="uppercase">Delete {team.name} section</span>
+						<span className="uppercase">Delete {iggDeclaration.name} </span>
 					</DialogTitle>
 					<DialogDescription>Dangerous! Please note that this action is irreversible</DialogDescription>
 				</DialogHeader>
 				<p>
-					This will delete <strong>{team.name}</strong> section from the <strong>{team.organization?.name}</strong>{" "}
-					department and all its <strong>officers</strong> from the database. Continue with caution.
+					This will delete <strong>{iggDeclaration.name}</strong> from the database. Continue with caution.
 				</p>
 				<DialogFooter>
 					<Button variant={"outline"} onClick={() => setOpen(false)}>

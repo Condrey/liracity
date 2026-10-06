@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-	const positions = await getAllPositions()
+	const positions = await getAllPositions();
 	return (
 		<div>
 			<PageTitle heading={PAGE_TITLE}>

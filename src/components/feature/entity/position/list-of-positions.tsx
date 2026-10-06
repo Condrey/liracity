@@ -16,7 +16,7 @@ interface ListOfPositionsProps {
 }
 
 export default function ListOfPositions({ positions }: ListOfPositionsProps) {
-	const query = usePositionsWithInitialDataQuery(positions)
+	const query = usePositionsWithInitialDataQuery(positions);
 	const { data, status } = query;
 	return (
 		<div className="space-y-4">
@@ -33,7 +33,7 @@ export default function ListOfPositions({ positions }: ListOfPositionsProps) {
 					columns={usePositionColumns}
 					filterColumn={{ id: "jobTitle", label: "Job title" }}
 					ROWS_PER_TABLE={10}
-					className="w-full max-w-9xl mx-auto"
+					className="mx-auto w-full max-w-9xl"
 				>
 					<ButtonAddEditPosition size={"icon"}>
 						<PlusIcon />

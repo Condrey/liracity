@@ -8,9 +8,5 @@ import { Metadata } from "next";
 // 	description
 // };
 export default function Page() {
-	return (
-		<div className="">
-			{/* <PageTitle heading={title} /> */}
-		</div>
-	);
+	return <div className="">{/* <PageTitle heading={title} /> */}</div>;
 }

@@ -19,12 +19,12 @@ export default function ButtonAddEditPosition({ position, ...props }: Props) {
 	if (!isAuthorized) return null;
 	return (
 		<>
-				<Button
-					type="button"
-					onClick={() => setOpen(true)}
-					title={position ? `Update position` : "Create a new position"}
-					{...props}
-				/>
+			<Button
+				type="button"
+				onClick={() => setOpen(true)}
+				title={position ? `Update position` : "Create a new position"}
+				{...props}
+			/>
 
 			<FormAddEditPosition open={open} setOpen={setOpen} positionToEdit={position} />
 		</>

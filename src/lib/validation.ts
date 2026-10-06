@@ -247,3 +247,33 @@ export type EmailSchema = z.infer<typeof emailSchema>;
 
 export const singleContentSchema = z.object({ singleContent: requiredString });
 export type SingleContentSchema = z.infer<typeof singleContentSchema>;
+
+// announcements
+export const iggDeclarationSchema = z.object({
+	id: z.string().optional(),
+	name: requiredString
+		.min(1, "Enter your full name")
+		.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase())),
+	title: requiredString.min(3, "Please state your correct title"),
+	nin: requiredString
+		.min(1, "Please provide a NIN for the announcement")
+		.max(14, "NIN should not be more than 14 characters")
+		.superRefine((val, ctx) => {
+			if (val.length != 14) {
+				ctx.addIssue({
+					code: "custom",
+					message: "NIN should be 14 characters."
+				});
+			}
+		}),
+	email: z.email().min(1, "Please provide an email"),
+	phoneNumber: requiredString.min(1, "Please provide a phone number").superRefine((val, ctx) => {
+		if (val.length != 10) {
+			ctx.addIssue({
+				code: "custom",
+				message: "Phone number should be 10 digits."
+			});
+		}
+	})
+});
+export type IGGDeclarationSchema = z.infer<typeof iggDeclarationSchema>;

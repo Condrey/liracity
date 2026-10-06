@@ -62,11 +62,18 @@ const attachmentRouter = f({
 		if (!user) throw new UploadThingError("Unauthorized");
 		return {};
 	})
+	.onUploadError(({ error }) => {
+		console.error("Attachment upload error: ", error);
+		throw new UploadThingError(error.message);
+	})
 	.onUploadComplete(async ({ file }) => {
 		const media = await prisma.media.create({
 			data: {
 				url: file.url.replace("/f/", `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`),
-				type: file.type.startsWith("image") ? "IMAGE" : "VIDEO"
+				type: file.type.startsWith("image") ? "IMAGE" : file.type.startsWith("application/pdf") ? "PDF" : "VIDEO",
+				extension: file.name.split(".").pop() || "",
+				name: file.name,
+				size: file.size
 			}
 		});
 

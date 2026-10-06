@@ -19,12 +19,7 @@ interface FormAddEditEmployeeProps {
 	employee?: EmployeeData;
 }
 
-export default function FormAddEditEmployee({
-	open,
-	setOpen,
-	organizationId,
-	employee
-}: FormAddEditEmployeeProps) {
+export default function FormAddEditEmployee({ open, setOpen, organizationId, employee }: FormAddEditEmployeeProps) {
 	const currentYear = new Date().getFullYear();
 	const form = useForm<EmployeeSchema>({
 		resolver: zodResolver(employeeSchema),

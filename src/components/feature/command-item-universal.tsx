@@ -36,7 +36,13 @@ export default function CommandItemUniversal({
 	);
 }
 
-export function ChosenUniversalCommandItem( {title,subTitle}:{ title:string|undefined|null,subTitle:string|undefined|null} ) {
+export function ChosenUniversalCommandItem({
+	title,
+	subTitle
+}: {
+	title: string | undefined | null;
+	subTitle: string | undefined | null;
+}) {
 	if (!title) return null;
 	return (
 		<div className="flex max-w-md items-center justify-between gap-2">

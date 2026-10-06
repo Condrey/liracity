@@ -1,25 +1,18 @@
 import { PageTitle, TypographyH2 } from "@/components/page-utils";
 import TipTapViewer from "@/components/tip-tap-editor/tip-tap-viewer";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuLabel,
-	DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
 import { Role } from "@/generated/prisma/enums";
 import { eventStatuses, myPrivileges } from "@/lib/enums";
 import { useSession } from "@/lib/session-provider";
 import { EventData } from "@/lib/types";
 import { getEventStatusAndPeriod } from "@/lib/utils";
 import { formatDate, isAfter } from "date-fns";
-import { Edit3Icon, MapPinIcon, MoreVerticalIcon, Trash2Icon } from "lucide-react";
+import { Edit3Icon, MapPinIcon, Trash2Icon } from "lucide-react";
 import ArticleImage from "../../article-image";
 import ButtonAddEditEvent from "../button-add-edit-event";
 import ButtonDeleteEvent from "../button-delete-event";
 import ListOfRelatedEvents from "../list-of-related-events";
+import DownloadItemContainer from "@/components/feature/downloads/download-item-container";
 
 interface EventContentProps {
 	event: EventData;
@@ -80,40 +73,13 @@ function TitleSection({ isAuthorized, event }: { isAuthorized: boolean; event: E
 	return (
 		<header>
 			<PageTitle heading={title} className="flex-wrap md:text-2xl">
-				{isAuthorized && (
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button size={"icon-lg"} variant={"secondary"} className="rounded-full">
-								<span className="sr-only">Show actions</span>
-								<MoreVerticalIcon />
-							</Button>
-						</DropdownMenuTrigger>
+				<ButtonAddEditEvent size={"icon-sm"} variant={"ghost"} event={event} className="w-full flex-none justify-start">
+					<Edit3Icon />
+				</ButtonAddEditEvent>
 
-						<DropdownMenuContent>
-							<DropdownMenuGroup className="space-y-1">
-								<DropdownMenuLabel>Action</DropdownMenuLabel>
-
-								<ButtonAddEditEvent
-									size={"sm"}
-									variant={"ghost"}
-									event={event}
-									className="w-full flex-none justify-start"
-								>
-									<Edit3Icon /> Edit event
-								</ButtonAddEditEvent>
-
-								<ButtonDeleteEvent
-									event={event}
-									size={"sm"}
-									variant={"ghost"}
-									className="w-full flex-none justify-start"
-								>
-									<Trash2Icon /> Delete event
-								</ButtonDeleteEvent>
-							</DropdownMenuGroup>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				)}
+				<ButtonDeleteEvent event={event} size={"icon-sm"} variant={"ghost"} className="w-full flex-none justify-start">
+					<Trash2Icon />
+				</ButtonDeleteEvent>
 			</PageTitle>
 
 			<div className="mb-2 flex flex-wrap items-center gap-2">
@@ -150,18 +116,23 @@ function OtherMediaSection({ media }: { media: EventData["media"] }) {
 				<section className="space-y-2">
 					<TypographyH2 title="Other media from the event" className="uppercase" />
 					<div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
-						{media.map((medium) => {
-							if (medium.type === "IMAGE")
+						{media.map((attachment) => {
+							if (attachment.type === "IMAGE") {
 								return (
 									<ArticleImage
-										key={medium.id}
-										mediaIdentifier={medium.url}
+										key={attachment.id}
+										mediaIdentifier={attachment.url}
 										alt="other graphic"
 										height={1080}
 										width={1920}
 										className="aspect-video"
 									/>
 								);
+							} else {
+								return (
+									<DownloadItemContainer key={attachment.id} attachment={{ ...attachment, _count: { events: 0 } }} />
+								);
+							}
 						})}
 					</div>
 				</section>

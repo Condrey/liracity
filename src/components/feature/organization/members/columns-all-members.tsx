@@ -62,7 +62,7 @@ export const useAllMembersColumns = (organizationSlug: string): ColumnDef<Member
 			const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 			const url = getNavigationLinkWithPathnameWithoutUpdate(`/users/${id}`);
 			return (
-				<ButtonGroup>					
+				<ButtonGroup>
 					<Button variant={"secondary"} onClick={() => startTransition(() => {})} size={"sm"} asChild>
 						<Link href={url}>View {isPending ? <Spinner /> : <ArrowUpRightIcon />}</Link>
 					</Button>

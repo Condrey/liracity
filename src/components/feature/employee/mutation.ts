@@ -33,7 +33,7 @@ export function useDeleteEmployeeMutation() {
 	return useMutation({
 		mutationFn: deleteEmployee,
 		async onSuccess(data, variables, context) {
-			const queryKey: QueryKey = ["sector", ];
+			const queryKey: QueryKey = ["sector"];
 
 			queryClient.invalidateQueries({ queryKey });
 

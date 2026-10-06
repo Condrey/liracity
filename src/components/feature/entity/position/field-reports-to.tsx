@@ -26,9 +26,9 @@ export default function FieldReportsTo({ form }: Props) {
 	if (status === "error") return <ErrorContainer errorMessage="Err getting positions" query={query} />;
 	if (status === "pending")
 		return (
-			<div className="w-full  bg-accent animate-pulse space-y-2">
-				<Skeleton className="h-4 bg-foreground/20 w-1/4" />
-				<Skeleton className="h-9  bg-foreground/20 w-full" />
+			<div className="w-full animate-pulse space-y-2 bg-accent">
+				<Skeleton className="h-4 w-1/4 bg-foreground/20" />
+				<Skeleton className="h-9 w-full bg-foreground/20" />
 			</div>
 		);
 
@@ -41,7 +41,7 @@ export default function FieldReportsTo({ form }: Props) {
 				const currentItem = positions.find((position) => position.id === field.value);
 				return (
 					<FormItem>
-						<FormLabel >Reports To</FormLabel>
+						<FormLabel>Reports To</FormLabel>
 						<Popover open={open} onOpenChange={setOpen} modal={true}>
 							<PopoverTrigger asChild>
 								<FormControl>
@@ -81,24 +81,21 @@ export default function FieldReportsTo({ form }: Props) {
 														<CommandItemUniversal
 															isChecked={isChecked}
 															primaryContent={<ItemTitle className="line-clamp-1">{jobTitle}</ItemTitle>}
-                              	secondaryContent=
-														{
-															<>
-																{departmentalSection && (
-																	<>
-																		
-																		<ItemTitle className="line-clamp-1 text-xs">
-																			{departmentalSection.sectionName}
-																		</ItemTitle>
-																		<ItemDescription className="line-clamp-1 text-xs">
-																			{departmentalSection.stationType}
-																		</ItemDescription>
-																	</>
-																)}
-															</>
-														}
+															secondaryContent={
+																<>
+																	{departmentalSection && (
+																		<>
+																			<ItemTitle className="line-clamp-1 text-xs">
+																				{departmentalSection.sectionName}
+																			</ItemTitle>
+																			<ItemDescription className="line-clamp-1 text-xs">
+																				{departmentalSection.stationType}
+																			</ItemDescription>
+																		</>
+																	)}
+																</>
+															}
 														/>
-													
 													</CommandItem>
 												);
 											})}

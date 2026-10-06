@@ -10,7 +10,7 @@ import { cache } from "react";
 
 async function departmentalSections() {
 	const departmentalSections = await prisma.departmentalSection.findMany({
-		orderBy: [{stationType:'desc'},{ sectionName: "asc" }],
+		orderBy: [{ stationType: "desc" }, { sectionName: "asc" }],
 		include: departmentalSectionDataInclude
 	});
 	return departmentalSections;
@@ -30,16 +30,17 @@ export async function upsertDepartmentalSection(departmentalSection: Departmenta
 	const { user } = await validateRequest();
 	const isAuthorized = myPrivileges[(user?.role as Role) || Role.USER].includes(Role.SUPER_ADMIN);
 	if (!isAuthorized) throw Error("Unauthorized to perform this action.");
-	const { id, sectionName, stationType } =
-		departmentalSectionSchema.parse(departmentalSection);
+	const { id, sectionName, stationType } = departmentalSectionSchema.parse(departmentalSection);
 
 	return await prisma.departmentalSection.upsert({
 		where: { id },
 		create: {
-			sectionName, stationType
+			sectionName,
+			stationType
 		},
 		update: {
-			sectionName, stationType
+			sectionName,
+			stationType
 		}
 	});
 }

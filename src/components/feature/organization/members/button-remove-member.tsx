@@ -28,7 +28,7 @@ export default function ButtonRemoveMember({ member, ...props }: Props) {
 	const [open, setOpen] = useState(false);
 
 	const { mutate, isPending, error } = useRemoveMemberMutation();
-	const { user:userSession } = useSession();
+	const { user: userSession } = useSession();
 	const isAuthorized = myPrivileges[(userSession?.role as Role) || Role.USER].includes("HOD");
 	if (!isAuthorized) return null;
 

@@ -90,10 +90,10 @@ export function AttachmentPreviews({
 
 			{/* for uploading attachments  */}
 			<div className={cn("space-y-2")}>
-				{attachments.map((attachment) => {
+				{attachments.map((attachment, index) => {
 					return (
 						<Attachment
-							key={attachment.mediaId}
+							key={attachment.mediaId ?? index}
 							state={attachment.isUploading && (uploadProgress || 0) < 100 ? "uploading" : "done"}
 							className={cn(!!attachment.mediaId && "hidden")}
 						>

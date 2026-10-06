@@ -26,10 +26,10 @@ export default function FieldDepartmentalSection({ form }: Props) {
 	if (status === "error") return <ErrorContainer errorMessage="Err getting departmental Sections" query={query} />;
 	if (status === "pending")
 		return (
-		  <div className="w-full  bg-accent animate-pulse space-y-2">
-            <Skeleton className="h-4 bg-foreground/20 w-1/4" />
-            <Skeleton className="h-9  bg-foreground/20 w-full" />
-          </div>
+			<div className="w-full animate-pulse space-y-2 bg-accent">
+				<Skeleton className="h-4 w-1/4 bg-foreground/20" />
+				<Skeleton className="h-9 w-full bg-foreground/20" />
+			</div>
 		);
 
 	return (
@@ -64,10 +64,12 @@ export default function FieldDepartmentalSection({ form }: Props) {
 									<CommandList>
 										<CommandEmpty className="flex max-w-sm flex-col items-center justify-center gap-2 p-3 text-center">
 											<p className="inline-block">No result</p>
-											<ButtonAddEditDepartmentalSection variant={"secondary"}>Add new Section</ButtonAddEditDepartmentalSection>
+											<ButtonAddEditDepartmentalSection variant={"secondary"}>
+												Add new Section
+											</ButtonAddEditDepartmentalSection>
 										</CommandEmpty>
 										<CommandGroup>
-											{departmentalSections.map(({ id,  sectionName, stationType }) => {
+											{departmentalSections.map(({ id, sectionName, stationType }) => {
 												const isChecked = field.value === id;
 												return (
 													<CommandItem
@@ -81,14 +83,10 @@ export default function FieldDepartmentalSection({ form }: Props) {
 														<CommandItemUniversal
 															isChecked={isChecked}
 															primaryContent={<ItemTitle className="line-clamp-1">{sectionName}</ItemTitle>}
-                              	secondaryContent=
-														{
-															<ItemDescription className="line-clamp-1 text-xs">
-																			{stationType}
-																		</ItemDescription>
-														}
+															secondaryContent={
+																<ItemDescription className="line-clamp-1 text-xs">{stationType}</ItemDescription>
+															}
 														/>
-													
 													</CommandItem>
 												);
 											})}

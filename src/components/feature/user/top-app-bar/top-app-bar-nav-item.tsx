@@ -16,9 +16,8 @@ import { TransitionStartFunction, useTransition } from "react";
 
 interface NavigationMenuItemContentProps {
 	nav: NavLinkGroup;
-	
 }
-export function NavigationMenuItemContent({ nav,  }: NavigationMenuItemContentProps) {
+export function NavigationMenuItemContent({ nav }: NavigationMenuItemContentProps) {
 	const parentLink = nav.href;
 	const Icon = nav.icon;
 	const [isPending, startTransition] = useTransition();
@@ -60,7 +59,7 @@ export function NavigationMenuItemContent({ nav,  }: NavigationMenuItemContentPr
 					render={<Link href={parentLink} passHref></Link>}
 					className={cn(
 						navigationMenuTriggerStyle(),
-						"bg-primary dark:hover:bg-accent hover:bg-background hover:text-foreground dark:bg-background"
+						"bg-primary hover:bg-background hover:text-foreground dark:bg-background dark:hover:bg-accent"
 					)}
 					onClick={() => startTransition(() => {})}
 				>

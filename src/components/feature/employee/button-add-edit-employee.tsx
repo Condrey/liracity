@@ -13,11 +13,7 @@ interface ButtonAddEditEmployeeProps extends ButtonProps {
 	employee?: EmployeeData;
 }
 
-export default function ButtonAddEditEmployee({
-	employee,
-	organizationId,
-	...props
-}: ButtonAddEditEmployeeProps) {
+export default function ButtonAddEditEmployee({ employee, organizationId, ...props }: ButtonAddEditEmployeeProps) {
 	const [open, setOpen] = useState(false);
 	const { user } = useSession();
 	const isAuthorized = !!user && myPrivileges[user.role as Role].includes(Role.MODERATOR);
@@ -29,12 +25,7 @@ export default function ButtonAddEditEmployee({
 				title={employee ? `Update ${employee.user.name!.split(" ").pop()}'s information` : "Create new staff"}
 				{...props}
 			/>
-			<FormAddEditEmployee
-				open={open}
-				setOpen={setOpen}
-				employee={employee}
-				organizationId={organizationId}
-			/>
+			<FormAddEditEmployee open={open} setOpen={setOpen} employee={employee} organizationId={organizationId} />
 		</>
 	);
 }

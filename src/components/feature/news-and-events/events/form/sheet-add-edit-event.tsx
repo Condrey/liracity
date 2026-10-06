@@ -10,6 +10,7 @@ import { Spinner } from "@/components/ui/spinner";
 import AttachFileMedia from "@/components/uploadthing/attachment-file-media";
 import { ButtonAddSingleAttachment } from "@/components/uploadthing/button-add-attachment";
 import { EventStatus } from "@/generated/prisma/enums";
+import { MAX_ATTACHMENTS } from "@/lib/constants";
 import { eventStatuses } from "@/lib/enums";
 import { EventData } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -157,7 +158,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 							)}
 							
 						</pre> */}
-						{/* <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre> */}
+						<pre>{JSON.stringify({ mediaIds }, null, 2)}</pre>
 						<div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-3 md:flex-row">
 							{/* main content  */}
 							<div className="space-y-4 md:w-2/3 md:*:space-y-4 md:*:border md:*:bg-card md:*:p-3">
@@ -266,6 +267,7 @@ export default function SheetAddEditEvents({ event, open, setOpen, altId, userId
 								<div>
 									<AttachFileMedia
 										setMediaIds={setMediaIds}
+										maxAttachments={MAX_ATTACHMENTS}
 										onRemoveClicked={(attachment) => {
 											mediaMutation.mutate({
 												eventId: watchedId,

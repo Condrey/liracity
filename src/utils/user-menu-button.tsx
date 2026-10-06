@@ -37,7 +37,7 @@ export default function UserMenuButton({ className, isOnlyInfo = false }: UserMe
 	const [isPending, startTransition] = useTransition();
 	const currentPathname = usePathname();
 	const searchParams = useSearchParams();
-	const router = useRouter()
+	const router = useRouter();
 	const newParams = new URLSearchParams(searchParams.toString());
 	newParams.set(REDIRECT_TO_URL_SEARCH_PARAMS, currentPathname);
 	const loginUrl = `/sign-in` + "?" + newParams.toString();

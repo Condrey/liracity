@@ -19,12 +19,12 @@ export default function ButtonAddEditDepartmentalSection({ departmentalSection, 
 	if (!isAuthorized) return null;
 	return (
 		<>
-				<Button
-					type="button"
-					onClick={() => setOpen(true)}
-					title={departmentalSection ? `Update departmental Section` : "Create a new departmental Section"}
-					{...props}
-				/>
+			<Button
+				type="button"
+				onClick={() => setOpen(true)}
+				title={departmentalSection ? `Update departmental Section` : "Create a new departmental Section"}
+				{...props}
+			/>
 
 			<FormAddEditDepartmentalSection open={open} setOpen={setOpen} departmentalSectionToEdit={departmentalSection} />
 		</>

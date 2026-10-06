@@ -44,7 +44,6 @@ interface TipTapEditorHeaderProps {
 }
 
 export default function TipTapEditorHeader({ editor, className }: TipTapEditorHeaderProps) {
-	
 	const [showTableOptions, setShowTableOptions] = useState(false);
 
 	const setLink = useCallback(() => {
@@ -72,15 +71,13 @@ export default function TipTapEditorHeader({ editor, className }: TipTapEditorHe
 		}
 	}, [editor]);
 
-
 	const editorState = useEditorState({
 		editor,
 		selector: (ctx) => ({
 			isLink: ctx.editor?.isActive("link")
 		})
 	});
-	if(!editor) return  null;
-
+	if (!editor) return null;
 
 	return (
 		<div

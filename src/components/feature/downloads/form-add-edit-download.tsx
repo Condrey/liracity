@@ -48,7 +48,7 @@ export default function FormAddEditDownload({ open, setOpen, downloadToEdit }: P
 				</SheetHeader>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-						<span>{JSON.stringify(mediaIds, null, 2)}</span>
+						{/* <span>{JSON.stringify(mediaIds, null, 2)}</span> */}
 						<div className="flex flex-col gap-4 md:flex-row">
 							<div className="space-y-4">
 								<FormField

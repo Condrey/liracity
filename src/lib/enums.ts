@@ -1,4 +1,4 @@
-import { EventStatus, NewsArticleStatus, Role,StationType } from "@/generated/prisma/enums";
+import { EventStatus, NewsArticleStatus, Role, StationType } from "@/generated/prisma/enums";
 import { InboxIcon, LetterTextIcon, LockIcon, LucideIcon, TrashIcon, UploadIcon } from "lucide-react";
 
 // role
@@ -108,14 +108,12 @@ export const newsArticleStatuses: Record<
 	}
 };
 
-
 // station types
 export const allStationTypes = Object.values(StationType);
 export const stationTypes: Record<
 	StationType,
 	{
 		title: string;
-		
 	}
 > = {
 	DIVISION: {

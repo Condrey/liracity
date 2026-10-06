@@ -1,48 +1,50 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-import { departmentalSectionSchema, DepartmentalSectionSchema } from "@/lib/validation";
 import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteIggDeclaration, upsertIggDeclaration } from "./action";
 import { toast } from "sonner";
-import { deleteDepartmentalSection, upsertDepartmentalSection } from "./action";
 
-const queryKey: QueryKey = ["departmentalSections"];
+const queryKey: QueryKey = ["iggDeclarations"];
 
-export function useUpsertDepartmentalSectionMutation(userId: string | undefined) {
+export function useUpsertIggDeclarationMutation() {
 	const queryClient = useQueryClient();
 	const mutation = useMutation({
-		mutationFn: upsertDepartmentalSection,
+		mutationFn: upsertIggDeclaration,
 		onSuccess: async (data, variables) => {
 			await Promise.all([await queryClient.cancelQueries({ queryKey })]);
 
 			queryClient.invalidateQueries({ queryKey });
 
 			toast.success("success", {
-				description: !variables.id ? "Departmental Section added" : "Departmental Section updated"
+				description: !variables.id ? "IggDeclaration added" : "IggDeclaration updated"
 			});
 		},
 		onError(error, variables, context) {
 			console.error(error);
-			toast.error(`Failed to ${variables.id ? "update" : "add"}departmental Section.`);
+			toast.error(`Failed to ${variables.id ? "update" : "add"} ${variables.name}'s iggDeclaration.`);
 		}
 	});
 	return mutation;
 }
 
-export function useDeleteDepartmentalSectionMutation() {
+export function useDeleteIggDeclarationMutation() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: deleteDepartmentalSection,
+		mutationFn: deleteIggDeclaration,
 		async onSuccess(data, variables, context) {
+			const queryKey3: QueryKey = ["team", variables.id];
+
 			await Promise.all([await queryClient.cancelQueries({ queryKey })]);
 
 			queryClient.invalidateQueries({ queryKey });
 
-			toast.success(`Deleted departmental Section successfully`);
+			toast.success("Success", {
+				description: `Deleted ${variables?.name}  successfully`
+			});
 		},
 		onError(error, variables, context) {
 			console.error(error);
-			toast.error(`Failed to delete departmental Section.`);
+			toast.error(`Failed to delete this leader.`);
 		}
 	});
 }

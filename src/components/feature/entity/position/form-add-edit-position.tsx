@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import FieldReportsTo from "./field-reports-to";
 import { useUpsertPositionMutation } from "./mutation";
 import FieldDepartmentalSection from "./field-departmental-section";
-import {Sheet, SheetContent, SheetTitle, SheetHeader} from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTitle, SheetHeader } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
 
 interface FormAddEditPositionProps {
@@ -45,46 +45,46 @@ export default function FormAddEditPosition({ open, setOpen, positionToEdit }: F
 	}
 
 	return (
-		<Sheet open={open} onOpenChange={setOpen} >
-			<SheetContent side="top" className="h-svh w-full px-4 overflow-auto">
+		<Sheet open={open} onOpenChange={setOpen}>
+			<SheetContent side="top" className="h-svh w-full overflow-auto px-4">
 				<SheetHeader>
 					<SheetTitle> {positionToEdit ? "Update Position" : "Add Position"}</SheetTitle>
-					</SheetHeader>
+				</SheetHeader>
 				<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mx-auto w-full max-w-5xl ">
-					<div className="flex flex-col *:flex-1 flex-wrap gap-3 md:flex-row">
+					<form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto w-full max-w-5xl space-y-4">
+						<div className="flex flex-col flex-wrap gap-3 *:flex-1 md:flex-row">
+							<FormField
+								control={form.control}
+								name="jobTitle"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel required>Job title</FormLabel>
+										<FormControl>
+											<Input placeholder="e.g., IT Officer" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="salaryScale"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel required>Salary Scale</FormLabel>
+										<FormControl>
+											<Input placeholder="e.g., U4" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
+						<div className="flex flex-col flex-wrap gap-3 *:flex-1 md:flex-row">
+							<FieldReportsTo form={form} />
+							<FieldDepartmentalSection form={form} />
+						</div>
 						<FormField
-							control={form.control}
-							name="jobTitle"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel required>Job title</FormLabel>
-									<FormControl>
-										<Input placeholder="e.g., IT Officer" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="salaryScale"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel required>Salary Scale</FormLabel>
-									<FormControl>
-										<Input placeholder="e.g., U4" {...field} />
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
-					</div>
-					<div className="flex flex-col *:flex-1 flex-wrap gap-3 md:flex-row">
-						<FieldReportsTo form={form} />
-						<FieldDepartmentalSection form={form} />
-					</div>
-					<FormField
 							control={form.control}
 							name="jobPurpose"
 							render={({ field }) => (
@@ -97,34 +97,34 @@ export default function FormAddEditPosition({ open, setOpen, positionToEdit }: F
 								</FormItem>
 							)}
 						/>
-					<FormField
-						control={form.control}
-						name="dutiesAndQualifications"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel required>Duties and Qualifications</FormLabel>
-								<FormControl>
-									<TipTapEditorWithHeader
-										onChange={field.onChange}
-										placeholder={`Add Duties and Person Specification for this position`}
-										value={field.value}
-										includeHeader={true}
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<div role="alert" className="text-destructive">
-						{error?.message}
-					</div>
-					<div className="flex w-full items-center justify-end gap-4">
-						<LoadingButton loading={isPending} disabled={!form.formState.isDirty}>
-							{positionToEdit ? "Update position" : "Add position"}
-						</LoadingButton>
-					</div>
-				</form>
-			</Form>
+						<FormField
+							control={form.control}
+							name="dutiesAndQualifications"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel required>Duties and Qualifications</FormLabel>
+									<FormControl>
+										<TipTapEditorWithHeader
+											onChange={field.onChange}
+											placeholder={`Add Duties and Person Specification for this position`}
+											value={field.value}
+											includeHeader={true}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div role="alert" className="text-destructive">
+							{error?.message}
+						</div>
+						<div className="flex w-full items-center justify-end gap-4">
+							<LoadingButton loading={isPending} disabled={!form.formState.isDirty}>
+								{positionToEdit ? "Update position" : "Add position"}
+							</LoadingButton>
+						</div>
+					</form>
+				</Form>
 			</SheetContent>
 		</Sheet>
 	);

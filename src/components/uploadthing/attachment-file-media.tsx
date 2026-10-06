@@ -27,15 +27,8 @@ export default function AttachFileMedia({
 	initialAttachments = [],
 	maxAttachments = MAX_ATTACHMENTS
 }: Props) {
-	const {
-		startUpload,
-		attachments,
-		setAttachments,
-		addInitialAttachments,
-		isUploading,
-		uploadProgress,
-		removeAttachment
-	} = useOtherMediaUploads();
+	const { startUpload, attachments, addInitialAttachments, isUploading, uploadProgress, removeAttachment } =
+		useOtherMediaUploads();
 
 	useEffect(() => {
 		const mediaIds = attachments.map((a) => a.mediaId!).filter(Boolean) as string[];

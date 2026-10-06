@@ -36,9 +36,7 @@ export default function ListOfMembers({ initialData }: Props) {
 			data={members}
 			columns={columns}
 			filterColumn={{ id: "user_name", label: "member name" }}
-			tableHeaderSection={
-				<TypographyH4 title='List of Technical Staffs' className="pt-4"/>
-			}
+			tableHeaderSection={<TypographyH4 title="List of Technical Staffs" className="pt-4" />}
 			className="w-full"
 		></DataTable>
 	);

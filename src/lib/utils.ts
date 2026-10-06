@@ -164,3 +164,19 @@ export function getEventStatusAndPeriod({ startDate, endDate }: { startDate: Dat
 	}
 	return { status, period };
 }
+
+export function obscureString(text: string, revealStart = 2, revealEnd = 2, maskChar = "*"): string {
+	if (!text) return "";
+
+	const length = text.length;
+	// If the string is too short, mask everything except the first character
+	if (revealStart + revealEnd >= length) {
+		return text[0] + maskChar.repeat(length - 1);
+	}
+
+	const startPart = text.slice(0, revealStart);
+	const endPart = text.slice(length - revealEnd);
+	const maskedPart = maskChar.repeat(length - revealStart - revealEnd);
+
+	return `${startPart}${maskedPart}${endPart}`;
+}

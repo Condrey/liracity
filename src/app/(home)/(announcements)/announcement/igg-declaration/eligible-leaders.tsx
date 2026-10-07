@@ -1,8 +1,10 @@
 import { Button, ButtonProps } from "@/components/ui/button";
 import {
 	Dialog,
+	DialogClose,
 	DialogContent,
 	DialogDescription,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger
@@ -26,7 +28,7 @@ export default function EligibleLeaders({ ...props }: ButtonProps) {
 			<DialogTrigger asChild>
 				<Button {...props} />
 			</DialogTrigger>
-			<DialogContent className="space-y-2">
+			<DialogContent className="max-h-150 space-y-2 overflow-y-auto">
 				<DialogHeader>
 					<DialogTitle className="uppercase">Eligible Leaders</DialogTitle>
 					<DialogDescription>
@@ -49,6 +51,11 @@ export default function EligibleLeaders({ ...props }: ButtonProps) {
 						))}
 					</ul>
 				</div>
+				<DialogFooter>
+					<DialogClose asChild>
+						<Button>Close Preview</Button>
+					</DialogClose>
+				</DialogFooter>
 			</DialogContent>
 		</Dialog>
 	);

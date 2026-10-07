@@ -35,6 +35,9 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 				description="No leader has submitted their details for Igg Declarations yet. If you are a leader, use the button below to register."
 			>
 				<ButtonAddEditIGGDeclaration variant="secondary">Register IGG Declaration</ButtonAddEditIGGDeclaration>
+				<EligibleLeaders variant={"link"}>
+					<InfoIcon className="inline" /> Show Eligible Leaders
+				</EligibleLeaders>
 			</EmptyContainer>
 		);
 	}

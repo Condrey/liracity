@@ -265,6 +265,7 @@ export const iggDeclarationSchema = z.object({
 	),
 
 	nin: requiredString
+		.toUpperCase()
 		.min(1, "Please provide a NIN for the announcement")
 		.max(14, "NIN should not be more than 14 characters")
 		.superRefine((val, ctx) => {

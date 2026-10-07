@@ -22,7 +22,7 @@ export default async function Page() {
 	return (
 		<div className="h-dvh w-full gap-4 overflow-y-auto overscroll-y-auto lg:grid lg:grid-cols-3 lg:py-4">
 			<div className="space-y-6 p-4 md:col-span-2">
-				<div className="sticky top-0 flex flex-col bg-card lg:hidden">
+				<div className="sticky top-0 flex flex-col bg-card lg:hidden z-50">
 					<h1 className="mt-4 text-lg font-bold tracking-tight text-pretty uppercase">
 						All Submitted Leader details{" "}
 						<span className="font-normal text-muted-foreground">({allIggDeclarations.length})</span>

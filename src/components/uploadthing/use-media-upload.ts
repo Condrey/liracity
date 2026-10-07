@@ -8,7 +8,7 @@ export function useOtherMediaUploads() {
 	const [attachments, setAttachments] = useState<Attachment[]>([]);
 	const [uploadProgress, setUploadProgress] = useState<number>();
 
-	const { startUpload, isUploading, } = useUploadThing("attachment", {
+	const { startUpload, isUploading } = useUploadThing("attachment", {
 		onBeforeUploadBegin(files) {
 			console.log("1. UPLOAD: BEFORE_UPLOAD_BEGIN: Renaming files for submission");
 			console.log({ files });

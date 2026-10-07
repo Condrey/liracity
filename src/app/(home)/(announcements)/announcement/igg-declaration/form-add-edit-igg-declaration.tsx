@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/ui/loading-button";
 import { IggDeclaration } from "@/generated/prisma/client";
@@ -48,6 +48,7 @@ export default function FormAddEditIGGDeclaration({ iggDeclarationToEdit, setOpe
 							<FormControl>
 								<Input {...field} />
 							</FormControl>
+							<FormDescription>Enter name as it appears on National ID</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

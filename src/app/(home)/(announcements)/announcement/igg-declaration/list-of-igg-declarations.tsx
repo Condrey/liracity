@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonAddEditIGGDeclaration } from "./button-add-edit-iggDeclaration";
 import { DataTable } from "@/components/data-table/data-table";
 import { useIggDeclarationColumns } from "./columns";
-import { Edit2Icon, EditIcon, HistoryIcon, InfoIcon, PlusIcon, SheetIcon } from "lucide-react";
+import { DownloadCloudIcon, Edit2Icon, EditIcon, HistoryIcon, InfoIcon, PlusIcon, SheetIcon } from "lucide-react";
 import EligibleLeaders from "./eligible-leaders";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemTitle } from "@/components/ui/item";
 import { formatDate } from "date-fns";
@@ -93,11 +93,11 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 			// 	</ButtonAddEditIGGDeclaration>
 			// }
 		>
-			<ButtonDownloadIgDeclarationSheetSheet>
-				<SheetIcon />
+			<ButtonDownloadIgDeclarationSheetSheet className="bg-success">
+				<DownloadCloudIcon className="mr-2" /> Download
 			</ButtonDownloadIgDeclarationSheetSheet>
-			<ButtonAddEditIGGDeclaration variant="outline">
-				<PlusIcon /> New
+			<ButtonAddEditIGGDeclaration variant="default">
+				<PlusIcon /> New Registration
 			</ButtonAddEditIGGDeclaration>
 		</DataTable>
 	);

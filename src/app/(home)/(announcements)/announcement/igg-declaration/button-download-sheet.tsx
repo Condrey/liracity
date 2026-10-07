@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, ButtonProps } from "@/components/ui/button";
 import LoadingButton from "@/components/ui/loading-button";
 import kyInstance from "@/lib/ky";

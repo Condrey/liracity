@@ -10,8 +10,7 @@ export async function POST(req: Request) {
 	const iggDeclarationList = await prisma.iggDeclaration.findMany({ orderBy: { name: "asc" } });
 	const { user } = await validateRequest();
 	const now = new Date();
-	const fullYear = now.getFullYear();
-	const _100YearsAgo = subYears(now, 100);
+	const fullYear = now.getFullYear() + 1;
 	// create a new workbook
 	const workbook = new ExcelJS.Workbook();
 	const sheet = workbook.addWorksheet(`Lira_City_Council_Bi-annual_IG-Declaration_Registration_${fullYear}`);
@@ -28,7 +27,7 @@ export async function POST(req: Request) {
 
 	// title: uppercase
 	sheet.mergeCells("C1:O1");
-	sheet.getCell("C1").value = `606:Lira City Council IG- Declaration List`.toUpperCase();
+	sheet.getCell("C1").value = `606:Lira City Council IG-Declaration Registration List`.toUpperCase();
 	sheet.getCell("C1").style = {
 		font: { bold: true, size: 18, color: { argb: "0243c4" } },
 		alignment: { horizontal: "left", vertical: "middle" }
@@ -36,12 +35,12 @@ export async function POST(req: Request) {
 
 	// subtitle: black color
 	sheet.mergeCells("C2:O2");
-	sheet.getCell("C2").value = `Bi-annual IG-Declaration Registration ${fullYear}`.toUpperCase();
+	sheet.getCell("C2").value = `Bi-annual IG-Declaration Registration for March ${fullYear}`.toUpperCase();
 	sheet.getCell("C2").style = {
 		font: { bold: true, size: 16, color: { argb: "000000" } },
 		alignment: { horizontal: "left", vertical: "middle" }
 	};
-
+	sheet.addRow([]);
 	// ---Header Row---
 	const headers = ["No.", "Name of leader", "Title", "NIN", "Email", "Phone No."];
 	if (!user) {
@@ -69,7 +68,8 @@ export async function POST(req: Request) {
 		const col = i + 1;
 		sheet.getColumn(col).width = width;
 	});
-	// --- 10 Empty Rows with Borders ---
+
+	// --- The Data ---
 	iggDeclarationList.forEach(({ name, email, phoneNumber, nin, title }, index) => {
 		const row = sheet.addRow([index + 1, name, title, nin, email, phoneNumber]);
 		row.eachCell((cell) => {
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
 			};
 		});
 	});
-	sheet.addRow([]);
+
 	// --- Freeze Header Row ---
 	sheet.views = [{ state: "frozen", ySplit: 4 }];
 

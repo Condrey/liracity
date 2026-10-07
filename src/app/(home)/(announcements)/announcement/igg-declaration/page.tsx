@@ -4,8 +4,10 @@ import { getAllIggDeclarations } from "./action";
 import ListOfIGGDeclarations from "./list-of-igg-declarations";
 import { Metadata } from "next";
 import { ButtonAddEditIGGDeclaration } from "./button-add-edit-iggDeclaration";
-import { InfoIcon, PlusIcon } from "lucide-react";
+import { DownloadCloudIcon, InfoIcon, PlusIcon } from "lucide-react";
 import EligibleLeaders from "./eligible-leaders";
+import ButtonDownloadIgDeclarationSheetSheet from "./button-download-sheet";
+import { ButtonGroup } from "@/components/ui/button-group";
 
 export const metadata: Metadata = {
 	title: "Registration for Bi-annual IGG-Declaration for Leaders",
@@ -29,15 +31,23 @@ export default async function Page() {
 					</h1>
 					<div className="flex w-full justify-between">
 						<EligibleLeaders variant={"link"}>
-							<InfoIcon className="inline" /> Show Eligible Leaders
+							<InfoIcon className="inline" /> See Eligible Leaders
 						</EligibleLeaders>
-						<ButtonAddEditIGGDeclaration variant="default">
-							<PlusIcon /> Self Register
-						</ButtonAddEditIGGDeclaration>
+						<ButtonGroup>
+							<ButtonAddEditIGGDeclaration variant="default">
+								<PlusIcon /> Self Register
+							</ButtonAddEditIGGDeclaration>
+						</ButtonGroup>
 					</div>
+					<ButtonDownloadIgDeclarationSheetSheet className="bg-success">
+						<DownloadCloudIcon className="mr-2" /> Download List
+					</ButtonDownloadIgDeclarationSheetSheet>
 				</div>
 
 				<ListOfIGGDeclarations initialData={allIggDeclarations} />
+				<ButtonAddEditIGGDeclaration variant="default" className="w-full lg:hidden">
+					<PlusIcon /> New Registration
+				</ButtonAddEditIGGDeclaration>
 			</div>
 			<div className="mr-4 hidden space-y-6 bg-card p-0 lg:flex lg:flex-col lg:p-4">
 				<h1 className="text-lg font-bold tracking-tight text-pretty uppercase">

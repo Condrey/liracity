@@ -23,7 +23,22 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 		initialData
 	});
 	const columns = useIggDeclarationColumns();
-	const { data, status, error } = query;
+	const { data: originalData = [], status, error } = query;
+	const now = new Date();
+	const data: IggDeclaration[] = [
+		...originalData,
+		{
+			id: "james",
+			name: "Ogwang Coundrey James",
+			email: "james@liracity.go.ug",
+			nin: "CM970221050AZJ",
+			title: "City Mayor",
+			phoneNumber: "0776239674",
+			createdAt: now,
+			updatedAt: now
+		}
+	];
+
 	if (status === "error") {
 		return <ErrorContainer query={query} errorMessage="Failed to load IGG Declarations" />;
 	}

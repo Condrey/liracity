@@ -5,7 +5,7 @@ import { IGGDeclarationSchema, iggDeclarationSchema } from "@/lib/validation";
 import { cache } from "react";
 
 async function allIggDeclarations() {
-	const iggDeclarations = await prisma.iggDeclaration.findMany();
+	const iggDeclarations = await prisma.iggDeclaration.findMany({ orderBy: { createdAt: "desc" } });
 	return iggDeclarations;
 }
 export const getAllIggDeclarations = cache(allIggDeclarations);

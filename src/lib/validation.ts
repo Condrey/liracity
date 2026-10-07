@@ -275,7 +275,7 @@ export const iggDeclarationSchema = z.object({
 				});
 			}
 		}),
-	email: z.email().min(1, "Please provide an email"),
+	email: z.email().trim().min(1, "Please provide an email"),
 	phoneNumber: requiredString.min(1, "Please provide a phone number").superRefine((val, ctx) => {
 		if (val.length != 10) {
 			ctx.addIssue({

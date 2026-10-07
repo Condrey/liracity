@@ -251,9 +251,12 @@ export type SingleContentSchema = z.infer<typeof singleContentSchema>;
 // announcements
 export const iggDeclarationSchema = z.object({
 	id: z.string().optional(),
-	name: requiredString
-		.min(1, "Enter your full name")
-		.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase())),
+	name: requiredString.min(1, "Enter your full name").transform((val) =>
+		val
+			.trim()
+			.toLocaleLowerCase()
+			.replace(/\b\w/g, (char) => char.toUpperCase())
+	),
 	title: requiredString.min(3, "Please state your correct title").transform((val) =>
 		val
 			.trim()

@@ -40,25 +40,23 @@ export function DataTableColumnHeader<TData, TValue>({
 	return (
 		<div className={cn("flex items-center space-x-2", className)}>
 			<DropdownMenu>
-				<DropdownMenuTrigger
-					render={
-						<Button
-							variant={variant || "ghost"}
-							size={size || "sm"}
-							className={cn("-ml-3 h-8 data-[state=open]:bg-accent", className)}
-							{...props}
-						>
-							<span>{title}</span>
-							{column.getIsSorted() === "desc" ? (
-								<ArrowDownIcon className="ml-2 h-4 w-4" />
-							) : column.getIsSorted() === "asc" ? (
-								<ArrowUpIcon className="ml-2 h-4 w-4" />
-							) : (
-								<CaretSortIcon className="ml-2 h-4 w-4" />
-							)}
-						</Button>
-					}
-				/>
+				<DropdownMenuTrigger asChild>
+					<Button
+						variant={variant || "ghost"}
+						size={size || "sm"}
+						className={cn("-ml-3 h-8 data-[state=open]:bg-accent", className)}
+						{...props}
+					>
+						<span>{title}</span>
+						{column.getIsSorted() === "desc" ? (
+							<ArrowDownIcon className="ml-2 h-4 w-4" />
+						) : column.getIsSorted() === "asc" ? (
+							<ArrowUpIcon className="ml-2 h-4 w-4" />
+						) : (
+							<CaretSortIcon className="ml-2 h-4 w-4" />
+						)}
+					</Button>
+				</DropdownMenuTrigger>
 
 				<DropdownMenuContent align="start">
 					<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
@@ -92,9 +90,9 @@ export function DataColumnFilter<TData>({ table, variant, ...props }: DataColumn
 	return (
 		<>
 			<DropdownMenu>
-				<DropdownMenuTrigger
-					render={<Button variant={containsSorting ? "destructive" : variant || "ghost"} {...props} />}
-				/>
+				<DropdownMenuTrigger asChild>
+					<Button variant={containsSorting ? "destructive" : variant || "ghost"} {...props} />
+				</DropdownMenuTrigger>
 
 				<DropdownMenuContent>
 					<DropdownMenuGroup>

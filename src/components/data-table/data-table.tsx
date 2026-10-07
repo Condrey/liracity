@@ -92,8 +92,8 @@ export function DataTable<TData, TValue>({
 					</DataColumnFilter>
 				</div>
 
-				<div className="h-full">
-					<div className="absolute right-3 bottom-3 z-40 *:size-12 *:rounded-full">{fab}</div>
+				<div className="relative h-full">
+					{fab && <div className="absolute right-3 bottom-3 z-40 *:size-12 *:rounded-full">{fab}</div>}{" "}
 					<InfiniteScrollContainer
 						onBottomReached={() => {
 							setCount((count) => count + MOBILE_MAX_ITEMS);

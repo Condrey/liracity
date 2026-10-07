@@ -43,9 +43,6 @@ export async function POST(req: Request) {
 	sheet.addRow([]);
 	// ---Header Row---
 	const headers = ["No.", "Name of leader", "Title", "NIN", "Email", "Phone No."];
-	if (!user) {
-		sheet.addRow([]);
-	}
 	const headerRow = sheet.addRow(headers);
 	headerRow.eachCell((cell) => {
 		cell.fill = {

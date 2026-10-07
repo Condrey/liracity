@@ -86,11 +86,11 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 					</Item>
 				);
 			}}
-			// fab={
-			// 	<ButtonAddEditIGGDeclaration variant="default">
-			// 		<PlusIcon />
-			// 	</ButtonAddEditIGGDeclaration>
-			// }
+			fab={
+				<ButtonAddEditIGGDeclaration variant="default">
+					<PlusIcon />
+				</ButtonAddEditIGGDeclaration>
+			}
 		>
 			<ButtonAddEditIGGDeclaration variant="outline">
 				<PlusIcon /> New

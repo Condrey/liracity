@@ -92,7 +92,7 @@ export function DataTable<TData, TValue>({
 					</DataColumnFilter>
 				</div>
 
-				<div className="relative h-full">
+				<div className="relative h-full w-full">
 					{fab && <div className="absolute right-3 bottom-3 z-40 *:size-12 *:rounded-full">{fab}</div>}{" "}
 					<InfiniteScrollContainer
 						onBottomReached={() => {
@@ -100,7 +100,7 @@ export function DataTable<TData, TValue>({
 						}}
 					>
 						{table.getRowModel().rows.length ? (
-							<div className="grid gap-3 *:max-w-92 sm:grid-cols-2 lg:hidden">
+							<div className="grid gap-3 *:mx-auto *:max-w-92 sm:grid-cols-2 lg:hidden">
 								{table
 									.getRowModel()
 									.rows.slice(0, count)

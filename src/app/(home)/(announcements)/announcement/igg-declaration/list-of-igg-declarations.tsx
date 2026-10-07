@@ -66,16 +66,16 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 				return (
 					<Item variant={"muted"} className="w-full">
 						<ItemContent>
-							<ItemTitle>{name}</ItemTitle>
+							<ItemTitle className="uppercase">{name}</ItemTitle>
 							<ItemDescription>{title}</ItemDescription>
 							<ItemDescription>
 								{phoneNumber} - {email}
 							</ItemDescription>
 						</ItemContent>
 						<ItemFooter>
-							<span>
-								<HistoryIcon className="mr-1 inline size-4 text-muted-foreground" />
-								{formatDate(createdAt, "PP")}
+							<span className="text-muted-foreground">
+								<HistoryIcon className="mr-1 inline size-4" />
+								{formatDate(createdAt, "PPp")}
 							</span>
 							<ItemActions>
 								<ButtonAddEditIGGDeclaration variant="secondary" iggDeclarationToEdit={item}>

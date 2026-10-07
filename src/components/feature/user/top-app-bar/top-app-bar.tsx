@@ -14,7 +14,7 @@ export default async function TopAppBar({ className }: { className?: string }) {
 			<div className="flex items-center justify-between gap-2 bg-linear-to-l from-destructive to-warning px-4 py-2 text-white">
 				<Image src={iggLogo} alt="IGG Logo" height={50} width={200} />
 
-				<Button className="" size={"lg"} asChild>
+				<Button className="bg-destructive" size={"lg"} asChild>
 					<Link href={"/announcement/igg-declaration"} passHref>
 						<span className="shimmer">Register</span> <span className="hidden shimmer lg:flex">for declaration</span>
 					</Link>

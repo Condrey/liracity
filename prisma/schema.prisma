@@ -160,7 +160,7 @@ model Media {
   id                 String        @id @default(uuid())
   type               MediaType
   url                String
-  size              Int?
+  size               Int?
   name               String?
   description        String?
   isForDownloads     Boolean       @default(false)
@@ -506,7 +506,7 @@ model IggDeclaration {
   id          String   @id @default(uuid())
   name        String
   title       String
-  nin         String
+  nin         String   @unique
   email       String
   phoneNumber String
   createdAt   DateTime @default(now())

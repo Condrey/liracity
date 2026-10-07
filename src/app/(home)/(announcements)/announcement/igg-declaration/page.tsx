@@ -20,9 +20,9 @@ All Accountants, Internal Auditors and Procurement Officers of and above the ran
 export default async function Page() {
 	const allIggDeclarations = await getAllIggDeclarations();
 	return (
-		<div className="h-dvh w-full gap-4 overflow-y-auto overscroll-y-auto lg:grid lg:grid-cols-3 lg:py-4">
+		<div className="w-full gap-4 lg:grid lg:grid-cols-3 lg:py-4">
 			<div className="space-y-6 p-4 md:col-span-2">
-				<div className="z-50 flex flex-col lg:hidden">
+				<div className="z-50 flex flex-col gap-2 lg:hidden">
 					<h1 className="mt-4 text-lg font-bold tracking-tight text-pretty uppercase">
 						All Submitted Leader details{" "}
 						<span className="font-normal text-muted-foreground">({allIggDeclarations.length})</span>

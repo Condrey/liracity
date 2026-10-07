@@ -34,7 +34,7 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 				message={"No IGG declarations found"}
 				description="No leader has submitted their details for Igg Declarations yet. If you are a leader, use the button below to register."
 			>
-				<ButtonAddEditIGGDeclaration variant="secondary">Register for IG-Declaration now</ButtonAddEditIGGDeclaration>
+				<ButtonAddEditIGGDeclaration>Register for IG-Declaration now</ButtonAddEditIGGDeclaration>
 				<EligibleLeaders variant={"link"}>
 					<InfoIcon className="inline" /> Show Eligible Leaders
 				</EligibleLeaders>

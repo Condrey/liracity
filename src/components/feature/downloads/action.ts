@@ -11,6 +11,7 @@ import { cache } from "react";
 async function allDownloads() {
 	const data: MediaData[] = await prisma.media.findMany({
 		where: { type: { in: ["PDF", "SPREADSHEET", "POWER_POINT", "WORD"] }, isForDownloads: true },
+		orderBy: { createdAt: "desc" },
 		include: mediaDataInclude
 	});
 	return data;

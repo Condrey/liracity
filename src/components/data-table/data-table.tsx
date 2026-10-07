@@ -100,7 +100,7 @@ export function DataTable<TData, TValue>({
 						}}
 					>
 						{table.getRowModel().rows.length ? (
-							<div className="grid gap-3 *:mx-auto *:max-w-92 sm:grid-cols-2 lg:hidden">
+							<div className="grid gap-3 *:mx-auto *:w-full sm:grid-cols-2 md:*:max-w-92 lg:hidden">
 								{table
 									.getRowModel()
 									.rows.slice(0, count)

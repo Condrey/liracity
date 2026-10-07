@@ -74,11 +74,11 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 						</ItemContent>
 						<ItemFooter>
 							<span>
-								<HistoryIcon className="mr-1 inline size-4" />
+								<HistoryIcon className="mr-1 inline size-4 text-muted-foreground" />
 								{formatDate(createdAt, "PP")}
 							</span>
 							<ItemActions>
-								<ButtonAddEditIGGDeclaration variant="secondary">
+								<ButtonAddEditIGGDeclaration variant="secondary" iggDeclarationToEdit={item}>
 									<Edit2Icon /> Edit
 								</ButtonAddEditIGGDeclaration>
 							</ItemActions>

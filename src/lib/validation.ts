@@ -254,7 +254,13 @@ export const iggDeclarationSchema = z.object({
 	name: requiredString
 		.min(1, "Enter your full name")
 		.transform((val) => val.trim().replace(/\b\w/g, (char) => char.toUpperCase())),
-	title: requiredString.min(3, "Please state your correct title"),
+	title: requiredString.min(3, "Please state your correct title").transform((val) =>
+		val
+			.trim()
+			.toLocaleLowerCase()
+			.replace(/\b\w/g, (char) => char.toUpperCase())
+	),
+
 	nin: requiredString
 		.min(1, "Please provide a NIN for the announcement")
 		.max(14, "NIN should not be more than 14 characters")

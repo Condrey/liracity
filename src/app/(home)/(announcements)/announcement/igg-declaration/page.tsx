@@ -5,7 +5,14 @@ import ListOfIGGDeclarations from "./list-of-igg-declarations";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Registration for Bi-annual IGG-Declaration for Leaders"
+	title: "Registration for Bi-annual IGG-Declaration for Leaders",
+	description: `
+Eligible leaders are City Mayor, City Councilors, Division Chairpersons, Division Vice Chairpersons;
+Specified Leaders like Town Clerk, Deputy & Division Town Clerks, Assistant Town Clerks, Treasurers; Deputy & Assistant Treasures
+Heads of Department including; Engineer, Education Officer, Community Development Officer, Education Officer; Health Officer; Engineer; Production Officer, Planner, Internal Auditor, Natural resources Officer and Chief Finance Officer
+Chairperson, Members and Secretary of the City Commission, City Land Board and City Contracts Committee.
+All Accountants, Internal Auditors and Procurement Officers of and above the rank of officer.
+`
 };
 export default async function Page() {
 	const allIggDeclarations = await getAllIggDeclarations();

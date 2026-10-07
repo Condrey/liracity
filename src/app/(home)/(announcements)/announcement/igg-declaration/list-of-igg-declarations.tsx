@@ -9,8 +9,10 @@ import { Button } from "@/components/ui/button";
 import { ButtonAddEditIGGDeclaration } from "./button-add-edit-iggDeclaration";
 import { DataTable } from "@/components/data-table/data-table";
 import { useIggDeclarationColumns } from "./columns";
-import { InfoIcon, PlusIcon } from "lucide-react";
+import { Edit2Icon, EditIcon, HistoryIcon, InfoIcon, PlusIcon } from "lucide-react";
 import EligibleLeaders from "./eligible-leaders";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemTitle } from "@/components/ui/item";
+import { formatDate } from "date-fns";
 
 interface Props {
 	initialData: IggDeclaration[];
@@ -23,21 +25,8 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 		initialData
 	});
 	const columns = useIggDeclarationColumns();
-	const { data: originalData = [], status, error } = query;
+	const { data, status, error } = query;
 	const now = new Date();
-	const data: IggDeclaration[] = [
-		...originalData,
-		{
-			id: "james",
-			name: "Ogwang Coundrey James",
-			email: "james@liracity.go.ug",
-			nin: "CM970221050AZJ",
-			title: "City Mayor",
-			phoneNumber: "0776239674",
-			createdAt: now,
-			updatedAt: now
-		}
-	];
 
 	if (status === "error") {
 		return <ErrorContainer query={query} errorMessage="Failed to load IGG Declarations" />;
@@ -71,6 +60,36 @@ export default function ListOfIGGDeclarations({ initialData }: Props) {
 						<InfoIcon className="inline" /> Show Eligible Leaders
 					</EligibleLeaders>
 				</div>
+			}
+			cardRenderer={(item) => {
+				const { email, createdAt, name, nin, phoneNumber, title } = item;
+				return (
+					<Item variant={"muted"} className="w-full">
+						<ItemContent>
+							<ItemTitle>{name}</ItemTitle>
+							<ItemDescription>{title}</ItemDescription>
+							<ItemDescription>
+								{phoneNumber} - {email}
+							</ItemDescription>
+						</ItemContent>
+						<ItemFooter>
+							<span>
+								<HistoryIcon className="mr-1 inline size-4" />
+								{formatDate(createdAt, "PP")}
+							</span>
+							<ItemActions>
+								<ButtonAddEditIGGDeclaration variant="secondary">
+									<Edit2Icon /> Edit
+								</ButtonAddEditIGGDeclaration>
+							</ItemActions>
+						</ItemFooter>
+					</Item>
+				);
+			}}
+			fab={
+				<ButtonAddEditIGGDeclaration variant="default">
+					<PlusIcon />
+				</ButtonAddEditIGGDeclaration>
 			}
 		>
 			<ButtonAddEditIGGDeclaration variant="outline">

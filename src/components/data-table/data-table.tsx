@@ -15,10 +15,14 @@ import {
 	useReactTable,
 	VisibilityState
 } from "@tanstack/react-table";
-import { SearchIcon } from "lucide-react";
+import { FunnelIcon, SearchIcon } from "lucide-react";
 import * as React from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableViewOptions } from "./data-table-view-options";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { DataColumnFilter } from "./data-table-column-header";
+import { MOBILE_MAX_ITEMS } from "@/lib/constants";
+import InfiniteScrollContainer from "../infinite-scroll-container";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -30,6 +34,8 @@ interface DataTableProps<TData, TValue> {
 	children?: React.ReactNode;
 	tableHeaderSection?: React.ReactNode;
 	className?: string;
+	fab?: React.ReactNode;
+	cardRenderer?: (row: TData) => React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
@@ -41,8 +47,13 @@ export function DataTable<TData, TValue>({
 	filterColumn,
 	children,
 	tableHeaderSection,
-	className
+	className,
+	fab,
+	cardRenderer
 }: DataTableProps<TData, TValue>) {
+	const isMobile = useIsMobile();
+	const [count, setCount] = React.useState(5);
+
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
@@ -61,83 +72,141 @@ export function DataTable<TData, TValue>({
 		state: { sorting, columnFilters, columnVisibility }
 	});
 	return (
-		<div className={cn("w-fit max-w-full rounded-md bg-primary/10 md:border dark:bg-card", className)}>
-			{/* Header section  */}
-			<div className="px-4">
-				<div className="w-full">{tableHeaderSection}</div>
-				{/* filtering , column visibility and children */}
-				<div className="flex items-center justify-between gap-2 py-4">
+		<>
+			{/* mobile view  */}
+			<div className={cn("size-full space-y-6 lg:hidden", className)}>
+				<div className="flex w-full justify-between gap-2">
 					{!!filterColumn && (
-						<div className="relative">
-							<SearchIcon className="absolute start-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors peer-focus:text-foreground peer-focus-visible:text-foreground" />
+						<div className={cn("relative flex w-full max-w-md")}>
+							<SearchIcon className="absolute inset-s-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors peer-focus:text-foreground peer-focus-visible:text-foreground" />
 							<Input
 								placeholder={`Search by ${filterColumn.label ?? filterColumn.id}...`}
 								value={(table.getColumn(filterColumn.id)?.getFilterValue() as string) ?? ""}
 								onChange={(event) => table.getColumn(filterColumn.id)?.setFilterValue(event.target.value)}
-								className="peer max-w-sm ps-7"
+								className="peer flex-1 ps-7"
 							/>
 						</div>
 					)}
-					<div className="flex items-center gap-2">
-						<DataTableViewOptions table={table} />
-						{children}
-					</div>
+					<DataColumnFilter table={table}>
+						<FunnelIcon className="shrink" /> <span className="hidden shrink sm:block">Sort</span>
+					</DataColumnFilter>
+				</div>
+
+				<div className="h-full">
+					<div className="absolute right-3 bottom-3 z-40 *:size-12 *:rounded-full">{fab}</div>
+					<InfiniteScrollContainer
+						onBottomReached={() => {
+							setCount((count) => count + MOBILE_MAX_ITEMS);
+						}}
+					>
+						{table.getRowModel().rows.length ? (
+							<div className="grid gap-3 *:max-w-92 sm:grid-cols-2 lg:hidden">
+								{table
+									.getRowModel()
+									.rows.slice(0, count)
+									.map((row) => {
+										const rowItem = row.original as TData;
+										return (
+											<div
+												key={row.id}
+												onClick={() => (handleClick ? handleClick((row.original as { id: string }).id) : undefined)}
+											>
+												{cardRenderer?.(rowItem)}
+											</div>
+										);
+									})}
+							</div>
+						) : (
+							<div className="py-8 text-center text-muted-foreground">No results</div>
+						)}
+					</InfiniteScrollContainer>
 				</div>
 			</div>
-			{/* Table content section  */}
-			<div className="mx-4 border bg-card dark:bg-secondary/30">
-				<Table>
-					<TableHeader>
-						{table.getHeaderGroups().map((headerGroup) => (
-							<TableRow
-								key={headerGroup.id}
-								className="bg-warning *:border-r *:last:border-r-0 hover:bg-warning dark:bg-warning-foreground dark:hover:bg-warning-foreground"
-							>
-								{headerGroup.headers.map((header) => {
-									return (
-										<TableHead key={header.id} className="flex-1">
-											{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-										</TableHead>
-									);
-								})}
-							</TableRow>
-						))}
-					</TableHeader>
-					<TableBody className="">
-						{table.getRowModel().rows.length ? (
-							table.getRowModel().rows.map((row) => {
-								const rowItem = row.original as { id: string };
-								return (
-									<TableRow
-										key={row.id}
-										data-state={row.getIsSelected() && "selected"}
-										onClick={() => (handleClick ? handleClick(rowItem.id) : undefined)}
-										className={cn(
-											"*:border-r *:last:border-r-0",
-											!handleClick ? "cursor-default" : "group/row cursor-pointer",
-											rowItem.id === selectedItemId && "bg-muted"
-										)}
-									>
-										{row.getVisibleCells().map((cell, index, array) => (
-											<TableCell key={cell.id} className="w-fit">
-												{flexRender(cell.column.columnDef.cell, cell.getContext())}
-											</TableCell>
-										))}
-									</TableRow>
-								);
-							})
-						) : (
-							<TableRow>
-								<TableCell colSpan={columns.length} className="h-24 text-center">
-									No results
-								</TableCell>
-							</TableRow>
+			{/* dESKTOP VIEW  */}
+			<div
+				className={cn(
+					"hidden w-fit max-w-dvw rounded-md bg-primary/10 md:border lg:block dark:bg-card",
+					"max-w-[calc(100vw-var(--actual-sidebar-width)-(--spacing(4))-8px)]",
+					className
+				)}
+			>
+				{/* Header section  */}
+				<div className="px-4">
+					<div className="w-full">{tableHeaderSection}</div>
+					{/* filtering , column visibility and children */}
+					<div className="flex items-center justify-between gap-2 py-4">
+						{!!filterColumn && (
+							<div className="relative">
+								<SearchIcon className="absolute start-2 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors peer-focus:text-foreground peer-focus-visible:text-foreground" />
+								<Input
+									placeholder={`Search by ${filterColumn.label ?? filterColumn.id}...`}
+									value={(table.getColumn(filterColumn.id)?.getFilterValue() as string) ?? ""}
+									onChange={(event) => table.getColumn(filterColumn.id)?.setFilterValue(event.target.value)}
+									className="peer max-w-sm ps-7"
+								/>
+							</div>
 						)}
-					</TableBody>
-				</Table>
+						<div className="flex items-center gap-2">
+							<DataTableViewOptions table={table} />
+							{children}
+						</div>
+					</div>
+				</div>
+				{/* Table content section  */}
+				<div className="mx-4 border bg-card dark:bg-secondary/30">
+					<Table>
+						<TableHeader>
+							{table.getHeaderGroups().map((headerGroup) => (
+								<TableRow
+									key={headerGroup.id}
+									className="bg-warning *:border-r *:last:border-r-0 hover:bg-warning dark:bg-warning-foreground dark:hover:bg-warning-foreground"
+								>
+									{headerGroup.headers.map((header) => {
+										return (
+											<TableHead key={header.id} className="flex-1">
+												{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+											</TableHead>
+										);
+									})}
+								</TableRow>
+							))}
+						</TableHeader>
+						<TableBody className="">
+							{table.getRowModel().rows.length ? (
+								table.getRowModel().rows.map((row) => {
+									const rowItem = row.original as { id: string };
+									return (
+										<TableRow
+											key={row.id}
+											data-state={row.getIsSelected() && "selected"}
+											onClick={() => (handleClick ? handleClick(rowItem.id) : undefined)}
+											className={cn(
+												"*:border-r *:last:border-r-0",
+												!handleClick ? "cursor-default" : "group/row cursor-pointer",
+												rowItem.id === selectedItemId && "bg-muted"
+											)}
+										>
+											{row.getVisibleCells().map((cell, index, array) => (
+												<TableCell key={cell.id} className="w-fit">
+													{flexRender(cell.column.columnDef.cell, cell.getContext())}
+												</TableCell>
+											))}
+										</TableRow>
+									);
+								})
+							) : (
+								<TableRow>
+									<TableCell colSpan={columns.length} className="h-24 text-center">
+										No results
+									</TableCell>
+								</TableRow>
+							)}
+						</TableBody>
+					</Table>
+				</div>
+				{/* pagination  */}
+				<DataTablePagination table={table} ROWS_PER_PAGE={ROWS_PER_TABLE} className="p-4" />
 			</div>
-			{/* pagination  */}
-			<DataTablePagination table={table} ROWS_PER_PAGE={ROWS_PER_TABLE} className="p-4" />
-		</div>
+		</>
 	);
 }

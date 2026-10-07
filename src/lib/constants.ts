@@ -4,6 +4,7 @@ export const MAX_ATTACHMENTS = 5;
 export const REDIRECT_TO_URL_SEARCH_PARAMS = "redirectToUrl";
 export const SEARCH_PARAMS_NEWS_EVENTS = "defaultNewsEventsTabs";
 export const DEFAULT_PASSWORD = "defaultPassword123!";
+export const MOBILE_MAX_ITEMS = 10;
 
 export const LINK_ESSENTIAL_SERVICES = "/services/essential";
 export const LINK_NEWS = "/media/news";

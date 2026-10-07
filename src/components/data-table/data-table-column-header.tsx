@@ -1,49 +1,65 @@
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon } from "@radix-ui/react-icons";
-import { Column } from "@tanstack/react-table";
+import { Column, Table } from "@tanstack/react-table";
 
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import {
 	DropdownMenu,
+	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
+	DropdownMenuGroup,
 	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuPortal,
 	DropdownMenuSeparator,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { CheckIcon, XIcon } from "lucide-react";
 
-interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
-	column: Column<TData, TValue>;
-	title: string;
-}
+type DataTableColumnHeaderProps<TData, TValue> = React.HTMLAttributes<HTMLDivElement> &
+	ButtonProps & {
+		column: Column<TData, TValue>;
+		title: string;
+	};
 
 export function DataTableColumnHeader<TData, TValue>({
 	column,
 	title,
-	className
+	className,
+	variant,
+	size,
+	...props
 }: DataTableColumnHeaderProps<TData, TValue>) {
 	if (!column.getCanSort()) {
 		return <div className={cn(className)}>{title}</div>;
 	}
 
 	return (
-		<div className={cn("flex w-full flex-1 items-center space-x-2", className)}>
+		<div className={cn("flex items-center space-x-2", className)}>
 			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button
-						variant="ghost"
-						size="sm"
-						className={cn("-ml-3 flex h-8 w-full items-center justify-between data-[state=open]:bg-accent", className)}
-					>
-						<span>{title}</span>
-						{column.getIsSorted() === "desc" ? (
-							<ArrowDownIcon className="ml-2 h-4 w-4" />
-						) : column.getIsSorted() === "asc" ? (
-							<ArrowUpIcon className="ml-2 h-4 w-4" />
-						) : (
-							<CaretSortIcon className="ml-2 h-4 w-4" />
-						)}
-					</Button>
-				</DropdownMenuTrigger>
+				<DropdownMenuTrigger
+					render={
+						<Button
+							variant={variant || "ghost"}
+							size={size || "sm"}
+							className={cn("-ml-3 h-8 data-[state=open]:bg-accent", className)}
+							{...props}
+						>
+							<span>{title}</span>
+							{column.getIsSorted() === "desc" ? (
+								<ArrowDownIcon className="ml-2 h-4 w-4" />
+							) : column.getIsSorted() === "asc" ? (
+								<ArrowUpIcon className="ml-2 h-4 w-4" />
+							) : (
+								<CaretSortIcon className="ml-2 h-4 w-4" />
+							)}
+						</Button>
+					}
+				/>
+
 				<DropdownMenuContent align="start">
 					<DropdownMenuItem onClick={() => column.toggleSorting(false)}>
 						<ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
@@ -62,4 +78,79 @@ export function DataTableColumnHeader<TData, TValue>({
 			</DropdownMenu>
 		</div>
 	);
+}
+
+type DataColumnFilterProps<TData> = React.HTMLAttributes<HTMLDivElement> &
+	ButtonProps & {
+		table: Table<TData>;
+	};
+
+export function DataColumnFilter<TData>({ table, variant, ...props }: DataColumnFilterProps<TData>) {
+	const columns = table.getAllColumns().filter((col) => col.getCanSort());
+	if (!columns.length) return null;
+	const containsSorting = columns.some((c) => c.getIsSorted());
+	return (
+		<>
+			<DropdownMenu>
+				<DropdownMenuTrigger
+					render={<Button variant={containsSorting ? "destructive" : variant || "ghost"} {...props} />}
+				/>
+
+				<DropdownMenuContent>
+					<DropdownMenuGroup>
+						<DropdownMenuLabel>Sort by</DropdownMenuLabel>
+						<DropdownMenuSeparator />
+						{columns.map((column) => {
+							const title = getColumnTitle(column);
+							const sorted = column.getIsSorted();
+
+							return (
+								<DropdownMenuSub key={column.id}>
+									<DropdownMenuSubTrigger className="capitalize">
+										{sorted && <CheckIcon />}
+										{title}
+									</DropdownMenuSubTrigger>
+									<DropdownMenuPortal>
+										<DropdownMenuSubContent>
+											<DropdownMenuLabel>Sort by order</DropdownMenuLabel>
+											<DropdownMenuSeparator />
+											<DropdownMenuCheckboxItem
+												checked={sorted === "asc"}
+												onCheckedChange={() => column.toggleSorting(false)}
+											>
+												Ascending <ArrowUpIcon className="ms-auto inline size-4" />
+											</DropdownMenuCheckboxItem>
+											<DropdownMenuCheckboxItem
+												checked={sorted === "desc"}
+												onCheckedChange={() => column.toggleSorting(true)}
+											>
+												Descending
+												<ArrowDownIcon className="ms-auto inline size-4" />
+											</DropdownMenuCheckboxItem>
+										</DropdownMenuSubContent>
+									</DropdownMenuPortal>
+								</DropdownMenuSub>
+							);
+						})}
+					</DropdownMenuGroup>
+					<DropdownMenuItem variant="destructive" onClick={() => table.resetSorting()}>
+						<XIcon className="mr-2 size-4" />
+						Clear Sorting
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</>
+	);
+}
+
+function getColumnTitle<TData>(column: Column<TData, unknown>) {
+	const header = column.columnDef.header;
+
+	if (typeof header === "string") return header;
+
+	if (typeof column.id === "string") {
+		return column.id.replace(/_/g, " ");
+	}
+
+	return "Column";
 }

@@ -52,7 +52,7 @@ export default function ListOfEvents({ initialData, limit, filter }: ListOfEvent
 	return (
 		<div className="flex w-full max-w-9xl flex-col gap-6">
 			<ItemGroup className="grid items-stretch gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-				{data.map((eventsArticle) => (
+				{data.slice(0,limit).map((eventsArticle) => (
 					<EventsArticleContainer key={eventsArticle.id} eventsArticle={eventsArticle} />
 				))}
 			</ItemGroup>

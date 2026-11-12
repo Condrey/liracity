@@ -11,7 +11,7 @@ import { NewsArticleData } from "@/lib/types";
 import { cn, formatDateToLocal } from "@/lib/utils";
 import { MapPinIcon } from "lucide-react";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import ArticleImage from "../article-image";
 
 export default function NewsArticleContainer({
@@ -23,27 +23,25 @@ export default function NewsArticleContainer({
 }) {
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
 	const [isPending, startTransition] = useTransition();
-	const [isHovering, setIsHovering] = useState(false);
 	const { newsArticleStatus, icon, variant } = newsArticleStatuses[status];
 	const Icon = icon;
 	const { user } = useSession();
 	const isNotVisitor = myPrivileges[(user?.role as Role) || Role.USER].includes(Role.STAFF);
+	const link = getNavigationLinkWithPathnameWithoutUpdate(`${LINK_NEWS}/${slug}`);
 	return (
 		<Item
 			variant="outline"
 			className={cn(
-				"group/article size-auto h-fit cursor-pointer border border-warning/20 p-0",
+				"group/article size-auto h-fit cursor-pointer border p-0",
 				isPending && "animate-pulse",
-				isHovering && "bg-muted shadow-md",
+				"hover:bg-muted hover:shadow-md",
 				className
 			)}
 			onClick={() => startTransition(() => {})}
-			onMouseEnter={() => setIsHovering(true)}
-			onMouseLeave={() => setIsHovering(false)}
 			asChild
 		>
-			<Link href={getNavigationLinkWithPathnameWithoutUpdate(`${LINK_NEWS}/${slug}`)} className="pb-6">
-				<ItemHeader className="relative min-h-[20px] overflow-hidden px-0">
+			<Link href={link} className="pb-6">
+				<ItemHeader className="relative min-h-5 overflow-hidden px-0">
 					<div className="">
 						<ArticleImage
 							mediaIdentifier={coverImage?.url}
@@ -52,8 +50,8 @@ export default function NewsArticleContainer({
 							width={720}
 							height={480}
 							className={cn(
-								"pointer-events-none aspect-square max-h-[200px] touch-none rounded-sm mask-b-from-2% object-cover",
-								isHovering && "scale-110 transition-all duration-300"
+								"pointer-events-none aspect-square max-h-50 touch-none rounded-sm object-cover",
+								"group-hover/article:scale-110 group-hover/article:transition-all group-hover/article:duration-300"
 							)}
 						/>
 					</div>
@@ -62,14 +60,16 @@ export default function NewsArticleContainer({
 						loading={isPending}
 						className={cn(
 							"hidden",
-							"absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+							"absolute inset-s-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
 							isPending && "block",
-							isHovering && "block"
+							"group-hover/article:block"
 						)}
 					>
 						{isPending ? "Opening" : "Read article"}
 					</LoadingButton>
-					<Badge className="absolute top-0 left-0 bg-amber-300 text-amber-950">News article</Badge>
+					<Badge className="absolute top-0 left-0 bg-linear-90 from-amber-300 to-amber-500 text-amber-950 dark:text-amber-950">
+						News article
+					</Badge>
 				</ItemHeader>
 				<ItemFooter className="flex-wrap justify-start gap-1 space-x-1 px-3">
 					{isNotVisitor && (

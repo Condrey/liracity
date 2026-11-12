@@ -1,3 +1,4 @@
 {
-	"cSpell.words": ["ipps", "linkify", "uplaodthing"]
+	"cSpell.words": ["ipps", "linkify", "uplaodthing"],
+	"postman.settings.dotenv-detection-notification-visibility": false
 }

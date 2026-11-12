@@ -1,25 +1,23 @@
 "use client";
 
+import { TypographyH3 } from "@/components/page-utils";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { webName } from "@/lib/utils";
 import { CodeIcon, CopyIcon, FileStackIcon, LightbulbIcon, RocketIcon } from "lucide-react";
 import markdownIt from "markdown-it";
+import Image from "next/image";
 import { toast } from "sonner";
 const md = markdownIt("commonmark", { html: false });
 
 export default function WhatWeStandFor() {
 	return (
-		<div className="me-auto flex w-full gap-4 pb-3">
-			{/* <div className="hidden aspect-square md:flex h-[250px] w-[300px] bg-card">
-				<Image src={`/logo.png`} alt="logo" height={250} width={300} />
-			</div> */}
-
+		<div className="me-auto flex w-full gap-4 bg-card pb-3">
 			<Tabs defaultValue="vision" className="w-full space-y-4 rounded-md">
-				{/* <div className="space-y-1 mb-4">
-					<TypographyH3 title={webName} className=" uppercase text-balance text-start" />
+				<div className="my-1.5 space-y-1 px-4">
+					<TypographyH3 title={webName} className="text-start text-balance uppercase" />
 					<h4 className="text-sm text-muted-foreground">Vision, mission, mandate, e.t.c </h4>
-				</div> */}
+				</div>
 				<div className="border-y bg-card px-3 py-1">
 					<TabsList className="h-fit w-full max-w-4xl flex-wrap gap-1 *:h-8 *:flex-1 sm:h-9 [&_svg]:hidden [&_svg]:size-4 sm:[&_svg]:block">
 						<TabsTrigger value="vision">
@@ -46,11 +44,11 @@ export default function WhatWeStandFor() {
 						<TabsContent
 							key={key}
 							value={key}
-							className="w-full max-w-prose space-y-3 px-3 text-justify text-pretty hyphens-auto"
+							className="w-full  space-y-3 px-3 text-justify text-pretty hyphens-auto"
 						>
 							<div className="flex flex-wrap gap-0.5 text-xs text-muted-foreground">
 								Tap on these <strong>tabs</strong> above to view more. e.g., on{" "}
-								<span className="flex items-center">
+								<span className="flex items-center [&_svg]:hidden [&_svg]:size-3 sm:[&_svg]:block">
 									"<RocketIcon className="mr-1 size-3" /> Mission"
 								</span>
 							</div>
@@ -74,7 +72,7 @@ export default function WhatWeStandFor() {
 									<span className="text-start font-medium tracking-tighter text-muted-foreground">| {webName}</span>{" "}
 									<div
 										dangerouslySetInnerHTML={{ __html: md.render(value) }}
-										// className="text-sm tracking-normal text-pretty hyphens-auto whitespace-pre-line md:whitespace-normal"
+										className="text-sm tracking-normal text-pretty max-w-prose hyphens-auto whitespace-pre-line md:whitespace-normal"
 									/>
 								</div>
 							</div>

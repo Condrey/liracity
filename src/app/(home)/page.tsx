@@ -8,8 +8,10 @@ import HeroSection, { HeroSectionLoadingSkeleton } from "./hero-section";
 import { SampleEvents } from "./sample-events";
 import { SampleNewsArticles } from "./sample-news-articles";
 import WhatWeStandFor from "./what-we-stand-for";
+import { getAllEvents } from "@/components/feature/news-and-events/events/action";
 
 export default function Home() {
+	const sampleEvents = getAllEvents(10);
 	return (
 		<PageContainer className="flex flex-col justify-start px-0 pt-0">
 			{/* Hero section  */}
@@ -19,7 +21,7 @@ export default function Home() {
 
 			{/* other sections  */}
 			{/* What we stand for  */}
-			<div className="border-y">
+			<div className="border-y max-w-5xl w-full mx-auto">
 				<WhatWeStandFor />
 			</div>
 
@@ -27,14 +29,15 @@ export default function Home() {
 			<Suspense
 				fallback={
 					<div className="grid gap-4 px-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						{Array.from({ length: 6 }, (_, index) => (
+						{Array.from({ length: 5 }, (_, index) => (
 							<EventsArticleContainerSkeleton key={index} />
 						))}
 					</div>
 				}
 			>
-				<SampleEvents />
+				<SampleEvents sampleEvents={sampleEvents} />
 			</Suspense>
+
 			<hr className="my-6" />
 			{/* Message from our leaders  */}
 			{/* <MessageFromLeaders /> */}

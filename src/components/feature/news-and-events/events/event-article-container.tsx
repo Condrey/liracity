@@ -14,7 +14,7 @@ import { cn, getEventStatusAndPeriod } from "@/lib/utils";
 import { isAfter } from "date-fns";
 import { CalendarIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import ArticleImage from "../article-image";
 
 export default function EventsArticleContainer({
@@ -25,7 +25,6 @@ export default function EventsArticleContainer({
 	className?: string;
 }) {
 	const { getNavigationLinkWithPathnameWithoutUpdate } = useCustomSearchParams();
-	const [mouseEntered, setMouseEntered] = useState(false);
 	const [isPending, startTransition] = useTransition();
 	const { eventStatus, icon, variant } = eventStatuses[status];
 	const Icon = icon;
@@ -39,15 +38,12 @@ export default function EventsArticleContainer({
 		<Item
 			variant="outline"
 			className={cn(
-				"mb-4 flex cursor-pointer flex-col p-0 hover:bg-primary/20 md:pb-6",
-				"mb:aspect-video items-start justify-start",
+				"mb-4 group/event flex cursor-pointer flex-col bg-card p-0 hover:bg-primary/20 md:pb-6",
+				"mb:aspect-video items-start justify-start hover:shadow-md",
 				isPending && "animate-pulse",
-				mouseEntered && "shadow-md",
 				className
 			)}
 			onClick={() => startTransition(() => {})}
-			onMouseEnter={() => setMouseEntered(true)}
-			onMouseLeave={() => setMouseEntered(false)}
 			asChild
 		>
 			<Link
@@ -60,12 +56,12 @@ export default function EventsArticleContainer({
 					width={500}
 					height={600}
 					className={cn(
-						"pointer-events-none max-h-40 min-h-40 w-full touch-none rounded-sm bg-cover object-cover opacity-15 md:aspect-video md:max-h-none",
-						mouseEntered && "scale-110 transition-all duration-300"
+						" pointer-events-none hidden max-h-40 min-h-40 w-full blur-3xl touch-none rounded-sm bg-cover object-cover opacity-50 md:block md:aspect-video md:max-h-none",
+						"group-hover/event:scale-110 group-hover/event:transition-all group-hover/event:duration-300  group-hover/event:opacity-100 group-hover/event:blur-xl"
 					)}
 				/>
-				<div className="absolute mb-8 size-full flex-1 p-3 backdrop-blur-sm">
-					<ItemContent className="">
+				<div className="size-full flex-1 p-3  md:absolute md:mb-8">
+					<ItemContent className="overflow-clip">
 						<ItemFooter className="flex flex-wrap justify-start gap-1 space-x-1">
 							{isNotVisitor && (
 								<Badge variant={variant}>
@@ -84,12 +80,11 @@ export default function EventsArticleContainer({
 						<ItemTitle
 							className={cn(
 								"mb-1.5 line-clamp-2 font-bold uppercase",
-								mouseEntered && "scale-105 transition-all duration-200"
 							)}
 						>
 							{title}
 						</ItemTitle>
-						<ItemDescription className="line-clamp-[4] md:line-clamp-3">
+						<ItemDescription className="line-clamp-4 md:line-clamp-3">
 							<TipTapViewer
 								content={summary ?? description}
 								className="text-start text-sm md:text-sm dark:text-muted-foreground"
@@ -111,8 +106,9 @@ export default function EventsArticleContainer({
 					className={cn(
 						"absolute hidden",
 						"max-w-fit backdrop-blur-2xl",
-						"start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-						(isPending || mouseEntered) && "block animate-in duration-500 ease-in"
+						"inset-s-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+						'group-hover/event:block group-hover/event:animate-in group-hover/event:duration-500 group-hover/event:ease-in',
+						isPending && "block animate-in duration-500 ease-in"
 					)}
 				>
 					Read more...

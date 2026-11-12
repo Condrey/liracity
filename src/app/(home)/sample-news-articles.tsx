@@ -13,7 +13,7 @@ export async function SampleNewsArticles() {
 	return (
 		<div className="flex flex-col gap-3 px-3">
 			<h1 className="text-xl font-bold tracking-tighter uppercase">Recent news Articles</h1>
-			<ListOfNewsArticles initialData={newsArticles} limit={limit} />
+			<ListOfNewsArticles initialData={newsArticles} limit={MAX_DISPLAY} />
 			<Link
 				href={`/media/news-events`}
 				className={cn(

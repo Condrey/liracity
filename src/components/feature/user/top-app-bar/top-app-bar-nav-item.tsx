@@ -25,16 +25,16 @@ export function NavigationMenuItemContent({ nav }: NavigationMenuItemContentProp
 		<NavigationMenuItem key={parentLink}>
 			{!!nav.children?.length ? (
 				<>
-					<NavigationMenuTrigger className="bg-primary hover:bg-background hover:text-foreground dark:bg-background">
+					<NavigationMenuTrigger className="uppercase ">
 						{isPending && <Spinner className="mr-1 inline self-center" />}
 						{nav.title}
 					</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+						<ul className="grid w-100 gap-2 md:w-125 md:grid-cols-2 lg:w-150">
 							<li className="row-span-3">
 								<NavigationMenuLink
 									render={<Link href={parentLink} />}
-									className="flex h-full w-full flex-row items-center justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none select-none focus:shadow-md lg:flex-col lg:justify-center"
+									className="flex h-full w-full flex-row items-center justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-none select-none focus:shadow-md lg:flex-col lg:justify-center"
 								>
 									{Icon && <Icon className="size-16" strokeWidth={0.5} />}
 									<div className="flex flex-col lg:items-center lg:*:text-center">
@@ -59,7 +59,7 @@ export function NavigationMenuItemContent({ nav }: NavigationMenuItemContentProp
 					render={<Link href={parentLink} passHref></Link>}
 					className={cn(
 						navigationMenuTriggerStyle(),
-						"bg-primary hover:bg-background hover:text-foreground dark:bg-background dark:hover:bg-accent"
+'uppercase'
 					)}
 					onClick={() => startTransition(() => {})}
 				>

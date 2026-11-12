@@ -3,6 +3,7 @@ import TopAppBar from "@/components/feature/user/top-app-bar/top-app-bar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { validateRequest } from "@/lib/get-session";
 import SessionProvider from "@/lib/session-provider";
+import { cn } from "@/lib/utils";
 
 export const iframeHeight = "800px";
 const TOP_APP_BAR_HEIGHT = "48px";
@@ -24,7 +25,13 @@ export default async function Layout({ children }: { children: React.ReactNode }
 				}
 			>
 				<SidebarProvider className="flex flex-col">
-					<header className="sticky top-0 z-50 w-full bg-primary text-primary-foreground dark:border-b dark:bg-card dark:text-card-foreground">
+					<header
+						className={cn(
+							"sticky top-0 z-50 w-full border-b",
+							// "bg-primary text-primary-foreground dark:bg-card dark:text-card-foreground"
+							"bg-card text-card-foreground "
+						)}
+					>
 						<TopAppBar className="mx-auto w-full max-w-9xl px-3 py-2" />
 					</header>
 					<div className="flex size-full flex-1">

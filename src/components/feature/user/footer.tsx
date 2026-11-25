@@ -35,8 +35,8 @@ export default function Footer({ className }: { className?: string }) {
 			{/* Copyright details and theme toggler  */}
 			<div className="w-full bg-foreground/5 px-4 py-2 tracking-wider text-muted-foreground capitalize md:mt-8 md:bg-black dark:md:bg-background">
 				<div className="mx-auto flex w-full max-w-9xl items-center justify-between">
-					<p className='text-center text-xs md:text-sm md:after:content-["_-_The_Republic_Of_Uganda"]'>
-						{`Copyright 2025${currentYear <= 2025 ? "" : `- ${currentYear}`},
+					<p className='text-center text-xs md:text-sm md:after:content-[":_The_Republic_Of_Uganda"] after:italic'>
+						{`Copyright 2025${currentYear <= 2025 ? "" : ` - ${currentYear}`},
             ${webName}`}
 					</p>
 					<ThemeToggler />

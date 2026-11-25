@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import About from "./about";
 import GeographyAndLandmarks from "./geography-and-landmarks";
 import HistoryAndCulture from "./history-and-culture";
+import PageContainer from "@/components/page-container";
 
 const { title, description } = {
 	title: "About",
@@ -16,12 +17,12 @@ export const metadata: Metadata = {
 export default async function Page() {
 	const entity = await prisma.entity.findFirst();
 	return (
-		<div className="relative flex w-full space-x-4">
+		<PageContainer  className="relative flex w-full space-x-4">
 			<div className="mx-auto w-full max-w-3xl">
 				<About entity={entity!} id="#about" />
 				<HistoryAndCulture entity={entity!} id="#history-culture" />
 				<GeographyAndLandmarks entity={entity!} id="#geography" />
 			</div>
-		</div>
+		</PageContainer>
 	);
 }

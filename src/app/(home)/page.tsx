@@ -1,5 +1,5 @@
 import { EventsArticleContainerSkeleton } from "@/components/feature/news-and-events/events/event-article-container-skeleton";
-import { getLatestNews } from "@/components/feature/news-and-events/news/action";
+import { getAllNewsArticles, getLatestNews } from "@/components/feature/news-and-events/news/action";
 import NewsArticleContainerSkeleton from "@/components/feature/news-and-events/news/news-article-container-skeleton";
 import NewsLetterForm from "@/components/feature/user/news-letter-form";
 import PageContainer from "@/components/page-container";
@@ -12,6 +12,7 @@ import { getAllEvents } from "@/components/feature/news-and-events/events/action
 
 export default function Home() {
 	const sampleEvents = getAllEvents(10);
+	const sampleNewsArticles = getAllNewsArticles(10);
 	return (
 		<PageContainer className="flex flex-col justify-start px-0 pt-0">
 			{/* Hero section  */}
@@ -52,7 +53,7 @@ export default function Home() {
 					</div>
 				}
 			>
-				<SampleNewsArticles />
+				<SampleNewsArticles sampleNewsArticles={sampleNewsArticles} />
 			</Suspense>
 			{/* News letter form */}
 			<NewsLetterForm />

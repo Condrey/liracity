@@ -1,15 +1,23 @@
+'use client'
 import { getAllNewsArticles } from "@/components/feature/news-and-events/news/action";
 import ListOfNewsArticles from "@/components/feature/news-and-events/news/list-of-news-articles";
 import { buttonVariants } from "@/components/ui/button";
+import { NewsArticle } from "@/generated/prisma/client";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { EventData, NewsArticleData } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
+import { use } from "react";
 
-export async function SampleNewsArticles() {
-	const limit = 10;
-	const MAX_DISPLAY = 6;
-	const newsArticles = await getAllNewsArticles(limit);
-	if (!newsArticles.length) return null;
+interface Props {
+	sampleNewsArticles: Promise<NewsArticleData[]>;
+}
+export  function SampleNewsArticles({ sampleNewsArticles }: Props) {
+		const newsArticles = use(sampleNewsArticles);
+	const isMobile = useIsMobile()
+	const MAX_DISPLAY = isMobile ? 3 : 5;
+		if (!newsArticles.length) return null;
 	return (
 		<div className="flex flex-col gap-3 px-3">
 			<h1 className="text-xl font-bold tracking-tighter uppercase">Recent news Articles</h1>

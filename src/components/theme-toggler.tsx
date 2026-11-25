@@ -21,7 +21,7 @@ export function ThemeToggler() {
 					<Button
 						key={name}
 						className={
-							currentTheme === theme ? "bg-secondary text-secondary-foreground" : "bg-transparent text-foreground"
+							currentTheme === theme ? "bg-secondary text-secondary-foreground" : "bg-secondary/5 text-secondary dark:bg-transparent dark:text-foreground"
 						}
 						size={"icon"}
 						onClick={() => setTheme(theme)}

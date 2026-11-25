@@ -35,9 +35,10 @@ export default function HeroSection({ initialData }: { initialData: NewsArticleD
 
 	return (
 		<div
-			className="flex flex-col w-full overflow-clip relative  lg:rounded-l-xl  md:h-[90vh] md:max-h-fit lg:flex-row lg:max-h-[75vh]"
-			style={{ backgroundColor: dominantColor||'fff' }}
-		>
+			className="flex flex-col w-full overflow-clip relative lg:rounded-l-xl  md:h-[90vh] md:max-h-fit lg:flex-row lg:max-h-[75vh]"
+style={{
+		backgroundColor: `color-mix(in srgb, ${dominantColor || '#fff'} 50%, transparent)`,
+	}}		>
 			<Image
 				src={data.coverImage?.url || `/hero.jpg`}
 				alt="hero-image"
